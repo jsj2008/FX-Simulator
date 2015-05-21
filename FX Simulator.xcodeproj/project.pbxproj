@@ -1,0 +1,1325 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		700360151AA8C0CE00A57959 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 700360141AA8C0CE00A57959 /* iAd.framework */; };
+		700B95851B0C3C97003F160B /* InputTradeLotViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 700B95841B0C3C97003F160B /* InputTradeLotViewController.m */; };
+		705C2E101ADE4C270089D510 /* Money+ConvertToAccountCurrency.m in Sources */ = {isa = PBXBuildFile; fileRef = 705C2E0F1ADE4C270089D510 /* Money+ConvertToAccountCurrency.m */; };
+		705DCE4A1AE6893E00BCF710 /* tradedb.sqlite3 in Resources */ = {isa = PBXBuildFile; fileRef = 705DCE491AE6893E00BCF710 /* tradedb.sqlite3 */; };
+		705DCE4B1AE7C84300BCF710 /* Rates.m in Sources */ = {isa = PBXBuildFile; fileRef = 70B5AAEE1AC7FF44001F8823 /* Rates.m */; };
+		705DCE4C1AE7CE9800BCF710 /* RatePanelButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 70AD14751AADD0AA0099F0BA /* RatePanelButton.m */; };
+		7076F5A71AECCBBB004CC6BA /* NewStartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7076F5A61AECCBBB004CC6BA /* NewStartViewController.m */; };
+		7076F5AA1AECCDB7004CC6BA /* SetCurrencyPairViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7076F5A91AECCDB7004CC6BA /* SetCurrencyPairViewController.m */; };
+		7076F5AB1AECCEB3004CC6BA /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FC031A9F58D100CAB509 /* MainViewController.m */; };
+		7079FEE81AF4FF23004D3CEA /* SetStartTimeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7079FEE71AF4FF23004D3CEA /* SetStartTimeViewController.m */; };
+		7079FEEB1AF9E688004D3CEA /* NSDate+FXSDateData.m in Sources */ = {isa = PBXBuildFile; fileRef = 7079FEEA1AF9E688004D3CEA /* NSDate+FXSDateData.m */; };
+		709BC75E1B0700320059C940 /* SetAutoUpdateIntervalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 709BC75D1B0700320059C940 /* SetAutoUpdateIntervalViewController.m */; };
+		70B5AAEC1AC7BE90001F8823 /* ExecuteOrderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 70B5AAEB1AC7BE90001F8823 /* ExecuteOrderTests.m */; };
+		70B5AAF21ACE5BC0001F8823 /* SubChartDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70B5AAF11ACE5BC0001F8823 /* SubChartDataViewController.m */; };
+		70D2FA8A1A9F305700CAB509 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FA891A9F305700CAB509 /* main.m */; };
+		70D2FA8D1A9F305700CAB509 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FA8C1A9F305700CAB509 /* AppDelegate.m */; };
+		70D2FA961A9F305700CAB509 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 70D2FA941A9F305700CAB509 /* Main.storyboard */; };
+		70D2FA981A9F305700CAB509 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 70D2FA971A9F305700CAB509 /* Images.xcassets */; };
+		70D2FA9B1A9F305700CAB509 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 70D2FA991A9F305700CAB509 /* LaunchScreen.xib */; };
+		70D2FAA71A9F305800CAB509 /* FX_SimulatorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FAA61A9F305800CAB509 /* FX_SimulatorTests.m */; };
+		70D2FAB41A9F531800CAB509 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 70D2FAB31A9F531800CAB509 /* libsqlite3.0.dylib */; };
+		70D2FACF1A9F558100CAB509 /* forex_time_scale.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 70D2FACE1A9F558100CAB509 /* forex_time_scale.sqlite */; };
+		70D2FAD61A9F559200CAB509 /* OpenPositionTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FAD11A9F559200CAB509 /* OpenPositionTableViewController.m */; };
+		70D2FAD71A9F559200CAB509 /* OpenPositionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FAD31A9F559200CAB509 /* OpenPositionHeaderView.m */; };
+		70D2FAD81A9F559200CAB509 /* OpenPositionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FAD51A9F559200CAB509 /* OpenPositionTableViewCell.m */; };
+		70D2FAF11A9F56AE00CAB509 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FAE71A9F56AE00CAB509 /* FMDatabase.m */; };
+		70D2FAF21A9F56AE00CAB509 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FAE91A9F56AE00CAB509 /* FMDatabaseAdditions.m */; };
+		70D2FAF31A9F56AE00CAB509 /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FAEB1A9F56AE00CAB509 /* FMDatabasePool.m */; };
+		70D2FAF41A9F56AE00CAB509 /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FAED1A9F56AE00CAB509 /* FMDatabaseQueue.m */; };
+		70D2FAF51A9F56AE00CAB509 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FAF01A9F56AE00CAB509 /* FMResultSet.m */; };
+		70D2FB081A9F56BE00CAB509 /* display@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 70D2FAF61A9F56BE00CAB509 /* display@2x.png */; };
+		70D2FB091A9F56BE00CAB509 /* display.png in Resources */ = {isa = PBXBuildFile; fileRef = 70D2FAF71A9F56BE00CAB509 /* display.png */; };
+		70D2FB0A1A9F56BE00CAB509 /* clock.png in Resources */ = {isa = PBXBuildFile; fileRef = 70D2FAF81A9F56BE00CAB509 /* clock.png */; };
+		70D2FB0B1A9F56BE00CAB509 /* clock@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 70D2FAF91A9F56BE00CAB509 /* clock@2x.png */; };
+		70D2FB0C1A9F56BE00CAB509 /* config.png in Resources */ = {isa = PBXBuildFile; fileRef = 70D2FAFA1A9F56BE00CAB509 /* config.png */; };
+		70D2FB0D1A9F56BE00CAB509 /* config@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 70D2FAFB1A9F56BE00CAB509 /* config@2x.png */; };
+		70D2FB0E1A9F56BE00CAB509 /* file.png in Resources */ = {isa = PBXBuildFile; fileRef = 70D2FAFC1A9F56BE00CAB509 /* file.png */; };
+		70D2FB0F1A9F56BE00CAB509 /* file@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 70D2FAFD1A9F56BE00CAB509 /* file@2x.png */; };
+		70D2FB101A9F56BE00CAB509 /* graph.png in Resources */ = {isa = PBXBuildFile; fileRef = 70D2FAFE1A9F56BE00CAB509 /* graph.png */; };
+		70D2FB111A9F56BE00CAB509 /* graph@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 70D2FAFF1A9F56BE00CAB509 /* graph@2x.png */; };
+		70D2FB121A9F56BE00CAB509 /* info.png in Resources */ = {isa = PBXBuildFile; fileRef = 70D2FB001A9F56BE00CAB509 /* info.png */; };
+		70D2FB131A9F56BE00CAB509 /* info@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 70D2FB011A9F56BE00CAB509 /* info@2x.png */; };
+		70D2FB141A9F56BE00CAB509 /* note.png in Resources */ = {isa = PBXBuildFile; fileRef = 70D2FB021A9F56BE00CAB509 /* note.png */; };
+		70D2FB151A9F56BE00CAB509 /* note@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 70D2FB031A9F56BE00CAB509 /* note@2x.png */; };
+		70D2FB161A9F56BE00CAB509 /* plus.png in Resources */ = {isa = PBXBuildFile; fileRef = 70D2FB041A9F56BE00CAB509 /* plus.png */; };
+		70D2FB171A9F56BE00CAB509 /* plus@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 70D2FB051A9F56BE00CAB509 /* plus@2x.png */; };
+		70D2FB181A9F56BE00CAB509 /* portfolio.png in Resources */ = {isa = PBXBuildFile; fileRef = 70D2FB061A9F56BE00CAB509 /* portfolio.png */; };
+		70D2FB191A9F56BE00CAB509 /* portfolio@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 70D2FB071A9F56BE00CAB509 /* portfolio@2x.png */; };
+		70D2FB251A9F572B00CAB509 /* SubChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FB1C1A9F572B00CAB509 /* SubChartViewController.m */; };
+		70D2FB261A9F572B00CAB509 /* SubChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FB1E1A9F572B00CAB509 /* SubChartView.m */; };
+		70D2FB291A9F572B00CAB509 /* SubChartViewData.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FB241A9F572B00CAB509 /* SubChartViewData.m */; };
+		70D2FB481A9F574000CAB509 /* TradeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FB2B1A9F574000CAB509 /* TradeViewController.m */; };
+		70D2FB491A9F574000CAB509 /* ChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FB2D1A9F574000CAB509 /* ChartViewController.m */; };
+		70D2FB4A1A9F574000CAB509 /* RatePanelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FB2F1A9F574000CAB509 /* RatePanelViewController.m */; };
+		70D2FB4B1A9F574000CAB509 /* TradeDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FB311A9F574000CAB509 /* TradeDataViewController.m */; };
+		70D2FB4C1A9F574000CAB509 /* TradeDataViewData.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FB331A9F574000CAB509 /* TradeDataViewData.m */; };
+		70D2FB501A9F574000CAB509 /* ChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FB3B1A9F574000CAB509 /* ChartView.m */; };
+		70D2FB5F1A9F575900CAB509 /* ExecutionHistoryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FB581A9F575900CAB509 /* ExecutionHistoryTableViewController.m */; };
+		70D2FB601A9F575900CAB509 /* ExecutionHistoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FB5A1A9F575900CAB509 /* ExecutionHistoryTableViewCell.m */; };
+		70D2FB611A9F575900CAB509 /* ExecutionHistoryHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FB5C1A9F575900CAB509 /* ExecutionHistoryHeaderView.m */; };
+		70D2FB621A9F575900CAB509 /* ExecutionHistoryViewLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FB5E1A9F575900CAB509 /* ExecutionHistoryViewLabel.m */; };
+		70D2FB691A9F576500CAB509 /* Market.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FB641A9F576500CAB509 /* Market.m */; };
+		70D2FB6A1A9F576500CAB509 /* MarketManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FB661A9F576500CAB509 /* MarketManager.m */; };
+		70D2FB6B1A9F576500CAB509 /* MarketTimeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FB681A9F576500CAB509 /* MarketTimeManager.m */; };
+		70D2FB701A9F577200CAB509 /* CandlesFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FB6D1A9F577200CAB509 /* CandlesFactory.m */; };
+		70D2FB711A9F577200CAB509 /* Candle.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FB6F1A9F577200CAB509 /* Candle.m */; };
+		70D2FB761A9F577F00CAB509 /* OrderHistory.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FB731A9F577F00CAB509 /* OrderHistory.m */; };
+		70D2FB771A9F577F00CAB509 /* OrderHistoryFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FB751A9F577F00CAB509 /* OrderHistoryFactory.m */; };
+		70D2FB841A9F579000CAB509 /* ExecutionHistory.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FB791A9F579000CAB509 /* ExecutionHistory.m */; };
+		70D2FB851A9F579000CAB509 /* ExecutionHistoryFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FB7B1A9F579000CAB509 /* ExecutionHistoryFactory.m */; };
+		70D2FB861A9F579000CAB509 /* ExecutionHistoryManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FB7D1A9F579000CAB509 /* ExecutionHistoryManager.m */; };
+		70D2FB881A9F579000CAB509 /* ExecutionHistoryRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FB811A9F579000CAB509 /* ExecutionHistoryRecord.m */; };
+		70D2FB891A9F579000CAB509 /* ExecutionHistoryManagerFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FB831A9F579000CAB509 /* ExecutionHistoryManagerFactory.m */; };
+		70D2FB9C1A9F57A000CAB509 /* ForexHistory.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FB8B1A9F57A000CAB509 /* ForexHistory.m */; };
+		70D2FB9D1A9F57A000CAB509 /* ForexDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FB8D1A9F57A000CAB509 /* ForexDatabase.m */; };
+		70D2FB9E1A9F57A000CAB509 /* ForexHistoryCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FB8F1A9F57A000CAB509 /* ForexHistoryCache.m */; };
+		70D2FB9F1A9F57A000CAB509 /* ForexHistoryData.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FB911A9F57A000CAB509 /* ForexHistoryData.m */; };
+		70D2FBA01A9F57A000CAB509 /* ForexHistoryCacheConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FB931A9F57A000CAB509 /* ForexHistoryCacheConfig.m */; };
+		70D2FBA11A9F57A000CAB509 /* ForexHistoryDataArrayUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FB951A9F57A000CAB509 /* ForexHistoryDataArrayUtils.m */; };
+		70D2FBA21A9F57A000CAB509 /* ForexHistoryUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FB971A9F57A000CAB509 /* ForexHistoryUtils.m */; };
+		70D2FBA31A9F57A000CAB509 /* ForexHistoryFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FB991A9F57A000CAB509 /* ForexHistoryFactory.m */; };
+		70D2FBA41A9F57A000CAB509 /* ForexTimeScaleDataArrayFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FB9B1A9F57A000CAB509 /* ForexTimeScaleDataArrayFactory.m */; };
+		70D2FBAD1A9F57B000CAB509 /* UsersOrder.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FBA61A9F57B000CAB509 /* UsersOrder.m */; };
+		70D2FBAE1A9F57B000CAB509 /* OrderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FBA81A9F57B000CAB509 /* OrderManager.m */; };
+		70D2FBAF1A9F57B000CAB509 /* Order.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FBAA1A9F57B000CAB509 /* Order.m */; };
+		70D2FBB01A9F57B000CAB509 /* OrderManagerFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FBAC1A9F57B000CAB509 /* OrderManagerFactory.m */; };
+		70D2FBC11A9F57BD00CAB509 /* OpenPositionRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FBB21A9F57BD00CAB509 /* OpenPositionRecord.m */; };
+		70D2FBC21A9F57BD00CAB509 /* OpenPosition.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FBB41A9F57BD00CAB509 /* OpenPosition.m */; };
+		70D2FBC31A9F57BD00CAB509 /* OpenPositionFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FBB61A9F57BD00CAB509 /* OpenPositionFactory.m */; };
+		70D2FBC41A9F57BD00CAB509 /* OpenPositionUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FBB81A9F57BD00CAB509 /* OpenPositionUtils.m */; };
+		70D2FBC61A9F57BD00CAB509 /* OpenPositionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FBBC1A9F57BD00CAB509 /* OpenPositionManager.m */; };
+		70D2FBC71A9F57BD00CAB509 /* OpenPositionRawRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FBBE1A9F57BD00CAB509 /* OpenPositionRawRecord.m */; };
+		70D2FBC81A9F57BD00CAB509 /* OpenPositionManagerFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FBC01A9F57BD00CAB509 /* OpenPositionManagerFactory.m */; };
+		70D2FBD51A9F57CB00CAB509 /* SaveDataFileStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FBCA1A9F57CB00CAB509 /* SaveDataFileStorage.m */; };
+		70D2FBD61A9F57CB00CAB509 /* SaveData.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FBCC1A9F57CB00CAB509 /* SaveData.m */; };
+		70D2FBD71A9F57CB00CAB509 /* SaveDataStorageFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FBCE1A9F57CB00CAB509 /* SaveDataStorageFactory.m */; };
+		70D2FBD81A9F57CB00CAB509 /* SaveLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FBD01A9F57CB00CAB509 /* SaveLoader.m */; };
+		70D2FBD91A9F57CB00CAB509 /* TableNameFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FBD21A9F57CB00CAB509 /* TableNameFormatter.m */; };
+		70D2FBF51A9F57DC00CAB509 /* ExecutionOrderMaterial.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FBDC1A9F57DC00CAB509 /* ExecutionOrderMaterial.m */; };
+		70D2FBF61A9F57DC00CAB509 /* ExecutionOrdersFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FBDE1A9F57DC00CAB509 /* ExecutionOrdersFactory.m */; };
+		70D2FBF71A9F57DC00CAB509 /* ExecutionOrdersCreator.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FBE01A9F57DC00CAB509 /* ExecutionOrdersCreator.m */; };
+		70D2FBF81A9F57DC00CAB509 /* ExecutionOrdersCreateModeFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FBE21A9F57DC00CAB509 /* ExecutionOrdersCreateModeFactory.m */; };
+		70D2FBF91A9F57DC00CAB509 /* ExecutionOrdersCreateMode.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FBE41A9F57DC00CAB509 /* ExecutionOrdersCreateMode.m */; };
+		70D2FBFA1A9F57DC00CAB509 /* OnlyCloseExecutionOrdersCreateMode.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FBE61A9F57DC00CAB509 /* OnlyCloseExecutionOrdersCreateMode.m */; };
+		70D2FBFB1A9F57DC00CAB509 /* OnlyNewExecutionOrdersCreateMode.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FBE81A9F57DC00CAB509 /* OnlyNewExecutionOrdersCreateMode.m */; };
+		70D2FBFC1A9F57DC00CAB509 /* CloseAndNewExecutionOrdersCreateMode.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FBEA1A9F57DC00CAB509 /* CloseAndNewExecutionOrdersCreateMode.m */; };
+		70D2FBFD1A9F57DC00CAB509 /* ExecutionOrder.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FBEC1A9F57DC00CAB509 /* ExecutionOrder.m */; };
+		70D2FBFE1A9F57DC00CAB509 /* CloseExecutionOrder.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FBEE1A9F57DC00CAB509 /* CloseExecutionOrder.m */; };
+		70D2FBFF1A9F57DC00CAB509 /* NewExecutionOrder.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FBF01A9F57DC00CAB509 /* NewExecutionOrder.m */; };
+		70D2FC001A9F57DC00CAB509 /* ExecutionOrdersManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FBF21A9F57DC00CAB509 /* ExecutionOrdersManager.m */; };
+		70D2FC011A9F57DC00CAB509 /* ExecutionOrdersTransactionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FBF41A9F57DC00CAB509 /* ExecutionOrdersTransactionManager.m */; };
+		70D2FC091A9F58EC00CAB509 /* ConfigViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FC061A9F58EC00CAB509 /* ConfigViewController.m */; };
+		70D2FC0F1A9F58F700CAB509 /* TradeDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FC0C1A9F58F700CAB509 /* TradeDatabase.m */; };
+		70D2FC101A9F58F700CAB509 /* CurrencyPair.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FC0E1A9F58F700CAB509 /* CurrencyPair.m */; };
+		70D2FC3D1A9F591600CAB509 /* OrderType.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FC121A9F591500CAB509 /* OrderType.m */; };
+		70D2FC3E1A9F591600CAB509 /* ChartViewData.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FC141A9F591500CAB509 /* ChartViewData.m */; };
+		70D2FC3F1A9F591600CAB509 /* RatePanelViewData.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FC161A9F591500CAB509 /* RatePanelViewData.m */; };
+		70D2FC401A9F591600CAB509 /* Currency.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FC181A9F591500CAB509 /* Currency.m */; };
+		70D2FC411A9F591600CAB509 /* TimeScaleUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FC1A1A9F591500CAB509 /* TimeScaleUtils.m */; };
+		70D2FC421A9F591600CAB509 /* Setting.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FC1C1A9F591500CAB509 /* Setting.m */; };
+		70D2FC431A9F591600CAB509 /* MarketTimeScale.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FC1E1A9F591500CAB509 /* MarketTimeScale.m */; };
+		70D2FC441A9F591600CAB509 /* Spread.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FC201A9F591500CAB509 /* Spread.m */; };
+		70D2FC451A9F591600CAB509 /* Rate.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FC221A9F591500CAB509 /* Rate.m */; };
+		70D2FC461A9F591600CAB509 /* Money.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FC241A9F591500CAB509 /* Money.m */; };
+		70D2FC471A9F591600CAB509 /* CurrencyConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FC261A9F591600CAB509 /* CurrencyConverter.m */; };
+		70D2FC481A9F591600CAB509 /* Lot.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FC281A9F591600CAB509 /* Lot.m */; };
+		70D2FC491A9F591600CAB509 /* ProfitAndLossCalculator.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FC2A1A9F591600CAB509 /* ProfitAndLossCalculator.m */; };
+		70D2FC4B1A9F591600CAB509 /* Common.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FC2E1A9F591600CAB509 /* Common.m */; };
+		70D2FC4C1A9F591600CAB509 /* PositionSize.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FC301A9F591600CAB509 /* PositionSize.m */; };
+		70D2FC4D1A9F591600CAB509 /* TradeDbDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FC321A9F591600CAB509 /* TradeDbDataSource.m */; };
+		70D2FC4E1A9F591600CAB509 /* Equity.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FC341A9F591600CAB509 /* Equity.m */; };
+		70D2FC4F1A9F591600CAB509 /* Balance.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FC361A9F591600CAB509 /* Balance.m */; };
+		70D2FC501A9F591600CAB509 /* EquityFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FC381A9F591600CAB509 /* EquityFactory.m */; };
+		70D2FC511A9F591600CAB509 /* MarketTime.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FC3A1A9F591600CAB509 /* MarketTime.m */; };
+		70ED621E1AFCA11F0008F939 /* SetSpreadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70ED621D1AFCA11F0008F939 /* SetSpreadViewController.m */; };
+		70ED62211AFCA1400008F939 /* SetAccountCurrencyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70ED62201AFCA1400008F939 /* SetAccountCurrencyViewController.m */; };
+		70ED62241AFCA17E0008F939 /* SetStartBalanceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70ED62231AFCA17E0008F939 /* SetStartBalanceViewController.m */; };
+		70ED62271AFCA2620008F939 /* SetNewStartDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70ED62261AFCA2620008F939 /* SetNewStartDataViewController.m */; };
+		70ED622B1B01C0330008F939 /* SetPositionSizeOfLotViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70ED622A1B01C0330008F939 /* SetPositionSizeOfLotViewController.m */; };
+		70ED622E1B0211630008F939 /* SetTimeScaleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70ED622D1B0211630008F939 /* SetTimeScaleViewController.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		70D2FAA11A9F305800CAB509 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 70D2FA7C1A9F305700CAB509 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 70D2FA831A9F305700CAB509;
+			remoteInfo = "FX Simulator";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		700360141AA8C0CE00A57959 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
+		700B95831B0C3C97003F160B /* InputTradeLotViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputTradeLotViewController.h; sourceTree = "<group>"; };
+		700B95841B0C3C97003F160B /* InputTradeLotViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InputTradeLotViewController.m; sourceTree = "<group>"; };
+		705C2E0E1ADE4C270089D510 /* Money+ConvertToAccountCurrency.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Money+ConvertToAccountCurrency.h"; sourceTree = "<group>"; };
+		705C2E0F1ADE4C270089D510 /* Money+ConvertToAccountCurrency.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Money+ConvertToAccountCurrency.m"; sourceTree = "<group>"; };
+		705DCE491AE6893E00BCF710 /* tradedb.sqlite3 */ = {isa = PBXFileReference; lastKnownFileType = file; path = tradedb.sqlite3; sourceTree = "<group>"; };
+		7076F5A51AECCBBB004CC6BA /* NewStartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewStartViewController.h; sourceTree = "<group>"; };
+		7076F5A61AECCBBB004CC6BA /* NewStartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewStartViewController.m; sourceTree = "<group>"; };
+		7076F5A81AECCDB7004CC6BA /* SetCurrencyPairViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetCurrencyPairViewController.h; sourceTree = "<group>"; };
+		7076F5A91AECCDB7004CC6BA /* SetCurrencyPairViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetCurrencyPairViewController.m; sourceTree = "<group>"; };
+		7079FEE61AF4FF23004D3CEA /* SetStartTimeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetStartTimeViewController.h; sourceTree = "<group>"; };
+		7079FEE71AF4FF23004D3CEA /* SetStartTimeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetStartTimeViewController.m; sourceTree = "<group>"; };
+		7079FEE91AF9E688004D3CEA /* NSDate+FXSDateData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+FXSDateData.h"; sourceTree = "<group>"; };
+		7079FEEA1AF9E688004D3CEA /* NSDate+FXSDateData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+FXSDateData.m"; sourceTree = "<group>"; };
+		709BC75C1B0700320059C940 /* SetAutoUpdateIntervalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetAutoUpdateIntervalViewController.h; sourceTree = "<group>"; };
+		709BC75D1B0700320059C940 /* SetAutoUpdateIntervalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetAutoUpdateIntervalViewController.m; sourceTree = "<group>"; };
+		70AD14741AADD0AA0099F0BA /* RatePanelButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RatePanelButton.h; sourceTree = "<group>"; };
+		70AD14751AADD0AA0099F0BA /* RatePanelButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RatePanelButton.m; sourceTree = "<group>"; };
+		70B5AAEB1AC7BE90001F8823 /* ExecuteOrderTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExecuteOrderTests.m; sourceTree = "<group>"; };
+		70B5AAED1AC7FF44001F8823 /* Rates.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Rates.h; sourceTree = "<group>"; };
+		70B5AAEE1AC7FF44001F8823 /* Rates.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Rates.m; sourceTree = "<group>"; };
+		70B5AAF01ACE5BC0001F8823 /* SubChartDataViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubChartDataViewController.h; sourceTree = "<group>"; };
+		70B5AAF11ACE5BC0001F8823 /* SubChartDataViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubChartDataViewController.m; sourceTree = "<group>"; };
+		70D2FA841A9F305700CAB509 /* FX Simulator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "FX Simulator.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		70D2FA881A9F305700CAB509 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		70D2FA891A9F305700CAB509 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		70D2FA8B1A9F305700CAB509 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		70D2FA8C1A9F305700CAB509 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		70D2FA951A9F305700CAB509 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		70D2FA971A9F305700CAB509 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		70D2FA9A1A9F305700CAB509 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		70D2FAA01A9F305800CAB509 /* FX SimulatorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "FX SimulatorTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		70D2FAA51A9F305800CAB509 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		70D2FAA61A9F305800CAB509 /* FX_SimulatorTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FX_SimulatorTests.m; sourceTree = "<group>"; };
+		70D2FAB31A9F531800CAB509 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
+		70D2FACE1A9F558100CAB509 /* forex_time_scale.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = forex_time_scale.sqlite; sourceTree = "<group>"; };
+		70D2FAD01A9F559200CAB509 /* OpenPositionTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenPositionTableViewController.h; sourceTree = "<group>"; };
+		70D2FAD11A9F559200CAB509 /* OpenPositionTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenPositionTableViewController.m; sourceTree = "<group>"; };
+		70D2FAD21A9F559200CAB509 /* OpenPositionHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenPositionHeaderView.h; sourceTree = "<group>"; };
+		70D2FAD31A9F559200CAB509 /* OpenPositionHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenPositionHeaderView.m; sourceTree = "<group>"; };
+		70D2FAD41A9F559200CAB509 /* OpenPositionTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenPositionTableViewCell.h; sourceTree = "<group>"; };
+		70D2FAD51A9F559200CAB509 /* OpenPositionTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenPositionTableViewCell.m; sourceTree = "<group>"; };
+		70D2FAE61A9F56AE00CAB509 /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabase.h; sourceTree = "<group>"; };
+		70D2FAE71A9F56AE00CAB509 /* FMDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabase.m; sourceTree = "<group>"; };
+		70D2FAE81A9F56AE00CAB509 /* FMDatabaseAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseAdditions.h; sourceTree = "<group>"; };
+		70D2FAE91A9F56AE00CAB509 /* FMDatabaseAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseAdditions.m; sourceTree = "<group>"; };
+		70D2FAEA1A9F56AE00CAB509 /* FMDatabasePool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabasePool.h; sourceTree = "<group>"; };
+		70D2FAEB1A9F56AE00CAB509 /* FMDatabasePool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabasePool.m; sourceTree = "<group>"; };
+		70D2FAEC1A9F56AE00CAB509 /* FMDatabaseQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseQueue.h; sourceTree = "<group>"; };
+		70D2FAED1A9F56AE00CAB509 /* FMDatabaseQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseQueue.m; sourceTree = "<group>"; };
+		70D2FAEE1A9F56AE00CAB509 /* FMDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDB.h; sourceTree = "<group>"; };
+		70D2FAEF1A9F56AE00CAB509 /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
+		70D2FAF01A9F56AE00CAB509 /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
+		70D2FAF61A9F56BE00CAB509 /* display@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "display@2x.png"; sourceTree = "<group>"; };
+		70D2FAF71A9F56BE00CAB509 /* display.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = display.png; sourceTree = "<group>"; };
+		70D2FAF81A9F56BE00CAB509 /* clock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = clock.png; sourceTree = "<group>"; };
+		70D2FAF91A9F56BE00CAB509 /* clock@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "clock@2x.png"; sourceTree = "<group>"; };
+		70D2FAFA1A9F56BE00CAB509 /* config.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = config.png; sourceTree = "<group>"; };
+		70D2FAFB1A9F56BE00CAB509 /* config@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "config@2x.png"; sourceTree = "<group>"; };
+		70D2FAFC1A9F56BE00CAB509 /* file.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = file.png; sourceTree = "<group>"; };
+		70D2FAFD1A9F56BE00CAB509 /* file@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "file@2x.png"; sourceTree = "<group>"; };
+		70D2FAFE1A9F56BE00CAB509 /* graph.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = graph.png; sourceTree = "<group>"; };
+		70D2FAFF1A9F56BE00CAB509 /* graph@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "graph@2x.png"; sourceTree = "<group>"; };
+		70D2FB001A9F56BE00CAB509 /* info.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = info.png; sourceTree = "<group>"; };
+		70D2FB011A9F56BE00CAB509 /* info@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "info@2x.png"; sourceTree = "<group>"; };
+		70D2FB021A9F56BE00CAB509 /* note.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = note.png; sourceTree = "<group>"; };
+		70D2FB031A9F56BE00CAB509 /* note@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "note@2x.png"; sourceTree = "<group>"; };
+		70D2FB041A9F56BE00CAB509 /* plus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = plus.png; sourceTree = "<group>"; };
+		70D2FB051A9F56BE00CAB509 /* plus@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "plus@2x.png"; sourceTree = "<group>"; };
+		70D2FB061A9F56BE00CAB509 /* portfolio.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = portfolio.png; sourceTree = "<group>"; };
+		70D2FB071A9F56BE00CAB509 /* portfolio@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "portfolio@2x.png"; sourceTree = "<group>"; };
+		70D2FB1B1A9F572B00CAB509 /* SubChartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubChartViewController.h; sourceTree = "<group>"; };
+		70D2FB1C1A9F572B00CAB509 /* SubChartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubChartViewController.m; sourceTree = "<group>"; };
+		70D2FB1D1A9F572B00CAB509 /* SubChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubChartView.h; sourceTree = "<group>"; };
+		70D2FB1E1A9F572B00CAB509 /* SubChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubChartView.m; sourceTree = "<group>"; };
+		70D2FB231A9F572B00CAB509 /* SubChartViewData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubChartViewData.h; sourceTree = "<group>"; };
+		70D2FB241A9F572B00CAB509 /* SubChartViewData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubChartViewData.m; sourceTree = "<group>"; };
+		70D2FB2A1A9F574000CAB509 /* TradeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TradeViewController.h; sourceTree = "<group>"; };
+		70D2FB2B1A9F574000CAB509 /* TradeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TradeViewController.m; sourceTree = "<group>"; };
+		70D2FB2C1A9F574000CAB509 /* ChartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChartViewController.h; sourceTree = "<group>"; };
+		70D2FB2D1A9F574000CAB509 /* ChartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChartViewController.m; sourceTree = "<group>"; };
+		70D2FB2E1A9F574000CAB509 /* RatePanelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RatePanelViewController.h; sourceTree = "<group>"; };
+		70D2FB2F1A9F574000CAB509 /* RatePanelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RatePanelViewController.m; sourceTree = "<group>"; };
+		70D2FB301A9F574000CAB509 /* TradeDataViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TradeDataViewController.h; sourceTree = "<group>"; };
+		70D2FB311A9F574000CAB509 /* TradeDataViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TradeDataViewController.m; sourceTree = "<group>"; };
+		70D2FB321A9F574000CAB509 /* TradeDataViewData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TradeDataViewData.h; sourceTree = "<group>"; };
+		70D2FB331A9F574000CAB509 /* TradeDataViewData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TradeDataViewData.m; sourceTree = "<group>"; };
+		70D2FB3A1A9F574000CAB509 /* ChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChartView.h; sourceTree = "<group>"; };
+		70D2FB3B1A9F574000CAB509 /* ChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChartView.m; sourceTree = "<group>"; };
+		70D2FB571A9F575900CAB509 /* ExecutionHistoryTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExecutionHistoryTableViewController.h; sourceTree = "<group>"; };
+		70D2FB581A9F575900CAB509 /* ExecutionHistoryTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExecutionHistoryTableViewController.m; sourceTree = "<group>"; };
+		70D2FB591A9F575900CAB509 /* ExecutionHistoryTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExecutionHistoryTableViewCell.h; sourceTree = "<group>"; };
+		70D2FB5A1A9F575900CAB509 /* ExecutionHistoryTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExecutionHistoryTableViewCell.m; sourceTree = "<group>"; };
+		70D2FB5B1A9F575900CAB509 /* ExecutionHistoryHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExecutionHistoryHeaderView.h; sourceTree = "<group>"; };
+		70D2FB5C1A9F575900CAB509 /* ExecutionHistoryHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExecutionHistoryHeaderView.m; sourceTree = "<group>"; };
+		70D2FB5D1A9F575900CAB509 /* ExecutionHistoryViewLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExecutionHistoryViewLabel.h; sourceTree = "<group>"; };
+		70D2FB5E1A9F575900CAB509 /* ExecutionHistoryViewLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExecutionHistoryViewLabel.m; sourceTree = "<group>"; };
+		70D2FB631A9F576500CAB509 /* Market.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Market.h; sourceTree = "<group>"; };
+		70D2FB641A9F576500CAB509 /* Market.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Market.m; sourceTree = "<group>"; };
+		70D2FB651A9F576500CAB509 /* MarketManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarketManager.h; sourceTree = "<group>"; };
+		70D2FB661A9F576500CAB509 /* MarketManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarketManager.m; sourceTree = "<group>"; };
+		70D2FB671A9F576500CAB509 /* MarketTimeManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarketTimeManager.h; sourceTree = "<group>"; };
+		70D2FB681A9F576500CAB509 /* MarketTimeManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarketTimeManager.m; sourceTree = "<group>"; };
+		70D2FB6C1A9F577200CAB509 /* CandlesFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CandlesFactory.h; sourceTree = "<group>"; };
+		70D2FB6D1A9F577200CAB509 /* CandlesFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CandlesFactory.m; sourceTree = "<group>"; };
+		70D2FB6E1A9F577200CAB509 /* Candle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Candle.h; sourceTree = "<group>"; };
+		70D2FB6F1A9F577200CAB509 /* Candle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Candle.m; sourceTree = "<group>"; };
+		70D2FB721A9F577F00CAB509 /* OrderHistory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderHistory.h; sourceTree = "<group>"; };
+		70D2FB731A9F577F00CAB509 /* OrderHistory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderHistory.m; sourceTree = "<group>"; };
+		70D2FB741A9F577F00CAB509 /* OrderHistoryFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderHistoryFactory.h; sourceTree = "<group>"; };
+		70D2FB751A9F577F00CAB509 /* OrderHistoryFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderHistoryFactory.m; sourceTree = "<group>"; };
+		70D2FB781A9F579000CAB509 /* ExecutionHistory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExecutionHistory.h; sourceTree = "<group>"; };
+		70D2FB791A9F579000CAB509 /* ExecutionHistory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExecutionHistory.m; sourceTree = "<group>"; };
+		70D2FB7A1A9F579000CAB509 /* ExecutionHistoryFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExecutionHistoryFactory.h; sourceTree = "<group>"; };
+		70D2FB7B1A9F579000CAB509 /* ExecutionHistoryFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExecutionHistoryFactory.m; sourceTree = "<group>"; };
+		70D2FB7C1A9F579000CAB509 /* ExecutionHistoryManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExecutionHistoryManager.h; sourceTree = "<group>"; };
+		70D2FB7D1A9F579000CAB509 /* ExecutionHistoryManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExecutionHistoryManager.m; sourceTree = "<group>"; };
+		70D2FB801A9F579000CAB509 /* ExecutionHistoryRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExecutionHistoryRecord.h; sourceTree = "<group>"; };
+		70D2FB811A9F579000CAB509 /* ExecutionHistoryRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExecutionHistoryRecord.m; sourceTree = "<group>"; };
+		70D2FB821A9F579000CAB509 /* ExecutionHistoryManagerFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExecutionHistoryManagerFactory.h; sourceTree = "<group>"; };
+		70D2FB831A9F579000CAB509 /* ExecutionHistoryManagerFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExecutionHistoryManagerFactory.m; sourceTree = "<group>"; };
+		70D2FB8A1A9F57A000CAB509 /* ForexHistory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForexHistory.h; sourceTree = "<group>"; };
+		70D2FB8B1A9F57A000CAB509 /* ForexHistory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForexHistory.m; sourceTree = "<group>"; };
+		70D2FB8C1A9F57A000CAB509 /* ForexDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForexDatabase.h; sourceTree = "<group>"; };
+		70D2FB8D1A9F57A000CAB509 /* ForexDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForexDatabase.m; sourceTree = "<group>"; };
+		70D2FB8E1A9F57A000CAB509 /* ForexHistoryCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForexHistoryCache.h; sourceTree = "<group>"; };
+		70D2FB8F1A9F57A000CAB509 /* ForexHistoryCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForexHistoryCache.m; sourceTree = "<group>"; };
+		70D2FB901A9F57A000CAB509 /* ForexHistoryData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForexHistoryData.h; sourceTree = "<group>"; };
+		70D2FB911A9F57A000CAB509 /* ForexHistoryData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForexHistoryData.m; sourceTree = "<group>"; };
+		70D2FB921A9F57A000CAB509 /* ForexHistoryCacheConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForexHistoryCacheConfig.h; sourceTree = "<group>"; };
+		70D2FB931A9F57A000CAB509 /* ForexHistoryCacheConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForexHistoryCacheConfig.m; sourceTree = "<group>"; };
+		70D2FB941A9F57A000CAB509 /* ForexHistoryDataArrayUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForexHistoryDataArrayUtils.h; sourceTree = "<group>"; };
+		70D2FB951A9F57A000CAB509 /* ForexHistoryDataArrayUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForexHistoryDataArrayUtils.m; sourceTree = "<group>"; };
+		70D2FB961A9F57A000CAB509 /* ForexHistoryUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForexHistoryUtils.h; sourceTree = "<group>"; };
+		70D2FB971A9F57A000CAB509 /* ForexHistoryUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForexHistoryUtils.m; sourceTree = "<group>"; };
+		70D2FB981A9F57A000CAB509 /* ForexHistoryFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForexHistoryFactory.h; sourceTree = "<group>"; };
+		70D2FB991A9F57A000CAB509 /* ForexHistoryFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForexHistoryFactory.m; sourceTree = "<group>"; };
+		70D2FB9A1A9F57A000CAB509 /* ForexTimeScaleDataArrayFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForexTimeScaleDataArrayFactory.h; sourceTree = "<group>"; };
+		70D2FB9B1A9F57A000CAB509 /* ForexTimeScaleDataArrayFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForexTimeScaleDataArrayFactory.m; sourceTree = "<group>"; };
+		70D2FBA51A9F57B000CAB509 /* UsersOrder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UsersOrder.h; sourceTree = "<group>"; };
+		70D2FBA61A9F57B000CAB509 /* UsersOrder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UsersOrder.m; sourceTree = "<group>"; };
+		70D2FBA71A9F57B000CAB509 /* OrderManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderManager.h; sourceTree = "<group>"; };
+		70D2FBA81A9F57B000CAB509 /* OrderManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderManager.m; sourceTree = "<group>"; };
+		70D2FBA91A9F57B000CAB509 /* Order.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Order.h; sourceTree = "<group>"; };
+		70D2FBAA1A9F57B000CAB509 /* Order.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Order.m; sourceTree = "<group>"; };
+		70D2FBAB1A9F57B000CAB509 /* OrderManagerFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderManagerFactory.h; sourceTree = "<group>"; };
+		70D2FBAC1A9F57B000CAB509 /* OrderManagerFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderManagerFactory.m; sourceTree = "<group>"; };
+		70D2FBB11A9F57BD00CAB509 /* OpenPositionRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenPositionRecord.h; sourceTree = "<group>"; };
+		70D2FBB21A9F57BD00CAB509 /* OpenPositionRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenPositionRecord.m; sourceTree = "<group>"; };
+		70D2FBB31A9F57BD00CAB509 /* OpenPosition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenPosition.h; sourceTree = "<group>"; };
+		70D2FBB41A9F57BD00CAB509 /* OpenPosition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenPosition.m; sourceTree = "<group>"; };
+		70D2FBB51A9F57BD00CAB509 /* OpenPositionFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenPositionFactory.h; sourceTree = "<group>"; };
+		70D2FBB61A9F57BD00CAB509 /* OpenPositionFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenPositionFactory.m; sourceTree = "<group>"; };
+		70D2FBB71A9F57BD00CAB509 /* OpenPositionUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenPositionUtils.h; sourceTree = "<group>"; };
+		70D2FBB81A9F57BD00CAB509 /* OpenPositionUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenPositionUtils.m; sourceTree = "<group>"; };
+		70D2FBBB1A9F57BD00CAB509 /* OpenPositionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenPositionManager.h; sourceTree = "<group>"; };
+		70D2FBBC1A9F57BD00CAB509 /* OpenPositionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenPositionManager.m; sourceTree = "<group>"; };
+		70D2FBBD1A9F57BD00CAB509 /* OpenPositionRawRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenPositionRawRecord.h; sourceTree = "<group>"; };
+		70D2FBBE1A9F57BD00CAB509 /* OpenPositionRawRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenPositionRawRecord.m; sourceTree = "<group>"; };
+		70D2FBBF1A9F57BD00CAB509 /* OpenPositionManagerFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenPositionManagerFactory.h; sourceTree = "<group>"; };
+		70D2FBC01A9F57BD00CAB509 /* OpenPositionManagerFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenPositionManagerFactory.m; sourceTree = "<group>"; };
+		70D2FBC91A9F57CB00CAB509 /* SaveDataFileStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SaveDataFileStorage.h; sourceTree = "<group>"; };
+		70D2FBCA1A9F57CB00CAB509 /* SaveDataFileStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SaveDataFileStorage.m; sourceTree = "<group>"; };
+		70D2FBCB1A9F57CB00CAB509 /* SaveData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SaveData.h; sourceTree = "<group>"; };
+		70D2FBCC1A9F57CB00CAB509 /* SaveData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SaveData.m; sourceTree = "<group>"; };
+		70D2FBCD1A9F57CB00CAB509 /* SaveDataStorageFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SaveDataStorageFactory.h; sourceTree = "<group>"; };
+		70D2FBCE1A9F57CB00CAB509 /* SaveDataStorageFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SaveDataStorageFactory.m; sourceTree = "<group>"; };
+		70D2FBCF1A9F57CB00CAB509 /* SaveLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SaveLoader.h; sourceTree = "<group>"; };
+		70D2FBD01A9F57CB00CAB509 /* SaveLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SaveLoader.m; sourceTree = "<group>"; };
+		70D2FBD11A9F57CB00CAB509 /* TableNameFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableNameFormatter.h; sourceTree = "<group>"; };
+		70D2FBD21A9F57CB00CAB509 /* TableNameFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableNameFormatter.m; sourceTree = "<group>"; };
+		70D2FBD31A9F57CB00CAB509 /* SaveManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SaveManager.h; sourceTree = "<group>"; };
+		70D2FBD41A9F57CB00CAB509 /* SaveManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SaveManager.m; sourceTree = "<group>"; };
+		70D2FBDB1A9F57DC00CAB509 /* ExecutionOrderMaterial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExecutionOrderMaterial.h; sourceTree = "<group>"; };
+		70D2FBDC1A9F57DC00CAB509 /* ExecutionOrderMaterial.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExecutionOrderMaterial.m; sourceTree = "<group>"; };
+		70D2FBDD1A9F57DC00CAB509 /* ExecutionOrdersFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExecutionOrdersFactory.h; sourceTree = "<group>"; };
+		70D2FBDE1A9F57DC00CAB509 /* ExecutionOrdersFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExecutionOrdersFactory.m; sourceTree = "<group>"; };
+		70D2FBDF1A9F57DC00CAB509 /* ExecutionOrdersCreator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExecutionOrdersCreator.h; sourceTree = "<group>"; };
+		70D2FBE01A9F57DC00CAB509 /* ExecutionOrdersCreator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExecutionOrdersCreator.m; sourceTree = "<group>"; };
+		70D2FBE11A9F57DC00CAB509 /* ExecutionOrdersCreateModeFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExecutionOrdersCreateModeFactory.h; sourceTree = "<group>"; };
+		70D2FBE21A9F57DC00CAB509 /* ExecutionOrdersCreateModeFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExecutionOrdersCreateModeFactory.m; sourceTree = "<group>"; };
+		70D2FBE31A9F57DC00CAB509 /* ExecutionOrdersCreateMode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExecutionOrdersCreateMode.h; sourceTree = "<group>"; };
+		70D2FBE41A9F57DC00CAB509 /* ExecutionOrdersCreateMode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExecutionOrdersCreateMode.m; sourceTree = "<group>"; };
+		70D2FBE51A9F57DC00CAB509 /* OnlyCloseExecutionOrdersCreateMode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OnlyCloseExecutionOrdersCreateMode.h; sourceTree = "<group>"; };
+		70D2FBE61A9F57DC00CAB509 /* OnlyCloseExecutionOrdersCreateMode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OnlyCloseExecutionOrdersCreateMode.m; sourceTree = "<group>"; };
+		70D2FBE71A9F57DC00CAB509 /* OnlyNewExecutionOrdersCreateMode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OnlyNewExecutionOrdersCreateMode.h; sourceTree = "<group>"; };
+		70D2FBE81A9F57DC00CAB509 /* OnlyNewExecutionOrdersCreateMode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OnlyNewExecutionOrdersCreateMode.m; sourceTree = "<group>"; };
+		70D2FBE91A9F57DC00CAB509 /* CloseAndNewExecutionOrdersCreateMode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CloseAndNewExecutionOrdersCreateMode.h; sourceTree = "<group>"; };
+		70D2FBEA1A9F57DC00CAB509 /* CloseAndNewExecutionOrdersCreateMode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CloseAndNewExecutionOrdersCreateMode.m; sourceTree = "<group>"; };
+		70D2FBEB1A9F57DC00CAB509 /* ExecutionOrder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExecutionOrder.h; sourceTree = "<group>"; };
+		70D2FBEC1A9F57DC00CAB509 /* ExecutionOrder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExecutionOrder.m; sourceTree = "<group>"; };
+		70D2FBED1A9F57DC00CAB509 /* CloseExecutionOrder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CloseExecutionOrder.h; sourceTree = "<group>"; };
+		70D2FBEE1A9F57DC00CAB509 /* CloseExecutionOrder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CloseExecutionOrder.m; sourceTree = "<group>"; };
+		70D2FBEF1A9F57DC00CAB509 /* NewExecutionOrder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewExecutionOrder.h; sourceTree = "<group>"; };
+		70D2FBF01A9F57DC00CAB509 /* NewExecutionOrder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewExecutionOrder.m; sourceTree = "<group>"; };
+		70D2FBF11A9F57DC00CAB509 /* ExecutionOrdersManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExecutionOrdersManager.h; sourceTree = "<group>"; };
+		70D2FBF21A9F57DC00CAB509 /* ExecutionOrdersManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExecutionOrdersManager.m; sourceTree = "<group>"; };
+		70D2FBF31A9F57DC00CAB509 /* ExecutionOrdersTransactionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExecutionOrdersTransactionManager.h; sourceTree = "<group>"; };
+		70D2FBF41A9F57DC00CAB509 /* ExecutionOrdersTransactionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExecutionOrdersTransactionManager.m; sourceTree = "<group>"; };
+		70D2FC021A9F58D100CAB509 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
+		70D2FC031A9F58D100CAB509 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		70D2FC051A9F58EC00CAB509 /* ConfigViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigViewController.h; sourceTree = "<group>"; };
+		70D2FC061A9F58EC00CAB509 /* ConfigViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigViewController.m; sourceTree = "<group>"; };
+		70D2FC0B1A9F58F700CAB509 /* TradeDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TradeDatabase.h; sourceTree = "<group>"; };
+		70D2FC0C1A9F58F700CAB509 /* TradeDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TradeDatabase.m; sourceTree = "<group>"; };
+		70D2FC0D1A9F58F700CAB509 /* CurrencyPair.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurrencyPair.h; sourceTree = "<group>"; };
+		70D2FC0E1A9F58F700CAB509 /* CurrencyPair.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurrencyPair.m; sourceTree = "<group>"; };
+		70D2FC111A9F591500CAB509 /* OrderType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderType.h; sourceTree = "<group>"; };
+		70D2FC121A9F591500CAB509 /* OrderType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderType.m; sourceTree = "<group>"; };
+		70D2FC131A9F591500CAB509 /* ChartViewData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChartViewData.h; sourceTree = "<group>"; };
+		70D2FC141A9F591500CAB509 /* ChartViewData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChartViewData.m; sourceTree = "<group>"; };
+		70D2FC151A9F591500CAB509 /* RatePanelViewData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RatePanelViewData.h; sourceTree = "<group>"; };
+		70D2FC161A9F591500CAB509 /* RatePanelViewData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RatePanelViewData.m; sourceTree = "<group>"; };
+		70D2FC171A9F591500CAB509 /* Currency.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Currency.h; sourceTree = "<group>"; };
+		70D2FC181A9F591500CAB509 /* Currency.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Currency.m; sourceTree = "<group>"; };
+		70D2FC191A9F591500CAB509 /* TimeScaleUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeScaleUtils.h; sourceTree = "<group>"; };
+		70D2FC1A1A9F591500CAB509 /* TimeScaleUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeScaleUtils.m; sourceTree = "<group>"; };
+		70D2FC1B1A9F591500CAB509 /* Setting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Setting.h; sourceTree = "<group>"; };
+		70D2FC1C1A9F591500CAB509 /* Setting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Setting.m; sourceTree = "<group>"; };
+		70D2FC1D1A9F591500CAB509 /* MarketTimeScale.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarketTimeScale.h; sourceTree = "<group>"; };
+		70D2FC1E1A9F591500CAB509 /* MarketTimeScale.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarketTimeScale.m; sourceTree = "<group>"; };
+		70D2FC1F1A9F591500CAB509 /* Spread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Spread.h; sourceTree = "<group>"; };
+		70D2FC201A9F591500CAB509 /* Spread.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Spread.m; sourceTree = "<group>"; };
+		70D2FC211A9F591500CAB509 /* Rate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Rate.h; sourceTree = "<group>"; };
+		70D2FC221A9F591500CAB509 /* Rate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Rate.m; sourceTree = "<group>"; };
+		70D2FC231A9F591500CAB509 /* Money.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Money.h; sourceTree = "<group>"; };
+		70D2FC241A9F591500CAB509 /* Money.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Money.m; sourceTree = "<group>"; };
+		70D2FC251A9F591500CAB509 /* CurrencyConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurrencyConverter.h; sourceTree = "<group>"; };
+		70D2FC261A9F591600CAB509 /* CurrencyConverter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurrencyConverter.m; sourceTree = "<group>"; };
+		70D2FC271A9F591600CAB509 /* Lot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Lot.h; sourceTree = "<group>"; };
+		70D2FC281A9F591600CAB509 /* Lot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Lot.m; sourceTree = "<group>"; };
+		70D2FC291A9F591600CAB509 /* ProfitAndLossCalculator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfitAndLossCalculator.h; sourceTree = "<group>"; };
+		70D2FC2A1A9F591600CAB509 /* ProfitAndLossCalculator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfitAndLossCalculator.m; sourceTree = "<group>"; };
+		70D2FC2D1A9F591600CAB509 /* Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
+		70D2FC2E1A9F591600CAB509 /* Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Common.m; sourceTree = "<group>"; };
+		70D2FC2F1A9F591600CAB509 /* PositionSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PositionSize.h; sourceTree = "<group>"; };
+		70D2FC301A9F591600CAB509 /* PositionSize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PositionSize.m; sourceTree = "<group>"; };
+		70D2FC311A9F591600CAB509 /* TradeDbDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TradeDbDataSource.h; sourceTree = "<group>"; };
+		70D2FC321A9F591600CAB509 /* TradeDbDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TradeDbDataSource.m; sourceTree = "<group>"; };
+		70D2FC331A9F591600CAB509 /* Equity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Equity.h; sourceTree = "<group>"; };
+		70D2FC341A9F591600CAB509 /* Equity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Equity.m; sourceTree = "<group>"; };
+		70D2FC351A9F591600CAB509 /* Balance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Balance.h; sourceTree = "<group>"; };
+		70D2FC361A9F591600CAB509 /* Balance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Balance.m; sourceTree = "<group>"; };
+		70D2FC371A9F591600CAB509 /* EquityFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EquityFactory.h; sourceTree = "<group>"; };
+		70D2FC381A9F591600CAB509 /* EquityFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EquityFactory.m; sourceTree = "<group>"; };
+		70D2FC391A9F591600CAB509 /* MarketTime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarketTime.h; sourceTree = "<group>"; };
+		70D2FC3A1A9F591600CAB509 /* MarketTime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarketTime.m; sourceTree = "<group>"; };
+		70ED621C1AFCA11F0008F939 /* SetSpreadViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetSpreadViewController.h; sourceTree = "<group>"; };
+		70ED621D1AFCA11F0008F939 /* SetSpreadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetSpreadViewController.m; sourceTree = "<group>"; };
+		70ED621F1AFCA1400008F939 /* SetAccountCurrencyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetAccountCurrencyViewController.h; sourceTree = "<group>"; };
+		70ED62201AFCA1400008F939 /* SetAccountCurrencyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetAccountCurrencyViewController.m; sourceTree = "<group>"; };
+		70ED62221AFCA17E0008F939 /* SetStartBalanceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetStartBalanceViewController.h; sourceTree = "<group>"; };
+		70ED62231AFCA17E0008F939 /* SetStartBalanceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetStartBalanceViewController.m; sourceTree = "<group>"; };
+		70ED62251AFCA2620008F939 /* SetNewStartDataViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetNewStartDataViewController.h; sourceTree = "<group>"; };
+		70ED62261AFCA2620008F939 /* SetNewStartDataViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetNewStartDataViewController.m; sourceTree = "<group>"; };
+		70ED62291B01C0330008F939 /* SetPositionSizeOfLotViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetPositionSizeOfLotViewController.h; sourceTree = "<group>"; };
+		70ED622A1B01C0330008F939 /* SetPositionSizeOfLotViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetPositionSizeOfLotViewController.m; sourceTree = "<group>"; };
+		70ED622C1B0211630008F939 /* SetTimeScaleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetTimeScaleViewController.h; sourceTree = "<group>"; };
+		70ED622D1B0211630008F939 /* SetTimeScaleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetTimeScaleViewController.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		70D2FA811A9F305700CAB509 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				700360151AA8C0CE00A57959 /* iAd.framework in Frameworks */,
+				70D2FAB41A9F531800CAB509 /* libsqlite3.0.dylib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		70D2FA9D1A9F305800CAB509 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		70D2FA7B1A9F305700CAB509 = {
+			isa = PBXGroup;
+			children = (
+				700360141AA8C0CE00A57959 /* iAd.framework */,
+				70D2FAB31A9F531800CAB509 /* libsqlite3.0.dylib */,
+				70D2FA861A9F305700CAB509 /* FX Simulator */,
+				70D2FAA31A9F305800CAB509 /* FX SimulatorTests */,
+				70D2FA851A9F305700CAB509 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		70D2FA851A9F305700CAB509 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				70D2FA841A9F305700CAB509 /* FX Simulator.app */,
+				70D2FAA01A9F305800CAB509 /* FX SimulatorTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		70D2FA861A9F305700CAB509 /* FX Simulator */ = {
+			isa = PBXGroup;
+			children = (
+				700B95831B0C3C97003F160B /* InputTradeLotViewController.h */,
+				700B95841B0C3C97003F160B /* InputTradeLotViewController.m */,
+				70D2FA8B1A9F305700CAB509 /* AppDelegate.h */,
+				70D2FA8C1A9F305700CAB509 /* AppDelegate.m */,
+				70D2FC021A9F58D100CAB509 /* MainViewController.h */,
+				70D2FC031A9F58D100CAB509 /* MainViewController.m */,
+				70D2FA941A9F305700CAB509 /* Main.storyboard */,
+				70D2FA971A9F305700CAB509 /* Images.xcassets */,
+				70D2FA991A9F305700CAB509 /* LaunchScreen.xib */,
+				70D2FC051A9F58EC00CAB509 /* ConfigViewController.h */,
+				70D2FC061A9F58EC00CAB509 /* ConfigViewController.m */,
+				70D2FC0B1A9F58F700CAB509 /* TradeDatabase.h */,
+				70D2FC0C1A9F58F700CAB509 /* TradeDatabase.m */,
+				70D2FAB51A9F53E800CAB509 /* NewStartView */,
+				70D2FACC1A9F553E00CAB509 /* OpenPositionView */,
+				70D2FACD1A9F555600CAB509 /* Resources */,
+				70D2FB1A1A9F56E500CAB509 /* SubChartView */,
+				70D2FAE31A9F565900CAB509 /* TradeView */,
+				70D2FAE21A9F564300CAB509 /* ExecutionHistoryView */,
+				70D2FAE11A9F563800CAB509 /* Market */,
+				70D2FAE01A9F562A00CAB509 /* Candle */,
+				70D2FADF1A9F561A00CAB509 /* OrderHistory */,
+				70D2FADE1A9F560C00CAB509 /* ExecutionHistory */,
+				70D2FADD1A9F55FE00CAB509 /* ForexHistory */,
+				70D2FADC1A9F55EF00CAB509 /* Order */,
+				70D2FADB1A9F55E500CAB509 /* OpenPosition */,
+				70D2FADA1A9F55D700CAB509 /* SaveSystem */,
+				70D2FAD91A9F55B500CAB509 /* ExecuteOrderSystem */,
+				70D2FC0D1A9F58F700CAB509 /* CurrencyPair.h */,
+				70D2FC0E1A9F58F700CAB509 /* CurrencyPair.m */,
+				70D2FC111A9F591500CAB509 /* OrderType.h */,
+				70D2FC121A9F591500CAB509 /* OrderType.m */,
+				70D2FC131A9F591500CAB509 /* ChartViewData.h */,
+				70D2FC141A9F591500CAB509 /* ChartViewData.m */,
+				70D2FC151A9F591500CAB509 /* RatePanelViewData.h */,
+				70D2FC161A9F591500CAB509 /* RatePanelViewData.m */,
+				70D2FC171A9F591500CAB509 /* Currency.h */,
+				70D2FC181A9F591500CAB509 /* Currency.m */,
+				70D2FC191A9F591500CAB509 /* TimeScaleUtils.h */,
+				70D2FC1A1A9F591500CAB509 /* TimeScaleUtils.m */,
+				70D2FC1B1A9F591500CAB509 /* Setting.h */,
+				70D2FC1C1A9F591500CAB509 /* Setting.m */,
+				70D2FC1D1A9F591500CAB509 /* MarketTimeScale.h */,
+				70D2FC1E1A9F591500CAB509 /* MarketTimeScale.m */,
+				70D2FC1F1A9F591500CAB509 /* Spread.h */,
+				70D2FC201A9F591500CAB509 /* Spread.m */,
+				70D2FC211A9F591500CAB509 /* Rate.h */,
+				70D2FC221A9F591500CAB509 /* Rate.m */,
+				70D2FC231A9F591500CAB509 /* Money.h */,
+				70D2FC241A9F591500CAB509 /* Money.m */,
+				70D2FC251A9F591500CAB509 /* CurrencyConverter.h */,
+				70D2FC261A9F591600CAB509 /* CurrencyConverter.m */,
+				70D2FC271A9F591600CAB509 /* Lot.h */,
+				70D2FC281A9F591600CAB509 /* Lot.m */,
+				70D2FC291A9F591600CAB509 /* ProfitAndLossCalculator.h */,
+				70D2FC2A1A9F591600CAB509 /* ProfitAndLossCalculator.m */,
+				70D2FC2D1A9F591600CAB509 /* Common.h */,
+				70D2FC2E1A9F591600CAB509 /* Common.m */,
+				70D2FC2F1A9F591600CAB509 /* PositionSize.h */,
+				70D2FC301A9F591600CAB509 /* PositionSize.m */,
+				70D2FC311A9F591600CAB509 /* TradeDbDataSource.h */,
+				70D2FC321A9F591600CAB509 /* TradeDbDataSource.m */,
+				70D2FC331A9F591600CAB509 /* Equity.h */,
+				70D2FC341A9F591600CAB509 /* Equity.m */,
+				70D2FC351A9F591600CAB509 /* Balance.h */,
+				70D2FC361A9F591600CAB509 /* Balance.m */,
+				70D2FC371A9F591600CAB509 /* EquityFactory.h */,
+				70D2FC381A9F591600CAB509 /* EquityFactory.m */,
+				70D2FC391A9F591600CAB509 /* MarketTime.h */,
+				70D2FC3A1A9F591600CAB509 /* MarketTime.m */,
+				70B5AAED1AC7FF44001F8823 /* Rates.h */,
+				70B5AAEE1AC7FF44001F8823 /* Rates.m */,
+				705C2E0E1ADE4C270089D510 /* Money+ConvertToAccountCurrency.h */,
+				705C2E0F1ADE4C270089D510 /* Money+ConvertToAccountCurrency.m */,
+				7076F5A51AECCBBB004CC6BA /* NewStartViewController.h */,
+				7076F5A61AECCBBB004CC6BA /* NewStartViewController.m */,
+				70ED62251AFCA2620008F939 /* SetNewStartDataViewController.h */,
+				70ED62261AFCA2620008F939 /* SetNewStartDataViewController.m */,
+				7076F5A81AECCDB7004CC6BA /* SetCurrencyPairViewController.h */,
+				7076F5A91AECCDB7004CC6BA /* SetCurrencyPairViewController.m */,
+				7079FEE61AF4FF23004D3CEA /* SetStartTimeViewController.h */,
+				7079FEE71AF4FF23004D3CEA /* SetStartTimeViewController.m */,
+				70ED621C1AFCA11F0008F939 /* SetSpreadViewController.h */,
+				70ED621D1AFCA11F0008F939 /* SetSpreadViewController.m */,
+				70ED621F1AFCA1400008F939 /* SetAccountCurrencyViewController.h */,
+				70ED62201AFCA1400008F939 /* SetAccountCurrencyViewController.m */,
+				70ED62221AFCA17E0008F939 /* SetStartBalanceViewController.h */,
+				70ED62231AFCA17E0008F939 /* SetStartBalanceViewController.m */,
+				7079FEE91AF9E688004D3CEA /* NSDate+FXSDateData.h */,
+				7079FEEA1AF9E688004D3CEA /* NSDate+FXSDateData.m */,
+				70ED62291B01C0330008F939 /* SetPositionSizeOfLotViewController.h */,
+				70ED622A1B01C0330008F939 /* SetPositionSizeOfLotViewController.m */,
+				70ED622C1B0211630008F939 /* SetTimeScaleViewController.h */,
+				70ED622D1B0211630008F939 /* SetTimeScaleViewController.m */,
+				70D2FA871A9F305700CAB509 /* Supporting Files */,
+				709BC75C1B0700320059C940 /* SetAutoUpdateIntervalViewController.h */,
+				709BC75D1B0700320059C940 /* SetAutoUpdateIntervalViewController.m */,
+			);
+			path = "FX Simulator";
+			sourceTree = "<group>";
+		};
+		70D2FA871A9F305700CAB509 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				70D2FAE51A9F569A00CAB509 /* UITabBarIcon */,
+				70D2FAE41A9F568400CAB509 /* FMDB */,
+				70D2FA881A9F305700CAB509 /* Info.plist */,
+				70D2FA891A9F305700CAB509 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		70D2FAA31A9F305800CAB509 /* FX SimulatorTests */ = {
+			isa = PBXGroup;
+			children = (
+				70D2FAA61A9F305800CAB509 /* FX_SimulatorTests.m */,
+				70B5AAEB1AC7BE90001F8823 /* ExecuteOrderTests.m */,
+				70D2FAA41A9F305800CAB509 /* Supporting Files */,
+			);
+			path = "FX SimulatorTests";
+			sourceTree = "<group>";
+		};
+		70D2FAA41A9F305800CAB509 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				70D2FAA51A9F305800CAB509 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		70D2FAB51A9F53E800CAB509 /* NewStartView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = NewStartView;
+			sourceTree = "<group>";
+		};
+		70D2FACC1A9F553E00CAB509 /* OpenPositionView */ = {
+			isa = PBXGroup;
+			children = (
+				70D2FAD01A9F559200CAB509 /* OpenPositionTableViewController.h */,
+				70D2FAD11A9F559200CAB509 /* OpenPositionTableViewController.m */,
+				70D2FAD21A9F559200CAB509 /* OpenPositionHeaderView.h */,
+				70D2FAD31A9F559200CAB509 /* OpenPositionHeaderView.m */,
+				70D2FAD41A9F559200CAB509 /* OpenPositionTableViewCell.h */,
+				70D2FAD51A9F559200CAB509 /* OpenPositionTableViewCell.m */,
+			);
+			name = OpenPositionView;
+			sourceTree = "<group>";
+		};
+		70D2FACD1A9F555600CAB509 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				705DCE491AE6893E00BCF710 /* tradedb.sqlite3 */,
+				70D2FACE1A9F558100CAB509 /* forex_time_scale.sqlite */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		70D2FAD91A9F55B500CAB509 /* ExecuteOrderSystem */ = {
+			isa = PBXGroup;
+			children = (
+				70D2FBDB1A9F57DC00CAB509 /* ExecutionOrderMaterial.h */,
+				70D2FBDC1A9F57DC00CAB509 /* ExecutionOrderMaterial.m */,
+				70D2FBDD1A9F57DC00CAB509 /* ExecutionOrdersFactory.h */,
+				70D2FBDE1A9F57DC00CAB509 /* ExecutionOrdersFactory.m */,
+				70D2FBDF1A9F57DC00CAB509 /* ExecutionOrdersCreator.h */,
+				70D2FBE01A9F57DC00CAB509 /* ExecutionOrdersCreator.m */,
+				70D2FBE11A9F57DC00CAB509 /* ExecutionOrdersCreateModeFactory.h */,
+				70D2FBE21A9F57DC00CAB509 /* ExecutionOrdersCreateModeFactory.m */,
+				70D2FBE31A9F57DC00CAB509 /* ExecutionOrdersCreateMode.h */,
+				70D2FBE41A9F57DC00CAB509 /* ExecutionOrdersCreateMode.m */,
+				70D2FBE51A9F57DC00CAB509 /* OnlyCloseExecutionOrdersCreateMode.h */,
+				70D2FBE61A9F57DC00CAB509 /* OnlyCloseExecutionOrdersCreateMode.m */,
+				70D2FBE71A9F57DC00CAB509 /* OnlyNewExecutionOrdersCreateMode.h */,
+				70D2FBE81A9F57DC00CAB509 /* OnlyNewExecutionOrdersCreateMode.m */,
+				70D2FBE91A9F57DC00CAB509 /* CloseAndNewExecutionOrdersCreateMode.h */,
+				70D2FBEA1A9F57DC00CAB509 /* CloseAndNewExecutionOrdersCreateMode.m */,
+				70D2FBEB1A9F57DC00CAB509 /* ExecutionOrder.h */,
+				70D2FBEC1A9F57DC00CAB509 /* ExecutionOrder.m */,
+				70D2FBED1A9F57DC00CAB509 /* CloseExecutionOrder.h */,
+				70D2FBEE1A9F57DC00CAB509 /* CloseExecutionOrder.m */,
+				70D2FBEF1A9F57DC00CAB509 /* NewExecutionOrder.h */,
+				70D2FBF01A9F57DC00CAB509 /* NewExecutionOrder.m */,
+				70D2FBF11A9F57DC00CAB509 /* ExecutionOrdersManager.h */,
+				70D2FBF21A9F57DC00CAB509 /* ExecutionOrdersManager.m */,
+				70D2FBF31A9F57DC00CAB509 /* ExecutionOrdersTransactionManager.h */,
+				70D2FBF41A9F57DC00CAB509 /* ExecutionOrdersTransactionManager.m */,
+			);
+			name = ExecuteOrderSystem;
+			sourceTree = "<group>";
+		};
+		70D2FADA1A9F55D700CAB509 /* SaveSystem */ = {
+			isa = PBXGroup;
+			children = (
+				70D2FBC91A9F57CB00CAB509 /* SaveDataFileStorage.h */,
+				70D2FBCA1A9F57CB00CAB509 /* SaveDataFileStorage.m */,
+				70D2FBCB1A9F57CB00CAB509 /* SaveData.h */,
+				70D2FBCC1A9F57CB00CAB509 /* SaveData.m */,
+				70D2FBCD1A9F57CB00CAB509 /* SaveDataStorageFactory.h */,
+				70D2FBCE1A9F57CB00CAB509 /* SaveDataStorageFactory.m */,
+				70D2FBCF1A9F57CB00CAB509 /* SaveLoader.h */,
+				70D2FBD01A9F57CB00CAB509 /* SaveLoader.m */,
+				70D2FBD11A9F57CB00CAB509 /* TableNameFormatter.h */,
+				70D2FBD21A9F57CB00CAB509 /* TableNameFormatter.m */,
+				70D2FBD31A9F57CB00CAB509 /* SaveManager.h */,
+				70D2FBD41A9F57CB00CAB509 /* SaveManager.m */,
+			);
+			name = SaveSystem;
+			sourceTree = "<group>";
+		};
+		70D2FADB1A9F55E500CAB509 /* OpenPosition */ = {
+			isa = PBXGroup;
+			children = (
+				70D2FBB11A9F57BD00CAB509 /* OpenPositionRecord.h */,
+				70D2FBB21A9F57BD00CAB509 /* OpenPositionRecord.m */,
+				70D2FBB31A9F57BD00CAB509 /* OpenPosition.h */,
+				70D2FBB41A9F57BD00CAB509 /* OpenPosition.m */,
+				70D2FBB51A9F57BD00CAB509 /* OpenPositionFactory.h */,
+				70D2FBB61A9F57BD00CAB509 /* OpenPositionFactory.m */,
+				70D2FBB71A9F57BD00CAB509 /* OpenPositionUtils.h */,
+				70D2FBB81A9F57BD00CAB509 /* OpenPositionUtils.m */,
+				70D2FBBB1A9F57BD00CAB509 /* OpenPositionManager.h */,
+				70D2FBBC1A9F57BD00CAB509 /* OpenPositionManager.m */,
+				70D2FBBD1A9F57BD00CAB509 /* OpenPositionRawRecord.h */,
+				70D2FBBE1A9F57BD00CAB509 /* OpenPositionRawRecord.m */,
+				70D2FBBF1A9F57BD00CAB509 /* OpenPositionManagerFactory.h */,
+				70D2FBC01A9F57BD00CAB509 /* OpenPositionManagerFactory.m */,
+			);
+			name = OpenPosition;
+			sourceTree = "<group>";
+		};
+		70D2FADC1A9F55EF00CAB509 /* Order */ = {
+			isa = PBXGroup;
+			children = (
+				70D2FBA51A9F57B000CAB509 /* UsersOrder.h */,
+				70D2FBA61A9F57B000CAB509 /* UsersOrder.m */,
+				70D2FBA71A9F57B000CAB509 /* OrderManager.h */,
+				70D2FBA81A9F57B000CAB509 /* OrderManager.m */,
+				70D2FBA91A9F57B000CAB509 /* Order.h */,
+				70D2FBAA1A9F57B000CAB509 /* Order.m */,
+				70D2FBAB1A9F57B000CAB509 /* OrderManagerFactory.h */,
+				70D2FBAC1A9F57B000CAB509 /* OrderManagerFactory.m */,
+			);
+			name = Order;
+			sourceTree = "<group>";
+		};
+		70D2FADD1A9F55FE00CAB509 /* ForexHistory */ = {
+			isa = PBXGroup;
+			children = (
+				70D2FB8A1A9F57A000CAB509 /* ForexHistory.h */,
+				70D2FB8B1A9F57A000CAB509 /* ForexHistory.m */,
+				70D2FB8C1A9F57A000CAB509 /* ForexDatabase.h */,
+				70D2FB8D1A9F57A000CAB509 /* ForexDatabase.m */,
+				70D2FB8E1A9F57A000CAB509 /* ForexHistoryCache.h */,
+				70D2FB8F1A9F57A000CAB509 /* ForexHistoryCache.m */,
+				70D2FB901A9F57A000CAB509 /* ForexHistoryData.h */,
+				70D2FB911A9F57A000CAB509 /* ForexHistoryData.m */,
+				70D2FB921A9F57A000CAB509 /* ForexHistoryCacheConfig.h */,
+				70D2FB931A9F57A000CAB509 /* ForexHistoryCacheConfig.m */,
+				70D2FB941A9F57A000CAB509 /* ForexHistoryDataArrayUtils.h */,
+				70D2FB951A9F57A000CAB509 /* ForexHistoryDataArrayUtils.m */,
+				70D2FB961A9F57A000CAB509 /* ForexHistoryUtils.h */,
+				70D2FB971A9F57A000CAB509 /* ForexHistoryUtils.m */,
+				70D2FB981A9F57A000CAB509 /* ForexHistoryFactory.h */,
+				70D2FB991A9F57A000CAB509 /* ForexHistoryFactory.m */,
+				70D2FB9A1A9F57A000CAB509 /* ForexTimeScaleDataArrayFactory.h */,
+				70D2FB9B1A9F57A000CAB509 /* ForexTimeScaleDataArrayFactory.m */,
+			);
+			name = ForexHistory;
+			sourceTree = "<group>";
+		};
+		70D2FADE1A9F560C00CAB509 /* ExecutionHistory */ = {
+			isa = PBXGroup;
+			children = (
+				70D2FB781A9F579000CAB509 /* ExecutionHistory.h */,
+				70D2FB791A9F579000CAB509 /* ExecutionHistory.m */,
+				70D2FB7A1A9F579000CAB509 /* ExecutionHistoryFactory.h */,
+				70D2FB7B1A9F579000CAB509 /* ExecutionHistoryFactory.m */,
+				70D2FB7C1A9F579000CAB509 /* ExecutionHistoryManager.h */,
+				70D2FB7D1A9F579000CAB509 /* ExecutionHistoryManager.m */,
+				70D2FB801A9F579000CAB509 /* ExecutionHistoryRecord.h */,
+				70D2FB811A9F579000CAB509 /* ExecutionHistoryRecord.m */,
+				70D2FB821A9F579000CAB509 /* ExecutionHistoryManagerFactory.h */,
+				70D2FB831A9F579000CAB509 /* ExecutionHistoryManagerFactory.m */,
+			);
+			name = ExecutionHistory;
+			sourceTree = "<group>";
+		};
+		70D2FADF1A9F561A00CAB509 /* OrderHistory */ = {
+			isa = PBXGroup;
+			children = (
+				70D2FB721A9F577F00CAB509 /* OrderHistory.h */,
+				70D2FB731A9F577F00CAB509 /* OrderHistory.m */,
+				70D2FB741A9F577F00CAB509 /* OrderHistoryFactory.h */,
+				70D2FB751A9F577F00CAB509 /* OrderHistoryFactory.m */,
+			);
+			name = OrderHistory;
+			sourceTree = "<group>";
+		};
+		70D2FAE01A9F562A00CAB509 /* Candle */ = {
+			isa = PBXGroup;
+			children = (
+				70D2FB6C1A9F577200CAB509 /* CandlesFactory.h */,
+				70D2FB6D1A9F577200CAB509 /* CandlesFactory.m */,
+				70D2FB6E1A9F577200CAB509 /* Candle.h */,
+				70D2FB6F1A9F577200CAB509 /* Candle.m */,
+			);
+			name = Candle;
+			sourceTree = "<group>";
+		};
+		70D2FAE11A9F563800CAB509 /* Market */ = {
+			isa = PBXGroup;
+			children = (
+				70D2FB631A9F576500CAB509 /* Market.h */,
+				70D2FB641A9F576500CAB509 /* Market.m */,
+				70D2FB651A9F576500CAB509 /* MarketManager.h */,
+				70D2FB661A9F576500CAB509 /* MarketManager.m */,
+				70D2FB671A9F576500CAB509 /* MarketTimeManager.h */,
+				70D2FB681A9F576500CAB509 /* MarketTimeManager.m */,
+			);
+			name = Market;
+			sourceTree = "<group>";
+		};
+		70D2FAE21A9F564300CAB509 /* ExecutionHistoryView */ = {
+			isa = PBXGroup;
+			children = (
+				70D2FB571A9F575900CAB509 /* ExecutionHistoryTableViewController.h */,
+				70D2FB581A9F575900CAB509 /* ExecutionHistoryTableViewController.m */,
+				70D2FB591A9F575900CAB509 /* ExecutionHistoryTableViewCell.h */,
+				70D2FB5A1A9F575900CAB509 /* ExecutionHistoryTableViewCell.m */,
+				70D2FB5B1A9F575900CAB509 /* ExecutionHistoryHeaderView.h */,
+				70D2FB5C1A9F575900CAB509 /* ExecutionHistoryHeaderView.m */,
+				70D2FB5D1A9F575900CAB509 /* ExecutionHistoryViewLabel.h */,
+				70D2FB5E1A9F575900CAB509 /* ExecutionHistoryViewLabel.m */,
+			);
+			name = ExecutionHistoryView;
+			sourceTree = "<group>";
+		};
+		70D2FAE31A9F565900CAB509 /* TradeView */ = {
+			isa = PBXGroup;
+			children = (
+				70D2FB2A1A9F574000CAB509 /* TradeViewController.h */,
+				70D2FB2B1A9F574000CAB509 /* TradeViewController.m */,
+				70D2FB2C1A9F574000CAB509 /* ChartViewController.h */,
+				70D2FB2D1A9F574000CAB509 /* ChartViewController.m */,
+				70D2FB2E1A9F574000CAB509 /* RatePanelViewController.h */,
+				70D2FB2F1A9F574000CAB509 /* RatePanelViewController.m */,
+				70D2FB301A9F574000CAB509 /* TradeDataViewController.h */,
+				70D2FB311A9F574000CAB509 /* TradeDataViewController.m */,
+				70D2FB321A9F574000CAB509 /* TradeDataViewData.h */,
+				70D2FB331A9F574000CAB509 /* TradeDataViewData.m */,
+				70D2FB3A1A9F574000CAB509 /* ChartView.h */,
+				70D2FB3B1A9F574000CAB509 /* ChartView.m */,
+				70AD14741AADD0AA0099F0BA /* RatePanelButton.h */,
+				70AD14751AADD0AA0099F0BA /* RatePanelButton.m */,
+			);
+			name = TradeView;
+			sourceTree = "<group>";
+		};
+		70D2FAE41A9F568400CAB509 /* FMDB */ = {
+			isa = PBXGroup;
+			children = (
+				70D2FAE61A9F56AE00CAB509 /* FMDatabase.h */,
+				70D2FAE71A9F56AE00CAB509 /* FMDatabase.m */,
+				70D2FAE81A9F56AE00CAB509 /* FMDatabaseAdditions.h */,
+				70D2FAE91A9F56AE00CAB509 /* FMDatabaseAdditions.m */,
+				70D2FAEA1A9F56AE00CAB509 /* FMDatabasePool.h */,
+				70D2FAEB1A9F56AE00CAB509 /* FMDatabasePool.m */,
+				70D2FAEC1A9F56AE00CAB509 /* FMDatabaseQueue.h */,
+				70D2FAED1A9F56AE00CAB509 /* FMDatabaseQueue.m */,
+				70D2FAEE1A9F56AE00CAB509 /* FMDB.h */,
+				70D2FAEF1A9F56AE00CAB509 /* FMResultSet.h */,
+				70D2FAF01A9F56AE00CAB509 /* FMResultSet.m */,
+			);
+			name = FMDB;
+			sourceTree = "<group>";
+		};
+		70D2FAE51A9F569A00CAB509 /* UITabBarIcon */ = {
+			isa = PBXGroup;
+			children = (
+				70D2FAF61A9F56BE00CAB509 /* display@2x.png */,
+				70D2FAF71A9F56BE00CAB509 /* display.png */,
+				70D2FAF81A9F56BE00CAB509 /* clock.png */,
+				70D2FAF91A9F56BE00CAB509 /* clock@2x.png */,
+				70D2FAFA1A9F56BE00CAB509 /* config.png */,
+				70D2FAFB1A9F56BE00CAB509 /* config@2x.png */,
+				70D2FAFC1A9F56BE00CAB509 /* file.png */,
+				70D2FAFD1A9F56BE00CAB509 /* file@2x.png */,
+				70D2FAFE1A9F56BE00CAB509 /* graph.png */,
+				70D2FAFF1A9F56BE00CAB509 /* graph@2x.png */,
+				70D2FB001A9F56BE00CAB509 /* info.png */,
+				70D2FB011A9F56BE00CAB509 /* info@2x.png */,
+				70D2FB021A9F56BE00CAB509 /* note.png */,
+				70D2FB031A9F56BE00CAB509 /* note@2x.png */,
+				70D2FB041A9F56BE00CAB509 /* plus.png */,
+				70D2FB051A9F56BE00CAB509 /* plus@2x.png */,
+				70D2FB061A9F56BE00CAB509 /* portfolio.png */,
+				70D2FB071A9F56BE00CAB509 /* portfolio@2x.png */,
+			);
+			name = UITabBarIcon;
+			sourceTree = "<group>";
+		};
+		70D2FB1A1A9F56E500CAB509 /* SubChartView */ = {
+			isa = PBXGroup;
+			children = (
+				70D2FB1B1A9F572B00CAB509 /* SubChartViewController.h */,
+				70D2FB1C1A9F572B00CAB509 /* SubChartViewController.m */,
+				70D2FB1D1A9F572B00CAB509 /* SubChartView.h */,
+				70D2FB1E1A9F572B00CAB509 /* SubChartView.m */,
+				70D2FB231A9F572B00CAB509 /* SubChartViewData.h */,
+				70D2FB241A9F572B00CAB509 /* SubChartViewData.m */,
+				70B5AAF01ACE5BC0001F8823 /* SubChartDataViewController.h */,
+				70B5AAF11ACE5BC0001F8823 /* SubChartDataViewController.m */,
+			);
+			name = SubChartView;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		70D2FA831A9F305700CAB509 /* FX Simulator */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 70D2FAAA1A9F305800CAB509 /* Build configuration list for PBXNativeTarget "FX Simulator" */;
+			buildPhases = (
+				70D2FA801A9F305700CAB509 /* Sources */,
+				70D2FA811A9F305700CAB509 /* Frameworks */,
+				70D2FA821A9F305700CAB509 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "FX Simulator";
+			productName = "FX Simulator";
+			productReference = 70D2FA841A9F305700CAB509 /* FX Simulator.app */;
+			productType = "com.apple.product-type.application";
+		};
+		70D2FA9F1A9F305800CAB509 /* FX SimulatorTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 70D2FAAD1A9F305800CAB509 /* Build configuration list for PBXNativeTarget "FX SimulatorTests" */;
+			buildPhases = (
+				70D2FA9C1A9F305800CAB509 /* Sources */,
+				70D2FA9D1A9F305800CAB509 /* Frameworks */,
+				70D2FA9E1A9F305800CAB509 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				70D2FAA21A9F305800CAB509 /* PBXTargetDependency */,
+			);
+			name = "FX SimulatorTests";
+			productName = "FX SimulatorTests";
+			productReference = 70D2FAA01A9F305800CAB509 /* FX SimulatorTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		70D2FA7C1A9F305700CAB509 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0610;
+				ORGANIZATIONNAME = yusuke;
+				TargetAttributes = {
+					70D2FA831A9F305700CAB509 = {
+						CreatedOnToolsVersion = 6.1.1;
+					};
+					70D2FA9F1A9F305800CAB509 = {
+						CreatedOnToolsVersion = 6.1.1;
+						TestTargetID = 70D2FA831A9F305700CAB509;
+					};
+				};
+			};
+			buildConfigurationList = 70D2FA7F1A9F305700CAB509 /* Build configuration list for PBXProject "FX Simulator" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 70D2FA7B1A9F305700CAB509;
+			productRefGroup = 70D2FA851A9F305700CAB509 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				70D2FA831A9F305700CAB509 /* FX Simulator */,
+				70D2FA9F1A9F305800CAB509 /* FX SimulatorTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		70D2FA821A9F305700CAB509 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				70D2FACF1A9F558100CAB509 /* forex_time_scale.sqlite in Resources */,
+				70D2FB111A9F56BE00CAB509 /* graph@2x.png in Resources */,
+				70D2FB0E1A9F56BE00CAB509 /* file.png in Resources */,
+				70D2FA961A9F305700CAB509 /* Main.storyboard in Resources */,
+				70D2FB131A9F56BE00CAB509 /* info@2x.png in Resources */,
+				70D2FB091A9F56BE00CAB509 /* display.png in Resources */,
+				70D2FB0F1A9F56BE00CAB509 /* file@2x.png in Resources */,
+				70D2FA9B1A9F305700CAB509 /* LaunchScreen.xib in Resources */,
+				70D2FB101A9F56BE00CAB509 /* graph.png in Resources */,
+				70D2FA981A9F305700CAB509 /* Images.xcassets in Resources */,
+				70D2FB151A9F56BE00CAB509 /* note@2x.png in Resources */,
+				70D2FB191A9F56BE00CAB509 /* portfolio@2x.png in Resources */,
+				70D2FB0B1A9F56BE00CAB509 /* clock@2x.png in Resources */,
+				70D2FB161A9F56BE00CAB509 /* plus.png in Resources */,
+				70D2FB0A1A9F56BE00CAB509 /* clock.png in Resources */,
+				70D2FB121A9F56BE00CAB509 /* info.png in Resources */,
+				70D2FB141A9F56BE00CAB509 /* note.png in Resources */,
+				705DCE4A1AE6893E00BCF710 /* tradedb.sqlite3 in Resources */,
+				70D2FB171A9F56BE00CAB509 /* plus@2x.png in Resources */,
+				70D2FB181A9F56BE00CAB509 /* portfolio.png in Resources */,
+				70D2FB081A9F56BE00CAB509 /* display@2x.png in Resources */,
+				70D2FB0D1A9F56BE00CAB509 /* config@2x.png in Resources */,
+				70D2FB0C1A9F56BE00CAB509 /* config.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		70D2FA9E1A9F305800CAB509 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		70D2FA801A9F305700CAB509 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				70D2FB291A9F572B00CAB509 /* SubChartViewData.m in Sources */,
+				70D2FB621A9F575900CAB509 /* ExecutionHistoryViewLabel.m in Sources */,
+				70D2FB9D1A9F57A000CAB509 /* ForexDatabase.m in Sources */,
+				70D2FBC71A9F57BD00CAB509 /* OpenPositionRawRecord.m in Sources */,
+				70D2FC4E1A9F591600CAB509 /* Equity.m in Sources */,
+				70D2FBF61A9F57DC00CAB509 /* ExecutionOrdersFactory.m in Sources */,
+				70D2FB491A9F574000CAB509 /* ChartViewController.m in Sources */,
+				70D2FB601A9F575900CAB509 /* ExecutionHistoryTableViewCell.m in Sources */,
+				70ED62271AFCA2620008F939 /* SetNewStartDataViewController.m in Sources */,
+				70D2FB771A9F577F00CAB509 /* OrderHistoryFactory.m in Sources */,
+				70D2FB6B1A9F576500CAB509 /* MarketTimeManager.m in Sources */,
+				70D2FBF81A9F57DC00CAB509 /* ExecutionOrdersCreateModeFactory.m in Sources */,
+				70D2FB481A9F574000CAB509 /* TradeViewController.m in Sources */,
+				70D2FB4B1A9F574000CAB509 /* TradeDataViewController.m in Sources */,
+				70ED622E1B0211630008F939 /* SetTimeScaleViewController.m in Sources */,
+				700B95851B0C3C97003F160B /* InputTradeLotViewController.m in Sources */,
+				705DCE4B1AE7C84300BCF710 /* Rates.m in Sources */,
+				70D2FBD91A9F57CB00CAB509 /* TableNameFormatter.m in Sources */,
+				70D2FC441A9F591600CAB509 /* Spread.m in Sources */,
+				70D2FB9F1A9F57A000CAB509 /* ForexHistoryData.m in Sources */,
+				7076F5AA1AECCDB7004CC6BA /* SetCurrencyPairViewController.m in Sources */,
+				709BC75E1B0700320059C940 /* SetAutoUpdateIntervalViewController.m in Sources */,
+				7076F5A71AECCBBB004CC6BA /* NewStartViewController.m in Sources */,
+				70D2FC511A9F591600CAB509 /* MarketTime.m in Sources */,
+				70D2FBFF1A9F57DC00CAB509 /* NewExecutionOrder.m in Sources */,
+				70D2FB841A9F579000CAB509 /* ExecutionHistory.m in Sources */,
+				705DCE4C1AE7CE9800BCF710 /* RatePanelButton.m in Sources */,
+				70D2FB501A9F574000CAB509 /* ChartView.m in Sources */,
+				70D2FC411A9F591600CAB509 /* TimeScaleUtils.m in Sources */,
+				7079FEEB1AF9E688004D3CEA /* NSDate+FXSDateData.m in Sources */,
+				70D2FBFA1A9F57DC00CAB509 /* OnlyCloseExecutionOrdersCreateMode.m in Sources */,
+				70D2FB711A9F577200CAB509 /* Candle.m in Sources */,
+				70D2FBD61A9F57CB00CAB509 /* SaveData.m in Sources */,
+				70D2FAD61A9F559200CAB509 /* OpenPositionTableViewController.m in Sources */,
+				70D2FBA31A9F57A000CAB509 /* ForexHistoryFactory.m in Sources */,
+				70D2FBF91A9F57DC00CAB509 /* ExecutionOrdersCreateMode.m in Sources */,
+				70D2FB761A9F577F00CAB509 /* OrderHistory.m in Sources */,
+				70D2FB691A9F576500CAB509 /* Market.m in Sources */,
+				70D2FB251A9F572B00CAB509 /* SubChartViewController.m in Sources */,
+				70D2FB4C1A9F574000CAB509 /* TradeDataViewData.m in Sources */,
+				70D2FB9E1A9F57A000CAB509 /* ForexHistoryCache.m in Sources */,
+				70D2FBD51A9F57CB00CAB509 /* SaveDataFileStorage.m in Sources */,
+				70D2FBAE1A9F57B000CAB509 /* OrderManager.m in Sources */,
+				70D2FC3D1A9F591600CAB509 /* OrderType.m in Sources */,
+				70D2FAF11A9F56AE00CAB509 /* FMDatabase.m in Sources */,
+				70D2FBA41A9F57A000CAB509 /* ForexTimeScaleDataArrayFactory.m in Sources */,
+				70D2FA8D1A9F305700CAB509 /* AppDelegate.m in Sources */,
+				70D2FAD71A9F559200CAB509 /* OpenPositionHeaderView.m in Sources */,
+				70ED621E1AFCA11F0008F939 /* SetSpreadViewController.m in Sources */,
+				70D2FB5F1A9F575900CAB509 /* ExecutionHistoryTableViewController.m in Sources */,
+				70D2FB851A9F579000CAB509 /* ExecutionHistoryFactory.m in Sources */,
+				70D2FC3E1A9F591600CAB509 /* ChartViewData.m in Sources */,
+				70D2FC0F1A9F58F700CAB509 /* TradeDatabase.m in Sources */,
+				70D2FBD81A9F57CB00CAB509 /* SaveLoader.m in Sources */,
+				70D2FB261A9F572B00CAB509 /* SubChartView.m in Sources */,
+				70D2FAF21A9F56AE00CAB509 /* FMDatabaseAdditions.m in Sources */,
+				70D2FAD81A9F559200CAB509 /* OpenPositionTableViewCell.m in Sources */,
+				7076F5AB1AECCEB3004CC6BA /* MainViewController.m in Sources */,
+				70D2FC491A9F591600CAB509 /* ProfitAndLossCalculator.m in Sources */,
+				70D2FB4A1A9F574000CAB509 /* RatePanelViewController.m in Sources */,
+				70D2FBC21A9F57BD00CAB509 /* OpenPosition.m in Sources */,
+				70D2FC451A9F591600CAB509 /* Rate.m in Sources */,
+				70D2FB6A1A9F576500CAB509 /* MarketManager.m in Sources */,
+				70D2FAF31A9F56AE00CAB509 /* FMDatabasePool.m in Sources */,
+				70D2FC3F1A9F591600CAB509 /* RatePanelViewData.m in Sources */,
+				70D2FBC11A9F57BD00CAB509 /* OpenPositionRecord.m in Sources */,
+				70D2FBF51A9F57DC00CAB509 /* ExecutionOrderMaterial.m in Sources */,
+				70D2FBB01A9F57B000CAB509 /* OrderManagerFactory.m in Sources */,
+				70D2FBAF1A9F57B000CAB509 /* Order.m in Sources */,
+				70D2FB9C1A9F57A000CAB509 /* ForexHistory.m in Sources */,
+				70D2FC011A9F57DC00CAB509 /* ExecutionOrdersTransactionManager.m in Sources */,
+				70D2FC471A9F591600CAB509 /* CurrencyConverter.m in Sources */,
+				70D2FB861A9F579000CAB509 /* ExecutionHistoryManager.m in Sources */,
+				70D2FAF41A9F56AE00CAB509 /* FMDatabaseQueue.m in Sources */,
+				70D2FC401A9F591600CAB509 /* Currency.m in Sources */,
+				70D2FC461A9F591600CAB509 /* Money.m in Sources */,
+				70ED62211AFCA1400008F939 /* SetAccountCurrencyViewController.m in Sources */,
+				70D2FC4B1A9F591600CAB509 /* Common.m in Sources */,
+				70D2FC4F1A9F591600CAB509 /* Balance.m in Sources */,
+				70D2FBFD1A9F57DC00CAB509 /* ExecutionOrder.m in Sources */,
+				70D2FA8A1A9F305700CAB509 /* main.m in Sources */,
+				70D2FAF51A9F56AE00CAB509 /* FMResultSet.m in Sources */,
+				70D2FC4D1A9F591600CAB509 /* TradeDbDataSource.m in Sources */,
+				70ED62241AFCA17E0008F939 /* SetStartBalanceViewController.m in Sources */,
+				70D2FC091A9F58EC00CAB509 /* ConfigViewController.m in Sources */,
+				70D2FBFC1A9F57DC00CAB509 /* CloseAndNewExecutionOrdersCreateMode.m in Sources */,
+				70D2FB881A9F579000CAB509 /* ExecutionHistoryRecord.m in Sources */,
+				70D2FC501A9F591600CAB509 /* EquityFactory.m in Sources */,
+				7079FEE81AF4FF23004D3CEA /* SetStartTimeViewController.m in Sources */,
+				70D2FC481A9F591600CAB509 /* Lot.m in Sources */,
+				70D2FB611A9F575900CAB509 /* ExecutionHistoryHeaderView.m in Sources */,
+				70D2FBFE1A9F57DC00CAB509 /* CloseExecutionOrder.m in Sources */,
+				70D2FBA21A9F57A000CAB509 /* ForexHistoryUtils.m in Sources */,
+				70D2FBAD1A9F57B000CAB509 /* UsersOrder.m in Sources */,
+				70D2FBC81A9F57BD00CAB509 /* OpenPositionManagerFactory.m in Sources */,
+				70D2FC4C1A9F591600CAB509 /* PositionSize.m in Sources */,
+				705C2E101ADE4C270089D510 /* Money+ConvertToAccountCurrency.m in Sources */,
+				70D2FB891A9F579000CAB509 /* ExecutionHistoryManagerFactory.m in Sources */,
+				70D2FBFB1A9F57DC00CAB509 /* OnlyNewExecutionOrdersCreateMode.m in Sources */,
+				70D2FC101A9F58F700CAB509 /* CurrencyPair.m in Sources */,
+				70D2FBA11A9F57A000CAB509 /* ForexHistoryDataArrayUtils.m in Sources */,
+				70D2FBC41A9F57BD00CAB509 /* OpenPositionUtils.m in Sources */,
+				70D2FBA01A9F57A000CAB509 /* ForexHistoryCacheConfig.m in Sources */,
+				70D2FC001A9F57DC00CAB509 /* ExecutionOrdersManager.m in Sources */,
+				70D2FBC61A9F57BD00CAB509 /* OpenPositionManager.m in Sources */,
+				70D2FB701A9F577200CAB509 /* CandlesFactory.m in Sources */,
+				70B5AAF21ACE5BC0001F8823 /* SubChartDataViewController.m in Sources */,
+				70D2FC421A9F591600CAB509 /* Setting.m in Sources */,
+				70ED622B1B01C0330008F939 /* SetPositionSizeOfLotViewController.m in Sources */,
+				70D2FBC31A9F57BD00CAB509 /* OpenPositionFactory.m in Sources */,
+				70D2FC431A9F591600CAB509 /* MarketTimeScale.m in Sources */,
+				70D2FBF71A9F57DC00CAB509 /* ExecutionOrdersCreator.m in Sources */,
+				70D2FBD71A9F57CB00CAB509 /* SaveDataStorageFactory.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		70D2FA9C1A9F305800CAB509 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				70D2FAA71A9F305800CAB509 /* FX_SimulatorTests.m in Sources */,
+				70B5AAEC1AC7BE90001F8823 /* ExecuteOrderTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		70D2FAA21A9F305800CAB509 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 70D2FA831A9F305700CAB509 /* FX Simulator */;
+			targetProxy = 70D2FAA11A9F305800CAB509 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		70D2FA941A9F305700CAB509 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				70D2FA951A9F305700CAB509 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		70D2FA991A9F305700CAB509 /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				70D2FA9A1A9F305700CAB509 /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		70D2FAA81A9F305800CAB509 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		70D2FAA91A9F305800CAB509 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		70D2FAAB1A9F305800CAB509 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = "FX Simulator/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		70D2FAAC1A9F305800CAB509 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = "FX Simulator/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		70D2FAAE1A9F305800CAB509 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "FX SimulatorTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FX Simulator.app/FX Simulator";
+			};
+			name = Debug;
+		};
+		70D2FAAF1A9F305800CAB509 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "FX SimulatorTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FX Simulator.app/FX Simulator";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		70D2FA7F1A9F305700CAB509 /* Build configuration list for PBXProject "FX Simulator" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				70D2FAA81A9F305800CAB509 /* Debug */,
+				70D2FAA91A9F305800CAB509 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		70D2FAAA1A9F305800CAB509 /* Build configuration list for PBXNativeTarget "FX Simulator" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				70D2FAAB1A9F305800CAB509 /* Debug */,
+				70D2FAAC1A9F305800CAB509 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		70D2FAAD1A9F305800CAB509 /* Build configuration list for PBXNativeTarget "FX SimulatorTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				70D2FAAE1A9F305800CAB509 /* Debug */,
+				70D2FAAF1A9F305800CAB509 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 70D2FA7C1A9F305700CAB509 /* Project object */;
+}
