@@ -358,7 +358,22 @@
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="2VH-y0-kup" id="f3j-fh-dQ8">
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tel-Nb-X5c" userLabel="New Start Button">
+                                                    <rect key="frame" x="223" y="5" width="90" height="30"/>
+                                                    <state key="normal" title="新しく始める">
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="newStartButtonPushed:" destination="lkl-JJ-fvd" eventType="touchUpInside" id="0j2-1K-lLX"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstAttribute="centerY" secondItem="Tel-Nb-X5c" secondAttribute="centerY" constant="1.5" id="0vl-xK-L9N"/>
+                                                <constraint firstAttribute="centerX" secondItem="Tel-Nb-X5c" secondAttribute="centerX" constant="32" id="Tly-WN-Jgz"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                     </tableViewCell>
@@ -1784,9 +1799,9 @@
                                                 <exclude reference="wTb-v1-cm5"/>
                                             </mask>
                                             <mask key="constraints">
-                                                <exclude reference="2vF-Wu-SxP"/>
                                                 <exclude reference="FyQ-cX-YuP"/>
                                                 <exclude reference="QFQ-47-mVk"/>
+                                                <exclude reference="2vF-Wu-SxP"/>
                                             </mask>
                                         </variation>
                                     </view>
