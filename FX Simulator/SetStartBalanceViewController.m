@@ -37,7 +37,7 @@ static const NSInteger kDefautStartBalanceValue = 1;
     
     [self.textField resignFirstResponder];
     
-    NSInteger inputStartBalance = [self.textField.text integerValue];
+    NSInteger inputStartBalance = [[self.textField.text stringByReplacingOccurrencesOfString:@"," withString:@""] integerValue];
     
     if (0 < inputStartBalance) {
         self.delegate.startBalance = [[Money alloc] initWithAmount:inputStartBalance currency:nil];
