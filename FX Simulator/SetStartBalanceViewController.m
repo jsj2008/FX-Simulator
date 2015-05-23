@@ -9,7 +9,6 @@
 #import "SetStartBalanceViewController.h"
 
 #import "Money.h"
-#import "NewStartViewController.h"
 
 @interface SetStartBalanceViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *textField;

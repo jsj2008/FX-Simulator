@@ -8,7 +8,6 @@
 
 #import "SetSpreadViewController.h"
 
-#import "NewStartViewController.h"
 #import "Spread.h"
 
 @interface SetSpreadViewController ()

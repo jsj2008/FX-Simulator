@@ -6,28 +6,10 @@
 //  
 //
 
-#import <UIKit/UIKit.h>
+#import "SetNewStartDataViewController.h"
 
-@class Currency;
-@class CurrencyPair;
-@class MarketTime;
-@class MarketTimeScale;
-@class Money;
-@class PositionSize;
-@class Spread;
 
-@protocol NewStartViewControllerDelegate <NSObject>
-@property (nonatomic, readwrite) Currency *accountCurrency;
-@property (nonatomic, readwrite) CurrencyPair *currencyPair;
-@property (nonatomic, readwrite) MarketTime *startTime;
-@property (nonatomic, readwrite) MarketTimeScale *timeScale;
-@property (nonatomic, readwrite) Money *startBalance;
-@property (nonatomic, readwrite) Spread *spread;
-/// 1LotあたりのPositionSize
-@property (nonatomic, readwrite) PositionSize *positionSizeOfLot;
-@end
-
-@interface NewStartViewController : UITableViewController <NewStartViewControllerDelegate>
+@interface NewStartViewController : UITableViewController <SetNewStartViewControllerDelegate>
 @property (nonatomic, readwrite) Currency *accountCurrency;
 @property (nonatomic, readwrite) CurrencyPair *currencyPair;
 @property (nonatomic, readwrite) MarketTime *startTime;

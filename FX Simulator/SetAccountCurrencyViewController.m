@@ -9,7 +9,6 @@
 #import "SetAccountCurrencyViewController.h"
 
 #import "Currency.h"
-#import "NewStartViewController.h"
 #import "Setting.h"
 
 @interface SetAccountCurrencyViewController ()
