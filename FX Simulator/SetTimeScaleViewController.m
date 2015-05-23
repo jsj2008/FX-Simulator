@@ -8,7 +8,6 @@
 
 #import "SetTimeScaleViewController.h"
 
-#import "NewStartViewController.h"
 #import "MarketTimeScale.h"
 #import "Setting.h"
 

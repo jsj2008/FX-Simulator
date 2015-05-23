@@ -8,7 +8,6 @@
 
 #import "SetStartTimeViewController.h"
 
-#import "NewStartViewController.h"
 #import "MarketTime.h"
 #import "NSDate+FXSDateData.h"
 

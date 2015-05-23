@@ -8,7 +8,6 @@
 
 #import "SetPositionSizeOfLotViewController.h"
 
-#import "NewStartViewController.h"
 #import "PositionSize.h"
 
 @interface SetPositionSizeOfLotViewController ()
