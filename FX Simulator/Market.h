@@ -42,6 +42,6 @@
 @property (nonatomic) BOOL isAutoUpdate;
 @property (nonatomic) NSArray* currentForexHistoryDataArray;
 @property (nonatomic) ForexHistoryData *currentForexHistoryData;
-@property (nonatomic, readonly) int currentTimestamp;
+@property (nonatomic, readonly) int currentLoadedRowid;
 @property (nonatomic, readwrite) NSNumber *autoUpdateInterval;
 @end

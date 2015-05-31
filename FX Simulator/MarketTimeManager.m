@@ -18,11 +18,11 @@
 #import "ForexHistory.h"
 #import "ForexHistoryData.h"
 
-static NSString * const kKeyPath = @"time";
+static NSString * const kKeyPath = @"currentLoadedRowid";
 
 @interface MarketTimeManager ()
 
-@property (nonatomic, readwrite) int time;
+@property (nonatomic, readwrite) int currentLoadedRowid;
 
 @end
 
@@ -51,7 +51,7 @@ static NSString * const kKeyPath = @"time";
 -(void)loadTime
 {
     ForexHistoryData *forexHistoryData = [forexHistory selectRowidLimitCloseTimestamp:saveData.lastLoadedCloseTimestamp];
-    _time = forexHistoryData.ratesID;
+    _currentLoadedRowid = forexHistoryData.ratesID;
 }
 
 -(void)addObserver:(NSObject *)observer
@@ -69,7 +69,7 @@ static NSString * const kKeyPath = @"time";
 
 -(void)add
 {
-    self.time++;
+    self.currentLoadedRowid++;
 }
 
 /*-(void)stop

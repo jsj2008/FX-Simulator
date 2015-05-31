@@ -57,7 +57,7 @@
 
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
-    if ([keyPath isEqualToString:@"currentTimestamp"] && [object isKindOfClass:[Market class]]) {
+    if ([keyPath isEqualToString:@"currentLoadedRowid"] && [object isKindOfClass:[Market class]]) {
         
         [ratePanelViewData updateCurrentMarket:(Market*)object];
     

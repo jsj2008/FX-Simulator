@@ -20,6 +20,6 @@
 -(void)start;
 -(void)add;
 @property (nonatomic) BOOL isAutoUpdate;
-@property (nonatomic, readonly) int time;
+@property (nonatomic, readonly) int currentLoadedRowid;
 @property (nonatomic, readwrite) NSNumber *autoUpdateInterval;
 @end
