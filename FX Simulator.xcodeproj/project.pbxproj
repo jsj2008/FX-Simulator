@@ -21,6 +21,10 @@
 		709BC75E1B0700320059C940 /* SetAutoUpdateIntervalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 709BC75D1B0700320059C940 /* SetAutoUpdateIntervalViewController.m */; };
 		70B5AAEC1AC7BE90001F8823 /* ExecuteOrderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 70B5AAEB1AC7BE90001F8823 /* ExecuteOrderTests.m */; };
 		70B5AAF21ACE5BC0001F8823 /* SubChartDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70B5AAF11ACE5BC0001F8823 /* SubChartDataViewController.m */; };
+		70CFEB361B15A6DE00837727 /* SaveDataStorageTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 70CFEB351B15A6DE00837727 /* SaveDataStorageTests.m */; };
+		70CFEB391B15B66300837727 /* TradeTestDbDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 70CFEB381B15B66300837727 /* TradeTestDbDataSource.m */; };
+		70CFEB3E1B16EA6800837727 /* TradeTestDb.sqlite3 in Resources */ = {isa = PBXBuildFile; fileRef = 70CFEB3D1B16EA6800837727 /* TradeTestDb.sqlite3 */; };
+		70CFEB411B19F92800837727 /* FXSTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 70CFEB401B19F92800837727 /* FXSTest.m */; };
 		70D2FA8A1A9F305700CAB509 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FA891A9F305700CAB509 /* main.m */; };
 		70D2FA8D1A9F305700CAB509 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FA8C1A9F305700CAB509 /* AppDelegate.m */; };
 		70D2FA961A9F305700CAB509 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 70D2FA941A9F305700CAB509 /* Main.storyboard */; };
@@ -183,6 +187,13 @@
 		70B5AAEE1AC7FF44001F8823 /* Rates.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Rates.m; sourceTree = "<group>"; };
 		70B5AAF01ACE5BC0001F8823 /* SubChartDataViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubChartDataViewController.h; sourceTree = "<group>"; };
 		70B5AAF11ACE5BC0001F8823 /* SubChartDataViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubChartDataViewController.m; sourceTree = "<group>"; };
+		70CFEB351B15A6DE00837727 /* SaveDataStorageTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SaveDataStorageTests.m; sourceTree = "<group>"; };
+		70CFEB371B15B66300837727 /* TradeTestDbDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TradeTestDbDataSource.h; sourceTree = "<group>"; };
+		70CFEB381B15B66300837727 /* TradeTestDbDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TradeTestDbDataSource.m; sourceTree = "<group>"; };
+		70CFEB3A1B16CFF600837727 /* FX_Simulator-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FX_Simulator-Prefix.pch"; sourceTree = "<group>"; };
+		70CFEB3D1B16EA6800837727 /* TradeTestDb.sqlite3 */ = {isa = PBXFileReference; lastKnownFileType = file; path = TradeTestDb.sqlite3; sourceTree = "<group>"; };
+		70CFEB3F1B19F92800837727 /* FXSTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FXSTest.h; sourceTree = "<group>"; };
+		70CFEB401B19F92800837727 /* FXSTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FXSTest.m; sourceTree = "<group>"; };
 		70D2FA841A9F305700CAB509 /* FX Simulator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "FX Simulator.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		70D2FA881A9F305700CAB509 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		70D2FA891A9F305700CAB509 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -561,6 +572,10 @@
 				70D2FA871A9F305700CAB509 /* Supporting Files */,
 				709BC75C1B0700320059C940 /* SetAutoUpdateIntervalViewController.h */,
 				709BC75D1B0700320059C940 /* SetAutoUpdateIntervalViewController.m */,
+				70CFEB371B15B66300837727 /* TradeTestDbDataSource.h */,
+				70CFEB381B15B66300837727 /* TradeTestDbDataSource.m */,
+				70CFEB3F1B19F92800837727 /* FXSTest.h */,
+				70CFEB401B19F92800837727 /* FXSTest.m */,
 			);
 			path = "FX Simulator";
 			sourceTree = "<group>";
@@ -572,6 +587,7 @@
 				70D2FAE41A9F568400CAB509 /* FMDB */,
 				70D2FA881A9F305700CAB509 /* Info.plist */,
 				70D2FA891A9F305700CAB509 /* main.m */,
+				70CFEB3A1B16CFF600837727 /* FX_Simulator-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -582,6 +598,7 @@
 				70D2FAA61A9F305800CAB509 /* FX_SimulatorTests.m */,
 				70B5AAEB1AC7BE90001F8823 /* ExecuteOrderTests.m */,
 				70D2FAA41A9F305800CAB509 /* Supporting Files */,
+				70CFEB351B15A6DE00837727 /* SaveDataStorageTests.m */,
 			);
 			path = "FX SimulatorTests";
 			sourceTree = "<group>";
@@ -617,6 +634,7 @@
 		70D2FACD1A9F555600CAB509 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				70CFEB3D1B16EA6800837727 /* TradeTestDb.sqlite3 */,
 				705DCE491AE6893E00BCF710 /* tradedb.sqlite3 */,
 				70D2FACE1A9F558100CAB509 /* forex_time_scale.sqlite */,
 			);
@@ -982,6 +1000,7 @@
 				705DCE4A1AE6893E00BCF710 /* tradedb.sqlite3 in Resources */,
 				70D2FB171A9F56BE00CAB509 /* plus@2x.png in Resources */,
 				70D2FB181A9F56BE00CAB509 /* portfolio.png in Resources */,
+				70CFEB3E1B16EA6800837727 /* TradeTestDb.sqlite3 in Resources */,
 				70D2FB081A9F56BE00CAB509 /* display@2x.png in Resources */,
 				70D2FB0D1A9F56BE00CAB509 /* config@2x.png in Resources */,
 				70D2FB0C1A9F56BE00CAB509 /* config.png in Resources */,
@@ -1051,10 +1070,12 @@
 				70D2FA8D1A9F305700CAB509 /* AppDelegate.m in Sources */,
 				70D2FAD71A9F559200CAB509 /* OpenPositionHeaderView.m in Sources */,
 				70ED621E1AFCA11F0008F939 /* SetSpreadViewController.m in Sources */,
+				70CFEB411B19F92800837727 /* FXSTest.m in Sources */,
 				70D2FB5F1A9F575900CAB509 /* ExecutionHistoryTableViewController.m in Sources */,
 				70D2FB851A9F579000CAB509 /* ExecutionHistoryFactory.m in Sources */,
 				70D2FC3E1A9F591600CAB509 /* ChartViewData.m in Sources */,
 				70D2FC0F1A9F58F700CAB509 /* TradeDatabase.m in Sources */,
+				70CFEB391B15B66300837727 /* TradeTestDbDataSource.m in Sources */,
 				70D2FBD81A9F57CB00CAB509 /* SaveLoader.m in Sources */,
 				70D2FB261A9F572B00CAB509 /* SubChartView.m in Sources */,
 				70D2FAF21A9F56AE00CAB509 /* FMDatabaseAdditions.m in Sources */,
@@ -1124,6 +1145,7 @@
 			files = (
 				70D2FAA71A9F305800CAB509 /* FX_SimulatorTests.m in Sources */,
 				70B5AAEC1AC7BE90001F8823 /* ExecuteOrderTests.m in Sources */,
+				70CFEB361B15A6DE00837727 /* SaveDataStorageTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1239,6 +1261,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PREFIX_HEADER = "FX Simulator/FX_Simulator-Prefix.pch";
 				INFOPLIST_FILE = "FX Simulator/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1249,6 +1272,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PREFIX_HEADER = "FX Simulator/FX_Simulator-Prefix.pch";
 				INFOPLIST_FILE = "FX Simulator/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1263,6 +1287,7 @@
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 				);
+				GCC_PREFIX_HEADER = "";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -1282,6 +1307,7 @@
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 				);
+				GCC_PREFIX_HEADER = "";
 				INFOPLIST_FILE = "FX SimulatorTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";

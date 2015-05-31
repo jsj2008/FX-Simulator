@@ -34,8 +34,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    _saveData = [SaveLoader load];
-    self.autoUpdateInterval = _saveData.autoUpdateInterval;
+    //_saveData = [SaveLoader load];
+    //self.autoUpdateInterval = _saveData.autoUpdateInterval;
     
     _market = [MarketManager sharedMarket];
 }
@@ -43,6 +43,9 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+    _saveData = [SaveLoader load];
+    self.autoUpdateInterval = _saveData.autoUpdateInterval;
     
     [self.setAutoUpdateIntervalButton setTitle:self.autoUpdateInterval.stringValue forState:self.setAutoUpdateIntervalButton.state];
 }

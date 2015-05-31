@@ -12,4 +12,5 @@
 
 @interface MarketManager : NSObject
 +(Market*)sharedMarket;
++(void)reloadMarket;
 @end

@@ -8,6 +8,11 @@
 
 #import "MainViewController.h"
 
+#import "ExecutionHistoryTableViewController.h"
+#import "NewStartViewController.h"
+#import "OpenPositionTableViewController.h"
+#import "TradeViewController.h"
+
 @interface MainViewController ()
 
 @end
@@ -17,6 +22,23 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    
+    
+    for (UIViewController *controller in self.viewControllers) {
+        if ([controller isMemberOfClass:[NewStartViewController class]]) {
+            ((NewStartViewController*)controller).delegate = self;
+        }
+    }
+    
+    for (UIViewController *controller in self.viewControllers) {
+        /*if ([controller isKindOfClass:[TradeViewController class]]) {
+            controller = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"TradeViewController"];
+        }*/
+        /*if ([controller conformsToProtocol:@protocol(NewStartViewControllerDelegate)]) {
+            [newStartViewController addDelegate:(id<NewStartViewControllerDelegate>)controller];
+        }*/
+    }
     
     //TradeViewController *tradeViewController = [[TradeViewController alloc]init];
     //[tradeViewController viewDidLoad];
@@ -71,6 +93,19 @@
         for (UITableViewCell *cell in [view visibleCells]) {
             cell.backgroundColor = [UIColor blackColor];
             cell.textLabel.textColor = [UIColor whiteColor];
+        }
+    }
+}
+
+-(void)updatedSaveData
+{
+    for (UIViewController *controller __strong in self.viewControllers) {
+        if ([controller isMemberOfClass:[TradeViewController class]]) {
+            controller = [self.storyboard instantiateViewControllerWithIdentifier:@"TradeViewController"];
+        } else if ([controller isMemberOfClass:[OpenPositionTableViewController class]]) {
+            controller = [self.storyboard instantiateViewControllerWithIdentifier:@"OpenPositionTableViewController"];
+        } else if ([controller isMemberOfClass:[ExecutionHistoryTableViewController class]]) {
+            controller = [self.storyboard instantiateViewControllerWithIdentifier:@"ExecutionHistoryTableViewController"];
         }
     }
 }

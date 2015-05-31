@@ -10,6 +10,7 @@
 
 #import "MarketTime.h"
 #import "NSDate+FXSDateData.h"
+#import "SaveData.h"
 
 typedef struct PickerRowSet {
     NSUInteger yearRow;
@@ -59,7 +60,7 @@ typedef struct PickerRowSet {
 {
     [super viewWillAppear:animated];
     
-    [self selectRowForDate:self.delegate.startTime.date];
+    [self selectRowForDate:self.saveData.startTime.date];
     
     /*NSUInteger index = [_currencyPairList indexOfObject:self.delegate.currencyPair];
     [self.pickerView selectRow:index inComponent:0 animated:NO];*/
@@ -138,7 +139,7 @@ numberOfRowsInComponent:(NSInteger)component
         selectedDate = _maxStartDate;
     }
     
-    self.delegate.startTime = [[MarketTime alloc] initWithDate:selectedDate];
+    self.saveData.startTime = [[MarketTime alloc] initWithDate:selectedDate];
 }
 
 /**

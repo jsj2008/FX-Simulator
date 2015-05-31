@@ -12,17 +12,36 @@
 #import "MarketTimeScale.h"
 #import "Currency.h"
 #import "CurrencyPair.h"
+#import "FXSTest.h"
 #import "TableNameFormatter.h"
 #import "Spread.h"
 #import "PositionSize.h"
 #import "Lot.h"
 #import "Money.h"
+#import "TradeTestDbDataSource.h"
 #import "TradeDbDataSource.h"
 
 @implementation SaveData
 
+-(instancetype)init
+{
+    if (self = [super init]) {
+        _tradePositionSize = [[PositionSize alloc] initWithSizeValue:10000];
+        _lastLoadedCloseTimestamp = [[MarketTime alloc] initWithTimestamp:0];
+        _isAutoUpdate = YES;
+        _autoUpdateInterval = @1.0;
+        _subChartSelectedTimeScale = [[MarketTimeScale alloc] initWithMinute:60];
+    }
+    
+    return self;
+}
+
 -(id)initWithSaveDataDictionary:(NSDictionary*)dic
 {
+    if (dic == nil) {
+        return nil;
+    }
+    
     if (self = [super init]) {
         Currency *baseCurrency = [[Currency alloc] initWithString:[[dic objectForKey:@"CurrencyPair"] objectAtIndex:0]];
         Currency *quoteCurrency = [[Currency alloc] initWithString:[[dic objectForKey:@"CurrencyPair"] objectAtIndex:1]];
@@ -32,7 +51,7 @@
         _timeScale = [[MarketTimeScale alloc] initWithMinute:[[dic objectForKey:@"TimeScale"] intValue]];
         _startTime = [[MarketTime alloc] initWithTimestamp:[[dic objectForKey:@"StartTimestamp"] intValue]];
         _spread = [[Spread alloc] initWithPips:[[dic objectForKey:@"Spread"] doubleValue] currencyPair:_currencyPair];
-        _accountCurrency = [dic objectForKey:@"AccountCurrency"];
+        _accountCurrency = [[Currency alloc] initWithString:[dic objectForKey:@"AccountCurrency"]];
         _startBalance = [[Money alloc] initWithAmount:[[dic objectForKey:@"StartBalance"] longLongValue] currency:_accountCurrency];
         _positionSizeOfLot = [[PositionSize alloc] initWithSizeValue:[[dic objectForKey:@"PositionSizeOfLot"] unsignedLongLongValue]];
         //_defaultTradePositionSize = [[PositionSize alloc] initWithSizeValue:[[dic objectForKey:@"DefaultTradePositionSize"] unsignedLongLongValue]];
@@ -43,9 +62,15 @@
         _autoUpdateInterval = [NSNumber numberWithFloat:[[dic objectForKey:@"AutoUpdateInterval"] floatValue]];
         _subChartSelectedTimeScale = [[MarketTimeScale alloc] initWithMinute:[[dic objectForKey:@"SubChartSelectedTimeScale"] intValue]];
         
-        _orderHistoryDataSource = [[TradeDbDataSource alloc] initWithTableName:[dic objectForKey:@"OrderHistoryTableName"] SaveSlotNumber:[NSNumber numberWithInt:_slotNumber]];
-        _executionHistoryDataSource = [[TradeDbDataSource alloc] initWithTableName:[dic objectForKey:@"ExecutionHistoryTableName"] SaveSlotNumber:[NSNumber numberWithInt:_slotNumber]];
-        _openPositionDataSource = [[TradeDbDataSource alloc] initWithTableName:[dic objectForKey:@"OpenPositionTableName"] SaveSlotNumber:[NSNumber numberWithInt:_slotNumber]];
+        if (![FXSTest inTest]) {
+            _orderHistoryDataSource = [[TradeDbDataSource alloc] initWithTableName:[dic objectForKey:@"OrderHistoryTableName"] SaveSlotNumber:[NSNumber numberWithInt:_slotNumber]];
+            _executionHistoryDataSource = [[TradeDbDataSource alloc] initWithTableName:[dic objectForKey:@"ExecutionHistoryTableName"] SaveSlotNumber:[NSNumber numberWithInt:_slotNumber]];
+            _openPositionDataSource = [[TradeDbDataSource alloc] initWithTableName:[dic objectForKey:@"OpenPositionTableName"] SaveSlotNumber:[NSNumber numberWithInt:_slotNumber]];
+        } else {
+            _orderHistoryDataSource = [[TradeTestDbDataSource alloc] initWithTableName:[dic objectForKey:@"OrderHistoryTableName"] SaveSlotNumber:[NSNumber numberWithInt:_slotNumber]];
+            _executionHistoryDataSource = [[TradeTestDbDataSource alloc] initWithTableName:[dic objectForKey:@"ExecutionHistoryTableName"] SaveSlotNumber:[NSNumber numberWithInt:_slotNumber]];
+            _openPositionDataSource = [[TradeTestDbDataSource alloc] initWithTableName:[dic objectForKey:@"OpenPositionTableName"] SaveSlotNumber:[NSNumber numberWithInt:_slotNumber]];
+        }
     }
     
     return self;
@@ -53,7 +78,7 @@
 
 -(id)initWithDefaultDataAndSlotNumber:(int)slotNumber
 {
-    if (self = [super init]) {
+    if (self = [self init]) {
         _slotNumber = slotNumber;
         _currencyPair = [[CurrencyPair alloc] initWithBaseCurrency:[[Currency alloc] initWithCurrencyType:USD] QuoteCurrency:[[Currency alloc] initWithCurrencyType:JPY]];
         _timeScale = [[MarketTimeScale alloc] initWithMinute:15];
@@ -65,9 +90,29 @@
         _accountCurrency = [[Currency alloc] initWithCurrencyType:JPY];
         _startBalance = [[Money alloc] initWithAmount:1000000 currency:_accountCurrency];
         _positionSizeOfLot = [[PositionSize alloc] initWithSizeValue:10000];
-        //_defaultTradePositionSize = [[PositionSize alloc] initWithSizeValue:10000];
-        _tradePositionSize = [[PositionSize alloc] initWithSizeValue:10000];
-        //_lot = [[Lot alloc] initWithLotValue:1];
+        
+        
+        NSString *orderHistoryTableName = @"order_history";
+        NSString *executionHistoryTableName = @"execution_history";
+        NSString *openPositionTableName = @"open_position";
+        /*NSString *orderHistoryTableName = [TableNameFormatter orderHistoryTableNameForSaveSlot:_slotNumber];
+         NSString *executionHistoryTableName = [TableNameFormatter executionHistoryTableNameForSaveSlot:_slotNumber];
+         NSString *openPositionTableName = [TableNameFormatter openPositionTableNameForSaveSlot:_slotNumber];*/
+        
+        if (![FXSTest inTest]) {
+            _orderHistoryDataSource = [[TradeDbDataSource alloc] initWithTableName:orderHistoryTableName SaveSlotNumber:[NSNumber numberWithInt:slotNumber]];
+            _executionHistoryDataSource = [[TradeDbDataSource alloc] initWithTableName:executionHistoryTableName SaveSlotNumber:[NSNumber numberWithInt:slotNumber]];
+            _openPositionDataSource = [[TradeDbDataSource alloc] initWithTableName:openPositionTableName SaveSlotNumber:[NSNumber numberWithInt:slotNumber]];
+        } else {
+            _orderHistoryDataSource = [[TradeTestDbDataSource alloc] initWithTableName:orderHistoryTableName SaveSlotNumber:[NSNumber numberWithInt:slotNumber]];
+            _executionHistoryDataSource = [[TradeTestDbDataSource alloc] initWithTableName:executionHistoryTableName SaveSlotNumber:[NSNumber numberWithInt:slotNumber]];
+            _openPositionDataSource = [[TradeTestDbDataSource alloc] initWithTableName:openPositionTableName SaveSlotNumber:[NSNumber numberWithInt:slotNumber]];
+        }
+        
+        
+        
+        
+        /*_tradePositionSize = [[PositionSize alloc] initWithSizeValue:10000];
         _lastLoadedCloseTimestamp = 0;
         _isAutoUpdate = YES;
         _autoUpdateInterval = @1.0;
@@ -76,13 +121,10 @@
         NSString *orderHistoryTableName = @"order_history";
         NSString *executionHistoryTableName = @"execution_history";
         NSString *openPositionTableName = @"open_position";
-        /*NSString *orderHistoryTableName = [TableNameFormatter orderHistoryTableNameForSaveSlot:_slotNumber];
-        NSString *executionHistoryTableName = [TableNameFormatter executionHistoryTableNameForSaveSlot:_slotNumber];
-        NSString *openPositionTableName = [TableNameFormatter openPositionTableNameForSaveSlot:_slotNumber];*/
         
         _orderHistoryDataSource = [[TradeDbDataSource alloc] initWithTableName:orderHistoryTableName SaveSlotNumber:[NSNumber numberWithInt:slotNumber]];
         _executionHistoryDataSource = [[TradeDbDataSource alloc] initWithTableName:executionHistoryTableName SaveSlotNumber:[NSNumber numberWithInt:slotNumber]];
-        _openPositionDataSource = [[TradeDbDataSource alloc] initWithTableName:openPositionTableName SaveSlotNumber:[NSNumber numberWithInt:slotNumber]];
+        _openPositionDataSource = [[TradeDbDataSource alloc] initWithTableName:openPositionTableName SaveSlotNumber:[NSNumber numberWithInt:slotNumber]];*/
     }
     
     return self;

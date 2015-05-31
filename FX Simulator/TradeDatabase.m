@@ -10,10 +10,11 @@
 #import "FMDatabase.h"
 
 static NSString* const dbFileName = @"tradedb.sqlite3";
+static NSString* const testDbFileName = @"TradeTestDb.sqlite3";
 
 @implementation TradeDatabase
 
-+(FMDatabase*)dbConnect
++(FMDatabase*)connectOfDbFileName:(NSString *)fileName
 {
     NSString *dbPath;
     
@@ -22,13 +23,13 @@ static NSString* const dbFileName = @"tradedb.sqlite3";
     NSArray  *paths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES);
     //NSArray  *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
-    dbPath = [documentsDirectory stringByAppendingPathComponent:dbFileName];
+    dbPath = [documentsDirectory stringByAppendingPathComponent:fileName];
     ret = [fm fileExistsAtPath:dbPath];
     
     NSError *error;
     
     if(!ret){
-        NSString *bundleDbPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:dbFileName];
+        NSString *bundleDbPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:fileName];
         BOOL result = [fm copyItemAtPath:bundleDbPath toPath:dbPath error:&error];
         //[fm createFileAtPath:dbPath contents:nil attributes:nil];
         
@@ -40,6 +41,16 @@ static NSString* const dbFileName = @"tradedb.sqlite3";
     }
     
     return [FMDatabase databaseWithPath:dbPath];
+}
+
++(FMDatabase*)dbConnect
+{
+    return [self connectOfDbFileName:dbFileName];
+}
+
++(FMDatabase*)testDbConnect
+{
+    return [self connectOfDbFileName:testDbFileName];
 }
 
 /*-(id)init

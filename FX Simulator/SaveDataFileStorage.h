@@ -12,14 +12,22 @@
 
 @protocol SaveDataStorage <NSObject>
 -(BOOL)existSaveDataSlotNumber:(int)num;
--(BOOL)save:(SaveData*)saveData;
+/**
+ 既存のトレード履歴データベース(オープンポジション、約定履歴)があった場合、それを削除して、新たなセーブデータを作成する。
+*/
+-(BOOL)newSave:(SaveData*)saveData;
+-(BOOL)updateSave:(SaveData*)saveData;
 -(SaveData*)loadSlotNumber:(int)number;
--(void)deleteFromSlotNumber:(NSNumber*)number;
+-(BOOL)deleteFromSlotNumber:(NSNumber*)number;
+-(void)deleteAll;
 @end
 
 @interface SaveDataFileStorage : NSObject <SaveDataStorage>
+//-(instancetype)initWithTestMode;
 -(BOOL)existSaveDataSlotNumber:(int)num;
--(BOOL)save:(SaveData*)saveData;
+-(BOOL)newSave:(SaveData*)saveData;
+-(BOOL)updateSave:(SaveData*)saveData;
 -(SaveData*)loadSlotNumber:(int)number;
--(void)deleteFromSlotNumber:(NSNumber*)number;
+-(BOOL)deleteFromSlotNumber:(NSNumber*)number;
+-(void)deleteAll;
 @end

@@ -21,6 +21,9 @@
  最新のCloseのAskレートを取得。
 */
 -(Rate*)getCurrentAskRate;
+/**
+ Startした瞬間、時間が進み、Observerのメソッドが呼ばれ、それぞれのObserverに値がセットされる。
+*/
 -(void)start;
 /**
  ただの一時停止。セーブデータの自動更新設定は変更されない。

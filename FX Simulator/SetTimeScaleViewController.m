@@ -9,6 +9,7 @@
 #import "SetTimeScaleViewController.h"
 
 #import "MarketTimeScale.h"
+#import "SaveData.h"
 #import "Setting.h"
 
 @interface SetTimeScaleViewController ()
@@ -31,7 +32,7 @@
 {
     [super viewWillAppear:animated];
     
-    NSUInteger index = [_timeScaleList indexOfObject:self.delegate.timeScale];
+    NSUInteger index = [_timeScaleList indexOfObject:self.saveData.timeScale];
     [self.pickerView selectRow:index inComponent:0 animated:NO];
 }
 
@@ -58,7 +59,7 @@ numberOfRowsInComponent:(NSInteger)component
 - (void)pickerView:(UIPickerView *)pickerView
       didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
-    self.delegate.timeScale = [_timeScaleList objectAtIndex:row];
+    self.saveData.timeScale = [_timeScaleList objectAtIndex:row];
 }
 
 - (void)didReceiveMemoryWarning {

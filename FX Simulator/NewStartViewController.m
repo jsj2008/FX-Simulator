@@ -10,9 +10,12 @@
 
 #import "Currency.h"
 #import "CurrencyPair.h"
+#import "MarketManager.h"
 #import "MarketTime.h"
 #import "Money.h"
 #import "PositionSize.h"
+#import "SaveDataFileStorage.h"
+#import "SaveDataStorageFactory.h"
 #import "Spread.h"
 #import "MarketTimeScale.h"
 #import "SaveData.h"
@@ -31,7 +34,19 @@
 
 @end
 
-@implementation NewStartViewController
+@implementation NewStartViewController {
+    SaveData *_newSaveData;
+}
+
+-(instancetype)initWithCoder:(NSCoder *)aDecoder
+{
+    if (self = [super initWithCoder:aDecoder]) {
+        _newSaveData = [SaveData new];
+        _newSaveData.slotNumber = 1;
+    }
+    
+    return self;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -39,37 +54,46 @@
     
     SaveData *saveData = [SaveLoader load];
     
-    self.currencyPair = saveData.currencyPair;
-    self.startTime = saveData.startTime;
-    self.timeScale = saveData.timeScale;
-    self.spread = saveData.spread;
-    self.accountCurrency = saveData.accountCurrency;
-    self.startBalance = saveData.startBalance;
-    self.positionSizeOfLot = saveData.positionSizeOfLot;
+    _newSaveData.currencyPair = saveData.currencyPair;
+    _newSaveData.startTime = saveData.startTime;
+    _newSaveData.timeScale = saveData.timeScale;
+    _newSaveData.spread = saveData.spread;
+    _newSaveData.accountCurrency = saveData.accountCurrency;
+    _newSaveData.startBalance = saveData.startBalance;
+    _newSaveData.positionSizeOfLot = saveData.positionSizeOfLot;
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     
-    [self.setCurrencyPairButton setTitle:[self.currencyPair toDisplayString] forState:self.setCurrencyPairButton.state];
-    [self.setTimeScaleButton setTitle:[self.timeScale toDisplayString] forState:self.setTimeScaleButton.state];
-    [self.setStartTimeButton setTitle:[self.startTime toDisplayYMDString] forState:self.setStartTimeButton.state];
-    [self.setSpreadButton setTitle:[self.spread toDisplayString] forState:self.setSpreadButton.state];
-    [self.setAccountCurrencyButton setTitle:[self.accountCurrency toDisplayString] forState:self.setAccountCurrencyButton.state];
-    [self.setStartBalanceButton setTitle:[self.startBalance toDisplayString] forState:self.setStartBalanceButton.state];
-    [self.setPositionSizeOfLotButton setTitle:[self.positionSizeOfLot toDisplayString] forState:self.setPositionSizeOfLotButton.state];
+    [self.setCurrencyPairButton setTitle:[_newSaveData.currencyPair toDisplayString] forState:self.setCurrencyPairButton.state];
+    [self.setTimeScaleButton setTitle:[_newSaveData.timeScale toDisplayString] forState:self.setTimeScaleButton.state];
+    [self.setStartTimeButton setTitle:[_newSaveData.startTime toDisplayYMDString] forState:self.setStartTimeButton.state];
+    [self.setSpreadButton setTitle:[_newSaveData.spread toDisplayString] forState:self.setSpreadButton.state];
+    [self.setAccountCurrencyButton setTitle:[_newSaveData.accountCurrency toDisplayString] forState:self.setAccountCurrencyButton.state];
+    [self.setStartBalanceButton setTitle:[_newSaveData.startBalance toDisplayString] forState:self.setStartBalanceButton.state];
+    [self.setPositionSizeOfLotButton setTitle:[_newSaveData.positionSizeOfLot toDisplayString] forState:self.setPositionSizeOfLotButton.state];
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqualToString:@"SetCurrencyPairViewControllerSegue"] || [segue.identifier isEqualToString:@"SetTimeScaleViewControllerSegue"] || [segue.identifier isEqualToString:@"SetStartTimeViewControllerSegue"] || [segue.identifier isEqualToString:@"SetSpreadViewControllerSegue"] || [segue.identifier isEqualToString:@"SetAccountCurrencyViewControllerSegue"] || [segue.identifier isEqualToString:@"SetStartBalanceViewControllerSegue"] || [segue.identifier isEqualToString:@"SetPositionSizeOfLotViewControllerSegue"]) {
         SetNewStartDataViewController *controller = segue.destinationViewController;
-        controller.delegate = self;
+        controller.saveData = _newSaveData;
     }
 }
 
 - (IBAction)newStartButtonPushed:(id)sender {
+    id<SaveDataStorage> storage = [SaveDataStorageFactory createSaveDataStorage];
+    
+    [storage newSave:_newSaveData];
+    
+    [SaveLoader reloadSaveData];
+    
+    [MarketManager reloadMarket];
+    
+    [self.delegate updatedSaveData];
 }
 
 - (void)didReceiveMemoryWarning {

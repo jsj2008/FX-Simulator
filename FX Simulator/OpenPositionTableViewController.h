@@ -6,8 +6,8 @@
 //  
 //
 
-#import <UIKit/UIKit.h>
+#import "NewStartViewController.h"
 
-@interface OpenPositionTableViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
-
+@interface OpenPositionTableViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, NewStartViewControllerDelegate>
+-(void)reloadSaveData;
 @end

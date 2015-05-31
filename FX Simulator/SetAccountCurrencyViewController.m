@@ -9,6 +9,7 @@
 #import "SetAccountCurrencyViewController.h"
 
 #import "Currency.h"
+#import "SaveData.h"
 #import "Setting.h"
 
 @interface SetAccountCurrencyViewController ()
@@ -31,7 +32,7 @@
 {
     [super viewWillAppear:animated];
     
-    NSUInteger index = [_accountCurrencyList indexOfObject:self.delegate.accountCurrency];
+    NSUInteger index = [_accountCurrencyList indexOfObject:self.saveData.accountCurrency];
     [self.pickerView selectRow:index inComponent:0 animated:NO];
 }
 
@@ -58,7 +59,7 @@ numberOfRowsInComponent:(NSInteger)component
 - (void)pickerView:(UIPickerView *)pickerView
       didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
-    self.delegate.accountCurrency = [_accountCurrencyList objectAtIndex:row];
+    self.saveData.accountCurrency = [_accountCurrencyList objectAtIndex:row];
 }
 
 - (void)didReceiveMemoryWarning {

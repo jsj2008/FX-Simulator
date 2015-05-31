@@ -26,7 +26,8 @@
 
 -(Money*)addMoney:(Money*)money
 {
-    if (self.currency == nil) {
+    if (self.currency == nil || money == nil) {
+        DLog(@"Currency or Money nil");
         return nil;
     }
     

@@ -43,6 +43,11 @@ static const int cacheSize = 300;
 
 -(id)initWithCurrencyPair:(CurrencyPair *)currencyPair timeScale:(MarketTimeScale*)timeScale
 {
+    if (currencyPair == nil || timeScale == nil) {
+        DLog(@"CurrencyPair or TimeScale nil");
+        return nil;
+    }
+    
     if (self = [self init]) {
         _currencyPair = currencyPair;
         _timeScale = timeScale.minute;

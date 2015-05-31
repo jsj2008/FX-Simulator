@@ -19,4 +19,9 @@
     //return [SaveDataFileStorageMock new];
 }
 
+/*+(id<SaveDataStorage>)createSaveDataTestStorage
+{
+    return [[SaveDataFileStorage alloc] initWithTestMode];
+}*/
+
 @end

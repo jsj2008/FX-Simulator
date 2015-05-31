@@ -5,7 +5,7 @@
 //  Created  on 2014/05/26.
 //  
 //
-
+#import <UIKit/UIKit.h>
 #import "ChartViewController.h"
 #import "TradeDataViewController.h"
 //#import <UIKit/UIKit.h>

@@ -19,16 +19,16 @@
 @class MarketTime;
 
 @interface SaveData : NSObject
-@property (nonatomic, readonly) int slotNumber;
-@property (nonatomic, readonly) CurrencyPair* currencyPair;
-@property (nonatomic, readonly) MarketTimeScale *timeScale;
-@property (nonatomic, readonly) MarketTime *startTime;
-@property (nonatomic, readonly) Spread *spread;
+@property (nonatomic, readwrite) int slotNumber;
+@property (nonatomic, readwrite) CurrencyPair* currencyPair;
+@property (nonatomic, readwrite) MarketTimeScale *timeScale;
+@property (nonatomic, readwrite) MarketTime *startTime;
+@property (nonatomic, readwrite) Spread *spread;
 @property (nonatomic, readwrite) MarketTime *lastLoadedCloseTimestamp;
 @property (nonatomic, readwrite) Currency* accountCurrency;
-@property (nonatomic, readonly) PositionSize *positionSizeOfLot;
+@property (nonatomic, readwrite) PositionSize *positionSizeOfLot;
 @property (nonatomic, readwrite) PositionSize *tradePositionSize;
-@property (nonatomic, readonly) Money *startBalance;
+@property (nonatomic, readwrite) Money *startBalance;
 @property (nonatomic, readwrite) BOOL isAutoUpdate;
 // SaveDataかUserDataか
 @property (nonatomic, readwrite) NSNumber *autoUpdateInterval;
@@ -36,6 +36,7 @@
 /*@property (nonatomic, readonly) NSString *orderHistoryTableName;
 @property (nonatomic, readonly) NSString *executionHistoryTableName;
 @property (nonatomic, readonly) NSString *openPositionTableName;*/
+#warning OpenPositionなどをそのまま返すようにする。
 @property (nonatomic, readonly) TradeDbDataSource *orderHistoryDataSource;
 @property (nonatomic, readonly) TradeDbDataSource *executionHistoryDataSource;
 @property (nonatomic, readonly) TradeDbDataSource *openPositionDataSource;

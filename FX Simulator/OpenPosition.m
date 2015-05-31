@@ -40,6 +40,11 @@
 
 -(id)initWithDataSource:(TradeDbDataSource*)dataSource AccountCurrency:(Currency *)accountCurrency
 {
+    if (dataSource == nil || accountCurrency == nil) {
+        DLog(@"DataSource or AccountCurrency nil");
+        return nil;
+    }
+    
     if (self = [super init]) {
         //OpenPositionTable *table = [[OpenPositionTable alloc] initWithDataSource:dataSource];
         //[table setTable];
