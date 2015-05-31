@@ -76,7 +76,7 @@
         _timeScale = [[MarketTimeScale alloc] initWithMinute:15];
         NSDateFormatter *formatter = [NSDateFormatter new];
         [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-        NSDate *date = [formatter dateFromString:@"2010-01-01 00:00:00"];
+        NSDate *date = [formatter dateFromString:@"2007-01-01 00:00:00"];
         _startTime = [[MarketTime alloc] initWithTimestamp:[date timeIntervalSince1970]];
         _lastLoadedCloseTimestamp = _startTime;
         _spread = [[Spread alloc] initWithPips:1 currencyPair:_currencyPair];
