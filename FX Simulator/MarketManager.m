@@ -24,4 +24,13 @@ static Market *sharedMarket = nil;
     return sharedMarket;
 }
 
++(void)reloadMarket
+{
+    @synchronized(self) {
+        if (sharedMarket != nil) {
+            sharedMarket = [Market new];
+        }
+    }
+}
+
 @end

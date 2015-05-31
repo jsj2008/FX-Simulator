@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 
-@class Currency;
+/*@class Currency;
 @class CurrencyPair;
 @class MarketTime;
 @class MarketTimeScale;
@@ -26,9 +26,10 @@
 @property (nonatomic, readwrite) Spread *spread;
 /// 1LotあたりのPositionSize
 @property (nonatomic, readwrite) PositionSize *positionSizeOfLot;
-@end
+@end*/
 
+@class SaveData;
 
 @interface SetNewStartDataViewController : UIViewController
-@property (nonatomic, assign) id<SetNewStartViewControllerDelegate> delegate;
+@property (nonatomic, readwrite) SaveData *saveData;
 @end

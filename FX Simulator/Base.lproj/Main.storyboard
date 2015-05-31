@@ -360,7 +360,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tel-Nb-X5c" userLabel="New Start Button">
-                                                    <rect key="frame" x="223" y="5" width="90" height="30"/>
+                                                    <rect key="frame" x="255" y="7" width="90" height="30"/>
                                                     <state key="normal" title="新しく始める">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
@@ -371,8 +371,8 @@
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                             <constraints>
-                                                <constraint firstAttribute="centerY" secondItem="Tel-Nb-X5c" secondAttribute="centerY" constant="1.5" id="0vl-xK-L9N"/>
-                                                <constraint firstAttribute="centerX" secondItem="Tel-Nb-X5c" secondAttribute="centerX" constant="32" id="Tly-WN-Jgz"/>
+                                                <constraint firstAttribute="centerY" secondItem="Tel-Nb-X5c" secondAttribute="centerY" id="0vl-xK-L9N"/>
+                                                <constraint firstAttribute="centerX" secondItem="Tel-Nb-X5c" secondAttribute="centerX" id="Tly-WN-Jgz"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -517,7 +517,7 @@
         <!--Open Position View Controller-->
         <scene sceneID="9em-5c-HSC">
             <objects>
-                <viewController id="UZy-Pp-b1L" userLabel="Open Position View Controller" customClass="OpenPositionTableViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="OpenPositionTableViewController" id="UZy-Pp-b1L" userLabel="Open Position View Controller" customClass="OpenPositionTableViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="DSj-F5-lvf"/>
                         <viewControllerLayoutGuide type="bottom" id="55o-f0-g48"/>
@@ -785,7 +785,7 @@
         <!--Execution History View Controller-->
         <scene sceneID="bj4-Ez-mxo">
             <objects>
-                <viewController title="Execution History View Controller" id="0Zi-Ab-Rvg" customClass="ExecutionHistoryTableViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ExecutionHistoryTableViewController" title="Execution History View Controller" id="0Zi-Ab-Rvg" customClass="ExecutionHistoryTableViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="sRl-gn-g5Q"/>
                         <viewControllerLayoutGuide type="bottom" id="xaa-Vd-xzO"/>
@@ -1283,7 +1283,7 @@
         <!--Trade-->
         <scene sceneID="tdy-gL-0Zy">
             <objects>
-                <viewController title="Trade" id="FsJ-ty-zYD" customClass="TradeViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TradeViewController" title="Trade" id="FsJ-ty-zYD" customClass="TradeViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Jvj-6s-LHl"/>
                         <viewControllerLayoutGuide type="bottom" id="CYR-sO-hTC"/>

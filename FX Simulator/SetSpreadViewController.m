@@ -8,6 +8,7 @@
 
 #import "SetSpreadViewController.h"
 
+#import "SaveData.h"
 #import "Spread.h"
 
 @interface SetSpreadViewController ()
@@ -28,7 +29,7 @@ static const NSInteger kDefautSpreadValue = 1;
 {
     [super viewWillAppear:animated];
     
-    self.textField.text = [self.delegate.spread toDisplayString];
+    self.textField.text = [self.saveData.spread toDisplayString];
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -40,9 +41,9 @@ static const NSInteger kDefautSpreadValue = 1;
     NSInteger inputSpread = [self.textField.text integerValue];
     
     if (0 < inputSpread) {
-        self.delegate.spread = [[Spread alloc] initWithPips:inputSpread currencyPair:nil];
+        self.saveData.spread = [[Spread alloc] initWithPips:inputSpread currencyPair:nil];
     } else {
-        self.delegate.spread = [[Spread alloc] initWithPips:kDefautSpreadValue currencyPair:nil];
+        self.saveData.spread = [[Spread alloc] initWithPips:kDefautSpreadValue currencyPair:nil];
     }
 }
 

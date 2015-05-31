@@ -9,6 +9,7 @@
 #import "SetPositionSizeOfLotViewController.h"
 
 #import "PositionSize.h"
+#import "SaveData.h"
 
 @interface SetPositionSizeOfLotViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *textField;
@@ -28,7 +29,7 @@ static const NSInteger kDefautPositionSizeValue = 1;
 {
     [super viewWillAppear:animated];
     
-    self.textField.text = [self.delegate.positionSizeOfLot toDisplayString];
+    self.textField.text = [self.saveData.positionSizeOfLot toDisplayString];
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -40,9 +41,9 @@ static const NSInteger kDefautPositionSizeValue = 1;
     NSInteger inputPositionSize = [self.textField.text integerValue];
     
     if (0 < inputPositionSize) {
-        self.delegate.positionSizeOfLot = [[PositionSize alloc] initWithSizeValue:inputPositionSize];
+        self.saveData.positionSizeOfLot = [[PositionSize alloc] initWithSizeValue:inputPositionSize];
     } else {
-        self.delegate.positionSizeOfLot = [[PositionSize alloc] initWithSizeValue:kDefautPositionSizeValue];
+        self.saveData.positionSizeOfLot = [[PositionSize alloc] initWithSizeValue:kDefautPositionSizeValue];
     }
 }
 

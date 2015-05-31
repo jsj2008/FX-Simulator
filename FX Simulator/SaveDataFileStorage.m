@@ -12,10 +12,12 @@
 #import "SaveData.h"
 #import "Currency.h"
 #import "CurrencyPair.h"
+#import "FXSTest.h"
 #import "Spread.h"
 #import "TradeDbDataSource.h"
 
 static NSString* const saveDataFileName = @"SaveData.plist";
+static NSString* const saveDataTestFileName = @"SaveDataTest.plist";
 
 @implementation SaveDataFileStorage {
     NSString *saveDataFilePath;
@@ -24,28 +26,44 @@ static NSString* const saveDataFileName = @"SaveData.plist";
 -(id)init
 {
     if (self = [super init]) {
-        [self setSaveDataFilePath];
-        [self setSaveDataFile];
+        if ([FXSTest inTest]) {
+            saveDataFilePath = [self getSaveDataFilePath:saveDataTestFileName];
+        } else {
+            saveDataFilePath = [self getSaveDataFilePath:saveDataFileName];
+        }
+        [self setSaveDataFile:saveDataFilePath];
     }
     
     return self;
 }
 
--(void)setSaveDataFilePath
+/*-(instancetype)initWithTestMode
+{
+    if (self = [super init]) {
+        NSString *path = [self getSaveDataFilePath:saveDataTestFileName];
+        [self setSaveDataFile:path];
+    }
+    
+    return self;
+}*/
+
+-(NSString*)getSaveDataFilePath:(NSString *)fileName
 {
     NSArray  *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
-    saveDataFilePath = [documentsDirectory stringByAppendingPathComponent:saveDataFileName];
+    NSString *path = [documentsDirectory stringByAppendingPathComponent:fileName];
+    
+    return path;
 }
 
--(void)setSaveDataFile
+-(void)setSaveDataFile:(NSString*)path
 {
     BOOL ret;
     NSFileManager *fm = [NSFileManager defaultManager];
-    ret = [fm fileExistsAtPath:saveDataFilePath];
+    ret = [fm fileExistsAtPath:path];
     
     if(!ret){
-        [fm createFileAtPath:saveDataFilePath contents:nil attributes:nil];
+        [fm createFileAtPath:path contents:nil attributes:nil];
     }
 }
 
@@ -62,13 +80,50 @@ static NSString* const saveDataFileName = @"SaveData.plist";
 
 }
 
--(BOOL)save:(SaveData*)saveData
+-(BOOL)save:(SaveData *)saveData
 {
+    if (![self validateSaveData:saveData]) {
+        return NO;
+    }
+    
     NSMutableDictionary *saveDataFileDic =  [NSMutableDictionary dictionaryWithContentsOfFile:saveDataFilePath];
     
     if (saveDataFileDic == nil) {
         saveDataFileDic = [NSMutableDictionary dictionary];
     }
+    
+    NSDictionary *saveDataDic = saveData.saveDataDictionary;
+    
+    [saveDataFileDic setObject:saveDataDic forKey:[NSString stringWithFormat:@"%d", saveData.slotNumber]];
+    
+    return [saveDataFileDic writeToFile:saveDataFilePath atomically:YES];
+}
+
+-(BOOL)validateSaveData:(SaveData *)saveData
+{
+    if (saveData == nil) {
+        return NO;
+    }
+    
+    return YES;
+}
+
+-(BOOL)newSave:(SaveData *)saveData
+{
+    if ([self existSaveDataSlotNumber:saveData.slotNumber]) {
+        [self deleteFromSlotNumber:@(saveData.slotNumber)];
+    }
+    
+    return [self save:saveData];
+}
+
+-(BOOL)updateSave:(SaveData*)saveData
+{
+    if (![self existSaveDataSlotNumber:saveData.slotNumber]) {
+        return NO;
+    }
+    
+    return [self save:saveData];
     
     /*NSDictionary *saveDataDic = @{@"SaveSlot":[NSNumber numberWithInt:saveData.slotNumber],
                                   @"CurrencyPair":[saveData.currencyPair toArray],
@@ -84,12 +139,6 @@ static NSString* const saveDataFileName = @"SaveData.plist";
                                   @"OrderHistoryTableName":saveData.orderHistoryTableName,
                                   @"ExecutionHistoryTableName":saveData.executionHistoryTableName,
                                   @"OpenPositionTableName":saveData.openPositionTableName};*/
-    
-    NSDictionary *saveDataDic = saveData.saveDataDictionary;
-    
-    [saveDataFileDic setObject:saveDataDic forKey:[NSString stringWithFormat:@"%d", saveData.slotNumber]];
-    
-    return [saveDataFileDic writeToFile:saveDataFilePath atomically:YES];
 }
 
 -(SaveData*)loadSlotNumber:(int)num
@@ -102,11 +151,20 @@ static NSString* const saveDataFileName = @"SaveData.plist";
     return saveData;
 }
 
--(void)deleteFromSlotNumber:(NSNumber *)number
+-(BOOL)deleteFromSlotNumber:(NSNumber *)number
 {
+    if (number == nil) {
+        return NO;
+    }
+    
     NSMutableDictionary *saveDataFileDic = [NSMutableDictionary dictionaryWithContentsOfFile:saveDataFilePath];
     
     NSDictionary *saveDataDic = [saveDataFileDic objectForKey:number.stringValue];
+    
+    if (saveDataDic == nil) {
+        return NO;
+    }
+    
     SaveData *saveData = [[SaveData alloc] initWithSaveDataDictionary:saveDataDic];
     
     [self deleteTableFromDataSource:saveData.orderHistoryDataSource];
@@ -116,15 +174,29 @@ static NSString* const saveDataFileName = @"SaveData.plist";
     
     [saveDataFileDic removeObjectForKey:number.stringValue];
     [saveDataFileDic writeToFile:saveDataFilePath atomically:YES];
+    
+    return YES;
+}
+
+-(void)deleteAll
+{
+    NSMutableDictionary *saveDataFileDic = [NSMutableDictionary dictionaryWithContentsOfFile:saveDataFilePath];
+    
+    for (NSString *key in saveDataFileDic.allKeys) {
+        [self deleteFromSlotNumber:@(key.intValue)];
+    }
+    
+    [saveDataFileDic removeAllObjects];
+    [saveDataFileDic writeToFile:saveDataFilePath atomically:YES];
 }
 
 -(void)deleteTableFromDataSource:(TradeDbDataSource*)dataSource
 {
-#warning テーブルの削除ではなく、データの削除にする。
+    NSString *sql = [NSString stringWithFormat:@"DELETE FROM %@;", dataSource.tableName];
     FMDatabase *tradeDb = dataSource.connection;
     
     [tradeDb open];
-    [tradeDb executeUpdate:@"DROP TABLE IF EXISTS %@;", dataSource.tableName];
+    [tradeDb executeUpdate:sql];
     [tradeDb close];
 }
 

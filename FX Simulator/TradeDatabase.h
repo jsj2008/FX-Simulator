@@ -16,5 +16,6 @@
 
 @interface TradeDatabase : NSObject
 +(FMDatabase*)dbConnect;
++(FMDatabase*)testDbConnect;
 //-(FMDatabase*)dbConnect;
 @end

@@ -9,6 +9,7 @@
 #import "SetCurrencyPairViewController.h"
 
 #import "CurrencyPair.h"
+#import "SaveData.h"
 #import "Setting.h"
 
 @interface SetCurrencyPairViewController ()
@@ -29,7 +30,7 @@
 {
     [super viewWillAppear:animated];
     
-    NSUInteger index = [_currencyPairList indexOfObject:self.delegate.currencyPair];
+    NSUInteger index = [_currencyPairList indexOfObject:self.saveData.currencyPair];
     [self.pickerView selectRow:index inComponent:0 animated:NO];
 }
 
@@ -56,7 +57,7 @@ numberOfRowsInComponent:(NSInteger)component
 - (void)pickerView:(UIPickerView *)pickerView
       didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
-    self.delegate.currencyPair = [_currencyPairList objectAtIndex:row];
+    self.saveData.currencyPair = [_currencyPairList objectAtIndex:row];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -9,6 +9,8 @@
 #import "SaveLoader.h"
 
 #import "SaveData.h"
+#import "SaveDataFileStorage.h"
+#import "SaveDataStorageFactory.h"
 
 @implementation SaveLoader
 
@@ -20,18 +22,36 @@ static SaveData *sharedSaveData;
     
     @synchronized(self) {
         if (sharedSaveData == nil) {
-            sharedSaveData = [[SaveData alloc] initWithDefaultDataAndSlotNumber:slotNumber];
+            id<SaveDataStorage> storage = [SaveDataStorageFactory createSaveDataStorage];
+            
+            sharedSaveData = [storage loadSlotNumber:slotNumber];
+            //sharedSaveData = [[SaveData alloc] initWithDefaultDataAndSlotNumber:slotNumber];
+            
+            if (sharedSaveData == nil) {
+                SaveData *defaultSaveData = [[SaveData alloc] initWithDefaultDataAndSlotNumber:slotNumber];
+                [storage newSave:defaultSaveData];
+                sharedSaveData = [storage loadSlotNumber:slotNumber];
+            }
         }
     }
     
     return sharedSaveData;
 }
 
-+(void)setSharedSaveData:(SaveData *)saveData
++(void)reloadSaveData
+{
+    @synchronized(self) {
+        if (sharedSaveData != nil) {
+            sharedSaveData = nil;
+        }
+    }
+}
+
+/*+(void)setSharedSaveData:(SaveData *)saveData
 {
     @synchronized(self) {
         sharedSaveData = saveData;
     }
-}
+}*/
 
 @end

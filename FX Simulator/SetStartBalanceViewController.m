@@ -8,6 +8,7 @@
 
 #import "SetStartBalanceViewController.h"
 
+#import "SaveData.h"
 #import "Money.h"
 
 @interface SetStartBalanceViewController ()
@@ -28,7 +29,7 @@ static const NSInteger kDefautStartBalanceValue = 1;
 {
     [super viewWillAppear:animated];
     
-    self.textField.text = [self.delegate.startBalance toDisplayString];
+    self.textField.text = [self.saveData.startBalance toDisplayString];
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -40,9 +41,9 @@ static const NSInteger kDefautStartBalanceValue = 1;
     NSInteger inputStartBalance = [[self.textField.text stringByReplacingOccurrencesOfString:@"," withString:@""] integerValue];
     
     if (0 < inputStartBalance) {
-        self.delegate.startBalance = [[Money alloc] initWithAmount:inputStartBalance currency:nil];
+        self.saveData.startBalance = [[Money alloc] initWithAmount:inputStartBalance currency:nil];
     } else {
-        self.delegate.startBalance = [[Money alloc] initWithAmount:kDefautStartBalanceValue currency:nil];
+        self.saveData.startBalance = [[Money alloc] initWithAmount:kDefautStartBalanceValue currency:nil];
     }
 }
 

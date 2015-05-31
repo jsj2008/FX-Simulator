@@ -12,4 +12,5 @@
 
 @interface SaveDataStorageFactory : NSObject
 +(id<SaveDataStorage>)createSaveDataStorage;
+//+(id<SaveDataStorage>)createSaveDataTestStorage;
 @end
