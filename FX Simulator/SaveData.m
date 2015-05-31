@@ -23,19 +23,6 @@
 
 @implementation SaveData
 
--(instancetype)init
-{
-    if (self = [super init]) {
-        _tradePositionSize = [[PositionSize alloc] initWithSizeValue:10000];
-        _lastLoadedCloseTimestamp = [[MarketTime alloc] initWithTimestamp:0];
-        _isAutoUpdate = YES;
-        _autoUpdateInterval = @1.0;
-        _subChartSelectedTimeScale = [[MarketTimeScale alloc] initWithMinute:60];
-    }
-    
-    return self;
-}
-
 -(id)initWithSaveDataDictionary:(NSDictionary*)dic
 {
     if (dic == nil) {
@@ -78,7 +65,12 @@
 
 -(id)initWithDefaultDataAndSlotNumber:(int)slotNumber
 {
-    if (self = [self init]) {
+    if (self = [super init]) {
+        _tradePositionSize = [[PositionSize alloc] initWithSizeValue:10000];
+        _isAutoUpdate = YES;
+        _autoUpdateInterval = @1.0;
+        _subChartSelectedTimeScale = [[MarketTimeScale alloc] initWithMinute:60];
+        
         _slotNumber = slotNumber;
         _currencyPair = [[CurrencyPair alloc] initWithBaseCurrency:[[Currency alloc] initWithCurrencyType:USD] QuoteCurrency:[[Currency alloc] initWithCurrencyType:JPY]];
         _timeScale = [[MarketTimeScale alloc] initWithMinute:15];
@@ -86,6 +78,7 @@
         [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
         NSDate *date = [formatter dateFromString:@"2010-01-01 00:00:00"];
         _startTime = [[MarketTime alloc] initWithTimestamp:[date timeIntervalSince1970]];
+        _lastLoadedCloseTimestamp = _startTime;
         _spread = [[Spread alloc] initWithPips:1 currencyPair:_currencyPair];
         _accountCurrency = [[Currency alloc] initWithCurrencyType:JPY];
         _startBalance = [[Money alloc] initWithAmount:1000000 currency:_accountCurrency];
