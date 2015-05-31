@@ -18,8 +18,6 @@
 #import "ForexHistory.h"
 #import "ForexHistoryData.h"
 
-static int defaultTime = 500;
-static float  kDefaultUpdateTime = 1.0;
 static NSString * const kKeyPath = @"time";
 
 @interface MarketTimeManager ()
@@ -52,12 +50,8 @@ static NSString * const kKeyPath = @"time";
 
 -(void)loadTime
 {
-    if (saveData.lastLoadedCloseTimestamp == 0) {
-        _time = defaultTime;
-    } else {
-        ForexHistoryData *forexHistoryData = [forexHistory selectRowidLimitCloseTimestamp:saveData.lastLoadedCloseTimestamp];
-        _time = forexHistoryData.close.timestamp.timestampValue;
-    }
+    ForexHistoryData *forexHistoryData = [forexHistory selectRowidLimitCloseTimestamp:saveData.lastLoadedCloseTimestamp];
+    _time = forexHistoryData.ratesID;
 }
 
 -(void)addObserver:(NSObject *)observer

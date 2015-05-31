@@ -23,7 +23,7 @@
 #warning あとでDLogで置き換える。
     NSArray  *paths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES);
     NSString *path = [paths objectAtIndex:0];
-    NSLog(@"path: %@", path);
+    DLog(@"path: %@", path);
     
     return YES;
 }
