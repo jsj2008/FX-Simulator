@@ -35,7 +35,10 @@ static int minTimeScaleMinute = 15;
         NSArray *_array = [minTimeScaleForexHistory selectMaxCloseTimestamp:closeTimestamp minOpenTimestamp:lastData.close.timestamp.timestampValue + 1];
         ForexHistoryData *newLastData = [[ForexHistoryData alloc] initWithForexHistoryDataArray:_array];
         
-        [array removeObjectAtIndex:0];
+        if (0 < [array count]) {
+            [array removeObjectAtIndex:0];
+        }
+        
         [array addObject:newLastData];
     }
     
