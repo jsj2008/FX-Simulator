@@ -20,17 +20,16 @@
 #import "Rates.h"
 
 
-static NSString * const kKeyPath = @"currentTimestamp";
+static NSString * const kKeyPath = @"currentLoadedRowid";
 
 @interface Market ()
-@property (nonatomic, readwrite) int currentTimestamp;
+@property (nonatomic, readwrite) int currentLoadedRowid;
 @end
 
 @implementation Market {
     SaveData *saveData;
     MarketTimeManager *marketTime;
     ForexHistory *forexHistory;
-    int _currentMarketTime;
     BOOL _isStart;
 }
 
@@ -41,7 +40,7 @@ static NSString * const kKeyPath = @"currentTimestamp";
         forexHistory = [ForexHistoryFactory createForexHistoryFromCurrencyPair:saveData.currencyPair timeScale:saveData.timeScale];
         marketTime = [MarketTimeManager new];
         [marketTime addObserver:self];
-        _currentMarketTime = marketTime.time;
+        _currentLoadedRowid = marketTime.currentLoadedRowid;
         _isStart = NO;
         [self setMarketData];
     }
@@ -67,7 +66,7 @@ static NSString * const kKeyPath = @"currentTimestamp";
 -(void)setDefaultData
 {
     /// observerが全て更新され、Marketのデータがセットされる。
-    self.currentTimestamp = marketTime.time;
+    self.currentLoadedRowid = marketTime.currentLoadedRowid;
 }
 
 -(void)start
@@ -118,17 +117,19 @@ static NSString * const kKeyPath = @"currentTimestamp";
 -(void)setMarketData
 {
     int getDataCount = 40; // MarketがあらかじめForexHistoryから取得するデータ数
-    self.currentForexHistoryDataArray = [forexHistory selectMaxRowid:_currentMarketTime limit:getDataCount];
+    self.currentForexHistoryDataArray = [forexHistory selectMaxRowid:_currentLoadedRowid limit:getDataCount];
     self.currentForexHistoryData = [self.currentForexHistoryDataArray lastObject];
 }
 
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
-    if ([keyPath isEqualToString:@"time"] && [object isKindOfClass:[MarketTimeManager class]]) {
+    if ([keyPath isEqualToString:@"currentLoadedRowid"] && [object isKindOfClass:[MarketTimeManager class]]) {
         
-        _currentMarketTime = [[object valueForKey:@"time"] intValue];
+        _currentLoadedRowid = [[object valueForKey:@"currentLoadedRowid"] intValue];
         
         [self setMarketData];
+        
+        self.currentLoadedRowid = _currentLoadedRowid;
         // SimulatorManager
         // observeの呼ばれる順番は不規則
         // Marketの更新"直後"に実行したいものはObserverにしない
@@ -137,8 +138,6 @@ static NSString * const kKeyPath = @"currentTimestamp";
         //self.currentTimestamp = self.currentForexHistoryData.close.timestamp.timestampValue;
         //int t = self.currentForexHistoryData.close.timestamp.timestampValue;
         //self.currentTimestamp = 100;
-        //self.isAutoUpdate = YES;
-        self.currentTimestamp = self.currentForexHistoryData.close.timestamp.timestampValue;
         //self.isAutoUpdate = YES;
     }
 }
