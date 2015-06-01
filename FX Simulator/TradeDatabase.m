@@ -20,7 +20,7 @@ static NSString* const testDbFileName = @"TradeTestDb.sqlite3";
     
     BOOL ret;
     NSFileManager *fm = [NSFileManager defaultManager];
-    NSArray  *paths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES);
+    NSArray  *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     //NSArray  *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
     dbPath = [documentsDirectory stringByAppendingPathComponent:fileName];
