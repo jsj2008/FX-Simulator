@@ -86,7 +86,7 @@
     // Do any additional setup after loading the view.
     
     _ratePanelViewController.delegate = _tradeDataViewController;
-    _tradeDataViewController.delegate = self;
+    _tradeDataViewController.delegate = _simulationManager;
     
     [_simulationManager addObserver:_chartViewController];
     [_simulationManager addObserver:_ratePanelViewController];
@@ -171,12 +171,6 @@
 {
     [tradeDataViewController tradeViewTouchesBegan];
 }*/
-
--(void)autoUpdateSettingSwitchChanged:(BOOL)isSwitchOn
-{
-    _simulationManager.isAutoUpdate = isSwitchOn;
-    //_market.isSaveDataAutoUpdate = isSwitchOn;
-}
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
