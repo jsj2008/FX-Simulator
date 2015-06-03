@@ -9,10 +9,10 @@
 #import "ConfigViewController.h"
 
 #import "Market.h"
-#import "MarketManager.h"
 #import "SaveData.h"
 #import "SaveLoader.h"
 #import "SetAutoUpdateIntervalViewController.h"
+#import "SimulationManager.h"
 
 @interface ConfigViewController ()
 @property (weak, nonatomic) IBOutlet UIButton *setAutoUpdateIntervalButton;
@@ -37,7 +37,7 @@
     //_saveData = [SaveLoader load];
     //self.autoUpdateInterval = _saveData.autoUpdateInterval;
     
-    _market = [MarketManager sharedMarket];
+    _market = [SimulationManager sharedSimulationManager].market;
 }
 
 -(void)viewWillAppear:(BOOL)animated

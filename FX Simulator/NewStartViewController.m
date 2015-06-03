@@ -10,7 +10,6 @@
 
 #import "Currency.h"
 #import "CurrencyPair.h"
-#import "MarketManager.h"
 #import "MarketTime.h"
 #import "Money.h"
 #import "PositionSize.h"
@@ -21,6 +20,7 @@
 #import "SaveData.h"
 #import "SaveLoader.h"
 #import "SetNewStartDataViewController.h"
+#import "SimulationManager.h"
 
 
 @interface NewStartViewController ()
@@ -91,7 +91,8 @@
     
     [SaveLoader reloadSaveData];
     
-    [MarketManager reloadMarket];
+    SimulationManager *simulationManager = [SimulationManager sharedSimulationManager];
+    [simulationManager restartSimulation];
     
     [self.delegate updatedSaveData];
 }
