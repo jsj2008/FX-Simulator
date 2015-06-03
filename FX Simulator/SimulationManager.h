@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "TradeDataViewController.h"
 
 @protocol SimulationManagerDelegate <NSObject>
 /// 新しいシュミレーションが始まったことを伝える。
@@ -20,9 +21,9 @@
  シュミレーションの状態をチェックして、それにもとづいてシュミレーションを管理する。
 */
 
-@interface SimulationManager : NSObject
+@interface SimulationManager : NSObject <TradeDataViewControllerDelegate>
 +(SimulationManager*)sharedSimulationManager;
-/// 口座残高をチェックする。マイナスならシュミレーションを停止する。
+-(void)autoUpdateSettingSwitchChanged:(BOOL)isSwitchOn;
 -(void)updatedBalance:(Balance*)balance;
 -(void)restartSimulation;
 -(void)addObserver:(NSObject*)observer;

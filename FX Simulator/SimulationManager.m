@@ -40,6 +40,11 @@ static SimulationManager *sharedSimulationManager;
     return self;
 }
 
+-(void)autoUpdateSettingSwitchChanged:(BOOL)isSwitchOn
+{
+    self.market.isAutoUpdate = isSwitchOn;
+}
+
 -(void)updatedBalance:(Balance *)balance
 {
     
