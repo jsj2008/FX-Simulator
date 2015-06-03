@@ -73,7 +73,6 @@
 		70D2FB611A9F575900CAB509 /* ExecutionHistoryHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FB5C1A9F575900CAB509 /* ExecutionHistoryHeaderView.m */; };
 		70D2FB621A9F575900CAB509 /* ExecutionHistoryViewLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FB5E1A9F575900CAB509 /* ExecutionHistoryViewLabel.m */; };
 		70D2FB691A9F576500CAB509 /* Market.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FB641A9F576500CAB509 /* Market.m */; };
-		70D2FB6A1A9F576500CAB509 /* MarketManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FB661A9F576500CAB509 /* MarketManager.m */; };
 		70D2FB6B1A9F576500CAB509 /* MarketTimeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FB681A9F576500CAB509 /* MarketTimeManager.m */; };
 		70D2FB701A9F577200CAB509 /* CandlesFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FB6D1A9F577200CAB509 /* CandlesFactory.m */; };
 		70D2FB711A9F577200CAB509 /* Candle.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FB6F1A9F577200CAB509 /* Candle.m */; };
@@ -145,6 +144,8 @@
 		70D2FC4F1A9F591600CAB509 /* Balance.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FC361A9F591600CAB509 /* Balance.m */; };
 		70D2FC501A9F591600CAB509 /* EquityFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FC381A9F591600CAB509 /* EquityFactory.m */; };
 		70D2FC511A9F591600CAB509 /* MarketTime.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FC3A1A9F591600CAB509 /* MarketTime.m */; };
+		70EACE621B1ED17700A2E532 /* SimulationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 70EACE611B1ED17700A2E532 /* SimulationManager.m */; };
+		70EACE631B1EE19B00A2E532 /* MarketManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FB661A9F576500CAB509 /* MarketManager.m */; };
 		70ED621E1AFCA11F0008F939 /* SetSpreadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70ED621D1AFCA11F0008F939 /* SetSpreadViewController.m */; };
 		70ED62211AFCA1400008F939 /* SetAccountCurrencyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70ED62201AFCA1400008F939 /* SetAccountCurrencyViewController.m */; };
 		70ED62241AFCA17E0008F939 /* SetStartBalanceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70ED62231AFCA17E0008F939 /* SetStartBalanceViewController.m */; };
@@ -418,6 +419,8 @@
 		70D2FC381A9F591600CAB509 /* EquityFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EquityFactory.m; sourceTree = "<group>"; };
 		70D2FC391A9F591600CAB509 /* MarketTime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarketTime.h; sourceTree = "<group>"; };
 		70D2FC3A1A9F591600CAB509 /* MarketTime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarketTime.m; sourceTree = "<group>"; };
+		70EACE601B1ED17700A2E532 /* SimulationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimulationManager.h; sourceTree = "<group>"; };
+		70EACE611B1ED17700A2E532 /* SimulationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimulationManager.m; sourceTree = "<group>"; };
 		70ED621C1AFCA11F0008F939 /* SetSpreadViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetSpreadViewController.h; sourceTree = "<group>"; };
 		70ED621D1AFCA11F0008F939 /* SetSpreadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetSpreadViewController.m; sourceTree = "<group>"; };
 		70ED621F1AFCA1400008F939 /* SetAccountCurrencyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetAccountCurrencyViewController.h; sourceTree = "<group>"; };
@@ -576,6 +579,8 @@
 				70CFEB381B15B66300837727 /* TradeTestDbDataSource.m */,
 				70CFEB3F1B19F92800837727 /* FXSTest.h */,
 				70CFEB401B19F92800837727 /* FXSTest.m */,
+				70EACE601B1ED17700A2E532 /* SimulationManager.h */,
+				70EACE611B1ED17700A2E532 /* SimulationManager.m */,
 			);
 			path = "FX Simulator";
 			sourceTree = "<group>";
@@ -1046,6 +1051,7 @@
 				7076F5A71AECCBBB004CC6BA /* NewStartViewController.m in Sources */,
 				70D2FC511A9F591600CAB509 /* MarketTime.m in Sources */,
 				70D2FBFF1A9F57DC00CAB509 /* NewExecutionOrder.m in Sources */,
+				70EACE631B1EE19B00A2E532 /* MarketManager.m in Sources */,
 				70D2FB841A9F579000CAB509 /* ExecutionHistory.m in Sources */,
 				705DCE4C1AE7CE9800BCF710 /* RatePanelButton.m in Sources */,
 				70D2FB501A9F574000CAB509 /* ChartView.m in Sources */,
@@ -1083,9 +1089,9 @@
 				7076F5AB1AECCEB3004CC6BA /* MainViewController.m in Sources */,
 				70D2FC491A9F591600CAB509 /* ProfitAndLossCalculator.m in Sources */,
 				70D2FB4A1A9F574000CAB509 /* RatePanelViewController.m in Sources */,
+				70EACE621B1ED17700A2E532 /* SimulationManager.m in Sources */,
 				70D2FBC21A9F57BD00CAB509 /* OpenPosition.m in Sources */,
 				70D2FC451A9F591600CAB509 /* Rate.m in Sources */,
-				70D2FB6A1A9F576500CAB509 /* MarketManager.m in Sources */,
 				70D2FAF31A9F56AE00CAB509 /* FMDatabasePool.m in Sources */,
 				70D2FC3F1A9F591600CAB509 /* RatePanelViewData.m in Sources */,
 				70D2FBC11A9F57BD00CAB509 /* OpenPositionRecord.m in Sources */,

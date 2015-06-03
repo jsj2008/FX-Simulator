@@ -10,10 +10,10 @@
 
 #import <QuartzCore/QuartzCore.h>
 #import "ChartViewController.h"
-#import "MarketManager.h"
 #import "Market.h"
 #import "ChartViewController.h"
 #import "RatePanelViewController.h"
+#import "SimulationManager.h"
 #import "TradeDataViewController.h"
 
 @interface TradeViewController ()
@@ -21,11 +21,11 @@
 @end
 
 @implementation TradeViewController {
-    Market *_market;
+    //Market *_market;
     ChartViewController *_chartViewController;
     RatePanelViewController *_ratePanelViewController;
     TradeDataViewController *_tradeDataViewController;
-    
+    SimulationManager *_simulationManager;
     UIView *_adView;
 }
 
@@ -41,7 +41,7 @@
 -(instancetype)initWithCoder:(NSCoder *)aDecoder
 {
     if (self = [super initWithCoder:aDecoder]) {
-        _market = [MarketManager sharedMarket];
+        _simulationManager = [SimulationManager sharedSimulationManager];
     }
     
     return self;
@@ -88,9 +88,9 @@
     _ratePanelViewController.delegate = _tradeDataViewController;
     _tradeDataViewController.delegate = self;
     
-    [_market addObserver:_chartViewController];
-    [_market addObserver:_ratePanelViewController];
-    [_market addObserver:_tradeDataViewController];
+    [_simulationManager addObserver:_chartViewController];
+    [_simulationManager addObserver:_ratePanelViewController];
+    [_simulationManager addObserver:_tradeDataViewController];
     
     //self.childViewControllers[0];
     
@@ -108,7 +108,7 @@
     //[market addObserver:tradeDataViewController];
     //[_market setDefaultData];
     
-    [_market start];
+    [_simulationManager start];
 }
 
 -(void)viewDidLayoutSubviews
@@ -151,7 +151,7 @@
 {
     [super viewWillAppear:animated];
     
-    [_market resume];
+    [_simulationManager resume];
     //_market.isAutoUpdate = _market.isSaveDataAutoUpdate;
     //[market setPaused:NO];
     
@@ -161,7 +161,7 @@
 {
     [super viewWillDisappear:animated];
     
-    [_market pause];
+    [_simulationManager pause];
     //_market.isAutoUpdate = NO;
     //[market setPaused:YES];
     
@@ -174,7 +174,7 @@
 
 -(void)autoUpdateSettingSwitchChanged:(BOOL)isSwitchOn
 {
-    _market.isAutoUpdate = isSwitchOn;
+    _simulationManager.isAutoUpdate = isSwitchOn;
     //_market.isSaveDataAutoUpdate = isSwitchOn;
 }
 
@@ -196,8 +196,8 @@
 
 -(void)chartViewTouched
 {
-    if (!_market.isAutoUpdate) {
-        [_market add];
+    if (!_simulationManager.isAutoUpdate) {
+        [_simulationManager add];
     }
 }
 

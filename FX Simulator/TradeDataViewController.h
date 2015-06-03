@@ -13,6 +13,12 @@
 -(void)autoUpdateSettingSwitchChanged:(BOOL)isSwitchOn;
 @end
 
+@class Balance;
+
+@protocol TradeDataViewControllerTradeDataDelegate <NSObject>
+-(void)updatedBalance:(Balance*)balance;
+@end
+
 @interface TradeDataViewController : UIViewController <RatePanelViewControllerDelegate, UITextFieldDelegate>
 -(void)didOrder;
 -(void)tradeViewTouchesBegan;

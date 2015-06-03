@@ -11,6 +11,6 @@
 @class Market;
 
 @interface MarketManager : NSObject
-+(Market*)sharedMarket;
-+(void)reloadMarket;
+//+(Market*)sharedMarket;
+//+(void)reloadMarket;
 @end

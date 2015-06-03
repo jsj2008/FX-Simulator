@@ -10,7 +10,6 @@
 
 #import "SaveLoader.h"
 #import "SaveData.h"
-#import "MarketManager.h"
 #import "Market.h"
 #import "ForexTimeScaleDataArrayFactory.h"
 #import "ForexHistoryData.h"
@@ -18,6 +17,7 @@
 #import "TimeScaleUtils.h"
 #import "MarketTimeScale.h"
 #import "Rate.h"
+#import "SimulationManager.h"
 #import "MarketTime.h"
 
 @implementation SubChartViewData {
@@ -30,7 +30,7 @@
 {
     if (self = [super init]) {
         saveData = [SaveLoader load];
-        market = [MarketManager sharedMarket];
+        market = [SimulationManager sharedSimulationManager].market;
         timeScaleList = [TimeScaleUtils selectTimeScaleListExecept:saveData.timeScale fromTimeScaleList:[Setting timeScaleList]];
     }
     

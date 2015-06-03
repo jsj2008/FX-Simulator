@@ -19,7 +19,6 @@
 #import "Currency.h"
 #import "ForexHistoryData.h"
 #import "Market.h"
-#import "MarketManager.h"
 #import "OpenPosition.h"
 #import "OpenPositionFactory.h"
 #import "OpenPositionRecord.h"
@@ -27,6 +26,7 @@
 #import "OpenPositionTableViewCell.h"
 #import "SaveData.h"
 #import "SaveLoader.h"
+#import "SimulationManager.h"
 
 static const unsigned int displayMaxOpenPositionDataRecords = 100;
 
@@ -64,7 +64,7 @@ static const unsigned int displayMaxOpenPositionDataRecords = 100;
     if (self = [super initWithCoder:aDecoder]) {
         //SaveData *saveData = [SaveLoader load];
         //_accountCurrency = saveData.accountCurrency;
-        _market = [MarketManager sharedMarket];
+        _market = [SimulationManager sharedSimulationManager].market;
         _openPosition = [OpenPositionFactory createOpenPosition];
     }
     
