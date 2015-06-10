@@ -9,13 +9,12 @@
 #import <UIKit/UIKit.h>
 #import "RatePanelViewController.h"
 
-@protocol TradeDataViewControllerDelegate <NSObject>
--(void)autoUpdateSettingSwitchChanged:(BOOL)isSwitchOn;
-@end
-
 @class Balance;
 
-@protocol TradeDataViewControllerTradeDataDelegate <NSObject>
+@protocol TradeDataViewControllerDelegate <NSObject>
+/// 自動更新を設定するボタンが変更されたとき。
+-(void)autoUpdateSettingSwitchChanged:(BOOL)isSwitchOn;
+/// 口座残高が更新されたとき。
 -(void)updatedBalance:(Balance*)balance;
 @end
 

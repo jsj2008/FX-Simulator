@@ -19,11 +19,13 @@
 
 /**
  シュミレーションの状態をチェックして、それにもとづいてシュミレーションを管理する。
+ Marketオブジェクトを持ち、Marketの時間が進むと、それに応じて、オブザーバにMarketの変更を伝える。
 */
 
 @interface SimulationManager : NSObject <TradeDataViewControllerDelegate>
 +(SimulationManager*)sharedSimulationManager;
 -(void)autoUpdateSettingSwitchChanged:(BOOL)isSwitchOn;
+/// 口座残高が変更されたとき、０以下かどうかチェックする。
 -(void)updatedBalance:(Balance*)balance;
 -(void)restartSimulation;
 -(void)addObserver:(NSObject*)observer;
