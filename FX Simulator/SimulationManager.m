@@ -54,7 +54,7 @@ static SimulationManager *sharedSimulationManager;
     if ([equity isShortage]) {
         [self pause];
         [_simulationState shortage];
-        [_simulationState showAlert];
+        [_simulationState showAlert:self.alertTargetController];
     }
 }
 
@@ -91,12 +91,21 @@ static SimulationManager *sharedSimulationManager;
 
 -(void)add
 {
-    [self.market add];
+    if (![_simulationState isStop]) {
+        [self.market add];
+    } else {
+        [_simulationState showAlert:self.alertTargetController];
+    }
 }
 
--(void)stop
+-(BOOL)isStop
 {
-    [self pause];
+    return [_simulationState isStop];
+}
+
+-(void)showAlert:(UIViewController *)controller
+{
+    [_simulationState showAlert:controller];
 }
 
 -(void)setIsAutoUpdate:(BOOL)isAutoUpdate
@@ -107,11 +116,6 @@ static SimulationManager *sharedSimulationManager;
 -(BOOL)isAutoUpdate
 {
     return self.market.isAutoUpdate;
-}
-
--(void)setAlertTargetController:(TradeViewController *)alertTargetController
-{
-    _simulationState.alertTarget = alertTargetController;
 }
 
 @end

@@ -26,11 +26,7 @@
  資産が0以下なのか、チャートが端まで読み込まれたのかなど、その状態に応じて、異なるアラートを出す。
  シュミレーションがストップしていないときは、アラートは表示されない。
 */
--(void)showAlert;
+-(void)showAlert:(UIViewController*)controller;
 -(void)reset;
-/**
- アラートを表示するUIViewController
-*/
-@property (nonatomic, weak) UIViewController *alertTarget;
 @property (nonatomic, readonly) BOOL isStop;
 @end

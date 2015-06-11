@@ -38,7 +38,7 @@ static NSString* const chartEndAlertTitle = @"チャートが端まで読み込�
     _isForexDataEnd = YES;
 }
 
-- (void)showAlert
+- (void)showAlert:(UIViewController *)controller
 {
     NSString *title = @"";
     
@@ -58,7 +58,7 @@ static NSString* const chartEndAlertTitle = @"チャートが端まで読み込�
         [alert addAction:[UIAlertAction actionWithTitle:@"OK"
                                                   style:UIAlertActionStyleDefault
                                                 handler:nil]];
-        [self.alertTarget presentViewController:alert animated:YES completion:nil];
+        [controller presentViewController:alert animated:YES completion:nil];
     }else{
         // UIAlertViewを使ってアラートを表示
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title
