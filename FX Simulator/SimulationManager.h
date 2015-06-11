@@ -16,6 +16,7 @@
 
 @class Balance;
 @class Market;
+@class TradeViewController;
 
 /**
  シュミレーションの状態をチェックして、それにもとづいてシュミレーションを管理する。
@@ -25,13 +26,12 @@
 @interface SimulationManager : NSObject <TradeDataViewControllerDelegate>
 +(SimulationManager*)sharedSimulationManager;
 -(void)autoUpdateSettingSwitchChanged:(BOOL)isSwitchOn;
-/// 口座残高が変更されたとき、０以下かどうかチェックする。
--(void)updatedBalance:(Balance*)balance;
+-(void)updatedEquity:(Equity *)equity;
 -(void)restartSimulation;
 -(void)addObserver:(NSObject*)observer;
 /**
  Startした瞬間、時間が進み、Observerのメソッドが呼ばれ、それぞれのObserverに値がセットされる。
- */
+*/
 -(void)start;
 /**
  ただの一時停止。セーブデータの自動更新設定は変更されない。
@@ -39,7 +39,7 @@
 -(void)pause;
 /**
  セーブデータの自動更新設定(AutoUpdate)をそのまま反映するだけ。
- */
+*/
 -(void)resume;
 /// 時間を進める。
 -(void)add;
@@ -47,7 +47,11 @@
  Onなら自動更新になり、セーブデータの自動更新設定もOnに変更される。
  Offでも同じ。
  */
-@property (nonatomic, assign) id<SimulationManagerDelegate> delegate;
+@property (nonatomic, weak) id<SimulationManagerDelegate> delegate;
+/**
+ アラート(チャートが端まで読み込まれたとき、資産が０以下になったときなど)を表示するUIViewController
+*/
+@property (nonatomic, weak) TradeViewController *alertTargetController;
 @property (nonatomic) BOOL isAutoUpdate;
 @property (nonatomic, readonly) Market *market;
 @end

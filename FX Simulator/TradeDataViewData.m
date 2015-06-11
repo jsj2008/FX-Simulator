@@ -21,11 +21,13 @@
 #import "PositionSize.h"
 #import "Lot.h"
 
+@interface TradeDataViewData ()
+@property (nonatomic, readwrite) Equity *equity;
+@end
+
 @implementation TradeDataViewData {
     SaveData *saveData;
     OpenPosition *openPosition;
-    Equity *_equity;
-    //int positionSizeOfLot;
     ForexHistoryData *_forexHistoryData;
     Money *_profitAndLoss;
 }
@@ -45,10 +47,10 @@
 -(void)didOrder
 {
     [openPosition update];
-    [_equity updateBalance];
+    [self.equity updateBalance];
     
     _profitAndLoss = [openPosition profitAndLossForRate:_forexHistoryData.close];
-    [_equity setCurrentProfitAndLoss:_profitAndLoss];
+    [self.equity setCurrentProfitAndLoss:_profitAndLoss];
 }
 
 -(void)updateForexHistoryData:(ForexHistoryData *)forexHistoryData
@@ -56,7 +58,7 @@
     _forexHistoryData = forexHistoryData;
     
     _profitAndLoss = [openPosition profitAndLossForRate:_forexHistoryData.close];
-    [_equity setCurrentProfitAndLoss:_profitAndLoss];
+    [self.equity setCurrentProfitAndLoss:_profitAndLoss];
 }
 
 -(NSString*)displayOrderType
@@ -100,7 +102,7 @@
     
     //[_equity setCurrentProfitAndLoss:profitAndLoss];
     
-    return _equity.equity.toDisplayString;
+    return self.equity.equity.toDisplayString;
 }
 
 -(UIColor*)displayEquityColor
@@ -109,7 +111,7 @@
     
     //[_equity setCurrentProfitAndLoss:profitAndLoss];
     
-    return _equity.equity.toDisplayColor;
+    return self.equity.equity.toDisplayColor;
 }
  
 -(NSString*)displayOpenPositionMarketValue
