@@ -88,6 +88,8 @@
     _ratePanelViewController.delegate = _tradeDataViewController;
     _tradeDataViewController.delegate = _simulationManager;
     
+    _simulationManager.alertTargetController = self;
+    
     [_simulationManager addObserver:_chartViewController];
     [_simulationManager addObserver:_ratePanelViewController];
     [_simulationManager addObserver:_tradeDataViewController];

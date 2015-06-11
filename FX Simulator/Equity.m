@@ -38,6 +38,15 @@
     _profitAndLoss = profitAndLoss;
 }
 
+-(BOOL)isShortage
+{
+    if (self.equity.amount < 0) {
+        return YES;
+    } else {
+        return NO;
+    }
+}
+
 -(Money*)equity
 {
     return [_balance.balance addMoney:_profitAndLoss];
