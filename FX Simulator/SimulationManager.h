@@ -27,6 +27,7 @@
 +(SimulationManager*)sharedSimulationManager;
 -(void)autoUpdateSettingSwitchChanged:(BOOL)isSwitchOn;
 -(void)updatedEquity:(Equity *)equity;
+-(void)didLoadForexDataEnd;
 -(void)restartSimulation;
 -(void)addObserver:(NSObject*)observer;
 /**
