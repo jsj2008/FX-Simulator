@@ -10,6 +10,7 @@
 
 #import "Equity.h"
 #import "Market.h"
+#import "SimulationState.h"
 #import "TradeViewController.h"
 
 @interface SimulationManager ()
@@ -17,8 +18,7 @@
 @end
 
 @implementation SimulationManager {
-    /// チャートが端まで読み込まれた、口座残高が足りなくなったなど、これ以上シュミレーションができないときに使う。
-    BOOL _isSimulationStop;
+    SimulationState *_simulationState;
 }
 
 static SimulationManager *sharedSimulationManager;
@@ -38,7 +38,7 @@ static SimulationManager *sharedSimulationManager;
 {
     if (self = [super init]) {
         _market = [Market new];
-        _isSimulationStop = NO;
+        _simulationState = [SimulationState new];
     }
     
     return self;
@@ -52,15 +52,21 @@ static SimulationManager *sharedSimulationManager;
 -(void)updatedEquity:(Equity *)equity
 {
     if ([equity isShortage]) {
-        [self stop];
-        [self showAlertTitle:@"資産が足りません。" Message:nil];
+        [self pause];
+        [_simulationState shortage];
+        [_simulationState showAlert];
     }
+}
+
+-(void)didLoadForexDataEnd
+{
+    
 }
 
 -(void)restartSimulation
 {
     self.market = [Market new];
-    _isSimulationStop = NO;
+    [_simulationState reset];
 }
 
 -(void)addObserver:(NSObject *)observer
@@ -91,7 +97,6 @@ static SimulationManager *sharedSimulationManager;
 -(void)stop
 {
     [self pause];
-    _isSimulationStop = YES;
 }
 
 -(void)setIsAutoUpdate:(BOOL)isAutoUpdate
@@ -104,28 +109,9 @@ static SimulationManager *sharedSimulationManager;
     return self.market.isAutoUpdate;
 }
 
-- (void)showAlertTitle:(NSString *)title Message:(NSString *)message
+-(void)setAlertTargetController:(TradeViewController *)alertTargetController
 {
-    Class class = NSClassFromString(@"UIAlertController");
-    if(class){
-        // UIAlertControllerを使ってアラートを表示
-        UIAlertController *alert = nil;
-        alert = [UIAlertController alertControllerWithTitle:title
-                                                    message:message
-                                             preferredStyle:UIAlertControllerStyleAlert];
-        [alert addAction:[UIAlertAction actionWithTitle:@"OK"
-                                                  style:UIAlertActionStyleDefault
-                                                handler:nil]];
-        [self.alertTargetController presentViewController:alert animated:YES completion:nil];
-    }else{
-        // UIAlertViewを使ってアラートを表示
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title
-                                                        message:message
-                                                       delegate:nil
-                                              cancelButtonTitle:nil
-                                              otherButtonTitles:@"OK", nil];
-        [alert show];
-    }
+    _simulationState.alertTarget = alertTargetController;
 }
 
 @end
