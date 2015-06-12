@@ -8,7 +8,7 @@
 
 #import "SimulationState.h"
 
-#import <UIKit/UIKit.h>
+#import "FXSAlert.h"
 
 static NSString* const shortageAlertTitle = @"資産が足りません。";
 static NSString* const chartEndAlertTitle = @"チャートが端まで読み込まれました。";
@@ -40,7 +40,7 @@ static NSString* const chartEndAlertTitle = @"チャートが端まで読み込�
 
 - (void)showAlert:(UIViewController *)controller
 {
-    NSString *title = @"";
+    NSString *title;
     
     if (_isShortage) {
         title = shortageAlertTitle;
@@ -48,26 +48,7 @@ static NSString* const chartEndAlertTitle = @"チャートが端まで読み込�
         title = chartEndAlertTitle;
     }
     
-    Class class = NSClassFromString(@"UIAlertController");
-    if(class){
-        // UIAlertControllerを使ってアラートを表示
-        UIAlertController *alert = nil;
-        alert = [UIAlertController alertControllerWithTitle:title
-                                                    message:nil
-                                             preferredStyle:UIAlertControllerStyleAlert];
-        [alert addAction:[UIAlertAction actionWithTitle:@"OK"
-                                                  style:UIAlertActionStyleDefault
-                                                handler:nil]];
-        [controller presentViewController:alert animated:YES completion:nil];
-    }else{
-        // UIAlertViewを使ってアラートを表示
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title
-                                                        message:nil
-                                                       delegate:nil
-                                              cancelButtonTitle:nil
-                                              otherButtonTitles:@"OK", nil];
-        [alert show];
-    }
+    [FXSAlert showAlert:controller title:title message:nil];
 }
 
 -(void)reset
