@@ -8,6 +8,8 @@
 
 #import "UsersOrder.h"
 
+#import "OpenPosition.h"
+#import "OpenPositionFactory.h"
 #import "SaveLoader.h"
 #import "SaveData.h"
 #import "ForexHistoryData.h"
@@ -20,6 +22,17 @@
 +(UsersOrder*)createFromCurrencyPair:(CurrencyPair*)currencyPair orderType:(OrderType*)orderType positionSize:(PositionSize*)positionSize rate:(Rate*)rate orderSpread:(Spread*)spread
 {
     return [[UsersOrder alloc] initWithCurrencyPair:currencyPair orderType:orderType orderRate:rate positionSize:positionSize orderSpread:spread];
+}
+
+-(BOOL)includeCloseOrder
+{
+    OpenPosition *openPosition = [OpenPositionFactory createOpenPosition];
+    
+    if ([self.orderType isEqualOrderType:openPosition.orderType]) {
+        return NO;
+    } else {
+        return YES;
+    }
 }
 
 /*+(UsersOrder*)createFromOrderType:(OrderType *)orderType positionSize:(PositionSize *)positionSize rate:(Rate*)rate

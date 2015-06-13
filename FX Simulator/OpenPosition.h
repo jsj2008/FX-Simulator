@@ -29,6 +29,10 @@
 -(void)update;
 -(Money*)profitAndLossForRate:(Rate*)rate;
 -(Money*)marketValueForRate:(Rate*)rate;
+/**
+ レコード数が最大かどうか。
+*/
+-(BOOL)isMax;
 @property (nonatomic, readonly) Currency *currency;
 @property (nonatomic, readonly) OrderType *orderType;
 @property (nonatomic, readonly) PositionSize *totalPositionSize;

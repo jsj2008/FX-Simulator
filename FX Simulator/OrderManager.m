@@ -11,12 +11,14 @@
 #import "UsersOrder.h"
 #import "OrderHistoryFactory.h"
 #import "OrderHistory.h"
+#import "OrderManagerState.h"
 #import "ExecutionOrderMaterial.h"
 #import "ExecutionOrdersFactory.h"
 #import "ExecutionOrdersManager.h"
 
 @implementation OrderManager {
     OrderHistory *_orderHistory;
+    OrderManagerState *_orderManagerState;
     ExecutionOrdersFactory *_executionOrdersFactory;
     ExecutionOrdersManager *_executionOrdersManager;
 }
@@ -36,6 +38,7 @@
 {
     if (self = [super init]) {
         _orderHistory = orderHistory;
+        _orderManagerState = [OrderManagerState new];
         _executionOrdersFactory = executionOrdersFactory;
         _executionOrdersManager = executionOrdersManager;
     }
@@ -43,7 +46,7 @@
     return self;
 }
 
--(BOOL)execute:(UsersOrder*)order error:(NSError **)anError
+-(BOOL)execute:(UsersOrder*)order
 {
     //if (!order.isValid) {
         /*NSDictionary *errorDic = @{
@@ -54,6 +57,14 @@
         
         //return false;
     //}
+    
+    [_orderManagerState updateState:order];
+    
+    if (![_orderManagerState isExecutable]) {
+        [_orderManagerState showAlert:self.alertTarget];
+        return NO;
+    }
+    
     
     int orderNumber = [_orderHistory saveUsersOrder:order];
     

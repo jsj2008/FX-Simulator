@@ -53,6 +53,8 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    orderManager.alertTarget = self;
 }
 
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
@@ -75,10 +77,12 @@
     
     UsersOrder *usersOrder = [UsersOrder createFromCurrencyPair:ratePanelViewData.currencyPair  orderType:orderType  positionSize:ratePanelViewData.currentPositionSize rate:[ratePanelViewData getCurrentRateForOrderType:orderType] orderSpread:ratePanelViewData.spread];
     
-    [orderManager execute:usersOrder error:&anError];
+    BOOL result = [orderManager execute:usersOrder];
     
-    if ([_delegate respondsToSelector:@selector(didOrder)]) {
-        [_delegate didOrder];
+    if (result) {
+        if ([_delegate respondsToSelector:@selector(didOrder)]) {
+            [_delegate didOrder];
+        }
     }
 }
 
