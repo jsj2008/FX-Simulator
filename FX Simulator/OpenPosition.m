@@ -25,6 +25,8 @@
 #import "ExecutionHistory.h"
 #import "CurrencyConverter.h"
 
+static const int maxRecords = 3;
+
 @implementation OpenPosition {
     ExecutionHistory *_executionHistory;
     FMDatabase *tradeDatabase;
@@ -148,6 +150,37 @@
 -(Money*)marketValueForRate:(Rate*)rate
 {
     return [rate multiplyPositionSize:self.totalPositionSize];
+}
+
+-(BOOL)isMax
+{
+    if (maxRecords < [self countAllRecords]) {
+        return YES;
+    } else {
+        return NO;
+    }
+}
+
+/**
+ レコード数をカウント
+*/
+-(int)countAllRecords
+{
+    NSString *sql = [NSString stringWithFormat:@"select count(*) as count from %@;", _tableName];
+    
+    [tradeDatabase open];
+    
+    FMResultSet *rs = [tradeDatabase executeQuery:sql];
+    
+    int count = 0;
+    
+    while ([rs next]) {
+        count  = [rs intForColumn:@"count"];
+    }
+    
+    [tradeDatabase close];
+    
+    return count;
 }
 
 -(OrderType*)orderType

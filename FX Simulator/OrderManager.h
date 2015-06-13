@@ -12,6 +12,7 @@
 @class OrderHistory;
 @class ExecutionOrdersFactory;
 @class ExecutionOrdersManager;
+@class UIViewController;
 
 /**
  ユーザーからのOrder(注文)を実行するクラス。
@@ -20,5 +21,6 @@
 
 @interface OrderManager : NSObject
 -(id)initWithOrderHistory:(OrderHistory*)orderHistory executionOrdersFactory:(ExecutionOrdersFactory*)executionOrdersFactory executionOrdersManager:(ExecutionOrdersManager*)executionOrdersManager;
--(BOOL)execute:(UsersOrder*)order error:(NSError**)anError;
+-(BOOL)execute:(UsersOrder*)order;
+@property (nonatomic, weak) UIViewController *alertTarget;
 @end
