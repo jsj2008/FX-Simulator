@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		700360151AA8C0CE00A57959 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 700360141AA8C0CE00A57959 /* iAd.framework */; };
 		700B95851B0C3C97003F160B /* InputTradeLotViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 700B95841B0C3C97003F160B /* InputTradeLotViewController.m */; };
+		7041B7111B2EEDAD00DD64FE /* Account.m in Sources */ = {isa = PBXBuildFile; fileRef = 7041B7101B2EEDAD00DD64FE /* Account.m */; };
 		705C2E101ADE4C270089D510 /* Money+ConvertToAccountCurrency.m in Sources */ = {isa = PBXBuildFile; fileRef = 705C2E0F1ADE4C270089D510 /* Money+ConvertToAccountCurrency.m */; };
 		705DCE4A1AE6893E00BCF710 /* tradedb.sqlite3 in Resources */ = {isa = PBXBuildFile; fileRef = 705DCE491AE6893E00BCF710 /* tradedb.sqlite3 */; };
 		705DCE4B1AE7C84300BCF710 /* Rates.m in Sources */ = {isa = PBXBuildFile; fileRef = 70B5AAEE1AC7FF44001F8823 /* Rates.m */; };
@@ -171,6 +172,8 @@
 		700360141AA8C0CE00A57959 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 		700B95831B0C3C97003F160B /* InputTradeLotViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputTradeLotViewController.h; sourceTree = "<group>"; };
 		700B95841B0C3C97003F160B /* InputTradeLotViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InputTradeLotViewController.m; sourceTree = "<group>"; };
+		7041B70F1B2EEDAD00DD64FE /* Account.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Account.h; sourceTree = "<group>"; };
+		7041B7101B2EEDAD00DD64FE /* Account.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Account.m; sourceTree = "<group>"; };
 		705C2E0E1ADE4C270089D510 /* Money+ConvertToAccountCurrency.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Money+ConvertToAccountCurrency.h"; sourceTree = "<group>"; };
 		705C2E0F1ADE4C270089D510 /* Money+ConvertToAccountCurrency.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Money+ConvertToAccountCurrency.m"; sourceTree = "<group>"; };
 		705DCE491AE6893E00BCF710 /* tradedb.sqlite3 */ = {isa = PBXFileReference; lastKnownFileType = file; path = tradedb.sqlite3; sourceTree = "<group>"; };
@@ -596,6 +599,8 @@
 				70EACE681B2AACBE00A2E532 /* FXSAlert.m */,
 				70EACE6A1B2B1BE900A2E532 /* OrderManagerState.h */,
 				70EACE6B1B2B1BE900A2E532 /* OrderManagerState.m */,
+				7041B70F1B2EEDAD00DD64FE /* Account.h */,
+				7041B7101B2EEDAD00DD64FE /* Account.m */,
 			);
 			path = "FX Simulator";
 			sourceTree = "<group>";
@@ -1074,6 +1079,7 @@
 				70D2FC411A9F591600CAB509 /* TimeScaleUtils.m in Sources */,
 				7079FEEB1AF9E688004D3CEA /* NSDate+FXSDateData.m in Sources */,
 				70D2FBFA1A9F57DC00CAB509 /* OnlyCloseExecutionOrdersCreateMode.m in Sources */,
+				7041B7111B2EEDAD00DD64FE /* Account.m in Sources */,
 				70D2FB711A9F577200CAB509 /* Candle.m in Sources */,
 				70D2FBD61A9F57CB00CAB509 /* SaveData.m in Sources */,
 				70D2FAD61A9F559200CAB509 /* OpenPositionTableViewController.m in Sources */,

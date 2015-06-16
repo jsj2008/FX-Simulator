@@ -214,4 +214,23 @@ static const int cacheSize = 300;
     return [[MarketTime alloc] initWithDate:date];
 }
 
+-(ForexHistoryData*)lastRecord
+{
+    ForexHistoryData *data;
+    
+    NSString *sql = [NSString stringWithFormat:@"select rowid,* from %@ order by rowid desc limit 1;", _forexHistoryTableName];
+    
+    [forexDatabase open];
+    
+    FMResultSet *results = [forexDatabase executeQuery:sql];
+    
+    while ([results next]) {
+        data = [[ForexHistoryData alloc] initWithFMResultSet:results currencyPair:_currencyPair];
+    }
+    
+    [forexDatabase close];
+    
+    return data;
+}
+
 @end

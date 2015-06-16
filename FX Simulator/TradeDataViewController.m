@@ -149,9 +149,9 @@
         self.equityLabel.text = self.tradeDataViewData.displayEquity;
         self.equityLabel.textColor = self.tradeDataViewData.displayEquityColor;
         
-        if ([self.delegate respondsToSelector:@selector(updatedEquity:)]) {
+        /*if ([self.delegate respondsToSelector:@selector(updatedEquity:)]) {
             [self.delegate updatedEquity:self.tradeDataViewData.equity];
-        }
+        }*/
     }
 }
 

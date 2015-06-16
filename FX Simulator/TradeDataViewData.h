@@ -28,6 +28,6 @@
 @property (nonatomic, readonly) NSString *displayOpenPositionMarketValue;
 //@property (nonatomic, readonly) NSString *defaultTradeLotInputFieldValue;
 @property (nonatomic, readwrite) Lot *tradeLot;
-@property (nonatomic, readonly) Equity *equity;
+//@property (nonatomic, readonly) Equity *equity;
 @property (nonatomic, readwrite) BOOL isAutoUpdate;
 @end

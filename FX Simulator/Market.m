@@ -30,7 +30,21 @@ static NSString * const kKeyPath = @"currentLoadedRowid";
     SaveData *saveData;
     MarketTimeManager *marketTime;
     ForexHistory *forexHistory;
+    ForexHistoryData *_lastData;
     BOOL _isStart;
+}
+
+static Market *sharedMarket;
+
++(Market*)sharedMarket
+{
+    @synchronized(self) {
+        if (sharedMarket == nil) {
+            sharedMarket = [Market new];
+        }
+    }
+    
+    return sharedMarket;
 }
 
 -(id)init
@@ -38,6 +52,7 @@ static NSString * const kKeyPath = @"currentLoadedRowid";
     if (self = [super init]) {
         saveData = [SaveLoader load];
         forexHistory = [ForexHistoryFactory createForexHistoryFromCurrencyPair:saveData.currencyPair timeScale:saveData.timeScale];
+        _lastData = [forexHistory lastRecord];
         marketTime = [MarketTimeManager new];
         [marketTime addObserver:self];
         _currentLoadedRowid = marketTime.currentLoadedRowid;
@@ -145,6 +160,15 @@ static NSString * const kKeyPath = @"currentLoadedRowid";
 -(void)setAutoUpdateInterval:(NSNumber *)autoUpdateInterval
 {
     marketTime.autoUpdateInterval = autoUpdateInterval;
+}
+
+-(BOOL)didLoadLastData
+{
+    if (_lastData.ratesID == self.currentForexHistoryData.ratesID) {
+        return YES;
+    } else {
+        return NO;
+    }
 }
 
 @end

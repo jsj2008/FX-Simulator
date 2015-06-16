@@ -26,8 +26,8 @@
 @interface SimulationManager : NSObject <TradeDataViewControllerDelegate>
 +(SimulationManager*)sharedSimulationManager;
 -(void)autoUpdateSettingSwitchChanged:(BOOL)isSwitchOn;
--(void)updatedEquity:(Equity *)equity;
--(void)didLoadForexDataEnd;
+//-(void)updatedEquity:(Equity *)equity;
+//-(void)didLoadForexDataEnd;
 -(void)restartSimulation;
 -(void)addObserver:(NSObject*)observer;
 /**
@@ -42,7 +42,7 @@
  セーブデータの自動更新設定(AutoUpdate)をそのまま反映するだけ。
 */
 -(void)resume;
-/// 時間を進める。
+/// 手動で時間を進める。
 -(void)add;
 -(BOOL)isStop;
 -(void)showAlert:(UIViewController*)controller;

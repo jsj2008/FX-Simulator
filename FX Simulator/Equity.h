@@ -17,7 +17,7 @@
 
 @interface Equity : NSObject
 -(id)initWithBalance:(Balance*)balance;
--(void)updateBalance;
+-(void)update;
 -(void)setCurrentProfitAndLoss:(Money*)profitAndLoss;
 /**
  資産が不足しているかどうか。(0以下かどうか)

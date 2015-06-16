@@ -12,6 +12,7 @@
 @class Rate;
 
 @interface Market : NSObject
++(Market*)sharedMarket;
 -(void)addObserver:(NSObject*)observer;
 /**
  最新のCloseのBidレートを取得。
@@ -35,6 +36,7 @@
 -(void)resume;
 /// 時間を進める。
 -(void)add;
+-(BOOL)didLoadLastData;
 /**
  Onなら自動更新になり、セーブデータの自動更新設定もOnに変更される。
  Offでも同じ。

@@ -8,7 +8,10 @@
 
 #import "SimulationState.h"
 
+#import "Account.h"
+#import "ForexHistoryData.h"
 #import "FXSAlert.h"
+#import "Market.h"
 
 static NSString* const shortageAlertTitle = @"資産が足りません。";
 static NSString* const chartEndAlertTitle = @"チャートが端まで読み込まれました。";
@@ -16,13 +19,17 @@ static NSString* const chartEndAlertTitle = @"チャートが端まで読み込�
 @implementation SimulationState {
     BOOL _isShortage;
     BOOL _isForexDataEnd;
+    Account *_account;
+    Market *_market;
 }
 
--(instancetype)init
+-(instancetype)initWithMarket:(Market*)market
 {
     if (self = [super init]) {
         _isShortage = NO;
         _isForexDataEnd = NO;
+        _account = [Account sharedAccount];
+        _market = market;
     }
     
     return self;
@@ -33,10 +40,10 @@ static NSString* const chartEndAlertTitle = @"チャートが端まで読み込�
     _isShortage = YES;
 }
 
--(void)didLoadForexDataEnd
+/*-(void)didLoadForexDataEnd
 {
     _isForexDataEnd = YES;
-}
+}*/
 
 - (void)showAlert:(UIViewController *)controller
 {
@@ -51,6 +58,19 @@ static NSString* const chartEndAlertTitle = @"チャートが端まで読み込�
     [FXSAlert showAlert:controller title:title message:nil];
 }
 
+-(void)updatedMarket
+{
+    [_account updatedMarket];
+    
+    if ([_account isShortage]) {
+        _isShortage = YES;
+    }
+    
+    if ([_market didLoadLastData]) {
+        _isForexDataEnd = YES;
+    }
+}
+
 -(void)reset
 {
     _isShortage = NO;
@@ -61,9 +81,9 @@ static NSString* const chartEndAlertTitle = @"チャートが端まで読み込�
 {
     if (_isShortage || _isForexDataEnd) {
         return YES;
+    } else {
+        return NO;
     }
-    
-    return NO;
 }
 
 @end
