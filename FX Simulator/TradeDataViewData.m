@@ -8,10 +8,9 @@
 
 #import "TradeDataViewData.h"
 
+#import "Account.h"
 #import "OpenPositionFactory.h"
 #import "OpenPosition.h"
-#import "EquityFactory.h"
-#import "Equity.h"
 #import "Money.h"
 #import "ForexHistoryData.h"
 #import "OrderType.h"
@@ -21,22 +20,22 @@
 #import "PositionSize.h"
 #import "Lot.h"
 
-@interface TradeDataViewData ()
-@property (nonatomic, readwrite) Equity *equity;
-@end
 
 @implementation TradeDataViewData {
+    Account *_account;
+    Money *_equity;
     SaveData *saveData;
     OpenPosition *openPosition;
-    ForexHistoryData *_forexHistoryData;
     Money *_profitAndLoss;
+    ForexHistoryData *_forexHistoryData;
 }
 
 -(id)init
 {
     if (self = [super init]) {
         openPosition = [OpenPositionFactory createOpenPosition];
-        _equity = [EquityFactory createEquity];
+        _account = [Account sharedAccount];
+        _equity = _account.equity;
         saveData = [SaveLoader load];
         //positionSizeOfLot = saveData.positionSizeOfLot;
     }
@@ -46,11 +45,9 @@
 
 -(void)didOrder
 {
-    [openPosition update];
-    [self.equity updateBalance];
-    
     _profitAndLoss = [openPosition profitAndLossForRate:_forexHistoryData.close];
-    [self.equity setCurrentProfitAndLoss:_profitAndLoss];
+    
+    [_account didOrder];
 }
 
 -(void)updateForexHistoryData:(ForexHistoryData *)forexHistoryData
@@ -58,7 +55,8 @@
     _forexHistoryData = forexHistoryData;
     
     _profitAndLoss = [openPosition profitAndLossForRate:_forexHistoryData.close];
-    [self.equity setCurrentProfitAndLoss:_profitAndLoss];
+    
+    _equity = _account.equity;
 }
 
 -(NSString*)displayOrderType
@@ -102,7 +100,7 @@
     
     //[_equity setCurrentProfitAndLoss:profitAndLoss];
     
-    return self.equity.equity.toDisplayString;
+    return _equity.toDisplayString;
 }
 
 -(UIColor*)displayEquityColor
@@ -111,7 +109,7 @@
     
     //[_equity setCurrentProfitAndLoss:profitAndLoss];
     
-    return self.equity.equity.toDisplayColor;
+    return _equity.toDisplayColor;
 }
  
 -(NSString*)displayOpenPositionMarketValue

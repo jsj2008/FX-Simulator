@@ -24,6 +24,9 @@
 #import "ExecutionHistoryFactory.h"
 #import "ExecutionHistory.h"
 #import "CurrencyConverter.h"
+#import "SimulationManager.h"
+#import "Market.h"
+#import "ForexHistoryData.h"
 
 static const int maxRecords = 3;
 

@@ -34,4 +34,5 @@
  その通貨と時間軸でシュミレーションを始めることができる最大の時間。手動で設定してあるが、データベースから生成する。例 2015年1月1日
  */
 -(MarketTime*)maximumSimulationStartTime;
+-(ForexHistoryData*)lastRecord;
 @end

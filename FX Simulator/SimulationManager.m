@@ -8,6 +8,7 @@
 
 #import "SimulationManager.h"
 
+#import "Account.h"
 #import "Equity.h"
 #import "Market.h"
 #import "SimulationState.h"
@@ -37,11 +38,25 @@ static SimulationManager *sharedSimulationManager;
 -(instancetype)init
 {
     if (self = [super init]) {
-        _market = [Market new];
-        _simulationState = [SimulationState new];
+        _market = [Market sharedMarket];
+        [_market addObserver:self];
+        _simulationState = [[SimulationState alloc] initWithMarket:_market];
     }
     
     return self;
+}
+
+-(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    if ([keyPath isEqualToString:@"currentLoadedRowid"] && [object isKindOfClass:[Market class]]) {
+        
+        [_simulationState updatedMarket];
+        
+        if ([_simulationState isStop]) {
+            [self pause];
+            [_simulationState showAlert:self.alertTargetController];;
+        }
+    }
 }
 
 -(void)autoUpdateSettingSwitchChanged:(BOOL)isSwitchOn
@@ -49,19 +64,14 @@ static SimulationManager *sharedSimulationManager;
     self.market.isAutoUpdate = isSwitchOn;
 }
 
--(void)updatedEquity:(Equity *)equity
+/*-(void)updatedEquity:(Equity *)equity
 {
     if ([equity isShortage]) {
         [self pause];
         [_simulationState shortage];
         [_simulationState showAlert:self.alertTargetController];
     }
-}
-
--(void)didLoadForexDataEnd
-{
-    
-}
+}*/
 
 -(void)restartSimulation
 {
@@ -90,7 +100,7 @@ static SimulationManager *sharedSimulationManager;
 }
 
 -(void)add
-{
+{    
     if (![_simulationState isStop]) {
         [self.market add];
     } else {
