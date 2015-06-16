@@ -10,10 +10,11 @@
 
 
 @class UIViewController;
+@class Account;
 @class Market;
 
 @interface SimulationState : NSObject
--(instancetype)initWithMarket:(Market*)market;
+-(instancetype)initWithAccount:(Account*)account Market:(Market*)market;
 /**
  資産が０以下になったときに、呼ぶ。
  資産が0以下である状態になる。

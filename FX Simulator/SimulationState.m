@@ -23,12 +23,12 @@ static NSString* const chartEndAlertTitle = @"チャートが端まで読み込�
     Market *_market;
 }
 
--(instancetype)initWithMarket:(Market*)market
+-(instancetype)initWithAccount:(Account *)account Market:(Market *)market
 {
     if (self = [super init]) {
         _isShortage = NO;
         _isForexDataEnd = NO;
-        _account = [Account sharedAccount];
+        _account = account;
         _market = market;
     }
     
@@ -59,9 +59,7 @@ static NSString* const chartEndAlertTitle = @"チャートが端まで読み込�
 }
 
 -(void)updatedMarket
-{
-    [_account updatedMarket];
-    
+{    
     if ([_account isShortage]) {
         _isShortage = YES;
     }

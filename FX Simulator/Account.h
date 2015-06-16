@@ -13,7 +13,7 @@
 @class OpenPosition;
 
 @interface Account : NSObject
-+(Account*)sharedAccount;
+-(instancetype)initWithMarket:(Market*)market;
 -(void)updatedMarket;
 -(void)didOrder;
 -(BOOL)isShortage;

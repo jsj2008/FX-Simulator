@@ -146,7 +146,6 @@
 		70D2FC501A9F591600CAB509 /* EquityFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FC381A9F591600CAB509 /* EquityFactory.m */; };
 		70D2FC511A9F591600CAB509 /* MarketTime.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FC3A1A9F591600CAB509 /* MarketTime.m */; };
 		70EACE621B1ED17700A2E532 /* SimulationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 70EACE611B1ED17700A2E532 /* SimulationManager.m */; };
-		70EACE631B1EE19B00A2E532 /* MarketManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FB661A9F576500CAB509 /* MarketManager.m */; };
 		70EACE661B296F1100A2E532 /* SimulationState.m in Sources */ = {isa = PBXBuildFile; fileRef = 70EACE651B296F1100A2E532 /* SimulationState.m */; };
 		70EACE691B2AACBE00A2E532 /* FXSAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = 70EACE681B2AACBE00A2E532 /* FXSAlert.m */; };
 		70EACE6C1B2B1BE900A2E532 /* OrderManagerState.m in Sources */ = {isa = PBXBuildFile; fileRef = 70EACE6B1B2B1BE900A2E532 /* OrderManagerState.m */; };
@@ -277,8 +276,6 @@
 		70D2FB5E1A9F575900CAB509 /* ExecutionHistoryViewLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExecutionHistoryViewLabel.m; sourceTree = "<group>"; };
 		70D2FB631A9F576500CAB509 /* Market.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Market.h; sourceTree = "<group>"; };
 		70D2FB641A9F576500CAB509 /* Market.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Market.m; sourceTree = "<group>"; };
-		70D2FB651A9F576500CAB509 /* MarketManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarketManager.h; sourceTree = "<group>"; };
-		70D2FB661A9F576500CAB509 /* MarketManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarketManager.m; sourceTree = "<group>"; };
 		70D2FB671A9F576500CAB509 /* MarketTimeManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarketTimeManager.h; sourceTree = "<group>"; };
 		70D2FB681A9F576500CAB509 /* MarketTimeManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarketTimeManager.m; sourceTree = "<group>"; };
 		70D2FB6C1A9F577200CAB509 /* CandlesFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CandlesFactory.h; sourceTree = "<group>"; };
@@ -823,8 +820,6 @@
 			children = (
 				70D2FB631A9F576500CAB509 /* Market.h */,
 				70D2FB641A9F576500CAB509 /* Market.m */,
-				70D2FB651A9F576500CAB509 /* MarketManager.h */,
-				70D2FB661A9F576500CAB509 /* MarketManager.m */,
 				70D2FB671A9F576500CAB509 /* MarketTimeManager.h */,
 				70D2FB681A9F576500CAB509 /* MarketTimeManager.m */,
 			);
@@ -1072,7 +1067,6 @@
 				7076F5A71AECCBBB004CC6BA /* NewStartViewController.m in Sources */,
 				70D2FC511A9F591600CAB509 /* MarketTime.m in Sources */,
 				70D2FBFF1A9F57DC00CAB509 /* NewExecutionOrder.m in Sources */,
-				70EACE631B1EE19B00A2E532 /* MarketManager.m in Sources */,
 				70D2FB841A9F579000CAB509 /* ExecutionHistory.m in Sources */,
 				705DCE4C1AE7CE9800BCF710 /* RatePanelButton.m in Sources */,
 				70D2FB501A9F574000CAB509 /* ChartView.m in Sources */,
