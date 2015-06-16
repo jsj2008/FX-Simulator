@@ -15,6 +15,7 @@
 -(void)restartedSimulation;
 @end
 
+@class UIViewController;
 @class Account;
 @class Balance;
 @class Market;
@@ -31,7 +32,7 @@
 -(void)didNotifyObservers;
 -(void)autoUpdateSettingSwitchChanged:(BOOL)isSwitchOn;
 -(void)restartSimulation;
--(void)addObserver:(NSObject*)observer;
+-(void)addObserver:(UIViewController*)observer;
 /**
  Startした瞬間、時間が進み、Observerのメソッドが呼ばれ、それぞれのObserverに値がセットされる。
 */

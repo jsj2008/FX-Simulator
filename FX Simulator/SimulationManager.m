@@ -73,7 +73,7 @@ static SimulationManager *sharedSimulationManager;
     [_simulationState reset];
 }
 
--(void)addObserver:(NSObject *)observer
+-(void)addObserver:(UIViewController *)observer
 {
     [self.market addObserver:observer];
 }
