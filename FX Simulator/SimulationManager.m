@@ -38,24 +38,27 @@ static SimulationManager *sharedSimulationManager;
 -(instancetype)init
 {
     if (self = [super init]) {
-        _market = [Market sharedMarket];
-        [_market addObserver:self];
-        _simulationState = [[SimulationState alloc] initWithMarket:_market];
+        _market = [Market new];
+        _market.delegate = self;
+        _account = [[Account alloc] initWithMarket:_market];
+        _simulationState = [[SimulationState alloc] initWithAccount:_account Market:_market];
     }
     
     return self;
 }
 
--(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+-(void)willNotifyObservers
 {
-    if ([keyPath isEqualToString:@"currentLoadedRowid"] && [object isKindOfClass:[Market class]]) {
-        
-        [_simulationState updatedMarket];
-        
-        if ([_simulationState isStop]) {
-            [self pause];
-            [_simulationState showAlert:self.alertTargetController];;
-        }
+    [_account updatedMarket];
+}
+
+-(void)didNotifyObservers
+{
+    [_simulationState updatedMarket];
+    
+    if ([_simulationState isStop]) {
+        [self pause];
+        [_simulationState showAlert:self.alertTargetController];;
     }
 }
 
@@ -63,15 +66,6 @@ static SimulationManager *sharedSimulationManager;
 {
     self.market.isAutoUpdate = isSwitchOn;
 }
-
-/*-(void)updatedEquity:(Equity *)equity
-{
-    if ([equity isShortage]) {
-        [self pause];
-        [_simulationState shortage];
-        [_simulationState showAlert:self.alertTargetController];
-    }
-}*/
 
 -(void)restartSimulation
 {

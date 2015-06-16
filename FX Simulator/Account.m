@@ -26,24 +26,11 @@
     Market *_market;
 }
 
-static Account *sharedAccount;
-
-+(Account*)sharedAccount
-{
-    @synchronized(self) {
-        if (sharedAccount == nil) {
-            sharedAccount = [Account new];
-        }
-    }
-    
-    return sharedAccount;
-}
-
--(instancetype)init
+-(instancetype)initWithMarket:(Market *)market
 {
     if (self = [super init]) {
         _equityObj = [EquityFactory createEquity];
-        _market = [Market sharedMarket];
+        _market = market;
         _openPosition = [OpenPositionFactory createOpenPosition];
         [self updatedMarket];
     }

@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Market.h"
 #import "TradeDataViewController.h"
 
 @protocol SimulationManagerDelegate <NSObject>
@@ -14,6 +15,7 @@
 -(void)restartedSimulation;
 @end
 
+@class Account;
 @class Balance;
 @class Market;
 @class TradeViewController;
@@ -23,11 +25,11 @@
  Marketオブジェクトを持ち、Marketの時間が進むと、それに応じて、オブザーバにMarketの変更を伝える。
 */
 
-@interface SimulationManager : NSObject <TradeDataViewControllerDelegate>
+@interface SimulationManager : NSObject <MarketDelegate, TradeDataViewControllerDelegate>
 +(SimulationManager*)sharedSimulationManager;
+-(void)willNotifyObservers;
+-(void)didNotifyObservers;
 -(void)autoUpdateSettingSwitchChanged:(BOOL)isSwitchOn;
-//-(void)updatedEquity:(Equity *)equity;
-//-(void)didLoadForexDataEnd;
 -(void)restartSimulation;
 -(void)addObserver:(NSObject*)observer;
 /**
@@ -55,5 +57,6 @@
  Offでも同じ。
  */
 @property (nonatomic) BOOL isAutoUpdate;
+@property (nonatomic, readonly) Account *account;
 @property (nonatomic, readonly) Market *market;
 @end

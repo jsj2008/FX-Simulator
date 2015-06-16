@@ -12,27 +12,20 @@
 #import "ForexHistoryData.h"
 #import "Money.h"
 #import "Balance.h"
-#import "Market.h"
-#import "OpenPosition.h"
-#import "OpenPositionFactory.h"
-#import "SimulationManager.h"
 
 @interface Equity ()
 @property (nonatomic, readwrite) Money *equity;
 @end
 
 @implementation Equity {
-    //Currency *_currency;
     Money *_profitAndLoss;
     Balance *_balance;
-    Market *_market;
 }
 
 -(id)initWithBalance:(Balance*)balance
 {
     if (self = [super init]) {
         _balance = balance;
-        _market = [Market sharedMarket];
         [self update];
     }
     

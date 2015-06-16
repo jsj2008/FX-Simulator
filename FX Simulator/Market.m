@@ -34,19 +34,6 @@ static NSString * const kKeyPath = @"currentLoadedRowid";
     BOOL _isStart;
 }
 
-static Market *sharedMarket;
-
-+(Market*)sharedMarket
-{
-    @synchronized(self) {
-        if (sharedMarket == nil) {
-            sharedMarket = [Market new];
-        }
-    }
-    
-    return sharedMarket;
-}
-
 -(id)init
 {
     if (self = [super init]) {
@@ -144,16 +131,20 @@ static Market *sharedMarket;
         
         [self setMarketData];
         
+        if ([self.delegate respondsToSelector:@selector(willNotifyObservers)]) {
+            [self.delegate willNotifyObservers];
+        }
+        
         self.currentLoadedRowid = _currentLoadedRowid;
         // SimulatorManager
         // observeの呼ばれる順番は不規則
         // Marketの更新"直後"に実行したいものはObserverにしない
         // MarketTimeの変化でのみcurrentTimestampが変化
         // currentTimestampの変化で、MarketのObserverを更新
-        //self.currentTimestamp = self.currentForexHistoryData.close.timestamp.timestampValue;
-        //int t = self.currentForexHistoryData.close.timestamp.timestampValue;
-        //self.currentTimestamp = 100;
-        //self.isAutoUpdate = YES;
+        
+        if ([self.delegate respondsToSelector:@selector(didNotifyObservers)]) {
+            [self.delegate didNotifyObservers];
+        }
     }
 }
 
