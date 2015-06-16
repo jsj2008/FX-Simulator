@@ -19,11 +19,18 @@
 -(void)didNotifyObservers;
 @end
 
+@class UIViewController;
 @class ForexHistoryData;
 @class Rate;
 
 @interface Market : NSObject
--(void)addObserver:(NSObject*)observer;
+/**
+ UIViewControllerに限定。
+ オブザーバに通知される順番は決まっていない（たぶん）。
+ Marketの更新に応じて、データを更新する時は、オブザーバ(UIViewController)に通知が伝わる前にする。
+ オブザーバ(UIViewController)に通知が伝わる前に、データを更新したとき、そのデータは表示(UIViewController)には反映されない。
+*/
+-(void)addObserver:(UIViewController*)observer;
 /**
  最新のCloseのBidレートを取得。
 */

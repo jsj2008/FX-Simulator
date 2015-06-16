@@ -50,9 +50,9 @@ static NSString * const kKeyPath = @"currentLoadedRowid";
     return self;
 }
 
--(void)addObserver:(NSObject *)observer
+-(void)addObserver:(UIViewController *)observer
 {
-    [self addObserver:observer forKeyPath:kKeyPath options:NSKeyValueObservingOptionNew context:NULL];
+    [self addObserver:(NSObject*)observer forKeyPath:kKeyPath options:NSKeyValueObservingOptionNew context:NULL];
 }
 
 -(Rate*)getCurrentBidRate
