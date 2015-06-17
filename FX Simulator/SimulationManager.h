@@ -30,6 +30,7 @@
 +(SimulationManager*)sharedSimulationManager;
 -(void)willNotifyObservers;
 -(void)didNotifyObservers;
+-(void)didOrder;
 -(void)autoUpdateSettingSwitchChanged:(BOOL)isSwitchOn;
 -(void)restartSimulation;
 -(void)addObserver:(UIViewController*)observer;

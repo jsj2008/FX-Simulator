@@ -22,15 +22,15 @@
 
 
 @implementation TradeDataViewData {
-    Account *_account;
     SaveData *saveData;
+    SimulationManager *_simulationManager;
     ForexHistoryData *_forexHistoryData;
 }
 
 -(id)init
 {
     if (self = [super init]) {
-        _account = [SimulationManager sharedSimulationManager].account;
+        _simulationManager = [SimulationManager sharedSimulationManager];
         saveData = [SaveLoader load];
     }
     
@@ -39,7 +39,7 @@
 
 -(void)didOrder
 {
-    [_account didOrder];
+    [_simulationManager didOrder];
 }
 
 -(void)updateForexHistoryData:(ForexHistoryData *)forexHistoryData
@@ -49,37 +49,37 @@
 
 -(NSString*)displayOrderType
 {
-    return _account.openPosition.orderType.toDisplayString;
+    return _simulationManager.account.openPosition.orderType.toDisplayString;
 }
 
 -(UIColor*)displayOrderTypeColor
 {
-    return _account.openPosition.orderType.toColor;
+    return _simulationManager.account.openPosition.orderType.toColor;
 }
 
 -(NSString*)displayTotalLot
 {
-    return _account.openPosition.totalLot.toDisplayString;
+    return _simulationManager.account.openPosition.totalLot.toDisplayString;
     //return [NSString stringWithFormat:@"Lot %@", openPosition.totalLot.stringValue];
 }
 
 -(NSString*)displayAverageRate
 {
-    return [_account.openPosition.averageRate toDisplayString];
+    return [_simulationManager.account.openPosition.averageRate toDisplayString];
 }
  
 -(NSString*)displayProfitAndLoss
 {
     //Money *profitAndLoss = [openPosition profitAndLossForRate:_forexHistoryData.close];
     
-    return _account.profitAndLoss.toDisplayString;
+    return _simulationManager.account.profitAndLoss.toDisplayString;
 }
  
 -(UIColor*)displayProfitAndLossColor
 {
     //Money *profitAndLoss = [openPosition profitAndLossForRate:_forexHistoryData.close];
     
-    return _account.profitAndLoss.toDisplayColor;
+    return _simulationManager.account.profitAndLoss.toDisplayColor;
 }
 
 -(NSString*)displayEquity
@@ -88,7 +88,7 @@
     
     //[_equity setCurrentProfitAndLoss:profitAndLoss];
     
-    return _account.equity.toDisplayString;
+    return _simulationManager.account.equity.toDisplayString;
 }
 
 -(UIColor*)displayEquityColor
@@ -97,12 +97,12 @@
     
     //[_equity setCurrentProfitAndLoss:profitAndLoss];
     
-    return _account.equity.toDisplayColor;
+    return _simulationManager.account.equity.toDisplayColor;
 }
  
 -(NSString*)displayOpenPositionMarketValue
 {
-    Money *marketValue = [_account.openPosition marketValueForRate:_forexHistoryData.close];
+    Money *marketValue = [_simulationManager.account.openPosition marketValueForRate:_forexHistoryData.close];
     
     return marketValue.toDisplayString;
 }
