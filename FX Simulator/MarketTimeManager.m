@@ -40,7 +40,7 @@ static NSString * const kKeyPath = @"currentLoadedRowid";
         saveData = [SaveLoader load];
         forexHistory = [[ForexHistory alloc] initWithCurrencyPair:saveData.currencyPair timeScale:saveData.timeScale];
         [self loadTime];
-        _isAutoUpdate = saveData.isAutoUpdate;
+        //_isAutoUpdate = saveData.isAutoUpdate;
         
         self.autoUpdateInterval = saveData.autoUpdateInterval;
     }
@@ -98,6 +98,16 @@ static NSString * const kKeyPath = @"currentLoadedRowid";
         startTime = [link timestamp];
         [self add];
     }
+}
+
+-(void)pause
+{
+    [self setIsAutoUpdate:NO];
+}
+
+-(void)resume
+{
+    [self setIsAutoUpdate:YES];
 }
 
 -(void)setIsAutoUpdate:(BOOL)isAutoUpdate

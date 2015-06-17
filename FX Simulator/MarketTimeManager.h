@@ -19,7 +19,9 @@
 -(void)addObserver:(NSObject*)observer;
 -(void)start;
 -(void)add;
-@property (nonatomic) BOOL isAutoUpdate;
+-(void)pause;
+-(void)resume;
+//@property (nonatomic) BOOL isAutoUpdate;
 @property (nonatomic, readonly) int currentLoadedRowid;
 @property (nonatomic, readwrite) NSNumber *autoUpdateInterval;
 @end
