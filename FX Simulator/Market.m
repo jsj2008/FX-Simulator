@@ -82,12 +82,12 @@ static NSString * const kKeyPath = @"currentLoadedRowid";
 
 -(void)pause
 {
-    [marketTime setIsAutoUpdate:NO];
+    [marketTime pause];
 }
 
 -(void)resume
 {
-    [marketTime setIsAutoUpdate:saveData.isAutoUpdate];
+    [marketTime resume];
 }
 
 -(void)add
@@ -103,10 +103,12 @@ static NSString * const kKeyPath = @"currentLoadedRowid";
 
 -(void)setIsAutoUpdate:(BOOL)isAutoUpdate
 {
-    saveData.isAutoUpdate = isAutoUpdate;
-    
     if (_isStart) {
-        [marketTime setIsAutoUpdate:isAutoUpdate];
+        if (YES == isAutoUpdate) {
+            [marketTime resume];
+        } else {
+            [marketTime pause];
+        }
     } else {
         if (YES == saveData.isAutoUpdate) {
             [self startTime];

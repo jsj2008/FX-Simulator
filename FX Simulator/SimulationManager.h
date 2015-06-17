@@ -32,7 +32,7 @@
 -(void)didNotifyObservers;
 -(void)didOrder;
 -(void)autoUpdateSettingSwitchChanged:(BOOL)isSwitchOn;
--(void)restartSimulation;
++(void)restartSimulation;
 -(void)addObserver:(UIViewController*)observer;
 /**
  Startした瞬間、時間が進み、Observerのメソッドが呼ばれ、それぞれのObserverに値がセットされる。

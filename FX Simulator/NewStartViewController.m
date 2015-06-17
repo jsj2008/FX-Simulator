@@ -92,7 +92,7 @@
     [SaveLoader reloadSaveData];
     
     SimulationManager *simulationManager = [SimulationManager sharedSimulationManager];
-    [simulationManager restartSimulation];
+    [SimulationManager restartSimulation];
     
     [self.delegate updatedSaveData];
 }

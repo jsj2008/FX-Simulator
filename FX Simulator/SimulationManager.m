@@ -11,6 +11,8 @@
 #import "Account.h"
 #import "Equity.h"
 #import "Market.h"
+#import "SaveData.h"
+#import "SaveLoader.h"
 #import "SimulationState.h"
 #import "TradeViewController.h"
 
@@ -19,6 +21,7 @@
 @end
 
 @implementation SimulationManager {
+    SaveData *_saveData;
     SimulationState *_simulationState;
 }
 
@@ -38,6 +41,7 @@ static SimulationManager *sharedSimulationManager;
 -(instancetype)init
 {
     if (self = [super init]) {
+        _saveData = [SaveLoader load];
         _market = [Market new];
         _market.delegate = self;
         _account = [[Account alloc] initWithMarket:_market];
@@ -69,13 +73,16 @@ static SimulationManager *sharedSimulationManager;
 
 -(void)autoUpdateSettingSwitchChanged:(BOOL)isSwitchOn
 {
-    self.market.isAutoUpdate = isSwitchOn;
+    _saveData.isAutoUpdate = isSwitchOn;
+    
+    if (![_simulationState isStop]) {
+        self.market.isAutoUpdate = _saveData.isAutoUpdate;
+    }
 }
 
 -(void)restartSimulation
 {
-    self.market = [Market new];
-    [_simulationState reset];
+    sharedSimulationManager = nil;
 }
 
 -(void)addObserver:(UIViewController *)observer
