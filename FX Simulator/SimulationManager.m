@@ -62,6 +62,11 @@ static SimulationManager *sharedSimulationManager;
     }
 }
 
+-(void)didOrder
+{
+    [self.account didOrder];
+}
+
 -(void)autoUpdateSettingSwitchChanged:(BOOL)isSwitchOn
 {
     self.market.isAutoUpdate = isSwitchOn;
