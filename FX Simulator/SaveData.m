@@ -12,8 +12,10 @@
 #import "MarketTimeScale.h"
 #import "Currency.h"
 #import "CurrencyPair.h"
+#import "FXSTimeRange.h"
 #import "FXSTest.h"
 #import "TableNameFormatter.h"
+#import "Setting.h"
 #import "Spread.h"
 #import "PositionSize.h"
 #import "Lot.h"
@@ -74,10 +76,7 @@
         _slotNumber = slotNumber;
         _currencyPair = [[CurrencyPair alloc] initWithBaseCurrency:[[Currency alloc] initWithCurrencyType:USD] QuoteCurrency:[[Currency alloc] initWithCurrencyType:JPY]];
         _timeScale = [[MarketTimeScale alloc] initWithMinute:15];
-        NSDateFormatter *formatter = [NSDateFormatter new];
-        [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-        NSDate *date = [formatter dateFromString:@"2007-01-01 00:00:00"];
-        _startTime = [[MarketTime alloc] initWithTimestamp:[date timeIntervalSince1970]];
+        _startTime = [Setting rangeForCurrencyPair:_currencyPair timeScale:_timeScale].start;
         _lastLoadedCloseTimestamp = _startTime;
         _spread = [[Spread alloc] initWithPips:1 currencyPair:_currencyPair];
         _accountCurrency = [[Currency alloc] initWithCurrencyType:JPY];

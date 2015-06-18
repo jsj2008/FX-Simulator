@@ -10,6 +10,10 @@
 
 #import "Currency.h"
 #import "CurrencyPair.h"
+#import "ForexHistory.h"
+#import "ForexHistoryFactory.h"
+#import "FXSTimeRange.h"
+#import "MarketTime.h"
 #import "MarketTimeScale.h"
 #import "Rate.h"
 
@@ -180,6 +184,16 @@ static NSDictionary *spreadRateDic;
             return nil;
         }
     }
+}
+
++(FXSTimeRange*)rangeForCurrencyPair:(CurrencyPair *)currencyPair timeScale:(MarketTimeScale *)timeScale
+{
+    ForexHistory *forexHistory = [ForexHistoryFactory createForexHistoryFromCurrencyPair:currencyPair timeScale:timeScale];
+    
+    MarketTime *rangeStart = [[forexHistory minOpenTime] addDay:50];
+    MarketTime *rangeEnd = [[forexHistory maxOpenTime] addDay:-50];
+    
+    return [[FXSTimeRange alloc] initWithRangeStart:rangeStart end:rangeEnd];
 }
 
 @end
