@@ -8,9 +8,11 @@
 
 #import "SetStartTimeViewController.h"
 
+#import "FXSTimeRange.h"
 #import "MarketTime.h"
 #import "NSDate+FXSDateData.h"
 #import "SaveData.h"
+#import "Setting.h"
 
 typedef struct PickerRowSet {
     NSUInteger yearRow;
@@ -37,9 +39,8 @@ typedef struct PickerRowSet {
     
     // Do any additional setup after loading the view.
     
-    // TODO: DBから取得するようにする。
-    _minStartDate = [self getDateByYear:@"2007" month:@"1" day:@"1"];
-    _maxStartDate = [self getDateByYear:@"2015" month:@"1" day:@"1"];
+    _minStartDate = [Setting rangeForCurrencyPair:self.saveData.currencyPair timeScale:self.saveData.timeScale].start.date;
+    _maxStartDate = [Setting rangeForCurrencyPair:self.saveData.currencyPair timeScale:self.saveData.timeScale].end.date;
     
     _displayPickerYearStringArray = [NSMutableArray array];
     _displayPickerMonthStringArray = [NSMutableArray array];
