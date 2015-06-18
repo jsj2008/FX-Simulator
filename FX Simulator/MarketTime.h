@@ -11,6 +11,8 @@
 @interface MarketTime : NSObject
 -(instancetype)initWithTimestamp:(timestamp_t)timestamp;
 -(instancetype)initWithDate:(NSDate*)date;
+-(MarketTime*)addDay:(int)day;
+-(NSComparisonResult)compare:(MarketTime*)time;
 -(NSString*)toDisplayTimeString;
 -(NSString*)toDisplayYMDString;
 -(NSString*)toDisplayHMSString;

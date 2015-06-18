@@ -27,12 +27,12 @@
 -(ForexHistoryData*)selectOpenTimestamp:(int)timestamp;
 -(int)selectCloseTimestampFromRowid:(int)rowid;
 /**
- その通貨と時間軸でシュミレーションを始めることができる最小の時間。手動で設定してあるが、データベースから生成する。例 2010年1月1日
+ その通貨と時間軸のテーブルの始値の最初の時間。
  */
--(MarketTime*)minimumSimulationStartTime;
+-(MarketTime*)minOpenTime;
 /**
- その通貨と時間軸でシュミレーションを始めることができる最大の時間。手動で設定してあるが、データベースから生成する。例 2015年1月1日
+ その通貨と時間軸のテーブルの始値の最終の時間。
  */
--(MarketTime*)maximumSimulationStartTime;
+-(MarketTime*)maxOpenTime;
 -(ForexHistoryData*)lastRecord;
 @end

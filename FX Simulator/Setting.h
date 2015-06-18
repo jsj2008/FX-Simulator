@@ -9,8 +9,11 @@
 #import <Foundation/Foundation.h>
 
 @class CurrencyPair;
+@class FXSTimeRange;
 @class MarketTime;
+@class MarketTimeScale;
 @class Rate;
+
 
 /**
  新たなシュミレーション対象の通貨ペアを増やしたり、時間軸、口座通貨を増やしたりするときは、この設定クラスを変更する。
@@ -46,4 +49,8 @@
  通貨の変換などに使うレート。例 USD/JPY １ドル = 100円
 */
 +(Rate*)baseRateOfCurrencyPair:(CurrencyPair*)currencyPair;
+/**
+ その通貨と時間軸で、シュミレーションを開始できる時間の範囲。
+*/
++(FXSTimeRange*)rangeForCurrencyPair:(CurrencyPair*)currencyPair timeScale:(MarketTimeScale*)timeScale;
 @end

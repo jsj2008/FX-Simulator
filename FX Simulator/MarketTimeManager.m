@@ -64,12 +64,6 @@ static NSString * const kKeyPath = @"currentLoadedRowid";
     _link = [CADisplayLink displayLinkWithTarget:self selector:@selector(update:)];
     startTime = CACurrentMediaTime();
     [_link addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];
-    [self firstAdd];
-}
-
--(void)firstAdd
-{
-    self.currentLoadedRowid = _currentLoadedRowid;
 }
 
 -(void)add

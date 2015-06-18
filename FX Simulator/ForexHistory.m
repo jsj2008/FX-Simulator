@@ -18,6 +18,7 @@
 #import "ForexHistoryCacheConfig.h"
 #import "ForexHistoryCache.h"
 #import "ForexHistoryUtils.h"
+#import "Rate.h"
 
 
 
@@ -186,32 +187,33 @@ static const int cacheSize = 300;
     return openTimestamp;
 }
 
--(MarketTime*)minimumSimulationStartTime
+-(MarketTime*)minOpenTime
 {
-    NSString* dateString = @"2007-01-01 00:00:00";
-    
-    NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-
-    [formatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
-    
-    NSDate *date = [formatter dateFromString:dateString];
-    
-    return [[MarketTime alloc] initWithDate:date];
+    return [self firstRecord].open.timestamp;
 }
 
--(MarketTime*)maximumSimulationStartTime
+-(MarketTime*)maxOpenTime
 {
-    NSString* dateString = @"2015-01-01 00:00:00";
+    return [self lastRecord].close.timestamp;
+}
+
+-(ForexHistoryData*)firstRecord
+{
+    ForexHistoryData *data;
     
-    NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    NSString *sql = [NSString stringWithFormat:@"select rowid,* from %@ limit 1;", _forexHistoryTableName];
     
-    [formatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
+    [forexDatabase open];
     
-    NSDate *date = [formatter dateFromString:dateString];
+    FMResultSet *results = [forexDatabase executeQuery:sql];
     
-    return [[MarketTime alloc] initWithDate:date];
+    while ([results next]) {
+        data = [[ForexHistoryData alloc] initWithFMResultSet:results currencyPair:_currencyPair];
+    }
+    
+    [forexDatabase close];
+    
+    return data;
 }
 
 -(ForexHistoryData*)lastRecord
