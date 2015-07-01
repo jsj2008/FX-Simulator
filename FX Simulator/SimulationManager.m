@@ -9,11 +9,13 @@
 #import "SimulationManager.h"
 
 #import "Account.h"
+#import "CurrencyPair.h"
 #import "Equity.h"
 #import "Market.h"
 #import "SaveData.h"
 #import "SaveLoader.h"
 #import "SimulationState.h"
+#import "MarketTimeScale.h"
 #import "TradeViewController.h"
 
 @interface SimulationManager ()

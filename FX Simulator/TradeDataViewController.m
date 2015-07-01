@@ -23,6 +23,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *equityLabel;
 @property (weak, nonatomic) IBOutlet UIButton *tradeLotSettingButton;
 @property (weak, nonatomic) IBOutlet UISwitch *autoUpdateSettingSwitch;
+@property (weak, nonatomic) IBOutlet UILabel *currentSettingLabel;
 @property (nonatomic, readonly) TradeDataViewData *tradeDataViewData;
 @end
 
@@ -85,6 +86,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self.tradeLotSettingButton setTitle:[self.tradeDataViewData.tradeLot toDisplayString] forState:self.tradeLotSettingButton.state];
+    
+    self.currentSettingLabel.text = self.tradeDataViewData.displayCurrentSetting;
     
     /*tradeDataView.tradeLotInputField.delegate = self;
     

@@ -16,7 +16,7 @@
 @interface TradeDataViewData : NSObject
 -(void)updateForexHistoryData:(ForexHistoryData*)forexHistoryData;
 -(void)didOrder;
-//@property (nonatomic, readwrite) ForexHistoryData *currentForexHistoryData;
+-(NSString*)displayCurrentSetting;
 @property (nonatomic, readonly) NSString *displayOrderType;
 @property (nonatomic, readonly) UIColor *displayOrderTypeColor;
 @property (nonatomic, readonly) NSString *displayTotalLot;
