@@ -84,7 +84,11 @@ static SimulationManager *sharedSimulationManager;
 
 +(void)restartSimulation
 {
-    sharedSimulationManager = nil;
+    @synchronized(self) {
+        if (sharedSimulationManager != nil) {
+            sharedSimulationManager = nil;
+        }
+    }
 }
 
 -(void)addObserver:(UIViewController *)observer
