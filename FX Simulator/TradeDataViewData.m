@@ -9,9 +9,11 @@
 #import "TradeDataViewData.h"
 
 #import "Account.h"
+#import "CurrencyPair.h"
 #import "OpenPosition.h"
 #import "Money.h"
 #import "ForexHistoryData.h"
+#import "MarketTimeScale.h"
 #import "OrderType.h"
 #import "SaveLoader.h"
 #import "SaveData.h"
@@ -45,6 +47,13 @@
 -(void)updateForexHistoryData:(ForexHistoryData *)forexHistoryData
 {
     _forexHistoryData = forexHistoryData;
+}
+
+-(NSString*)displayCurrentSetting
+{
+    NSString *str = [NSString stringWithFormat:@"%@ %@", [saveData.currencyPair toDisplayString], [saveData.timeScale toDisplayString]];
+    
+    return str;
 }
 
 -(NSString*)displayOrderType

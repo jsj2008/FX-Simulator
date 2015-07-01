@@ -2004,6 +2004,7 @@
                     <connections>
                         <outlet property="autoUpdateSettingSwitch" destination="NDy-kR-pf4" id="gbq-gz-JbR"/>
                         <outlet property="averageRateLabel" destination="SP3-ib-R1f" id="Veo-wK-J1j"/>
+                        <outlet property="currentSettingLabel" destination="vTM-6Y-sph" id="HGB-mN-e7R"/>
                         <outlet property="equityLabel" destination="xnc-OW-Iav" id="uiH-7k-Uef"/>
                         <outlet property="openPositionMarketValueLabel" destination="YR4-2L-jzB" id="3Uv-EM-4cz"/>
                         <outlet property="orderTypeLabel" destination="bOb-Qf-ST9" id="gWE-jp-4yV"/>
