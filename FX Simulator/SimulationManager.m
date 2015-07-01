@@ -80,7 +80,7 @@ static SimulationManager *sharedSimulationManager;
     }
 }
 
--(void)restartSimulation
++(void)restartSimulation
 {
     sharedSimulationManager = nil;
 }
