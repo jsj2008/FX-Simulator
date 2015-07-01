@@ -35,10 +35,10 @@ static NSString* const chartEndAlertTitle = @"チャートが端まで読み込�
     return self;
 }
 
--(void)shortage
+/*-(void)shortage
 {
     _isShortage = YES;
-}
+}*/
 
 /*-(void)didLoadForexDataEnd
 {
