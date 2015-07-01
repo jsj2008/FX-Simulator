@@ -13,18 +13,14 @@
 @class Account;
 @class Market;
 
+/**
+ シミュレーションを停止すべきかどうか、などのシュミレーションの状態を管理する。
+ AccountやMarketによって、シュミレーションを停止するかどうかを判定する。
+ また、シュミレーションの停止の種類によって、異なるアラートを表示する。
+*/
+
 @interface SimulationState : NSObject
 -(instancetype)initWithAccount:(Account*)account Market:(Market*)market;
-/**
- 資産が０以下になったときに、呼ぶ。
- 資産が0以下である状態になる。
-*/
--(void)shortage;
-/**
- チャートが端まで読み込まれたときに、呼ぶ。
- Marketのデータが最後まで読み込まれた状態になる。
-*/
-//-(void)didLoadForexDataEnd;
 /**
  資産が0以下なのか、チャートが端まで読み込まれたのかなど、その状態に応じて、異なるアラートを出す。
  シュミレーションがストップしていないときは、アラートは表示されない。
