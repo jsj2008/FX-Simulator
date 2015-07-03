@@ -42,6 +42,7 @@
 {
     if (self = [super initWithCoder:aDecoder]) {
         _newSaveData = [[SaveData alloc] initWithDefaultDataAndSlotNumber:1];
+        [self setDefaultNewSaveData];
         _delegates = [NSHashTable weakObjectsHashTable];
     }
     
@@ -69,8 +70,6 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
-    [self setDefaultNewSaveData];
     
     [self.setCurrencyPairButton setTitle:[_newSaveData.currencyPair toDisplayString] forState:self.setCurrencyPairButton.state];
     [self.setTimeScaleButton setTitle:[_newSaveData.timeScale toDisplayString] forState:self.setTimeScaleButton.state];
@@ -104,11 +103,18 @@
     }
     
     [self.delegate updatedSaveData];
+    
+    [self updatedSaveData];
 }
 
 -(void)addDelegate:(id<NewStartViewControllerDelegate>)delegate
 {
     [_delegates addObject:delegate];
+}
+
+-(void)updatedSaveData
+{
+    [self setDefaultNewSaveData];
 }
 
 - (void)didReceiveMemoryWarning {
