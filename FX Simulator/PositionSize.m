@@ -8,6 +8,7 @@
 
 #import "PositionSize.h"
 
+#import "NSNumber+FXSNumberConverter.h"
 #import "SaveLoader.h"
 #import "SaveData.h"
 #import "Lot.h"
@@ -26,7 +27,7 @@
 
 -(NSString*)toDisplayString
 {
-    return [self.sizeValueObj stringValue];
+    return [self.sizeValueObj fxs_toDisplayString];
 }
 
 -(Lot*)toLot

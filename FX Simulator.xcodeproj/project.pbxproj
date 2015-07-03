@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		700360151AA8C0CE00A57959 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 700360141AA8C0CE00A57959 /* iAd.framework */; };
 		700B95851B0C3C97003F160B /* InputTradeLotViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 700B95841B0C3C97003F160B /* InputTradeLotViewController.m */; };
+		7033C5D61B469F56005EF07B /* NSNumber+FXSNumberConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 7033C5D51B469F56005EF07B /* NSNumber+FXSNumberConverter.m */; };
 		7041B7111B2EEDAD00DD64FE /* Account.m in Sources */ = {isa = PBXBuildFile; fileRef = 7041B7101B2EEDAD00DD64FE /* Account.m */; };
 		7041B7141B3278A700DD64FE /* FXSTimeRange.m in Sources */ = {isa = PBXBuildFile; fileRef = 7041B7131B3278A700DD64FE /* FXSTimeRange.m */; };
 		705C2E101ADE4C270089D510 /* Money+ConvertToAccountCurrency.m in Sources */ = {isa = PBXBuildFile; fileRef = 705C2E0F1ADE4C270089D510 /* Money+ConvertToAccountCurrency.m */; };
@@ -172,6 +173,8 @@
 		700360141AA8C0CE00A57959 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 		700B95831B0C3C97003F160B /* InputTradeLotViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputTradeLotViewController.h; sourceTree = "<group>"; };
 		700B95841B0C3C97003F160B /* InputTradeLotViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InputTradeLotViewController.m; sourceTree = "<group>"; };
+		7033C5D41B469F56005EF07B /* NSNumber+FXSNumberConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumber+FXSNumberConverter.h"; sourceTree = "<group>"; };
+		7033C5D51B469F56005EF07B /* NSNumber+FXSNumberConverter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNumber+FXSNumberConverter.m"; sourceTree = "<group>"; };
 		7041B70F1B2EEDAD00DD64FE /* Account.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Account.h; sourceTree = "<group>"; };
 		7041B7101B2EEDAD00DD64FE /* Account.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Account.m; sourceTree = "<group>"; };
 		7041B7121B3278A700DD64FE /* FXSTimeRange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FXSTimeRange.h; sourceTree = "<group>"; };
@@ -603,6 +606,8 @@
 				7041B7101B2EEDAD00DD64FE /* Account.m */,
 				7041B7121B3278A700DD64FE /* FXSTimeRange.h */,
 				7041B7131B3278A700DD64FE /* FXSTimeRange.m */,
+				7033C5D41B469F56005EF07B /* NSNumber+FXSNumberConverter.h */,
+				7033C5D51B469F56005EF07B /* NSNumber+FXSNumberConverter.m */,
 			);
 			path = "FX Simulator";
 			sourceTree = "<group>";
@@ -1148,6 +1153,7 @@
 				70D2FBA21A9F57A000CAB509 /* ForexHistoryUtils.m in Sources */,
 				70D2FBAD1A9F57B000CAB509 /* UsersOrder.m in Sources */,
 				70D2FBC81A9F57BD00CAB509 /* OpenPositionManagerFactory.m in Sources */,
+				7033C5D61B469F56005EF07B /* NSNumber+FXSNumberConverter.m in Sources */,
 				70D2FC4C1A9F591600CAB509 /* PositionSize.m in Sources */,
 				705C2E101ADE4C270089D510 /* Money+ConvertToAccountCurrency.m in Sources */,
 				70D2FB891A9F579000CAB509 /* ExecutionHistoryManagerFactory.m in Sources */,
