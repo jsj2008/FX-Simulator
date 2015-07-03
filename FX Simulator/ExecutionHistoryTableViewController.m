@@ -56,10 +56,15 @@ static const unsigned int displayMaxExecutionHistoryRecords = 100;
 -(instancetype)initWithCoder:(NSCoder *)aDecoder
 {
     if (self = [super initWithCoder:aDecoder]) {
-        _executionHistory = [ExecutionHistoryFactory createExecutionHistory];;
+        [self setInitData];
     }
     
     return self;
+}
+
+-(void)setInitData
+{
+    _executionHistory = [ExecutionHistoryFactory createExecutionHistory];
 }
 
 /*-(void)loadView
@@ -176,6 +181,11 @@ static const unsigned int displayMaxExecutionHistoryRecords = 100;
     //_executionHistoryRecords = [[_executionHistoryRecords reverseObjectEnumerator] allObjects];
     
     [self.tableView reloadData];
+}
+
+-(void)updatedSaveData
+{
+    [self setInitData];
 }
 
 #pragma mark - Table view data source

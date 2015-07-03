@@ -51,6 +51,7 @@
  セーブデータの自動更新設定(AutoUpdate)をそのまま反映するだけ。
 */
 -(void)resume;
+-(void)updatedSaveData;
 /// 時間を進める。
 -(void)add;
 -(BOOL)didLoadLastData;
@@ -60,6 +61,7 @@
  Offでも同じ。
 */
 @property (nonatomic) BOOL isAutoUpdate;
+@property (nonatomic, readonly) BOOL isStart;
 @property (nonatomic) NSArray* currentForexHistoryDataArray;
 @property (nonatomic) ForexHistoryData *currentForexHistoryData;
 @property (nonatomic, readonly) int currentLoadedRowid;

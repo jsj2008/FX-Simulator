@@ -1390,7 +1390,7 @@
         <!--Sub Chart-->
         <scene sceneID="eDa-qk-nQJ">
             <objects>
-                <viewController title="Sub Chart" id="le4-VF-0hB" customClass="SubChartViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SubChartViewController" title="Sub Chart" id="le4-VF-0hB" customClass="SubChartViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="5Ud-Dm-PfM"/>
                         <viewControllerLayoutGuide type="bottom" id="rWu-on-UmE"/>
@@ -1472,7 +1472,7 @@
         <!--Chart View Controller-->
         <scene sceneID="9c7-6U-myj">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="8uj-a3-MsS" customClass="ChartViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ChartViewController" automaticallyAdjustsScrollViewInsets="NO" id="8uj-a3-MsS" customClass="ChartViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="b60-xY-XfG"/>
                         <viewControllerLayoutGuide type="bottom" id="ukY-5v-jaS"/>

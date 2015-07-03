@@ -25,7 +25,7 @@
 @implementation RatePanelViewController {
     OrderManager *orderManager;
     RatePanelViewData *ratePanelViewData;
-    __weak id<RatePanelViewControllerDelegate> _delegate; //!?
+    //__weak id<RatePanelViewControllerDelegate> _delegate; //!?
 }
 
 @synthesize delegate = _delegate;
@@ -42,19 +42,23 @@
 -(instancetype)initWithCoder:(NSCoder *)aDecoder
 {
     if (self = [super initWithCoder:aDecoder]) {
-        orderManager = [OrderManagerFactory createOrderManager];
-        ratePanelViewData = [RatePanelViewData new];
+        [self setInitData];
     }
     
     return self;
+}
+
+-(void)setInitData
+{
+    orderManager = [OrderManagerFactory createOrderManager];
+    orderManager.alertTarget = self;
+    ratePanelViewData = [RatePanelViewData new];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
-    orderManager.alertTarget = self;
 }
 
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
@@ -72,9 +76,7 @@
 
 /// Order執行
 -(void)order:(OrderType *)orderType
-{
-    NSError *anError = nil;
-    
+{    
     UsersOrder *usersOrder = [UsersOrder createFromCurrencyPair:ratePanelViewData.currencyPair  orderType:orderType  positionSize:ratePanelViewData.currentPositionSize rate:[ratePanelViewData getCurrentRateForOrderType:orderType] orderSpread:ratePanelViewData.spread];
     
     BOOL result = [orderManager execute:usersOrder];
@@ -94,6 +96,11 @@
 - (IBAction)buyButtonTouched:(id)sender {
     OrderType *orderType = [[OrderType alloc] initWithLong];
     [self order:orderType];
+}
+
+-(void)updatedSaveData
+{
+    [self setInitData];
 }
 
 /*- (IBAction)bidRateButtonTouched:(id)sender {

@@ -31,27 +31,25 @@
 @property (weak, nonatomic) IBOutlet UIButton *setAccountCurrencyButton;
 @property (weak, nonatomic) IBOutlet UIButton *setStartBalanceButton;
 @property (weak, nonatomic) IBOutlet UIButton *setPositionSizeOfLotButton;
-
 @end
 
 @implementation NewStartViewController {
+    NSHashTable *_delegates;
     SaveData *_newSaveData;
 }
 
 -(instancetype)initWithCoder:(NSCoder *)aDecoder
 {
     if (self = [super initWithCoder:aDecoder]) {
-        _newSaveData = [SaveData new];
-        _newSaveData.slotNumber = 1;
+        _newSaveData = [[SaveData alloc] initWithDefaultDataAndSlotNumber:1];
+        _delegates = [NSHashTable weakObjectsHashTable];
     }
     
     return self;
 }
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    
+-(void)setDefaultNewSaveData
+{
     SaveData *saveData = [SaveLoader load];
     
     _newSaveData.currencyPair = saveData.currencyPair;
@@ -63,9 +61,16 @@
     _newSaveData.positionSizeOfLot = saveData.positionSizeOfLot;
 }
 
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    // Do any additional setup after loading the view.
+}
+
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+    [self setDefaultNewSaveData];
     
     [self.setCurrencyPairButton setTitle:[_newSaveData.currencyPair toDisplayString] forState:self.setCurrencyPairButton.state];
     [self.setTimeScaleButton setTitle:[_newSaveData.timeScale toDisplayString] forState:self.setTimeScaleButton.state];
@@ -91,9 +96,19 @@
     
     [SaveLoader reloadSaveData];
     
-    [SimulationManager restartSimulation];
+    SimulationManager *simulationManager = [SimulationManager sharedSimulationManager];
+    [simulationManager updatedSaveData];
+    
+    for (id<NewStartViewControllerDelegate> delegate in _delegates) {
+        [delegate updatedSaveData];
+    }
     
     [self.delegate updatedSaveData];
+}
+
+-(void)addDelegate:(id<NewStartViewControllerDelegate>)delegate
+{
+    [_delegates addObject:delegate];
 }
 
 - (void)didReceiveMemoryWarning {

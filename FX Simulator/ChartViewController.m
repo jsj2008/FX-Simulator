@@ -14,9 +14,6 @@
 
 @interface ChartViewController ()
 @property (weak, nonatomic) IBOutlet ChartView *chartView;
-
-//@property (weak, nonatomic) IBOutlet UILabel *tlabel;
-
 @end
 
 @implementation ChartViewController {
@@ -92,7 +89,6 @@
         _chartViewData.chartDataArray = ((Market*)object).currentForexHistoryDataArray;
         self.chartView.chartDataArray = _chartViewData.chartDataArray;
         [self.chartView setNeedsDisplay];
-        //_tlabel.text = @"aaa";
     }
 }
 
@@ -100,6 +96,12 @@
     if ([self.delegate respondsToSelector:@selector(chartViewTouched)]) {
         [self.delegate chartViewTouched];
     }
+}
+
+-(void)updatedSaveData
+{
+    self.chartView.chartDataArray = nil;
+    [self.chartView setNeedsDisplay];
 }
 
 - (void)didReceiveMemoryWarning

@@ -11,7 +11,10 @@
 #import "ExecutionHistoryTableViewController.h"
 #import "NewStartViewController.h"
 #import "OpenPositionTableViewController.h"
+#import "SubChartViewController.h"
 #import "TradeViewController.h"
+
+#import "ChartViewController.h"
 
 @interface MainViewController ()
 
@@ -23,15 +26,20 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    
+    NewStartViewController *newStartViewController;
     
     for (UIViewController *controller in self.viewControllers) {
         if ([controller isMemberOfClass:[NewStartViewController class]]) {
-            ((NewStartViewController*)controller).delegate = self;
+            newStartViewController = (NewStartViewController*)controller;
+            newStartViewController.delegate = self;
+            //((NewStartViewController*)controller).delegate = self;
         }
     }
     
     for (UIViewController *controller in self.viewControllers) {
+        if ([controller conformsToProtocol:@protocol(NewStartViewControllerDelegate)]) {
+            [newStartViewController addDelegate:(id<NewStartViewControllerDelegate>)controller];
+        }
         /*if ([controller isKindOfClass:[TradeViewController class]]) {
             controller = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"TradeViewController"];
         }*/
@@ -99,15 +107,19 @@
 
 -(void)updatedSaveData
 {
-    for (UIViewController *controller __strong in self.viewControllers) {
+    /*for (UIViewController *controller __strong in self.viewControllers) {
         if ([controller isMemberOfClass:[TradeViewController class]]) {
             controller = [self.storyboard instantiateViewControllerWithIdentifier:@"TradeViewController"];
+        } else if ([controller isMemberOfClass:[SubChartViewController class]]) {
+            controller = [self.storyboard instantiateViewControllerWithIdentifier:@"SubChartViewController"];
         } else if ([controller isMemberOfClass:[OpenPositionTableViewController class]]) {
             controller = [self.storyboard instantiateViewControllerWithIdentifier:@"OpenPositionTableViewController"];
         } else if ([controller isMemberOfClass:[ExecutionHistoryTableViewController class]]) {
             controller = [self.storyboard instantiateViewControllerWithIdentifier:@"ExecutionHistoryTableViewController"];
+        } else if ([controller isMemberOfClass:[ChartViewController class]]) {
+            controller = [self.storyboard instantiateViewControllerWithIdentifier:@"ChartViewController"];
         }
-    }
+    }*/
 }
 
 /*-(void)changeStatusBarFrame

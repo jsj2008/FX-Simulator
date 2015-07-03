@@ -28,30 +28,38 @@ static NSString * const kKeyPath = @"currentLoadedRowid";
 
 @implementation Market {
     SaveData *saveData;
-    MarketTimeManager *marketTime;
+    MarketTimeManager *_marketTimeManager;
+    NSMutableArray *_observers;
     ForexHistory *forexHistory;
     ForexHistoryData *_lastData;
-    BOOL _isStart;
 }
 
 -(id)init
 {
     if (self = [super init]) {
-        saveData = [SaveLoader load];
-        forexHistory = [ForexHistoryFactory createForexHistoryFromCurrencyPair:saveData.currencyPair timeScale:saveData.timeScale];
-        _lastData = [forexHistory lastRecord];
-        marketTime = [MarketTimeManager new];
-        [marketTime addObserver:self];
-        _currentLoadedRowid = marketTime.currentLoadedRowid;
-        _isStart = NO;
-        [self setMarketData];
+        [self setInitData];
+        _observers = [NSMutableArray array];
     }
     
     return self;
 }
 
+-(void)setInitData
+{
+    saveData = [SaveLoader load];
+    forexHistory = [ForexHistoryFactory createForexHistoryFromCurrencyPair:saveData.currencyPair timeScale:saveData.timeScale];
+    _lastData = [forexHistory lastRecord];
+    _marketTimeManager = [MarketTimeManager new];
+    [_marketTimeManager addObserver:self];
+    _currentLoadedRowid = _marketTimeManager.currentLoadedRowid;
+    _isStart = NO;
+    [self setMarketData];
+}
+
 -(void)addObserver:(UIViewController *)observer
 {
+    [_observers addObject:observer];
+    
     [self addObserver:(NSObject*)observer forKeyPath:kKeyPath options:NSKeyValueObservingOptionNew context:NULL];
 }
 
@@ -68,7 +76,7 @@ static NSString * const kKeyPath = @"currentLoadedRowid";
 -(void)setDefaultData
 {
     /// observerが全て更新され、Marketのデータがセットされる。
-    self.currentLoadedRowid = marketTime.currentLoadedRowid;
+    self.currentLoadedRowid = _marketTimeManager.currentLoadedRowid;
 }
 
 -(void)start
@@ -82,32 +90,38 @@ static NSString * const kKeyPath = @"currentLoadedRowid";
 
 -(void)pause
 {
-    [marketTime pause];
+    [_marketTimeManager pause];
 }
 
 -(void)resume
 {
-    [marketTime resume];
+    [_marketTimeManager resume];
+}
+
+-(void)updatedSaveData
+{
+    [_marketTimeManager end];
+    [self setInitData];
 }
 
 -(void)add
 {
-    [marketTime add];
+    [_marketTimeManager add];
 }
 
 -(void)startTime
 {
     _isStart = YES;
-    [marketTime start];
+    [_marketTimeManager start];
 }
 
 -(void)setIsAutoUpdate:(BOOL)isAutoUpdate
 {
     if (_isStart) {
         if (YES == isAutoUpdate) {
-            [marketTime resume];
+            [_marketTimeManager resume];
         } else {
-            [marketTime pause];
+            [_marketTimeManager pause];
         }
     } else {
         if (YES == saveData.isAutoUpdate) {
@@ -152,7 +166,7 @@ static NSString * const kKeyPath = @"currentLoadedRowid";
 
 -(void)setAutoUpdateInterval:(NSNumber *)autoUpdateInterval
 {
-    marketTime.autoUpdateInterval = autoUpdateInterval;
+    _marketTimeManager.autoUpdateInterval = autoUpdateInterval;
 }
 
 -(BOOL)didLoadLastData
@@ -161,6 +175,13 @@ static NSString * const kKeyPath = @"currentLoadedRowid";
         return YES;
     } else {
         return NO;
+    }
+}
+
+-(void)dealloc
+{
+    for (NSObject *obj in _observers) {
+        [self removeObserver:obj forKeyPath:kKeyPath];
     }
 }
 

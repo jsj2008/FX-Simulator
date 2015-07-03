@@ -18,5 +18,6 @@
 
 @interface RatePanelViewController : UIViewController
 -(void)order:(OrderType *)orderType;
+-(void)updatedSaveData;
 @property (nonatomic, weak) id<RatePanelViewControllerDelegate> delegate;
 @end
