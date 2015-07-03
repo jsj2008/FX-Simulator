@@ -10,6 +10,7 @@
 
 #import "CurrencyConverter.h"
 #import "Currency.h"
+#import "NSNumber+FXSNumberConverter.h"
 
 @implementation Money
 
@@ -54,15 +55,7 @@
 
 -(NSString*)toDisplayString
 {
-    NSNumberFormatter *formatter = [NSNumberFormatter new];
-    [formatter setNumberStyle:NSNumberFormatterDecimalStyle];
-    [formatter setGroupingSeparator:@","];
-    [formatter setGroupingSize:3];
-    
-    //NSString *result = [formatter stringFromNumber:priceNumber];
-    
-    return [formatter stringFromNumber:self.toMoneyValueObj];
-    //return [NSString stringWithFormat:@"%lli", _amount];
+    return [self.toMoneyValueObj fxs_toDisplayString];
 }
 
 -(UIColor*)toDisplayColor

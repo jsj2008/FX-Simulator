@@ -8,6 +8,7 @@
 
 #import "Lot.h"
 
+#import "NSNumber+FXSNumberConverter.h"
 #import "SaveLoader.h"
 #import "SaveData.h"
 #import "PositionSize.h"
@@ -34,7 +35,8 @@
 
 -(NSString*)toDisplayString
 {
-    return [NSString stringWithFormat:@"%llu", self.lotValue];
+    return [self.valueObj fxs_toDisplayString];
+    //return [NSString stringWithFormat:@"%llu", self.lotValue];
 }
 
 -(NSNumber*)valueObj
