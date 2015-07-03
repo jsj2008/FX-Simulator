@@ -9,5 +9,5 @@
 #import "NewStartViewController.h"
 
 @interface OpenPositionTableViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, NewStartViewControllerDelegate>
--(void)reloadSaveData;
+-(void)updatedSaveData;
 @end

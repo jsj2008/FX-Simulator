@@ -35,7 +35,9 @@
 {
     CGContextRef context = UIGraphicsGetCurrentContext();
     
-    //NSLog(@"ChartView %f %f", self.frame.size.width, self.frame.size.height);
+    if (self.chartDataArray == nil) {
+        return;
+    }
     
     NSArray *candles = [CandlesFactory createCandlesFromForexHistoryDataArray:self.chartDataArray chartViewWidth:self.frame.size.width chartViewHeight:self.frame.size.height];
     

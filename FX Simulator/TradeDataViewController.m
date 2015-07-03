@@ -24,14 +24,11 @@
 @property (weak, nonatomic) IBOutlet UIButton *tradeLotSettingButton;
 @property (weak, nonatomic) IBOutlet UISwitch *autoUpdateSettingSwitch;
 @property (weak, nonatomic) IBOutlet UILabel *currentSettingLabel;
-@property (nonatomic, readonly) TradeDataViewData *tradeDataViewData;
+//@property (nonatomic, readonly) TradeDataViewData *tradeDataViewData;
 @end
 
 @implementation TradeDataViewController {
-    //float selfViewY;
-    //float keyboardHigh;
-    //TradeDataViewData *tradeDataViewData;
-    //TradeDataView *tradeDataView;
+    TradeDataViewData *_tradeDataViewData;
 }
 
 /*-(id)init
@@ -85,26 +82,18 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [self.tradeLotSettingButton setTitle:[self.tradeDataViewData.tradeLot toDisplayString] forState:self.tradeLotSettingButton.state];
     
-    self.currentSettingLabel.text = self.tradeDataViewData.displayCurrentSetting;
-    
-    /*tradeDataView.tradeLotInputField.delegate = self;
-    
-    tradeDataView.tradeLotInputField.text = tradeDataViewData.tradeLotInputFieldValue;
-    
-    tradeDataView.autoUpdateSettingSwitch.on = tradeDataViewData.isAutoUpdate;
-    
-    [tradeDataView.autoUpdateSettingSwitch addTarget:self
-                                              action:@selector(switchValueChanged:)
-                                    forControlEvents:UIControlEventValueChanged];*/
-    
-    [self didOrder];
 }
 
 -(void)viewWillAppear:(BOOL)animated {
     
     [super viewWillAppear:animated];
+    
+    [self.tradeLotSettingButton setTitle:[_tradeDataViewData.tradeLot toDisplayString] forState:self.tradeLotSettingButton.state];
+    
+    self.currentSettingLabel.text = _tradeDataViewData.displayCurrentSetting;
+    
+    [self didOrder];
     
     /*NSNotificationCenter* nc = [NSNotificationCenter defaultCenter];
     
@@ -144,30 +133,30 @@
 {    
     if ([keyPath isEqualToString:@"currentLoadedRowid"] && [object isKindOfClass:[Market class]]) {
         Market *market = (Market*)object;
-        [self.tradeDataViewData updateForexHistoryData:market.currentForexHistoryData];
-        self.profitAndLossLabel.text = self.tradeDataViewData.displayProfitAndLoss;
-        self.profitAndLossLabel.textColor = self.tradeDataViewData.displayProfitAndLossColor;
+        [_tradeDataViewData updateForexHistoryData:market.currentForexHistoryData];
+        self.profitAndLossLabel.text = _tradeDataViewData.displayProfitAndLoss;
+        self.profitAndLossLabel.textColor = _tradeDataViewData.displayProfitAndLossColor;
         
-        self.openPositionMarketValueLabel.text = self.tradeDataViewData.displayOpenPositionMarketValue;
-        self.equityLabel.text = self.tradeDataViewData.displayEquity;
-        self.equityLabel.textColor = self.tradeDataViewData.displayEquityColor;
+        self.openPositionMarketValueLabel.text = _tradeDataViewData.displayOpenPositionMarketValue;
+        self.equityLabel.text = _tradeDataViewData.displayEquity;
+        self.equityLabel.textColor = _tradeDataViewData.displayEquityColor;
     }
 }
 
 -(void)didOrder
 {
-    [self.tradeDataViewData didOrder];
+    [_tradeDataViewData didOrder];
     
-    self.orderTypeLabel.text = self.tradeDataViewData.displayOrderType;
-    self.orderTypeLabel.textColor = self.tradeDataViewData.displayOrderTypeColor;
-    self.totalOpenLotLabel.text = self.tradeDataViewData.displayTotalLot;
-    self.averageRateLabel.text = self.tradeDataViewData.displayAverageRate;
+    self.orderTypeLabel.text = _tradeDataViewData.displayOrderType;
+    self.orderTypeLabel.textColor = _tradeDataViewData.displayOrderTypeColor;
+    self.totalOpenLotLabel.text = _tradeDataViewData.displayTotalLot;
+    self.averageRateLabel.text = _tradeDataViewData.displayAverageRate;
     
-    self.profitAndLossLabel.text = self.tradeDataViewData.displayProfitAndLoss;
-    self.profitAndLossLabel.textColor = self.tradeDataViewData.displayProfitAndLossColor;
-    self.openPositionMarketValueLabel.text = self.tradeDataViewData.displayOpenPositionMarketValue;
-    self.equityLabel.text = self.tradeDataViewData.displayEquity;
-    self.equityLabel.textColor = self.tradeDataViewData.displayEquityColor;
+    self.profitAndLossLabel.text = _tradeDataViewData.displayProfitAndLoss;
+    self.profitAndLossLabel.textColor = _tradeDataViewData.displayProfitAndLossColor;
+    self.openPositionMarketValueLabel.text = _tradeDataViewData.displayOpenPositionMarketValue;
+    self.equityLabel.text = _tradeDataViewData.displayEquity;
+    self.equityLabel.textColor = _tradeDataViewData.displayEquityColor;
     
     /*tradeDataView.displayAverageRate = tradeDataViewData.displayAverageRate;
     tradeDataView.displayOrderType = tradeDataViewData.displayOrderType;
@@ -247,7 +236,7 @@
     if ([segue.identifier isEqualToString:@"InputTradeLotViewControllerSegue"]) {
         InputTradeLotViewController *controller = segue.destinationViewController;
         //if (controller.isFirstAccess) {
-        controller.defaultInputTradeLot = self.tradeDataViewData.tradeLot;
+        controller.defaultInputTradeLot = _tradeDataViewData.tradeLot;
         
             //controller.isFirstAccess = NO;
         //}
@@ -258,9 +247,9 @@
 {
     InputTradeLotViewController *controller = segue.sourceViewController;
     
-    self.tradeDataViewData.tradeLot = controller.inputTradeLot;
+    _tradeDataViewData.tradeLot = controller.inputTradeLot;
     
-    [self.tradeLotSettingButton setTitle:[self.tradeDataViewData.tradeLot toDisplayString] forState:self.tradeLotSettingButton.state];
+    [self.tradeLotSettingButton setTitle:[_tradeDataViewData.tradeLot toDisplayString] forState:self.tradeLotSettingButton.state];
 }
 
 - (IBAction)autoUpdateSettingSwitchChanged:(id)sender {
@@ -273,6 +262,11 @@
     NSString *urlString = @"http://www.forexite.com";
     NSURL *url = [NSURL URLWithString:urlString];
     [[UIApplication sharedApplication] openURL:url];
+}
+
+-(void)updatedSaveData
+{
+    _tradeDataViewData = [TradeDataViewData new];
 }
 
 - (void)didReceiveMemoryWarning

@@ -21,7 +21,6 @@
 @end
 
 @implementation TradeViewController {
-    //Market *_market;
     ChartViewController *_chartViewController;
     RatePanelViewController *_ratePanelViewController;
     TradeDataViewController *_tradeDataViewController;
@@ -110,7 +109,7 @@
     //[market addObserver:tradeDataViewController];
     //[_market setDefaultData];
     
-    [_simulationManager start];
+    //[_simulationManager start];
 }
 
 -(void)viewDidLayoutSubviews
@@ -152,6 +151,10 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+    if (!_simulationManager.isStart) {
+        [_simulationManager start];
+    }
     
     [_simulationManager resume];
     //_market.isAutoUpdate = _market.isSaveDataAutoUpdate;
@@ -195,6 +198,13 @@
     if (!_simulationManager.isAutoUpdate) {
         [_simulationManager add];
     }
+}
+
+-(void)updatedSaveData
+{
+    [_chartViewController updatedSaveData];
+    [_ratePanelViewController updatedSaveData];
+    [_tradeDataViewController updatedSaveData];
 }
 
 - (void)didReceiveMemoryWarning

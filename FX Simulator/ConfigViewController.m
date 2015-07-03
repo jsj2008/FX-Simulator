@@ -24,6 +24,23 @@
     SaveData *_saveData;
 }
 
+-(instancetype)initWithCoder:(NSCoder *)aDecoder
+{
+    if (self = [super initWithCoder:aDecoder]) {
+        [self setInitData];
+    }
+    
+    return self;
+}
+
+-(void)setInitData
+{
+    _market = [SimulationManager sharedSimulationManager].market;
+    
+    _saveData = [SaveLoader load];
+    self.autoUpdateInterval = _saveData.autoUpdateInterval;
+}
+
 /*-(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -36,16 +53,11 @@
     
     //_saveData = [SaveLoader load];
     //self.autoUpdateInterval = _saveData.autoUpdateInterval;
-    
-    _market = [SimulationManager sharedSimulationManager].market;
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
-    _saveData = [SaveLoader load];
-    self.autoUpdateInterval = _saveData.autoUpdateInterval;
     
     [self.setAutoUpdateIntervalButton setTitle:self.autoUpdateInterval.stringValue forState:self.setAutoUpdateIntervalButton.state];
 }
@@ -64,6 +76,11 @@
     
     _saveData.autoUpdateInterval = self.autoUpdateInterval;
     _market.autoUpdateInterval = _saveData.autoUpdateInterval;
+}
+
+-(void)updatedSaveData
+{
+    [self setInitData];
 }
 
 - (void)didReceiveMemoryWarning {

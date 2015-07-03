@@ -28,6 +28,7 @@ static NSString * const kKeyPath = @"currentLoadedRowid";
 
 @implementation MarketTimeManager {
     SaveData *saveData;
+    NSMutableArray *_observers;
     ForexHistory *forexHistory;
     float startTime;
     float duration;
@@ -37,15 +38,19 @@ static NSString * const kKeyPath = @"currentLoadedRowid";
 -(id)init
 {
     if (self = [super init]) {
-        saveData = [SaveLoader load];
-        forexHistory = [[ForexHistory alloc] initWithCurrencyPair:saveData.currencyPair timeScale:saveData.timeScale];
-        [self loadTime];
-        //_isAutoUpdate = saveData.isAutoUpdate;
-        
-        self.autoUpdateInterval = saveData.autoUpdateInterval;
+        [self setInitData];
+        _observers = [NSMutableArray array];
     }
     
     return self;
+}
+
+-(void)setInitData
+{
+    saveData = [SaveLoader load];
+    forexHistory = [[ForexHistory alloc] initWithCurrencyPair:saveData.currencyPair timeScale:saveData.timeScale];
+    [self loadTime];
+    self.autoUpdateInterval = saveData.autoUpdateInterval;
 }
 
 -(void)loadTime
@@ -56,7 +61,14 @@ static NSString * const kKeyPath = @"currentLoadedRowid";
 
 -(void)addObserver:(NSObject *)observer
 {
+    [_observers addObject:observer];
+    
     [self addObserver:observer forKeyPath:kKeyPath options:NSKeyValueObservingOptionNew context:NULL];
+}
+
+-(void)removeObserver:(NSObject *)observer
+{
+    [self removeObserver:observer forKeyPath:kKeyPath];
 }
 
 -(void)start
@@ -64,6 +76,12 @@ static NSString * const kKeyPath = @"currentLoadedRowid";
     _link = [CADisplayLink displayLinkWithTarget:self selector:@selector(update:)];
     startTime = CACurrentMediaTime();
     [_link addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];
+}
+
+-(void)end
+{
+    [_link removeFromRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];
+    _link = nil;
 }
 
 -(void)add
@@ -121,6 +139,13 @@ static NSString * const kKeyPath = @"currentLoadedRowid";
         
         [_link setPaused:isAutoUpdate];
     }*/
+}
+
+-(void)dealloc
+{
+    for (NSObject *obj in _observers) {
+        [self removeObserver:obj forKeyPath:kKeyPath];
+    }
 }
 
 @end

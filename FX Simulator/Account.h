@@ -24,6 +24,7 @@
  マーケットの状態に応じて、アカウント情報を更新する。
 */
 -(void)updatedMarket;
+-(void)updatedSaveData;
 -(void)didOrder;
 /**
  総資産が０以下かどうか。

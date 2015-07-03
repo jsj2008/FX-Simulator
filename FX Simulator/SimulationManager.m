@@ -19,7 +19,7 @@
 #import "TradeViewController.h"
 
 @interface SimulationManager ()
-@property (nonatomic, readwrite) Market *market;
+//@property (nonatomic, readwrite) Market *market;
 @end
 
 @implementation SimulationManager {
@@ -43,14 +43,19 @@ static SimulationManager *sharedSimulationManager;
 -(instancetype)init
 {
     if (self = [super init]) {
-        _saveData = [SaveLoader load];
         _market = [Market new];
         _market.delegate = self;
         _account = [[Account alloc] initWithMarket:_market];
-        _simulationState = [[SimulationState alloc] initWithAccount:_account Market:_market];
+        [self setInitData];
     }
     
     return self;
+}
+
+-(void)setInitData
+{
+    _saveData = [SaveLoader load];
+    _simulationState = [[SimulationState alloc] initWithAccount:_account Market:_market];
 }
 
 -(void)willNotifyObservers
@@ -82,13 +87,11 @@ static SimulationManager *sharedSimulationManager;
     }
 }
 
-+(void)restartSimulation
+-(void)updatedSaveData
 {
-    @synchronized(self) {
-        if (sharedSimulationManager != nil) {
-            sharedSimulationManager = nil;
-        }
-    }
+    [self.market updatedSaveData];
+    [self.account updatedSaveData];
+    [self setInitData];
 }
 
 -(void)addObserver:(UIViewController *)observer
@@ -138,6 +141,11 @@ static SimulationManager *sharedSimulationManager;
 -(BOOL)isAutoUpdate
 {
     return self.market.isAutoUpdate;
+}
+
+-(BOOL)isStart
+{
+    return self.market.isStart;
 }
 
 @end

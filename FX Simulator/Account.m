@@ -29,18 +29,30 @@
 -(instancetype)initWithMarket:(Market *)market
 {
     if (self = [super init]) {
-        _equityObj = [EquityFactory createEquity];
         _market = market;
-        _openPosition = [OpenPositionFactory createOpenPosition];
-        [self updatedMarket];
+        [self setInitData];
     }
     
     return self;
 }
 
+-(void)setInitData
+{
+    _equityObj = [EquityFactory createEquity];
+    _openPosition = [OpenPositionFactory createOpenPosition];
+    [self updatedMarket];
+}
+
 -(void)updatedMarket
 {
     [_equityObj setCurrentProfitAndLoss:self.profitAndLoss];
+}
+
+-(void)updatedSaveData
+{
+    _equityObj = [EquityFactory createEquity];
+    _openPosition = [OpenPositionFactory createOpenPosition];
+    [self updatedMarket];
 }
 
 -(void)didOrder

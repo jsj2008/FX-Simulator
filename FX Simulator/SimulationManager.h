@@ -32,7 +32,7 @@
 -(void)didNotifyObservers;
 -(void)didOrder;
 -(void)autoUpdateSettingSwitchChanged:(BOOL)isSwitchOn;
-+(void)restartSimulation;
+-(void)updatedSaveData;
 -(void)addObserver:(UIViewController*)observer;
 /**
  Startした瞬間、時間が進み、Observerのメソッドが呼ばれ、それぞれのObserverに値がセットされる。
@@ -59,6 +59,7 @@
  Offでも同じ。
  */
 @property (nonatomic) BOOL isAutoUpdate;
+@property (nonatomic, readonly) BOOL isStart;
 @property (nonatomic, readonly) Account *account;
 @property (nonatomic, readonly) Market *market;
 @end

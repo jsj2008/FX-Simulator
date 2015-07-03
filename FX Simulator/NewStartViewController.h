@@ -14,6 +14,7 @@
 @end
 
 @interface NewStartViewController : UITableViewController
+-(void)addDelegate:(id<NewStartViewControllerDelegate>)delegate;
 @property (nonatomic, assign) id<NewStartViewControllerDelegate> delegate;
 /*@property (nonatomic, readwrite) Currency *accountCurrency;
 @property (nonatomic, readwrite) CurrencyPair *currencyPair;

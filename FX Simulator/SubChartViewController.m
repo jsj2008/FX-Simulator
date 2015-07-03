@@ -45,8 +45,7 @@
 -(instancetype)initWithCoder:(NSCoder *)aDecoder
 {
     if (self = [super initWithCoder:aDecoder]) {
-        _subChartViewData = [SubChartViewData new];
-        _items = _subChartViewData.items;
+        [self setInitData];
     }
     
     return self;
@@ -75,8 +74,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
-    [self setItems:_items forSegment:self.segment];
     
     //self.segment.selectedSegmentIndex = 0;
     /*[self.segment addTarget:self
@@ -201,6 +198,8 @@
 {
     [super viewWillAppear:animated];
     
+    [self setItems:_items forSegment:self.segment];
+    
     /*CGRect mainScreenRect = [[UIScreen mainScreen] applicationFrame];
     float statusBarHeight = [[UIApplication sharedApplication] statusBarFrame].size.height;
     float adViewHeight = 49.0;
@@ -245,6 +244,17 @@
 {
     [subChartDataView hiddenData];
 }*/
+
+-(void)setInitData
+{
+    _subChartViewData = [SubChartViewData new];
+    _items = _subChartViewData.items;
+}
+
+-(void)updatedSaveData
+{
+    [self setInitData];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

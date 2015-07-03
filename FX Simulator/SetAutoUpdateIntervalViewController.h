@@ -8,8 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@protocol ConfigViewControllerDelegate;
+@protocol SetAutoUpdateIntervalViewControllerDelegate
+@property (nonatomic, readwrite) NSNumber *autoUpdateInterval;
+@end
 
 @interface SetAutoUpdateIntervalViewController : UIViewController
-@property (nonatomic, assign) id<ConfigViewControllerDelegate> delegate;
+@property (nonatomic, assign) id<SetAutoUpdateIntervalViewControllerDelegate> delegate;
 @end

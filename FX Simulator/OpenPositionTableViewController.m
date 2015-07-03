@@ -16,6 +16,7 @@
 #import "FXTimestamp.h"
 #import "Currency.h"
 #import "Money.h"*/
+#import "Account.h"
 #import "Currency.h"
 #import "ForexHistoryData.h"
 #import "Market.h"
@@ -64,11 +65,17 @@ static const unsigned int displayMaxOpenPositionDataRecords = 100;
     if (self = [super initWithCoder:aDecoder]) {
         //SaveData *saveData = [SaveLoader load];
         //_accountCurrency = saveData.accountCurrency;
-        _market = [SimulationManager sharedSimulationManager].market;
-        _openPosition = [OpenPositionFactory createOpenPosition];
+        [self setInitData];
     }
     
     return self;
+}
+
+-(void)setInitData
+{
+    SimulationManager *simulationManager = [SimulationManager sharedSimulationManager];
+    _market = simulationManager.market;
+    _openPosition = simulationManager.account.openPosition;
 }
 
 
@@ -191,6 +198,11 @@ static const unsigned int displayMaxOpenPositionDataRecords = 100;
     
     return [_openPositionDataRecords count];
     //return 10;
+}
+
+-(void)updatedSaveData
+{
+    [self setInitData];
 }
 
 - (void)didReceiveMemoryWarning {

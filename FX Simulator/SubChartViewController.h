@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "NewStartViewController.h"
 
-@interface SubChartViewController : UIViewController
-
+@interface SubChartViewController : UIViewController <NewStartViewControllerDelegate>
+-(void)updatedSaveData;
 @end

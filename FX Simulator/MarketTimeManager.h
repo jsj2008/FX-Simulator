@@ -18,6 +18,7 @@
 @interface MarketTimeManager : NSObject
 -(void)addObserver:(NSObject*)observer;
 -(void)start;
+-(void)end;
 -(void)add;
 -(void)pause;
 -(void)resume;

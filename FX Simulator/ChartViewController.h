@@ -17,6 +17,7 @@
 @end
 
 @interface ChartViewController : UIViewController
+-(void)updatedSaveData;
 @property (nonatomic, readwrite) NSArray *defaultForexHistoryDataArray;
 @property (nonatomic, assign) id<ChartViewControllerDelegate> delegate;
 //@property (weak, nonatomic) IBOutlet ChartView *chartView;

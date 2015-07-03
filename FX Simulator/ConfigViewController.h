@@ -7,11 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "NewStartViewController.h"
+#import "SetAutoUpdateIntervalViewController.h"
 
-@protocol ConfigViewControllerDelegate <NSObject>
-@property (nonatomic, readwrite) NSNumber *autoUpdateInterval;
-@end
 
-@interface ConfigViewController : UITableViewController <ConfigViewControllerDelegate>
+@interface ConfigViewController : UITableViewController <NewStartViewControllerDelegate, SetAutoUpdateIntervalViewControllerDelegate>
+-(void)updatedSaveData;
 @property (nonatomic, readwrite) NSNumber *autoUpdateInterval;
 @end
