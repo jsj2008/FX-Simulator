@@ -84,14 +84,14 @@
     return [self initWithForexDataArray:[_forexDataArray subarrayWithRange:NSMakeRange(getStartIndex, count)]];
 }
 
-- (Rate *)maxRate
+- (double)maxRate
 {
-    return [_forexDataArray valueForKeyPath:@"@max.high"];
+    return [[_forexDataArray valueForKeyPath:@"@max.high.rateValue"] doubleValue];
 }
 
-- (Rate *)minRate
+- (double)minRate
 {
-    return (Rate *)[_forexDataArray valueForKeyPath:@"@min.low"];
+    return [[_forexDataArray valueForKeyPath:@"@min.low.rateValue"] doubleValue];
 }
 
 @end

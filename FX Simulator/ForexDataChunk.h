@@ -16,8 +16,8 @@
 - (instancetype)initWithForexDataArray:(NSArray *)array;
 - (void)enumerateObjectsUsingBlock:(void (^)(ForexHistoryData *obj))block;
 - (ForexDataChunk *)getForexDataLimit:(NSUInteger)count;
-- (Rate *)minRate;
-- (Rate *)maxRate;
+- (double)minRate;
+- (double)maxRate;
 @property (nonatomic, readonly) NSUInteger count;
 @property (nonatomic, readonly) ForexHistoryData *current;
 @end

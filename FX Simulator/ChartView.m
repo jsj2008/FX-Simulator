@@ -46,7 +46,7 @@
         return;
     }
     
-    [_candleChart strokeIndicatorFromForexDataArray:self.chartDataChunk displayForexDataCount:50 displaySize:self.frame.size];
+    [_candleChart strokeIndicatorFromForexDataArray:self.chartDataChunk displayForexDataCount:40 displaySize:self.frame.size];
     
     //NSArray *candles = [CandlesFactory createCandlesFromForexHistoryDataArray:self.chartDataArray chartViewWidth:self.frame.size.width chartViewHeight:self.frame.size.height];
     
