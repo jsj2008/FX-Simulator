@@ -10,7 +10,7 @@
 
 @implementation SimpleMovingAverage
 
-- (void)strokeIndicatorFromForexDataArray:(ForexDataArray *)array displayPointCount:(NSInteger)count displaySize:(CGSize)size
+- (void)strokeIndicatorFromForexDataArray:(ForexDataChunk *)array displayPointCount:(NSInteger)count displaySize:(CGSize)size
 {
     
 }

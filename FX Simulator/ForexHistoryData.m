@@ -26,6 +26,8 @@
         _close = [[Rate alloc] initWithRateValue:[rs doubleForColumn:@"close"] currencyPair:currencyPair timestamp:closeTimestamp];
         _high = [[Rate alloc] initWithRateValue:[rs doubleForColumn:@"high"] currencyPair:currencyPair timestamp:nil];
         _low = [[Rate alloc] initWithRateValue:[rs doubleForColumn:@"low"] currencyPair:currencyPair timestamp:nil];
+        
+        _previous = [ForexHistoryData new];
     }
     
     return self;
@@ -39,6 +41,8 @@
         _close = ((ForexHistoryData*)[array lastObject]).close;
         _high = [[Rate alloc] initWithRateValue:[ForexHistoryDataArrayUtils maxRateOfArray:array] currencyPair:_currencyPair timestamp:nil];
         _low = [[Rate alloc] initWithRateValue:[ForexHistoryDataArrayUtils minRateOfArray:array] currencyPair:_currencyPair timestamp:nil];
+        
+        _previous = [ForexHistoryData new];
     }
     
     return self;

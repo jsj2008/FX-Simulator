@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+@class ForexDataChunk;
+
 @interface CandlesFactory : NSObject
-+(NSArray*)createCandlesFromForexHistoryDataArray:(NSArray*)forexHistoryDataArray chartViewWidth:(float)width chartViewHeight:(float)height;
++(NSArray*)createCandlesFromForexHistoryDataChunk:(ForexDataChunk*)chunk displayForexDataCount:(NSInteger)count chartViewWidth:(float)width chartViewHeight:(float)height;
 @end

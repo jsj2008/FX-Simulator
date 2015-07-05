@@ -17,7 +17,7 @@
     
     UIBezierPath *rectangle =
     [UIBezierPath bezierPathWithRect:CGRectMake(self.rect.origin.x, self.rect.origin.y, self.rect.size.width, self.rect.size.height)];
-    //rectangle.lineWidth = 1;
+    rectangle.lineWidth = 0;
     [rectangle fill];
     [rectangle stroke];
     

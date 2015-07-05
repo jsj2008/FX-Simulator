@@ -12,13 +12,16 @@
 
 @class UIBezierPath;
 @class UIView;
-@class ForexDataArray;
+@class ForexDataChunk;
 
 /**
  @param count 画面に表示するForexDataの個数。
 */
 
 @protocol Indicator <NSObject>
-- (void)strokeIndicatorFromForexDataArray:(ForexDataArray *)array displayPointCount:(NSInteger)count displaySize:(CGSize)size;
-//-(UIBezierPath*)createPathFromMarket:(Market*)market displayPointCount:(NSInteger)count displaySize:(CGSize)size;
+- (void)strokeIndicatorFromForexDataArray:(ForexDataChunk *)array displayForexDataCount:(NSInteger)count displaySize:(CGSize)size;
+@end
+
+@interface Indicator : NSObject
+
 @end

@@ -20,6 +20,7 @@
 @end
 
 @class UIViewController;
+@class ForexDataChunk;
 @class ForexHistoryData;
 @class Rate;
 
@@ -65,7 +66,8 @@
 */
 @property (nonatomic) BOOL isAutoUpdate;
 @property (nonatomic, readonly) BOOL isStart;
-@property (nonatomic) NSArray* currentForexHistoryDataArray;
+@property (nonatomic) ForexDataChunk *currentForexDataChunk;
+//@property (nonatomic) NSArray* currentForexHistoryDataArray;
 @property (nonatomic) ForexHistoryData *currentForexHistoryData;
 @property (nonatomic, readonly) int currentLoadedRowid;
 @property (nonatomic, readwrite) NSNumber *autoUpdateInterval;

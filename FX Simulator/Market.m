@@ -13,13 +13,16 @@
 #import "MarketTimeManager.h"
 #import "CurrencyPair.h"
 #import "Rate.h"
+#import "Setting.h"
 #import "MarketTime.h"
+#import "ForexDataChunk.h"
 #import "ForexHistoryFactory.h"
 #import "ForexHistory.h"
 #import "ForexHistoryData.h"
 #import "Rates.h"
 
 
+static NSInteger kMaxForexDataStore;
 static NSString * const kKeyPath = @"currentLoadedRowid";
 
 @interface Market ()
@@ -32,6 +35,11 @@ static NSString * const kKeyPath = @"currentLoadedRowid";
     NSMutableArray *_observers;
     ForexHistory *forexHistory;
     ForexHistoryData *_lastData;
+}
+
++(void)initialize
+{
+    kMaxForexDataStore = [Setting maxDisplayForexDataCountOfChartView] + [Setting maxIndicatorTerm] - 1;
 }
 
 -(id)init
@@ -73,7 +81,7 @@ static NSString * const kKeyPath = @"currentLoadedRowid";
     return [[[Rates alloc] initWithBidRtae:self.currentForexHistoryData.close] askRate];
 }
 
-- (NSArray *)getForexDataLimit:(NSInteger)count
+/*- (NSArray *)getForexDataLimit:(NSInteger)count
 {
     NSInteger lastIndex = self.currentForexHistoryDataArray.count - 1;
     NSInteger getStartIndex = lastIndex - count + 1;
@@ -83,7 +91,7 @@ static NSString * const kKeyPath = @"currentLoadedRowid";
     }
     
     return [self.currentForexHistoryDataArray subarrayWithRange:NSMakeRange(getStartIndex, lastIndex)];
-}
+}*/
 
 -(void)setDefaultData
 {
@@ -146,9 +154,12 @@ static NSString * const kKeyPath = @"currentLoadedRowid";
 
 -(void)setMarketData
 {
-    int getDataCount = 40; // MarketがあらかじめForexHistoryから取得するデータ数
-    self.currentForexHistoryDataArray = [forexHistory selectMaxRowid:_currentLoadedRowid limit:getDataCount];
-    self.currentForexHistoryData = [self.currentForexHistoryDataArray lastObject];
+    int getDataCount = kMaxForexDataStore; // MarketがあらかじめForexHistoryから取得するデータ数
+    
+    self.currentForexDataChunk = [forexHistory selectMaxRowid:_currentLoadedRowid limit:getDataCount];
+    self.currentForexHistoryData = self.currentForexDataChunk.current;
+    /*self.currentForexHistoryDataArray = [forexHistory selectMaxRowid:_currentLoadedRowid limit:getDataCount];
+    self.currentForexHistoryData = [self.currentForexHistoryDataArray lastObject];*/
 }
 
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context

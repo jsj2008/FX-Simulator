@@ -53,4 +53,12 @@
  その通貨と時間軸で、シュミレーションを開始できる時間の範囲。
 */
 +(FXSTimeRange*)rangeForCurrencyPair:(CurrencyPair*)currencyPair timeScale:(MarketTimeScale*)timeScale;
+/**
+ ChartView(SubChart含む)に表示するForexDataの最大数。
+*/
++ (NSUInteger)maxDisplayForexDataCountOfChartView;
+/**
+ インジケーターに使える、最大の期間。
+*/
++ (NSUInteger)maxIndicatorTerm;
 @end

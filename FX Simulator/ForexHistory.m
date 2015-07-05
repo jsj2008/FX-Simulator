@@ -11,6 +11,8 @@
 #import "MarketTime.h"
 #import "MarketTimeScale.h"
 #import "ForexDatabase.h"
+#import "ForexDataChunk.h"
+#import "ForexHistoryData.h"
 #import "FMDatabase.h"
 #import "FMResultSet.h"
 #import "CurrencyPair.h"
@@ -58,7 +60,7 @@ static const int cacheSize = 300;
     return self;
 }
 
--(NSArray*)selectMaxRowid:(int)rowid limit:(int)limit
+-(ForexDataChunk*)selectMaxRowid:(int)rowid limit:(int)limit
 {
     int rangeStart = rowid - limit + 1;
     NSRange range = NSMakeRange(rangeStart, limit);
@@ -77,7 +79,7 @@ static const int cacheSize = 300;
         
         NSString *forexHistoryTableName = [ForexHistoryUtils createTableName:selectConfig.currencyPair.toCodeString timeScale:selectConfig.timeScale];
         
-        NSString *sql = [NSString stringWithFormat:@"SELECT rowid,* FROM %@ WHERE rowid >= %d AND rowid <= %d", forexHistoryTableName, startID, endID];
+        NSString *sql = [NSString stringWithFormat:@"SELECT rowid,* FROM %@ WHERE rowid >= %d AND rowid <= %d ORDER BY close_minute_close_timestamp DESC", forexHistoryTableName, startID, endID];
         
         [forexDatabase open];
         
@@ -93,8 +95,7 @@ static const int cacheSize = 300;
         [cache override:array config:selectConfig];
     }
     
-    
-    return [array copy];
+    return [[ForexDataChunk alloc] initWithForexDataArray:array];
 }
 
 -(NSArray*)selectMaxCloseTimestamp:(int)timestamp limit:(int)num

@@ -11,7 +11,7 @@
 		700360151AA8C0CE00A57959 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 700360141AA8C0CE00A57959 /* iAd.framework */; };
 		70042C641B47ABBC00C1A22E /* SimpleMovingAverage.m in Sources */ = {isa = PBXBuildFile; fileRef = 70042C631B47ABBC00C1A22E /* SimpleMovingAverage.m */; };
 		70042C671B47FA1500C1A22E /* IndicatorUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 70042C661B47FA1500C1A22E /* IndicatorUtils.m */; };
-		70042C6D1B480D6800C1A22E /* ForexDataArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 70042C6C1B480D6800C1A22E /* ForexDataArray.m */; };
+		70042C6D1B480D6800C1A22E /* ForexDataChunk.m in Sources */ = {isa = PBXBuildFile; fileRef = 70042C6C1B480D6800C1A22E /* ForexDataChunk.m */; };
 		700B95851B0C3C97003F160B /* InputTradeLotViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 700B95841B0C3C97003F160B /* InputTradeLotViewController.m */; };
 		7033C5D61B469F56005EF07B /* NSNumber+FXSNumberConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 7033C5D51B469F56005EF07B /* NSNumber+FXSNumberConverter.m */; };
 		7041B7111B2EEDAD00DD64FE /* Account.m in Sources */ = {isa = PBXBuildFile; fileRef = 7041B7101B2EEDAD00DD64FE /* Account.m */; };
@@ -182,8 +182,8 @@
 		70042C631B47ABBC00C1A22E /* SimpleMovingAverage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleMovingAverage.m; sourceTree = "<group>"; };
 		70042C651B47FA1500C1A22E /* IndicatorUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IndicatorUtils.h; sourceTree = "<group>"; };
 		70042C661B47FA1500C1A22E /* IndicatorUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IndicatorUtils.m; sourceTree = "<group>"; };
-		70042C6B1B480D6800C1A22E /* ForexDataArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForexDataArray.h; sourceTree = "<group>"; };
-		70042C6C1B480D6800C1A22E /* ForexDataArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForexDataArray.m; sourceTree = "<group>"; };
+		70042C6B1B480D6800C1A22E /* ForexDataChunk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForexDataChunk.h; sourceTree = "<group>"; };
+		70042C6C1B480D6800C1A22E /* ForexDataChunk.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForexDataChunk.m; sourceTree = "<group>"; };
 		700B95831B0C3C97003F160B /* InputTradeLotViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputTradeLotViewController.h; sourceTree = "<group>"; };
 		700B95841B0C3C97003F160B /* InputTradeLotViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InputTradeLotViewController.m; sourceTree = "<group>"; };
 		7033C5D41B469F56005EF07B /* NSNumber+FXSNumberConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumber+FXSNumberConverter.h"; sourceTree = "<group>"; };
@@ -625,8 +625,8 @@
 				70042C631B47ABBC00C1A22E /* SimpleMovingAverage.m */,
 				70042C651B47FA1500C1A22E /* IndicatorUtils.h */,
 				70042C661B47FA1500C1A22E /* IndicatorUtils.m */,
-				70042C6B1B480D6800C1A22E /* ForexDataArray.h */,
-				70042C6C1B480D6800C1A22E /* ForexDataArray.m */,
+				70042C6B1B480D6800C1A22E /* ForexDataChunk.h */,
+				70042C6C1B480D6800C1A22E /* ForexDataChunk.m */,
 				7002F4A01B48D77000AF9DA7 /* CandleChart.h */,
 				7002F4A11B48D77000AF9DA7 /* CandleChart.m */,
 				7002F4A31B48D7A200AF9DA7 /* Indicator.h */,
@@ -1094,7 +1094,7 @@
 				705DCE4B1AE7C84300BCF710 /* Rates.m in Sources */,
 				70D2FBD91A9F57CB00CAB509 /* TableNameFormatter.m in Sources */,
 				70D2FC441A9F591600CAB509 /* Spread.m in Sources */,
-				70042C6D1B480D6800C1A22E /* ForexDataArray.m in Sources */,
+				70042C6D1B480D6800C1A22E /* ForexDataChunk.m in Sources */,
 				70D2FB9F1A9F57A000CAB509 /* ForexHistoryData.m in Sources */,
 				7076F5AA1AECCDB7004CC6BA /* SetCurrencyPairViewController.m in Sources */,
 				709BC75E1B0700320059C940 /* SetAutoUpdateIntervalViewController.m in Sources */,

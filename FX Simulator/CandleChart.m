@@ -10,15 +10,15 @@
 
 #import "Candle.h"
 #import "CandlesFactory.h"
-#import "ForexDataArray.h"
+#import "ForexDataChunk.h"
 
 @implementation CandleChart
 
-- (void)strokeIndicatorFromForexDataArray:(ForexDataArray *)array displayPointCount:(NSInteger)count displaySize:(CGSize)size
+- (void)strokeIndicatorFromForexDataArray:(ForexDataChunk *)array displayForexDataCount:(NSInteger)count displaySize:(CGSize)size
 {
-    NSArray *displayForexData = [array getForexDataLimit:count];
+    ForexDataChunk *displayForexDataChunk = [array getForexDataLimit:count];
     
-    NSArray *candles = [CandlesFactory createCandlesFromForexHistoryDataArray:displayForexData chartViewWidth:size.width chartViewHeight:size.height];
+    NSArray *candles = [CandlesFactory createCandlesFromForexHistoryDataChunk:displayForexDataChunk displayForexDataCount:count chartViewWidth:size.width chartViewHeight:size.height];
     
     for (Candle *candle in candles) {
         [candle stroke];

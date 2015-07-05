@@ -17,6 +17,7 @@
 #import "MarketTimeScale.h"
 #import "Rate.h"
 
+
 static NSDictionary *spreadRateDic;
 
 @implementation Setting
@@ -194,6 +195,16 @@ static NSDictionary *spreadRateDic;
     MarketTime *rangeEnd = [[forexHistory maxOpenTime] addDay:-50];
     
     return [[FXSTimeRange alloc] initWithRangeStart:rangeStart end:rangeEnd];
+}
+
++ (NSUInteger)maxDisplayForexDataCountOfChartView
+{
+    return 250;
+}
+
++ (NSUInteger)maxIndicatorTerm
+{
+    return 200;
 }
 
 @end
