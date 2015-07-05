@@ -12,13 +12,13 @@
 //#import "DataSourcettt.h"
 //@class ForexHistoricalDataResultSet;
 
-@class ForexDataArray;
+@class ForexDataChunk;
 
 @interface ChartView : UIView
 //-(id)initWithFrame:(CGRect)frame;
 //-(void)update:(CurrencyDatabaseResultSet*)_resultsSet;
 //-(void)updateChart:(NSArray*)chartDataArray;
-@property (nonatomic) ForexDataArray *chartDataArray;
+@property (nonatomic) ForexDataChunk *chartDataChunk;
 //-(void)update;
 //-(void)updateTime:(int)time;
 //-(void)drawRect:(CGRect)rect;

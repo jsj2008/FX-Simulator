@@ -12,7 +12,7 @@
 #import "Candle.h"
 #import "CandleChart.h"
 #import "CandlesFactory.h"
-#import "ForexDataArray.h"
+#import "ForexDataChunk.h"
 #import "IndicatorUtils.h"
 
 
@@ -32,7 +32,7 @@
 {
     if (self = [super initWithCoder:aDecoder]) {
         _candleChart = [CandleChart new];
-        _chartDataArray = [ForexDataArray new];
+        _chartDataChunk = [ForexDataChunk new];
     }
     
     return self;
@@ -42,11 +42,11 @@
 {
     CGContextRef context = UIGraphicsGetCurrentContext();
     
-    if (self.chartDataArray == nil) {
+    if (self.chartDataChunk == nil) {
         return;
     }
     
-    [_candleChart strokeIndicatorFromForexDataArray:self.chartDataArray displayPointCount:self.chartDataArray.array.count displaySize:self.frame.size];
+    [_candleChart strokeIndicatorFromForexDataArray:self.chartDataChunk displayForexDataCount:50 displaySize:self.frame.size];
     
     //NSArray *candles = [CandlesFactory createCandlesFromForexHistoryDataArray:self.chartDataArray chartViewWidth:self.frame.size.width chartViewHeight:self.frame.size.height];
     

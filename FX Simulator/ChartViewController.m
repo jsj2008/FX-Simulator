@@ -10,7 +10,7 @@
 
 #import "ChartView.h"
 #import "ChartViewData.h"
-#import "ForexDataArray.h"
+#import "ForexDataChunk.h"
 #import "Market.h"
 
 @interface ChartViewController ()
@@ -87,8 +87,9 @@
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
     if ([keyPath isEqualToString:@"currentLoadedRowid"] && [object isKindOfClass:[Market class]]) {
-        _chartViewData.chartDataArray = ((Market*)object).currentForexHistoryDataArray;
-        self.chartView.chartDataArray.array = _chartViewData.chartDataArray;
+        /*_chartViewData.chartDataArray = ((Market*)object).currentForexHistoryDataArray;
+        self.chartView.chartDataArray.array = _chartViewData.chartDataArray;*/
+        self.chartView.chartDataChunk = ((Market*)object).currentForexDataChunk;
         [self.chartView setNeedsDisplay];
     }
 }
@@ -101,7 +102,7 @@
 
 -(void)updatedSaveData
 {
-    self.chartView.chartDataArray = nil;
+    self.chartView.chartDataChunk = nil;
     [self.chartView setNeedsDisplay];
 }
 
