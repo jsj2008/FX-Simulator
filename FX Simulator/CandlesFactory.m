@@ -25,8 +25,8 @@
     float spaceBetweenCandles = 2.0;
     int numberOfCandle = count;
     float candleWidth = (width-spaceBetweenCandles*numberOfCandle-spaceBetweenCandles)/numberOfCandle;
-    double maxRate = [chunk maxRate].rateValue;
-    double minRate = [chunk minRate].rateValue;
+    double maxRate = [chunk maxRate];
+    double minRate = [chunk minRate];
     /*double maxRate = [ForexHistoryDataArrayUtils maxRateOfArray:forexHistoryDataArray];
     double minRate = [ForexHistoryDataArrayUtils minRateOfArray:forexHistoryDataArray];*/
     float pipDispSize = height/(maxRate - minRate);
