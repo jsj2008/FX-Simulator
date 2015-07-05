@@ -73,6 +73,18 @@ static NSString * const kKeyPath = @"currentLoadedRowid";
     return [[[Rates alloc] initWithBidRtae:self.currentForexHistoryData.close] askRate];
 }
 
+- (NSArray *)getForexDataLimit:(NSInteger)count
+{
+    NSInteger lastIndex = self.currentForexHistoryDataArray.count - 1;
+    NSInteger getStartIndex = lastIndex - count + 1;
+    
+    if (lastIndex < 0 || getStartIndex < 0) {
+        return nil;
+    }
+    
+    return [self.currentForexHistoryDataArray subarrayWithRange:NSMakeRange(getStartIndex, lastIndex)];
+}
+
 -(void)setDefaultData
 {
     /// observerが全て更新され、Marketのデータがセットされる。
