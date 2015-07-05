@@ -13,6 +13,8 @@
 #import "ForexHistoryData.h"
 #import "Rate.h"
 
+#import "IndicatorUtils.h"
+
 @implementation CandlesFactory
 
 +(NSMutableArray*)createCandlesFromForexHistoryDataArray:(NSArray *)forexHistoryDataArray chartViewWidth:(float)width chartViewHeight:(float)height

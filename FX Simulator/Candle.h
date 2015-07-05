@@ -24,6 +24,7 @@
 @end*/
 
 @interface Candle : NSObject
+-(void)stroke;
 @property (nonatomic) CGRect rect;
 @property (nonatomic) CGPoint highLineTop;
 @property (nonatomic) CGPoint highLineBottom;

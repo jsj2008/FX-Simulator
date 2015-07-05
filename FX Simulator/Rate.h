@@ -24,6 +24,8 @@
  このRateにスプレッドを追加したRateを返す。
 */
 -(Rate*)addSpread:(Spread*)spread;
+-(Rate*)subRate:(Rate*)rate;
+-(NSComparisonResult)compare:(Rate*)rate;
 -(Money*)multiplyPositionSize:(PositionSize*)positionSize;
 -(NSString*)toDisplayString;
 @property (nonatomic, readonly) MarketTime *timestamp;

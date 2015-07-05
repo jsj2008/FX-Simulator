@@ -10,6 +10,7 @@
 
 #import "ChartView.h"
 #import "ChartViewData.h"
+#import "ForexDataArray.h"
 #import "Market.h"
 
 @interface ChartViewController ()
@@ -87,7 +88,7 @@
 {
     if ([keyPath isEqualToString:@"currentLoadedRowid"] && [object isKindOfClass:[Market class]]) {
         _chartViewData.chartDataArray = ((Market*)object).currentForexHistoryDataArray;
-        self.chartView.chartDataArray = _chartViewData.chartDataArray;
+        self.chartView.chartDataArray.array = _chartViewData.chartDataArray;
         [self.chartView setNeedsDisplay];
     }
 }

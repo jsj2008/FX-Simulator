@@ -50,6 +50,24 @@
     //return [[Rate alloc] initWithRateValue:(self.rateValue + spread.spreadValue) currencyPair:self.currencyPair timestamp:self.timestamp];
 }
 
+-(Rate*)subRate:(Rate *)rate
+{
+    if (rate == nil) {
+        return nil;
+    }
+    
+    if (![self.currencyPair isEqualCurrencyPair:rate.currencyPair]) {
+        return nil;
+    }
+    
+    return [[Rate alloc] initWithRateValue:self.rateValue - rate.rateValue currencyPair:self.currencyPair timestamp:self.timestamp];
+}
+
+-(NSComparisonResult)compare:(Rate*)rate
+{
+    return [self.rateValueObj compare:rate.rateValueObj];
+}
+
 -(Money*)multiplyPositionSize:(PositionSize*)positionSize
 {
     return [[Money alloc] initWithAmount:(self.rateValue * positionSize.sizeValue) currency:self.currencyPair.quoteCurrency];

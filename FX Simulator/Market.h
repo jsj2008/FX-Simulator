@@ -39,6 +39,7 @@
  最新のCloseのAskレートを取得。
 */
 -(Rate*)getCurrentAskRate;
+-(NSArray*)getForexDataLimit:(NSInteger)count;
 /**
  Startした瞬間、時間が進み、Observerのメソッドが呼ばれ、それぞれのObserverに値がセットされる。
 */
@@ -52,7 +53,9 @@
 */
 -(void)resume;
 -(void)updatedSaveData;
-/// 時間を進める。
+/** 
+ 時間を進める。
+*/
 -(void)add;
 -(BOOL)didLoadLastData;
 @property (nonatomic, weak) id<MarketDelegate> delegate;
