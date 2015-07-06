@@ -30,5 +30,4 @@
 @property (nonatomic, readonly) Rate *close;
 @property (nonatomic, readonly) NSString *displayOpenTimestamp;
 @property (nonatomic, readonly) NSString *displayCloseTimestamp;
-@property (nonatomic, readwrite) ForexHistoryData *previous;
 @end

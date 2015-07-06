@@ -12,10 +12,9 @@
 @class Rate;
 
 @interface ForexDataChunk : NSObject
-- (instancetype)initWithHeadForexData:(ForexHistoryData *)data;
 - (instancetype)initWithForexDataArray:(NSArray *)array;
-- (void)enumerateObjectsUsingBlock:(void (^)(ForexHistoryData *obj))block;
-- (ForexDataChunk *)getForexDataLimit:(NSUInteger)count;
+- (void)enumerateObjectsUsingBlock:(void (^)(ForexHistoryData *obj, NSUInteger idx))block;
+- (ForexDataChunk *)getForexDataLimit:(NSUInteger)limit;
 - (double)minRate;
 - (double)maxRate;
 @property (nonatomic, readonly) NSUInteger count;

@@ -11,5 +11,5 @@
 
 
 @interface SimpleMovingAverage : NSObject <Indicator>
-- (void)strokeIndicatorFromForexDataArray:(ForexDataChunk *)array displayPointCount:(NSInteger)count displaySize:(CGSize)size;
+- (void)strokeIndicatorFromForexDataChunk:(ForexDataChunk *)chunk displayPointCount:(NSInteger)count displaySize:(CGSize)size;
 @end
