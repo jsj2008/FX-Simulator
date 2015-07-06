@@ -19,7 +19,7 @@
 */
 
 @protocol Indicator <NSObject>
-- (void)strokeIndicatorFromForexDataArray:(ForexDataChunk *)array displayForexDataCount:(NSInteger)count displaySize:(CGSize)size;
+- (void)strokeIndicatorFromForexDataChunk:(ForexDataChunk *)chunk displayForexDataCount:(NSInteger)count displaySize:(CGSize)size;
 @end
 
 @interface Indicator : NSObject

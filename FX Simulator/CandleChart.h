@@ -10,6 +10,6 @@
 #import "Indicator.h"
 
 @interface CandleChart : NSObject <Indicator>
-- (void)strokeIndicatorFromForexDataArray:(ForexDataChunk *)array displayForexDataCount:(NSInteger)count displaySize:(CGSize)size;
+- (void)strokeIndicatorFromForexDataChunk:(ForexDataChunk *)chunk displayForexDataCount:(NSInteger)count displaySize:(CGSize)size;
 //-(UIBezierPath*)createPathFromMarket:(Market*)market displayPointCount:(NSInteger)count displaySize:(CGSize)size;
 @end

@@ -31,9 +31,8 @@
     double minRate = [ForexHistoryDataArrayUtils minRateOfArray:forexHistoryDataArray];*/
     float pipDispSize = height/(maxRate - minRate);
     
-    __block int candleNumber = 0;
-    
-    [chunk enumerateObjectsUsingBlock:^(ForexHistoryData *obj) {
+    [chunk enumerateObjectsUsingBlock:^(ForexHistoryData *obj, NSUInteger idx) {
+        int candleNumber = idx;
         double open = obj.open.rateValue;
         double close = obj.close.rateValue;
         double high = obj.high.rateValue;
@@ -95,8 +94,6 @@
         candle.forexHistoryData = obj;
         
         [array addObject:candle];
-        
-        candleNumber++;
     }];
     /*
     //for (ForexHistoryData* forexHistoryData in forexHistoryDataArray) {

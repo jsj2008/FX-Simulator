@@ -14,9 +14,9 @@
 
 @implementation CandleChart
 
-- (void)strokeIndicatorFromForexDataArray:(ForexDataChunk *)array displayForexDataCount:(NSInteger)count displaySize:(CGSize)size
+- (void)strokeIndicatorFromForexDataChunk:(ForexDataChunk *)chunk displayForexDataCount:(NSInteger)count displaySize:(CGSize)size
 {
-    ForexDataChunk *displayForexDataChunk = [array getForexDataLimit:count];
+    ForexDataChunk *displayForexDataChunk = [chunk getForexDataLimit:count];
     
     NSArray *candles = [CandlesFactory createCandlesFromForexHistoryDataChunk:displayForexDataChunk displayForexDataCount:count chartViewWidth:size.width chartViewHeight:size.height];
     

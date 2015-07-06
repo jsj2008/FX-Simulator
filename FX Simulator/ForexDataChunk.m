@@ -11,77 +11,42 @@
 #import "ForexHistoryData.h"
 
 @implementation ForexDataChunk {
-    ForexHistoryData *_headForexData;
     NSArray *_forexDataArray;
-}
-
-- (instancetype)initWithHeadForexData:(ForexHistoryData *)data
-{
-    if (data == nil) {
-        return nil;
-    }
-    
-    if (self = [super init]) {
-        _headForexData = data;
-        _current = _headForexData;
-        NSMutableArray *forexDataArray = [NSMutableArray array];
-        [self forexDataList:_headForexData UsingBlock:^(ForexHistoryData *obj) {
-            [forexDataArray addObject:obj];
-        }];
-        _forexDataArray = [forexDataArray copy];
-        _count = _forexDataArray.count;
-    }
-    
-    return self;
 }
 
 - (instancetype)initWithForexDataArray:(NSArray *)array
 {
-    __block ForexHistoryData *headData = nil;
-    __block ForexHistoryData *previous;
-        
-    [array enumerateObjectsUsingBlock:^(ForexHistoryData *obj, NSUInteger idx, BOOL *stop) {
-        if (headData == nil) {
-            headData = obj;
-            previous = headData;
-        } else {
-            previous.previous = obj;
-            previous = previous.previous;
-        }
-    }];
-    
-    return [self initWithHeadForexData:headData];
-}
-
-- (void)forexDataList:(ForexHistoryData*)data UsingBlock:(void (^)(ForexHistoryData *obj))block
-{
-    if (data == nil) {
-        return;
-    }
-    
-    block(data);
-    
-    [self forexDataList:data.previous UsingBlock:block];
-}
-
-- (void)enumerateObjectsUsingBlock:(void (^)(ForexHistoryData *obj))block
-{
-    [self forexDataList:_headForexData UsingBlock:block];
-}
-
-- (ForexDataChunk *)getForexDataLimit:(NSUInteger)count
-{
-    if ([self count] == 0 || count == 0) {
+    if (array.count == 0) {
         return nil;
     }
     
-    NSInteger getStartIndex = [self count] - count;
-    
-    if ([self count] < count) {
-        getStartIndex = 0;
+    if (self = [super init]) {
+        _forexDataArray = array;
+        _current = _forexDataArray.firstObject;
+        _count = _forexDataArray.count;
+    }
+
+    return self;
+}
+
+- (void)enumerateObjectsUsingBlock:(void (^)(ForexHistoryData *, NSUInteger))block
+{
+    [_forexDataArray enumerateObjectsUsingBlock:^(ForexHistoryData *obj, NSUInteger idx, BOOL *stop) {
+        block(obj, idx);
+    }];
+}
+
+- (ForexDataChunk *)getForexDataLimit:(NSUInteger)limit
+{
+    if ([self count] == 0 || limit == 0) {
+        return nil;
     }
     
-    return [self initWithForexDataArray:[_forexDataArray subarrayWithRange:NSMakeRange(getStartIndex, count)]];
+    if ([self count] < limit) {
+        limit = [self count];
+    }
+    
+    return [self initWithForexDataArray:[_forexDataArray subarrayWithRange:NSMakeRange(0, limit)]];
 }
 
 - (double)maxRate
