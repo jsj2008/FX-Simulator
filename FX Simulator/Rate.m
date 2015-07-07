@@ -40,6 +40,19 @@
     }
 }
 
+- (Rate *)addRate:(Rate *)rate
+{
+    if (rate == nil) {
+        return nil;
+    }
+    
+    if (![self.currencyPair isEqualCurrencyPair:rate.currencyPair]) {
+        return nil;
+    }
+    
+    return [[Rate alloc] initWithRateValue:self.rateValue + rate.rateValue currencyPair:self.currencyPair timestamp:self.timestamp];
+}
+
 -(Rate*)addSpread:(Spread*)spread
 {
     if (![self.currencyPair isEqualCurrencyPair:spread.currencyPair]) {
@@ -50,9 +63,18 @@
     //return [[Rate alloc] initWithRateValue:(self.rateValue + spread.spreadValue) currencyPair:self.currencyPair timestamp:self.timestamp];
 }
 
+- (Rate *)divide:(NSUInteger)num
+{
+    return [[Rate alloc] initWithRateValue:self.rateValue/num  currencyPair:self.currencyPair timestamp:self.timestamp];
+}
+
 -(Rate*)subRate:(Rate *)rate
 {
-    if (rate == nil) {
+    Rate *addRate = [[Rate alloc] initWithRateValue:-(rate.rateValue) currencyPair:self.currencyPair timestamp:self.timestamp];
+    
+    return [self addRate:addRate];
+    
+    /*if (rate == nil) {
         return nil;
     }
     
@@ -60,7 +82,7 @@
         return nil;
     }
     
-    return [[Rate alloc] initWithRateValue:self.rateValue - rate.rateValue currencyPair:self.currencyPair timestamp:self.timestamp];
+    return [[Rate alloc] initWithRateValue:self.rateValue - rate.rateValue currencyPair:self.currencyPair timestamp:self.timestamp];*/
 }
 
 -(NSComparisonResult)compare:(Rate*)rate

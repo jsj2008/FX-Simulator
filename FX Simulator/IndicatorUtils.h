@@ -18,5 +18,6 @@
  @param count レートポイントが表示される個数。
  @param size 表示するViewのサイズ。
 */
-+(CGPoint)getChartViewPointFromRate:(Rate*)rate ratePointNumber:(NSInteger)num minRate:(Rate*)minRate maxRate:(Rate*)maxRate ratePointCount:(NSInteger)count viewSize:(CGSize)size;
++ (CGPoint)getChartViewPointFromRate:(Rate*)rate ratePointNumber:(NSInteger)num minRate:(double)minRate maxRate:(double)maxRate ratePointCount:(NSInteger)count viewSize:(CGSize)size;
++ (CGPoint)getMiddlePoint:(CGPoint)p1 nextPoint:(CGPoint)p2;
 @end

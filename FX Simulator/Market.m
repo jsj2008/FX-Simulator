@@ -170,10 +170,12 @@ static NSString * const kKeyPath = @"currentLoadedRowid";
         
         [self setMarketData];
         
+        // Market更新前を通知。
         if ([self.delegate respondsToSelector:@selector(willNotifyObservers)]) {
             [self.delegate willNotifyObservers];
         }
         
+        // Market更新。
         self.currentLoadedRowid = _currentLoadedRowid;
         // SimulatorManager
         // observeの呼ばれる順番は不規則
@@ -181,6 +183,7 @@ static NSString * const kKeyPath = @"currentLoadedRowid";
         // MarketTimeの変化でのみcurrentTimestampが変化
         // currentTimestampの変化で、MarketのObserverを更新
         
+        // Market更新後を通知。
         if ([self.delegate respondsToSelector:@selector(didNotifyObservers)]) {
             [self.delegate didNotifyObservers];
         }
