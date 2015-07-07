@@ -25,8 +25,8 @@
     float spaceBetweenCandles = 2.0;
     int numberOfCandle = count;
     float candleWidth = (width-spaceBetweenCandles*numberOfCandle-spaceBetweenCandles)/numberOfCandle;
-    double maxRate = [chunk maxRate];
-    double minRate = [chunk minRate];
+    double maxRate = [chunk getMaxRateLimit:count];
+    double minRate = [chunk getMinRateLimit:count];
     /*double maxRate = [ForexHistoryDataArrayUtils maxRateOfArray:forexHistoryDataArray];
     double minRate = [ForexHistoryDataArrayUtils minRateOfArray:forexHistoryDataArray];*/
     float pipDispSize = height/(maxRate - minRate);
@@ -94,7 +94,7 @@
         candle.forexHistoryData = obj;
         
         [array addObject:candle];
-    }];
+    } limit:count resultReverse:NO];
     /*
     //for (ForexHistoryData* forexHistoryData in forexHistoryDataArray) {
         double open = forexHistoryData.open.rateValue;

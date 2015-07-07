@@ -44,6 +44,31 @@
     return self;
 }
 
+- (Rate *)getRateForType:(RateType)type
+{
+    Rate *result;
+    
+    switch (type) {
+        case Open:
+            result = self.open;
+            break;
+            
+        case High:
+            result = self.high;
+            break;
+            
+        case Low:
+            result = self.low;
+            break;
+            
+        case Close:
+            result = self.close;
+            break;
+    }
+    
+    return result;
+}
+
 -(NSString*)displayOpenTimestamp
 {
     return self.open.timestamp.toDisplayTimeString;

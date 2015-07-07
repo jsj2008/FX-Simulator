@@ -16,9 +16,7 @@
 
 - (void)strokeIndicatorFromForexDataChunk:(ForexDataChunk *)chunk displayForexDataCount:(NSInteger)count displaySize:(CGSize)size
 {
-    ForexDataChunk *displayForexDataChunk = [chunk getForexDataLimit:count];
-    
-    NSArray *candles = [CandlesFactory createCandlesFromForexHistoryDataChunk:displayForexDataChunk displayForexDataCount:count chartViewWidth:size.width chartViewHeight:size.height];
+    NSArray *candles = [CandlesFactory createCandlesFromForexHistoryDataChunk:chunk displayForexDataCount:count chartViewWidth:size.width chartViewHeight:size.height];
     
     for (Candle *candle in candles) {
         [candle stroke];

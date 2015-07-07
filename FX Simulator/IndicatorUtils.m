@@ -12,16 +12,22 @@
 
 @implementation IndicatorUtils
 
-+(CGPoint)getChartViewPointFromRate:(Rate *)rate ratePointNumber:(NSInteger)num minRate:(Rate *)minRate maxRate:(Rate *)maxRate ratePointCount:(NSInteger)count viewSize:(CGSize)size
++ (CGPoint)getChartViewPointFromRate:(Rate *)rate ratePointNumber:(NSInteger)num minRate:(double)minRate maxRate:(double)maxRate ratePointCount:(NSInteger)count viewSize:(CGSize)size
 {
     float ratePointZoneWidth = size.width / count;
-    float positionX = num * ratePointZoneWidth + ratePointZoneWidth / 2;
+    // RatePointZoneの真ん中に、表示する。
+    float positionX = size.width - (num * ratePointZoneWidth + ratePointZoneWidth / 2);
     
-    float subResult = [maxRate subRate:minRate].rateValue;
+    float subResult = maxRate - minRate;
     float pipDispSize = size.height/subResult;
-    float positionY = [maxRate subRate:rate].rateValue * pipDispSize;
+    float positionY = (maxRate - rate.rateValue) * pipDispSize;
     
     return CGPointMake(positionX, positionY);
+}
+
++ (CGPoint)getMiddlePoint:(CGPoint)p1 nextPoint:(CGPoint)p2
+{
+    return CGPointMake((p1.x + p2.x) * 0.5, (p1.y + p2.y) * 0.5);
 }
 
 @end

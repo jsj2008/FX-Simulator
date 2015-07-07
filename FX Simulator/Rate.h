@@ -20,10 +20,12 @@
  このRateと対象のRateのCurrencyPairが同じかどうか。
 */
 -(BOOL)isEqualCurrencyPair:(Rate*)rate;
+- (Rate *)addRate:(Rate *)rate;
 /**
  このRateにスプレッドを追加したRateを返す。
 */
 -(Rate*)addSpread:(Spread*)spread;
+- (Rate *)divide:(NSUInteger)num;
 -(Rate*)subRate:(Rate*)rate;
 -(NSComparisonResult)compare:(Rate*)rate;
 -(Money*)multiplyPositionSize:(PositionSize*)positionSize;

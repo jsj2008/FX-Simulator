@@ -22,6 +22,3 @@
 - (void)strokeIndicatorFromForexDataChunk:(ForexDataChunk *)chunk displayForexDataCount:(NSInteger)count displaySize:(CGSize)size;
 @end
 
-@interface Indicator : NSObject
-
-@end
