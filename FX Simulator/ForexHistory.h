@@ -21,7 +21,8 @@
 
 @interface ForexHistory : NSObject
 -(id)initWithCurrencyPair:(CurrencyPair*)currencyPair timeScale:(MarketTimeScale*)timeScale;
--(ForexDataChunk*)selectMaxRowid:(int)rowid limit:(int)limit;
+- (ForexDataChunk *)selectCenterData:(ForexHistoryData *)data sideLimit:(NSUInteger)limit;
+- (ForexDataChunk *)selectMaxRowid:(int)rowid limit:(int)limit;
 -(NSArray*)selectMaxCloseTimestamp:(int)timestamp limit:(int)num;
 -(NSArray*)selectMaxCloseTimestamp:(int)maxTimestamp minOpenTimestamp:(int)minTimestamp;
 -(ForexHistoryData*)selectRowidLimitCloseTimestamp:(MarketTime*)maxTimestamp;

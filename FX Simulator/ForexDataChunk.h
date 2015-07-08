@@ -36,8 +36,12 @@
 
 //- (ForexDataChunk *)getForexDataLimit:(NSUInteger)limit;
 - (ForexDataChunk *)getForexDataChunkInRange:(NSRange)range;
-- (double)getMinRateLimit:(NSUInteger)limit;
-- (double)getMaxRateLimit:(NSUInteger)limit;
+- (Rate *)getMinRateLimit:(NSUInteger)limit;
+- (Rate *)getMaxRateLimit:(NSUInteger)limit;
+- (ForexDataChunk *)getChunkFromBaseData:(ForexHistoryData *)data relativePosition:(NSInteger)pos limit:(NSUInteger)limit;
+/*- (ForexDataChunk *)getChunkFromHeadData:(ForexHistoryData *)data limit:(NSUInteger)limit;
+- (ForexDataChunk *)getChunkFromHeadData:(ForexHistoryData *)data back:(NSUInteger)back limit:(NSUInteger)limit;
+- (ForexDataChunk *)getChunkFromNextDataOf:(ForexHistoryData *)data limit:(NSUInteger)limit;*/
 @property (nonatomic, readonly) NSUInteger count;
 @property (nonatomic, readonly) ForexHistoryData *current;
 @end

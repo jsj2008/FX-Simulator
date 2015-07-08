@@ -10,6 +10,7 @@
 
 @interface MarketTimeScale : NSObject
 -(id)initWithMinute:(int)minute;
+- (BOOL)isEqualToTimeScale:(MarketTimeScale *)timeScale;
 -(NSString*)toDisplayString;
 @property (nonatomic, readonly) int minute;
 @property (nonatomic, readonly) NSNumber *minuteValueObj;

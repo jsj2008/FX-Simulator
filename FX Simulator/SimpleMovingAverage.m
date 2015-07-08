@@ -10,6 +10,7 @@
 
 #import "ForexDataChunk.h"
 #import "IndicatorUtils.h"
+#import "Rate.h"
 
 @implementation SimpleMovingAverage {
     NSUInteger _term;
@@ -35,7 +36,6 @@
     __block CGPoint previousLoaded;
     
     [chunk enumerateObjectsAndAverageRatesUsingBlock:^(ForexHistoryData *obj, NSUInteger idx, Rate *average) {
-        
         CGPoint p = [IndicatorUtils getChartViewPointFromRate:average ratePointNumber:idx minRate:[chunk getMinRateLimit:count] maxRate:[chunk getMaxRateLimit:count] ratePointCount:count viewSize:size];
         
         if (idx == 0) {

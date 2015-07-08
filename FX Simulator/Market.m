@@ -16,6 +16,7 @@
 #import "Setting.h"
 #import "MarketTime.h"
 #import "ForexDataChunk.h"
+#import "ForexDataChunkStore.h"
 #import "ForexHistoryFactory.h"
 #import "ForexHistory.h"
 #import "ForexHistoryData.h"
@@ -23,7 +24,7 @@
 
 
 static NSInteger kMaxForexDataStore;
-static NSString * const kKeyPath = @"currentLoadedRowid";
+static NSString * const kKeyPath = @"currentForexHistoryData";
 
 @interface Market ()
 @property (nonatomic, readwrite) int currentLoadedRowid;
@@ -33,8 +34,10 @@ static NSString * const kKeyPath = @"currentLoadedRowid";
     SaveData *saveData;
     MarketTimeManager *_marketTimeManager;
     NSMutableArray *_observers;
+    ForexDataChunkStore *_forexDataChunkStore;
     ForexHistory *forexHistory;
     ForexHistoryData *_lastData;
+    ForexHistoryData *_startForexData;
 }
 
 +(void)initialize
@@ -55,12 +58,19 @@ static NSString * const kKeyPath = @"currentLoadedRowid";
 -(void)setInitData
 {
     saveData = [SaveLoader load];
+    
+    _forexDataChunkStore = [[ForexDataChunkStore alloc] initWithCurrencyPair:saveData.currencyPair timeScale:saveData.timeScale];
+    
     forexHistory = [ForexHistoryFactory createForexHistoryFromCurrencyPair:saveData.currencyPair timeScale:saveData.timeScale];
     _lastData = [forexHistory lastRecord];
+    _startForexData = [forexHistory selectRowidLimitCloseTimestamp:saveData.lastLoadedCloseTimestamp];
+    
     _marketTimeManager = [MarketTimeManager new];
     [_marketTimeManager addObserver:self];
-    _currentLoadedRowid = _marketTimeManager.currentLoadedRowid;
+    
+    //_currentLoadedRowid = _marketTimeManager.currentLoadedRowid;
     _isStart = NO;
+#warning ここでもMarket更新している。
     [self setMarketData];
 }
 
@@ -95,8 +105,35 @@ static NSString * const kKeyPath = @"currentLoadedRowid";
 
 -(void)setDefaultData
 {
+    self.currentForexDataChunk = [_forexDataChunkStore getChunkFromHeadData:_startForexData limit:kMaxForexDataStore];
+    
+    [self updateMarketForCurrentData:_startForexData];
+    
     /// observerが全て更新され、Marketのデータがセットされる。
-    self.currentLoadedRowid = _marketTimeManager.currentLoadedRowid;
+    //self.currentLoadedRowid = _marketTimeManager.currentLoadedRowid;
+}
+
+- (void)updateMarketForCurrentData:(ForexHistoryData *)data
+{
+    //self.currentForexDataChunk = [_forexDataChunkStore getChunkFromHeadData:self.currentForexHistoryData limit:kMaxForexDataStore];
+    
+    // Market更新前を通知。
+    if ([self.delegate respondsToSelector:@selector(willNotifyObservers)]) {
+        [self.delegate willNotifyObservers];
+    }
+    
+    // Market更新。
+    self.currentForexHistoryData = data;
+    // SimulatorManager
+    // observeの呼ばれる順番は不規則
+    // Marketの更新"直後"に実行したいものはObserverにしない
+    // MarketTimeの変化でのみcurrentTimestampが変化
+    // currentTimestampの変化で、MarketのObserverを更新
+    
+    // Market更新後を通知。
+    if ([self.delegate respondsToSelector:@selector(didNotifyObservers)]) {
+        [self.delegate didNotifyObservers];
+    }
 }
 
 -(void)start
@@ -166,27 +203,13 @@ static NSString * const kKeyPath = @"currentLoadedRowid";
 {
     if ([keyPath isEqualToString:@"currentLoadedRowid"] && [object isKindOfClass:[MarketTimeManager class]]) {
         
-        _currentLoadedRowid = [[object valueForKey:@"currentLoadedRowid"] intValue];
+        self.currentForexDataChunk = [_forexDataChunkStore getChunkFromNextDataOf:self.currentForexHistoryData limit:kMaxForexDataStore];
         
-        [self setMarketData];
-        
-        // Market更新前を通知。
-        if ([self.delegate respondsToSelector:@selector(willNotifyObservers)]) {
-            [self.delegate willNotifyObservers];
+        if (self.currentForexDataChunk == nil) {
+            return;
         }
         
-        // Market更新。
-        self.currentLoadedRowid = _currentLoadedRowid;
-        // SimulatorManager
-        // observeの呼ばれる順番は不規則
-        // Marketの更新"直後"に実行したいものはObserverにしない
-        // MarketTimeの変化でのみcurrentTimestampが変化
-        // currentTimestampの変化で、MarketのObserverを更新
-        
-        // Market更新後を通知。
-        if ([self.delegate respondsToSelector:@selector(didNotifyObservers)]) {
-            [self.delegate didNotifyObservers];
-        }
+        [self updateMarketForCurrentData:self.currentForexDataChunk.current];
     }
 }
 

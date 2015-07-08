@@ -11,6 +11,7 @@
 @class FMResultSet;
 @class CurrencyPair;
 @class Rate;
+@class MarketTimeScale;
 
 typedef NS_ENUM(NSUInteger, RateType) {
     Open = 1,
@@ -24,14 +25,16 @@ typedef NS_ENUM(NSUInteger, RateType) {
 */
 
 @interface ForexHistoryData : NSObject
--(id)initWithFMResultSet:(FMResultSet*)rs currencyPair:(CurrencyPair*)currencyPair;
+-(id)initWithFMResultSet:(FMResultSet*)rs currencyPair:(CurrencyPair*)currencyPair timeScale:(MarketTimeScale *)timeScale;
 - (Rate *)getRateForType:(RateType)type;
 /**
  ForexHistoryDataの配列から、さらに一つのForexHistoryDataを生成する。
 */
 -(id)initWithForexHistoryDataArray:(NSArray*)array;
+- (BOOL)isEqualToForexData:(ForexHistoryData *)data;
 @property (nonatomic, readonly) int ratesID;
 @property (nonatomic, readonly) CurrencyPair *currencyPair;
+@property (nonatomic, readonly) MarketTimeScale *timeScale;
 @property (nonatomic, readonly) Rate *open;
 @property (nonatomic, readonly) Rate *high;
 @property (nonatomic, readonly) Rate *low;

@@ -131,7 +131,7 @@
 
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {    
-    if ([keyPath isEqualToString:@"currentLoadedRowid"] && [object isKindOfClass:[Market class]]) {
+    if ([keyPath isEqualToString:@"currentForexHistoryData"] && [object isKindOfClass:[Market class]]) {
         Market *market = (Market*)object;
         [_tradeDataViewData updateForexHistoryData:market.currentForexHistoryData];
         self.profitAndLossLabel.text = _tradeDataViewData.displayProfitAndLoss;

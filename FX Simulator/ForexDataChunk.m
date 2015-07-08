@@ -274,18 +274,45 @@
     return [[ForexDataChunk alloc] initWithForexDataArray:[_forexDataArray subarrayWithRange:range]];
 }
 
-- (double)getMinRateLimit:(NSUInteger)limit
+- (Rate *)getMinRateLimit:(NSUInteger)limit
 {
-    NSArray *rangeArray = [self getArrayLimit:limit];
+    //NSArray *limitArray = [self getArrayLimit:limit];
     
-    return [[rangeArray valueForKeyPath:@"@min.low.rateValue"] doubleValue];
+    /*NSPredicate *predicate = [NSPredicate predicateWithFormat:@"low.rateValue == %@.@min.low.rateValue", limitArray];
+    NSArray *results = [limitArray filteredArrayUsingPredicate:predicate];
+    
+    return ((ForexHistoryData *)results[0]).low;*/
+    
+    /*NSArray *rangeArray = [self getArrayLimit:limit];
+    
+    return [[Rate alloc] initWithRateValue:[[rangeArray valueForKeyPath:@"@min.low.rateValue"] doubleValue] currencyPair:nil timestamp:nil];*/
+    
+    __block Rate *minRate = nil;
+    
+    [self enumerateObjectsUsingBlock:^(ForexHistoryData *obj, NSUInteger idx) {
+        if (idx == 0) {
+            minRate = obj.low;
+        } else if (obj.low.rateValue < minRate.rateValue) {
+            minRate = obj.low;
+        }
+    } limit:limit resultReverse:NO];
+    
+    return minRate;
 }
 
-- (double)getMaxRateLimit:(NSUInteger)limit
+- (Rate *)getMaxRateLimit:(NSUInteger)limit
 {
-    NSArray *rangeArray = [self getArrayLimit:limit];
+    __block Rate *maxRate = nil;
     
-    return [[rangeArray valueForKeyPath:@"@max.high.rateValue"] doubleValue];
+    [self enumerateObjectsUsingBlock:^(ForexHistoryData *obj, NSUInteger idx) {
+        if (idx == 0) {
+            maxRate = obj.high;
+        } else if (maxRate.rateValue < obj.high.rateValue) {
+            maxRate = obj.high;
+        }
+    } limit:limit resultReverse:NO];
+    
+    return maxRate;
 }
 
 -(NSArray*)getArrayLimit:(NSUInteger)limit
@@ -301,6 +328,48 @@
     }
     
     return [_forexDataArray subarrayWithRange:range];
+}
+
+- (ForexDataChunk *)getChunkFromBaseData:(ForexHistoryData *)data relativePosition:(NSInteger)pos limit:(NSUInteger)limit
+{
+    NSUInteger baseIndex = [_forexDataArray indexOfObject:data];
+    
+    if (baseIndex == NSNotFound) {
+        return nil;
+    }
+    
+    NSInteger startIndex = baseIndex + (-pos);
+    
+    if (self.count-1 < startIndex) {
+        return nil;
+    }
+    
+    if (startIndex < 0) {
+        startIndex = 0;
+    }
+    
+    NSUInteger len = limit;
+    
+    if (self.count < (startIndex + len)) {
+        len = self.count - startIndex;
+    }
+    
+    return [self getForexDataChunkInRange:NSMakeRange(startIndex, len)];
+}
+
+- (ForexDataChunk *)getChunkFromHeadData:(ForexHistoryData *)data limit:(NSUInteger)limit
+{
+    return [self getChunkFromBaseData:data relativePosition:0 limit:limit];
+}
+
+- (ForexDataChunk *)getChunkFromHeadData:(ForexHistoryData *)data back:(NSUInteger)back limit:(NSUInteger)limit
+{
+    return [self getChunkFromBaseData:data relativePosition:-back limit:limit];
+}
+
+- (ForexDataChunk *)getChunkFromNextDataOf:(ForexHistoryData *)data limit:(NSUInteger)limit
+{
+    return [self getChunkFromBaseData:data relativePosition:1 limit:limit];
 }
 
 - (NSUInteger)count

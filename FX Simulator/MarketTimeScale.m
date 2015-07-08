@@ -12,6 +12,10 @@
 
 -(id)initWithMinute:(int)minute
 {
+    if (!(0 < minute)) {
+        return nil;
+    }
+    
     if (self = [super init]) {
         _minute = minute;
     }
@@ -23,7 +27,7 @@
     if (other == self) {
         return YES;
     } else if ([other isKindOfClass:[self class]]) {
-        if ([self isEqualTimeScale:other]) {
+        if ([self isEqualToTimeScale:other]) {
             return YES;
         }
     }
@@ -31,7 +35,7 @@
     return NO;
 }
 
--(BOOL)isEqualTimeScale:(MarketTimeScale*)timeScale
+-(BOOL)isEqualToTimeScale:(MarketTimeScale*)timeScale
 {
     if (self.minute == timeScale.minute) {
         return YES;

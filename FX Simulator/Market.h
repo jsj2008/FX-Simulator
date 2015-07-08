@@ -69,6 +69,6 @@
 @property (nonatomic) ForexDataChunk *currentForexDataChunk;
 //@property (nonatomic) NSArray* currentForexHistoryDataArray;
 @property (nonatomic) ForexHistoryData *currentForexHistoryData;
-@property (nonatomic, readonly) int currentLoadedRowid;
+//@property (nonatomic, readonly) int currentLoadedRowid;
 @property (nonatomic, readwrite) NSNumber *autoUpdateInterval;
 @end
