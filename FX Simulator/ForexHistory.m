@@ -30,7 +30,8 @@ static const int cacheSize = 300;
     FMDatabase *forexDatabase;
     ForexHistoryCache *cache;
     CurrencyPair *_currencyPair;
-    int _timeScale;
+    MarketTimeScale *_timeScale;
+    int _timeScaleInt;
     NSString *_forexHistoryTableName;
 }
 
@@ -53,11 +54,46 @@ static const int cacheSize = 300;
     
     if (self = [self init]) {
         _currencyPair = currencyPair;
-        _timeScale = timeScale.minute;
-        _forexHistoryTableName = [ForexHistoryUtils createTableName:_currencyPair.toCodeString timeScale:_timeScale];
+        _timeScale = timeScale;
+        _timeScaleInt = timeScale.minute;
+        _forexHistoryTableName = [ForexHistoryUtils createTableName:_currencyPair.toCodeString timeScale:_timeScaleInt];
     }
     
     return self;
+}
+
+- (ForexDataChunk *)selectCenterData:(ForexHistoryData *)data sideLimit:(NSUInteger)limit
+{
+    //NSString *sql = [NSString stringWithFormat:@"SELECT rowid,* FROM %@ WHERE ? <= close_minute_close_timestamp ORDER BY close_minute_close_timestamp ASC LIMIT ?", _forexHistoryTableName];
+    //NSString *sql2 = [NSString stringWithFormat:@"SELECT rowid,* FROM %@ WHERE close_minute_close_timestamp < ? ORDER BY close_minute_close_timestamp DESC LIMIT ?", _forexHistoryTableName];
+    NSString *sql = [NSString stringWithFormat:@"SELECT rowid,* FROM (SELECT rowid,* FROM %@ WHERE ? <= close_minute_close_timestamp ORDER BY close_minute_close_timestamp ASC LIMIT ?) ORDER BY close_minute_close_timestamp DESC", _forexHistoryTableName];
+    NSString *sql2 = [NSString stringWithFormat:@"SELECT rowid,* FROM %@ WHERE close_minute_close_timestamp < ? ORDER BY close_minute_close_timestamp DESC LIMIT ?", _forexHistoryTableName];
+    
+    [forexDatabase open];
+    
+    FMResultSet *results = [forexDatabase executeQuery:sql, data.close.timestamp.timestampValueObj, @(limit)];
+    
+    NSMutableArray *frontArray = [NSMutableArray array];
+    
+    while ([results next]) {
+        ForexHistoryData *data = [[ForexHistoryData alloc] initWithFMResultSet:results currencyPair:_currencyPair timeScale:_timeScale];
+        [frontArray addObject:data];
+    }
+    
+    FMResultSet *results2 = [forexDatabase executeQuery:sql2, data.close.timestamp.timestampValueObj, @(limit)];
+    
+    NSMutableArray *backArray = [NSMutableArray array];
+    
+    while ([results2 next]) {
+        ForexHistoryData *data = [[ForexHistoryData alloc] initWithFMResultSet:results2 currencyPair:_currencyPair timeScale:_timeScale];
+        [backArray addObject:data];
+    }
+    
+    [forexDatabase close];
+    
+    NSArray *array = [[frontArray arrayByAddingObjectsFromArray:backArray] copy];
+    
+    return [[ForexDataChunk alloc] initWithForexDataArray:array];
 }
 
 -(ForexDataChunk*)selectMaxRowid:(int)rowid limit:(int)limit
@@ -69,7 +105,7 @@ static const int cacheSize = 300;
     
     ForexHistoryCacheConfig *selectConfig = [ForexHistoryCacheConfig new];
     selectConfig.currencyPair = _currencyPair;
-    selectConfig.timeScale = _timeScale;
+    selectConfig.timeScale = _timeScaleInt;
     
     if ([selectConfig isEqual:cache.config] && [cache existCacheStartRatesID:range.location Num:range.length]) {
         array = [cache selectCacheStartRatesID:range.location Num:range.length];
@@ -86,7 +122,7 @@ static const int cacheSize = 300;
         FMResultSet *results = [forexDatabase executeQuery:sql];
         
         while ([results next]) {
-            ForexHistoryData *data = [[ForexHistoryData alloc] initWithFMResultSet:results currencyPair:_currencyPair];
+            ForexHistoryData *data = [[ForexHistoryData alloc] initWithFMResultSet:results currencyPair:_currencyPair timeScale:_timeScale];
             [array addObject:data];
         }
         
@@ -102,7 +138,7 @@ static const int cacheSize = 300;
 {
     NSMutableArray *array = [NSMutableArray array];
     
-    NSString *forexHistoryTableName = [ForexHistoryUtils createTableName:_currencyPair.toCodeString timeScale:_timeScale];
+    NSString *forexHistoryTableName = [ForexHistoryUtils createTableName:_currencyPair.toCodeString timeScale:_timeScaleInt];
     
     //NSString *sql = [NSString stringWithFormat:@"SELECT rowid,* FROM %@ WHERE open_minute_open_timestamp <= %d ORDER BY open_minute_open_timestamp DESC LIMIT %d", forexHistoryTableName, timestamp, num];
     NSString *sql = [NSString stringWithFormat:@"SELECT rowid,* FROM (SELECT rowid,* FROM %@ WHERE close_minute_close_timestamp <= %d ORDER BY close_minute_close_timestamp DESC LIMIT %d) ORDER BY rowid ASC", forexHistoryTableName, timestamp, num];
@@ -113,7 +149,7 @@ static const int cacheSize = 300;
     
     while ([results next]) {
         //id<ForexHistoryData> data = [ForexHistoryData createDataFromFMResultSet:results];
-        ForexHistoryData *data = [[ForexHistoryData alloc] initWithFMResultSet:results currencyPair:_currencyPair];
+        ForexHistoryData *data = [[ForexHistoryData alloc] initWithFMResultSet:results currencyPair:_currencyPair timeScale:_timeScale];
         [array addObject:data];
     }
     
@@ -126,7 +162,7 @@ static const int cacheSize = 300;
 {
     NSMutableArray *array = [NSMutableArray array];
     
-    NSString *forexHistoryTableName = [ForexHistoryUtils createTableName:_currencyPair.toCodeString timeScale:_timeScale];
+    NSString *forexHistoryTableName = [ForexHistoryUtils createTableName:_currencyPair.toCodeString timeScale:_timeScaleInt];
     
     //NSString *sql = [NSString stringWithFormat:@"SELECT rowid,* FROM %@ WHERE open_minute_open_timestamp >= %d and close_minute_close_timestamp <= %d", forexHistoryTableName, minTimestamp, maxTimestamp];
     NSString *sql = [NSString stringWithFormat:@"SELECT rowid,* FROM %@ WHERE open_minute_open_timestamp >= %d and close_minute_close_timestamp <= %d", forexHistoryTableName, minTimestamp, maxTimestamp];
@@ -136,7 +172,7 @@ static const int cacheSize = 300;
     FMResultSet *results = [forexDatabase executeQuery:sql];
     
     while ([results next]) {
-        ForexHistoryData *data = [[ForexHistoryData alloc] initWithFMResultSet:results currencyPair:_currencyPair];
+        ForexHistoryData *data = [[ForexHistoryData alloc] initWithFMResultSet:results currencyPair:_currencyPair timeScale:_timeScale];
         [array addObject:data];
     }
     
@@ -156,7 +192,7 @@ static const int cacheSize = 300;
     FMResultSet *results = [forexDatabase executeQuery:sql];
     
     while ([results next]) {
-        data = [[ForexHistoryData alloc] initWithFMResultSet:results currencyPair:_currencyPair];
+        data = [[ForexHistoryData alloc] initWithFMResultSet:results currencyPair:_currencyPair timeScale:_timeScale];
     }
     
     [forexDatabase close];
@@ -209,7 +245,7 @@ static const int cacheSize = 300;
     FMResultSet *results = [forexDatabase executeQuery:sql];
     
     while ([results next]) {
-        data = [[ForexHistoryData alloc] initWithFMResultSet:results currencyPair:_currencyPair];
+        data = [[ForexHistoryData alloc] initWithFMResultSet:results currencyPair:_currencyPair timeScale:_timeScale];
     }
     
     [forexDatabase close];
@@ -228,7 +264,7 @@ static const int cacheSize = 300;
     FMResultSet *results = [forexDatabase executeQuery:sql];
     
     while ([results next]) {
-        data = [[ForexHistoryData alloc] initWithFMResultSet:results currencyPair:_currencyPair];
+        data = [[ForexHistoryData alloc] initWithFMResultSet:results currencyPair:_currencyPair timeScale:_timeScale];
     }
     
     [forexDatabase close];
