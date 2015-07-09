@@ -62,16 +62,18 @@ static const int cacheSize = 300;
     return self;
 }
 
-- (ForexDataChunk *)selectCenterData:(ForexHistoryData *)data sideLimit:(NSUInteger)limit
+- (ForexDataChunk *)selectBaseData:(ForexHistoryData *)data frontLimit:(NSUInteger)frontLimit backLimit:(NSUInteger)backLimit
 {
     //NSString *sql = [NSString stringWithFormat:@"SELECT rowid,* FROM %@ WHERE ? <= close_minute_close_timestamp ORDER BY close_minute_close_timestamp ASC LIMIT ?", _forexHistoryTableName];
     //NSString *sql2 = [NSString stringWithFormat:@"SELECT rowid,* FROM %@ WHERE close_minute_close_timestamp < ? ORDER BY close_minute_close_timestamp DESC LIMIT ?", _forexHistoryTableName];
-    NSString *sql = [NSString stringWithFormat:@"SELECT rowid,* FROM (SELECT rowid,* FROM %@ WHERE ? <= close_minute_close_timestamp ORDER BY close_minute_close_timestamp ASC LIMIT ?) ORDER BY close_minute_close_timestamp DESC", _forexHistoryTableName];
-    NSString *sql2 = [NSString stringWithFormat:@"SELECT rowid,* FROM %@ WHERE close_minute_close_timestamp < ? ORDER BY close_minute_close_timestamp DESC LIMIT ?", _forexHistoryTableName];
+    NSString *getFrontDataSql = [NSString stringWithFormat:@"SELECT rowid,* FROM (SELECT rowid,* FROM %@ WHERE ? <= close_minute_close_timestamp ORDER BY close_minute_close_timestamp ASC LIMIT ?) ORDER BY close_minute_close_timestamp DESC", _forexHistoryTableName];
+    NSString *getBackDataSql = [NSString stringWithFormat:@"SELECT rowid,* FROM %@ WHERE close_minute_close_timestamp < ? ORDER BY close_minute_close_timestamp DESC LIMIT ?", _forexHistoryTableName];
     
     [forexDatabase open];
     
-    FMResultSet *results = [forexDatabase executeQuery:sql, data.close.timestamp.timestampValueObj, @(limit)];
+    /* get front array */
+    
+    FMResultSet *results = [forexDatabase executeQuery:getFrontDataSql, data.close.timestamp.timestampValueObj, @(frontLimit+1)]; // +1 基準となるデータ自身を含む。
     
     NSMutableArray *frontArray = [NSMutableArray array];
     
@@ -80,7 +82,9 @@ static const int cacheSize = 300;
         [frontArray addObject:data];
     }
     
-    FMResultSet *results2 = [forexDatabase executeQuery:sql2, data.close.timestamp.timestampValueObj, @(limit)];
+    /* get back array */
+    
+    FMResultSet *results2 = [forexDatabase executeQuery:getBackDataSql, data.close.timestamp.timestampValueObj, @(backLimit)];
     
     NSMutableArray *backArray = [NSMutableArray array];
     
@@ -90,6 +94,8 @@ static const int cacheSize = 300;
     }
     
     [forexDatabase close];
+    
+    
     
     NSArray *array = [[frontArray arrayByAddingObjectsFromArray:backArray] copy];
     

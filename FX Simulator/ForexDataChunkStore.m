@@ -15,11 +15,13 @@
 @implementation ForexDataChunkStore {
     ForexDataChunk *_forexDataChunkCache;
     ForexHistory *_forexHistory;
-    NSUInteger _cacheSize;
-    NSUInteger _sideLimit;
+    NSUInteger _frontLimit;
+    NSUInteger _backLimit;
 }
 
-- (instancetype)initWithCurrencyPair:(CurrencyPair *)currencyPair timeScale:(MarketTimeScale *)timeScale
+static const NSUInteger buffer = 200;
+
+- (instancetype)initWithCurrencyPair:(CurrencyPair *)currencyPair timeScale:(MarketTimeScale *)timeScale getMaxLimit:(NSUInteger)maxLimit
 {
     if (currencyPair == nil || timeScale == nil) {
         return nil;
@@ -30,8 +32,8 @@
         if (_forexHistory == nil) {
             return nil;
         }
-        _cacheSize = 1001;
-        _sideLimit = (_cacheSize - 1) / 2;
+        _frontLimit = buffer / 2;
+        _backLimit = maxLimit + _frontLimit;
     }
     
     return self;
@@ -40,25 +42,25 @@
 - (ForexDataChunk *)getChunkFromBaseData:(ForexHistoryData *)data relativePosition:(NSInteger)pos limit:(NSUInteger)limit
 {
     if (_forexDataChunkCache == nil) {
-        _forexDataChunkCache = [_forexHistory selectCenterData:data sideLimit:_sideLimit];
+        _forexDataChunkCache = [_forexHistory selectBaseData:data frontLimit:_frontLimit backLimit:_backLimit];
     }
 
     ForexDataChunk *chunk = [_forexDataChunkCache getChunkFromBaseData:data relativePosition:pos limit:limit];
     
     if (chunk == nil || chunk.count < limit) {
-        _forexDataChunkCache = [_forexHistory selectCenterData:data sideLimit:_sideLimit];
+        _forexDataChunkCache = [_forexHistory selectBaseData:data frontLimit:_frontLimit backLimit:_backLimit];
         chunk = [_forexDataChunkCache getChunkFromBaseData:data relativePosition:pos limit:limit];
     }
     
     return chunk;
 }
 
-- (ForexDataChunk *)getChunkFromHeadData:(ForexHistoryData *)data limit:(NSUInteger)limit
+- (ForexDataChunk *)getChunkFromBaseData:(ForexHistoryData *)data limit:(NSUInteger)limit
 {
     return [self getChunkFromBaseData:data relativePosition:0 limit:limit];
 }
 
-- (ForexDataChunk *)getChunkFromHeadData:(ForexHistoryData *)data back:(NSUInteger)back limit:(NSUInteger)limit
+- (ForexDataChunk *)getChunkFromBaseData:(ForexHistoryData *)data back:(NSUInteger)back limit:(NSUInteger)limit
 {
     return nil;
 }

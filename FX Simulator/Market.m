@@ -59,7 +59,7 @@ static NSString * const kKeyPath = @"currentForexHistoryData";
 {
     saveData = [SaveLoader load];
     
-    _forexDataChunkStore = [[ForexDataChunkStore alloc] initWithCurrencyPair:saveData.currencyPair timeScale:saveData.timeScale];
+    _forexDataChunkStore = [[ForexDataChunkStore alloc] initWithCurrencyPair:saveData.currencyPair timeScale:saveData.timeScale getMaxLimit:kMaxForexDataStore];
     
     forexHistory = [ForexHistoryFactory createForexHistoryFromCurrencyPair:saveData.currencyPair timeScale:saveData.timeScale];
     _lastData = [forexHistory lastRecord];
@@ -105,7 +105,7 @@ static NSString * const kKeyPath = @"currentForexHistoryData";
 
 -(void)setDefaultData
 {
-    self.currentForexDataChunk = [_forexDataChunkStore getChunkFromHeadData:_startForexData limit:kMaxForexDataStore];
+    self.currentForexDataChunk = [_forexDataChunkStore getChunkFromBaseData:_startForexData limit:kMaxForexDataStore];
     
     [self updateMarketForCurrentData:_startForexData];
     
