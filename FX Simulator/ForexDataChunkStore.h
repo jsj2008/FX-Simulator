@@ -12,10 +12,29 @@
 @class ForexHistoryData;
 @class ForexDataChunk;
 @class MarketTimeScale;
-        
+
+/**
+ ForexDataChunkのキャッシュを持ち、それを管理する。
+*/
 @interface ForexDataChunkStore : NSObject
-- (instancetype)initWithCurrencyPair:(CurrencyPair *)currencyPair timeScale:(MarketTimeScale *)timeScale;
-- (ForexDataChunk *)getChunkFromHeadData:(ForexHistoryData *)data limit:(NSUInteger)limit;
-- (ForexDataChunk *)getChunkFromHeadData:(ForexHistoryData *)data back:(NSUInteger)back limit:(NSUInteger)limit;
+
+/**
+ @param maxLimit メソッドで取得する最大のLimit。これをもとに、キャッシュのサイズが決まる。
+*/
+- (instancetype)initWithCurrencyPair:(CurrencyPair *)currencyPair timeScale:(MarketTimeScale *)timeScale getMaxLimit:(NSUInteger)maxLimit;
+
+/**
+ 基準となるデータを先頭に、最大Limit個のデータを取得する。
+*/
+- (ForexDataChunk *)getChunkFromBaseData:(ForexHistoryData *)data limit:(NSUInteger)limit;
+
+/**
+ 基準となるデータのback個前のデータを先頭に、最大Limit個のデータを取得する。
+*/
+- (ForexDataChunk *)getChunkFromBaseData:(ForexHistoryData *)data back:(NSUInteger)back limit:(NSUInteger)limit;
+
+/**
+ 基準となるデータの次のデータを先頭に、最大Limit個のデータを取得する。
+*/
 - (ForexDataChunk *)getChunkFromNextDataOf:(ForexHistoryData *)data limit:(NSUInteger)limit;
 @end

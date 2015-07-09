@@ -21,7 +21,11 @@
 
 @interface ForexHistory : NSObject
 -(id)initWithCurrencyPair:(CurrencyPair*)currencyPair timeScale:(MarketTimeScale*)timeScale;
-- (ForexDataChunk *)selectCenterData:(ForexHistoryData *)data sideLimit:(NSUInteger)limit;
+/**
+ 基準となるデータを中心に、前後のLimitに基づきデータを取得する。
+ @param data 基準データ
+*/
+- (ForexDataChunk *)selectBaseData:(ForexHistoryData *)data frontLimit:(NSUInteger)frontLimit backLimit:(NSUInteger)backLimit;
 - (ForexDataChunk *)selectMaxRowid:(int)rowid limit:(int)limit;
 -(NSArray*)selectMaxCloseTimestamp:(int)timestamp limit:(int)num;
 -(NSArray*)selectMaxCloseTimestamp:(int)maxTimestamp minOpenTimestamp:(int)minTimestamp;
