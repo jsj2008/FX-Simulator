@@ -13,6 +13,7 @@
 #import "Rate.h"
 #import "MarketTime.h"
 #import "MarketTimeScale.h"
+#import "ForexDataChunk.h"
 #import "ForexHistoryDataArrayUtils.h"
 
 @implementation ForexHistoryData
@@ -34,14 +35,15 @@
     return self;
 }
 
--(id)initWithForexHistoryDataArray:(NSArray*)array
+-(id)initWithForexDataChunk:(ForexDataChunk *)chunk timeScale:(MarketTimeScale *)timeScale
 {
     if (self = [self init]) {
-        _currencyPair = ((ForexHistoryData*)[array firstObject]).currencyPair;
-        _open = ((ForexHistoryData*)[array firstObject]).open;
-        _close = ((ForexHistoryData*)[array lastObject]).close;
-        _high = [[Rate alloc] initWithRateValue:[ForexHistoryDataArrayUtils maxRateOfArray:array] currencyPair:_currencyPair timestamp:nil];
-        _low = [[Rate alloc] initWithRateValue:[ForexHistoryDataArrayUtils minRateOfArray:array] currencyPair:_currencyPair timestamp:nil];
+        _currencyPair = chunk.current.currencyPair;
+        _timeScale = timeScale;
+        _open = chunk.current.open;
+        _close = chunk.oldest.close;
+        _high = [chunk getMaxRate];
+        _low = [chunk getMinRate];
     }
     
     return self;

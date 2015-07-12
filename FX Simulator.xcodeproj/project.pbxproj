@@ -98,7 +98,6 @@
 		70D2FBA11A9F57A000CAB509 /* ForexHistoryDataArrayUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FB951A9F57A000CAB509 /* ForexHistoryDataArrayUtils.m */; };
 		70D2FBA21A9F57A000CAB509 /* ForexHistoryUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FB971A9F57A000CAB509 /* ForexHistoryUtils.m */; };
 		70D2FBA31A9F57A000CAB509 /* ForexHistoryFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FB991A9F57A000CAB509 /* ForexHistoryFactory.m */; };
-		70D2FBA41A9F57A000CAB509 /* ForexTimeScaleDataArrayFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FB9B1A9F57A000CAB509 /* ForexTimeScaleDataArrayFactory.m */; };
 		70D2FBAD1A9F57B000CAB509 /* UsersOrder.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FBA61A9F57B000CAB509 /* UsersOrder.m */; };
 		70D2FBAE1A9F57B000CAB509 /* OrderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FBA81A9F57B000CAB509 /* OrderManager.m */; };
 		70D2FBAF1A9F57B000CAB509 /* Order.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FBAA1A9F57B000CAB509 /* Order.m */; };
@@ -1128,7 +1127,6 @@
 				70D2FBAE1A9F57B000CAB509 /* OrderManager.m in Sources */,
 				70D2FC3D1A9F591600CAB509 /* OrderType.m in Sources */,
 				70D2FAF11A9F56AE00CAB509 /* FMDatabase.m in Sources */,
-				70D2FBA41A9F57A000CAB509 /* ForexTimeScaleDataArrayFactory.m in Sources */,
 				70D2FA8D1A9F305700CAB509 /* AppDelegate.m in Sources */,
 				70D2FAD71A9F559200CAB509 /* OpenPositionHeaderView.m in Sources */,
 				70ED621E1AFCA11F0008F939 /* SetSpreadViewController.m in Sources */,

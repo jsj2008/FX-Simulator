@@ -8,10 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+@class ForexDataChunk;
+
 @interface SubChartView : UIView
-//-(id)initWithFrame:(CGRect)frame;
-//-(void)updateChart:(NSArray*)forexTimeScaleDataArray;
-@property (nonatomic) NSArray* candles;
-//@property NSArray* candles;
-//-(void)drawRect:(CGRect)rect;
+@property (nonatomic) ForexDataChunk *chunk;
 @end

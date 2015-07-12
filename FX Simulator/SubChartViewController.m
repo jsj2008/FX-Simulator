@@ -13,9 +13,10 @@
 #import "SubChartView.h"
 #import "SubChartViewData.h"
 #import "Rate.h"
+#import "ForexDataChunk.h"
+#import "ForexDataChunkStore.h"
 #import "ForexHistoryData.h"
-#import "CandlesFactory.h"
-#import "Candle.h"
+
 
 @interface SubChartViewController ()
 @property (weak, nonatomic) IBOutlet SubChartView *subChartView;
@@ -25,6 +26,7 @@
 @implementation SubChartViewController {
     //SubChartView *subChartView;
     //SubChartDataView *subChartDataView;
+    ForexDataChunkStore *_chunkStore;
     SubChartDataViewController *_subChartDataViewController;
     //UISegmentedControl *_segment;
     SubChartViewData *_subChartViewData;
@@ -75,7 +77,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    //self.segment.selectedSegmentIndex = 0;
+    self.segment.selectedSegmentIndex = 0;
+    
     /*[self.segment addTarget:self
                  action:@selector(segmentValueChanged:)
        forControlEvents:UIControlEventValueChanged];*/
@@ -104,53 +107,24 @@
     }
 }
 
--(void)viewDidLayoutSubviews
+/*-(void)viewDidLayoutSubviews
 {
-    [super viewDidLayoutSubviews];
-    
-    /*CGRect mainScreenRect = [[UIScreen mainScreen] applicationFrame];
-    float statusBarHeight = [[UIApplication sharedApplication] statusBarFrame].size.height;
-    float adViewHeight = 49.0;
-    float uiTabBarHeight = 49.0;
-    
-    
-    float chartViewY = statusBarHeight;
-    float chartViewWidth = mainScreenRect.size.width;
-    float chartViewHeight = (mainScreenRect.size.height - adViewHeight - uiTabBarHeight)*1.6/2.6;
-    
-    self.view.frame = CGRectMake(0, 0, mainScreenRect.size.width, statusBarHeight + mainScreenRect.size.height - uiTabBarHeight);
-    
-    subChartView.frame = CGRectMake(0, chartViewY, chartViewWidth, chartViewHeight);*/
-    
-    
-    /*_segment.frame = CGRectMake(0, 0, 250, 30);
-    _segment.center = CGPointMake([[UIScreen mainScreen] bounds].size.width / 2, subChartView.frame.origin.y + subChartView.frame.size.height + _segment.frame.size.height + 30);
-    _segment.selectedSegmentIndex = 0;
-    [_segment addTarget:self
-                action:@selector(segmentValueChanged:)
-      forControlEvents:UIControlEventValueChanged];
-    
-    
-    float subChartDataViewSideSpace = 15;
-    float subChartDataViewBottomSpace = 15;
-    float subChartDataViewX = subChartDataViewSideSpace;
-    float subChartDataViewY = _segment.center.y + _segment.frame.size.height;
-    float subChartDataViewWidth = self.view.frame.size.width - subChartDataViewSideSpace * 2;
-    float subChartDataViewHeight = self.view.frame.size.height - subChartDataViewY - subChartDataViewBottomSpace;
-    
-    subChartDataView.frame = CGRectMake(subChartDataViewX, subChartDataViewY, subChartDataViewWidth, subChartDataViewHeight);*/
+    [super viewDidLayoutSubviews];*/
     
     
     
-    NSArray *forexTimeScaleDataArray = [_subChartViewData getChartDataArray];
+    
+    
+    
+    /*NSArray *forexTimeScaleDataArray = [_subChartViewData getChartDataArray];
     
     self.subChartView.candles = [CandlesFactory createCandlesFromForexHistoryDataArray:forexTimeScaleDataArray chartViewWidth:self.subChartView.frame.size.width chartViewHeight:self.subChartView.frame.size.height];
     
-    [self.subChartView setNeedsDisplay];
-}
+    [self.subChartView setNeedsDisplay];*/
+//}
 
 - (IBAction)panGesture:(UIPanGestureRecognizer*)sender {
-    if (sender.state != UIGestureRecognizerStateEnded) {
+    /*if (sender.state != UIGestureRecognizerStateEnded) {
         
         CGPoint pt = [sender locationInView:self.subChartView];
         
@@ -168,37 +142,32 @@
         
         [_subChartDataViewController hiddenForexHistoryData];
         
-    }
+    }*/
 }
 
 - (IBAction)segmentValueChanged:(id)sender {
-    MarketTimeScale *timeScale = [_subChartViewData toTimeScalefFromSegmentIndex:self.segment.selectedSegmentIndex];
+    /*MarketTimeScale *timeScale = [_subChartViewData toTimeScalefFromSegmentIndex:self.segment.selectedSegmentIndex];
     
     NSArray *forexTimeScaleDataArray = [_subChartViewData getChartDataArrayWithTimeScale:timeScale];
     
     self.subChartView.candles = [CandlesFactory createCandlesFromForexHistoryDataArray:forexTimeScaleDataArray chartViewWidth:self.subChartView.frame.size.width chartViewHeight:self.subChartView.frame.size.height];
     
-    [self.subChartView setNeedsDisplay];
+    [self.subChartView setNeedsDisplay];*/
 }
-
-/*-(void)segmentValueChanged:(id)sender
-{
-    //UISegmentedControl *segment = (UISegmentedControl *)sender;
-    
-    MarketTimeScale *timeScale = [_subChartViewData toTimeScalefFromSegmentIndex:self.segment.selectedSegmentIndex];
-    
-    NSArray *forexTimeScaleDataArray = [_subChartViewData getChartDataArrayWithTimeScale:timeScale];
-    
-    self.subChartView.candles = [CandlesFactory createCandlesFromForexHistoryDataArray:forexTimeScaleDataArray chartViewWidth:self.subChartView.frame.size.width chartViewHeight:self.subChartView.frame.size.height];
-    
-    [self.subChartView setNeedsDisplay];
-}*/
 
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     
     [self setItems:_items forSegment:self.segment];
+    
+    ForexDataChunk *chunk = [_subChartViewData getCurrentChunk];
+    
+    _chunkStore = [[ForexDataChunkStore alloc] initWithCurrencyPair:chunk.current.currencyPair timeScale:self.selectedTimeScale getMaxLimit:500];
+    
+    self.subChartView.chunk = [_chunkStore getChunkFromBaseData:chunk.current limit:500];
+    
+    [self.subChartView setNeedsDisplay];
     
     /*CGRect mainScreenRect = [[UIScreen mainScreen] applicationFrame];
     float statusBarHeight = [[UIApplication sharedApplication] statusBarFrame].size.height;
@@ -254,6 +223,11 @@
 -(void)updatedSaveData
 {
     [self setInitData];
+}
+
+- (MarketTimeScale *)selectedTimeScale
+{
+    return [_subChartViewData toTimeScalefFromSegmentIndex:self.segment.selectedSegmentIndex];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -11,7 +11,6 @@
 #import "SaveLoader.h"
 #import "SaveData.h"
 #import "Market.h"
-#import "ForexTimeScaleDataArrayFactory.h"
 #import "ForexHistoryData.h"
 #import "Setting.h"
 #import "TimeScaleUtils.h"
@@ -37,22 +36,29 @@
     return self;
 }
 
+- (ForexDataChunk *)getCurrentChunk
+{
+    return market.currentForexDataChunk;
+}
+
 -(NSArray*)getChartDataArray
 {
     ForexHistoryData *data = market.currentForexHistoryData;
     
-    NSArray *array = [ForexTimeScaleDataArrayFactory createArrayFromMaxCloseTimestamp:data.close.timestamp.timestampValue limit:40 currencyPair:saveData.currencyPair timeScale:saveData.subChartSelectedTimeScale];
+    /*NSArray *array = [ForexTimeScaleDataArrayFactory createArrayFromMaxCloseTimestamp:data.close.timestamp.timestampValue limit:40 currencyPair:saveData.currencyPair timeScale:saveData.subChartSelectedTimeScale];
     
-    return array;
+    return array;*/
+    
+    return nil;
 }
 
 -(NSArray*)getChartDataArrayWithTimeScale:(MarketTimeScale*)timeScale
 {
     ForexHistoryData *data = market.currentForexHistoryData;
     
-    NSArray *array = [ForexTimeScaleDataArrayFactory createArrayFromMaxCloseTimestamp:data.close.timestamp.timestampValue limit:40 currencyPair:saveData.currencyPair timeScale:timeScale];
+    /*NSArray *array = [ForexTimeScaleDataArrayFactory createArrayFromMaxCloseTimestamp:data.close.timestamp.timestampValue limit:40 currencyPair:saveData.currencyPair timeScale:timeScale];*/
     
-    return array;
+    return nil;
 }
 
 -(MarketTimeScale*)toTimeScalefFromSegmentIndex:(int)index

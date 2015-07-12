@@ -63,7 +63,7 @@ static NSString * const kKeyPath = @"currentForexHistoryData";
     
     forexHistory = [ForexHistoryFactory createForexHistoryFromCurrencyPair:saveData.currencyPair timeScale:saveData.timeScale];
     _lastData = [forexHistory lastRecord];
-    _startForexData = [forexHistory selectRowidLimitCloseTimestamp:saveData.lastLoadedCloseTimestamp];
+    _startForexData = [forexHistory selectMaxCloseTime:saveData.lastLoadedCloseTimestamp limit:1].firstObject;
     
     _marketTimeManager = [MarketTimeManager new];
     [_marketTimeManager addObserver:self];

@@ -55,8 +55,8 @@ static NSString * const kKeyPath = @"currentLoadedRowid";
 
 -(void)loadTime
 {
-    ForexHistoryData *forexHistoryData = [forexHistory selectRowidLimitCloseTimestamp:saveData.lastLoadedCloseTimestamp];
-    _currentLoadedRowid = forexHistoryData.ratesID;
+    /*ForexHistoryData *forexHistoryData = [forexHistory selectRowidLimitCloseTimestamp:saveData.lastLoadedCloseTimestamp];*/
+    _currentLoadedRowid = 0;
 }
 
 -(void)addObserver:(NSObject *)observer

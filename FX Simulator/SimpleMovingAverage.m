@@ -29,6 +29,10 @@
 
 - (void)strokeIndicatorFromForexDataChunk:(ForexDataChunk *)chunk displayForexDataCount:(NSInteger)count displaySize:(CGSize)size
 {
+    if (chunk == nil) {
+        return;
+    }
+    
     UIBezierPath *path = [UIBezierPath bezierPath];
     path.lineWidth = 2;
     [_lineColor setStroke];

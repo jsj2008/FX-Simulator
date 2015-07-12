@@ -11,6 +11,7 @@
 @class CurrencyPair;
 @class ForexHistoryData;
 @class ForexDataChunk;
+@class MarketTime;
 @class MarketTimeScale;
 
 /**
@@ -31,10 +32,15 @@
 /**
  基準となるデータのback個前のデータを先頭に、最大Limit個のデータを取得する。
 */
-- (ForexDataChunk *)getChunkFromBaseData:(ForexHistoryData *)data back:(NSUInteger)back limit:(NSUInteger)limit;
+//- (ForexDataChunk *)getChunkFromBaseData:(ForexHistoryData *)data back:(NSUInteger)back limit:(NSUInteger)limit;
 
 /**
  基準となるデータの次のデータを先頭に、最大Limit個のデータを取得する。
 */
 - (ForexDataChunk *)getChunkFromNextDataOf:(ForexHistoryData *)data limit:(NSUInteger)limit;
+
+- (ForexHistoryData *)getChunkFromCloseTime:(MarketTime *)closeTime limit:(NSUInteger)limit;
+
+- (ForexHistoryData *)getChunkFromCloseTime:(MarketTime *)closeTime back:(NSUInteger)back limit:(NSUInteger)limit;
+
 @end
