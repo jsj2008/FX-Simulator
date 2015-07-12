@@ -42,6 +42,8 @@
 
 //- (ForexDataChunk *)getForexDataLimit:(NSUInteger)limit;
 - (ForexDataChunk *)getForexDataChunkInRange:(NSRange)range;
+- (Rate *)getMinRate;
+- (Rate *)getMaxRate;
 - (Rate *)getMinRateLimit:(NSUInteger)limit;
 - (Rate *)getMaxRateLimit:(NSUInteger)limit;
 
@@ -49,9 +51,15 @@
  基準となるデータからの相対位置にあるデータを先頭に、最大Limit個のデータを取得する。
 */
 - (ForexDataChunk *)getChunkFromBaseData:(ForexHistoryData *)data relativePosition:(NSInteger)pos limit:(NSUInteger)limit;
+
+/**
+ 最新のデータを先頭に追加する。
+*/
+- (void)addCurrentData:(ForexHistoryData *)data;
 /*- (ForexDataChunk *)getChunkFromHeadData:(ForexHistoryData *)data limit:(NSUInteger)limit;
 - (ForexDataChunk *)getChunkFromHeadData:(ForexHistoryData *)data back:(NSUInteger)back limit:(NSUInteger)limit;
 - (ForexDataChunk *)getChunkFromNextDataOf:(ForexHistoryData *)data limit:(NSUInteger)limit;*/
 @property (nonatomic, readonly) NSUInteger count;
 @property (nonatomic, readonly) ForexHistoryData *current;
+@property (nonatomic, readonly) ForexHistoryData *oldest;
 @end

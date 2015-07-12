@@ -44,6 +44,11 @@
     return NO;
 }
 
+- (NSComparisonResult)compare:(MarketTimeScale *)timeScale
+{
+    return [self.minuteValueObj compare:timeScale.minuteValueObj];
+}
+
 -(NSString*)toDisplayString
 {
     int dayTimeScaleMinute = 1440;

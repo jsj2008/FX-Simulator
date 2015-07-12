@@ -23,7 +23,6 @@
     
     if (self = [super init]) {
         _forexDataArray = array;
-        _current = _forexDataArray.firstObject;
     }
 
     return self;
@@ -274,6 +273,16 @@
     return [[ForexDataChunk alloc] initWithForexDataArray:[_forexDataArray subarrayWithRange:range]];
 }
 
+- (Rate *)getMinRate
+{
+    return [self getMinRateLimit:self.count];
+}
+
+- (Rate *)getMaxRate
+{
+    return [self getMaxRateLimit:self.count];
+}
+
 - (Rate *)getMinRateLimit:(NSUInteger)limit
 {
     //NSArray *limitArray = [self getArrayLimit:limit];
@@ -372,9 +381,32 @@
     return [self getChunkFromBaseData:data relativePosition:1 limit:limit];
 }
 
+- (void)addCurrentData:(ForexHistoryData *)data
+{
+    if (data == nil) {
+        return;
+    }
+    
+    NSMutableArray *array = [_forexDataArray mutableCopy];
+    
+    [array insertObject:data atIndex:0];
+    
+    _forexDataArray = [array copy];
+}
+
 - (NSUInteger)count
 {
     return _forexDataArray.count;
+}
+
+- (ForexHistoryData *)current
+{
+    return _forexDataArray.firstObject;
+}
+
+- ( ForexHistoryData *)oldest
+{
+    return _forexDataArray.lastObject;
 }
 
 @end

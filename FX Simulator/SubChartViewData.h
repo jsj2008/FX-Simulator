@@ -8,11 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
+@class ForexDataChunk;
 @class MarketTimeScale;
 
 @interface SubChartViewData : NSObject
--(NSArray*)getChartDataArray;
--(NSArray*)getChartDataArrayWithTimeScale:(MarketTimeScale*)timeScale;
+- (ForexDataChunk *)getCurrentChunk;
+//-(NSArray*)getChartDataArrayWithTimeScale:(MarketTimeScale*)timeScale;
 -(MarketTimeScale*)toTimeScalefFromSegmentIndex:(int)index;
 @property (nonatomic, readonly) NSArray *items;
 @end
