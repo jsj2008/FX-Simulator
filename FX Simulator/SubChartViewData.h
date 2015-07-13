@@ -13,7 +13,8 @@
 
 @interface SubChartViewData : NSObject
 - (ForexDataChunk *)getCurrentChunk;
-//-(NSArray*)getChartDataArrayWithTimeScale:(MarketTimeScale*)timeScale;
--(MarketTimeScale*)toTimeScalefFromSegmentIndex:(int)index;
+- (void)updateSelectedIndex:(NSUInteger)newIndex;
 @property (nonatomic, readonly) NSArray *items;
+@property (nonatomic) NSUInteger selectedSegmentIndex;
+@property (nonatomic, readonly) MarketTimeScale *selectedTimeScale;
 @end

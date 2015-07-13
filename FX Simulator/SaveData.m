@@ -22,6 +22,7 @@
 #import "Money.h"
 #import "TradeTestDbDataSource.h"
 #import "TradeDbDataSource.h"
+#import "TimeScaleUtils.h"
 
 @implementation SaveData
 
@@ -143,6 +144,12 @@
                                   @"OpenPositionTableName":self.openPositionDataSource.tableName};
     
     return saveDataDic;
+}
+
+- (void)setTimeScale:(MarketTimeScale *)timeScale
+{
+    _timeScale = timeScale;
+    _subChartSelectedTimeScale = [TimeScaleUtils selectTimeScaleListExecept:self.timeScale fromTimeScaleList:[Setting timeScaleList]].firstObject;
 }
 
 @end

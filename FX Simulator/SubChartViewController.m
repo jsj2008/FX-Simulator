@@ -24,25 +24,11 @@
 @end
 
 @implementation SubChartViewController {
-    //SubChartView *subChartView;
-    //SubChartDataView *subChartDataView;
     ForexDataChunkStore *_chunkStore;
     SubChartDataViewController *_subChartDataViewController;
-    //UISegmentedControl *_segment;
     SubChartViewData *_subChartViewData;
     NSArray *_items;
 }
-
-/*-(id)init
-{
-    if (self = [super init]) {
-        //subChartDataView = [SubChartDataView new];
-        subChartViewData = [SubChartViewData new];
-        items = subChartViewData.items;
-    }
-    
-    return self;
-}*/
 
 -(instancetype)initWithCoder:(NSCoder *)aDecoder
 {
@@ -53,18 +39,11 @@
     return self;
 }
 
-/*-(void)loadView
+-(void)setInitData
 {
-    [super loadView];
-    
-    //subChartView = [SubChartView new];
-    
-    //self.segment = [[UISegmentedControl alloc] initWithItems:items];
-    
-    //[self.view addSubview:subChartView];
-    //[self.view addSubview:_segment];
-    //[self.view addSubview:subChartDataView];
-}*/
+    _subChartViewData = [SubChartViewData new];
+    _items = _subChartViewData.items;
+}
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
@@ -77,27 +56,19 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.segment.selectedSegmentIndex = 0;
+    self.segment.selectedSegmentIndex = _subChartViewData.selectedSegmentIndex;
     
-    /*[self.segment addTarget:self
-                 action:@selector(segmentValueChanged:)
-       forControlEvents:UIControlEventValueChanged];*/
+    ForexDataChunk *chunk = [_subChartViewData getCurrentChunk];
+    _chunkStore = [[ForexDataChunkStore alloc] initWithCurrencyPair:chunk.current.currencyPair timeScale:self.selectedTimeScale getMaxLimit:500];
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
     
-    //self.segment = [[UISegmentedControl alloc] initWithItems:items];
+    [self setItems:_items forSegment:self.segment];
     
-    
-    /*CGRect mainScreenRect = [[UIScreen mainScreen] applicationFrame];
-    float statusBarHeight = [[UIApplication sharedApplication] statusBarFrame].size.height;
-    float adViewHeight = 49.0;
-    float uiTabBarHeight = 49.0;
-    
-    float chartViewY = statusBarHeight;
-    float chartViewWidth = mainScreenRect.size.width;
-    float chartViewHeight = (mainScreenRect.size.height - adViewHeight - uiTabBarHeight)*1.6/2.6;
-    
-    self.view.frame = CGRectMake(0, 0, mainScreenRect.size.width, statusBarHeight + mainScreenRect.size.height - uiTabBarHeight);
-    NSLog(@"%f", self.view.frame.size.height);
-    subChartView.frame = CGRectMake(0, chartViewY, chartViewWidth, chartViewHeight);*/
+    [self strokeChartView];
 }
 
 -(void)setItems:(NSArray*)items forSegment:(UISegmentedControl*)segment
@@ -110,11 +81,6 @@
 /*-(void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];*/
-    
-    
-    
-    
-    
     
     /*NSArray *forexTimeScaleDataArray = [_subChartViewData getChartDataArray];
     
@@ -146,48 +112,23 @@
 }
 
 - (IBAction)segmentValueChanged:(id)sender {
-    /*MarketTimeScale *timeScale = [_subChartViewData toTimeScalefFromSegmentIndex:self.segment.selectedSegmentIndex];
     
-    NSArray *forexTimeScaleDataArray = [_subChartViewData getChartDataArrayWithTimeScale:timeScale];
-    
-    self.subChartView.candles = [CandlesFactory createCandlesFromForexHistoryDataArray:forexTimeScaleDataArray chartViewWidth:self.subChartView.frame.size.width chartViewHeight:self.subChartView.frame.size.height];
-    
-    [self.subChartView setNeedsDisplay];*/
-}
-
--(void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    
-    [self setItems:_items forSegment:self.segment];
+    _subChartViewData.selectedSegmentIndex = self.segment.selectedSegmentIndex;
     
     ForexDataChunk *chunk = [_subChartViewData getCurrentChunk];
     
     _chunkStore = [[ForexDataChunkStore alloc] initWithCurrencyPair:chunk.current.currencyPair timeScale:self.selectedTimeScale getMaxLimit:500];
     
+    [self strokeChartView];
+}
+
+- (void)strokeChartView
+{
+    ForexDataChunk *chunk = [_subChartViewData getCurrentChunk];
+    
     self.subChartView.chunk = [_chunkStore getChunkFromBaseData:chunk.current limit:500];
     
     [self.subChartView setNeedsDisplay];
-    
-    /*CGRect mainScreenRect = [[UIScreen mainScreen] applicationFrame];
-    float statusBarHeight = [[UIApplication sharedApplication] statusBarFrame].size.height;
-    float adViewHeight = 49.0;
-    float uiTabBarHeight = 49.0;
-    
-    float chartViewY = statusBarHeight;
-    float chartViewWidth = mainScreenRect.size.width;
-    float chartViewHeight = (mainScreenRect.size.height - adViewHeight - uiTabBarHeight)*1.6/2.6;*/
-    
-    //self.view.frame = CGRectMake(0, 0, mainScreenRect.size.width, statusBarHeight + mainScreenRect.size.height - uiTabBarHeight);
-    /*subChartView.frame = CGRectMake(0, chartViewY, chartViewWidth, chartViewHeight);
-    
-    
-    
-    NSArray *forexTimeScaleDataArray = [subChartViewData getChartDataArray];
-    
-    subChartView.candles = [CandlesFactory createCandlesFromForexHistoryDataArray:forexTimeScaleDataArray chartViewWidth:subChartView.frame.size.width chartViewHeight:subChartView.frame.size.height];
-    
-    [subChartView setNeedsDisplay];*/
 }
 
 /*-(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
@@ -214,12 +155,6 @@
     [subChartDataView hiddenData];
 }*/
 
--(void)setInitData
-{
-    _subChartViewData = [SubChartViewData new];
-    _items = _subChartViewData.items;
-}
-
 -(void)updatedSaveData
 {
     [self setInitData];
@@ -227,7 +162,7 @@
 
 - (MarketTimeScale *)selectedTimeScale
 {
-    return [_subChartViewData toTimeScalefFromSegmentIndex:self.segment.selectedSegmentIndex];
+    return _subChartViewData.selectedTimeScale;
 }
 
 - (void)didReceiveMemoryWarning {

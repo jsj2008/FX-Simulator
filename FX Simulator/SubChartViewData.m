@@ -31,6 +31,7 @@
         saveData = [SaveLoader load];
         market = [SimulationManager sharedSimulationManager].market;
         timeScaleList = [TimeScaleUtils selectTimeScaleListExecept:saveData.timeScale fromTimeScaleList:[Setting timeScaleList]];
+        _selectedSegmentIndex = [self toSegmentIndexFromTimeScale:saveData.subChartSelectedTimeScale];
     }
     
     return self;
@@ -66,6 +67,11 @@
     return (MarketTimeScale*)[timeScaleList objectAtIndex:index];
 }
 
+- (NSUInteger)toSegmentIndexFromTimeScale:(MarketTimeScale *)timeScale
+{
+    return [timeScaleList indexOfObject:timeScale];
+}
+
 -(NSArray*)items
 {
     NSMutableArray *array = [NSMutableArray array];
@@ -77,6 +83,11 @@
     }
     
     return [array copy];
+}
+
+- (MarketTimeScale *)selectedTimeScale
+{
+    return [timeScaleList objectAtIndex:self.selectedSegmentIndex];
 }
 
 @end
