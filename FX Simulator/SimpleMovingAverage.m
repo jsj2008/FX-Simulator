@@ -11,6 +11,7 @@
 #import "ForexDataChunk.h"
 #import "IndicatorUtils.h"
 #import "Rate.h"
+#import "SimpleMovingAverageSource.h"
 
 @implementation SimpleMovingAverage {
     NSUInteger _term;
@@ -19,9 +20,15 @@
 
 -(instancetype)init
 {
-    if (self = [super init]) {
-        _term = 20;
-        _lineColor = [UIColor whiteColor];
+    return nil;
+}
+
+- (instancetype)initWithSource:(SimpleMovingAverageSource *)source
+{
+    if (self = [super initWithSource:source]) {
+        _source = source;
+        _term = _source.term;
+        _lineColor = _source.lineColor;
     }
     
     return self;
@@ -54,6 +61,11 @@
     } averageTerm:_term limit:count resultReverse:NO];
     
     [path stroke];
+}
+
++ (NSString *)indicatorName
+{
+    return @"SimpleMovingAverage";
 }
 
 @end
