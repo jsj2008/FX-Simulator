@@ -12,12 +12,10 @@
 
 static NSString* const kIndicatorNameKey = @"IndicatorName";
 static NSString* const kDisplayIndexKey = @"DisplayIndex";
-static NSString* const kIsMainChartKey = @"kIsMainChartKey";
+static NSString* const kIsMainChartKey = @"IsMainChart";
 static NSString* const kTimeScaleKey = @"TimeScale";
 
-@implementation IndicatorSource {
-    NSString *_codeName;
-}
+@implementation IndicatorSource
 
 - (instancetype)initWithDictionary:(NSDictionary *)dic
 {
@@ -26,7 +24,7 @@ static NSString* const kTimeScaleKey = @"TimeScale";
     }
     
     if (self = [super init]) {
-        _indicatorName = dic[kIndicatorNameKey];
+        _indicatorName = (NSString *)dic[kIndicatorNameKey];
         _displayIndex = ((NSNumber *)dic[kDisplayIndexKey]).unsignedIntegerValue;
         _isMainChart = ((NSNumber *)dic[kIsMainChartKey]).boolValue;
         _timeScale = [[MarketTimeScale alloc] initWithMinute:((NSNumber *)dic[kTimeScaleKey]).unsignedIntegerValue];

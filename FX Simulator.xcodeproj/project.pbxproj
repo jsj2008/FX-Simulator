@@ -16,6 +16,7 @@
 		7033C5D61B469F56005EF07B /* NSNumber+FXSNumberConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 7033C5D51B469F56005EF07B /* NSNumber+FXSNumberConverter.m */; };
 		7041B7111B2EEDAD00DD64FE /* Account.m in Sources */ = {isa = PBXBuildFile; fileRef = 7041B7101B2EEDAD00DD64FE /* Account.m */; };
 		7041B7141B3278A700DD64FE /* FXSTimeRange.m in Sources */ = {isa = PBXBuildFile; fileRef = 7041B7131B3278A700DD64FE /* FXSTimeRange.m */; };
+		704D3E321B56228200A8B9AB /* IndicatorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 704D3E311B56228200A8B9AB /* IndicatorTests.m */; };
 		705C2E101ADE4C270089D510 /* Money+ConvertToAccountCurrency.m in Sources */ = {isa = PBXBuildFile; fileRef = 705C2E0F1ADE4C270089D510 /* Money+ConvertToAccountCurrency.m */; };
 		705DCE4A1AE6893E00BCF710 /* tradedb.sqlite3 in Resources */ = {isa = PBXBuildFile; fileRef = 705DCE491AE6893E00BCF710 /* tradedb.sqlite3 */; };
 		705DCE4B1AE7C84300BCF710 /* Rates.m in Sources */ = {isa = PBXBuildFile; fileRef = 70B5AAEE1AC7FF44001F8823 /* Rates.m */; };
@@ -49,6 +50,7 @@
 		707CA1AF1B538E7900F099E9 /* SimpleMovingAverageSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 707CA1AE1B538E7900F099E9 /* SimpleMovingAverageSource.m */; };
 		707CA1B31B53A14500F099E9 /* IndicatorSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 707CA1B21B53A14500F099E9 /* IndicatorSource.m */; };
 		707CA1B71B53A51700F099E9 /* Indicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 707CA1B61B53A51700F099E9 /* Indicator.m */; };
+		707CA1BB1B56195600F099E9 /* SimpleMovingAverageTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 707CA1BA1B56195600F099E9 /* SimpleMovingAverageTests.m */; };
 		709BC75E1B0700320059C940 /* SetAutoUpdateIntervalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 709BC75D1B0700320059C940 /* SetAutoUpdateIntervalViewController.m */; };
 		70B5AAEC1AC7BE90001F8823 /* ExecuteOrderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 70B5AAEB1AC7BE90001F8823 /* ExecuteOrderTests.m */; };
 		70B5AAF21ACE5BC0001F8823 /* SubChartDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70B5AAF11ACE5BC0001F8823 /* SubChartDataViewController.m */; };
@@ -198,6 +200,7 @@
 		7041B7101B2EEDAD00DD64FE /* Account.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Account.m; sourceTree = "<group>"; };
 		7041B7121B3278A700DD64FE /* FXSTimeRange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FXSTimeRange.h; sourceTree = "<group>"; };
 		7041B7131B3278A700DD64FE /* FXSTimeRange.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FXSTimeRange.m; sourceTree = "<group>"; };
+		704D3E311B56228200A8B9AB /* IndicatorTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IndicatorTests.m; sourceTree = "<group>"; };
 		705C2E0E1ADE4C270089D510 /* Money+ConvertToAccountCurrency.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Money+ConvertToAccountCurrency.h"; sourceTree = "<group>"; };
 		705C2E0F1ADE4C270089D510 /* Money+ConvertToAccountCurrency.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Money+ConvertToAccountCurrency.m"; sourceTree = "<group>"; };
 		705DCE491AE6893E00BCF710 /* tradedb.sqlite3 */ = {isa = PBXFileReference; lastKnownFileType = file; path = tradedb.sqlite3; sourceTree = "<group>"; };
@@ -238,6 +241,7 @@
 		707CA1B11B53A14500F099E9 /* IndicatorSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IndicatorSource.h; sourceTree = "<group>"; };
 		707CA1B21B53A14500F099E9 /* IndicatorSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IndicatorSource.m; sourceTree = "<group>"; };
 		707CA1B61B53A51700F099E9 /* Indicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Indicator.m; sourceTree = "<group>"; };
+		707CA1BA1B56195600F099E9 /* SimpleMovingAverageTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleMovingAverageTests.m; sourceTree = "<group>"; };
 		709BC75C1B0700320059C940 /* SetAutoUpdateIntervalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetAutoUpdateIntervalViewController.h; sourceTree = "<group>"; };
 		709BC75D1B0700320059C940 /* SetAutoUpdateIntervalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetAutoUpdateIntervalViewController.m; sourceTree = "<group>"; };
 		70AD14741AADD0AA0099F0BA /* RatePanelButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RatePanelButton.h; sourceTree = "<group>"; };
@@ -685,6 +689,8 @@
 				70B5AAEB1AC7BE90001F8823 /* ExecuteOrderTests.m */,
 				70D2FAA41A9F305800CAB509 /* Supporting Files */,
 				70CFEB351B15A6DE00837727 /* SaveDataStorageTests.m */,
+				704D3E311B56228200A8B9AB /* IndicatorTests.m */,
+				707CA1BA1B56195600F099E9 /* SimpleMovingAverageTests.m */,
 			);
 			path = "FX SimulatorTests";
 			sourceTree = "<group>";
@@ -1244,7 +1250,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				70D2FAA71A9F305800CAB509 /* FX_SimulatorTests.m in Sources */,
+				707CA1BB1B56195600F099E9 /* SimpleMovingAverageTests.m in Sources */,
 				70B5AAEC1AC7BE90001F8823 /* ExecuteOrderTests.m in Sources */,
+				704D3E321B56228200A8B9AB /* IndicatorTests.m in Sources */,
 				70CFEB361B15A6DE00837727 /* SaveDataStorageTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
