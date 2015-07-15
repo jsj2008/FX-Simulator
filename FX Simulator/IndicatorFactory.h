@@ -8,9 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol Indicator;
-@protocol IndicatorSource;
+@class Indicator;
+@class IndicatorSource;
 
 @interface IndicatorFactory : NSObject
-+ (id<Indicator>)createFromSource:(id<IndicatorSource>)source;
++ (Indicator *)createFromSource:(IndicatorSource *)source;
 @end

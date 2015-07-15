@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "Indicator.h"
 
-@interface CandleChart : NSObject <Indicator>
+@interface CandleChart : NSObject
 - (void)strokeIndicatorFromForexDataChunk:(ForexDataChunk *)chunk displayForexDataCount:(NSInteger)count displaySize:(CGSize)size;
 //-(UIBezierPath*)createPathFromMarket:(Market*)market displayPointCount:(NSInteger)count displaySize:(CGSize)size;
 @end

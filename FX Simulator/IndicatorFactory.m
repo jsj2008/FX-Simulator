@@ -8,15 +8,17 @@
 
 #import "IndicatorFactory.h"
 
+#import "Indicator.h"
+#import "IndicatorSource.h"
 #import "SimpleMovingAverage.h"
 #import "SimpleMovingAverageSource.h"
 
 @implementation IndicatorFactory
 
-+ (id<Indicator>)createFromSource:(id<IndicatorSource>)source
++ (Indicator *)createFromSource:(IndicatorSource *)source
 {
-    if ([source isKindOfClass:[SimpleMovingAverage class]]) {
-        return [[SimpleMovingAverage alloc] initWithIndicatorSource:source];
+    if ([source isKindOfClass:[SimpleMovingAverageSource class]]) {
+        return [[SimpleMovingAverage alloc] initWithSource:(SimpleMovingAverageSource *)source];
     }
     
     return nil;
