@@ -71,6 +71,23 @@
     [self strokeChartView];
 }
 
+- (IBAction)handleLongPressGesture:(UILongPressGestureRecognizer *) sender
+{
+    if (sender.state != UIGestureRecognizerStateEnded) {
+        
+        CGPoint pt = [sender locationInView:self.subChartView];
+        
+        ForexHistoryData *data = [self.subChartView.chunk getForexDataFromTouchPoint:pt displayCount:self.subChartView.displayForexDataCount viewSize:self.subChartView.frame.size];
+        
+        [_subChartDataViewController displayForexHistoryData:data];
+        
+    } else {
+        
+        [_subChartDataViewController hiddenForexHistoryData];
+        
+    }
+}
+
 -(void)setItems:(NSArray*)items forSegment:(UISegmentedControl*)segment
 {
     for (int i = 0; i < segment.numberOfSegments; i++) {

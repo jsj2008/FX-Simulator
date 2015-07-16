@@ -18,6 +18,7 @@
 - (instancetype)initWithCoder:(NSCoder *)aDecoder
 {
     if (self = [super initWithCoder:aDecoder]) {
+        _displayForexDataCount = 40;
         _candleChart = [CandleChart new];
     }
     

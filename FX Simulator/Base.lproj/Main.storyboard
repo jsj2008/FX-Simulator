@@ -1405,6 +1405,7 @@
                                 <gestureRecognizers/>
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="Jae-Nf-TA1" appends="YES" id="HtM-9g-aFV"/>
+                                    <outletCollection property="gestureRecognizers" destination="a6f-cy-bTY" appends="YES" id="7ZQ-wg-m9s"/>
                                 </connections>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w2V-oy-Awx" userLabel="Segment View">
@@ -1466,6 +1467,11 @@
                         <action selector="panGesture:" destination="le4-VF-0hB" id="Huq-VZ-ivs"/>
                     </connections>
                 </panGestureRecognizer>
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="a6f-cy-bTY">
+                    <connections>
+                        <action selector="handleLongPressGesture:" destination="le4-VF-0hB" id="VlI-kg-SDr"/>
+                    </connections>
+                </pongPressGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1415" y="-228"/>
         </scene>
