@@ -394,9 +394,27 @@
     _forexDataArray = [array copy];
 }
 
+- (ForexHistoryData *)getForexDataFromTouchPoint:(CGPoint)point displayCount:(NSUInteger)count viewSize:(CGSize)size
+{
+    float displayForexDataWidth = size.width / count;
+    
+    NSUInteger touchIndex = (size.width - point.x) / displayForexDataWidth;
+    
+    if (self.lastIndex < touchIndex) {
+        return nil;
+    }
+    
+    return _forexDataArray[touchIndex];
+}
+
 - (NSUInteger)count
 {
     return _forexDataArray.count;
+}
+
+- (NSUInteger)lastIndex
+{
+    return self.count - 1;
 }
 
 - (ForexHistoryData *)current

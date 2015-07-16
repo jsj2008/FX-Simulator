@@ -100,6 +100,11 @@
     }
 }
 
+- (IBAction)handlePanGesture:(UIPanGestureRecognizer *)sender
+{
+    
+}
+
 -(void)updatedSaveData
 {
     self.chartView.chartDataChunk = nil;

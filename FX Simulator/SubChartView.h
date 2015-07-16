@@ -11,5 +11,6 @@
 @class ForexDataChunk;
 
 @interface SubChartView : UIView
+@property (nonatomic) NSUInteger displayForexDataCount;
 @property (nonatomic) ForexDataChunk *chunk;
 @end
