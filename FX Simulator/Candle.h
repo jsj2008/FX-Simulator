@@ -1,37 +1,17 @@
 //
-//  Candle.h
+//  CandleChart.h
 //  FX Simulator
 //
-//  Created  on 2014/10/30.
-//  
+//  Created by yuu on 2015/07/05.
+//
 //
 
 #import <Foundation/Foundation.h>
-#import <UIKit/UIKit.h>
+#import "Indicator.h"
 
-@class ForexHistoryData;
+@class CandleSource;
 
-/*@protocol Candle <NSObject>
-@property (nonatomic) CGRect rect;
-@property (nonatomic) CGPoint highLineTop;
-@property (nonatomic) CGPoint highLineBottom;
-@property (nonatomic) CGPoint lowLineTop;
-@property (nonatomic) CGPoint lowLineBottom;
-@property (nonatomic) float colorR;
-@property (nonatomic) float colorG;
-@property (nonatomic) float colorB;
-@property (nonatomic) id<ForexHistoryData> forexHistoryData;
-@end*/
-
-@interface Candle : NSObject
--(void)stroke;
-@property (nonatomic) CGRect rect;
-@property (nonatomic) CGPoint highLineTop;
-@property (nonatomic) CGPoint highLineBottom;
-@property (nonatomic) CGPoint lowLineTop;
-@property (nonatomic) CGPoint lowLineBottom;
-@property (nonatomic) float colorR;
-@property (nonatomic) float colorG;
-@property (nonatomic) float colorB;
-@property (nonatomic) ForexHistoryData *forexHistoryData;
+@interface Candle : Indicator
+- (instancetype)initWithCandleSource:(CandleSource *)source;
+- (void)strokeIndicatorFromForexDataChunk:(ForexDataChunk *)chunk displayForexDataCount:(NSInteger)count displaySize:(CGSize)size;
 @end

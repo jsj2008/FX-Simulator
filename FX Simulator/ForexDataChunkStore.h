@@ -39,8 +39,8 @@
 */
 - (ForexDataChunk *)getChunkFromNextDataOf:(ForexHistoryData *)data limit:(NSUInteger)limit;
 
-- (ForexHistoryData *)getChunkFromCloseTime:(MarketTime *)closeTime limit:(NSUInteger)limit;
+/*- (ForexHistoryData *)getChunkFromCloseTime:(MarketTime *)closeTime limit:(NSUInteger)limit;
 
-- (ForexHistoryData *)getChunkFromCloseTime:(MarketTime *)closeTime back:(NSUInteger)back limit:(NSUInteger)limit;
+- (ForexHistoryData *)getChunkFromCloseTime:(MarketTime *)closeTime back:(NSUInteger)back limit:(NSUInteger)limit;*/
 
 @end

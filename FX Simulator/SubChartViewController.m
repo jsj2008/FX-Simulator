@@ -8,9 +8,9 @@
 
 #import "SubChartViewController.h"
 
+#import "ChartViewController.h"
 #import "SubChartDataViewController.h"
 #import "MarketTimeScale.h"
-#import "SubChartView.h"
 #import "SubChartViewData.h"
 #import "Rate.h"
 #import "ForexDataChunk.h"
@@ -19,11 +19,11 @@
 
 
 @interface SubChartViewController ()
-@property (weak, nonatomic) IBOutlet SubChartView *subChartView;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segment;
 @end
 
 @implementation SubChartViewController {
+    ChartViewController *_chartViewController;
     ForexDataChunkStore *_chunkStore;
     SubChartDataViewController *_subChartDataViewController;
     SubChartViewData *_subChartViewData;
@@ -47,7 +47,10 @@
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if ([segue.identifier isEqualToString:@"SubChartDataViewControllerSeg"]) {
+    if ([segue.identifier isEqualToString:@"ChartViewControllerSeg"]) {
+        _chartViewController = segue.destinationViewController;
+        _chartViewController.delegate = self;
+    } else if ([segue.identifier isEqualToString:@"SubChartDataViewControllerSeg"]) {
         _subChartDataViewController = segue.destinationViewController;
     }
 }
@@ -71,21 +74,14 @@
     [self strokeChartView];
 }
 
-- (IBAction)handleLongPressGesture:(UILongPressGestureRecognizer *) sender
+- (void)longPressedForexData:(ForexHistoryData *)data
 {
-    if (sender.state != UIGestureRecognizerStateEnded) {
-        
-        CGPoint pt = [sender locationInView:self.subChartView];
-        
-        ForexHistoryData *data = [self.subChartView.chunk getForexDataFromTouchPoint:pt displayCount:self.subChartView.displayForexDataCount viewSize:self.subChartView.frame.size];
-        
-        [_subChartDataViewController displayForexHistoryData:data];
-        
-    } else {
-        
-        [_subChartDataViewController hiddenForexHistoryData];
-        
-    }
+    [_subChartDataViewController displayForexHistoryData:data];
+}
+
+- (void)longPressedEnd
+{
+    [_subChartDataViewController hiddenForexHistoryData];
 }
 
 -(void)setItems:(NSArray*)items forSegment:(UISegmentedControl*)segment
@@ -143,9 +139,11 @@
 {
     ForexDataChunk *chunk = [_subChartViewData getCurrentChunk];
     
-    self.subChartView.chunk = [_chunkStore getChunkFromBaseData:chunk.current limit:500];
+    [_chartViewController updateChartFor:[_chunkStore getChunkFromBaseData:chunk.current limit:500]];
     
-    [self.subChartView setNeedsDisplay];
+    /*self.subChartView.chunk = [_chunkStore getChunkFromBaseData:chunk.current limit:500];
+    
+    [self.subChartView setNeedsDisplay];*/
 }
 
 /*-(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event

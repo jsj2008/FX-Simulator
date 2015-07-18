@@ -8,18 +8,18 @@
 
 #import "SubChartView.h"
 
-#import "CandleChart.h"
+#import "Candle.h"
 
 
 @implementation SubChartView {
-    CandleChart *_candleChart;
+    Candle *_candleChart;
 }
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder
 {
     if (self = [super initWithCoder:aDecoder]) {
         _displayForexDataCount = 40;
-        _candleChart = [CandleChart new];
+        _candleChart = [Candle new];
     }
     
     return self;

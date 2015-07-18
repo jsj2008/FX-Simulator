@@ -14,6 +14,7 @@
 #import "SimpleMovingAverageSource.h"
 
 @implementation SimpleMovingAverage {
+    SimpleMovingAverageSource *_source;
     NSUInteger _term;
     UIColor *_lineColor;
 }
@@ -61,11 +62,6 @@
     } averageTerm:_term limit:count resultReverse:NO];
     
     [path stroke];
-}
-
-+ (NSString *)indicatorName
-{
-    return @"SimpleMovingAverage";
 }
 
 @end

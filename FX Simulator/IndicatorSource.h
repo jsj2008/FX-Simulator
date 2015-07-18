@@ -11,11 +11,13 @@
 @class MarketTimeScale;
 
 @interface IndicatorSource : NSObject
-- (instancetype)initWithDictionary:(NSDictionary *)dic;
+- (instancetype)initWithIndicatorName:(NSString *)indicatorName displayOrder:(NSUInteger)order;
+- (instancetype)initWithDictionary:(NSDictionary *)dic NS_REQUIRES_SUPER;
+- (BOOL)isEqualSource:(IndicatorSource *)source NS_REQUIRES_SUPER;
+- (NSDictionary *)sourceDictionary NS_REQUIRES_SUPER;
+- (BOOL)validateIndicatorSource;
 @property (nonatomic, readonly) NSString *indicatorName;
-@property (nonatomic, readonly) NSUInteger displayIndex;
-@property (nonatomic, readonly) BOOL isMainChart;
-@property (nonatomic, readonly) MarketTimeScale *timeScale;
-@property (nonatomic, readonly) NSDictionary *sourceDictinary;
+@property (nonatomic, readonly) NSUInteger displayOrder;
 + (NSString *)indicatorNameKey;
++ (NSUInteger)maxIndicatorTerm;
 @end

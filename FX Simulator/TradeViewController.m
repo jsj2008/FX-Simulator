@@ -9,6 +9,7 @@
 #import "TradeViewController.h"
 
 #import <QuartzCore/QuartzCore.h>
+#import "ChartSource.h"
 #import "ChartViewController.h"
 #import "Market.h"
 #import "ChartViewController.h"
@@ -28,15 +29,6 @@
     UIView *_adView;
 }
 
-/*-(id)init
-{
-    if (self = [super init]) {
-        _market = [MarketManager sharedMarket];
-    }
-    
-    return self;
-}*/
-
 -(instancetype)initWithCoder:(NSCoder *)aDecoder
 {
     if (self = [super initWithCoder:aDecoder]) {
@@ -46,70 +38,21 @@
     return self;
 }
 
-/*-(void)awakeFromNib
-{
-    [super awakeFromNib];
-    
-    _market = [MarketManager sharedMarket];
-}*/
-
-
-/*- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}*/
-
-/*-(void)loadView
-{
-    [super loadView];
-    
-    //chartViewController = [ChartViewController new];
-    ratePanelViewController = [RatePanelViewController new];
-    tradeDataViewController = [TradeDataViewController new];
-    
-    _adView = [UIView new];
-    [self.view addSubview:_adView];
-    
-    //[self.view addSubview:chartViewController.view];
-    [self.view addSubview:ratePanelViewController.view];
-    [self.view addSubview:tradeDataViewController.view];
-}*/
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    ChartSource *source = [[ChartSource alloc] initWithDictionary:@{@"IndexKey":@(0), @"CurrencyPair":@"USDJPY", @"TimeScale":@(15)}];
+    [_chartViewController setChartSource:source];
     
     _ratePanelViewController.delegate = _tradeDataViewController;
     _tradeDataViewController.delegate = _simulationManager;
     
     _simulationManager.alertTargetController = self;
     
-    [_simulationManager addObserver:_chartViewController];
+    [_simulationManager addObserver:self];
     [_simulationManager addObserver:_ratePanelViewController];
     [_simulationManager addObserver:_tradeDataViewController];
-    
-    //self.childViewControllers[0];
-    
-    //ChartViewController *chartViewController2 = [self.storyboard instantiateViewControllerWithIdentifier:@"ChartViewController"];
-    //chartViewController = self.childViewControllers[0];
-    //ratePanelViewController = self.childViewControllers[1];
-    
-    //chartViewController.tlabel.text = @"vvv";
-    //ratePanelViewController.delegate = tradeDataViewController;
-    //tradeDataViewController.delegate = self;
-    
-    //[_market addObserver:chartViewController];
-    //[_market addObserver:ratePanelViewController];
-    //[market addObserver:ratePanelViewController];
-    //[market addObserver:tradeDataViewController];
-    //[_market setDefaultData];
-    
-    //[_simulationManager start];
 }
 
 -(void)viewDidLayoutSubviews
@@ -190,6 +133,13 @@
         _tradeDataViewController = segue.destinationViewController;
         //controller.delegate = self;
         //[_market addObserver:segue.destinationViewController];
+    }
+}
+
+-(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    if ([keyPath isEqualToString:@"currentForexHistoryData"] && [object isKindOfClass:[Market class]]) {
+        [_chartViewController updateChartFor:((Market*)object).currentForexDataChunk];
     }
 }
 

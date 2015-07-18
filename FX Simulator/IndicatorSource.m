@@ -10,37 +10,58 @@
 
 #import "MarketTimeScale.h"
 
+static const NSUInteger kMaxIndicatorTerm = 200;
 static NSString* const kIndicatorNameKey = @"IndicatorName";
-static NSString* const kDisplayIndexKey = @"DisplayIndex";
-static NSString* const kIsMainChartKey = @"IsMainChart";
-static NSString* const kTimeScaleKey = @"TimeScale";
+static NSString* const kDisplayOrderKey = @"DisplayOrder";
+
 
 @implementation IndicatorSource
 
-- (instancetype)initWithDictionary:(NSDictionary *)dic
+- (instancetype)initWithIndicatorName:(NSString *)indicatorName displayOrder:(NSUInteger)order
 {
-    if (dic == nil) {
-        return nil;
-    }
-    
     if (self = [super init]) {
-        _indicatorName = (NSString *)dic[kIndicatorNameKey];
-        _displayIndex = ((NSNumber *)dic[kDisplayIndexKey]).unsignedIntegerValue;
-        _isMainChart = ((NSNumber *)dic[kIsMainChartKey]).boolValue;
-        _timeScale = [[MarketTimeScale alloc] initWithMinute:((NSNumber *)dic[kTimeScaleKey]).unsignedIntegerValue];
+        _indicatorName = indicatorName;
+        _displayOrder = order;
     }
     
     return self;
 }
 
+- (instancetype)initWithDictionary:(NSDictionary *)dic
+{
+    return [self initWithIndicatorName:dic[kIndicatorNameKey] displayOrder:((NSNumber *)dic[kDisplayOrderKey]).unsignedIntegerValue];
+}
+
+- (BOOL)isEqualSource:(IndicatorSource *)source
+{
+    if ([self.indicatorName isEqualToString:source.indicatorName] && self.displayOrder == source.displayOrder) {
+        return YES;
+    }
+    
+    return NO;
+}
+
 - (NSDictionary *)sourceDictinary
 {
-    return @{kIndicatorNameKey:self.indicatorName, kDisplayIndexKey:@(self.displayIndex), kIsMainChartKey:@(self.isMainChart), kTimeScaleKey:self.timeScale.minuteValueObj};
+    NSMutableDictionary *sourceDictionary = [NSMutableDictionary dictionary];
+    
+    if (self.indicatorName) {
+        sourceDictionary[kIndicatorNameKey] = self.indicatorName;
+    }
+    
+    sourceDictionary[kDisplayOrderKey] = @(self.displayOrder);
+    
+    return [sourceDictionary copy];
 }
 
 + (NSString *)indicatorNameKey
 {
     return kIndicatorNameKey;
+}
+
++ (NSUInteger)maxIndicatorTerm
+{
+    return kMaxIndicatorTerm;
 }
 
 @end

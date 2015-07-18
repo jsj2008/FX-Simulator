@@ -9,9 +9,7 @@
 #import "ChartViewController.h"
 #import "NewStartViewController.h"
 
-//#import <UIKit/UIKit.h>
-//#import "RatePanelView.h"
-//@class RatePanelView;
+
 @class Market;
 
 @interface TradeViewController : UIViewController <ChartViewControllerDelegate, NewStartViewControllerDelegate>

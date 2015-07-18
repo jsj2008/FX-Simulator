@@ -394,6 +394,15 @@
     _forexDataArray = [array copy];
 }
 
+- (ForexHistoryData *)getForexDataFromCurrent:(NSUInteger)back
+{
+    if (self.lastIndex < back) {
+        return nil;
+    }
+    
+    return _forexDataArray[back];
+}
+
 - (ForexHistoryData *)getForexDataFromTouchPoint:(CGPoint)point displayCount:(NSUInteger)count viewSize:(CGSize)size
 {
     float displayForexDataWidth = size.width / count;

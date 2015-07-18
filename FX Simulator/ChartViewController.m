@@ -8,90 +8,35 @@
 
 #import "ChartViewController.h"
 
+#import "ChartSource.h"
 #import "ChartView.h"
 #import "ChartViewData.h"
 #import "ForexDataChunk.h"
+#import "ForexDataChunkStore.h"
+#import "IndicatorSource.h"
 #import "Market.h"
 
 @interface ChartViewController ()
 @property (weak, nonatomic) IBOutlet ChartView *chartView;
 @end
 
+static const NSUInteger kMaxDisplayForexDataCount = 100;
+static const NSUInteger kMinDisplayForexDataCount = 40;
+
 @implementation ChartViewController {
-    //ChartView *_chartView;
-    ChartViewData *_chartViewData;
+    ChartSource *_source;
+    ForexDataChunk *_chunk;
+    ForexDataChunk *_displayedForexDataChunk;
+    ForexDataChunkStore *_store;
+    NSUInteger _displayForexDataCount;
+    float _updateDistance;
+    float _previousX;
 }
-
-/*-(id)init
-{
-    if (self = [super init]) {
-        _chartViewData = [ChartViewData new];
-    }
-    
-    return self;
-}*/
-
--(instancetype)initWithCoder:(NSCoder *)aDecoder
-{
-    if (self = [super initWithCoder:aDecoder]) {
-        _chartViewData = [ChartViewData new];
-    }
-    
-    return self;
-}
-
--(void)awakeFromNib
-{
-    [super awakeFromNib];
-    //_chartView = [ChartView new];
-    
-}
-
-/*- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
--(void)loadView
-{
-    [super loadView];
-    
-    chartView = [ChartView new];
-    
-    [self.view addSubview:chartView];
-}*/
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
-    //self.tlabel.text = @"bbb";
-    
-}
-
-/*-(void)viewDidLayoutSubviews
-{
-    [super viewDidLayoutSubviews];
-    
-    chartView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
-    //chartView.backgroundColor = [UIColor blueColor];
-    //chartView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
-    //[chartView setNeedsDisplay];
-}*/
-
--(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
-{
-    if ([keyPath isEqualToString:@"currentForexHistoryData"] && [object isKindOfClass:[Market class]]) {
-        /*_chartViewData.chartDataArray = ((Market*)object).currentForexHistoryDataArray;
-        self.chartView.chartDataArray.array = _chartViewData.chartDataArray;*/
-        self.chartView.chartDataChunk = ((Market*)object).currentForexDataChunk;
-        [self.chartView setNeedsDisplay];
-    }
 }
 
 - (IBAction)panGesture:(id)sender {
@@ -102,13 +47,112 @@
 
 - (IBAction)handlePanGesture:(UIPanGestureRecognizer *)sender
 {
+    if (_chunk == nil || _store == nil) {
+        return;
+    }
     
+    CGPoint location = [sender translationInView:self.chartView];
+    CGPoint velocity = [sender velocityInView:self.chartView];
+    
+    if (sender.state == UIGestureRecognizerStateBegan) {
+        _previousX = location.x;
+    } else if (sender.state == UIGestureRecognizerStateChanged) {
+        float distanceX = location.x - _previousX;
+        
+        if ([self updateChartForMoveDistance:distanceX]) {
+            _previousX = location.x;
+        }
+        
+    }
+
+}
+
+- (BOOL)updateChartForMoveDistance:(float)distance
+{
+    if (distance < 0) {
+        [self nextChart];
+            
+        return YES;
+    } else if (0 < distance) {
+        [self previousChart];
+            
+        return YES;
+    }
+    
+    return NO;
+}
+
+- (void)previousChart
+{
+    ForexHistoryData *newCurrentData = [_displayedForexDataChunk getForexDataFromCurrent:1];
+    if (newCurrentData == nil) {
+        return;
+    }
+    _displayedForexDataChunk = [_store getChunkFromBaseData:newCurrentData limit:[ChartViewController requireForexDataCountForChart]];
+    [self updateChartFor:_displayedForexDataChunk];
+}
+
+- (void)nextChart
+{
+    _displayedForexDataChunk = [_store getChunkFromNextDataOf:_displayedForexDataChunk.current limit:[ChartViewController requireForexDataCountForChart]];
+    [self updateChartFor:_displayedForexDataChunk];
+}
+
+
+- (IBAction)handleLongPressGesture:(UILongPressGestureRecognizer *) sender
+{
+    if (sender.state != UIGestureRecognizerStateEnded) {
+        
+        CGPoint pt = [sender locationInView:self.chartView];
+        
+        _displayForexDataCount = 40;
+        
+        ForexHistoryData *data = [self.chartView.chartDataChunk getForexDataFromTouchPoint:pt displayCount:_displayForexDataCount viewSize:self.chartView.frame.size];
+        
+        if (data == nil) {
+            return;
+        }
+        
+        if ([self.delegate respondsToSelector:@selector(longPressedForexData:)]) {
+            [self.delegate longPressedForexData:data];
+        }
+        
+    } else {
+        
+        if ([self.delegate respondsToSelector:@selector(longPressedEnd)]) {
+            [self.delegate longPressedEnd];
+        }
+        
+    }
+}
+
+- (void)setChartSource:(ChartSource *)source
+{
+    _source = source;
+    _store = [[ForexDataChunkStore alloc] initWithCurrencyPair:source.currencyPair timeScale:source.timeScale getMaxLimit:[ChartViewController requireForexDataCountForChart]];
+}
+
+- (void)updateChartFor:(ForexDataChunk *)chunk
+{
+    if (chunk == nil || chunk.count == 0) {
+        return;
+    }
+    
+    _chunk = chunk;
+    self.chartView.chartDataChunk = _chunk;
+    [self.chartView setNeedsDisplay];
+    _displayedForexDataChunk = _chunk;
 }
 
 -(void)updatedSaveData
 {
     self.chartView.chartDataChunk = nil;
     [self.chartView setNeedsDisplay];
+}
+
++ (NSUInteger)requireForexDataCountForChart
+{
+    return kMaxDisplayForexDataCount + [IndicatorSource maxIndicatorTerm] - 1;
 }
 
 - (void)didReceiveMemoryWarning
