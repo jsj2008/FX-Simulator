@@ -8,18 +8,18 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol Indicator;
 
+@class Indicator;
 @class MarketTimeScale;
 
 @interface IndicatorChunk : NSObject
-- (instancetype)initWithIndicatorArray:(NSArray *)array;
+- (instancetype)initWithIndicatorArray:(NSArray *)indicatorArray;
 
 /**
  インジケーターを表示順に列挙。
 */
-- (void)enumerateIndicatorsUsingBlock:(void (^)(id<Indicator> indicator))block isMainChart:(BOOL)isMainChart timeScale:(MarketTimeScale *)timeScale;
+- (void)enumerateIndicatorsUsingBlock:(void (^) (Indicator *indicator))block;
 
-
+@property (nonatomic, readonly) NSArray *indicatorSourceDictionaryArray;
 
 @end

@@ -29,19 +29,25 @@
     return self;
 }
 
-- (NSUInteger)displayIndex
+- (NSUInteger)displayOrder
 {
-    return _source.displayIndex;
+    return _source.displayOrder;
 }
 
-- (BOOL)isMainChart
+- (void)strokeIndicatorFromForexDataChunk:(ForexDataChunk *)chunk displayForexDataCount:(NSInteger)count displaySize:(CGSize)size
 {
-    return _source.isMainChart;
+    return;
 }
 
-- (MarketTimeScale *)timeScale
+- (NSComparisonResult)compareDisplayOrder:(Indicator *)indicator
 {
-    return _source.timeScale;
+    if (_source.displayOrder < indicator.displayOrder) {
+        return NSOrderedAscending;
+    } else if (_source.displayOrder > indicator.displayOrder) {
+        return NSOrderedDescending;
+    } else {
+        return NSOrderedSame;
+    }
 }
 
 - (NSDictionary *)sourceDictionary

@@ -43,11 +43,16 @@
 - (void)enumerateObjectsAndAverageOHLCRatesUsingBlock:(void (^)(ForexHistoryData *obj, NSUInteger idx, Rate *averageOpen, Rate *averageHigh, Rate *averageLow, Rate *averageClose))block averageTerm:(NSUInteger)term limit:(NSUInteger)limit resultReverse:(BOOL)reverse;
 
 //- (ForexDataChunk *)getForexDataLimit:(NSUInteger)limit;
-- (ForexDataChunk *)getForexDataChunkInRange:(NSRange)range;
+//- (ForexDataChunk *)getForexDataChunkInRange:(NSRange)range;
 - (Rate *)getMinRate;
 - (Rate *)getMaxRate;
 - (Rate *)getMinRateLimit:(NSUInteger)limit;
 - (Rate *)getMaxRateLimit:(NSUInteger)limit;
+
+/**
+ 最新のForexDataからback個前のデータを取得する。
+*/
+- (ForexHistoryData *)getForexDataFromCurrent:(NSUInteger)back;
 
 /**
  基準となるデータからの相対位置にあるデータを先頭に、最大Limit個のデータを取得する。

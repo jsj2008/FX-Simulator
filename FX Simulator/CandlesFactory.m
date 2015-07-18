@@ -8,7 +8,7 @@
 
 #import "CandlesFactory.h"
 
-#import "Candle.h"
+#import "SimpleCandle.h"
 #import "ForexDataChunk.h"
 #import "ForexHistoryDataArrayUtils.h"
 #import "ForexHistoryData.h"
@@ -81,7 +81,7 @@
         lowLineTop = CGPointMake((candlePositionX+candleWidth/2.0), (candlePositionY + candleHeight));
         lowLineBottom = CGPointMake(candlePositionX+candleWidth/2.0, (maxRate - low)*pipDispSize);
         
-        Candle *candle = [Candle new];
+        SimpleCandle *candle = [SimpleCandle new];
         candle.rect = CGRectMake(candlePositionX, candlePositionY, candleWidth, candleHeight);
         candle.highLineTop = highLineTop;
         candle.highLineBottom = highLineBottom;

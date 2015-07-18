@@ -18,7 +18,7 @@
 {
     NSString *indicatorName = dic[[IndicatorSource indicatorNameKey]];
     
-    if ([indicatorName isEqualToString:[SimpleMovingAverage indicatorName]]) {
+    if ([indicatorName isEqualToString:[SimpleMovingAverageSource indicatorName]]) {
         return [[SimpleMovingAverageSource alloc] initWithDictionary:dic];
     }
     

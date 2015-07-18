@@ -21,11 +21,10 @@
 */
 
 @interface Indicator : NSObject
-- (instancetype)initWithSource:(IndicatorSource *)source;
+- (instancetype)initWithSource:(IndicatorSource *)source NS_REQUIRES_SUPER;
 - (void)strokeIndicatorFromForexDataChunk:(ForexDataChunk *)chunk displayForexDataCount:(NSInteger)count displaySize:(CGSize)size;
-@property (nonatomic, readonly) NSUInteger displayIndex;
-@property (nonatomic, readonly) BOOL isMainChart;
-@property (nonatomic, readonly) MarketTimeScale *timeScale;
-@property (nonatomic, readonly) NSDictionary *sourceDictionary;
+- (NSComparisonResult)compareDisplayOrder:(Indicator *)indicator;
+- (NSDictionary *)sourceDictionary;
+@property (nonatomic, readonly) NSUInteger displayOrder;
 @end
 

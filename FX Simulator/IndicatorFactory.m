@@ -8,8 +8,6 @@
 
 #import "IndicatorFactory.h"
 
-#import "Indicator.h"
-#import "IndicatorSource.h"
 #import "SimpleMovingAverage.h"
 #import "SimpleMovingAverageSource.h"
 

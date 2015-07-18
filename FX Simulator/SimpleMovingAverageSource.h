@@ -12,7 +12,7 @@
 @import UIKit;
 
 @interface SimpleMovingAverageSource : IndicatorSource
-- (instancetype)initWithDictionary:(NSDictionary *)dic;
 @property (nonatomic) NSUInteger term;
 @property (nonatomic) UIColor *lineColor;
++ (NSString *)indicatorName;
 @end

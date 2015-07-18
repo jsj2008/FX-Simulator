@@ -11,6 +11,7 @@
 #import "MarketTimeScale.h"
 #import "SimpleMovingAverage.h"
 
+
 static NSString* const kTermKey = @"Term";
 static NSString* const kLineColorDataKey = @"LineColorData";
 
@@ -19,7 +20,7 @@ static NSString* const kLineColorDataKey = @"LineColorData";
 - (instancetype)initWithDictionary:(NSDictionary *)dic
 {
     if (self = [super initWithDictionary:dic]) {
-        if (![super.indicatorName isEqualToString:[SimpleMovingAverage indicatorName]]) {
+        if (![super.indicatorName isEqualToString:[SimpleMovingAverageSource indicatorName]]) {
             return nil;
         }
         _term = ((NSNumber *)[dic objectForKey:kTermKey]).unsignedIntegerValue;
@@ -32,7 +33,7 @@ static NSString* const kLineColorDataKey = @"LineColorData";
 
 - (NSDictionary *)sourceDictinary
 {
-    NSMutableDictionary *dic = [[super sourceDictinary] mutableCopy];
+    NSMutableDictionary *dic = [[super sourceDictionary] mutableCopy];
     
     [dic setObject:@(self.term) forKey:kTermKey];
     
@@ -42,6 +43,11 @@ static NSString* const kLineColorDataKey = @"LineColorData";
     }
     
     return [dic copy];
+}
+
++ (NSString *)indicatorName
+{
+    return @"SimpleMovingAverage";
 }
 
 @end

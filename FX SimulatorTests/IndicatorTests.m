@@ -32,7 +32,7 @@
     NSDictionary *dic = @{@"IndicatorName":@"SampleIndicator", @"DisplayIndex":@(1), @"IsMainChart":@(1), @"TimeScale":@(15)};
     IndicatorSource *source = [[IndicatorSource alloc] initWithDictionary:dic];
     
-    XCTAssertTrue([dic isEqualToDictionary:[source sourceDictinary]], @"equal sourceDictionary");
+    XCTAssertTrue([dic isEqualToDictionary:[source sourceDictionary]], @"equal sourceDictionary");
 }
 
 - (void)testPerformanceExample {

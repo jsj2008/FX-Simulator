@@ -1,39 +1,52 @@
 //
-//  Candle.m
+//  CandleChart.m
 //  FX Simulator
 //
-//  Created  on 2014/10/30.
-//  
+//  Created by yuu on 2015/07/05.
+//
 //
 
 #import "Candle.h"
 
-@implementation Candle
+#import "SimpleCandle.h"
+#import "CandleSource.h"
+#import "CandlesFactory.h"
+#import "ForexDataChunk.h"
 
--(void)stroke
+@implementation Candle {
+    CandleSource *_source;
+}
+
+- (instancetype)initWithSource:(IndicatorSource *)source
 {
-    [[UIColor colorWithRed:self.colorR green:self.colorG blue:self.colorB alpha:1.0] setStroke];
-    [[UIColor colorWithRed:self.colorR green:self.colorG blue:self.colorB alpha:1.0] setFill];
+    return nil;
+}
+
+- (instancetype)initWithCandleSource:(CandleSource *)source
+{
+    if (self = [super initWithSource:source]) {
+        _source = source;
+    }
     
-    UIBezierPath *rectangle =
-    [UIBezierPath bezierPathWithRect:CGRectMake(self.rect.origin.x, self.rect.origin.y, self.rect.size.width, self.rect.size.height)];
-    rectangle.lineWidth = 0;
-    [rectangle fill];
-    [rectangle stroke];
+    return self;
+}
+
+- (void)strokeIndicatorFromForexDataChunk:(ForexDataChunk *)chunk displayForexDataCount:(NSInteger)count displaySize:(CGSize)size
+{
+    if (chunk == nil) {
+        return;
+    }
     
-    UIBezierPath *highLine = [UIBezierPath bezierPath];
-    highLine.lineWidth = 2;
-    [highLine moveToPoint:self.highLineBottom];
-    [highLine addLineToPoint:self.highLineTop];
-    [highLine fill];
-    [highLine stroke];
+    NSArray *candles = [CandlesFactory createCandlesFromForexHistoryDataChunk:chunk displayForexDataCount:count chartViewWidth:size.width chartViewHeight:size.height];
     
-    UIBezierPath *lowLine = [UIBezierPath bezierPath];
-    lowLine.lineWidth = 2;
-    [lowLine moveToPoint:self.lowLineTop];
-    [lowLine addLineToPoint:self.lowLineBottom];
-    [lowLine fill];
-    [lowLine stroke];
+    for (SimpleCandle *candle in candles) {
+        [candle stroke];
+    }
+}
+
+- (NSDictionary *)sourceDictionary
+{
+    return [_source sourceDictionary];
 }
 
 @end
