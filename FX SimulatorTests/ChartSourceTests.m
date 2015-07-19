@@ -41,8 +41,9 @@
     CurrencyPair *currencyPair = [[CurrencyPair alloc] initWithCurrencyPairString:@"EURUSD"];
     MarketTimeScale *timeScale = [[MarketTimeScale alloc] initWithMinute:15];
     BOOL isMainChart = YES;
+    BOOL isSubChart = NO;
     
-    ChartSource *source = [[ChartSource alloc] initWithDefaultAndChartIndex:chartIndex currencyPair:currencyPair timeScale:timeScale isMainChart:isMainChart];
+    ChartSource *source = [[ChartSource alloc] initWithDefaultAndChartIndex:chartIndex currencyPair:currencyPair timeScale:timeScale isMainChart:isMainChart isSubChart:isSubChart];
     
     Candle *defaultIndicator = [[Candle alloc] initWithCandleSource:[[CandleSource alloc] initWithDefault]];
     NSDictionary *chartSourceDictionary = @{@"ChartIndex":@(chartIndex), @"TimeScale":timeScale.minuteValueObj, @"IsMainChart":@(isMainChart), @"IndicatorSourceDictionaryArray":defaultIndicator.sourceDictionary};

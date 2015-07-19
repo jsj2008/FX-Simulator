@@ -81,7 +81,7 @@ static NSString* const FXSDownLineColorDataKey = @"DownLineColorData";
     return NO;
 }
 
-- (NSDictionary *)sourceDictinary
+- (NSDictionary *)sourceDictionary
 {
     NSMutableDictionary *dic = [[super sourceDictionary] mutableCopy];
     
