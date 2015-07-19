@@ -46,7 +46,7 @@
 
 - (NSDictionary *)sourceDictionary
 {
-    return [_source sourceDictionary];
+    return _source.sourceDictionary;
 }
 
 @end
