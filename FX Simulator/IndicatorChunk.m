@@ -9,7 +9,7 @@
 #import "IndicatorChunk.h"
 
 #import "Indicator.h"
-#import "IndicatorSource.h"
+#import "IndicatorPlistSource.h"
 
 @implementation IndicatorChunk {
     NSMutableArray *_indicatorArray;

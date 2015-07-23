@@ -6,7 +6,7 @@
 //
 //
 
-#import "SimpleMovingAverageSource.h"
+#import "SimpleMovingAveragePlistSource.h"
 
 #import "MarketTimeScale.h"
 #import "SimpleMovingAverage.h"
@@ -15,12 +15,12 @@
 static NSString* const kTermKey = @"Term";
 static NSString* const kLineColorDataKey = @"LineColorData";
 
-@implementation SimpleMovingAverageSource
+@implementation SimpleMovingAveragePlistSource
 
 - (instancetype)initWithDictionary:(NSDictionary *)dic
 {
     if (self = [super initWithDictionary:dic]) {
-        if (![super.indicatorName isEqualToString:[SimpleMovingAverageSource indicatorName]]) {
+        if (![super.indicatorName isEqualToString:[SimpleMovingAveragePlistSource indicatorName]]) {
             return nil;
         }
         _term = ((NSNumber *)[dic objectForKey:kTermKey]).unsignedIntegerValue;

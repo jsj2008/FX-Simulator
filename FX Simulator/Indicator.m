@@ -8,11 +8,11 @@
 
 #import "Indicator.h"
 
-#import "IndicatorSource.h"
+#import "IndicatorPlistSource.h"
 #import "MarketTimeScale.h"
 
 @implementation Indicator {
-    IndicatorSource *_source;
+    IndicatorPlistSource *_source;
 }
 
 - (instancetype)init
@@ -20,7 +20,7 @@
     return nil;
 }
 
-- (instancetype)initWithSource:(IndicatorSource *)source
+- (instancetype)initWithSource:(IndicatorPlistSource *)source
 {
     if (self = [super init]) {
         _source = source;

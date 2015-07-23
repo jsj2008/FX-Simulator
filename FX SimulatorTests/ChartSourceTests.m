@@ -10,8 +10,8 @@
 #import <XCTest/XCTest.h>
 
 #import "Candle.h"
-#import "CandleSource.h"
-#import "ChartSource.h"
+#import "CandlePlistSource.h"
+#import "ChartPlistSource.h"
 #import "CurrencyPair.h"
 #import "MarketTimeScale.h"
 
@@ -43,9 +43,9 @@
     BOOL isMainChart = YES;
     BOOL isSubChart = NO;
     
-    ChartSource *source = [[ChartSource alloc] initWithDefaultAndChartIndex:chartIndex currencyPair:currencyPair timeScale:timeScale isMainChart:isMainChart isSubChart:isSubChart];
+    ChartPlistSource *source = [[ChartPlistSource alloc] initWithDefaultAndChartIndex:chartIndex currencyPair:currencyPair timeScale:timeScale isMainChart:isMainChart isSubChart:isSubChart];
     
-    Candle *defaultIndicator = [[Candle alloc] initWithCandleSource:[[CandleSource alloc] initWithDefault]];
+    Candle *defaultIndicator = [[Candle alloc] initWithCandleSource:[[CandlePlistSource alloc] initWithDefault]];
     NSDictionary *chartSourceDictionary = @{@"ChartIndex":@(chartIndex), @"TimeScale":timeScale.minuteValueObj, @"IsMainChart":@(isMainChart), @"IndicatorSourceDictionaryArray":defaultIndicator.sourceDictionary};
     
     XCTAssertEqualObjects(chartSourceDictionary, source.sourceDictionary);

@@ -12,7 +12,7 @@
 @class IndicatorChunk;
 @class MarketTimeScale;
 
-@interface ChartSource : NSObject
+@interface ChartPlistSource : NSObject
 - (instancetype)initWithDefaultAndChartIndex:(NSUInteger)index currencyPair:(CurrencyPair *)currencyPair timeScale:(MarketTimeScale *)timeScale isMainChart:(BOOL)isMainChart isSubChart:(BOOL)isSubChart;
 - (instancetype)initWithDictionary:(NSDictionary *)dic;
 - (BOOL)validateChartSource;

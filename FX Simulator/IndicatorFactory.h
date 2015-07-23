@@ -9,8 +9,8 @@
 #import <Foundation/Foundation.h>
 
 @class Indicator;
-@class IndicatorSource;
+@class IndicatorPlistSource;
 
 @interface IndicatorFactory : NSObject
-+ (Indicator *)createFromSource:(IndicatorSource *)source;
++ (Indicator *)createFromSource:(IndicatorPlistSource *)source;
 @end

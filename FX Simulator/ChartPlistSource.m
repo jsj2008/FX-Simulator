@@ -6,17 +6,17 @@
 //
 //
 
-#import "ChartSource.h"
+#import "ChartPlistSource.h"
 
 #import "Candle.h"
-#import "CandleSource.h"
+#import "CandlePlistSource.h"
 #import "CurrencyPair.h"
 #import "Indicator.h"
 #import "IndicatorChunk.h"
-#import "IndicatorSource.h"
+#import "IndicatorPlistSource.h"
 #import "MarketTimeScale.h"
 
-@implementation ChartSource
+@implementation ChartPlistSource
 
 static const NSUInteger FXSDefaultDisplayForexDataCount = 40;
 static NSString* const FXSDisplayForexDataCountKey = @"DisplayForexDataCount";
@@ -37,7 +37,7 @@ static NSString* const FXSIndicatorSourceDictionaryArrayKey = @"IndicatorSourceD
         _isMainChart = isMainChart;
         _isSubChart = isSubChart;
         
-        CandleSource *defaultIndicatorSource = [[CandleSource alloc] initWithDefault];
+        CandlePlistSource *defaultIndicatorSource = [[CandlePlistSource alloc] initWithDefault];
         Candle *defaultIndicator = [[Candle alloc] initWithCandleSource:defaultIndicatorSource];
         
         _displayIndicatorChunk = [[IndicatorChunk alloc] initWithIndicatorArray:@[defaultIndicator]];
@@ -69,7 +69,7 @@ static NSString* const FXSIndicatorSourceDictionaryArrayKey = @"IndicatorSourceD
     NSMutableArray *array = [NSMutableArray array];
     
     for (NSDictionary *dic in dictionaryArray) {
-        IndicatorSource *source = [[IndicatorSource alloc] initWithDictionary:dic];
+        IndicatorPlistSource *source = [[IndicatorPlistSource alloc] initWithDictionary:dic];
         if (source) {
             [array addObject:source];
         }
@@ -82,7 +82,7 @@ static NSString* const FXSIndicatorSourceDictionaryArrayKey = @"IndicatorSourceD
 {
     NSMutableArray *indicatorArray = [NSMutableArray array];
     
-    for (IndicatorSource *source in sourceArray) {
+    for (IndicatorPlistSource *source in sourceArray) {
         Indicator *indicator = [[Indicator alloc] initWithSource:source];
         if (indicator) {
             [indicatorArray addObject:indicator];

@@ -8,15 +8,15 @@
 
 #import "Chart.h"
 
-#import "ChartSource.h"
+#import "ChartPlistSource.h"
 #import "ForexDataChunk.h"
 
 @implementation Chart {
-    ChartSource *_chartSource;
+    ChartPlistSource *_chartSource;
     ForexDataChunk *_currentForexDataChunk;
 }
 
-- (instancetype)initWithChartSource:(ChartSource *)source
+- (instancetype)initWithChartSource:(ChartPlistSource *)source
 {
     if (self = [super init]) {
         _chartSource = source;

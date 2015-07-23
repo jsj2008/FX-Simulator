@@ -9,7 +9,7 @@
 #import "ChartChunk.h"
 
 #import "Chart.h"
-#import "ChartSource.h"
+#import "ChartPlistSource.h"
 #import "CurrencyPair.h"
 #import "MarketTimeScale.h"
 #import "Setting.h"
@@ -33,13 +33,13 @@
     
     for (MarketTimeScale *settingTimeScale in [Setting timeScaleList]) {
         if ([timeScale isEqualToTimeScale:settingTimeScale]) {
-            ChartSource *source = [[ChartSource alloc] initWithDefaultAndChartIndex:0 currencyPair:currencyPair timeScale:timeScale isMainChart:YES isSubChart:NO];
+            ChartPlistSource *source = [[ChartPlistSource alloc] initWithDefaultAndChartIndex:0 currencyPair:currencyPair timeScale:timeScale isMainChart:YES isSubChart:NO];
             [sourceArray addObject:source];
         }
     }
     
     [[self getTimeScaleArrayExcept:timeScale fromTimeScaleArray:[Setting timeScaleList]] enumerateObjectsUsingBlock:^(MarketTimeScale *obj, NSUInteger idx, BOOL *stop) {
-        ChartSource *source = [[ChartSource alloc] initWithDefaultAndChartIndex:idx currencyPair:currencyPair timeScale:obj isMainChart:NO isSubChart:YES];
+        ChartPlistSource *source = [[ChartPlistSource alloc] initWithDefaultAndChartIndex:idx currencyPair:currencyPair timeScale:obj isMainChart:NO isSubChart:YES];
         [sourceArray addObject:source];
     }];
     
@@ -52,7 +52,7 @@
 {
     NSMutableArray *chartArray = [NSMutableArray array];
     
-    for (ChartSource *source in sourceArray) {
+    for (ChartPlistSource *source in sourceArray) {
         Chart *chart = [[Chart alloc] initWithChartSource:source];
         if (chart) {
             [chartArray addObject:chart];
@@ -91,7 +91,7 @@
     NSMutableArray *chartArray = [NSMutableArray array];
     
     for (NSDictionary *sourceDictionary in dictionaryArray) {
-        ChartSource *chartSource = [[ChartSource alloc] initWithDictionary:sourceDictionary];
+        ChartPlistSource *chartSource = [[ChartPlistSource alloc] initWithDictionary:sourceDictionary];
         Chart *chart = [[Chart alloc] initWithChartSource:chartSource];
         if (chart) {
             [chartArray addObject:chart];

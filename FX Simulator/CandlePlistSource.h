@@ -6,13 +6,13 @@
 //
 //
 
-#import "IndicatorSource.h"
+#import "IndicatorPlistSource.h"
 
 @import UIKit;
 
-@interface CandleSource : IndicatorSource
+@interface CandlePlistSource : IndicatorPlistSource
 - (instancetype)initWithDefault;
-- (BOOL)isEqualSource:(CandleSource *)source;
+- (BOOL)isEqualSource:(CandlePlistSource *)source;
 @property (nonatomic) UIColor *upColor;
 @property (nonatomic) UIColor *downColor;
 @property (nonatomic) UIColor *upFrameColor;

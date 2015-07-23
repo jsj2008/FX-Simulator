@@ -10,10 +10,10 @@
 
 @class MarketTimeScale;
 
-@interface IndicatorSource : NSObject
+@interface IndicatorPlistSource : NSObject
 - (instancetype)initWithIndicatorName:(NSString *)indicatorName displayOrder:(NSUInteger)order;
 - (instancetype)initWithDictionary:(NSDictionary *)dic NS_REQUIRES_SUPER;
-- (BOOL)isEqualSource:(IndicatorSource *)source NS_REQUIRES_SUPER;
+- (BOOL)isEqualSource:(IndicatorPlistSource *)source NS_REQUIRES_SUPER;
 - (NSDictionary *)sourceDictionary NS_REQUIRES_SUPER;
 - (BOOL)validateIndicatorSource;
 @property (nonatomic, readonly) NSString *indicatorName;

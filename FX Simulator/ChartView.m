@@ -15,7 +15,7 @@
 #import "ForexDataChunk.h"
 #import "IndicatorUtils.h"
 #import "SimpleMovingAverage.h"
-#import "SimpleMovingAverageSource.h"
+#import "SimpleMovingAveragePlistSource.h"
 
 
 @implementation ChartView {
@@ -39,11 +39,11 @@
 {
     if (self = [super initWithCoder:aDecoder]) {
         _candleChart = [Candle new];
-        SimpleMovingAverageSource *s1 = [SimpleMovingAverageSource new];
-        SimpleMovingAverageSource *s2 = [SimpleMovingAverageSource new];
-        SimpleMovingAverageSource *s3 = [SimpleMovingAverageSource new];
-        SimpleMovingAverageSource *s4 = [SimpleMovingAverageSource new];
-        SimpleMovingAverageSource *s5 = [SimpleMovingAverageSource new];
+        SimpleMovingAveragePlistSource *s1 = [SimpleMovingAveragePlistSource new];
+        SimpleMovingAveragePlistSource *s2 = [SimpleMovingAveragePlistSource new];
+        SimpleMovingAveragePlistSource *s3 = [SimpleMovingAveragePlistSource new];
+        SimpleMovingAveragePlistSource *s4 = [SimpleMovingAveragePlistSource new];
+        SimpleMovingAveragePlistSource *s5 = [SimpleMovingAveragePlistSource new];
         s1.term = 20;
         s1.lineColor = [UIColor whiteColor];
         s2.term = 50;
