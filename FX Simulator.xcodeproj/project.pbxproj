@@ -26,6 +26,7 @@
 		705DCE4A1AE6893E00BCF710 /* tradedb.sqlite3 in Resources */ = {isa = PBXBuildFile; fileRef = 705DCE491AE6893E00BCF710 /* tradedb.sqlite3 */; };
 		705DCE4B1AE7C84300BCF710 /* Rates.m in Sources */ = {isa = PBXBuildFile; fileRef = 70B5AAEE1AC7FF44001F8823 /* Rates.m */; };
 		705DCE4C1AE7CE9800BCF710 /* RatePanelButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 70AD14751AADD0AA0099F0BA /* RatePanelButton.m */; };
+		7062E5BB1B60BB0100BDA666 /* CoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7062E5BA1B60BB0100BDA666 /* CoreDataManager.m */; };
 		7076F5A71AECCBBB004CC6BA /* NewStartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7076F5A61AECCBBB004CC6BA /* NewStartViewController.m */; };
 		7076F5AA1AECCDB7004CC6BA /* SetCurrencyPairViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7076F5A91AECCDB7004CC6BA /* SetCurrencyPairViewController.m */; };
 		7076F5AB1AECCEB3004CC6BA /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FC031A9F58D100CAB509 /* MainViewController.m */; };
@@ -220,6 +221,8 @@
 		705C2E0E1ADE4C270089D510 /* Money+ConvertToAccountCurrency.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Money+ConvertToAccountCurrency.h"; sourceTree = "<group>"; };
 		705C2E0F1ADE4C270089D510 /* Money+ConvertToAccountCurrency.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Money+ConvertToAccountCurrency.m"; sourceTree = "<group>"; };
 		705DCE491AE6893E00BCF710 /* tradedb.sqlite3 */ = {isa = PBXFileReference; lastKnownFileType = file; path = tradedb.sqlite3; sourceTree = "<group>"; };
+		7062E5B91B60BB0100BDA666 /* CoreDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataManager.h; sourceTree = "<group>"; };
+		7062E5BA1B60BB0100BDA666 /* CoreDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataManager.m; sourceTree = "<group>"; };
 		7076F5A51AECCBBB004CC6BA /* NewStartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewStartViewController.h; sourceTree = "<group>"; };
 		7076F5A61AECCBBB004CC6BA /* NewStartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewStartViewController.m; sourceTree = "<group>"; };
 		7076F5A81AECCDB7004CC6BA /* SetCurrencyPairViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetCurrencyPairViewController.h; sourceTree = "<group>"; };
@@ -692,6 +695,8 @@
 				704D3E761B5A7AFB00A8B9AB /* Chart.m */,
 				704D3E781B5A7B0C00A8B9AB /* ChartChunk.h */,
 				704D3E791B5A7B0C00A8B9AB /* ChartChunk.m */,
+				7062E5B91B60BB0100BDA666 /* CoreDataManager.h */,
+				7062E5BA1B60BB0100BDA666 /* CoreDataManager.m */,
 			);
 			path = "FX Simulator";
 			sourceTree = "<group>";
@@ -1188,6 +1193,7 @@
 				70D2FB251A9F572B00CAB509 /* SubChartViewController.m in Sources */,
 				70D2FB4C1A9F574000CAB509 /* TradeDataViewData.m in Sources */,
 				70D2FB9E1A9F57A000CAB509 /* ForexHistoryCache.m in Sources */,
+				7062E5BB1B60BB0100BDA666 /* CoreDataManager.m in Sources */,
 				70D2FBD51A9F57CB00CAB509 /* SaveDataFileStorage.m in Sources */,
 				70D2FBAE1A9F57B000CAB509 /* OrderManager.m in Sources */,
 				70D2FC3D1A9F591600CAB509 /* OrderType.m in Sources */,
