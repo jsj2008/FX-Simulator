@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
 
-#import "IndicatorSource.h"
+#import "IndicatorPlistSource.h"
 
 
 @interface IndicatorTests : XCTestCase
@@ -30,7 +30,7 @@
 
 - (void)testExample {
     NSDictionary *dic = @{@"IndicatorName":@"SampleIndicator", @"DisplayIndex":@(1), @"IsMainChart":@(1), @"TimeScale":@(15)};
-    IndicatorSource *source = [[IndicatorSource alloc] initWithDictionary:dic];
+    IndicatorPlistSource *source = [[IndicatorPlistSource alloc] initWithDictionary:dic];
     
     XCTAssertTrue([dic isEqualToDictionary:[source sourceDictionary]], @"equal sourceDictionary");
 }

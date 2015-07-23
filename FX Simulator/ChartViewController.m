@@ -8,12 +8,12 @@
 
 #import "ChartViewController.h"
 
-#import "ChartSource.h"
+#import "ChartPlistSource.h"
 #import "ChartView.h"
 #import "ChartViewData.h"
 #import "ForexDataChunk.h"
 #import "ForexDataChunkStore.h"
-#import "IndicatorSource.h"
+#import "IndicatorPlistSource.h"
 #import "Market.h"
 
 @interface ChartViewController ()
@@ -24,7 +24,7 @@ static const NSUInteger kMaxDisplayForexDataCount = 100;
 static const NSUInteger kMinDisplayForexDataCount = 40;
 
 @implementation ChartViewController {
-    ChartSource *_source;
+    ChartPlistSource *_source;
     ForexDataChunk *_chunk;
     ForexDataChunk *_displayedForexDataChunk;
     ForexDataChunkStore *_store;
@@ -126,7 +126,7 @@ static const NSUInteger kMinDisplayForexDataCount = 40;
     }
 }
 
-- (void)setChartSource:(ChartSource *)source
+- (void)setChartSource:(ChartPlistSource *)source
 {
     _source = source;
     _store = [[ForexDataChunkStore alloc] initWithCurrencyPair:source.currencyPair timeScale:source.timeScale getMaxLimit:[ChartViewController requireForexDataCountForChart]];
@@ -152,7 +152,7 @@ static const NSUInteger kMinDisplayForexDataCount = 40;
 
 + (NSUInteger)requireForexDataCountForChart
 {
-    return kMaxDisplayForexDataCount + [IndicatorSource maxIndicatorTerm] - 1;
+    return kMaxDisplayForexDataCount + [IndicatorPlistSource maxIndicatorTerm] - 1;
 }
 
 - (void)didReceiveMemoryWarning

@@ -8,18 +8,18 @@
 
 #import "IndicatorSourceFactory.h"
 
-#import "IndicatorSource.h"
+#import "IndicatorPlistSource.h"
 #import "SimpleMovingAverage.h"
-#import "SimpleMovingAverageSource.h"
+#import "SimpleMovingAveragePlistSource.h"
 
 @implementation IndicatorSourceFactory
 
-+ (IndicatorSource *)createFrom:(NSDictionary *)dic
++ (IndicatorPlistSource *)createFrom:(NSDictionary *)dic
 {
-    NSString *indicatorName = dic[[IndicatorSource indicatorNameKey]];
+    NSString *indicatorName = dic[[IndicatorPlistSource indicatorNameKey]];
     
-    if ([indicatorName isEqualToString:[SimpleMovingAverageSource indicatorName]]) {
-        return [[SimpleMovingAverageSource alloc] initWithDictionary:dic];
+    if ([indicatorName isEqualToString:[SimpleMovingAveragePlistSource indicatorName]]) {
+        return [[SimpleMovingAveragePlistSource alloc] initWithDictionary:dic];
     }
     
     return nil;

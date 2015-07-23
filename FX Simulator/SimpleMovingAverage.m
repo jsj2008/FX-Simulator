@@ -11,10 +11,10 @@
 #import "ForexDataChunk.h"
 #import "IndicatorUtils.h"
 #import "Rate.h"
-#import "SimpleMovingAverageSource.h"
+#import "SimpleMovingAveragePlistSource.h"
 
 @implementation SimpleMovingAverage {
-    SimpleMovingAverageSource *_source;
+    SimpleMovingAveragePlistSource *_source;
     NSUInteger _term;
     UIColor *_lineColor;
 }
@@ -24,7 +24,7 @@
     return nil;
 }
 
-- (instancetype)initWithSource:(SimpleMovingAverageSource *)source
+- (instancetype)initWithSource:(SimpleMovingAveragePlistSource *)source
 {
     if (self = [super initWithSource:source]) {
         _source = source;

@@ -6,7 +6,7 @@
 //
 //
 
-#import "CandleSource.h"
+#import "CandlePlistSource.h"
 
 static NSString* const FXSUpColorDataKey = @"UpColorData";
 static NSString* const FXSDownColorDataKey = @"DownColorData";
@@ -15,14 +15,14 @@ static NSString* const FXSDownFrameColorDataKey = @"DownFrameColorData";
 static NSString* const FXSUpLineColorDataKey = @"UpLineColorData";
 static NSString* const FXSDownLineColorDataKey = @"DownLineColorData";
 
-@implementation CandleSource
+@implementation CandlePlistSource
 
 @synthesize indicatorName = _indicatorName;
 @synthesize displayOrder = _displayOrder;
 
 - (instancetype)initWithDefault
 {
-    if (self = [super initWithIndicatorName:[CandleSource indicatorName] displayOrder:0]) {
+    if (self = [super initWithIndicatorName:[CandlePlistSource indicatorName] displayOrder:0]) {
         UIColor *upColor = [UIColor colorWithRed:35.0/255.0 green:172.0/255.0 blue:14.0/255.0 alpha:1.0];
         UIColor *downColor = [UIColor colorWithRed:199.0/250.0 green:36.0/255.0 blue:58.0/255.0 alpha:1.0];
         _upColor = upColor;
@@ -61,7 +61,7 @@ static NSString* const FXSDownLineColorDataKey = @"DownLineColorData";
     return self;
 }
 
-- (BOOL)isEqualSource:(CandleSource *)source
+- (BOOL)isEqualSource:(CandlePlistSource *)source
 {
     if (![super isEqualSource:source]) {
         return NO;

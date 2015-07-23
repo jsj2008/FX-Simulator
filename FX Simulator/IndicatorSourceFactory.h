@@ -8,8 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
-@class IndicatorSource;
+@class IndicatorPlistSource;
 
 @interface IndicatorSourceFactory : NSObject
-+ (IndicatorSource *)createFrom:(NSDictionary *)dic;
++ (IndicatorPlistSource *)createFrom:(NSDictionary *)dic;
 @end

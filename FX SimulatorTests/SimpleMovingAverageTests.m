@@ -10,7 +10,7 @@
 #import <XCTest/XCTest.h>
 
 #import "SimpleMovingAverage.h"
-#import "SimpleMovingAverageSource.h"
+#import "SimpleMovingAveragePlistSource.h"
 
 @interface SimpleMovingAverageTests : XCTestCase
 
@@ -33,7 +33,7 @@
     UIColor *color = [UIColor whiteColor];
     NSData *lineColorData = [NSKeyedArchiver archivedDataWithRootObject:color];
     NSDictionary *dic = @{@"IndicatorName":@"SimpleMovingAverage", @"DisplayIndex":@(1), @"IsMainChart":@(1), @"TimeScale":@(15), @"Term":@(term), @"LineColorData":lineColorData};
-    SimpleMovingAverageSource *source = [[SimpleMovingAverageSource alloc] initWithDictionary:dic];
+    SimpleMovingAveragePlistSource *source = [[SimpleMovingAveragePlistSource alloc] initWithDictionary:dic];
     
     XCTAssertTrue(source.term == term, @"equal term");
     XCTAssertTrue([source.lineColor isEqual:color], @"equal color");

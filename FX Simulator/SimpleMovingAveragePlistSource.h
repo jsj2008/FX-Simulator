@@ -7,11 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "IndicatorSource.h"
+#import "IndicatorPlistSource.h"
 
 @import UIKit;
 
-@interface SimpleMovingAverageSource : IndicatorSource
+@interface SimpleMovingAveragePlistSource : IndicatorPlistSource
 @property (nonatomic) NSUInteger term;
 @property (nonatomic) UIColor *lineColor;
 + (NSString *)indicatorName;

@@ -9,20 +9,20 @@
 #import "Candle.h"
 
 #import "SimpleCandle.h"
-#import "CandleSource.h"
+#import "CandlePlistSource.h"
 #import "CandlesFactory.h"
 #import "ForexDataChunk.h"
 
 @implementation Candle {
-    CandleSource *_source;
+    CandlePlistSource *_source;
 }
 
-- (instancetype)initWithSource:(IndicatorSource *)source
+- (instancetype)initWithSource:(IndicatorPlistSource *)source
 {
     return nil;
 }
 
-- (instancetype)initWithCandleSource:(CandleSource *)source
+- (instancetype)initWithCandleSource:(CandlePlistSource *)source
 {
     if (self = [super initWithSource:source]) {
         _source = source;

@@ -8,11 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
-@class ChartSource;
+@class ChartPlistSource;
 @class ForexDataChunk;
 
 @interface Chart : NSObject
-- (instancetype)initWithChartSource:(ChartSource *)source;
+- (instancetype)initWithChartSource:(ChartPlistSource *)source;
 - (void)setForexDataChunk:(ForexDataChunk *)chunk;
 - (void)stroke;
 - (BOOL)isEqualChartIndex:(NSUInteger)index;
