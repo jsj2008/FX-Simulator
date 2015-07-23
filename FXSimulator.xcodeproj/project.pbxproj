@@ -277,7 +277,7 @@
 		70CFEB3D1B16EA6800837727 /* TradeTestDb.sqlite3 */ = {isa = PBXFileReference; lastKnownFileType = file; path = TradeTestDb.sqlite3; sourceTree = "<group>"; };
 		70CFEB3F1B19F92800837727 /* FXSTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FXSTest.h; sourceTree = "<group>"; };
 		70CFEB401B19F92800837727 /* FXSTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FXSTest.m; sourceTree = "<group>"; };
-		70D2FA841A9F305700CAB509 /* FX Simulator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "FX Simulator.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		70D2FA841A9F305700CAB509 /* FXSimulator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FXSimulator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		70D2FA881A9F305700CAB509 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		70D2FA891A9F305700CAB509 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		70D2FA8B1A9F305700CAB509 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -285,7 +285,7 @@
 		70D2FA951A9F305700CAB509 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		70D2FA971A9F305700CAB509 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		70D2FA9A1A9F305700CAB509 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		70D2FAA01A9F305800CAB509 /* FX SimulatorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "FX SimulatorTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		70D2FAA01A9F305800CAB509 /* FXSimulatorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FXSimulatorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		70D2FAA51A9F305800CAB509 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		70D2FAA61A9F305800CAB509 /* FX_SimulatorTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FX_SimulatorTests.m; sourceTree = "<group>"; };
 		70D2FAB31A9F531800CAB509 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
@@ -539,8 +539,8 @@
 		70D2FA851A9F305700CAB509 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				70D2FA841A9F305700CAB509 /* FX Simulator.app */,
-				70D2FAA01A9F305800CAB509 /* FX SimulatorTests.xctest */,
+				70D2FA841A9F305700CAB509 /* FXSimulator.app */,
+				70D2FAA01A9F305800CAB509 /* FXSimulatorTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1025,9 +1025,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		70D2FA831A9F305700CAB509 /* FX Simulator */ = {
+		70D2FA831A9F305700CAB509 /* FXSimulator */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 70D2FAAA1A9F305800CAB509 /* Build configuration list for PBXNativeTarget "FX Simulator" */;
+			buildConfigurationList = 70D2FAAA1A9F305800CAB509 /* Build configuration list for PBXNativeTarget "FXSimulator" */;
 			buildPhases = (
 				70D2FA801A9F305700CAB509 /* Sources */,
 				70D2FA811A9F305700CAB509 /* Frameworks */,
@@ -1037,14 +1037,14 @@
 			);
 			dependencies = (
 			);
-			name = "FX Simulator";
+			name = FXSimulator;
 			productName = "FX Simulator";
-			productReference = 70D2FA841A9F305700CAB509 /* FX Simulator.app */;
+			productReference = 70D2FA841A9F305700CAB509 /* FXSimulator.app */;
 			productType = "com.apple.product-type.application";
 		};
-		70D2FA9F1A9F305800CAB509 /* FX SimulatorTests */ = {
+		70D2FA9F1A9F305800CAB509 /* FXSimulatorTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 70D2FAAD1A9F305800CAB509 /* Build configuration list for PBXNativeTarget "FX SimulatorTests" */;
+			buildConfigurationList = 70D2FAAD1A9F305800CAB509 /* Build configuration list for PBXNativeTarget "FXSimulatorTests" */;
 			buildPhases = (
 				70D2FA9C1A9F305800CAB509 /* Sources */,
 				70D2FA9D1A9F305800CAB509 /* Frameworks */,
@@ -1055,9 +1055,9 @@
 			dependencies = (
 				70D2FAA21A9F305800CAB509 /* PBXTargetDependency */,
 			);
-			name = "FX SimulatorTests";
+			name = FXSimulatorTests;
 			productName = "FX SimulatorTests";
-			productReference = 70D2FAA01A9F305800CAB509 /* FX SimulatorTests.xctest */;
+			productReference = 70D2FAA01A9F305800CAB509 /* FXSimulatorTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -1078,7 +1078,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 70D2FA7F1A9F305700CAB509 /* Build configuration list for PBXProject "FX Simulator" */;
+			buildConfigurationList = 70D2FA7F1A9F305700CAB509 /* Build configuration list for PBXProject "FXSimulator" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -1091,8 +1091,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				70D2FA831A9F305700CAB509 /* FX Simulator */,
-				70D2FA9F1A9F305800CAB509 /* FX SimulatorTests */,
+				70D2FA831A9F305700CAB509 /* FXSimulator */,
+				70D2FA9F1A9F305800CAB509 /* FXSimulatorTests */,
 			);
 		};
 /* End PBXProject section */
@@ -1300,7 +1300,7 @@
 /* Begin PBXTargetDependency section */
 		70D2FAA21A9F305800CAB509 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 70D2FA831A9F305700CAB509 /* FX Simulator */;
+			target = 70D2FA831A9F305700CAB509 /* FXSimulator */;
 			targetProxy = 70D2FAA11A9F305800CAB509 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -1410,7 +1410,7 @@
 				GCC_PREFIX_HEADER = "FX Simulator/FX_Simulator-Prefix.pch";
 				INFOPLIST_FILE = "FX Simulator/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = FXSimulator;
 			};
 			name = Debug;
 		};
@@ -1421,7 +1421,7 @@
 				GCC_PREFIX_HEADER = "FX Simulator/FX_Simulator-Prefix.pch";
 				INFOPLIST_FILE = "FX Simulator/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = FXSimulator;
 			};
 			name = Release;
 		};
@@ -1440,7 +1440,7 @@
 				);
 				INFOPLIST_FILE = "FX SimulatorTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = FXSimulatorTests;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FX Simulator.app/FX Simulator";
 			};
 			name = Debug;
@@ -1456,7 +1456,7 @@
 				GCC_PREFIX_HEADER = "";
 				INFOPLIST_FILE = "FX SimulatorTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = FXSimulatorTests;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FX Simulator.app/FX Simulator";
 			};
 			name = Release;
@@ -1464,7 +1464,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		70D2FA7F1A9F305700CAB509 /* Build configuration list for PBXProject "FX Simulator" */ = {
+		70D2FA7F1A9F305700CAB509 /* Build configuration list for PBXProject "FXSimulator" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				70D2FAA81A9F305800CAB509 /* Debug */,
@@ -1473,7 +1473,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		70D2FAAA1A9F305800CAB509 /* Build configuration list for PBXNativeTarget "FX Simulator" */ = {
+		70D2FAAA1A9F305800CAB509 /* Build configuration list for PBXNativeTarget "FXSimulator" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				70D2FAAB1A9F305800CAB509 /* Debug */,
@@ -1482,7 +1482,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		70D2FAAD1A9F305800CAB509 /* Build configuration list for PBXNativeTarget "FX SimulatorTests" */ = {
+		70D2FAAD1A9F305800CAB509 /* Build configuration list for PBXNativeTarget "FXSimulatorTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				70D2FAAE1A9F305800CAB509 /* Debug */,
