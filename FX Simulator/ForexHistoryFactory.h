@@ -10,8 +10,8 @@
 
 @class ForexHistory;
 @class CurrencyPair;
-@class MarketTimeScale;
+@class TimeFrame;
 
 @interface ForexHistoryFactory : NSObject
-+(ForexHistory*)createForexHistoryFromCurrencyPair:(CurrencyPair*)currencyPair timeScale:(MarketTimeScale*)timeScale;
++(ForexHistory*)createForexHistoryFromCurrencyPair:(CurrencyPair*)currencyPair timeScale:(TimeFrame*)timeScale;
 @end

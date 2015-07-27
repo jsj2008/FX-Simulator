@@ -8,8 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
-@class MarketTimeScale;
+@class TimeFrame;
 
 @interface TimeScaleUtils : NSObject
-+(NSArray*)selectTimeScaleListExecept:(MarketTimeScale*)timeScale fromTimeScaleList:(NSArray*)list;
++(NSArray*)selectTimeScaleListExecept:(TimeFrame*)timeScale fromTimeScaleList:(NSArray*)list;
 @end

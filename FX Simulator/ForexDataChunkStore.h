@@ -12,7 +12,7 @@
 @class ForexHistoryData;
 @class ForexDataChunk;
 @class MarketTime;
-@class MarketTimeScale;
+@class TimeFrame;
 
 /**
  ForexDataChunkのキャッシュを持ち、それを管理する。
@@ -22,7 +22,7 @@
 /**
  @param maxLimit メソッドで取得する最大のLimit。これをもとに、キャッシュのサイズが決まる。
 */
-- (instancetype)initWithCurrencyPair:(CurrencyPair *)currencyPair timeScale:(MarketTimeScale *)timeScale getMaxLimit:(NSUInteger)maxLimit;
+- (instancetype)initWithCurrencyPair:(CurrencyPair *)currencyPair timeScale:(TimeFrame *)timeScale getMaxLimit:(NSUInteger)maxLimit;
 
 /**
  基準となるデータを先頭に、最大Limit個のデータを取得する。

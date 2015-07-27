@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@class MarketTimeScale;
+@class TimeFrame;
 
 @interface IndicatorPlistSource : NSObject
 - (instancetype)initWithIndicatorName:(NSString *)indicatorName displayOrder:(NSUInteger)order;

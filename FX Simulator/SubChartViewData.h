@@ -9,12 +9,12 @@
 #import <Foundation/Foundation.h>
 
 @class ForexDataChunk;
-@class MarketTimeScale;
+@class TimeFrame;
 
 @interface SubChartViewData : NSObject
 - (ForexDataChunk *)getCurrentChunk;
 - (void)updateSelectedIndex:(NSUInteger)newIndex;
 @property (nonatomic, readonly) NSArray *items;
 @property (nonatomic) NSUInteger selectedSegmentIndex;
-@property (nonatomic, readonly) MarketTimeScale *selectedTimeScale;
+@property (nonatomic, readonly) TimeFrame *selectedTimeScale;
 @end

@@ -10,7 +10,7 @@
 
 
 @class Indicator;
-@class MarketTimeScale;
+@class TimeFrame;
 
 @interface IndicatorChunk : NSObject
 - (instancetype)initWithIndicatorArray:(NSArray *)indicatorArray;

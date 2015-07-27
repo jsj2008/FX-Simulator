@@ -13,7 +13,7 @@
 #import "OpenPosition.h"
 #import "Money.h"
 #import "ForexHistoryData.h"
-#import "MarketTimeScale.h"
+#import "TimeFrame.h"
 #import "OrderType.h"
 #import "SaveLoader.h"
 #import "SaveData.h"

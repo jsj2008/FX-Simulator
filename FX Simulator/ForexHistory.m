@@ -9,7 +9,7 @@
 #import "ForexHistory.h"
 
 #import "MarketTime.h"
-#import "MarketTimeScale.h"
+#import "TimeFrame.h"
 #import "ForexDatabase.h"
 #import "ForexDataChunk.h"
 #import "ForexHistoryData.h"
@@ -30,7 +30,7 @@ static const int cacheSize = 300;
     FMDatabase *forexDatabase;
     ForexHistoryCache *cache;
     CurrencyPair *_currencyPair;
-    MarketTimeScale *_timeScale;
+    TimeFrame *_timeScale;
     int _timeScaleInt;
     NSString *_forexHistoryTableName;
 }
@@ -45,7 +45,7 @@ static const int cacheSize = 300;
     return self;
 }
 
--(id)initWithCurrencyPair:(CurrencyPair *)currencyPair timeScale:(MarketTimeScale*)timeScale
+-(id)initWithCurrencyPair:(CurrencyPair *)currencyPair timeScale:(TimeFrame*)timeScale
 {
     if (currencyPair == nil || timeScale == nil) {
         DLog(@"CurrencyPair or TimeScale nil");

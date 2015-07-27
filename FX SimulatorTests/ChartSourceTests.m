@@ -13,7 +13,7 @@
 #import "CandlePlistSource.h"
 #import "ChartPlistSource.h"
 #import "CurrencyPair.h"
-#import "MarketTimeScale.h"
+#import "TimeFrame.h"
 
 @interface ChartSourceTests : XCTestCase
 
@@ -39,7 +39,7 @@
 - (void)testInitWithDefaultAndChartIndex {
     NSUInteger chartIndex = 0;
     CurrencyPair *currencyPair = [[CurrencyPair alloc] initWithCurrencyPairString:@"EURUSD"];
-    MarketTimeScale *timeScale = [[MarketTimeScale alloc] initWithMinute:15];
+    TimeFrame *timeScale = [[TimeFrame alloc] initWithMinute:15];
     BOOL isMainChart = YES;
     BOOL isSubChart = NO;
     

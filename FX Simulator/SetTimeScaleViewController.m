@@ -8,7 +8,7 @@
 
 #import "SetTimeScaleViewController.h"
 
-#import "MarketTimeScale.h"
+#import "TimeFrame.h"
 #import "SaveData.h"
 #import "Setting.h"
 
@@ -49,7 +49,7 @@ numberOfRowsInComponent:(NSInteger)component
 
 - (NSAttributedString *)pickerView:(UIPickerView *)pickerView attributedTitleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
-    NSString *title = [(MarketTimeScale*)[_timeScaleList objectAtIndex:row] toDisplayString];
+    NSString *title = [(TimeFrame*)[_timeScaleList objectAtIndex:row] toDisplayString];
     NSAttributedString *attString = [[NSAttributedString alloc] initWithString:title attributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
     
     return attString;
