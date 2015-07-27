@@ -8,8 +8,20 @@
 
 #import "Currency.h"
 
+static NSString* const FXSCurrencyKey = @"currency";
+
 @implementation Currency {
     CurrencyType _currencyType;
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder
+{
+    return [self initWithString:[aDecoder decodeObjectForKey:FXSCurrencyKey]];
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder
+{
+    [aCoder encodeObject:[self toCodeString] forKey:FXSCurrencyKey];
 }
 
 -(id)initWithCurrencyType:(CurrencyType)currencyType

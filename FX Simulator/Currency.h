@@ -16,7 +16,7 @@ typedef NS_ENUM(NSInteger, CurrencyType) {
     AUD
 };
 
-@interface Currency : NSObject
+@interface Currency : NSObject <NSCoding>
 -(id)initWithCurrencyType:(CurrencyType)currencyType;
 -(id)initWithString:(NSString*)currencyString;
 -(BOOL)isEqualCurrency:(Currency*)currency;
