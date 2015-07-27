@@ -10,7 +10,7 @@
 
 @class Currency;
 
-@interface CurrencyPair : NSObject
+@interface CurrencyPair : NSObject <NSCoding>
 -(id)initWithCurrencyPairString:(NSString*)currencyPairString;
 -(id)initWithBaseCurrency:(Currency*)baseCurrency QuoteCurrency:(Currency*)quoteCurrency;
 -(BOOL)isQuoteCurrencyEqualJPY;

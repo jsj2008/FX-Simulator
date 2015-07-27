@@ -11,9 +11,21 @@
 #import "Setting.h"
 #import "Currency.h"
 
+static NSString* const FXSCurrencyPairKey = @"CurrencyPair";
+
 @implementation CurrencyPair {
     Currency *_baseCurrency;
     Currency *_quoteCurrency;
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder
+{
+    return [self initWithCurrencyPairString:[aDecoder decodeObjectForKey:FXSCurrencyPairKey]];
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder
+{
+    [aCoder encodeObject:[self toCodeString] forKey:FXSCurrencyPairKey];
 }
 
 -(id)initWithBaseCurrency:(Currency *)baseCurrency QuoteCurrency:(Currency *)quoteCurrency
