@@ -10,7 +10,7 @@
 
 #import "ChartViewController.h"
 #import "SubChartDataViewController.h"
-#import "MarketTimeScale.h"
+#import "TimeFrame.h"
 #import "SubChartViewData.h"
 #import "Rate.h"
 #import "ForexDataChunk.h"
@@ -175,7 +175,7 @@
     [self setInitData];
 }
 
-- (MarketTimeScale *)selectedTimeScale
+- (TimeFrame *)selectedTimeScale
 {
     return _subChartViewData.selectedTimeScale;
 }

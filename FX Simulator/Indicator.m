@@ -9,7 +9,7 @@
 #import "Indicator.h"
 
 #import "IndicatorPlistSource.h"
-#import "MarketTimeScale.h"
+#import "TimeFrame.h"
 
 @implementation Indicator {
     IndicatorPlistSource *_source;

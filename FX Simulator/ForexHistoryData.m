@@ -12,13 +12,13 @@
 #import "CurrencyPair.h"
 #import "Rate.h"
 #import "MarketTime.h"
-#import "MarketTimeScale.h"
+#import "TimeFrame.h"
 #import "ForexDataChunk.h"
 #import "ForexHistoryDataArrayUtils.h"
 
 @implementation ForexHistoryData
 
--(id)initWithFMResultSet:(FMResultSet*)rs currencyPair:(CurrencyPair *)currencyPair timeScale:(MarketTimeScale *)timeScale
+-(id)initWithFMResultSet:(FMResultSet*)rs currencyPair:(CurrencyPair *)currencyPair timeScale:(TimeFrame *)timeScale
 {
     if (self = [self init]) {
         _ratesID = [rs intForColumn:@"rowid"];
@@ -35,7 +35,7 @@
     return self;
 }
 
--(id)initWithForexDataChunk:(ForexDataChunk *)chunk timeScale:(MarketTimeScale *)timeScale
+-(id)initWithForexDataChunk:(ForexDataChunk *)chunk timeScale:(TimeFrame *)timeScale
 {
     if (self = [self init]) {
         _currencyPair = chunk.current.currencyPair;
@@ -68,7 +68,7 @@
         return YES;
     }
     
-    if ((self.ratesID == data.ratesID) && [self.currencyPair isEqualCurrencyPair:data.currencyPair] && [self.timeScale isEqualToTimeScale:data.timeScale]) {
+    if ((self.ratesID == data.ratesID) && [self.currencyPair isEqualCurrencyPair:data.currencyPair] && [self.timeScale isEqualToTimeFrame:data.timeScale]) {
         return YES;
     } else {
         return NO;

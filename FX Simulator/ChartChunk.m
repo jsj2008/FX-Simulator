@@ -11,7 +11,7 @@
 #import "Chart.h"
 #import "ChartPlistSource.h"
 #import "CurrencyPair.h"
-#import "MarketTimeScale.h"
+#import "TimeFrame.h"
 #import "Setting.h"
 
 @implementation ChartChunk {
@@ -27,18 +27,18 @@
     return self;
 }
 
-- (instancetype)initWithDefaultAndMainChartCurrencyPair:(CurrencyPair *)currencyPair mainChartTimeScale:(MarketTimeScale *)timeScale
+- (instancetype)initWithDefaultAndMainChartCurrencyPair:(CurrencyPair *)currencyPair mainChartTimeScale:(TimeFrame *)timeScale
 {
     NSMutableArray *sourceArray = [NSMutableArray array];
     
-    for (MarketTimeScale *settingTimeScale in [Setting timeScaleList]) {
-        if ([timeScale isEqualToTimeScale:settingTimeScale]) {
+    for (TimeFrame *settingTimeScale in [Setting timeScaleList]) {
+        if ([timeScale isEqualToTimeFrame:settingTimeScale]) {
             ChartPlistSource *source = [[ChartPlistSource alloc] initWithDefaultAndChartIndex:0 currencyPair:currencyPair timeScale:timeScale isMainChart:YES isSubChart:NO];
             [sourceArray addObject:source];
         }
     }
     
-    [[self getTimeScaleArrayExcept:timeScale fromTimeScaleArray:[Setting timeScaleList]] enumerateObjectsUsingBlock:^(MarketTimeScale *obj, NSUInteger idx, BOOL *stop) {
+    [[self getTimeScaleArrayExcept:timeScale fromTimeScaleArray:[Setting timeScaleList]] enumerateObjectsUsingBlock:^(TimeFrame *obj, NSUInteger idx, BOOL *stop) {
         ChartPlistSource *source = [[ChartPlistSource alloc] initWithDefaultAndChartIndex:idx currencyPair:currencyPair timeScale:obj isMainChart:NO isSubChart:YES];
         [sourceArray addObject:source];
     }];
@@ -62,12 +62,12 @@
     return [chartArray copy];
 }
 
--(NSArray *)getTimeScaleArrayExcept:(MarketTimeScale *)exceptTimeScale fromTimeScaleArray:(NSArray *)timeScaleArray
+-(NSArray *)getTimeScaleArrayExcept:(TimeFrame *)exceptTimeScale fromTimeScaleArray:(NSArray *)timeScaleArray
 {
     NSMutableArray *array = [NSMutableArray array];
     
-    for (MarketTimeScale *timeScale in timeScaleArray) {
-        if (![exceptTimeScale isEqualToTimeScale:timeScale]) {
+    for (TimeFrame *timeScale in timeScaleArray) {
+        if (![exceptTimeScale isEqualToTimeFrame:timeScale]) {
             [array addObject:timeScale];
         }
     }

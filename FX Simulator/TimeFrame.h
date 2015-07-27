@@ -8,10 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
-@interface MarketTimeScale : NSObject
+@interface TimeFrame : NSObject
 -(id)initWithMinute:(int)minute;
-- (NSComparisonResult)compare:(MarketTimeScale *)timeScale;
-- (BOOL)isEqualToTimeScale:(MarketTimeScale *)timeScale;
+- (NSComparisonResult)compare:(TimeFrame *)timeFrame;
+- (BOOL)isEqualToTimeFrame:(TimeFrame *)timeFrame;
 -(NSString*)toDisplayString;
 @property (nonatomic, readonly) int minute;
 @property (nonatomic, readonly) NSNumber *minuteValueObj;

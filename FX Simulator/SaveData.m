@@ -9,7 +9,7 @@
 #import "SaveData.h"
 
 #import "MarketTime.h"
-#import "MarketTimeScale.h"
+#import "TimeFrame.h"
 #import "Currency.h"
 #import "CurrencyPair.h"
 #import "FXSTimeRange.h"
@@ -38,7 +38,7 @@
         
         _slotNumber = [[dic objectForKey:@"SaveSlot"] intValue];
         _currencyPair = [[CurrencyPair alloc] initWithBaseCurrency:baseCurrency QuoteCurrency:quoteCurrency];
-        _timeScale = [[MarketTimeScale alloc] initWithMinute:[[dic objectForKey:@"TimeScale"] intValue]];
+        _timeScale = [[TimeFrame alloc] initWithMinute:[[dic objectForKey:@"TimeScale"] intValue]];
         _startTime = [[MarketTime alloc] initWithTimestamp:[[dic objectForKey:@"StartTimestamp"] intValue]];
         _spread = [[Spread alloc] initWithPips:[[dic objectForKey:@"Spread"] doubleValue] currencyPair:_currencyPair];
         _accountCurrency = [[Currency alloc] initWithString:[dic objectForKey:@"AccountCurrency"]];
@@ -50,7 +50,7 @@
         _lastLoadedCloseTimestamp = [[MarketTime alloc] initWithTimestamp:[[dic objectForKey:@"LastLoadedCloseTimestamp"] intValue]];
         _isAutoUpdate = [[dic objectForKey:@"IsAutoUpdate"] boolValue];
         _autoUpdateInterval = [NSNumber numberWithFloat:[[dic objectForKey:@"AutoUpdateInterval"] floatValue]];
-        _subChartSelectedTimeScale = [[MarketTimeScale alloc] initWithMinute:[[dic objectForKey:@"SubChartSelectedTimeScale"] intValue]];
+        _subChartSelectedTimeScale = [[TimeFrame alloc] initWithMinute:[[dic objectForKey:@"SubChartSelectedTimeScale"] intValue]];
         
         if (![FXSTest inTest]) {
             _orderHistoryDataSource = [[TradeDbDataSource alloc] initWithTableName:[dic objectForKey:@"OrderHistoryTableName"] SaveSlotNumber:[NSNumber numberWithInt:_slotNumber]];
@@ -72,11 +72,11 @@
         _tradePositionSize = [[PositionSize alloc] initWithSizeValue:10000];
         _isAutoUpdate = YES;
         _autoUpdateInterval = @1.0;
-        _subChartSelectedTimeScale = [[MarketTimeScale alloc] initWithMinute:60];
+        _subChartSelectedTimeScale = [[TimeFrame alloc] initWithMinute:60];
         
         _slotNumber = slotNumber;
         _currencyPair = [[CurrencyPair alloc] initWithBaseCurrency:[[Currency alloc] initWithCurrencyType:USD] QuoteCurrency:[[Currency alloc] initWithCurrencyType:JPY]];
-        _timeScale = [[MarketTimeScale alloc] initWithMinute:15];
+        _timeScale = [[TimeFrame alloc] initWithMinute:15];
         _startTime = [Setting rangeForCurrencyPair:_currencyPair timeScale:_timeScale].start;
         _lastLoadedCloseTimestamp = _startTime;
         _spread = [[Spread alloc] initWithPips:1 currencyPair:_currencyPair];
@@ -146,7 +146,7 @@
     return saveDataDic;
 }
 
-- (void)setTimeScale:(MarketTimeScale *)timeScale
+- (void)setTimeScale:(TimeFrame *)timeScale
 {
     _timeScale = timeScale;
     _subChartSelectedTimeScale = [TimeScaleUtils selectTimeScaleListExecept:self.timeScale fromTimeScaleList:[Setting timeScaleList]].firstObject;

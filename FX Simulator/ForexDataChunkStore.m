@@ -13,12 +13,12 @@
 #import "ForexHistory.h"
 #import "ForexHistoryData.h"
 #import "ForexHistoryFactory.h"
-#import "MarketTimeScale.h"
+#import "TimeFrame.h"
 #import "Rate.h"
 
 @implementation ForexDataChunkStore {
     CurrencyPair *_currencyPair;
-    MarketTimeScale *_timeScale;
+    TimeFrame *_timeScale;
     ForexDataChunk *_forexDataChunkCache;
     ForexHistory *_forexHistory;
     NSUInteger _frontLimit;
@@ -27,7 +27,7 @@
 
 static const NSUInteger buffer = 200;
 
-- (instancetype)initWithCurrencyPair:(CurrencyPair *)currencyPair timeScale:(MarketTimeScale *)timeScale getMaxLimit:(NSUInteger)maxLimit
+- (instancetype)initWithCurrencyPair:(CurrencyPair *)currencyPair timeScale:(TimeFrame *)timeScale getMaxLimit:(NSUInteger)maxLimit
 {
     if (currencyPair == nil || timeScale == nil) {
         return nil;
@@ -102,7 +102,7 @@ static const NSUInteger buffer = 200;
 
 - (ForexDataChunk *)getChunkFromNextDataOf:(ForexHistoryData *)data limit:(NSUInteger)limit
 {
-    if (![_timeScale isEqualToTimeScale:data.timeScale]) {
+    if (![_timeScale isEqualToTimeFrame:data.timeScale]) {
         return nil;
     }
     

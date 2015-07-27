@@ -12,7 +12,7 @@
 
 @implementation ForexHistoryFactory
 
-+(ForexHistory*)createForexHistoryFromCurrencyPair:(CurrencyPair *)currencyPair timeScale:(MarketTimeScale*)timeScale
++(ForexHistory*)createForexHistoryFromCurrencyPair:(CurrencyPair *)currencyPair timeScale:(TimeFrame*)timeScale
 {
     return [[ForexHistory alloc] initWithCurrencyPair:currencyPair timeScale:timeScale];
 }

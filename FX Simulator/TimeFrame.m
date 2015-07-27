@@ -6,9 +6,9 @@
 //  
 //
 
-#import "MarketTimeScale.h"
+#import "TimeFrame.h"
 
-@implementation MarketTimeScale
+@implementation TimeFrame
 
 -(id)initWithMinute:(int)minute
 {
@@ -27,7 +27,7 @@
     if (other == self) {
         return YES;
     } else if ([other isKindOfClass:[self class]]) {
-        if ([self isEqualToTimeScale:other]) {
+        if ([self isEqualToTimeFrame:other]) {
             return YES;
         }
     }
@@ -35,18 +35,18 @@
     return NO;
 }
 
--(BOOL)isEqualToTimeScale:(MarketTimeScale*)timeScale
+-(BOOL)isEqualToTimeFrame:(TimeFrame*)timeFrame
 {
-    if (self.minute == timeScale.minute) {
+    if (self.minute == timeFrame.minute) {
         return YES;
     }
     
     return NO;
 }
 
-- (NSComparisonResult)compare:(MarketTimeScale *)timeScale
+- (NSComparisonResult)compare:(TimeFrame *)timeFrame
 {
-    return [self.minuteValueObj compare:timeScale.minuteValueObj];
+    return [self.minuteValueObj compare:timeFrame.minuteValueObj];
 }
 
 -(NSString*)toDisplayString

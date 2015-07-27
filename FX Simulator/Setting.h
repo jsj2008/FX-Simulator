@@ -11,7 +11,7 @@
 @class CurrencyPair;
 @class FXSTimeRange;
 @class MarketTime;
-@class MarketTimeScale;
+@class TimeFrame;
 @class Rate;
 
 
@@ -61,7 +61,7 @@
 /**
  その通貨と時間軸で、シュミレーションを開始できる時間の範囲。
 */
-+(FXSTimeRange*)rangeForCurrencyPair:(CurrencyPair*)currencyPair timeScale:(MarketTimeScale*)timeScale;
++(FXSTimeRange*)rangeForCurrencyPair:(CurrencyPair*)currencyPair timeScale:(TimeFrame*)timeScale;
 
 /**
  ChartView(SubChart含む)に表示するForexDataの最大数。

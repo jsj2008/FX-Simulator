@@ -11,7 +11,7 @@
 
 @class Chart;
 @class CurrencyPair;
-@class MarketTimeScale;
+@class TimeFrame;
 
 @interface ChartChunk : NSObject
 - (instancetype)initWithChartArray:(NSArray *)chartArray;
@@ -21,7 +21,7 @@
  メインチャート1つと、サブチャート3つを生成する。
  時間軸が重複しないように生成する。
 */
-- (instancetype)initWithDefaultAndMainChartCurrencyPair:(CurrencyPair *)currencyPair mainChartTimeScale:(MarketTimeScale *)timeScale;
+- (instancetype)initWithDefaultAndMainChartCurrencyPair:(CurrencyPair *)currencyPair mainChartTimeScale:(TimeFrame *)timeScale;
 
 /**
  ChartIndexがindexなチャート。

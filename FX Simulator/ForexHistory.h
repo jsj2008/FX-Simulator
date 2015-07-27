@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @class MarketTime;
-@class MarketTimeScale;
+@class TimeFrame;
 @class ForexDataChunk;
 @class ForexHistoryData;
 @class CurrencyPair;
@@ -21,7 +21,7 @@
 
 @interface ForexHistory : NSObject
 
--(id)initWithCurrencyPair:(CurrencyPair*)currencyPair timeScale:(MarketTimeScale*)timeScale;
+-(id)initWithCurrencyPair:(CurrencyPair*)currencyPair timeScale:(TimeFrame*)timeScale;
 
 /**
  基準となるデータを中心に、前後のLimitに基づきデータを取得する。

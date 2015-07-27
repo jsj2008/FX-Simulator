@@ -8,7 +8,7 @@
 
 #import "SimpleMovingAveragePlistSource.h"
 
-#import "MarketTimeScale.h"
+#import "TimeFrame.h"
 #import "SimpleMovingAverage.h"
 
 

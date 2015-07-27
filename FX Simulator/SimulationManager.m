@@ -15,7 +15,7 @@
 #import "SaveData.h"
 #import "SaveLoader.h"
 #import "SimulationState.h"
-#import "MarketTimeScale.h"
+#import "TimeFrame.h"
 #import "TradeViewController.h"
 
 @interface SimulationManager ()

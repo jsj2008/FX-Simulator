@@ -16,7 +16,7 @@
 #import "SaveDataFileStorage.h"
 #import "SaveDataStorageFactory.h"
 #import "Spread.h"
-#import "MarketTimeScale.h"
+#import "TimeFrame.h"
 #import "SaveData.h"
 #import "SaveLoader.h"
 #import "SetNewStartDataViewController.h"

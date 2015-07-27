@@ -14,7 +14,7 @@
 #import "ForexHistoryFactory.h"
 #import "FXSTimeRange.h"
 #import "MarketTime.h"
-#import "MarketTimeScale.h"
+#import "TimeFrame.h"
 #import "Rate.h"
 
 
@@ -102,7 +102,7 @@ static NSDictionary *spreadRateDic;
 +(NSArray*)timeScaleList
 {
     
-    return @[[[MarketTimeScale alloc] initWithMinute:15], [[MarketTimeScale alloc] initWithMinute:60], [[MarketTimeScale alloc] initWithMinute:240], [[MarketTimeScale alloc] initWithMinute:1440]];
+    return @[[[TimeFrame alloc] initWithMinute:15], [[TimeFrame alloc] initWithMinute:60], [[TimeFrame alloc] initWithMinute:240], [[TimeFrame alloc] initWithMinute:1440]];
 }
 
 +(NSArray*)accountCurrencyList
@@ -187,7 +187,7 @@ static NSDictionary *spreadRateDic;
     }
 }
 
-+(FXSTimeRange*)rangeForCurrencyPair:(CurrencyPair *)currencyPair timeScale:(MarketTimeScale *)timeScale
++(FXSTimeRange*)rangeForCurrencyPair:(CurrencyPair *)currencyPair timeScale:(TimeFrame *)timeScale
 {
     ForexHistory *forexHistory = [ForexHistoryFactory createForexHistoryFromCurrencyPair:currencyPair timeScale:timeScale];
     

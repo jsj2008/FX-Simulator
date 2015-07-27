@@ -8,15 +8,15 @@
 
 #import "TimeScaleUtils.h"
 
-#import "MarketTimeScale.h"
+#import "TimeFrame.h"
 
 @implementation TimeScaleUtils
 
-+(NSArray*)selectTimeScaleListExecept:(MarketTimeScale*)timeScale fromTimeScaleList:(NSArray *)list
++(NSArray*)selectTimeScaleListExecept:(TimeFrame*)timeScale fromTimeScaleList:(NSArray *)list
 {
     NSMutableArray *array = [NSMutableArray array];
 
-    for (MarketTimeScale *marketTimeScale in list) {
+    for (TimeFrame *marketTimeScale in list) {
         if (timeScale.minute != marketTimeScale.minute) {
             [array addObject:marketTimeScale];
         }

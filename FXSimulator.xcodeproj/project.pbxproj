@@ -156,7 +156,7 @@
 		70D2FC401A9F591600CAB509 /* Currency.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FC181A9F591500CAB509 /* Currency.m */; };
 		70D2FC411A9F591600CAB509 /* TimeScaleUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FC1A1A9F591500CAB509 /* TimeScaleUtils.m */; };
 		70D2FC421A9F591600CAB509 /* Setting.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FC1C1A9F591500CAB509 /* Setting.m */; };
-		70D2FC431A9F591600CAB509 /* MarketTimeScale.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FC1E1A9F591500CAB509 /* MarketTimeScale.m */; };
+		70D2FC431A9F591600CAB509 /* TimeFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FC1E1A9F591500CAB509 /* TimeFrame.m */; };
 		70D2FC441A9F591600CAB509 /* Spread.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FC201A9F591500CAB509 /* Spread.m */; };
 		70D2FC451A9F591600CAB509 /* Rate.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FC221A9F591500CAB509 /* Rate.m */; };
 		70D2FC461A9F591600CAB509 /* Money.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FC241A9F591500CAB509 /* Money.m */; };
@@ -470,8 +470,8 @@
 		70D2FC1A1A9F591500CAB509 /* TimeScaleUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeScaleUtils.m; sourceTree = "<group>"; };
 		70D2FC1B1A9F591500CAB509 /* Setting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Setting.h; sourceTree = "<group>"; };
 		70D2FC1C1A9F591500CAB509 /* Setting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Setting.m; sourceTree = "<group>"; };
-		70D2FC1D1A9F591500CAB509 /* MarketTimeScale.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarketTimeScale.h; sourceTree = "<group>"; };
-		70D2FC1E1A9F591500CAB509 /* MarketTimeScale.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarketTimeScale.m; sourceTree = "<group>"; };
+		70D2FC1D1A9F591500CAB509 /* TimeFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeFrame.h; sourceTree = "<group>"; };
+		70D2FC1E1A9F591500CAB509 /* TimeFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeFrame.m; sourceTree = "<group>"; };
 		70D2FC1F1A9F591500CAB509 /* Spread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Spread.h; sourceTree = "<group>"; };
 		70D2FC201A9F591500CAB509 /* Spread.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Spread.m; sourceTree = "<group>"; };
 		70D2FC211A9F591500CAB509 /* Rate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Rate.h; sourceTree = "<group>"; };
@@ -627,8 +627,8 @@
 				70D2FC1A1A9F591500CAB509 /* TimeScaleUtils.m */,
 				70D2FC1B1A9F591500CAB509 /* Setting.h */,
 				70D2FC1C1A9F591500CAB509 /* Setting.m */,
-				70D2FC1D1A9F591500CAB509 /* MarketTimeScale.h */,
-				70D2FC1E1A9F591500CAB509 /* MarketTimeScale.m */,
+				70D2FC1D1A9F591500CAB509 /* TimeFrame.h */,
+				70D2FC1E1A9F591500CAB509 /* TimeFrame.m */,
 				70D2FC1F1A9F591500CAB509 /* Spread.h */,
 				70D2FC201A9F591500CAB509 /* Spread.m */,
 				70D2FC211A9F591500CAB509 /* Rate.h */,
@@ -1316,7 +1316,7 @@
 				70D2FC421A9F591600CAB509 /* Setting.m in Sources */,
 				70ED622B1B01C0330008F939 /* SetPositionSizeOfLotViewController.m in Sources */,
 				70D2FBC31A9F57BD00CAB509 /* OpenPositionFactory.m in Sources */,
-				70D2FC431A9F591600CAB509 /* MarketTimeScale.m in Sources */,
+				70D2FC431A9F591600CAB509 /* TimeFrame.m in Sources */,
 				70E758FD1B4C09FE00A46E24 /* ForexDataChunkStore.m in Sources */,
 				70042C671B47FA1500C1A22E /* IndicatorUtils.m in Sources */,
 				70D2FBF71A9F57DC00CAB509 /* ExecutionOrdersCreator.m in Sources */,

@@ -14,7 +14,7 @@
 #import "ForexHistoryData.h"
 #import "Setting.h"
 #import "TimeScaleUtils.h"
-#import "MarketTimeScale.h"
+#import "TimeFrame.h"
 #import "Rate.h"
 #import "SimulationManager.h"
 #import "MarketTime.h"
@@ -53,7 +53,7 @@
     return nil;
 }
 
--(NSArray*)getChartDataArrayWithTimeScale:(MarketTimeScale*)timeScale
+-(NSArray*)getChartDataArrayWithTimeScale:(TimeFrame*)timeScale
 {
     ForexHistoryData *data = market.currentForexHistoryData;
     
@@ -62,12 +62,12 @@
     return nil;
 }
 
--(MarketTimeScale*)toTimeScalefFromSegmentIndex:(int)index
+-(TimeFrame*)toTimeScalefFromSegmentIndex:(int)index
 {
-    return (MarketTimeScale*)[timeScaleList objectAtIndex:index];
+    return (TimeFrame*)[timeScaleList objectAtIndex:index];
 }
 
-- (NSUInteger)toSegmentIndexFromTimeScale:(MarketTimeScale *)timeScale
+- (NSUInteger)toSegmentIndexFromTimeScale:(TimeFrame *)timeScale
 {
     return [timeScaleList indexOfObject:timeScale];
 }
@@ -78,14 +78,14 @@
     
     //NSArray *timeScaleList = [TimeScaleUtils selectTimeScaleListExecept:saveData.timeScale fromTimeScaleList:[Setting timeScaleList]];
     
-    for (MarketTimeScale *timeScale in timeScaleList) {
+    for (TimeFrame *timeScale in timeScaleList) {
         [array addObject:timeScale.toDisplayString];
     }
     
     return [array copy];
 }
 
-- (MarketTimeScale *)selectedTimeScale
+- (TimeFrame *)selectedTimeScale
 {
     return [timeScaleList objectAtIndex:self.selectedSegmentIndex];
 }

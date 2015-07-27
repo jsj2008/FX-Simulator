@@ -8,7 +8,7 @@
 
 #import "IndicatorPlistSource.h"
 
-#import "MarketTimeScale.h"
+#import "TimeFrame.h"
 
 static const NSUInteger kMaxIndicatorTerm = 200;
 static NSString* const kIndicatorNameKey = @"IndicatorName";

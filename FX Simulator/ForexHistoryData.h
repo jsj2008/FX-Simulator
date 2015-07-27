@@ -12,7 +12,7 @@
 @class CurrencyPair;
 @class Rate;
 @class ForexDataChunk;
-@class MarketTimeScale;
+@class TimeFrame;
 
 typedef NS_ENUM(NSUInteger, RateType) {
     Open = 1,
@@ -26,13 +26,13 @@ typedef NS_ENUM(NSUInteger, RateType) {
 */
 
 @interface ForexHistoryData : NSObject
--(id)initWithFMResultSet:(FMResultSet*)rs currencyPair:(CurrencyPair*)currencyPair timeScale:(MarketTimeScale *)timeScale;
--(id)initWithForexDataChunk:(ForexDataChunk *)chunk timeScale:(MarketTimeScale *)timeScale;
+-(id)initWithFMResultSet:(FMResultSet*)rs currencyPair:(CurrencyPair*)currencyPair timeScale:(TimeFrame *)timeScale;
+-(id)initWithForexDataChunk:(ForexDataChunk *)chunk timeScale:(TimeFrame *)timeScale;
 - (Rate *)getRateForType:(RateType)type;
 - (BOOL)isEqualToForexData:(ForexHistoryData *)data;
 @property (nonatomic, readonly) int ratesID;
 @property (nonatomic, readonly) CurrencyPair *currencyPair;
-@property (nonatomic, readonly) MarketTimeScale *timeScale;
+@property (nonatomic, readonly) TimeFrame *timeScale;
 @property (nonatomic, readonly) Rate *open;
 @property (nonatomic, readonly) Rate *high;
 @property (nonatomic, readonly) Rate *low;

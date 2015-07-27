@@ -14,7 +14,7 @@
 #import "Indicator.h"
 #import "IndicatorChunk.h"
 #import "IndicatorPlistSource.h"
-#import "MarketTimeScale.h"
+#import "TimeFrame.h"
 
 @implementation ChartPlistSource
 
@@ -27,7 +27,7 @@ static NSString* const FXSIsMainChartKey = @"IsMainChart";
 static NSString* const FXSIsSubChartKey = @"IsSubChart";
 static NSString* const FXSIndicatorSourceDictionaryArrayKey = @"IndicatorSourceDictionaryArray";
 
-- (instancetype)initWithDefaultAndChartIndex:(NSUInteger)index currencyPair:(CurrencyPair *)currencyPair timeScale:(MarketTimeScale *)timeScale isMainChart:(BOOL)isMainChart isSubChart:(BOOL)isSubChart
+- (instancetype)initWithDefaultAndChartIndex:(NSUInteger)index currencyPair:(CurrencyPair *)currencyPair timeScale:(TimeFrame *)timeScale isMainChart:(BOOL)isMainChart isSubChart:(BOOL)isSubChart
 {
     if (self = [super init]) {
         _displayForexDataCount = FXSDefaultDisplayForexDataCount;
@@ -52,7 +52,7 @@ static NSString* const FXSIndicatorSourceDictionaryArrayKey = @"IndicatorSourceD
         _displayForexDataCount = ((NSNumber *)dic[FXSDisplayForexDataCountKey]).unsignedIntegerValue;
         _chartIndex = ((NSNumber *)dic[FXSChartIndexKey]).unsignedIntegerValue;
         _currencyPair = [[CurrencyPair alloc] initWithCurrencyPairString:dic[FXSCurrencyPairKey]];
-        _timeScale = [[MarketTimeScale alloc] initWithMinute:((NSNumber *)dic[FXSTimeScaleKey]).unsignedIntegerValue];
+        _timeScale = [[TimeFrame alloc] initWithMinute:((NSNumber *)dic[FXSTimeScaleKey]).unsignedIntegerValue];
         _isMainChart = ((NSNumber *)dic[FXSIsMainChartKey]).boolValue;
         _isSubChart = ((NSNumber *)dic[FXSIsSubChartKey]).boolValue;
         

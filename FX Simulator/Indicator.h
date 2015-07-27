@@ -14,7 +14,7 @@
 @class UIBezierPath;
 @class UIView;
 @class ForexDataChunk;
-@class MarketTimeScale;
+@class TimeFrame;
 
 /**
  @param count 画面に表示するForexDataの個数。
