@@ -60,6 +60,7 @@
 		709BC75E1B0700320059C940 /* SetAutoUpdateIntervalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 709BC75D1B0700320059C940 /* SetAutoUpdateIntervalViewController.m */; };
 		70B5AAEC1AC7BE90001F8823 /* ExecuteOrderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 70B5AAEB1AC7BE90001F8823 /* ExecuteOrderTests.m */; };
 		70B5AAF21ACE5BC0001F8823 /* SubChartDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70B5AAF11ACE5BC0001F8823 /* SubChartDataViewController.m */; };
+		70BB8BEA1B60D07C00B0539D /* FXSimulator.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 70BB8BE81B60D07C00B0539D /* FXSimulator.xcdatamodeld */; };
 		70CFEB361B15A6DE00837727 /* SaveDataStorageTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 70CFEB351B15A6DE00837727 /* SaveDataStorageTests.m */; };
 		70CFEB391B15B66300837727 /* TradeTestDbDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 70CFEB381B15B66300837727 /* TradeTestDbDataSource.m */; };
 		70CFEB3E1B16EA6800837727 /* TradeTestDb.sqlite3 in Resources */ = {isa = PBXBuildFile; fileRef = 70CFEB3D1B16EA6800837727 /* TradeTestDb.sqlite3 */; };
@@ -270,6 +271,7 @@
 		70B5AAEE1AC7FF44001F8823 /* Rates.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Rates.m; sourceTree = "<group>"; };
 		70B5AAF01ACE5BC0001F8823 /* SubChartDataViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubChartDataViewController.h; sourceTree = "<group>"; };
 		70B5AAF11ACE5BC0001F8823 /* SubChartDataViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubChartDataViewController.m; sourceTree = "<group>"; };
+		70BB8BE91B60D07C00B0539D /* FXSimulator.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FXSimulator.xcdatamodel; sourceTree = "<group>"; };
 		70CFEB351B15A6DE00837727 /* SaveDataStorageTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SaveDataStorageTests.m; sourceTree = "<group>"; };
 		70CFEB371B15B66300837727 /* TradeTestDbDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TradeTestDbDataSource.h; sourceTree = "<group>"; };
 		70CFEB381B15B66300837727 /* TradeTestDbDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TradeTestDbDataSource.m; sourceTree = "<group>"; };
@@ -697,6 +699,7 @@
 				704D3E791B5A7B0C00A8B9AB /* ChartChunk.m */,
 				7062E5B91B60BB0100BDA666 /* CoreDataManager.h */,
 				7062E5BA1B60BB0100BDA666 /* CoreDataManager.m */,
+				70BB8BE81B60D07C00B0539D /* FXSimulator.xcdatamodeld */,
 			);
 			path = "FX Simulator";
 			sourceTree = "<group>";
@@ -1249,6 +1252,7 @@
 				70EACE6C1B2B1BE900A2E532 /* OrderManagerState.m in Sources */,
 				70D2FBFC1A9F57DC00CAB509 /* CloseAndNewExecutionOrdersCreateMode.m in Sources */,
 				70D2FB881A9F579000CAB509 /* ExecutionHistoryRecord.m in Sources */,
+				70BB8BEA1B60D07C00B0539D /* FXSimulator.xcdatamodeld in Sources */,
 				70D2FC501A9F591600CAB509 /* EquityFactory.m in Sources */,
 				7079FEE81AF4FF23004D3CEA /* SetStartTimeViewController.m in Sources */,
 				70D2FC481A9F591600CAB509 /* Lot.m in Sources */,
@@ -1492,6 +1496,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		70BB8BE81B60D07C00B0539D /* FXSimulator.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				70BB8BE91B60D07C00B0539D /* FXSimulator.xcdatamodel */,
+			);
+			currentVersion = 70BB8BE91B60D07C00B0539D /* FXSimulator.xcdatamodel */;
+			path = FXSimulator.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 70D2FA7C1A9F305700CAB509 /* Project object */;
 }

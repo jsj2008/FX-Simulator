@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7549" systemVersion="14D136" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="CandleSource" parentEntity="IndicatorSource" syncable="YES">
+        <attribute name="downColor" attributeType="Transformable" syncable="YES"/>
+        <attribute name="downLineColor" attributeType="Transformable" syncable="YES"/>
+        <attribute name="upColor" attributeType="Transformable" syncable="YES"/>
+        <attribute name="upLineColor" attributeType="Transformable" syncable="YES"/>
+        <relationship name="chartSource" maxCount="1" deletionRule="Nullify" destinationEntity="ChartSource" inverseName="candleSource" inverseEntity="ChartSource" syncable="YES"/>
+    </entity>
+    <entity name="ChartSource" syncable="YES">
+        <attribute name="chartIndex" attributeType="Integer 32" defaultValueString="-1" syncable="YES"/>
+        <attribute name="currencyPair" attributeType="Transformable" syncable="YES"/>
+        <attribute name="isSelected" attributeType="Boolean" syncable="YES"/>
+        <attribute name="timeFrame" attributeType="Transformable" syncable="YES"/>
+        <relationship name="candleSource" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="CandleSource" inverseName="chartSource" inverseEntity="CandleSource" syncable="YES"/>
+        <relationship name="saveDataSourceForMain" maxCount="1" deletionRule="Nullify" destinationEntity="SaveDataSource" inverseName="mainChartSources" inverseEntity="SaveDataSource" syncable="YES"/>
+        <relationship name="saveDataSourceForSub" maxCount="1" deletionRule="Nullify" destinationEntity="SaveDataSource" inverseName="subChartSources" inverseEntity="SaveDataSource" syncable="YES"/>
+        <relationship name="simpleMovingAverageSources" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="SimpleMovingAverageSource" inverseName="chartSource" inverseEntity="SimpleMovingAverageSource" syncable="YES"/>
+    </entity>
+    <entity name="IndicatorSource" isAbstract="YES" syncable="YES">
+        <attribute name="displayOrder" attributeType="Integer 32" defaultValueString="-1" syncable="YES"/>
+    </entity>
+    <entity name="SaveDataSource" syncable="YES">
+        <attribute name="accountCurrency" attributeType="Transformable" syncable="YES"/>
+        <attribute name="autoUpdateIntervalSeconds" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="currencyPair" attributeType="Transformable" syncable="YES"/>
+        <attribute name="isAutoUpdate" attributeType="Boolean" syncable="YES"/>
+        <attribute name="lastLoadedTime" attributeType="Transformable" syncable="YES"/>
+        <attribute name="positionSizeOfLot" attributeType="Transformable" syncable="YES"/>
+        <attribute name="slotNumber" attributeType="Integer 32" defaultValueString="-1" syncable="YES"/>
+        <attribute name="spread" attributeType="Transformable" syncable="YES"/>
+        <attribute name="startBalance" attributeType="Transformable" syncable="YES"/>
+        <attribute name="startTime" attributeType="Transformable" syncable="YES"/>
+        <attribute name="timeFrame" attributeType="Transformable" syncable="YES"/>
+        <attribute name="tradePositionSize" attributeType="Transformable" syncable="YES"/>
+        <relationship name="mainChartSources" toMany="YES" deletionRule="Cascade" destinationEntity="ChartSource" inverseName="saveDataSourceForMain" inverseEntity="ChartSource" syncable="YES"/>
+        <relationship name="subChartSources" toMany="YES" deletionRule="Cascade" destinationEntity="ChartSource" inverseName="saveDataSourceForSub" inverseEntity="ChartSource" syncable="YES"/>
+    </entity>
+    <entity name="SimpleMovingAverageSource" parentEntity="IndicatorSource" syncable="YES">
+        <attribute name="lineColor" attributeType="Transformable" syncable="YES"/>
+        <attribute name="period" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <relationship name="chartSource" maxCount="1" deletionRule="Nullify" destinationEntity="ChartSource" inverseName="simpleMovingAverageSources" inverseEntity="ChartSource" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="CandleSource" positionX="196" positionY="54" width="128" height="120"/>
+        <element name="ChartSource" positionX="-99" positionY="-180" width="128" height="165"/>
+        <element name="IndicatorSource" positionX="151" positionY="-144" width="128" height="58"/>
+        <element name="SaveDataSource" positionX="-270" positionY="-72" width="128" height="255"/>
+        <element name="SimpleMovingAverageSource" positionX="-81" positionY="177" width="128" height="90"/>
+    </elements>
+</model>
