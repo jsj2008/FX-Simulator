@@ -12,7 +12,21 @@
 #import "Currency.h"
 #import "NSNumber+FXSNumberConverter.h"
 
+static NSString* const FXSMoneyValueKey = @"moneyValue";
+static NSString* const FXSCurrencyKey = @"currency";
+
 @implementation Money
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder
+{
+    return [self initWithAmount:[aDecoder decodeInt64ForKey:FXSMoneyValueKey] currency:[aDecoder decodeObjectForKey:FXSCurrencyKey]];
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder
+{
+    [aCoder encodeInt64:self.amount forKey:FXSMoneyValueKey];
+    [aCoder encodeObject:self.currency forKey:FXSCurrencyKey];
+}
 
 // NewStartの新しいSaveData作成のところでは、currencyにnil入れている。
 -(id)initWithAmount:(amount_t)amount currency:(Currency*)currency

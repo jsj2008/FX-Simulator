@@ -8,7 +8,7 @@
 
 #import "ChartSource.h"
 #import "CandleSource.h"
-#import "NSManagedObject.h"
+//#import "NSManagedObject.h"
 #import "SimpleMovingAverageSource.h"
 
 

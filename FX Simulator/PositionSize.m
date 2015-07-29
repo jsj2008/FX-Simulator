@@ -13,8 +13,19 @@
 #import "SaveData.h"
 #import "Lot.h"
 
+static NSString* const FXSPositionSizeKey = @"positionSize";
 
 @implementation PositionSize
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder
+{
+    return [self initWithSizeValue:[aDecoder decodeInt64ForKey:FXSPositionSizeKey]];
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder
+{
+    [aCoder encodeInt64:self.sizeValue forKey:FXSPositionSizeKey];
+}
 
 -(id)initWithSizeValue:(position_size_t)size
 {

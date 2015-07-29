@@ -8,7 +8,7 @@
 
 #import "Common.h"
 
-@interface MarketTime : NSObject
+@interface MarketTime : NSObject <NSCoding>
 -(instancetype)initWithTimestamp:(timestamp_t)timestamp;
 -(instancetype)initWithDate:(NSDate*)date;
 -(MarketTime*)addDay:(int)day;

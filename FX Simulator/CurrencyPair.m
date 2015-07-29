@@ -11,7 +11,7 @@
 #import "Setting.h"
 #import "Currency.h"
 
-static NSString* const FXSCurrencyPairKey = @"CurrencyPair";
+static NSString* const FXSCurrencyPairKey = @"currencyPair";
 
 @implementation CurrencyPair {
     Currency *_baseCurrency;

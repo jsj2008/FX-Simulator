@@ -7,7 +7,7 @@
 //
 
 #import "CandleSource.h"
-#import "NSManagedObject.h"
+//#import "NSManagedObject.h"
 
 
 @implementation CandleSource

@@ -12,7 +12,7 @@
 @class CurrencyPair;
 @class Rate;
 
-@interface Spread : NSObject
+@interface Spread : NSObject <NSCoding>
 -(id)initWithPips:(spread_t)pips currencyPair:(CurrencyPair*)currencyPair;
 /**
  スプレッド(Pips)をレートに変換する。例 ドル円 1pip => 0.01円

@@ -8,9 +8,21 @@
 
 #import "TimeFrame.h"
 
+static NSString* const FXSTimeFrameKey = @"timeFrame";
+
 @implementation TimeFrame
 
--(id)initWithMinute:(int)minute
+- (instancetype)initWithCoder:(NSCoder *)aDecoder
+{
+    return [self initWithMinute:[aDecoder decodeIntegerForKey:FXSTimeFrameKey]];
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder
+{
+    [aCoder encodeInteger:self.minute forKey:FXSTimeFrameKey];
+}
+
+-(id)initWithMinute:(NSUInteger)minute
 {
     if (!(0 < minute)) {
         return nil;
