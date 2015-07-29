@@ -8,7 +8,19 @@
 
 #import "MarketTime.h"
 
+static NSString* const FXSTimeKey = @"time";
+
 @implementation MarketTime
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder
+{
+    return [self initWithDate:[aDecoder decodeObjectForKey:FXSTimeKey]];
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder
+{
+    [aCoder encodeObject:self.date forKey:FXSTimeKey];
+}
 
 -(instancetype)initWithTimestamp:(timestamp_t)timestamp
 {

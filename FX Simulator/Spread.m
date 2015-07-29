@@ -12,8 +12,21 @@
 #import "Rate.h"
 #import "Setting.h"
 
+static NSString* const FXSSpreadValueKey = @"spreadValue";
+static NSString* const FXSCurrencyPairKey = @"currencyPair";
 
 @implementation Spread
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder
+{
+    return [self initWithPips:[aDecoder decodeDoubleForKey:FXSSpreadValueKey] currencyPair:[aDecoder decodeObjectForKey:FXSCurrencyPairKey]];
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder
+{
+    [aCoder encodeDouble:self.spreadValue forKey:FXSSpreadValueKey];
+    [aCoder encodeObject:self.currencyPair forKey:FXSCurrencyPairKey];
+}
 
 // NewStartの新しいSaveData作成のところでは、currencyPairにnil入れている。
 -(id)initWithPips:(spread_t)pips currencyPair:(CurrencyPair *)currencyPair

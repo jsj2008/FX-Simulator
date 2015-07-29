@@ -11,7 +11,7 @@
 
 @class Currency;
 
-@interface Money : NSObject
+@interface Money : NSObject <NSCoding>
 -(id)initWithAmount:(amount_t)amount currency:(Currency*)currency;
 -(Money*)addMoney:(Money*)money;
 //-(Money*)convertToCurrency:(Currency*)currency;

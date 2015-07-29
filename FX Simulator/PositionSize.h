@@ -11,7 +11,7 @@
 
 @class Lot;
 
-@interface PositionSize : NSObject
+@interface PositionSize : NSObject <NSCoding>
 -(id)initWithSizeValue:(position_size_t)size;
 -(NSString*)toDisplayString;
 -(Lot*)toLot;
