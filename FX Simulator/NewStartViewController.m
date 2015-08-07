@@ -55,7 +55,7 @@
     
     _newSaveData.currencyPair = saveData.currencyPair;
     _newSaveData.startTime = saveData.startTime;
-    _newSaveData.timeScale = saveData.timeScale;
+    _newSaveData.timeFrame = saveData.timeFrame;
     _newSaveData.spread = saveData.spread;
     _newSaveData.accountCurrency = saveData.accountCurrency;
     _newSaveData.startBalance = saveData.startBalance;
@@ -72,7 +72,7 @@
     [super viewWillAppear:animated];
     
     [self.setCurrencyPairButton setTitle:[_newSaveData.currencyPair toDisplayString] forState:self.setCurrencyPairButton.state];
-    [self.setTimeScaleButton setTitle:[_newSaveData.timeScale toDisplayString] forState:self.setTimeScaleButton.state];
+    [self.setTimeScaleButton setTitle:[_newSaveData.timeFrame toDisplayString] forState:self.setTimeScaleButton.state];
     [self.setStartTimeButton setTitle:[_newSaveData.startTime toDisplayYMDString] forState:self.setStartTimeButton.state];
     [self.setSpreadButton setTitle:[_newSaveData.spread toDisplayString] forState:self.setSpreadButton.state];
     [self.setAccountCurrencyButton setTitle:[_newSaveData.accountCurrency toDisplayString] forState:self.setAccountCurrencyButton.state];
