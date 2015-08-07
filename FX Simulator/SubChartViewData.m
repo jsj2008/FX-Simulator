@@ -30,7 +30,7 @@
     if (self = [super init]) {
         saveData = [SaveLoader load];
         market = [SimulationManager sharedSimulationManager].market;
-        timeScaleList = [TimeScaleUtils selectTimeScaleListExecept:saveData.timeScale fromTimeScaleList:[Setting timeScaleList]];
+        timeScaleList = [TimeScaleUtils selectTimeScaleListExecept:saveData.timeFrame fromTimeScaleList:[Setting timeScaleList]];
         _selectedSegmentIndex = [self toSegmentIndexFromTimeScale:saveData.subChartSelectedTimeScale];
     }
     

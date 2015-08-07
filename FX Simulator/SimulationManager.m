@@ -27,7 +27,7 @@
     SimulationState *_simulationState;
 }
 
-static SimulationManager *sharedSimulationManager;
+static SimulationManager *sharedSimulationManager = nil;
 
 +(SimulationManager*)sharedSimulationManager
 {

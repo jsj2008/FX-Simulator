@@ -39,8 +39,8 @@ typedef struct PickerRowSet {
     
     // Do any additional setup after loading the view.
     
-    _minStartDate = [Setting rangeForCurrencyPair:self.saveData.currencyPair timeScale:self.saveData.timeScale].start.date;
-    _maxStartDate = [Setting rangeForCurrencyPair:self.saveData.currencyPair timeScale:self.saveData.timeScale].end.date;
+    _minStartDate = [Setting rangeForCurrencyPair:self.saveData.currencyPair timeScale:self.saveData.timeFrame].start.date;
+    _maxStartDate = [Setting rangeForCurrencyPair:self.saveData.currencyPair timeScale:self.saveData.timeFrame].end.date;
     
     _displayPickerYearStringArray = [NSMutableArray array];
     _displayPickerMonthStringArray = [NSMutableArray array];

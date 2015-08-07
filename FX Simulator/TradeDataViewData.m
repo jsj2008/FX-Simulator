@@ -51,7 +51,7 @@
 
 -(NSString*)displayCurrentSetting
 {
-    NSString *str = [NSString stringWithFormat:@"%@ %@", [saveData.currencyPair toDisplayString], [saveData.timeScale toDisplayString]];
+    NSString *str = [NSString stringWithFormat:@"%@ %@", [saveData.currencyPair toDisplayString], [saveData.timeFrame toDisplayString]];
     
     return str;
 }

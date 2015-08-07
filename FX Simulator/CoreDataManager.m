@@ -10,6 +10,19 @@
 
 @implementation CoreDataManager
 
+static CoreDataManager *sharedManager = nil;
+
++(CoreDataManager *)sharedManager
+{
+    @synchronized(self) {
+        if (sharedManager == nil) {
+            sharedManager = [CoreDataManager new];
+        }
+    }
+    
+    return sharedManager;
+}
+
 #pragma mark - Core Data stack
 
 @synthesize managedObjectContext = _managedObjectContext;

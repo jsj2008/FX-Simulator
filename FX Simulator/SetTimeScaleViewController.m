@@ -32,7 +32,7 @@
 {
     [super viewWillAppear:animated];
     
-    NSUInteger index = [_timeScaleList indexOfObject:self.saveData.timeScale];
+    NSUInteger index = [_timeScaleList indexOfObject:self.saveData.timeFrame];
     [self.pickerView selectRow:index inComponent:0 animated:NO];
 }
 
@@ -59,7 +59,7 @@ numberOfRowsInComponent:(NSInteger)component
 - (void)pickerView:(UIPickerView *)pickerView
       didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
-    self.saveData.timeScale = [_timeScaleList objectAtIndex:row];
+    self.saveData.timeFrame = [_timeScaleList objectAtIndex:row];
 }
 
 - (void)didReceiveMemoryWarning {
