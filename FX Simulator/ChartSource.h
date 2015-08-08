@@ -12,7 +12,6 @@
 @class CandleSource, NSManagedObject, SimpleMovingAverageSource;
 
 @interface ChartSource : NSManagedObject
-
 @property (nonatomic) int32_t chartIndex;
 @property (nonatomic, retain) id currencyPair;
 @property (nonatomic) BOOL isSelected;
