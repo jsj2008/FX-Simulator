@@ -6,13 +6,11 @@
 //
 //
 
-#import <Foundation/Foundation.h>
-#import <CoreData/CoreData.h>
-//#import "NSManagedObject.h"
+#import "IndicatorSource.h"
 
 @class NSManagedObject;
 
-@interface SimpleMovingAverageSource : NSManagedObject
+@interface SimpleMovingAverageSource : IndicatorSource
 
 @property (nonatomic, retain) id lineColor;
 @property (nonatomic) int32_t period;

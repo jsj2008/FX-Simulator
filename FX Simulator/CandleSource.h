@@ -6,13 +6,11 @@
 //
 //
 
-#import <Foundation/Foundation.h>
-#import <CoreData/CoreData.h>
-//#import "NSManagedObject.h"
+#import "IndicatorSource.h"
 
 @class NSManagedObject;
 
-@interface CandleSource : NSManagedObject
+@interface CandleSource : IndicatorSource
 
 @property (nonatomic, retain) id downColor;
 @property (nonatomic, retain) id downLineColor;
