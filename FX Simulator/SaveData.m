@@ -8,6 +8,8 @@
 
 #import "SaveData.h"
 
+#import "SaveDataSource.h"
+#import "SaveDataSource+Additions.h"
 #import "CoreDataManager.h"
 #import "MarketTime.h"
 #import "TimeFrame.h"
@@ -16,7 +18,6 @@
 #import "FXSTimeRange.h"
 #import "FXSTest.h"
 #import "TableNameFormatter.h"
-#import "SaveDataSource.h"
 #import "Setting.h"
 #import "Spread.h"
 #import "PositionSize.h"
@@ -34,14 +35,24 @@
     SaveDataSource *_saveDataSource;
 }
 
-+ (instancetype)createDefaultSaveDataFromSlotNumber:(NSUInteger)slotNumber
++ (instancetype)createSaveData
 {
     SaveDataSource *source = [NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass([SaveDataSource class]) inManagedObjectContext:[CoreDataManager sharedManager].managedObjectContext];
     
     SaveData *saveData = [[SaveData alloc] initWithSaveDataSource:source];
     
-    [saveData setDefaultDataAndSlotNumber:slotNumber];
+    return saveData;
+}
+
++ (instancetype)createDefaultSaveDataFromSlotNumber:(NSUInteger)slotNumber
+{
+    SaveDataSource *source = [NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass([SaveDataSource class]) inManagedObjectContext:[CoreDataManager sharedManager].managedObjectContext];
     
+    [source setDefaultDataAndSlotNumber:slotNumber];
+    [source setDefaultChartSources:[CoreDataManager sharedManager].managedObjectContext];
+    
+    SaveData *saveData = [[SaveData alloc] initWithSaveDataSource:source];
+
     return saveData;
 }
 
@@ -59,7 +70,7 @@
     return self;
 }
 
-- (void)setDefaultDataAndSlotNumber:(NSUInteger)slotNumber
+/*- (void)setDefaultDataAndSlotNumber:(NSUInteger)slotNumber
 {
     self.slotNumber = (int)slotNumber;
     self.currencyPair = [[CurrencyPair alloc] initWithBaseCurrency:[[Currency alloc] initWithCurrencyType:USD] QuoteCurrency:[[Currency alloc] initWithCurrencyType:JPY]];
@@ -73,123 +84,144 @@
     self.tradePositionSize = [[PositionSize alloc] initWithSizeValue:10000];
     self.isAutoUpdate = YES;
     self.autoUpdateInterval = 1.0;
+}*/
+
+- (void)delete
+{
+    [[CoreDataManager sharedManager].managedObjectContext deleteObject:_saveDataSource];
+}
+
+- (void)save
+{
+    [[CoreDataManager sharedManager] saveContext];
+}
+
+- (void)newSave
+{
+    [_saveDataSource setDefaultChartSources:[CoreDataManager sharedManager].managedObjectContext];
+    [self save];
+}
+
+- (void)updateSave
+{
+    [self save];
 }
 
 #pragma mark - getter,setter
 
 - (NSUInteger)slotNumber
 {
-    return _saveDataSource.slotNumber;
+    return _saveDataSource.fxsSlotNumber;
 }
 
 - (void)setCurrencyPair:(CurrencyPair *)currencyPair
 {
-    _saveDataSource.currencyPair = currencyPair;
+    _saveDataSource.fxsCurrencyPair = currencyPair;
 }
 
 - (CurrencyPair *)currencyPair
 {
-    return _saveDataSource.currencyPair;
+    return _saveDataSource.fxsCurrencyPair;
 }
 
 - (void)setTimeFrame:(TimeFrame *)timeFrame
 {
-    _saveDataSource.timeFrame = timeFrame;
+    _saveDataSource.fxsTimeFrame = timeFrame;
 }
 
 - (TimeFrame *)timeFrame
 {
-    return _saveDataSource.timeFrame;
+    return _saveDataSource.fxsTimeFrame;
 }
 
 - (void)setStartTime:(MarketTime *)startTime
 {
-    _saveDataSource.startTime = startTime;
+    _saveDataSource.fxsStartTime = startTime;
 }
 
 - (MarketTime *)startTime
 {
-    return _saveDataSource.startTime;
+    return _saveDataSource.fxsStartTime;
 }
 
 - (void)setSpread:(Spread *)spread
 {
-    _saveDataSource.spread = spread;
+    _saveDataSource.fxsSpread = spread;
 }
 
 - (Spread *)spread
 {
-    return _saveDataSource.spread;
+    return _saveDataSource.fxsSpread;
 }
 
 - (void)setLastLoadedTime:(MarketTime *)lastLoadedTime
 {
-    _saveDataSource.lastLoadedTime = lastLoadedTime;
+    _saveDataSource.fxsLastLoadedTime = lastLoadedTime;
 }
 
 - (MarketTime *)lastLoadedTime
 {
-    return _saveDataSource.lastLoadedTime;
+    return _saveDataSource.fxsLastLoadedTime;
 }
 
 - (void)setAccountCurrency:(Currency *)accountCurrency
 {
-    _saveDataSource.accountCurrency = accountCurrency;
+    _saveDataSource.fxsAccountCurrency = accountCurrency;
 }
 
 - (Currency *)accountCurrency
 {
-    return _saveDataSource.accountCurrency;
+    return _saveDataSource.fxsAccountCurrency;
 }
 
 - (void)setPositionSizeOfLot:(PositionSize *)positionSizeOfLot
 {
-    _saveDataSource.positionSizeOfLot = positionSizeOfLot;
+    _saveDataSource.fxsPositionSizeOfLot = positionSizeOfLot;
 }
 
 - (PositionSize *)positionSizeOfLot
 {
-    return _saveDataSource.positionSizeOfLot;
+    return _saveDataSource.fxsPositionSizeOfLot;
 }
 
 - (void)setTradePositionSize:(PositionSize *)tradePositionSize
 {
-    _saveDataSource.tradePositionSize = tradePositionSize;
+    _saveDataSource.fxsTradePositionSize = tradePositionSize;
 }
 
 - (PositionSize *)tradePositionSize
 {
-    return _saveDataSource.tradePositionSize;
+    return _saveDataSource.fxsTradePositionSize;
 }
 
 - (void)setStartBalance:(Money *)startBalance
 {
-    _saveDataSource.startBalance = startBalance;
+    _saveDataSource.fxsStartBalance = startBalance;
 }
 
 - (Money *)startBalance
 {
-    return _saveDataSource.startBalance;
+    return _saveDataSource.fxsStartBalance;
 }
 
 - (void)setIsAutoUpdate:(BOOL)isAutoUpdate
 {
-    _saveDataSource.isAutoUpdate = isAutoUpdate;
+    _saveDataSource.fxsIsAutoUpdate = isAutoUpdate;
 }
 
 - (BOOL)isAutoUpdate
 {
-    return _saveDataSource.isAutoUpdate;
+    return _saveDataSource.fxsIsAutoUpdate;
 }
 
 - (void)setAutoUpdateInterval:(float)autoUpdateInterval
 {
-    _saveDataSource.autoUpdateIntervalSeconds = autoUpdateInterval;
+    _saveDataSource.fxsAutoUpdateIntervalSeconds = autoUpdateInterval;
 }
 
 - (float)autoUpdateInterval
 {
-    return _saveDataSource.autoUpdateIntervalSeconds;
+    return _saveDataSource.fxsAutoUpdateIntervalSeconds;
 }
 
 /*-(id)initWithSaveDataDictionary:(NSDictionary*)dic
