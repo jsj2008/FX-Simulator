@@ -8,6 +8,8 @@
 
 #import "SaveDataSource.h"
 
+@import CoreData;
+
 @class Currency;
 @class CurrencyPair;
 @class Spread;
@@ -31,4 +33,5 @@
 @property (nonatomic) BOOL fxsIsAutoUpdate;
 @property (nonatomic) float fxsAutoUpdateIntervalSeconds;
 - (void)setDefaultDataAndSlotNumber:(NSUInteger)slotNumber;
+- (void)setDefaultChartSources:(NSManagedObjectContext *)managedObjectContext;
 @end

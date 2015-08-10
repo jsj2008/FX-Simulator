@@ -8,6 +8,8 @@
 
 #import "SaveDataSource+Additions.h"
 
+#import "ChartSource.h"
+#import "ChartSource+Additions.h"
 #import "Setting.h"
 #import "FXSTimeRange.h"
 #import "MarketTime.h"
@@ -35,6 +37,18 @@
     self.fxsTradePositionSize = [[PositionSize alloc] initWithSizeValue:10000];
     self.fxsIsAutoUpdate = YES;
     self.fxsAutoUpdateIntervalSeconds = 1.0;
+}
+
+- (void)setDefaultChartSources:(NSManagedObjectContext *)managedObjectContext
+{
+    ChartSource *mainChartSource = [NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass([ChartSource class]) inManagedObjectContext:managedObjectContext];
+    mainChartSource.fxsChartIndex = 0;
+    mainChartSource.fxsCurrencyPair = self.fxsCurrencyPair;
+    mainChartSource.fxsTimeFrame = self.timeFrame;
+    mainChartSource.fxsIsSelected = YES;
+    
+    [self addMainChartSourcesObject:mainChartSource];
+    
 }
 
 #pragma mark - getter,setter
