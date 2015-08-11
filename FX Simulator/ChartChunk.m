@@ -27,18 +27,18 @@
     return self;
 }
 
-- (instancetype)initWithDefaultAndMainChartCurrencyPair:(CurrencyPair *)currencyPair mainChartTimeScale:(TimeFrame *)timeScale
+/*- (instancetype)initWithDefaultAndMainChartCurrencyPair:(CurrencyPair *)currencyPair mainChartTimeScale:(TimeFrame *)timeScale
 {
     NSMutableArray *sourceArray = [NSMutableArray array];
     
-    for (TimeFrame *settingTimeScale in [Setting timeScaleList]) {
+    for (TimeFrame *settingTimeScale in [Setting timeFrameList]) {
         if ([timeScale isEqualToTimeFrame:settingTimeScale]) {
             ChartPlistSource *source = [[ChartPlistSource alloc] initWithDefaultAndChartIndex:0 currencyPair:currencyPair timeScale:timeScale isMainChart:YES isSubChart:NO];
             [sourceArray addObject:source];
         }
     }
     
-    [[self getTimeScaleArrayExcept:timeScale fromTimeScaleArray:[Setting timeScaleList]] enumerateObjectsUsingBlock:^(TimeFrame *obj, NSUInteger idx, BOOL *stop) {
+    [[self getTimeScaleArrayExcept:timeScale fromTimeScaleArray:[Setting timeFrameList]] enumerateObjectsUsingBlock:^(TimeFrame *obj, NSUInteger idx, BOOL *stop) {
         ChartPlistSource *source = [[ChartPlistSource alloc] initWithDefaultAndChartIndex:idx currencyPair:currencyPair timeScale:obj isMainChart:NO isSubChart:YES];
         [sourceArray addObject:source];
     }];
@@ -46,7 +46,7 @@
     NSArray *chartArray = [self toChartArrayFromChartSourceArray:sourceArray];
     
     return [self initWithChartArray:chartArray];
-}
+}*/
 
 - (NSArray *)toChartArrayFromChartSourceArray:(NSArray *)sourceArray
 {

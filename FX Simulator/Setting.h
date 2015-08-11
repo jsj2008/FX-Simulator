@@ -12,6 +12,7 @@
 @class FXSTimeRange;
 @class MarketTime;
 @class TimeFrame;
+@class TimeFrameChunk;
 @class Rate;
 
 
@@ -38,7 +39,7 @@
  シュミレーション対象の時間軸(15分足など)リスト。新たにシュミレートできる時間軸を増やす場合、手動で追加する必要。
  時間軸の短い順。
  */
-+(NSArray*)timeScaleList;
++(TimeFrameChunk *)timeFrameList;
 
 /**
  口座通貨に使うことができる通貨のリスト。ドル建て、円建てなど。
