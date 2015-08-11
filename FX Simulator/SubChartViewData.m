@@ -13,8 +13,8 @@
 #import "Market.h"
 #import "ForexHistoryData.h"
 #import "Setting.h"
-#import "TimeScaleUtils.h"
 #import "TimeFrame.h"
+#import "TimeFrameChunk.h"
 #import "Rate.h"
 #import "SimulationManager.h"
 #import "MarketTime.h"
@@ -22,7 +22,7 @@
 @implementation SubChartViewData {
     SaveData *saveData;
     Market *market;
-    NSArray *timeScaleList;
+    TimeFrameChunk *timeScaleList;
 }
 
 -(id)init
@@ -30,7 +30,7 @@
     if (self = [super init]) {
         saveData = [SaveLoader load];
         market = [SimulationManager sharedSimulationManager].market;
-        timeScaleList = [TimeScaleUtils selectTimeScaleListExecept:saveData.timeFrame fromTimeScaleList:[Setting timeScaleList]];
+        timeScaleList = [[Setting timeFrameList] getTimeFrameChunkExecept:saveData.timeFrame];
         _selectedSegmentIndex = [self toSegmentIndexFromTimeScale:saveData.subChartSelectedTimeScale];
     }
     
@@ -64,30 +64,28 @@
 
 -(TimeFrame*)toTimeScalefFromSegmentIndex:(int)index
 {
-    return (TimeFrame*)[timeScaleList objectAtIndex:index];
+    return (TimeFrame*)[timeScaleList timeFrameAtIndex:index];
 }
 
 - (NSUInteger)toSegmentIndexFromTimeScale:(TimeFrame *)timeScale
 {
-    return [timeScaleList indexOfObject:timeScale];
+    return [timeScaleList indexOfTimeFrame:timeScale];
 }
 
 -(NSArray*)items
 {
     NSMutableArray *array = [NSMutableArray array];
     
-    //NSArray *timeScaleList = [TimeScaleUtils selectTimeScaleListExecept:saveData.timeScale fromTimeScaleList:[Setting timeScaleList]];
-    
-    for (TimeFrame *timeScale in timeScaleList) {
-        [array addObject:timeScale.toDisplayString];
-    }
+    [timeScaleList enumerateTimeFrames:^(TimeFrame *timeFrame) {
+        [array addObject:timeFrame.toDisplayString];
+    }];
     
     return [array copy];
 }
 
 - (TimeFrame *)selectedTimeScale
 {
-    return [timeScaleList objectAtIndex:self.selectedSegmentIndex];
+    return [timeScaleList timeFrameAtIndex:self.selectedSegmentIndex];
 }
 
 @end

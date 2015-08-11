@@ -9,6 +9,7 @@
 #import "SetTimeScaleViewController.h"
 
 #import "TimeFrame.h"
+#import "TimeFrameChunk.h"
 #import "SaveData.h"
 #import "Setting.h"
 
@@ -18,21 +19,21 @@
 @end
 
 @implementation SetTimeScaleViewController {
-    NSArray *_timeScaleList;
+    TimeFrameChunk *_timeScaleList;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    _timeScaleList = [Setting timeScaleList];
+    _timeScaleList = [Setting timeFrameList];
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     
-    NSUInteger index = [_timeScaleList indexOfObject:self.saveData.timeFrame];
+    NSUInteger index = [_timeScaleList indexOfTimeFrame:self.saveData.timeFrame];
     [self.pickerView selectRow:index inComponent:0 animated:NO];
 }
 
@@ -49,7 +50,7 @@ numberOfRowsInComponent:(NSInteger)component
 
 - (NSAttributedString *)pickerView:(UIPickerView *)pickerView attributedTitleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
-    NSString *title = [(TimeFrame*)[_timeScaleList objectAtIndex:row] toDisplayString];
+    NSString *title = [(TimeFrame*)[_timeScaleList timeFrameAtIndex:row] toDisplayString];
     NSAttributedString *attString = [[NSAttributedString alloc] initWithString:title attributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
     
     return attString;
@@ -59,7 +60,7 @@ numberOfRowsInComponent:(NSInteger)component
 - (void)pickerView:(UIPickerView *)pickerView
       didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
-    self.saveData.timeFrame = [_timeScaleList objectAtIndex:row];
+    self.saveData.timeFrame = [_timeScaleList timeFrameAtIndex:row];
 }
 
 - (void)didReceiveMemoryWarning {

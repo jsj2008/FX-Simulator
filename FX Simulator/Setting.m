@@ -15,6 +15,7 @@
 #import "FXSTimeRange.h"
 #import "MarketTime.h"
 #import "TimeFrame.h"
+#import "TimeFrameChunk.h"
 #import "Rate.h"
 
 
@@ -99,10 +100,12 @@ static NSDictionary *spreadRateDic;
     return dic;
 }
 
-+(NSArray*)timeScaleList
++(TimeFrameChunk *)timeFrameList
 {
     
-    return @[[[TimeFrame alloc] initWithMinute:15], [[TimeFrame alloc] initWithMinute:60], [[TimeFrame alloc] initWithMinute:240], [[TimeFrame alloc] initWithMinute:1440]];
+    NSArray *timeFrameList = @[[[TimeFrame alloc] initWithMinute:15], [[TimeFrame alloc] initWithMinute:60], [[TimeFrame alloc] initWithMinute:240], [[TimeFrame alloc] initWithMinute:1440]];
+    
+    return [[TimeFrameChunk alloc] initWithTimeFrameArray:timeFrameList];
 }
 
 +(NSArray*)accountCurrencyList

@@ -22,6 +22,7 @@
 		700C9E621B75BADA0084320E /* SimpleMovingAverageSource+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 700C9E611B75BADA0084320E /* SimpleMovingAverageSource+Additions.m */; };
 		700C9E651B75BAF30084320E /* CandleSource+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 700C9E641B75BAF30084320E /* CandleSource+Additions.m */; };
 		700C9E7E1B7869050084320E /* SaveDataSource+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 700C9E7D1B7869050084320E /* SaveDataSource+Additions.m */; };
+		700C9E811B786C800084320E /* TimeFrameChunk.m in Sources */ = {isa = PBXBuildFile; fileRef = 700C9E801B786C800084320E /* TimeFrameChunk.m */; };
 		7033C5D61B469F56005EF07B /* NSNumber+FXSNumberConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 7033C5D51B469F56005EF07B /* NSNumber+FXSNumberConverter.m */; };
 		7041B7111B2EEDAD00DD64FE /* Account.m in Sources */ = {isa = PBXBuildFile; fileRef = 7041B7101B2EEDAD00DD64FE /* Account.m */; };
 		7041B7141B3278A700DD64FE /* FXSTimeRange.m in Sources */ = {isa = PBXBuildFile; fileRef = 7041B7131B3278A700DD64FE /* FXSTimeRange.m */; };
@@ -228,6 +229,8 @@
 		700C9E631B75BAF30084320E /* CandleSource+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CandleSource+Additions.h"; sourceTree = "<group>"; };
 		700C9E641B75BAF30084320E /* CandleSource+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CandleSource+Additions.m"; sourceTree = "<group>"; };
 		700C9E7D1B7869050084320E /* SaveDataSource+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SaveDataSource+Additions.m"; sourceTree = "<group>"; };
+		700C9E7F1B786C800084320E /* TimeFrameChunk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeFrameChunk.h; sourceTree = "<group>"; };
+		700C9E801B786C800084320E /* TimeFrameChunk.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeFrameChunk.m; sourceTree = "<group>"; };
 		7033C5D41B469F56005EF07B /* NSNumber+FXSNumberConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumber+FXSNumberConverter.h"; sourceTree = "<group>"; };
 		7033C5D51B469F56005EF07B /* NSNumber+FXSNumberConverter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNumber+FXSNumberConverter.m"; sourceTree = "<group>"; };
 		7041B70F1B2EEDAD00DD64FE /* Account.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Account.h; sourceTree = "<group>"; };
@@ -753,6 +756,8 @@
 				704D3E781B5A7B0C00A8B9AB /* ChartChunk.h */,
 				704D3E791B5A7B0C00A8B9AB /* ChartChunk.m */,
 				700C9E0C1B65FB5B0084320E /* CoreData */,
+				700C9E7F1B786C800084320E /* TimeFrameChunk.h */,
+				700C9E801B786C800084320E /* TimeFrameChunk.m */,
 			);
 			path = "FX Simulator";
 			sourceTree = "<group>";
@@ -1223,6 +1228,7 @@
 				70D2FC441A9F591600CAB509 /* Spread.m in Sources */,
 				70042C6D1B480D6800C1A22E /* ForexDataChunk.m in Sources */,
 				70D2FB9F1A9F57A000CAB509 /* ForexHistoryData.m in Sources */,
+				700C9E811B786C800084320E /* TimeFrameChunk.m in Sources */,
 				7076F5AA1AECCDB7004CC6BA /* SetCurrencyPairViewController.m in Sources */,
 				709BC75E1B0700320059C940 /* SetAutoUpdateIntervalViewController.m in Sources */,
 				7076F5A71AECCBBB004CC6BA /* NewStartViewController.m in Sources */,
