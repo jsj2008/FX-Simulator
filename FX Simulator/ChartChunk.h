@@ -17,17 +17,13 @@
 - (instancetype)initWithChartArray:(NSArray *)chartArray;
 
 /**
- メインチャートの通貨と時間軸をもとに、
- メインチャート1つと、サブチャート3つを生成する。
- 時間軸が重複しないように生成する。
+ 表示順に取り出す。 
 */
-- (instancetype)initWithDefaultAndMainChartCurrencyPair:(CurrencyPair *)currencyPair mainChartTimeScale:(TimeFrame *)timeScale;
+- (void)enumerateCharts:(void (^)(Chart *chart))block;
 
 /**
  ChartIndexがindexなチャート。
 */
 - (Chart *)chartOfChartIndex:(NSUInteger)index;
 
-+ (ChartChunk *)createFromChartSourceDictionaryArray:(NSArray *)dictionaryArray;
-@property (nonatomic, readonly) NSArray *chartSourceDictionaryArray;
 @end

@@ -50,7 +50,7 @@ static NSString * const kKeyPath = @"currentLoadedRowid";
     saveData = [SaveLoader load];
     forexHistory = [[ForexHistory alloc] initWithCurrencyPair:saveData.currencyPair timeScale:saveData.timeFrame];
     [self loadTime];
-    self.autoUpdateInterval = @(saveData.autoUpdateInterval);
+    self.autoUpdateInterval = @(saveData.autoUpdateIntervalSeconds);
 }
 
 -(void)loadTime

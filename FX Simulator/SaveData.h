@@ -10,6 +10,7 @@
 
 @class SaveDataSource;
 @class TradeDbDataSource;
+@class Chart;
 @class ChartChunk;
 @class Currency;
 @class CurrencyPair;
@@ -33,19 +34,16 @@
 @property (nonatomic) Money *startBalance;
 @property (nonatomic) BOOL isAutoUpdate;
 // SaveDataかUserDataか
-@property (nonatomic) float autoUpdateInterval;
-@property (nonatomic) TimeFrame *subChartSelectedTimeScale;
-@property (nonatomic) ChartChunk *chartChunk;
-/*@property (nonatomic, readonly) NSString *orderHistoryTableName;
-@property (nonatomic, readonly) NSString *executionHistoryTableName;
-@property (nonatomic, readonly) NSString *openPositionTableName;*/
+@property (nonatomic) float autoUpdateIntervalSeconds;
+@property (nonatomic, readonly) Chart *mainChart;
+@property (nonatomic, readonly) ChartChunk *subChartChunk;
 #warning OpenPositionなどをそのまま返すようにする。
 @property (nonatomic, readonly) TradeDbDataSource *orderHistoryDataSource;
 @property (nonatomic, readonly) TradeDbDataSource *executionHistoryDataSource;
 @property (nonatomic, readonly) TradeDbDataSource *openPositionDataSource;
 @property (nonatomic, readonly) NSDictionary *saveDataDictionary;
 + (instancetype)createDefaultSaveDataFromSlotNumber:(NSUInteger)slotNumber;
--(id)initWithSaveDataDictionary:(NSDictionary*)dic;
--(id)initWithDefaultDataAndSlotNumber:(int)slotNumber;
 - (instancetype)initWithSaveDataSource:(SaveDataSource *)source;
+- (void)newSave;
+- (void)updateSave;
 @end

@@ -38,7 +38,7 @@
     _market = [SimulationManager sharedSimulationManager].market;
     
     _saveData = [SaveLoader load];
-    self.autoUpdateInterval = _saveData.autoUpdateInterval;
+    self.autoUpdateInterval = @(_saveData.autoUpdateIntervalSeconds);
 }
 
 /*-(void)viewWillAppear:(BOOL)animated
@@ -74,8 +74,8 @@
 {
     [super viewWillDisappear:animated];
     
-    _saveData.autoUpdateInterval = self.autoUpdateInterval;
-    _market.autoUpdateInterval = _saveData.autoUpdateInterval;
+    _saveData.autoUpdateIntervalSeconds = self.autoUpdateInterval.floatValue;
+    _market.autoUpdateInterval = @(_saveData.autoUpdateIntervalSeconds);
 }
 
 -(void)updatedSaveData
