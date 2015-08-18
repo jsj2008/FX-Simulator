@@ -32,6 +32,7 @@
 
 @interface SaveData ()
 @property (nonatomic) NSUInteger slotNumber;
+//@property (nonatomic, readonly) CoreDataManager *coreDataManager;
 @end
 
 @implementation SaveData {
@@ -126,26 +127,26 @@
     self.autoUpdateInterval = 1.0;
 }*/
 
-- (void)delete
-{
-    [[CoreDataManager sharedManager].managedObjectContext deleteObject:_saveDataSource];
-}
-
-- (void)save
-{
-    [[CoreDataManager sharedManager] saveContext];
-}
-
 - (void)newSave
 {
-    // +delete
+    NSManagedObjectContext *context = [CoreDataManager sharedManager].managedObjectContext;
+    
+    NSFetchRequest *fetchRequest = [NSFetchRequest new];
+    NSEntityDescription * entityDescription = [NSEntityDescription entityForName:NSStringFromClass([self class]) inManagedObjectContext:context];
+    [fetchRequest setEntity:entityDescription];
+    NSPredicate * predicate = [NSPredicate predicateWithFormat:@"(slotNumber = %d)", self.slotNumber];
+     [fetchRequest setPredicate:predicate];
+    
+    NSError * error2;
+    NSArray * objects = [context executeFetchRequest:fetchRequest error:&error2];
+    
+    for (SaveDataSource *obj in objects) {
+        if (_saveDataSource.objectID != obj.objectID) {
+            [context deleteObject:obj];
+        }
+    }
+    
     [self setDefaultCharts];
-    [self save];
-}
-
-- (void)updateSave
-{
-    [self save];
 }
 
 #pragma mark - getter,setter
