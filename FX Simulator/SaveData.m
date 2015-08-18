@@ -35,13 +35,29 @@
 //@property (nonatomic, readonly) CoreDataManager *coreDataManager;
 @end
 
+static CoreDataManager *coreDataManagerStore = nil;
+
 @implementation SaveData {
     SaveDataSource *_saveDataSource;
 }
 
++ (CoreDataManager *)coreDataManager
+{
+    if (coreDataManagerStore == nil) {
+        return [CoreDataManager sharedManager];
+    } else {
+        return coreDataManagerStore;
+    }
+}
+
++ (void)setCoreDataManager:(CoreDataManager *)coreDataManager
+{
+    coreDataManagerStore = coreDataManager;
+}
+
 + (instancetype)createSaveData
 {
-    SaveDataSource *source = [NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass([SaveDataSource class]) inManagedObjectContext:[CoreDataManager sharedManager].managedObjectContext];
+    SaveDataSource *source = [NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass([SaveDataSource class]) inManagedObjectContext:[self coreDataManager].managedObjectContext];
     
     SaveData *saveData = [[SaveData alloc] initWithSaveDataSource:source];
     
@@ -50,7 +66,7 @@
 
 + (instancetype)createDefaultSaveDataFromSlotNumber:(NSUInteger)slotNumber
 {
-    SaveDataSource *source = [NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass([SaveDataSource class]) inManagedObjectContext:[CoreDataManager sharedManager].managedObjectContext];
+    SaveDataSource *source = [NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass([SaveDataSource class]) inManagedObjectContext:[self coreDataManager].managedObjectContext];
     
     SaveData *saveData = [[SaveData alloc] initWithSaveDataSource:source];
     
@@ -86,7 +102,7 @@
 
 - (void)setDefaultCharts
 {
-    Chart *mainChart = [[Chart alloc] initWithChartSource:[NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass([ChartSource class]) inManagedObjectContext:[CoreDataManager sharedManager].managedObjectContext]];
+    Chart *mainChart = [[Chart alloc] initWithChartSource:[NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass([ChartSource class]) inManagedObjectContext:[[self class] coreDataManager].managedObjectContext]];
     mainChart.chartIndex = 0;
     mainChart.currencyPair = self.currencyPair;
     mainChart.timeFrame = self.timeFrame;
@@ -95,7 +111,7 @@
     [_saveDataSource addMainChartSourcesObject:mainChart.chartSource];
     
     [[Setting timeFrameList] enumerateTimeFrames:^(NSUInteger idx, TimeFrame *timeFrame) {
-        Chart *subChart = [[Chart alloc] initWithChartSource:[NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass([ChartSource class]) inManagedObjectContext:[CoreDataManager sharedManager].managedObjectContext]];
+        Chart *subChart = [[Chart alloc] initWithChartSource:[NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass([ChartSource class]) inManagedObjectContext:[[self class] coreDataManager].managedObjectContext]];
         subChart.chartIndex = idx;
         subChart.currencyPair = self.currencyPair;
         subChart.timeFrame = self.timeFrame;
@@ -129,7 +145,7 @@
 
 - (void)newSave
 {
-    NSManagedObjectContext *context = [CoreDataManager sharedManager].managedObjectContext;
+    NSManagedObjectContext *context = [[self class] coreDataManager].managedObjectContext;
     
     NSFetchRequest *fetchRequest = [NSFetchRequest new];
     NSEntityDescription * entityDescription = [NSEntityDescription entityForName:NSStringFromClass([self class]) inManagedObjectContext:context];
