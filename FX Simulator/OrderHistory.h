@@ -8,10 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
+@class FMDatabase;
 @class TradeDbDataSource;
 @class UsersOrder;
 
 @interface OrderHistory : NSObject
--(id)initWithDataSource:(TradeDbDataSource*)dataSource;
--(int)saveUsersOrder:(UsersOrder*)order;
++ (instancetype)createFromSlotNumber:(NSUInteger)slotNumber;
+- (instancetype)initWithSaveSlotNumber:(NSUInteger)slotNumber db:(FMDatabase *)db;
+- (int)saveUsersOrder:(UsersOrder*)order;
+- (void)delete;
 @end

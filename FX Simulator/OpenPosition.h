@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 
-@class TradeDbDataSource;
+@class FMDatabase;
 @class Currency;
 @class CurrencyPair;
 @class OrderType;
@@ -19,10 +19,8 @@
 @class Money;
 
 @interface OpenPosition : NSObject
-/**
- テーブルが存在しない場合は、作成される。
-*/
--(id)initWithDataSource:(TradeDbDataSource*)dataSource AccountCurrency:(Currency*)accountCurrency;
++ (instancetype)createFromSlotNumber:(NSUInteger)slotNumber AccountCurrency:(Currency*)accountCurrency;
+- (instancetype)initWithSaveSlotNumber:(NSUInteger)slotNumber accountCurrency:(Currency*)accountCurrency db:(FMDatabase *)db;
 -(NSArray*)selectLatestDataLimit:(NSNumber *)num;
 -(NSArray*)selectLimitPositionSize:(PositionSize*)positionSize;
 -(NSArray*)selectAll;
@@ -33,6 +31,7 @@
  レコード数が最大かどうか。
 */
 -(BOOL)isMax;
+- (void)delete;
 @property (nonatomic, readonly) Currency *currency;
 @property (nonatomic, readonly) OrderType *orderType;
 @property (nonatomic, readonly) PositionSize *totalPositionSize;
