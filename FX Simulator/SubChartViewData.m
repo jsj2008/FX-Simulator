@@ -10,6 +10,8 @@
 
 #import "SaveLoader.h"
 #import "SaveData.h"
+#import "Chart.h"
+#import "ChartChunk.h"
 #import "Market.h"
 #import "ForexHistoryData.h"
 #import "Setting.h"
@@ -31,7 +33,7 @@
         saveData = [SaveLoader load];
         market = [SimulationManager sharedSimulationManager].market;
         timeScaleList = [[Setting timeFrameList] getTimeFrameChunkExecept:saveData.timeFrame];
-        _selectedSegmentIndex = [self toSegmentIndexFromTimeScale:saveData.subChartSelectedTimeScale];
+        _selectedSegmentIndex = [self toSegmentIndexFromTimeScale:saveData.subChartChunk.selectedChart.timeFrame];
     }
     
     return self;

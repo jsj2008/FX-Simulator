@@ -7,19 +7,18 @@
 //
 
 #import "ExecutionHistoryFactory.h"
+
 #import "SaveLoader.h"
 #import "SaveData.h"
 #import "ExecutionHistory.h"
-//#import "EHistoryMock.h"
 
 @implementation ExecutionHistoryFactory
 
-+(ExecutionHistory*)createExecutionHistory
++ (ExecutionHistory*)createExecutionHistory
 {
     SaveData *saveData = [SaveLoader load];
     
-    return [[ExecutionHistory alloc] initWithDataSource:saveData.executionHistoryDataSource];
-    //return [EHistoryMock new];
+    return saveData.executionHistory;
 }
 
 @end

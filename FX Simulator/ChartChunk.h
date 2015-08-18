@@ -26,4 +26,6 @@
 */
 - (Chart *)chartOfChartIndex:(NSUInteger)index;
 
+- (Chart *)selectedChart;
+
 @end

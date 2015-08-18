@@ -9,28 +9,21 @@
 #import "SaveLoader.h"
 
 #import "SaveData.h"
-#import "SaveDataFileStorage.h"
-#import "SaveDataStorageFactory.h"
 
 @implementation SaveLoader
 
 static SaveData *sharedSaveData;
+static NSUInteger FXSDefaultSlotNumber = 1;
 
-+(SaveData*)load
++ (SaveData*)load
 {
-    int slotNumber = 1;
-    
     @synchronized(self) {
         if (sharedSaveData == nil) {
-            id<SaveDataStorage> storage = [SaveDataStorageFactory createSaveDataStorage];
             
-            sharedSaveData = [storage loadSlotNumber:slotNumber];
-            //sharedSaveData = [[SaveData alloc] initWithDefaultDataAndSlotNumber:slotNumber];
+            sharedSaveData = [SaveData loadFromSlotNumber:FXSDefaultSlotNumber];
             
             if (sharedSaveData == nil) {
-                SaveData *defaultSaveData = [[SaveData alloc] initWithDefaultDataAndSlotNumber:slotNumber];
-                [storage newSave:defaultSaveData];
-                sharedSaveData = [storage loadSlotNumber:slotNumber];
+                sharedSaveData = [SaveData createDefaultSaveDataFromSlotNumber:FXSDefaultSlotNumber];
             }
         }
     }
@@ -38,7 +31,7 @@ static SaveData *sharedSaveData;
     return sharedSaveData;
 }
 
-+(void)reloadSaveData
++ (void)reloadSaveData
 {
     @synchronized(self) {
         if (sharedSaveData != nil) {
@@ -46,12 +39,5 @@ static SaveData *sharedSaveData;
         }
     }
 }
-
-/*+(void)setSharedSaveData:(SaveData *)saveData
-{
-    @synchronized(self) {
-        sharedSaveData = saveData;
-    }
-}*/
 
 @end

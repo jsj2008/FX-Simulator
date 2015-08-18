@@ -45,4 +45,17 @@
     return nil;
 }
 
+- (Chart *)selectedChart
+{
+    __block Chart *selectedChart;
+    
+    [self enumerateCharts:^(Chart *chart) {
+        if (chart.isSelected) {
+            selectedChart = chart;
+        }
+    }];
+    
+    return selectedChart;
+}
+
 @end

@@ -24,6 +24,8 @@
 		7041B7111B2EEDAD00DD64FE /* Account.m in Sources */ = {isa = PBXBuildFile; fileRef = 7041B7101B2EEDAD00DD64FE /* Account.m */; };
 		7041B7141B3278A700DD64FE /* FXSTimeRange.m in Sources */ = {isa = PBXBuildFile; fileRef = 7041B7131B3278A700DD64FE /* FXSTimeRange.m */; };
 		70467D2E1B8316A300B75BD3 /* CoreDataInMemoryManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 70467D2D1B8316A300B75BD3 /* CoreDataInMemoryManager.m */; };
+		70467D6A1B836AED00B75BD3 /* OrderHistoryFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FB751A9F577F00CAB509 /* OrderHistoryFactory.m */; };
+		70467D6B1B836B0600B75BD3 /* ExecutionHistoryFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FB7B1A9F579000CAB509 /* ExecutionHistoryFactory.m */; };
 		704D3E321B56228200A8B9AB /* IndicatorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 704D3E311B56228200A8B9AB /* IndicatorTests.m */; };
 		704D3E381B57C7D100A8B9AB /* ChartPlistSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 704D3E371B57C7D000A8B9AB /* ChartPlistSource.m */; };
 		704D3E3E1B58E5EF00A8B9AB /* CandlePlistSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 704D3E3D1B58E5EF00A8B9AB /* CandlePlistSource.m */; };
@@ -108,10 +110,8 @@
 		70D2FB711A9F577200CAB509 /* SimpleCandle.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FB6F1A9F577200CAB509 /* SimpleCandle.m */; };
 		70D2FB761A9F577F00CAB509 /* OrderHistory.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FB731A9F577F00CAB509 /* OrderHistory.m */; };
 		70D2FB841A9F579000CAB509 /* ExecutionHistory.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FB791A9F579000CAB509 /* ExecutionHistory.m */; };
-		70D2FB851A9F579000CAB509 /* ExecutionHistoryFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FB7B1A9F579000CAB509 /* ExecutionHistoryFactory.m */; };
 		70D2FB861A9F579000CAB509 /* ExecutionHistoryManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FB7D1A9F579000CAB509 /* ExecutionHistoryManager.m */; };
 		70D2FB881A9F579000CAB509 /* ExecutionHistoryRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FB811A9F579000CAB509 /* ExecutionHistoryRecord.m */; };
-		70D2FB891A9F579000CAB509 /* ExecutionHistoryManagerFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FB831A9F579000CAB509 /* ExecutionHistoryManagerFactory.m */; };
 		70D2FB9C1A9F57A000CAB509 /* ForexHistory.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FB8B1A9F57A000CAB509 /* ForexHistory.m */; };
 		70D2FB9D1A9F57A000CAB509 /* ForexDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FB8D1A9F57A000CAB509 /* ForexDatabase.m */; };
 		70D2FB9E1A9F57A000CAB509 /* ForexHistoryCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FB8F1A9F57A000CAB509 /* ForexHistoryCache.m */; };
@@ -130,7 +130,6 @@
 		70D2FBC41A9F57BD00CAB509 /* OpenPositionUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FBB81A9F57BD00CAB509 /* OpenPositionUtils.m */; };
 		70D2FBC61A9F57BD00CAB509 /* OpenPositionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FBBC1A9F57BD00CAB509 /* OpenPositionManager.m */; };
 		70D2FBC71A9F57BD00CAB509 /* OpenPositionRawRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FBBE1A9F57BD00CAB509 /* OpenPositionRawRecord.m */; };
-		70D2FBC81A9F57BD00CAB509 /* OpenPositionManagerFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FBC01A9F57BD00CAB509 /* OpenPositionManagerFactory.m */; };
 		70D2FBD61A9F57CB00CAB509 /* SaveData.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FBCC1A9F57CB00CAB509 /* SaveData.m */; };
 		70D2FBD71A9F57CB00CAB509 /* SaveDataStorageFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FBCE1A9F57CB00CAB509 /* SaveDataStorageFactory.m */; };
 		70D2FBD81A9F57CB00CAB509 /* SaveLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FBD01A9F57CB00CAB509 /* SaveLoader.m */; };
@@ -1210,6 +1209,7 @@
 				70ED622E1B0211630008F939 /* SetTimeScaleViewController.m in Sources */,
 				700B95851B0C3C97003F160B /* InputTradeLotViewController.m in Sources */,
 				704D3E7A1B5A7B0C00A8B9AB /* ChartChunk.m in Sources */,
+				70467D6A1B836AED00B75BD3 /* OrderHistoryFactory.m in Sources */,
 				705DCE4B1AE7C84300BCF710 /* Rates.m in Sources */,
 				70D2FBD91A9F57CB00CAB509 /* TableNameFormatter.m in Sources */,
 				70D2FC441A9F591600CAB509 /* Spread.m in Sources */,
@@ -1217,6 +1217,7 @@
 				70042C6D1B480D6800C1A22E /* ForexDataChunk.m in Sources */,
 				70D2FB9F1A9F57A000CAB509 /* ForexHistoryData.m in Sources */,
 				700C9E811B786C800084320E /* TimeFrameChunk.m in Sources */,
+				70467D6B1B836B0600B75BD3 /* ExecutionHistoryFactory.m in Sources */,
 				7076F5AA1AECCDB7004CC6BA /* SetCurrencyPairViewController.m in Sources */,
 				709BC75E1B0700320059C940 /* SetAutoUpdateIntervalViewController.m in Sources */,
 				7076F5A71AECCBBB004CC6BA /* NewStartViewController.m in Sources */,
@@ -1257,7 +1258,6 @@
 				70CFEB411B19F92800837727 /* FXSTest.m in Sources */,
 				700C9E1B1B65FBD20084320E /* IndicatorSource.m in Sources */,
 				70D2FB5F1A9F575900CAB509 /* ExecutionHistoryTableViewController.m in Sources */,
-				70D2FB851A9F579000CAB509 /* ExecutionHistoryFactory.m in Sources */,
 				704D3E771B5A7AFB00A8B9AB /* Chart.m in Sources */,
 				70D2FC3E1A9F591600CAB509 /* ChartViewData.m in Sources */,
 				70D2FC0F1A9F58F700CAB509 /* TradeDatabase.m in Sources */,
@@ -1312,11 +1312,9 @@
 				70D2FBFE1A9F57DC00CAB509 /* CloseExecutionOrder.m in Sources */,
 				70D2FBA21A9F57A000CAB509 /* ForexHistoryUtils.m in Sources */,
 				70D2FBAD1A9F57B000CAB509 /* UsersOrder.m in Sources */,
-				70D2FBC81A9F57BD00CAB509 /* OpenPositionManagerFactory.m in Sources */,
 				7033C5D61B469F56005EF07B /* NSNumber+FXSNumberConverter.m in Sources */,
 				70D2FC4C1A9F591600CAB509 /* PositionSize.m in Sources */,
 				705C2E101ADE4C270089D510 /* Money+ConvertToAccountCurrency.m in Sources */,
-				70D2FB891A9F579000CAB509 /* ExecutionHistoryManagerFactory.m in Sources */,
 				70D2FBFB1A9F57DC00CAB509 /* OnlyNewExecutionOrdersCreateMode.m in Sources */,
 				70D2FC101A9F58F700CAB509 /* CurrencyPair.m in Sources */,
 				70D2FBA11A9F57A000CAB509 /* ForexHistoryDataArrayUtils.m in Sources */,
