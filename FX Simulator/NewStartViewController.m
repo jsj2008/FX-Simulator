@@ -38,7 +38,7 @@
     SaveData *_newSaveData;
 }
 
--(instancetype)initWithCoder:(NSCoder *)aDecoder
+/*-(instancetype)initWithCoder:(NSCoder *)aDecoder
 {
     if (self = [super initWithCoder:aDecoder]) {
         _newSaveData = [[SaveData alloc] initWithDefaultDataAndSlotNumber:1];
@@ -47,7 +47,7 @@
     }
     
     return self;
-}
+}*/
 
 -(void)setDefaultNewSaveData
 {

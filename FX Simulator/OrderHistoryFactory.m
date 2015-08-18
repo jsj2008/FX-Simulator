@@ -17,7 +17,7 @@
 {
     SaveData *saveData = [SaveLoader load];
     
-    return [[OrderHistory alloc] initWithDataSource:saveData.orderHistoryDataSource];
+    return saveData.orderHistory;
 }
 
 @end

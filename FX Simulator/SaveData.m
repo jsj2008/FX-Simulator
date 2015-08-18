@@ -91,6 +91,28 @@ static CoreDataManager *coreDataManagerStore = nil;
     return saveData;
 }
 
++ (instancetype)loadFromSlotNumber:(NSUInteger)slotNumber
+{
+    NSManagedObjectContext *context = [self coreDataManager].managedObjectContext;
+    
+    NSFetchRequest *fetchRequest = [NSFetchRequest new];
+    NSEntityDescription * entityDescription = [NSEntityDescription entityForName:NSStringFromClass([SaveDataSource class]) inManagedObjectContext:context];
+    [fetchRequest setEntity:entityDescription];
+    NSPredicate * predicate = [NSPredicate predicateWithFormat:@"(save_slot = %d)", slotNumber];
+     [fetchRequest setPredicate:predicate];
+    
+    NSError * error2;
+    NSArray * objects = [context executeFetchRequest:fetchRequest error:&error2];
+    
+    SaveDataSource *source = nil;
+    
+    for (SaveDataSource *obj in objects) {
+        source = obj;
+    }
+    
+    return [[self alloc] initWithSaveDataSource:source];
+}
+
 - (instancetype)init
 {
     return nil;
@@ -98,6 +120,10 @@ static CoreDataManager *coreDataManagerStore = nil;
 
 - (instancetype)initWithSaveDataSource:(SaveDataSource *)source
 {
+    if (source == nil) {
+        return nil;
+    }
+    
     if (self = [super init]) {
         _saveDataSource = source;
     }

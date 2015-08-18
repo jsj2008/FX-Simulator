@@ -13,8 +13,4 @@
 @interface SaveLoader : NSObject
 +(SaveData*)load;
 +(void)reloadSaveData;
-/**
- このセットしたSaveDataがloadメソッドで読み込まれるものになる。
-*/
-//+(void)setSharedSaveData:(SaveData*)saveData;
 @end

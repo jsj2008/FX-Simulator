@@ -44,6 +44,7 @@
 @property (nonatomic, readonly) ExecutionHistory *executionHistory;
 + (void)setCoreDataManager:(CoreDataManager *)coreDataManager;
 + (instancetype)createDefaultSaveDataFromSlotNumber:(NSUInteger)slotNumber;
++ (instancetype)loadFromSlotNumber:(NSUInteger)slotNumber;
 - (instancetype)initWithSaveDataSource:(SaveDataSource *)source;
 
 /* 
