@@ -23,6 +23,8 @@
 #import "CurrencyConverter.h"
 #import "Market.h"
 #import "ForexHistoryData.h"
+#import "NewExecutionOrder.h"
+#import "CloseExecutionOrder.h"
 
 static NSString* const FXSOpenPositionTableName = @"open_position";
 static const int maxRecords = 3;
@@ -224,5 +226,82 @@ static const int maxRecords = 3;
 {
     
 }*/
+
+#pragma mark - update
+
+-(BOOL)execute:(NSArray *)orders
+{
+    if (!self.inExecutionOrdersTransaction) {
+        return NO;
+    }
+    
+    BOOL isSuccess;
+    
+    for (id order in orders) {
+        if ([order isKindOfClass:[CloseExecutionOrder class]]) {
+            isSuccess = [self closeOpenPosition:order];
+        } else if ([order isKindOfClass:[NewExecutionOrder class]]) {
+            isSuccess = [self newOpenPosition:order];
+        } else {
+            return NO;
+        }
+        
+        if (!isSuccess) {
+            return NO;
+        }
+    }
+    
+    return YES;
+}
+
+-(BOOL)closeOpenPosition:(CloseExecutionOrder*)closeOrder
+{
+    if (closeOrder.isCloseAllPositionOfRecord) {
+        return [self deleteOpenPositionNumber:closeOrder.closeOpenPositionNumber];
+    } else {
+        return [self updateOpenPositionNumber:closeOrder.closeOpenPositionNumber closePositionSize:closeOrder.positionSize];
+    }
+}
+
+-(BOOL)newOpenPosition:(NewExecutionOrder*)newOrder
+{
+    return [self saveOpenPositionRecord:[[OpenPositionRecord alloc] initWithNewExecutionOrder:newOrder]];
+}
+
+-(BOOL)deleteOpenPositionNumber:(int)num
+{
+    NSString *sql = [NSString stringWithFormat:@"delete from %@ where id = ? AND save_slot = ?", FXSOpenPositionTableName];
+    
+    if(![self.tradeDB executeUpdate:sql, @(num), @(_saveSlotNumber)]) {
+        return false;
+    }
+    
+    return true;
+}
+
+-(BOOL)updateOpenPositionNumber:(int)number closePositionSize:(PositionSize*)positionSsize
+{
+    // PositionSizeが0のRecordはそのままにしておく　OpenPositionでRecordを取得するときは0以上のものだけ取得
+    
+    NSString *sql = [NSString stringWithFormat:@"update %@ set position_size = position_size - ? where id = ? AND save_slot = ?", FXSOpenPositionTableName];
+    
+    if(![self.tradeDB executeUpdate:sql, positionSsize.sizeValue, @(number), @(_saveSlotNumber)]) {
+        return false;
+    }
+    
+    return true;
+}
+
+-(BOOL)saveOpenPositionRecord:(OpenPositionRecord*)record
+{
+    NSString *sql = [NSString stringWithFormat:@"insert into %@ (save_slot, execution_order_id, position_size) values (?, ?, ?);", FXSOpenPositionTableName];
+    
+    if([self.tradeDB executeUpdate:sql, @(_saveSlotNumber), @(record.executionOrderID), record.positionSize.sizeValueObj]) {
+        return YES;
+    } else {
+        return NO;
+    }
+    
+}
 
 @end

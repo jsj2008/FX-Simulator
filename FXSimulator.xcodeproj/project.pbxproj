@@ -128,7 +128,6 @@
 		70D2FBC21A9F57BD00CAB509 /* OpenPosition.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FBB41A9F57BD00CAB509 /* OpenPosition.m */; };
 		70D2FBC31A9F57BD00CAB509 /* OpenPositionFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FBB61A9F57BD00CAB509 /* OpenPositionFactory.m */; };
 		70D2FBC41A9F57BD00CAB509 /* OpenPositionUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FBB81A9F57BD00CAB509 /* OpenPositionUtils.m */; };
-		70D2FBC61A9F57BD00CAB509 /* OpenPositionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FBBC1A9F57BD00CAB509 /* OpenPositionManager.m */; };
 		70D2FBC71A9F57BD00CAB509 /* OpenPositionRawRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FBBE1A9F57BD00CAB509 /* OpenPositionRawRecord.m */; };
 		70D2FBD61A9F57CB00CAB509 /* SaveData.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FBCC1A9F57CB00CAB509 /* SaveData.m */; };
 		70D2FBD71A9F57CB00CAB509 /* SaveDataStorageFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FBCE1A9F57CB00CAB509 /* SaveDataStorageFactory.m */; };
@@ -1321,7 +1320,6 @@
 				70D2FBC41A9F57BD00CAB509 /* OpenPositionUtils.m in Sources */,
 				70D2FBA01A9F57A000CAB509 /* ForexHistoryCacheConfig.m in Sources */,
 				70D2FC001A9F57DC00CAB509 /* ExecutionOrdersManager.m in Sources */,
-				70D2FBC61A9F57BD00CAB509 /* OpenPositionManager.m in Sources */,
 				700C9E121B65FBD10084320E /* SimpleMovingAverageSource.m in Sources */,
 				70D2FB701A9F577200CAB509 /* CandlesFactory.m in Sources */,
 				70B5AAF21ACE5BC0001F8823 /* SubChartDataViewController.m in Sources */,
