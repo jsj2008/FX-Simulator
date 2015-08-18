@@ -33,7 +33,6 @@
 @property (nonatomic) PositionSize *tradePositionSize;
 @property (nonatomic) Money *startBalance;
 @property (nonatomic) BOOL isAutoUpdate;
-// SaveDataかUserDataか
 @property (nonatomic) float autoUpdateIntervalSeconds;
 @property (nonatomic, readonly) Chart *mainChart;
 @property (nonatomic, readonly) ChartChunk *subChartChunk;
@@ -41,9 +40,12 @@
 @property (nonatomic, readonly) TradeDbDataSource *orderHistoryDataSource;
 @property (nonatomic, readonly) TradeDbDataSource *executionHistoryDataSource;
 @property (nonatomic, readonly) TradeDbDataSource *openPositionDataSource;
-@property (nonatomic, readonly) NSDictionary *saveDataDictionary;
 + (instancetype)createDefaultSaveDataFromSlotNumber:(NSUInteger)slotNumber;
 - (instancetype)initWithSaveDataSource:(SaveDataSource *)source;
+
+/* 
+ 自分のslotNumberと重複するSaveDataSource(自分のSaveDataSourceを除く)を削除する。
+*/
 - (void)newSave;
-- (void)updateSave;
+
 @end
