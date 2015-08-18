@@ -26,9 +26,10 @@
 #import "PositionSize.h"
 #import "Lot.h"
 #import "Money.h"
-#import "TradeTestDbDataSource.h"
-#import "TradeDbDataSource.h"
 #import "TimeScaleUtils.h"
+#import "OrderHistory.h"
+#import "OpenPosition.h"
+#import "ExecutionHistory.h"
 
 @interface SaveData ()
 @property (nonatomic) NSUInteger slotNumber;
@@ -40,6 +41,10 @@ static CoreDataManager *coreDataManagerStore = nil;
 @implementation SaveData {
     SaveDataSource *_saveDataSource;
 }
+
+@synthesize orderHistory = _orderHistory;
+@synthesize openPosition = _openPosition;
+@synthesize executionHistory = _executionHistory;
 
 + (CoreDataManager *)coreDataManager
 {
@@ -297,6 +302,33 @@ static CoreDataManager *coreDataManagerStore = nil;
 - (float)autoUpdateIntervalSeconds
 {
     return _saveDataSource.autoUpdateIntervalSeconds;
+}
+
+- (OrderHistory *)orderHistory
+{
+    if (_orderHistory != nil) {
+        return _orderHistory;
+    }
+    
+    return [OrderHistory createFromSlotNumber:self.slotNumber];
+}
+
+- (OpenPosition *)openPosition
+{
+    if (_openPosition != nil) {
+        return _openPosition;
+    }
+    
+    return [OpenPosition createFromSlotNumber:self.slotNumber AccountCurrency:self.accountCurrency];
+}
+
+- (ExecutionHistory *)executionHistory
+{
+    if (_executionHistory != nil) {
+        return _executionHistory;
+    }
+    
+    return [ExecutionHistory createFromSlotNumber:self.slotNumber];
 }
 
 @end

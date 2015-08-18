@@ -107,7 +107,6 @@
 		70D2FB701A9F577200CAB509 /* CandlesFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FB6D1A9F577200CAB509 /* CandlesFactory.m */; };
 		70D2FB711A9F577200CAB509 /* SimpleCandle.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FB6F1A9F577200CAB509 /* SimpleCandle.m */; };
 		70D2FB761A9F577F00CAB509 /* OrderHistory.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FB731A9F577F00CAB509 /* OrderHistory.m */; };
-		70D2FB771A9F577F00CAB509 /* OrderHistoryFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FB751A9F577F00CAB509 /* OrderHistoryFactory.m */; };
 		70D2FB841A9F579000CAB509 /* ExecutionHistory.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FB791A9F579000CAB509 /* ExecutionHistory.m */; };
 		70D2FB851A9F579000CAB509 /* ExecutionHistoryFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FB7B1A9F579000CAB509 /* ExecutionHistoryFactory.m */; };
 		70D2FB861A9F579000CAB509 /* ExecutionHistoryManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FB7D1A9F579000CAB509 /* ExecutionHistoryManager.m */; };
@@ -1203,7 +1202,6 @@
 				70D2FB491A9F574000CAB509 /* ChartViewController.m in Sources */,
 				70D2FB601A9F575900CAB509 /* ExecutionHistoryTableViewCell.m in Sources */,
 				70ED62271AFCA2620008F939 /* SetNewStartDataViewController.m in Sources */,
-				70D2FB771A9F577F00CAB509 /* OrderHistoryFactory.m in Sources */,
 				70EACE691B2AACBE00A2E532 /* FXSAlert.m in Sources */,
 				70D2FB6B1A9F576500CAB509 /* MarketTimeManager.m in Sources */,
 				70D2FBF81A9F57DC00CAB509 /* ExecutionOrdersCreateModeFactory.m in Sources */,

@@ -19,64 +19,57 @@
 #import "OrderType.h"
 #import "PositionSize.h"
 
-static NSString* const createOrderHistoryTableSql = @"create table if not exists [TABLE_NAME] (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, order_rate REAL NOT NULL, trade_type TXT NOT NULL, position_size INTEGER NOT NULL);";
+static NSString* const FXSOrderHistoryTableName = @"order_history";
 
 @implementation OrderHistory {
-    FMDatabase *tradeDatabase;
-    NSNumber *_saveSlotNumber;
-    NSString *tableName;
+    FMDatabase *_tradeDatabase;
+    NSUInteger _saveSlotNumber;
 }
 
--(id)initWithDataSource:(TradeDbDataSource *)dataSource
++ (instancetype)createFromSlotNumber:(NSUInteger)slotNumber
+{
+    return [[self alloc] initWithSaveSlotNumber:slotNumber db:[TradeDatabase dbConnect]];
+}
+
+-(instancetype)initWithSaveSlotNumber:(NSUInteger)slotNumber db:(FMDatabase *)db
 {
     if (self = [super init]) {
-        tradeDatabase = dataSource.connection;
-        _saveSlotNumber = dataSource.saveSlotNumber;
-        tableName = dataSource.tableName;
-        //[self setTable];
+        _tradeDatabase = db;
+        _saveSlotNumber = slotNumber;
     }
     
     return self;
 }
 
-/*-(void)setTable
-{
-    NSString *sql = [self replaceTableName:createOrderHistoryTableSql];
-    
-    [tradeDatabase open];
-    
-    [tradeDatabase executeUpdate:sql];
-    
-    [tradeDatabase close];
-}*/
-
--(NSString*)replaceTableName:(NSString*)sql
-{
-    return [sql stringByReplacingOccurrencesOfString:@"[TABLE_NAME]" withString:tableName];
-}
-
 -(int)saveUsersOrder:(UsersOrder *)order
 {
-    NSString *sql = @"insert into [TABLE_NAME] (save_slot, order_rate, order_type, position_size) values (?, ?, ?, ?)";
-    sql = [self replaceTableName:sql];
+    NSString *sql = [NSString stringWithFormat:@"insert into %@ (save_slot, order_rate, order_type, position_size) values (?, ?, ?, ?)", FXSOrderHistoryTableName];
     
-    //NSNumber *ratesID = [NSNumber numberWithInt:order.forexHistoryData.ratesID];
     NSNumber *orderRate = order.orderRate.rateValueObj;
     NSString *orderTypeString = order.orderType.toTypeString;
     NSNumber *positionSize = order.positionSize.sizeValueObj;
     
-    [tradeDatabase open];
+    [_tradeDatabase open];
     
     int indexId = 0;
     
-    if([tradeDatabase executeUpdate:sql, _saveSlotNumber, orderRate, orderTypeString, positionSize]) {
-        indexId = [tradeDatabase lastInsertRowId];
+    if([_tradeDatabase executeUpdate:sql, @(_saveSlotNumber), orderRate, orderTypeString, positionSize]) {
+        indexId = [_tradeDatabase lastInsertRowId];
     }
     
-    [tradeDatabase close];
+    [_tradeDatabase close];
     
     return indexId;
 
+}
+
+- (void)delete
+{
+    NSString *sql = [NSString stringWithFormat:@"DELETE FROM %@ WHERE save_slot = ?;", FXSOrderHistoryTableName];
+    
+    [_tradeDatabase open];
+    [_tradeDatabase executeUpdate:sql, @(_saveSlotNumber)];
+    [_tradeDatabase close];
 }
 
 @end

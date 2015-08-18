@@ -8,8 +8,6 @@
 
 #import "OpenPosition.h"
 
-#import "TradeDbDataSource.h"
-//#import "OpenPositionTable.h"
 #import "TradeDatabase.h"
 #import "FMDatabase.h"
 #import "OpenPositionRecord.h"
@@ -18,24 +16,27 @@
 #import "Lot.h"
 #import "Rate.h"
 #import "ProfitAndLossCalculator.h"
-//#import "LotConverter.h"
 #import "Common.h"
 #import "PositionSize.h"
 #import "ExecutionHistoryFactory.h"
 #import "ExecutionHistory.h"
 #import "CurrencyConverter.h"
-//#import "SimulationManager.h"
 #import "Market.h"
 #import "ForexHistoryData.h"
 
+static NSString* const FXSOpenPositionTableName = @"open_position";
 static const int maxRecords = 3;
 
 @implementation OpenPosition {
     ExecutionHistory *_executionHistory;
-    FMDatabase *tradeDatabase;
-    NSString *_tableName;
-    NSNumber *_saveSlotNumber;
+    FMDatabase *_tradeDatabase;
+    NSUInteger _saveSlotNumber;
     NSArray *_allRecords;
+}
+
++ (instancetype)createFromSlotNumber:(NSUInteger)slotNumber AccountCurrency:(Currency*)accountCurrency
+{
+    return [[self alloc] initWithSaveSlotNumber:slotNumber accountCurrency:accountCurrency db:[TradeDatabase dbConnect]];
 }
 
 -(id)init
@@ -43,21 +44,11 @@ static const int maxRecords = 3;
     return nil;
 }
 
--(id)initWithDataSource:(TradeDbDataSource*)dataSource AccountCurrency:(Currency *)accountCurrency
+- (instancetype)initWithSaveSlotNumber:(NSUInteger)slotNumber accountCurrency:(Currency*)accountCurrency db:(FMDatabase *)db
 {
-    if (dataSource == nil || accountCurrency == nil) {
-        DLog(@"DataSource or AccountCurrency nil");
-        return nil;
-    }
-    
     if (self = [super init]) {
-        //OpenPositionTable *table = [[OpenPositionTable alloc] initWithDataSource:dataSource];
-        //[table setTable];
-        
-        tradeDatabase = dataSource.connection;
-        _tableName = dataSource.tableName;
-        _saveSlotNumber = dataSource.saveSlotNumber;
-        
+        _tradeDatabase = db;
+        _saveSlotNumber = slotNumber;
         _currency = accountCurrency;
         
         _executionHistory = [ExecutionHistoryFactory createExecutionHistory];
@@ -71,11 +62,6 @@ static const int maxRecords = 3;
 -(void)update
 {
     _allRecords = [self selectAll];
-}
-
--(NSString*)replaceTableName:(NSString*)sql
-{
-    return [sql stringByReplacingOccurrencesOfString:@"[TABLE_NAME]" withString:_tableName];
 }
 
 #warning Limit(OpenPositionViewController);
@@ -96,19 +82,15 @@ static const int maxRecords = 3;
 
 -(NSArray*)selectAll
 {
-    //NSMutableArray *array = [NSMutableArray array];
-    
-    NSString *sql = @"select * from [TABLE_NAME] WHERE save_slot = ?";
-    
-    sql = [self replaceTableName:sql];
+    NSString *sql = [NSString stringWithFormat:@"select * from %@ WHERE save_slot = ?", FXSOpenPositionTableName];
     
     NSMutableArray *rawRecords = [NSMutableArray array];
     
-    [tradeDatabase open];
+    [_tradeDatabase open];
     
     FMResultSet *rs;
     
-    rs = [tradeDatabase executeQuery:sql, _saveSlotNumber];
+    rs = [_tradeDatabase executeQuery:sql, @(_saveSlotNumber)];
     
     while ([rs next]) {
         OpenPositionRawRecord *rawRecord = [[OpenPositionRawRecord alloc] initWithFMResultSet:rs];
@@ -118,10 +100,9 @@ static const int maxRecords = 3;
         }
     }
     
-    [tradeDatabase close];
+    [_tradeDatabase close];
     
     return [self convertToOpenPositionRecordsFromRawRecords:rawRecords];
-
 }
 
 /**
@@ -169,11 +150,11 @@ static const int maxRecords = 3;
 */
 -(int)countAllRecords
 {
-    NSString *sql = [NSString stringWithFormat:@"select count(*) as count from %@;", _tableName];
+    NSString *sql = [NSString stringWithFormat:@"select count(*) as count from %@;", FXSOpenPositionTableName];
     
-    [tradeDatabase open];
+    [_tradeDatabase open];
     
-    FMResultSet *rs = [tradeDatabase executeQuery:sql];
+    FMResultSet *rs = [_tradeDatabase executeQuery:sql];
     
     int count = 0;
     
@@ -181,7 +162,7 @@ static const int maxRecords = 3;
         count  = [rs intForColumn:@"count"];
     }
     
-    [tradeDatabase close];
+    [_tradeDatabase close];
     
     return count;
 }
@@ -228,6 +209,15 @@ static const int maxRecords = 3;
     CurrencyPair *currencyPair = ((OpenPositionRecord*)[_allRecords firstObject]).currencyPair;
     
     return [[Rate alloc] initWithRateValue:averageRate currencyPair:currencyPair timestamp:nil];
+}
+
+- (void)delete
+{
+    NSString *sql = [NSString stringWithFormat:@"DELETE FROM %@ WHERE save_slot = ?;", FXSOpenPositionTableName];
+    
+    [_tradeDatabase open];
+    [_tradeDatabase executeUpdate:sql, @(_saveSlotNumber)];
+    [_tradeDatabase close];
 }
 
 /*-(Money*)totalPositionMarketValue
