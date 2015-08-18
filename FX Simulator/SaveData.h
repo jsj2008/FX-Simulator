@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+@class CoreDataManager;
 @class SaveDataSource;
 @class TradeDbDataSource;
 @class Chart;
@@ -40,6 +41,7 @@
 @property (nonatomic, readonly) TradeDbDataSource *orderHistoryDataSource;
 @property (nonatomic, readonly) TradeDbDataSource *executionHistoryDataSource;
 @property (nonatomic, readonly) TradeDbDataSource *openPositionDataSource;
++ (void)setCoreDataManager:(CoreDataManager *)coreDataManager;
 + (instancetype)createDefaultSaveDataFromSlotNumber:(NSUInteger)slotNumber;
 - (instancetype)initWithSaveDataSource:(SaveDataSource *)source;
 
