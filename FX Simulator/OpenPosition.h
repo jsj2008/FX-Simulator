@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "ExecutionOrdersTransactionManager.h"
 
 @class FMDatabase;
 @class Currency;
@@ -18,7 +18,7 @@
 @class Rate;
 @class Money;
 
-@interface OpenPosition : NSObject
+@interface OpenPosition : NSObject <ExecutionOrdersTransactionTarget>
 + (instancetype)createFromSlotNumber:(NSUInteger)slotNumber AccountCurrency:(Currency*)accountCurrency;
 - (instancetype)initWithSaveSlotNumber:(NSUInteger)slotNumber accountCurrency:(Currency*)accountCurrency db:(FMDatabase *)db;
 -(NSArray*)selectLatestDataLimit:(NSNumber *)num;
@@ -31,6 +31,7 @@
  レコード数が最大かどうか。
 */
 -(BOOL)isMax;
+-(BOOL)execute:(NSArray*)orders;
 - (void)delete;
 @property (nonatomic, readonly) Currency *currency;
 @property (nonatomic, readonly) OrderType *orderType;
@@ -38,4 +39,6 @@
 @property (nonatomic, readonly) Lot *totalLot;
 @property (nonatomic, readonly) Rate *averageRate;
 //@property (nonatomic, readonly) Money *totalPositionMarketValue;
+@property (nonatomic, readwrite) BOOL inExecutionOrdersTransaction;
+@property (nonatomic, readwrite) FMDatabase *tradeDB;
 @end
