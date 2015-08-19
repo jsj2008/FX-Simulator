@@ -10,26 +10,24 @@
 
 #import "FMDatabase.h"
 #import "TradeDatabase.h"
-#import "OpenPositionManager.h"
-#import "ExecutionHistoryManager.h"
+#import "OpenPosition.h"
+#import "ExecutionHistory.h"
 
 @implementation ExecutionOrdersTransactionManager {
-    FMDatabase *_tradeDB;
-    OpenPositionManager *_openPositionManager;
-    ExecutionHistoryManager *_executionHistoryManager;
+    OpenPosition *_openPosition;
+    ExecutionHistory *_executionHistory;
     BOOL _isStart;
     NSMutableArray *_targets;
 }
 
--(id)initWithOpenPositionManager:(OpenPositionManager *)openPositionManager executionHistoryManager:(ExecutionHistoryManager *)executionHistoryManager
+-(id)initWithOpenPosition:(OpenPosition *)openPosition executionHistory:(ExecutionHistory *)executionHistory
 {
     if (self = [super init]) {
-        _tradeDB = [TradeDatabase dbConnect];
-        _openPositionManager = openPositionManager;
-        _executionHistoryManager = executionHistoryManager;
+        _openPosition = openPosition;
+        _executionHistory = executionHistory;
         _targets = [NSMutableArray array];
-        [self addTransactionTarget:_openPositionManager];
-        [self addTransactionTarget:_executionHistoryManager];
+        [self addTransactionTarget:_openPosition];
+        [self addTransactionTarget:_executionHistory];
     }
     
     return self;
@@ -42,28 +40,30 @@
 
 -(BOOL)execute:(NSArray *)orders
 {
-    [self start];
+    FMDatabase *db = [TradeDatabase dbConnect];
     
-    NSArray *executionOrders = [_executionHistoryManager saveOrders:orders];
+    [self start:db];
+    
+    NSArray *executionOrders = [_executionHistory saveOrders:orders db:db];
     
     if (executionOrders != nil) {
-        if (![_openPositionManager execute:executionOrders]) {
+        if (![_openPosition execute:executionOrders db:db]) {
             [self rollback];
             
             return NO;
         }
     } else {
-        [self rollback];
+        [self rollback:db];
         
         return NO;
     }
     
-    [self commit];
+    [self commit:db];
     
     return YES;
 }
 
--(void)start
+-(void)start:(FMDatabase *)db
 {
     if (_isStart == NO) {
         
@@ -73,28 +73,28 @@
             target.inExecutionOrdersTransaction = YES;
         }
         
-        [_tradeDB open];
-        [_tradeDB beginTransaction];
+        [db open];
+        [db beginTransaction];
     }
 }
 
--(void)commit
+-(void)commit:(FMDatabase *)db
 {
     if (_isStart == YES) {
-        [_tradeDB commit];
-        [self end];
+        [db commit];
+        [self end:db];
     }
 }
 
--(void)rollback
+-(void)rollback:(FMDatabase *)db
 {
     if (_isStart == YES) {
-        [_tradeDB rollback];
-        [self end];
+        [db rollback];
+        [self end:db];
     }
 }
 
--(void)end
+-(void)end:(FMDatabase *)db
 {
     if (_isStart == YES) {
         
@@ -104,7 +104,7 @@
             target.inExecutionOrdersTransaction = NO;
         }
         
-        [_tradeDB close];
+        [db close];
     }
 }
 
