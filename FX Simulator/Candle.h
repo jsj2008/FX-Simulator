@@ -9,9 +9,9 @@
 #import <Foundation/Foundation.h>
 #import "Indicator.h"
 
-@class CandlePlistSource;
+@class CandleSource;
 
 @interface Candle : Indicator
-- (instancetype)initWithCandleSource:(CandlePlistSource *)source;
+- (instancetype)initWithCandleSource:(CandleSource *)source;
 - (void)strokeIndicatorFromForexDataChunk:(ForexDataChunk *)chunk displayForexDataCount:(NSInteger)count displaySize:(CGSize)size;
 @end

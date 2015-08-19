@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "IndicatorPlistSource.h"
+#import "IndicatorSource.h"
 
 @import UIKit;
 
@@ -21,10 +21,9 @@
 */
 
 @interface Indicator : NSObject
-- (instancetype)initWithSource:(IndicatorPlistSource *)source NS_REQUIRES_SUPER;
+- (instancetype)initWithIndicatorSource:(IndicatorSource *)source NS_REQUIRES_SUPER;
 - (void)strokeIndicatorFromForexDataChunk:(ForexDataChunk *)chunk displayForexDataCount:(NSInteger)count displaySize:(CGSize)size;
 - (NSComparisonResult)compareDisplayOrder:(Indicator *)indicator;
-- (NSDictionary *)sourceDictionary;
 @property (nonatomic, readonly) NSUInteger displayOrder;
 @end
 

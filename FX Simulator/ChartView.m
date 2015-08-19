@@ -15,16 +15,10 @@
 #import "ForexDataChunk.h"
 #import "IndicatorUtils.h"
 #import "SimpleMovingAverage.h"
-#import "SimpleMovingAveragePlistSource.h"
 
 
 @implementation ChartView {
-    Candle *_candleChart;
-    SimpleMovingAverage *_simpleMA;
-    SimpleMovingAverage *_simpleMA2;
-    SimpleMovingAverage *_simpleMA3;
-    SimpleMovingAverage *_simpleMA4;
-    SimpleMovingAverage *_simpleMA5;
+    
 }
 
 /*-(id)initWithFrame:(CGRect)frame
@@ -38,28 +32,7 @@
 -(instancetype)initWithCoder:(NSCoder *)aDecoder
 {
     if (self = [super initWithCoder:aDecoder]) {
-        _candleChart = [Candle new];
-        SimpleMovingAveragePlistSource *s1 = [SimpleMovingAveragePlistSource new];
-        SimpleMovingAveragePlistSource *s2 = [SimpleMovingAveragePlistSource new];
-        SimpleMovingAveragePlistSource *s3 = [SimpleMovingAveragePlistSource new];
-        SimpleMovingAveragePlistSource *s4 = [SimpleMovingAveragePlistSource new];
-        SimpleMovingAveragePlistSource *s5 = [SimpleMovingAveragePlistSource new];
-        s1.term = 20;
-        s1.lineColor = [UIColor whiteColor];
-        s2.term = 50;
-        s2.lineColor = [UIColor whiteColor];
-        s3.term = 100;
-        s3.lineColor = [UIColor whiteColor];
-        s4.term = 200;
-        s4.lineColor = [UIColor whiteColor];
-        s5.term = 200;
-        s5.lineColor = [UIColor whiteColor];
-        _simpleMA = [[SimpleMovingAverage alloc] initWithSource:s1];
-        _simpleMA2 = [[SimpleMovingAverage alloc] initWithSource:s2];
-        _simpleMA3 = [[SimpleMovingAverage alloc] initWithSource:s3];
-        _simpleMA4 = [[SimpleMovingAverage alloc] initWithSource:s4];
-        _simpleMA5 = [[SimpleMovingAverage alloc] initWithSource:s5];
-        _chartDataChunk = [ForexDataChunk new];
+        
     }
     
     return self;
@@ -71,12 +44,6 @@
         return;
     }
     
-    [_candleChart strokeIndicatorFromForexDataChunk:self.chartDataChunk displayForexDataCount:40 displaySize:self.frame.size];
-    /*[_simpleMA strokeIndicatorFromForexDataChunk:self.chartDataChunk displayForexDataCount:40 displaySize:self.frame.size];
-    [_simpleMA2 strokeIndicatorFromForexDataChunk:self.chartDataChunk displayForexDataCount:40 displaySize:self.frame.size];
-    [_simpleMA3 strokeIndicatorFromForexDataChunk:self.chartDataChunk displayForexDataCount:40 displaySize:self.frame.size];
-    [_simpleMA4 strokeIndicatorFromForexDataChunk:self.chartDataChunk displayForexDataCount:40 displaySize:self.frame.size];
-    [_simpleMA5 strokeIndicatorFromForexDataChunk:self.chartDataChunk displayForexDataCount:40 displaySize:self.frame.size];*/
 }
 
 @end

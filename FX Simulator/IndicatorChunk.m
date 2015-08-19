@@ -9,7 +9,6 @@
 #import "IndicatorChunk.h"
 
 #import "Indicator.h"
-#import "IndicatorPlistSource.h"
 
 @implementation IndicatorChunk {
     NSMutableArray *_indicatorArray;
@@ -47,20 +46,6 @@
             block(obj);
         }
     }];
-}
-
-- (NSArray *)indicatorSourceDictionaryArray
-{
-    NSMutableArray *dicArray = [NSMutableArray array];
-    
-    [self enumerateIndicatorsUsingBlock:^(Indicator *indicator) {
-        NSDictionary *dic = indicator.sourceDictionary;
-        if (dic) {
-            [dicArray addObject:dic];
-        }
-    }];
-    
-    return [dicArray copy];
 }
 
 @end

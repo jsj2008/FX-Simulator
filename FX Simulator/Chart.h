@@ -19,7 +19,6 @@
 - (void)setForexDataChunk:(ForexDataChunk *)chunk;
 - (void)stroke;
 - (BOOL)isEqualChartIndex:(NSUInteger)index;
-@property (nonatomic, readonly) NSDictionary *chartSourceDictionary;
 @property (nonatomic, readonly) ChartSource *chartSource;
 @property (nonatomic) NSUInteger chartIndex;
 @property (nonatomic) CurrencyPair *currencyPair;
