@@ -15,6 +15,11 @@
     IndicatorSource *_source;
 }
 
++ (NSUInteger)maxIndicatorPeriod
+{
+    return 200;
+}
+
 - (instancetype)init
 {
     return nil;

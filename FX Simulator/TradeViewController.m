@@ -9,6 +9,8 @@
 #import "TradeViewController.h"
 
 #import <QuartzCore/QuartzCore.h>
+#import "SaveData.h"
+#import "SaveLoader.h"
 #import "ChartViewController.h"
 #import "Market.h"
 #import "ChartViewController.h"
@@ -41,8 +43,10 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    ChartPlistSource *source = [[ChartPlistSource alloc] initWithDictionary:@{@"IndexKey":@(0), @"CurrencyPair":@"USDJPY", @"TimeScale":@(15)}];
-    [_chartViewController setChartSource:source];
+    
+    SaveData *saveData = [SaveLoader load];
+    
+    [_chartViewController setChart:saveData.mainChart];
     
     _ratePanelViewController.delegate = _tradeDataViewController;
     _tradeDataViewController.delegate = _simulationManager;

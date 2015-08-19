@@ -21,6 +21,7 @@
 */
 
 @interface Indicator : NSObject
++ (NSUInteger)maxIndicatorPeriod;
 - (instancetype)initWithIndicatorSource:(IndicatorSource *)source NS_REQUIRES_SUPER;
 - (void)strokeIndicatorFromForexDataChunk:(ForexDataChunk *)chunk displayForexDataCount:(NSInteger)count displaySize:(CGSize)size;
 - (NSComparisonResult)compareDisplayOrder:(Indicator *)indicator;

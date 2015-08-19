@@ -17,11 +17,11 @@
 - (void)longPressedEnd;
 @end
 
-@class ChartPlistSource;
+@class Chart;
 @class ForexDataChunk;
 
 @interface ChartViewController : UIViewController
-- (void)setChartSource:(ChartPlistSource *)source;
+- (void)setChart:(Chart *)chart;
 - (void)updateChartFor:(ForexDataChunk *)chunk;
 - (void)updatedSaveData;
 + (NSUInteger)requireForexDataCountForChart;
