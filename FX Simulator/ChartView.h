@@ -8,8 +8,11 @@
 
 @import UIKit;
 
-@class ForexDataChunk;
+@class Chart;
 
 @interface ChartView : UIView
-@property (nonatomic) ForexDataChunk *chartDataChunk;
+/**
+ 描写するチャートをセットする。
+*/
+@property (nonatomic) Chart *chart;
 @end

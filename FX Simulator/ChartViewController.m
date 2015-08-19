@@ -8,10 +8,12 @@
 
 #import "ChartViewController.h"
 
+#import "Chart.h"
 #import "ChartView.h"
 #import "ChartViewData.h"
 #import "ForexDataChunk.h"
 #import "ForexDataChunkStore.h"
+#import "Indicator.h"
 #import "Market.h"
 
 @interface ChartViewController ()
@@ -22,7 +24,7 @@ static const NSUInteger kMaxDisplayForexDataCount = 100;
 static const NSUInteger kMinDisplayForexDataCount = 40;
 
 @implementation ChartViewController {
-    ChartPlistSource *_source;
+    Chart *_chart;
     ForexDataChunk *_chunk;
     ForexDataChunk *_displayedForexDataChunk;
     ForexDataChunkStore *_store;
@@ -105,7 +107,7 @@ static const NSUInteger kMinDisplayForexDataCount = 40;
         
         _displayForexDataCount = 40;
         
-        ForexHistoryData *data = [self.chartView.chartDataChunk getForexDataFromTouchPoint:pt displayCount:_displayForexDataCount viewSize:self.chartView.frame.size];
+        ForexHistoryData *data = [self.chartView.chart getForexDataFromTouchPoint:pt displayCount:_displayForexDataCount viewSize:self.chartView.frame.size];
         
         if (data == nil) {
             return;
@@ -124,10 +126,11 @@ static const NSUInteger kMinDisplayForexDataCount = 40;
     }
 }
 
-- (void)setChartSource:(ChartPlistSource *)source
+- (void)setChart:(Chart *)chart
 {
-    _source = source;
-    _store = [[ForexDataChunkStore alloc] initWithCurrencyPair:source.currencyPair timeScale:source.timeScale getMaxLimit:[ChartViewController requireForexDataCountForChart]];
+    _chart = chart;
+    self.chartView.chart = _chart;
+    _store = [[ForexDataChunkStore alloc] initWithCurrencyPair:chart.currencyPair timeScale:chart.timeFrame getMaxLimit:[ChartViewController requireForexDataCountForChart]];
 }
 
 - (void)updateChartFor:(ForexDataChunk *)chunk
@@ -137,20 +140,20 @@ static const NSUInteger kMinDisplayForexDataCount = 40;
     }
     
     _chunk = chunk;
-    self.chartView.chartDataChunk = _chunk;
+    [_chart setForexDataChunk:chunk];
     [self.chartView setNeedsDisplay];
     _displayedForexDataChunk = _chunk;
 }
 
 -(void)updatedSaveData
 {
-    self.chartView.chartDataChunk = nil;
+    self.chartView.chart = nil;
     [self.chartView setNeedsDisplay];
 }
 
 + (NSUInteger)requireForexDataCountForChart
 {
-    return kMaxDisplayForexDataCount + [IndicatorPlistSource maxIndicatorTerm] - 1;
+    return kMaxDisplayForexDataCount + [Indicator maxIndicatorPeriod] - 1;
 }
 
 - (void)didReceiveMemoryWarning

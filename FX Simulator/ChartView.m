@@ -8,13 +8,7 @@
 
 #import "ChartView.h"
 
-#import "ForexHistoryData.h"
-#import "SimpleCandle.h"
-#import "Candle.h"
-#import "CandlesFactory.h"
-#import "ForexDataChunk.h"
-#import "IndicatorUtils.h"
-#import "SimpleMovingAverage.h"
+#import "Chart.h"
 
 
 @implementation ChartView {
@@ -39,10 +33,7 @@
 }
 
 -(void)drawRect:(CGRect)rect
-{    
-    if (self.chartDataChunk == nil) {
-        return;
-    }
+{
     
 }
 
