@@ -8,14 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
-@class OpenPositionManager;
-@class ExecutionHistoryManager;
+@class OpenPosition;
+@class ExecutionHistory;
 
 /**
  実行オーダーを実際に実行するクラス。
 */
 
 @interface ExecutionOrdersManager : NSObject
--(id)initWithOpenPositionManager:(OpenPositionManager*)openPositionManager executionHistoryManager:(ExecutionHistoryManager*)executionHistoryManager;
--(BOOL)executeOrders:(NSArray*)orders;
+- (instancetype)initWithOpenPosition:(OpenPosition *)openPosition executionHistory:(ExecutionHistory *)executionHistory;
+- (BOOL)executeOrders:(NSArray*)orders;
 @end
