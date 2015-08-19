@@ -7,80 +7,27 @@
 //
 
 #import "ExecutionOrdersManager.h"
+
 #import "ExecutionOrdersTransactionManager.h"
-#import "OpenPositionManagerFactory.h"
-#import "OpenPositionManager.h"
-#import "ExecutionHistoryManagerFactory.h"
-#import "ExecutionHistoryManager.h"
-//#import "OpenPositionFactory.h"
-//#import "OpenPosition.h"
-//#import "ExecutionHistoryFactory.h"
-//#import "ExecutionHistory.h"
-#import "CloseExecutionOrder.h"
-#import "NewExecutionOrder.h"
+#import "OpenPosition.h"
+#import "ExecutionHistory.h"
 
 @implementation ExecutionOrdersManager {
     ExecutionOrdersTransactionManager *_transactionManager;
 }
 
-/*-(id)init
+- (instancetype)initWithOpenPosition:(OpenPosition *)openPosition executionHistory:(ExecutionHistory *)executionHistory
 {
     if (self = [super init]) {
-        transactionManager = [ExecutionOrdersTransactionManager new];
-        OpenPositionManager *openPositionManager = [OpenPositionManagerFactory createOpenPositionManager];
-        ExecutionHistoryManager *executionHistoryManager = [ExecutionHistoryManagerFactory createExecutionHistoryManager];
-        [transactionManager addTransactionTarget:openPositionManager];
-        [transactionManager addTransactionTarget:executionHistoryManager];
-    }
-    
-    return self;
-}*/
-
--(id)initWithOpenPositionManager:(OpenPositionManager *)openPositionManager executionHistoryManager:(ExecutionHistoryManager *)executionHistoryManager
-{
-    if (self = [super init]) {
-        _transactionManager = [[ExecutionOrdersTransactionManager alloc] initWithOpenPositionManager:openPositionManager executionHistoryManager:executionHistoryManager];
-        //transactionManager = [ExecutionOrdersTransactionManager new];
-        //[transactionManager addTransactionTarget:openPositionManager];
-        //[transactionManager addTransactionTarget:executionHistoryManager];
+        _transactionManager = [[ExecutionOrdersTransactionManager alloc] initWithOpenPosition:openPosition executionHistory:executionHistory];
     }
     
     return self;
 }
 
--(BOOL)executeOrders:(NSArray*)orders
+- (BOOL)executeOrders:(NSArray*)orders
 {
     return [_transactionManager execute:orders];
-    
-    //[transactionManager addTransactionTarget:openPositionManager];
-    //[transactionManager addTransactionTarget:executionHistoryManager];
-    
-    //[transactionManager start];
-    
-    /*BOOL isSuccess;
-    
-    for (id order in orders) {
-        if ([order isKindOfClass:[CloseExecutionOrder class]]) {
-            isSuccess = [openPositionManager closeOpenPosition:order];
-        } else if ([order isKindOfClass:[NewExecutionOrder class]]) {
-            isSuccess = [openPositionManager newOpenPosition:order];
-        } else {
-            return NO;
-        }
-        
-        if (!isSuccess) {
-            [transactionManager rollback];
-            return NO;
-        }
-    }*/
-    
-    /*if([executionHistoryManager saveExecutionOrders:orders]) {
-        [transactionManager commit];
-        return YES;
-    } else {
-        [transactionManager rollback];
-        return NO;
-    }*/
 }
 
 @end
