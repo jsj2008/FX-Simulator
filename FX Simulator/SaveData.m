@@ -20,7 +20,6 @@
 #import "CurrencyPair.h"
 #import "FXSTimeRange.h"
 #import "FXSTest.h"
-#import "TableNameFormatter.h"
 #import "Setting.h"
 #import "Spread.h"
 #import "PositionSize.h"
@@ -33,7 +32,6 @@
 
 @interface SaveData ()
 @property (nonatomic) NSUInteger slotNumber;
-//@property (nonatomic, readonly) CoreDataManager *coreDataManager;
 @end
 
 static CoreDataManager *coreDataManagerStore = nil;
@@ -157,22 +155,6 @@ static CoreDataManager *coreDataManagerStore = nil;
         
     } execept:self.timeFrame];
 }
-
-/*- (void)setDefaultDataAndSlotNumber:(NSUInteger)slotNumber
-{
-    self.slotNumber = (int)slotNumber;
-    self.currencyPair = [[CurrencyPair alloc] initWithBaseCurrency:[[Currency alloc] initWithCurrencyType:USD] QuoteCurrency:[[Currency alloc] initWithCurrencyType:JPY]];
-    self.timeFrame = [[TimeFrame alloc] initWithMinute:15];
-    self.startTime = [Setting rangeForCurrencyPair:self.currencyPair timeScale:self.timeFrame].start;
-    self.lastLoadedTime = self.startTime;
-    self.spread = [[Spread alloc] initWithPips:1 currencyPair:self.currencyPair];
-    self.accountCurrency = [[Currency alloc] initWithCurrencyType:JPY];
-    self.startBalance = [[Money alloc] initWithAmount:1000000 currency:self.accountCurrency];
-    self.positionSizeOfLot = [[PositionSize alloc] initWithSizeValue:10000];
-    self.tradePositionSize = [[PositionSize alloc] initWithSizeValue:10000];
-    self.isAutoUpdate = YES;
-    self.autoUpdateInterval = 1.0;
-}*/
 
 - (void)newSave
 {

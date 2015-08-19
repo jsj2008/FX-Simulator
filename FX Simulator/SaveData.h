@@ -42,7 +42,13 @@
 @property (nonatomic, readonly) OrderHistory *orderHistory;
 @property (nonatomic, readonly) OpenPosition *openPosition;
 @property (nonatomic, readonly) ExecutionHistory *executionHistory;
+
+/**
+ テスト時などに、CoreDataManagerをセットする。
+ テストが終わったら、nilを入れる。
+*/
 + (void)setCoreDataManager:(CoreDataManager *)coreDataManager;
+
 + (instancetype)createDefaultSaveDataFromSlotNumber:(NSUInteger)slotNumber;
 + (instancetype)loadFromSlotNumber:(NSUInteger)slotNumber;
 - (instancetype)initWithSaveDataSource:(SaveDataSource *)source;
