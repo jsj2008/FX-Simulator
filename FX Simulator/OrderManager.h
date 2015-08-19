@@ -20,7 +20,8 @@
 */
 
 @interface OrderManager : NSObject
--(id)initWithOrderHistory:(OrderHistory*)orderHistory executionOrdersFactory:(ExecutionOrdersFactory*)executionOrdersFactory executionOrdersManager:(ExecutionOrdersManager*)executionOrdersManager;
--(BOOL)execute:(UsersOrder*)order;
++ (instancetype)createOrderManager;
+- (instancetype)initWithOrderHistory:(OrderHistory*)orderHistory executionOrdersFactory:(ExecutionOrdersFactory*)executionOrdersFactory executionOrdersManager:(ExecutionOrdersManager*)executionOrdersManager;
+- (BOOL)execute:(UsersOrder*)order;
 @property (nonatomic, weak) UIViewController *alertTarget;
 @end

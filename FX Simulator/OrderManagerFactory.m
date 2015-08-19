@@ -36,11 +36,7 @@
     
     // create ExecutionOrdersManager 実際のオーダーを実行する
     
-    OpenPositionManager *openPositionManager = [OpenPositionManagerFactory createOpenPositionManager];
-    
-    ExecutionHistoryManager *executionHistoryManager = [ExecutionHistoryManagerFactory createExecutionHistoryManager];
-    
-    ExecutionOrdersManager *executionOrdersManager = [[ExecutionOrdersManager alloc] initWithOpenPositionManager:openPositionManager executionHistoryManager:executionHistoryManager];
+    ExecutionOrdersManager *executionOrdersManager = [[ExecutionOrdersManager alloc] initWithOpenPosition:<#(OpenPosition *)#> executionHistory:<#(ExecutionHistory *)#>];
     
     
     
