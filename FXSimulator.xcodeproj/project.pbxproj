@@ -122,7 +122,6 @@
 		70D2FBAD1A9F57B000CAB509 /* UsersOrder.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FBA61A9F57B000CAB509 /* UsersOrder.m */; };
 		70D2FBAE1A9F57B000CAB509 /* OrderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FBA81A9F57B000CAB509 /* OrderManager.m */; };
 		70D2FBAF1A9F57B000CAB509 /* Order.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FBAA1A9F57B000CAB509 /* Order.m */; };
-		70D2FBB01A9F57B000CAB509 /* OrderManagerFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FBAC1A9F57B000CAB509 /* OrderManagerFactory.m */; };
 		70D2FBC11A9F57BD00CAB509 /* OpenPositionRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FBB21A9F57BD00CAB509 /* OpenPositionRecord.m */; };
 		70D2FBC21A9F57BD00CAB509 /* OpenPosition.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FBB41A9F57BD00CAB509 /* OpenPosition.m */; };
 		70D2FBC31A9F57BD00CAB509 /* OpenPositionFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FBB61A9F57BD00CAB509 /* OpenPositionFactory.m */; };
@@ -1276,7 +1275,6 @@
 				70D2FC3F1A9F591600CAB509 /* RatePanelViewData.m in Sources */,
 				70D2FBC11A9F57BD00CAB509 /* OpenPositionRecord.m in Sources */,
 				70D2FBF51A9F57DC00CAB509 /* ExecutionOrderMaterial.m in Sources */,
-				70D2FBB01A9F57B000CAB509 /* OrderManagerFactory.m in Sources */,
 				704D3E381B57C7D100A8B9AB /* ChartPlistSource.m in Sources */,
 				70D2FBAF1A9F57B000CAB509 /* Order.m in Sources */,
 				70D2FB9C1A9F57A000CAB509 /* ForexHistory.m in Sources */,

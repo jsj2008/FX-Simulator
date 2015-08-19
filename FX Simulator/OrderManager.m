@@ -8,8 +8,9 @@
 
 #import "OrderManager.h"
 
+#import "SaveLoader.h"
+#import "SaveData.h"
 #import "UsersOrder.h"
-#import "OrderHistoryFactory.h"
 #import "OrderHistory.h"
 #import "OrderManagerState.h"
 #import "ExecutionOrderMaterial.h"
@@ -23,18 +24,22 @@
     ExecutionOrdersManager *_executionOrdersManager;
 }
 
-/*-(id)init
++ (instancetype)createOrderManager
 {
-    if (self = [super init]) {
-        orderHistory = [OrderHistoryFactory createOrderHistory];
-        executionOrdersFactory = [ExecutionOrdersFactory new];
-        executionOrdersManager = [ExecutionOrdersManager new];
-    }
+    SaveData *saveData = [SaveLoader load];
     
-    return self;
-}*/
+    OrderHistory *orderHistory = saveData.orderHistory;
+    OpenPosition *openPosition = saveData.openPosition;
+    ExecutionHistory *executionHistory = saveData.executionHistory;
+    
+    ExecutionOrdersFactory *executionOrdersFactory = [[ExecutionOrdersFactory alloc] initWithOpenPosition:openPosition];
+    
+    ExecutionOrdersManager *executionOrdersManager = [[ExecutionOrdersManager alloc] initWithOpenPosition:openPosition executionHistory:executionHistory];
+    
+    return [[OrderManager alloc] initWithOrderHistory:orderHistory executionOrdersFactory:executionOrdersFactory executionOrdersManager:executionOrdersManager];
+}
 
--(id)initWithOrderHistory:(OrderHistory *)orderHistory executionOrdersFactory:(ExecutionOrdersFactory *)executionOrdersFactory executionOrdersManager:(ExecutionOrdersManager *)executionOrdersManager
+- (instancetype)initWithOrderHistory:(OrderHistory *)orderHistory executionOrdersFactory:(ExecutionOrdersFactory *)executionOrdersFactory executionOrdersManager:(ExecutionOrdersManager *)executionOrdersManager
 {
     if (self = [super init]) {
         _orderHistory = orderHistory;
@@ -46,25 +51,14 @@
     return self;
 }
 
--(BOOL)execute:(UsersOrder*)order
+- (BOOL)execute:(UsersOrder*)order
 {
-    //if (!order.isValid) {
-        /*NSDictionary *errorDic = @{
-                                   NSLocalizedDescriptionKey:@"Order Invalid",
-                                NSLocalizedRecoverySuggestionErrorKey:@"You can set numberB except zero"
-                                   };
-        *anError = [[NSError alloc] initWithDomain:domain code:0 userInfo:errorDic];*/
-        
-        //return false;
-    //}
-    
     [_orderManagerState updateState:order];
     
     if (![_orderManagerState isExecutable]) {
         [_orderManagerState showAlert:self.alertTarget];
         return NO;
     }
-    
     
     int orderNumber = [_orderHistory saveUsersOrder:order];
     
