@@ -54,7 +54,6 @@
 {
     [self start];
     
-    // orderID(ExecutionHistoryTableのRowid)がセットされたExecutionOrdersを返す
     NSArray *executionOrders = [_executionHistoryManager saveOrders:orders];
     
     if (executionOrders != nil) {
