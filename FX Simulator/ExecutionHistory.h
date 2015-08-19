@@ -7,18 +7,23 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "ExecutionOrdersTransactionManager.h"
 
 @class FMDatabase;
 @class ExecutionHistoryRecord;
 
-@interface ExecutionHistory : NSObject
+@interface ExecutionHistory : NSObject <ExecutionOrdersTransactionTarget>
 + (instancetype)createFromSlotNumber:(NSUInteger)slotNumber;
 - (instancetype)initWithSaveSlotNumber:(NSUInteger)slotNumber db:(FMDatabase *)db;
 // クローズ(Close)なオーダーの約定履歴はSelectしない???
 -(ExecutionHistoryRecord*)selectRecordFromOrderID:(NSNumber*)orderID;
 -(NSArray*)selectLatestDataLimit:(NSNumber *)num;
-//-(NSArray*)selectLimit:(NSNumber*)num;
-//-(BOOL)saveExecutionOrders:(NSArray*)orders;
 -(NSArray*)all;
 - (void)delete;
+/**
+ ユーザーからのオーダーから生成した実行用のオーダーの配列をExecutionHistoryテーブルに保存するメソッド。トランザクションが有効でなければ実行されない。
+ */
+-(NSArray*)saveOrders:(NSArray*)orders;
+@property (nonatomic, readwrite) BOOL inExecutionOrdersTransaction;
+@property (nonatomic, readwrite) FMDatabase *tradeDB;
 @end
