@@ -23,8 +23,8 @@
 /**
  ユーザーからのオーダーから生成した実行用のオーダーの配列をExecutionHistoryテーブルに保存するメソッド。トランザクションが有効でなければ実行されない。
  orderID(ExecutionHistoryTableのRowid)がセットされたExecutionOrdersを返す
+ @param db transaction用。
 */
--(NSArray*)saveOrders:(NSArray*)orders;
+-(NSArray*)saveOrders:(NSArray*)orders db:(FMDatabase *)db;
 @property (nonatomic, readwrite) BOOL inExecutionOrdersTransaction;
-@property (nonatomic, readwrite) FMDatabase *tradeDB;
 @end

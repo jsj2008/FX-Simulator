@@ -121,7 +121,7 @@ typedef struct{
     BOOL isSuccess;
 } SaveOrderResult;
 
--(NSArray*)saveOrders:(NSArray *)orders
+-(NSArray*)saveOrders:(NSArray *)orders db:(FMDatabase *)db
 {
     if (!self.inExecutionOrdersTransaction) {
         return nil;
@@ -135,7 +135,7 @@ typedef struct{
     
     for (ExecutionOrder *order in orders) {
         SaveOrderResult result;
-        result = [self saveOrder:order];
+        result = [self saveOrder:order db:db];
         if (result.isSuccess) {
             order.orderID = result.rowID;
         } else {
@@ -146,7 +146,7 @@ typedef struct{
     return orders;
 }
 
--(SaveOrderResult)saveOrder:(id)order
+-(SaveOrderResult)saveOrder:(id)order db:(FMDatabase *)db
 {
     NSString *sql = [NSString stringWithFormat:@"insert into %@ (save_slot, currency_pair, users_order_number, order_rate, order_rate_timestamp, order_spread, order_type, position_size, is_close, close_order_number, close_order_rate, close_order_spread) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);", FXSExecutionHistoryTableName];
     
@@ -200,11 +200,11 @@ typedef struct{
         result.isSuccess = NO;
     }
     
-    if(![self.tradeDB executeUpdate:sql, _saveSlotNumber, currencyPair, usersOrderNumber, orderRate, orderRateTimestamp, orderSpread, orderType, positionSize, isClose, closeUsersOrderNumber, closeOrderRate, closeOrderSpread]) {
+    if(![db executeUpdate:sql, _saveSlotNumber, currencyPair, usersOrderNumber, orderRate, orderRateTimestamp, orderSpread, orderType, positionSize, isClose, closeUsersOrderNumber, closeOrderRate, closeOrderSpread]) {
         NSLog(@"db error: ExecutionHistoryManager saveExecutionOrders");
         result.isSuccess = NO;
     } else {
-        result.rowID = [self.tradeDB lastInsertRowId];
+        result.rowID = [db lastInsertRowId];
         result.isSuccess = YES;
     }
     
