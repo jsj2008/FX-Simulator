@@ -48,7 +48,7 @@
     
     if (executionOrders != nil) {
         if (![_openPosition execute:executionOrders db:db]) {
-            [self rollback];
+            [self rollback:db];
             
             return NO;
         }
