@@ -227,7 +227,7 @@ static const int maxRecords = 3;
     
 }*/
 
-#pragma mark - update
+#pragma mark - execute orders
 
 -(BOOL)execute:(NSArray *)orders
 {
