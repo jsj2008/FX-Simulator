@@ -98,7 +98,7 @@ static CoreDataManager *coreDataManagerStore = nil;
     NSFetchRequest *fetchRequest = [NSFetchRequest new];
     NSEntityDescription * entityDescription = [NSEntityDescription entityForName:NSStringFromClass([SaveDataSource class]) inManagedObjectContext:context];
     [fetchRequest setEntity:entityDescription];
-    NSPredicate * predicate = [NSPredicate predicateWithFormat:@"(save_slot = %d)", slotNumber];
+    NSPredicate * predicate = [NSPredicate predicateWithFormat:@"(slotNumber = %d)", slotNumber];
      [fetchRequest setPredicate:predicate];
     
     NSError * error2;
