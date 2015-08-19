@@ -31,7 +31,10 @@
  レコード数が最大かどうか。
 */
 -(BOOL)isMax;
--(BOOL)execute:(NSArray*)orders;
+/**
+ @param db transaction用。
+*/
+-(BOOL)execute:(NSArray*)orders db:(FMDatabase *)db;
 - (void)delete;
 @property (nonatomic, readonly) Currency *currency;
 @property (nonatomic, readonly) OrderType *orderType;
@@ -40,5 +43,4 @@
 @property (nonatomic, readonly) Rate *averageRate;
 //@property (nonatomic, readonly) Money *totalPositionMarketValue;
 @property (nonatomic, readwrite) BOOL inExecutionOrdersTransaction;
-@property (nonatomic, readwrite) FMDatabase *tradeDB;
 @end
