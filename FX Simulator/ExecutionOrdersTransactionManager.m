@@ -21,16 +21,6 @@
     NSMutableArray *_targets;
 }
 
-/*-(id)init
-{
-    if (self = [super init]) {
-        _tradeDB = [TradeDatabase dbConnect];
-        _targets = [NSMutableArray array];
-    }
-    
-    return self;
-}*/
-
 -(id)initWithOpenPositionManager:(OpenPositionManager *)openPositionManager executionHistoryManager:(ExecutionHistoryManager *)executionHistoryManager
 {
     if (self = [super init]) {
@@ -68,17 +58,7 @@
         return NO;
     }
     
-    /*for (id<ExecutionOrdersTransactionTarget> target in _targets) {
-        if (![target execute:orders]) {
-            [self rollback];
-            [self end];
-            
-            return NO;
-        }
-    }*/
-    
     [self commit];
-    //[self end];
     
     return YES;
 }
@@ -91,7 +71,6 @@
         
         for (id<ExecutionOrdersTransactionTarget> target in _targets) {
             target.inExecutionOrdersTransaction = YES;
-            target.tradeDB = _tradeDB;
         }
         
         [_tradeDB open];
@@ -123,10 +102,7 @@
         
         for (id<ExecutionOrdersTransactionTarget> target in _targets) {
             target.inExecutionOrdersTransaction = NO;
-            target.tradeDB = nil;
         }
-        
-        //[_targets removeAllObjects];
         
         [_tradeDB close];
     }
