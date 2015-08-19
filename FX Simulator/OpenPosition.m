@@ -8,6 +8,8 @@
 
 #import "OpenPosition.h"
 
+#import "SaveData.h"
+#import "SaveLoader.h"
 #import "TradeDatabase.h"
 #import "FMDatabase.h"
 #import "OpenPositionRecord.h"
@@ -18,7 +20,6 @@
 #import "ProfitAndLossCalculator.h"
 #import "Common.h"
 #import "PositionSize.h"
-#import "ExecutionHistoryFactory.h"
 #import "ExecutionHistory.h"
 #import "CurrencyConverter.h"
 #import "Market.h"
@@ -38,7 +39,16 @@ static const int maxRecords = 3;
 
 + (instancetype)createFromSlotNumber:(NSUInteger)slotNumber AccountCurrency:(Currency*)accountCurrency
 {
-    return [[self alloc] initWithSaveSlotNumber:slotNumber accountCurrency:accountCurrency db:[TradeDatabase dbConnect]];
+    SaveData *saveData = [SaveLoader load];
+    
+    return [[self alloc] initWithSaveSlotNumber:slotNumber accountCurrency:accountCurrency executionHistory:saveData.executionHistory db:[TradeDatabase dbConnect]];
+}
+
++ (instancetype)loadOpenPosition
+{
+    SaveData *saveData = [SaveLoader load];
+    
+    return saveData.openPosition;
 }
 
 -(id)init
@@ -46,14 +56,13 @@ static const int maxRecords = 3;
     return nil;
 }
 
-- (instancetype)initWithSaveSlotNumber:(NSUInteger)slotNumber accountCurrency:(Currency*)accountCurrency db:(FMDatabase *)db
+- (instancetype)initWithSaveSlotNumber:(NSUInteger)slotNumber accountCurrency:(Currency*)accountCurrency executionHistory:(ExecutionHistory *)executionHistory db:(FMDatabase *)db
 {
     if (self = [super init]) {
         _tradeDatabase = db;
         _saveSlotNumber = slotNumber;
         _currency = accountCurrency;
-        
-        _executionHistory = [ExecutionHistoryFactory createExecutionHistory];
+        _executionHistory = executionHistory;
         
         [self update];
     }

@@ -11,7 +11,6 @@
 #import "SaveLoader.h"
 #import "SaveData.h"
 #import "Money.h"
-#import "ExecutionHistoryFactory.h"
 #import "ExecutionHistory.h"
 #import "Balance.h"
 #import "Equity.h"
@@ -24,7 +23,7 @@
     
     Money *startBalance = saveData.startBalance;
     
-    ExecutionHistory *executionHistory = [ExecutionHistoryFactory createExecutionHistory];
+    ExecutionHistory *executionHistory = [ExecutionHistory loadExecutionHistory];
     
     Balance *balance = [[Balance alloc] initWithStartBalance:startBalance ExecutionHistory:executionHistory];
     

@@ -8,7 +8,6 @@
 
 #import "ExecutionHistoryTableViewController.h"
 
-#import "ExecutionHistoryFactory.h"
 #import "ExecutionHistory.h"
 #import "OrderType.h"
 #import "Rate.h"
@@ -64,7 +63,7 @@ static const unsigned int displayMaxExecutionHistoryRecords = 100;
 
 -(void)setInitData
 {
-    _executionHistory = [ExecutionHistoryFactory createExecutionHistory];
+    _executionHistory = [ExecutionHistory loadExecutionHistory];
 }
 
 /*-(void)loadView

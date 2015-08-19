@@ -14,6 +14,7 @@
 
 @interface ExecutionHistory : NSObject <ExecutionOrdersTransactionTarget>
 + (instancetype)createFromSlotNumber:(NSUInteger)slotNumber;
++ (instancetype)loadExecutionHistory;
 - (instancetype)initWithSaveSlotNumber:(NSUInteger)slotNumber db:(FMDatabase *)db;
 // クローズ(Close)なオーダーの約定履歴はSelectしない???
 -(ExecutionHistoryRecord*)selectRecordFromOrderID:(NSNumber*)orderID;

@@ -7,7 +7,7 @@
 //
 
 #import "ExecutionOrdersCreateMode.h"
-#import "OpenPositionFactory.h"
+
 #import "OpenPosition.h"
 
 @implementation ExecutionOrdersCreateMode

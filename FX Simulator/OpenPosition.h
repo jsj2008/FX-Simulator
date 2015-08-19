@@ -10,6 +10,7 @@
 #import "ExecutionOrdersTransactionManager.h"
 
 @class FMDatabase;
+@class ExecutionHistory;
 @class Currency;
 @class CurrencyPair;
 @class OrderType;
@@ -20,7 +21,8 @@
 
 @interface OpenPosition : NSObject <ExecutionOrdersTransactionTarget>
 + (instancetype)createFromSlotNumber:(NSUInteger)slotNumber AccountCurrency:(Currency*)accountCurrency;
-- (instancetype)initWithSaveSlotNumber:(NSUInteger)slotNumber accountCurrency:(Currency*)accountCurrency db:(FMDatabase *)db;
++ (instancetype)loadOpenPosition;
+- (instancetype)initWithSaveSlotNumber:(NSUInteger)slotNumber accountCurrency:(Currency*)accountCurrency executionHistory:(ExecutionHistory *)executionHistory db:(FMDatabase *)db;
 -(NSArray*)selectLatestDataLimit:(NSNumber *)num;
 -(NSArray*)selectLimitPositionSize:(PositionSize*)positionSize;
 -(NSArray*)selectAll;

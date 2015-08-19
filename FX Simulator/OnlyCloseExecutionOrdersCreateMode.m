@@ -7,7 +7,7 @@
 //
 
 #import "OnlyCloseExecutionOrdersCreateMode.h"
-#import "OpenPositionFactory.h"
+
 #import "OpenPosition.h"
 #import "ExecutionOrderMaterial.h"
 #import "OpenPositionRecord.h"

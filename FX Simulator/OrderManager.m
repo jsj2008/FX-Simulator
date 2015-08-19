@@ -8,10 +8,10 @@
 
 #import "OrderManager.h"
 
-#import "SaveLoader.h"
-#import "SaveData.h"
 #import "UsersOrder.h"
 #import "OrderHistory.h"
+#import "OpenPosition.h"
+#import "ExecutionHistory.h"
 #import "OrderManagerState.h"
 #import "ExecutionOrderMaterial.h"
 #import "ExecutionOrdersFactory.h"
@@ -25,12 +25,10 @@
 }
 
 + (instancetype)createOrderManager
-{
-    SaveData *saveData = [SaveLoader load];
-    
-    OrderHistory *orderHistory = saveData.orderHistory;
-    OpenPosition *openPosition = saveData.openPosition;
-    ExecutionHistory *executionHistory = saveData.executionHistory;
+{    
+    OrderHistory *orderHistory = [OrderHistory loadOrderHistory];
+    OpenPosition *openPosition = [OpenPosition loadOpenPosition];
+    ExecutionHistory *executionHistory = [ExecutionHistory loadExecutionHistory];
     
     ExecutionOrdersFactory *executionOrdersFactory = [[ExecutionOrdersFactory alloc] initWithOpenPosition:openPosition];
     

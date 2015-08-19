@@ -9,7 +9,6 @@
 #import "UsersOrder.h"
 
 #import "OpenPosition.h"
-#import "OpenPositionFactory.h"
 #import "SaveLoader.h"
 #import "SaveData.h"
 #import "ForexHistoryData.h"
@@ -26,7 +25,7 @@
 
 -(BOOL)includeCloseOrder
 {
-    OpenPosition *openPosition = [OpenPositionFactory createOpenPosition];
+    OpenPosition *openPosition = [OpenPosition loadOpenPosition];
     
     if ([self.orderType isEqualOrderType:openPosition.orderType]) {
         return NO;
