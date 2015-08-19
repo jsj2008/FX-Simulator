@@ -8,11 +8,11 @@
 
 #import "Indicator.h"
 
-#import "IndicatorPlistSource.h"
+#import "IndicatorSource.h"
 #import "TimeFrame.h"
 
 @implementation Indicator {
-    IndicatorPlistSource *_source;
+    IndicatorSource *_source;
 }
 
 - (instancetype)init
@@ -20,7 +20,7 @@
     return nil;
 }
 
-- (instancetype)initWithSource:(IndicatorPlistSource *)source
+- (instancetype)initWithIndicatorSource:(IndicatorSource *)source
 {
     if (self = [super init]) {
         _source = source;
@@ -48,11 +48,6 @@
     } else {
         return NSOrderedSame;
     }
-}
-
-- (NSDictionary *)sourceDictionary
-{
-    return nil;
 }
 
 @end

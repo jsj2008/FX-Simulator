@@ -9,7 +9,6 @@
 #import "TradeViewController.h"
 
 #import <QuartzCore/QuartzCore.h>
-#import "ChartPlistSource.h"
 #import "ChartViewController.h"
 #import "Market.h"
 #import "ChartViewController.h"

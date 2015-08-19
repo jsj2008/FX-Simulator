@@ -20,6 +20,4 @@
 */
 - (void)enumerateIndicatorsUsingBlock:(void (^) (Indicator *indicator))block;
 
-@property (nonatomic, readonly) NSArray *indicatorSourceDictionaryArray;
-
 @end

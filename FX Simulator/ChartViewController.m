@@ -8,12 +8,10 @@
 
 #import "ChartViewController.h"
 
-#import "ChartPlistSource.h"
 #import "ChartView.h"
 #import "ChartViewData.h"
 #import "ForexDataChunk.h"
 #import "ForexDataChunkStore.h"
-#import "IndicatorPlistSource.h"
 #import "Market.h"
 
 @interface ChartViewController ()
