@@ -9,9 +9,11 @@
 #import <Foundation/Foundation.h>
 #import "Indicator.h"
 
-@class SimpleMovingAveragePlistSource;
+@class SimpleMovingAverageSource;
 
 @interface SimpleMovingAverage : Indicator
-- (instancetype)initWithSource:(SimpleMovingAveragePlistSource *)source;
+@property (nonatomic) UIColor *lineColor;
+@property (nonatomic) NSUInteger period;
+- (instancetype)initWithSimpleMovingAverageSource:(SimpleMovingAverageSource *)source;
 - (void)strokeIndicatorFromForexDataChunk:(ForexDataChunk *)chunk displayForexDataCount:(NSInteger)count displaySize:(CGSize)size;
 @end

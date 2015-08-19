@@ -8,15 +8,13 @@
 
 #import "SimpleMovingAverage.h"
 
+#import "SimpleMovingAverageSource.h"
 #import "ForexDataChunk.h"
 #import "IndicatorUtils.h"
 #import "Rate.h"
-#import "SimpleMovingAveragePlistSource.h"
 
 @implementation SimpleMovingAverage {
-    SimpleMovingAveragePlistSource *_source;
-    NSUInteger _term;
-    UIColor *_lineColor;
+    SimpleMovingAverageSource *_source;
 }
 
 -(instancetype)init
@@ -24,12 +22,10 @@
     return nil;
 }
 
-- (instancetype)initWithSource:(SimpleMovingAveragePlistSource *)source
+- (instancetype)initWithSimpleMovingAverageSource:(SimpleMovingAverageSource *)source
 {
-    if (self = [super initWithSource:source]) {
+    if (self = [super initWithIndicatorSource:source]) {
         _source = source;
-        _term = _source.term;
-        _lineColor = _source.lineColor;
     }
     
     return self;
@@ -43,7 +39,7 @@
     
     UIBezierPath *path = [UIBezierPath bezierPath];
     path.lineWidth = 2;
-    [_lineColor setStroke];
+    [self.lineColor setStroke];
     
     __block CGPoint previousLoaded;
     
@@ -59,9 +55,31 @@
         
         previousLoaded = p;
         
-    } averageTerm:_term limit:count resultReverse:NO];
+    } averageTerm:self.period limit:count resultReverse:NO];
     
     [path stroke];
+}
+
+#pragma mark - getter,setter
+
+- (NSUInteger)period
+{
+    return _source.period;
+}
+
+- (void)setPeriod:(NSUInteger)period
+{
+    _source.period = (int)period;
+}
+
+- (UIColor *)lineColor
+{
+    return _source.lineColor;
+}
+
+- (void)setLineColor:(UIColor *)lineColor
+{
+    _source.lineColor = lineColor;
 }
 
 @end
