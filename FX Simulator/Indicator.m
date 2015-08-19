@@ -34,11 +34,6 @@
     return self;
 }
 
-- (NSUInteger)displayOrder
-{
-    return _source.displayOrder;
-}
-
 - (void)strokeIndicatorFromForexDataChunk:(ForexDataChunk *)chunk displayForexDataCount:(NSInteger)count displaySize:(CGSize)size
 {
     return;
@@ -53,6 +48,13 @@
     } else {
         return NSOrderedSame;
     }
+}
+
+#pragma mark - getter,setter
+
+- (NSUInteger)displayOrder
+{
+    return _source.displayOrder;
 }
 
 @end
