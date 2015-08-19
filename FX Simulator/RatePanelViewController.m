@@ -11,7 +11,6 @@
 #import "RatePanelButton.h"
 #import "UsersOrder.h"
 #import "OrderType.h"
-#import "OrderManagerFactory.h"
 #import "OrderManager.h"
 #import "RatePanelViewData.h"
 #import "Market.h"
@@ -50,7 +49,7 @@
 
 -(void)setInitData
 {
-    orderManager = [OrderManagerFactory createOrderManager];
+    orderManager = [OrderManager createOrderManager];
     orderManager.alertTarget = self;
     ratePanelViewData = [RatePanelViewData new];
 }

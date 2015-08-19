@@ -13,8 +13,6 @@
 #import "MarketTime.h"
 #import "Money.h"
 #import "PositionSize.h"
-#import "SaveDataFileStorage.h"
-#import "SaveDataStorageFactory.h"
 #import "Spread.h"
 #import "TimeFrame.h"
 #import "SaveData.h"
@@ -89,9 +87,8 @@
 }
 
 - (IBAction)newStartButtonPushed:(id)sender {
-    id<SaveDataStorage> storage = [SaveDataStorageFactory createSaveDataStorage];
     
-    [storage newSave:_newSaveData];
+    //SaveData *newSaveData = [SaveData ];
     
     [SaveLoader reloadSaveData];
     

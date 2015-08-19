@@ -128,7 +128,6 @@
 		70D2FBC41A9F57BD00CAB509 /* OpenPositionUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FBB81A9F57BD00CAB509 /* OpenPositionUtils.m */; };
 		70D2FBC71A9F57BD00CAB509 /* OpenPositionRawRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FBBE1A9F57BD00CAB509 /* OpenPositionRawRecord.m */; };
 		70D2FBD61A9F57CB00CAB509 /* SaveData.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FBCC1A9F57CB00CAB509 /* SaveData.m */; };
-		70D2FBD71A9F57CB00CAB509 /* SaveDataStorageFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FBCE1A9F57CB00CAB509 /* SaveDataStorageFactory.m */; };
 		70D2FBD81A9F57CB00CAB509 /* SaveLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FBD01A9F57CB00CAB509 /* SaveLoader.m */; };
 		70D2FBD91A9F57CB00CAB509 /* TableNameFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FBD21A9F57CB00CAB509 /* TableNameFormatter.m */; };
 		70D2FBF51A9F57DC00CAB509 /* ExecutionOrderMaterial.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FBDC1A9F57DC00CAB509 /* ExecutionOrderMaterial.m */; };
@@ -569,6 +568,13 @@
 			name = CoreData;
 			sourceTree = "<group>";
 		};
+		70467D6C1B84548F00B75BD3 /* tmp */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = tmp;
+			sourceTree = "<group>";
+		};
 		70D2FA7B1A9F305700CAB509 = {
 			isa = PBXGroup;
 			children = (
@@ -592,6 +598,7 @@
 		70D2FA861A9F305700CAB509 /* FX Simulator */ = {
 			isa = PBXGroup;
 			children = (
+				70467D6C1B84548F00B75BD3 /* tmp */,
 				700B95831B0C3C97003F160B /* InputTradeLotViewController.h */,
 				700B95841B0C3C97003F160B /* InputTradeLotViewController.m */,
 				70D2FA8B1A9F305700CAB509 /* AppDelegate.h */,
@@ -1326,7 +1333,6 @@
 				70E758FD1B4C09FE00A46E24 /* ForexDataChunkStore.m in Sources */,
 				70042C671B47FA1500C1A22E /* IndicatorUtils.m in Sources */,
 				70D2FBF71A9F57DC00CAB509 /* ExecutionOrdersCreator.m in Sources */,
-				70D2FBD71A9F57CB00CAB509 /* SaveDataStorageFactory.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
