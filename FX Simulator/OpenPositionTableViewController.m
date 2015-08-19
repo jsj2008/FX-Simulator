@@ -21,7 +21,6 @@
 #import "ForexHistoryData.h"
 #import "Market.h"
 #import "OpenPosition.h"
-#import "OpenPositionFactory.h"
 #import "OpenPositionRecord.h"
 //#import "OpenPositionHeaderView.h"
 #import "OpenPositionTableViewCell.h"

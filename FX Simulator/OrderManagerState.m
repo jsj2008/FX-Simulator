@@ -10,7 +10,6 @@
 
 #import "FXSAlert.h"
 #import "OpenPosition.h"
-#import "OpenPositionFactory.h"
 #import "SimulationManager.h"
 #import "UsersOrder.h"
 
@@ -25,7 +24,7 @@
 -(instancetype)init
 {
     if (self = [super init]) {
-        _openPosition = [OpenPositionFactory createOpenPosition];
+        _openPosition = [OpenPosition loadOpenPosition];
         _simulationManager = [SimulationManager sharedSimulationManager];
         _simulationManagerStop = NO;
         _openPositionMax = NO;

@@ -14,7 +14,6 @@
 #import "Market.h"
 #import "Money.h"
 #import "OpenPosition.h"
-#import "OpenPositionFactory.h"
 
 @interface Account ()
 @property (nonatomic, readwrite) OpenPosition *openPosition;
@@ -39,7 +38,7 @@
 -(void)setInitData
 {
     _equityObj = [EquityFactory createEquity];
-    _openPosition = [OpenPositionFactory createOpenPosition];
+    _openPosition = [OpenPosition loadOpenPosition];
     [self updatedMarket];
 }
 
@@ -51,7 +50,7 @@
 -(void)updatedSaveData
 {
     _equityObj = [EquityFactory createEquity];
-    _openPosition = [OpenPositionFactory createOpenPosition];
+    _openPosition = [OpenPosition loadOpenPosition];
     [self updatedMarket];
 }
 

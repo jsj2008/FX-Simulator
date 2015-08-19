@@ -8,7 +8,6 @@
 
 #import "OrderHistory.h"
 
-#import "TradeDbDataSource.h"
 #import "TradeDatabase.h"
 #import "SaveData.h"
 #import "SaveLoader.h"
@@ -29,6 +28,13 @@ static NSString* const FXSOrderHistoryTableName = @"order_history";
 + (instancetype)createFromSlotNumber:(NSUInteger)slotNumber
 {
     return [[self alloc] initWithSaveSlotNumber:slotNumber db:[TradeDatabase dbConnect]];
+}
+
++ (instancetype)loadOrderHistory
+{
+    SaveData *saveData = [SaveLoader load];
+    
+    return saveData.orderHistory;
 }
 
 -(instancetype)initWithSaveSlotNumber:(NSUInteger)slotNumber db:(FMDatabase *)db

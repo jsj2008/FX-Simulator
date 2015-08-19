@@ -14,6 +14,7 @@
 
 @interface OrderHistory : NSObject
 + (instancetype)createFromSlotNumber:(NSUInteger)slotNumber;
++ (instancetype)loadOrderHistory;
 - (instancetype)initWithSaveSlotNumber:(NSUInteger)slotNumber db:(FMDatabase *)db;
 - (int)saveUsersOrder:(UsersOrder*)order;
 - (void)delete;

@@ -8,7 +8,6 @@
 
 #import "CloseAndNewExecutionOrdersCreateMode.h"
 
-#import "OpenPositionFactory.h"
 #import "OpenPosition.h"
 #import "Order.h"
 #import "ExecutionOrderMaterial.h"

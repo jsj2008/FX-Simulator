@@ -8,6 +8,8 @@
 
 #import "ExecutionHistory.h"
 
+#import "SaveData.h"
+#import "SaveLoader.h"
 #import "FMDatabase.h"
 #import "TradeDatabase.h"
 #import "ExecutionHistoryRecord.h"
@@ -33,6 +35,13 @@ static NSString* const FXSExecutionHistoryTableName = @"execution_history";
 + (instancetype)createFromSlotNumber:(NSUInteger)slotNumber
 {
     return [[self alloc] initWithSaveSlotNumber:slotNumber db:[TradeDatabase dbConnect]];
+}
+
++ (instancetype)loadExecutionHistory
+{
+    SaveData *saveData = [SaveLoader load];
+    
+    return saveData.executionHistory;
 }
 
 - (instancetype)initWithSaveSlotNumber:(NSUInteger)slotNumber db:(FMDatabase *)db
