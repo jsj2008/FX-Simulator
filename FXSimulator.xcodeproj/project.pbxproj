@@ -110,7 +110,6 @@
 		70D2FB711A9F577200CAB509 /* SimpleCandle.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FB6F1A9F577200CAB509 /* SimpleCandle.m */; };
 		70D2FB761A9F577F00CAB509 /* OrderHistory.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FB731A9F577F00CAB509 /* OrderHistory.m */; };
 		70D2FB841A9F579000CAB509 /* ExecutionHistory.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FB791A9F579000CAB509 /* ExecutionHistory.m */; };
-		70D2FB861A9F579000CAB509 /* ExecutionHistoryManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FB7D1A9F579000CAB509 /* ExecutionHistoryManager.m */; };
 		70D2FB881A9F579000CAB509 /* ExecutionHistoryRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FB811A9F579000CAB509 /* ExecutionHistoryRecord.m */; };
 		70D2FB9C1A9F57A000CAB509 /* ForexHistory.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FB8B1A9F57A000CAB509 /* ForexHistory.m */; };
 		70D2FB9D1A9F57A000CAB509 /* ForexDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FB8D1A9F57A000CAB509 /* ForexDatabase.m */; };
@@ -1283,7 +1282,6 @@
 				70D2FB9C1A9F57A000CAB509 /* ForexHistory.m in Sources */,
 				70D2FC011A9F57DC00CAB509 /* ExecutionOrdersTransactionManager.m in Sources */,
 				70D2FC471A9F591600CAB509 /* CurrencyConverter.m in Sources */,
-				70D2FB861A9F579000CAB509 /* ExecutionHistoryManager.m in Sources */,
 				70D2FAF41A9F56AE00CAB509 /* FMDatabaseQueue.m in Sources */,
 				70D2FC401A9F591600CAB509 /* Currency.m in Sources */,
 				704D3E3E1B58E5EF00A8B9AB /* CandlePlistSource.m in Sources */,
