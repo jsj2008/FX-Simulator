@@ -49,12 +49,18 @@
 */
 + (void)setCoreDataManager:(CoreDataManager *)coreDataManager;
 
-+ (instancetype)createDefaultSaveDataFromSlotNumber:(NSUInteger)slotNumber;
+/**
+ CoreDataに新しいデフォルトのセーブデータを登録。
+ 重複するslotNumberのセーブデータは削除される。
+*/
++ (instancetype)createDefaultNewSaveDataFromSlotNumber:(NSUInteger)slotNumber;
+
+/**
+ CoreDataに新しいセーブデータを登録。
+ 重複するslotNumberのセーブデータは削除される。
+*/
++ (instancetype)createNewSaveDataFromSlotNumber:(NSUInteger)slotNumber currencyPair:(CurrencyPair *)currencyPair timeFrame:(TimeFrame *)timeFrame;
+
 + (instancetype)loadFromSlotNumber:(NSUInteger)slotNumber;
 - (instancetype)initWithSaveDataSource:(SaveDataSource *)source;
-
-/* 
- 自分のslotNumberと重複するSaveDataSource(自分のSaveDataSourceを除く)を削除する。
-*/
-- (void)newSave;
 @end
