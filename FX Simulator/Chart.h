@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+@import UIKit;
+
 @class CurrencyPair;
 @class TimeFrame;
 @class ChartSource;

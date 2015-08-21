@@ -178,7 +178,7 @@ static CoreDataManager *coreDataManagerStore = nil;
     NSManagedObjectContext *context = [[self class] coreDataManager].managedObjectContext;
     
     NSFetchRequest *fetchRequest = [NSFetchRequest new];
-    NSEntityDescription * entityDescription = [NSEntityDescription entityForName:NSStringFromClass([self class]) inManagedObjectContext:context];
+    NSEntityDescription * entityDescription = [NSEntityDescription entityForName:NSStringFromClass([SaveDataSource class]) inManagedObjectContext:context];
     [fetchRequest setEntity:entityDescription];
     NSPredicate * predicate = [NSPredicate predicateWithFormat:@"(slotNumber = %d)", self.slotNumber];
      [fetchRequest setPredicate:predicate];
@@ -197,7 +197,7 @@ static CoreDataManager *coreDataManagerStore = nil;
 
 - (Chart *)mainChart
 {
-    return [_saveDataSource.mainChartSources allObjects].firstObject;
+    return [[Chart alloc] initWithChartSource:[_saveDataSource.mainChartSources allObjects].firstObject];    
 }
 
 - (ChartChunk *)subChartChunk
