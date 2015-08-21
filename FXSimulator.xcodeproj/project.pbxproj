@@ -208,6 +208,7 @@
 		7041B7131B3278A700DD64FE /* FXSTimeRange.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FXSTimeRange.m; sourceTree = "<group>"; };
 		70467D2C1B8316A300B75BD3 /* CoreDataInMemoryManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataInMemoryManager.h; sourceTree = "<group>"; };
 		70467D2D1B8316A300B75BD3 /* CoreDataInMemoryManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataInMemoryManager.m; sourceTree = "<group>"; };
+		70467D6F1B87030900B75BD3 /* SaveDataTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SaveDataTests.m; sourceTree = "<group>"; };
 		704D3E751B5A7AFB00A8B9AB /* Chart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chart.h; sourceTree = "<group>"; };
 		704D3E761B5A7AFB00A8B9AB /* Chart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Chart.m; sourceTree = "<group>"; };
 		704D3E781B5A7B0C00A8B9AB /* ChartChunk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChartChunk.h; sourceTree = "<group>"; };
@@ -699,6 +700,7 @@
 			children = (
 				70D2FAA61A9F305800CAB509 /* FX_SimulatorTests.m */,
 				70D2FAA41A9F305800CAB509 /* Supporting Files */,
+				70467D6F1B87030900B75BD3 /* SaveDataTests.m */,
 			);
 			path = "FX SimulatorTests";
 			sourceTree = "<group>";

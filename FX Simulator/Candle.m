@@ -14,7 +14,7 @@
 #import "ForexDataChunk.h"
 
 @implementation Candle {
-    CandleSource *_source;    
+    CandleSource *_source;
 }
 
 + (instancetype)createDefaultCandle
