@@ -1399,7 +1399,7 @@
 				INFOPLIST_FILE = "FX SimulatorTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = FXSimulatorTests;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FX Simulator.app/FX Simulator";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FXSimulator.app/FXSimulator";
 			};
 			name = Debug;
 		};
@@ -1415,7 +1415,7 @@
 				INFOPLIST_FILE = "FX SimulatorTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = FXSimulatorTests;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FX Simulator.app/FX Simulator";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FXSimulator.app/FXSimulator";
 			};
 			name = Release;
 		};
