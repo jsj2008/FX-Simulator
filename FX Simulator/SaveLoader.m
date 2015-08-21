@@ -23,7 +23,7 @@ static NSUInteger FXSDefaultSlotNumber = 1;
             sharedSaveData = [SaveData loadFromSlotNumber:FXSDefaultSlotNumber];
             
             if (sharedSaveData == nil) {
-                sharedSaveData = [SaveData createDefaultSaveDataFromSlotNumber:FXSDefaultSlotNumber];
+                sharedSaveData = [SaveData createDefaultNewSaveDataFromSlotNumber:FXSDefaultSlotNumber];
             }
         }
     }

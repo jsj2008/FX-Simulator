@@ -58,24 +58,13 @@ static CoreDataManager *coreDataManagerStore = nil;
     coreDataManagerStore = coreDataManager;
 }
 
-+ (instancetype)createSaveData
++ (instancetype)createDefaultNewSaveDataFromSlotNumber:(NSUInteger)slotNumber
 {
-    SaveDataSource *source = [NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass([SaveDataSource class]) inManagedObjectContext:[self coreDataManager].managedObjectContext];
+    CurrencyPair *currencyPair = [[CurrencyPair alloc] initWithBaseCurrency:[[Currency alloc] initWithCurrencyType:USD] QuoteCurrency:[[Currency alloc] initWithCurrencyType:JPY]];
+    TimeFrame *timeFrame = [[TimeFrame alloc] initWithMinute:15];
     
-    SaveData *saveData = [[SaveData alloc] initWithSaveDataSource:source];
+    SaveData *saveData = [self createNewSaveDataFromSlotNumber:slotNumber currencyPair:currencyPair timeFrame:timeFrame];
     
-    return saveData;
-}
-
-+ (instancetype)createDefaultSaveDataFromSlotNumber:(NSUInteger)slotNumber
-{
-    SaveDataSource *source = [NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass([SaveDataSource class]) inManagedObjectContext:[self coreDataManager].managedObjectContext];
-    
-    SaveData *saveData = [[SaveData alloc] initWithSaveDataSource:source];
-    
-    saveData.slotNumber = slotNumber;
-    saveData.currencyPair = [[CurrencyPair alloc] initWithBaseCurrency:[[Currency alloc] initWithCurrencyType:USD] QuoteCurrency:[[Currency alloc] initWithCurrencyType:JPY]];
-    saveData.timeFrame = [[TimeFrame alloc] initWithMinute:15];
     saveData.startTime = [Setting rangeForCurrencyPair:saveData.currencyPair timeScale:saveData.timeFrame].start;
     saveData.lastLoadedTime = saveData.startTime;
     saveData.spread = [[Spread alloc] initWithPips:1 currencyPair:saveData.currencyPair];
@@ -85,7 +74,28 @@ static CoreDataManager *coreDataManagerStore = nil;
     saveData.tradePositionSize = [[PositionSize alloc] initWithSizeValue:10000];
     saveData.isAutoUpdate = YES;
     saveData.autoUpdateIntervalSeconds = 1.0;
+    
+    return saveData;
+}
 
++ (instancetype)createNewSaveDataFromSlotNumber:(NSUInteger)slotNumber currencyPair:(CurrencyPair *)currencyPair timeFrame:(TimeFrame *)timeFrame
+{
+    if (currencyPair == nil || timeFrame == nil) {
+        return nil;
+    }
+    
+    SaveDataSource *source = [NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass([SaveDataSource class]) inManagedObjectContext:[self coreDataManager].managedObjectContext];
+    
+    SaveData *saveData = [[SaveData alloc] initWithSaveDataSource:source];
+    
+    saveData.slotNumber = slotNumber;
+    saveData.currencyPair = currencyPair;
+    saveData.timeFrame = timeFrame;
+    
+    [saveData setDefaultCharts];
+    
+    [saveData newSave];
+    
     return saveData;
 }
 
@@ -94,13 +104,13 @@ static CoreDataManager *coreDataManagerStore = nil;
     NSManagedObjectContext *context = [self coreDataManager].managedObjectContext;
     
     NSFetchRequest *fetchRequest = [NSFetchRequest new];
-    NSEntityDescription * entityDescription = [NSEntityDescription entityForName:NSStringFromClass([SaveDataSource class]) inManagedObjectContext:context];
+    NSEntityDescription *entityDescription = [NSEntityDescription entityForName:NSStringFromClass([SaveDataSource class]) inManagedObjectContext:context];
     [fetchRequest setEntity:entityDescription];
-    NSPredicate * predicate = [NSPredicate predicateWithFormat:@"(slotNumber = %d)", slotNumber];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(slotNumber = %d)", slotNumber];
      [fetchRequest setPredicate:predicate];
     
-    NSError * error2;
-    NSArray * objects = [context executeFetchRequest:fetchRequest error:&error2];
+    NSError *error2;
+    NSArray *objects = [context executeFetchRequest:fetchRequest error:&error2];
     
     SaveDataSource *source = nil;
     
@@ -131,6 +141,10 @@ static CoreDataManager *coreDataManagerStore = nil;
 
 - (void)setDefaultCharts
 {
+    if (self.currencyPair == nil || self.timeFrame == nil) {
+        return;
+    }
+    
     Chart *mainChart = [[Chart alloc] initWithChartSource:[NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass([ChartSource class]) inManagedObjectContext:[[self class] coreDataManager].managedObjectContext]];
     mainChart.chartIndex = 0;
     mainChart.currencyPair = self.currencyPair;
@@ -156,6 +170,9 @@ static CoreDataManager *coreDataManagerStore = nil;
     } execept:self.timeFrame];
 }
 
+/**
+ 重複するslotNumberのセーブデータを全て削除する。
+*/
 - (void)newSave
 {
     NSManagedObjectContext *context = [[self class] coreDataManager].managedObjectContext;
@@ -173,9 +190,7 @@ static CoreDataManager *coreDataManagerStore = nil;
         if (_saveDataSource.objectID != obj.objectID) {
             [context deleteObject:obj];
         }
-    }
-    
-    [self setDefaultCharts];
+    }    
 }
 
 #pragma mark - getter,setter
