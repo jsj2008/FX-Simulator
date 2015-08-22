@@ -71,9 +71,19 @@
     return _chartSource.currencyPair;
 }
 
+- (void)setCurrencyPair:(CurrencyPair *)currencyPair
+{
+    _chartSource.currencyPair = currencyPair;
+}
+
 - (TimeFrame *)timeFrame
 {
     return _chartSource.timeFrame;
+}
+
+- (void)setTimeFrame:(TimeFrame *)timeFrame
+{
+    _chartSource.timeFrame = timeFrame;
 }
 
 - (BOOL)isSelected
