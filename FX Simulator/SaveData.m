@@ -217,9 +217,9 @@ static CoreDataManager *coreDataManagerStore = nil;
     return _saveDataSource.slotNumber;
 }
 
-- (void)setCurrencyPair:(CurrencyPair *)currencyPair
+- (void)setSlotNumber:(NSUInteger)slotNumber
 {
-    _saveDataSource.currencyPair = currencyPair;
+    _saveDataSource.slotNumber = slotNumber;
 }
 
 - (CurrencyPair *)currencyPair
@@ -227,9 +227,9 @@ static CoreDataManager *coreDataManagerStore = nil;
     return _saveDataSource.currencyPair;
 }
 
-- (void)setTimeFrame:(TimeFrame *)timeFrame
+- (void)setCurrencyPair:(CurrencyPair *)currencyPair
 {
-    _saveDataSource.timeFrame = timeFrame;
+    _saveDataSource.currencyPair = currencyPair;
 }
 
 - (TimeFrame *)timeFrame
@@ -237,9 +237,9 @@ static CoreDataManager *coreDataManagerStore = nil;
     return _saveDataSource.timeFrame;
 }
 
-- (void)setStartTime:(MarketTime *)startTime
+- (void)setTimeFrame:(TimeFrame *)timeFrame
 {
-    _saveDataSource.startTime = startTime;
+    _saveDataSource.timeFrame = timeFrame;
 }
 
 - (MarketTime *)startTime
@@ -247,9 +247,9 @@ static CoreDataManager *coreDataManagerStore = nil;
     return _saveDataSource.startTime;
 }
 
-- (void)setSpread:(Spread *)spread
+- (void)setStartTime:(MarketTime *)startTime
 {
-    _saveDataSource.spread = spread;
+    _saveDataSource.startTime = startTime;
 }
 
 - (Spread *)spread
@@ -257,9 +257,9 @@ static CoreDataManager *coreDataManagerStore = nil;
     return _saveDataSource.spread;
 }
 
-- (void)setLastLoadedTime:(MarketTime *)lastLoadedTime
+- (void)setSpread:(Spread *)spread
 {
-    _saveDataSource.lastLoadedTime = lastLoadedTime;
+    _saveDataSource.spread = spread;
 }
 
 - (MarketTime *)lastLoadedTime
@@ -267,9 +267,9 @@ static CoreDataManager *coreDataManagerStore = nil;
     return _saveDataSource.lastLoadedTime;
 }
 
-- (void)setAccountCurrency:(Currency *)accountCurrency
+- (void)setLastLoadedTime:(MarketTime *)lastLoadedTime
 {
-    _saveDataSource.accountCurrency = accountCurrency;
+    _saveDataSource.lastLoadedTime = lastLoadedTime;
 }
 
 - (Currency *)accountCurrency
@@ -277,9 +277,9 @@ static CoreDataManager *coreDataManagerStore = nil;
     return _saveDataSource.accountCurrency;
 }
 
-- (void)setPositionSizeOfLot:(PositionSize *)positionSizeOfLot
+- (void)setAccountCurrency:(Currency *)accountCurrency
 {
-    _saveDataSource.positionSizeOfLot = positionSizeOfLot;
+    _saveDataSource.accountCurrency = accountCurrency;
 }
 
 - (PositionSize *)positionSizeOfLot
@@ -287,9 +287,9 @@ static CoreDataManager *coreDataManagerStore = nil;
     return _saveDataSource.positionSizeOfLot;
 }
 
-- (void)setTradePositionSize:(PositionSize *)tradePositionSize
+- (void)setPositionSizeOfLot:(PositionSize *)positionSizeOfLot
 {
-    _saveDataSource.tradePositionSize = tradePositionSize;
+    _saveDataSource.positionSizeOfLot = positionSizeOfLot;
 }
 
 - (PositionSize *)tradePositionSize
@@ -297,9 +297,9 @@ static CoreDataManager *coreDataManagerStore = nil;
     return _saveDataSource.tradePositionSize;
 }
 
-- (void)setStartBalance:(Money *)startBalance
+- (void)setTradePositionSize:(PositionSize *)tradePositionSize
 {
-    _saveDataSource.startBalance = startBalance;
+    _saveDataSource.tradePositionSize = tradePositionSize;
 }
 
 - (Money *)startBalance
@@ -307,9 +307,9 @@ static CoreDataManager *coreDataManagerStore = nil;
     return _saveDataSource.startBalance;
 }
 
-- (void)setIsAutoUpdate:(BOOL)isAutoUpdate
+- (void)setStartBalance:(Money *)startBalance
 {
-    _saveDataSource.isAutoUpdate = isAutoUpdate;
+    _saveDataSource.startBalance = startBalance;
 }
 
 - (BOOL)isAutoUpdate
@@ -317,14 +317,19 @@ static CoreDataManager *coreDataManagerStore = nil;
     return _saveDataSource.isAutoUpdate;
 }
 
-- (void)setAutoUpdateIntervalSeconds:(float)autoUpdateInterval
+- (void)setIsAutoUpdate:(BOOL)isAutoUpdate
 {
-    _saveDataSource.autoUpdateIntervalSeconds = autoUpdateInterval;
+    _saveDataSource.isAutoUpdate = isAutoUpdate;
 }
 
 - (float)autoUpdateIntervalSeconds
 {
     return _saveDataSource.autoUpdateIntervalSeconds;
+}
+
+- (void)setAutoUpdateIntervalSeconds:(float)autoUpdateInterval
+{
+    _saveDataSource.autoUpdateIntervalSeconds = autoUpdateInterval;
 }
 
 - (OrderHistory *)orderHistory
