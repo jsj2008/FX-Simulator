@@ -34,8 +34,6 @@
 @property (nonatomic) NSUInteger slotNumber;
 @end
 
-static CoreDataManager *coreDataManagerStore = nil;
-
 @implementation SaveData {
     SaveDataSource *_saveDataSource;
 }
@@ -46,16 +44,7 @@ static CoreDataManager *coreDataManagerStore = nil;
 
 + (CoreDataManager *)coreDataManager
 {
-    if (coreDataManagerStore == nil) {
-        return [CoreDataManager sharedManager];
-    } else {
-        return coreDataManagerStore;
-    }
-}
-
-+ (void)setCoreDataManager:(CoreDataManager *)coreDataManager
-{
-    coreDataManagerStore = coreDataManager;
+    return [CoreDataManager sharedManager];
 }
 
 + (instancetype)createDefaultNewSaveDataFromSlotNumber:(NSUInteger)slotNumber
