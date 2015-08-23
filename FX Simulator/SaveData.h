@@ -44,12 +44,6 @@
 @property (nonatomic, readonly) ExecutionHistory *executionHistory;
 
 /**
- テスト時などに、CoreDataManagerをセットする。
- テストが終わったら、nilを入れる。
-*/
-+ (void)setCoreDataManager:(CoreDataManager *)coreDataManager;
-
-/**
  CoreDataに新しいデフォルトのセーブデータを登録。
  重複するslotNumberのセーブデータは削除される。
 */
