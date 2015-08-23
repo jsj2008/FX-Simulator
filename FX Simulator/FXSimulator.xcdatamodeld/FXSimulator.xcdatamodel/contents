@@ -13,8 +13,8 @@
         <attribute name="isSelected" attributeType="Boolean" syncable="YES"/>
         <attribute name="timeFrame" attributeType="Transformable" syncable="YES"/>
         <relationship name="candleSource" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="CandleSource" inverseName="chartSource" inverseEntity="CandleSource" syncable="YES"/>
-        <relationship name="saveDataSourceForMain" maxCount="1" deletionRule="Nullify" destinationEntity="SaveDataSource" inverseName="mainChartSources" inverseEntity="SaveDataSource" syncable="YES"/>
-        <relationship name="saveDataSourceForSub" maxCount="1" deletionRule="Nullify" destinationEntity="SaveDataSource" inverseName="subChartSources" inverseEntity="SaveDataSource" syncable="YES"/>
+        <relationship name="saveDataSourceForMain" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SaveDataSource" inverseName="mainChartSources" inverseEntity="SaveDataSource" syncable="YES"/>
+        <relationship name="saveDataSourceForSub" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SaveDataSource" inverseName="subChartSources" inverseEntity="SaveDataSource" syncable="YES"/>
         <relationship name="simpleMovingAverageSources" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="SimpleMovingAverageSource" inverseName="chartSource" inverseEntity="SimpleMovingAverageSource" syncable="YES"/>
     </entity>
     <entity name="IndicatorSource" representedClassName="IndicatorSource" isAbstract="YES" syncable="YES">
