@@ -11,6 +11,7 @@
 
 #import "SaveData.h"
 #import "SaveDataSource.h"
+#import "CoreDataManager.h"
 #import "CoreDataInMemoryManager.h"
 #import "Chart.h"
 #import "ChartChunk.h"
@@ -38,14 +39,14 @@
     
     _coreDataManagerInMemory = [CoreDataInMemoryManager new];
     
-    [SaveData setCoreDataManager:_coreDataManagerInMemory];
+    [CoreDataManager setCoreDataManager:_coreDataManagerInMemory];
 }
 
 - (void)tearDown {
     // Put teardown code here. This method is called after the invocation of each test method in the class.
     [super tearDown];
     
-    [SaveData setCoreDataManager:nil];
+    [CoreDataManager setCoreDataManager:nil];
 }
 
 - (void)testExample {
