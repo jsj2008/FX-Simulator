@@ -73,18 +73,7 @@
     
     [_coreDataManagerInMemory saveContext];
     
-    NSManagedObjectContext *context = _coreDataManagerInMemory.managedObjectContext;
-    
-    NSFetchRequest *fetchRequest = [NSFetchRequest new];
-    NSEntityDescription * entityDescription = [NSEntityDescription entityForName:NSStringFromClass([SaveDataSource class]) inManagedObjectContext:context];
-    [fetchRequest setEntity:entityDescription];
-    NSPredicate * predicate = [NSPredicate predicateWithFormat:@"(slotNumber = %d)", slotNumber];
-    [fetchRequest setPredicate:predicate];
-    
-    NSError * error2;
-    NSArray * objects = [context executeFetchRequest:fetchRequest error:&error2];
-    
-    SaveData *newSaveData = [[SaveData alloc] initWithSaveDataSource:objects.firstObject];
+    SaveData *newSaveData = [SaveData loadFromSlotNumber:slotNumber];
     
     XCTAssertNotNil(newSaveData, @"Not nil");
     
