@@ -12,6 +12,11 @@
 
 static CoreDataManager *sharedManager = nil;
 
++ (void)setCoreDataManager:(CoreDataManager *)coreDataManager
+{
+    sharedManager = coreDataManager;
+}
+
 +(CoreDataManager *)sharedManager
 {
     @synchronized(self) {
