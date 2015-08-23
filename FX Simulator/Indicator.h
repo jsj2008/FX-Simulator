@@ -16,14 +16,15 @@
 @class ForexDataChunk;
 @class TimeFrame;
 
+@interface Indicator : NSObject
++ (NSUInteger)maxIndicatorPeriod;
+- (instancetype)initWithIndicatorSource:(IndicatorSource *)source;
+
 /**
  @param count 画面に表示するForexDataの個数。
 */
-
-@interface Indicator : NSObject
-+ (NSUInteger)maxIndicatorPeriod;
-- (instancetype)initWithIndicatorSource:(IndicatorSource *)source NS_REQUIRES_SUPER;
 - (void)strokeIndicatorFromForexDataChunk:(ForexDataChunk *)chunk displayForexDataCount:(NSInteger)count displaySize:(CGSize)size;
+
 - (NSComparisonResult)compareDisplayOrder:(Indicator *)indicator;
 @property (nonatomic, readonly) NSUInteger displayOrder;
 @end
