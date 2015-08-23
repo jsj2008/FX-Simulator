@@ -10,6 +10,7 @@
 
 @import UIKit;
 
+@class SaveDataSource;
 @class CurrencyPair;
 @class TimeFrame;
 @class ChartSource;
@@ -17,7 +18,8 @@
 @class ForexHistoryData;
 
 @interface Chart : NSObject
-- (instancetype)initWithChartSource:(ChartSource *)source;
++ (instancetype)createNewChartFromSaveDataSource:(SaveDataSource *)source;
++ (instancetype)createChartFromChartSource:(ChartSource *)source;
 - (NSComparisonResult)compareDisplayOrder:(Chart *)chart;
 - (void)setForexDataChunk:(ForexDataChunk *)chunk;
 - (void)stroke;

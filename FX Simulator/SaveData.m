@@ -134,16 +134,14 @@
         return;
     }
     
-    Chart *mainChart = [[Chart alloc] initWithChartSource:[NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass([ChartSource class]) inManagedObjectContext:[[self class] coreDataManager].managedObjectContext]];
+    Chart *mainChart = [Chart createNewChartFromSaveDataSource:_saveDataSource];
     mainChart.chartIndex = 0;
     mainChart.currencyPair = self.currencyPair;
     mainChart.timeFrame = self.timeFrame;
     mainChart.isSelected = YES;
     
-    [_saveDataSource addMainChartSourcesObject:mainChart.chartSource];
-    
     [[Setting timeFrameList] enumerateTimeFrames:^(NSUInteger idx, TimeFrame *timeFrame) {
-        Chart *subChart = [[Chart alloc] initWithChartSource:[NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass([ChartSource class]) inManagedObjectContext:[[self class] coreDataManager].managedObjectContext]];
+        Chart *subChart = [Chart createNewChartFromSaveDataSource:_saveDataSource];
         subChart.chartIndex = idx;
         subChart.currencyPair = self.currencyPair;
         subChart.timeFrame = self.timeFrame;
@@ -153,8 +151,6 @@
         } else {
             subChart.isSelected = NO;
         }
-        
-        [_saveDataSource addSubChartSourcesObject:subChart.chartSource];
         
     } execept:self.timeFrame];
 }
@@ -186,7 +182,7 @@
 
 - (Chart *)mainChart
 {
-    return [[Chart alloc] initWithChartSource:[_saveDataSource.mainChartSources allObjects].firstObject];    
+    return [Chart createChartFromChartSource:[_saveDataSource.mainChartSources allObjects].firstObject];
 }
 
 - (ChartChunk *)subChartChunk
@@ -194,7 +190,7 @@
     NSMutableArray *subChartArray = [NSMutableArray array];
     
     [_saveDataSource.subChartSources enumerateObjectsUsingBlock:^(ChartSource *obj, BOOL *stop) {
-        Chart *chart = [[Chart alloc] initWithChartSource:obj];
+        Chart *chart = [Chart createChartFromChartSource:obj];
         [subChartArray addObject:chart];
     }];
     

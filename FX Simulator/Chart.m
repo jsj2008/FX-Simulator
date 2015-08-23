@@ -8,11 +8,29 @@
 
 #import "Chart.h"
 
+#import "CoreDataManager.h"
 #import "ChartSource.h"
 #import "ForexDataChunk.h"
+#import "SaveDataSource.h"
 
 @implementation Chart {
     ForexDataChunk *_currentForexDataChunk;
+}
+
++ (instancetype)createNewChartFromSaveDataSource:(SaveDataSource *)source
+{
+    NSManagedObjectContext *context = [CoreDataManager sharedManager].managedObjectContext;
+    
+    Chart *chart = [[Chart alloc] initWithChartSource:[NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass([ChartSource class]) inManagedObjectContext:context]];
+    
+    [source addMainChartSourcesObject:chart.chartSource];
+    
+    return chart;
+}
+
++ (instancetype)createChartFromChartSource:(ChartSource *)source
+{
+    return [[self alloc] initWithChartSource:source];
 }
 
 - (instancetype)initWithChartSource:(ChartSource *)source
