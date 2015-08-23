@@ -161,6 +161,7 @@
 		70ED62271AFCA2620008F939 /* SetNewStartDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70ED62261AFCA2620008F939 /* SetNewStartDataViewController.m */; };
 		70ED622B1B01C0330008F939 /* SetPositionSizeOfLotViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70ED622A1B01C0330008F939 /* SetPositionSizeOfLotViewController.m */; };
 		70ED622E1B0211630008F939 /* SetTimeScaleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70ED622D1B0211630008F939 /* SetTimeScaleViewController.m */; };
+		70FC8ADE1B87895F009B121C /* SaveDataTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 70467D6F1B87030900B75BD3 /* SaveDataTests.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1249,6 +1250,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				70FC8ADE1B87895F009B121C /* SaveDataTests.m in Sources */,
 				70D2FAA71A9F305800CAB509 /* FX_SimulatorTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
