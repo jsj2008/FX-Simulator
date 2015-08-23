@@ -56,5 +56,4 @@
 + (instancetype)createNewSaveDataFromSlotNumber:(NSUInteger)slotNumber currencyPair:(CurrencyPair *)currencyPair timeFrame:(TimeFrame *)timeFrame;
 
 + (instancetype)loadFromSlotNumber:(NSUInteger)slotNumber;
-- (instancetype)initWithSaveDataSource:(SaveDataSource *)source;
 @end
