@@ -12,6 +12,7 @@
 @class CandleSource;
 
 @interface Candle : Indicator
+
 @property (nonatomic) UIColor *downColor;
 @property (nonatomic) UIColor *downLineColor;
 @property (nonatomic) UIColor *upColor;
@@ -23,5 +24,5 @@
 + (instancetype)createDefaultCandle;
 
 - (instancetype)initWithCandleSource:(CandleSource *)source;
-- (void)strokeIndicatorFromForexDataChunk:(ForexDataChunk *)chunk displayForexDataCount:(NSInteger)count displaySize:(CGSize)size;
+
 @end
