@@ -28,4 +28,6 @@
 
 - (Chart *)selectedChart;
 
+- (BOOL)existsChart;
+
 @end

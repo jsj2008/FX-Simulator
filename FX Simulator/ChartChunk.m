@@ -58,4 +58,13 @@
     return selectedChart;
 }
 
+- (BOOL)existsChart
+{
+    if (0 < _chartArray.count) {
+        return YES;
+    } else {
+        return NO;
+    }
+}
+
 @end
