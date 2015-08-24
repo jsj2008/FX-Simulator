@@ -8,6 +8,7 @@
 
 #import "Candle.h"
 
+#import "CoreDataManager.h"
 #import "SimpleCandle.h"
 #import "CandleSource.h"
 #import "CandlesFactory.h"
@@ -17,15 +18,18 @@
     CandleSource *_source;
 }
 
-+ (instancetype)createDefaultCandle
++ (instancetype)createTemporaryDefaultCandle
 {
     UIColor *upColor = [UIColor colorWithRed:35.0/255.0 green:172.0/255.0 blue:14.0/255.0 alpha:1.0];
     UIColor *downColor = [UIColor colorWithRed:199.0/250.0 green:36.0/255.0 blue:58.0/255.0 alpha:1.0];
     
-    CandleSource *source = [CandleSource new];
-    source.displayOrder = 0;
+    NSManagedObjectContext *context = [CoreDataManager sharedManager].managedObjectContext;
+    
+    NSEntityDescription *entityDescription = [NSEntityDescription entityForName:NSStringFromClass([CandleSource class]) inManagedObjectContext:context];
+    CandleSource *source = [[CandleSource alloc] initWithEntity:entityDescription insertIntoManagedObjectContext:nil];
     
     Candle *candle = [[Candle alloc] initWithCandleSource:source];
+    candle.displayOrder = 0;
     candle.upColor = upColor;
     candle.upLineColor = upColor;
     candle.downColor = downColor;
@@ -48,7 +52,7 @@
     return self;
 }
 
-- (void)strokeIndicatorFromForexDataChunk:(ForexDataChunk *)chunk displayForexDataCount:(NSInteger)count displaySize:(CGSize)size
+- (void)strokeIndicatorFromForexDataChunk:(ForexDataChunk *)chunk displayDataCount:(NSInteger)count displaySize:(CGSize)size
 {
     if (chunk == nil) {
         return;

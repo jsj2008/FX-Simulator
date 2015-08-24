@@ -78,7 +78,6 @@
 		70D2FAF41A9F56AE00CAB509 /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FAED1A9F56AE00CAB509 /* FMDatabaseQueue.m */; };
 		70D2FAF51A9F56AE00CAB509 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FAF01A9F56AE00CAB509 /* FMResultSet.m */; };
 		70D2FB251A9F572B00CAB509 /* SubChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FB1C1A9F572B00CAB509 /* SubChartViewController.m */; };
-		70D2FB261A9F572B00CAB509 /* SubChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FB1E1A9F572B00CAB509 /* SubChartView.m */; };
 		70D2FB291A9F572B00CAB509 /* SubChartViewData.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FB241A9F572B00CAB509 /* SubChartViewData.m */; };
 		70D2FB481A9F574000CAB509 /* TradeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FB2B1A9F574000CAB509 /* TradeViewController.m */; };
 		70D2FB491A9F574000CAB509 /* ChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FB2D1A9F574000CAB509 /* ChartViewController.m */; };
@@ -1183,7 +1182,6 @@
 				70D2FC3E1A9F591600CAB509 /* ChartViewData.m in Sources */,
 				70D2FC0F1A9F58F700CAB509 /* TradeDatabase.m in Sources */,
 				70D2FBD81A9F57CB00CAB509 /* SaveLoader.m in Sources */,
-				70D2FB261A9F572B00CAB509 /* SubChartView.m in Sources */,
 				70D2FAF21A9F56AE00CAB509 /* FMDatabaseAdditions.m in Sources */,
 				70D2FAD81A9F559200CAB509 /* OpenPositionTableViewCell.m in Sources */,
 				7076F5AB1AECCEB3004CC6BA /* MainViewController.m in Sources */,
