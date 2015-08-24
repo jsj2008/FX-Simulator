@@ -17,13 +17,29 @@
     ForexDataChunk *_currentForexDataChunk;
 }
 
-+ (instancetype)createNewChartFromSaveDataSource:(SaveDataSource *)source
++ (instancetype)createNewChart
 {
     NSManagedObjectContext *context = [CoreDataManager sharedManager].managedObjectContext;
     
     Chart *chart = [[Chart alloc] initWithChartSource:[NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass([ChartSource class]) inManagedObjectContext:context]];
     
+    return chart;
+}
+
++ (instancetype)createNewMainChartFromSaveDataSource:(SaveDataSource *)source
+{
+    Chart *chart = [self createNewChart];
+    
     [source addMainChartSourcesObject:chart.chartSource];
+    
+    return chart;
+}
+
++ (instancetype)createNewSubChartFromSaveDataSource:(SaveDataSource *)source
+{
+    Chart *chart = [self createNewChart];
+    
+    [source addSubChartSourcesObject:chart.chartSource];
     
     return chart;
 }

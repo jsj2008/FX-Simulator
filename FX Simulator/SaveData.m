@@ -134,14 +134,14 @@
         return;
     }
     
-    Chart *mainChart = [Chart createNewChartFromSaveDataSource:_saveDataSource];
+    Chart *mainChart = [Chart createNewMainChartFromSaveDataSource:_saveDataSource];
     mainChart.chartIndex = 0;
     mainChart.currencyPair = self.currencyPair;
     mainChart.timeFrame = self.timeFrame;
     mainChart.isSelected = YES;
     
     [[Setting timeFrameList] enumerateTimeFrames:^(NSUInteger idx, TimeFrame *timeFrame) {
-        Chart *subChart = [Chart createNewChartFromSaveDataSource:_saveDataSource];
+        Chart *subChart = [Chart createNewSubChartFromSaveDataSource:_saveDataSource];
         subChart.chartIndex = idx;
         subChart.currencyPair = self.currencyPair;
         subChart.timeFrame = self.timeFrame;

@@ -18,7 +18,8 @@
 @class ForexHistoryData;
 
 @interface Chart : NSObject
-+ (instancetype)createNewChartFromSaveDataSource:(SaveDataSource *)source;
++ (instancetype)createNewMainChartFromSaveDataSource:(SaveDataSource *)source;
++ (instancetype)createNewSubChartFromSaveDataSource:(SaveDataSource *)source;
 + (instancetype)createChartFromChartSource:(ChartSource *)source;
 - (NSComparisonResult)compareDisplayOrder:(Chart *)chart;
 - (void)setForexDataChunk:(ForexDataChunk *)chunk;
