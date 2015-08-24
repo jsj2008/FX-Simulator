@@ -9,6 +9,7 @@
 #import "IndicatorChunk.h"
 
 #import "Indicator.h"
+#import "Candle.h"
 
 @implementation IndicatorChunk {
     NSMutableArray *_indicatorArray;
@@ -16,6 +17,10 @@
 
 - (instancetype)initWithIndicatorArray:(NSArray *)indicatorArray
 {
+    if (!indicatorArray) {
+        return nil;
+    }
+    
     if (self = [super init]) {
         _indicatorArray = [indicatorArray mutableCopy];
     }
@@ -42,9 +47,34 @@
     }];*/
     
     [array enumerateObjectsUsingBlock:^(Indicator *obj, NSUInteger idx, BOOL *stop) {
-        if (obj) {
-            block(obj);
+        block(obj);
+    }];
+}
+
+- (BOOL)existsBaseIndicator
+{
+    for (Indicator *indicator in _indicatorArray) {
+        if ([indicator isMemberOfClass:[Candle class]]) {
+            return YES;
         }
+    }
+    
+    return NO;
+}
+
+- (BOOL)existsIndicator
+{
+    if (0 < _indicatorArray.count) {
+        return YES;
+    } else {
+        return NO;
+    }
+}
+
+- (void)strokeIndicatorFromForexDataChunk:(ForexDataChunk *)chunk displayDataCount:(NSInteger)count displaySize:(CGSize)size
+{
+    [self enumerateIndicatorsUsingBlock:^(Indicator *indicator) {
+        [indicator strokeIndicatorFromForexDataChunk:chunk displayDataCount:count displaySize:size];
     }];
 }
 

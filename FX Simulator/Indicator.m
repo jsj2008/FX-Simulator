@@ -34,7 +34,7 @@
     return self;
 }
 
-- (void)strokeIndicatorFromForexDataChunk:(ForexDataChunk *)chunk displayForexDataCount:(NSInteger)count displaySize:(CGSize)size
+- (void)strokeIndicatorFromForexDataChunk:(ForexDataChunk *)chunk displayDataCount:(NSInteger)count displaySize:(CGSize)size
 {
     return;
 }
@@ -55,6 +55,11 @@
 - (NSUInteger)displayOrder
 {
     return _source.displayOrder;
+}
+
+- (void)setDisplayOrder:(NSUInteger)displayOrder
+{
+    _source.displayOrder = displayOrder;
 }
 
 @end

@@ -140,7 +140,7 @@ static const NSUInteger kMinDisplayForexDataCount = 40;
     }
     
     _chunk = chunk;
-    [_chart setForexDataChunk:chunk];
+    self.chartView.forexDataChunk = _chunk;
     [self.chartView setNeedsDisplay];
     _displayedForexDataChunk = _chunk;
 }

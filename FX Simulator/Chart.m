@@ -10,11 +10,15 @@
 
 #import "CoreDataManager.h"
 #import "ChartSource.h"
+#import "Candle.h"
 #import "ForexDataChunk.h"
+#import "IndicatorChunk.h"
 #import "SaveDataSource.h"
 
 @implementation Chart {
-    ForexDataChunk *_currentForexDataChunk;
+    ForexDataChunk *_displayedForexDataChunk;
+    NSUInteger _displayedForexDataCount;
+    CGSize _displayedViewSize;
 }
 
 + (instancetype)createNewChart
@@ -69,14 +73,17 @@
     }
 }
 
-- (void)setForexDataChunk:(ForexDataChunk *)chunk
+- (void)strokeFromForexDataChunk:(ForexDataChunk *)chunk viewSize:(CGSize)size
 {
-    _currentForexDataChunk = chunk;
-}
-
-- (void)stroke
-{
+    _displayedForexDataChunk = chunk;
+    _displayedViewSize = size;
     
+    if (![self.indicatorChunk existsBaseIndicator]) {
+        Candle *candle = [Candle createTemporaryDefaultCandle];
+        [candle strokeIndicatorFromForexDataChunk:_displayedForexDataChunk displayDataCount:self.displayDataCount displaySize:_displayedViewSize];
+    } else {
+        [self.indicatorChunk strokeIndicatorFromForexDataChunk:_displayedForexDataChunk displayDataCount:self.displayDataCount displaySize:_displayedViewSize];
+    }
 }
 
 - (BOOL)isEqualChartIndex:(NSUInteger)index
@@ -130,5 +137,9 @@
     _chartSource.isSelected = isSelected;
 }
 
+- (NSUInteger)displayDataCount
+{
+    return 50;
+}
 
 @end

@@ -34,7 +34,7 @@
 
 -(void)drawRect:(CGRect)rect
 {
-    
+    [self.chart strokeFromForexDataChunk:self.forexDataChunk viewSize:self.frame.size];
 }
 
 @end

@@ -21,8 +21,6 @@
 /**
  DBには保存されない。
 */
-+ (instancetype)createDefaultCandle;
-
-- (instancetype)initWithCandleSource:(CandleSource *)source;
++ (instancetype)createTemporaryDefaultCandle;
 
 @end
