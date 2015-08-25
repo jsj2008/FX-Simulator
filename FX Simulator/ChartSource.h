@@ -1,6 +1,6 @@
 //
 //  ChartSource.h
-//  FXSimulator
+//  
 //
 //  Created by yuu on 2015/08/25.
 //
@@ -16,7 +16,7 @@
 @property (nonatomic) int32_t chartIndex;
 @property (nonatomic, retain) id currencyPair;
 @property (nonatomic) int32_t displayDataCount;
-@property (nonatomic) BOOL isSelected;
+@property (nonatomic) BOOL isDisplay;
 @property (nonatomic, retain) id timeFrame;
 @property (nonatomic, retain) CandleSource *candleSource;
 @property (nonatomic, retain) SaveDataSource *saveDataSourceForMain;

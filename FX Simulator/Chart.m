@@ -150,14 +150,14 @@ static const NSUInteger FXSMaxDisplayDataCount = 80;
     _chartSource.timeFrame = timeFrame;
 }
 
-- (BOOL)isSelected
+- (BOOL)isDisplay
 {
-    return _chartSource.isSelected;
+    return _chartSource.isDisplay;
 }
 
-- (void)setIsSelected:(BOOL)isSelected
+- (void)setIsDisplay:(BOOL)isDisplay
 {
-    _chartSource.isSelected = isSelected;
+    _chartSource.isDisplay = isDisplay;
 }
 
 - (NSUInteger)displayDataCount

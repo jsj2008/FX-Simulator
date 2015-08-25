@@ -11,7 +11,7 @@
         <attribute name="chartIndex" attributeType="Integer 32" defaultValueString="-1" syncable="YES"/>
         <attribute name="currencyPair" attributeType="Transformable" syncable="YES"/>
         <attribute name="displayDataCount" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
-        <attribute name="isSelected" attributeType="Boolean" syncable="YES"/>
+        <attribute name="isDisplay" attributeType="Boolean" syncable="YES"/>
         <attribute name="timeFrame" attributeType="Transformable" syncable="YES"/>
         <relationship name="candleSource" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="CandleSource" inverseName="chartSource" inverseEntity="CandleSource" syncable="YES"/>
         <relationship name="saveDataSourceForMain" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SaveDataSource" inverseName="mainChartSources" inverseEntity="SaveDataSource" syncable="YES"/>

@@ -83,7 +83,7 @@
     XCTAssertNotNil(newSaveData.mainChart, @"MainChart not nil");
     XCTAssertEqualObjects(currencyPair, newSaveData.mainChart.currencyPair, @"Equal CurrencyPair");
     XCTAssertEqualObjects(timeFrame, newSaveData.mainChart.timeFrame, @"Equal TimeFrame");
-    XCTAssertEqual(YES, newSaveData.mainChart.isSelected, "isSelected YES");
+    XCTAssertEqual(YES, newSaveData.mainChart.isDisplay, "isSelected YES");
     
     XCTAssertNotNil(newSaveData.subChartChunk, @"SubChartChunk not nil");
     XCTAssertTrue([newSaveData.subChartChunk existsChart], @"Exists SubChart");
