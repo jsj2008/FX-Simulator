@@ -50,7 +50,7 @@
     __block Chart *selectedChart;
     
     [self enumerateCharts:^(Chart *chart) {
-        if (chart.isSelected) {
+        if (chart.isDisplay) {
             selectedChart = chart;
         }
     }];

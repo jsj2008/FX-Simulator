@@ -32,7 +32,7 @@
 @property (nonatomic, readonly) ChartSource *chartSource;
 @property (nonatomic) NSUInteger chartIndex;
 @property (nonatomic) CurrencyPair *currencyPair;
-@property (nonatomic) BOOL isSelected;
+@property (nonatomic) BOOL isDisplay;
 @property (nonatomic) TimeFrame *timeFrame;
 @property (nonatomic) NSUInteger displayDataCount;
 @property (nonatomic) IndicatorChunk *indicatorChunk;

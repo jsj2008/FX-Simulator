@@ -1,6 +1,6 @@
 //
 //  ChartSource.m
-//  FXSimulator
+//  
 //
 //  Created by yuu on 2015/08/25.
 //
@@ -17,7 +17,7 @@
 @dynamic chartIndex;
 @dynamic currencyPair;
 @dynamic displayDataCount;
-@dynamic isSelected;
+@dynamic isDisplay;
 @dynamic timeFrame;
 @dynamic candleSource;
 @dynamic saveDataSourceForMain;

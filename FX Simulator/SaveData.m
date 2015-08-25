@@ -138,7 +138,7 @@
     mainChart.chartIndex = 0;
     mainChart.currencyPair = self.currencyPair;
     mainChart.timeFrame = self.timeFrame;
-    mainChart.isSelected = YES;
+    mainChart.isDisplay = YES;
     
     [[Setting timeFrameList] enumerateTimeFrames:^(NSUInteger idx, TimeFrame *timeFrame) {
         Chart *subChart = [Chart createNewSubChartFromSaveDataSource:_saveDataSource];
@@ -147,9 +147,9 @@
         subChart.timeFrame = timeFrame;
         
         if (idx == 0) {
-            subChart.isSelected = YES;
+            subChart.isDisplay = YES;
         } else {
-            subChart.isSelected = NO;
+            subChart.isDisplay = NO;
         }
         
     } execept:self.timeFrame];
