@@ -9,6 +9,7 @@
 #import "Chart.h"
 
 #import "CoreDataManager.h"
+#import "ChartView.h"
 #import "ChartSource.h"
 #import "Candle.h"
 #import "ForexDataChunk.h"
@@ -20,6 +21,8 @@ static const NSUInteger FXSMinDisplayDataCount = 30;
 static const NSUInteger FXSMaxDisplayDataCount = 80;
 
 @implementation Chart {
+    __weak ChartView *_chartView;
+    ForexDataChunk *_forexDataChunk;
     ForexDataChunk *_displayedForexDataChunk;
     NSUInteger _displayedForexDataCount;
     CGSize _displayedViewSize;
@@ -77,17 +80,23 @@ static const NSUInteger FXSMaxDisplayDataCount = 80;
     }
 }
 
-- (void)strokeFromForexDataChunk:(ForexDataChunk *)chunk viewSize:(CGSize)size
+- (void)stroke
 {
-    _displayedForexDataChunk = chunk;
-    _displayedViewSize = size;
+    if (_chartView == nil) {
+        return;
+    }
+    
+    CGSize viewSize = _chartView.frame.size;
     
     if (![self.indicatorChunk existsBaseIndicator]) {
         Candle *candle = [Candle createTemporaryDefaultCandle];
-        [candle strokeIndicatorFromForexDataChunk:_displayedForexDataChunk displayDataCount:self.displayDataCount displaySize:_displayedViewSize];
+        [candle strokeIndicatorFromForexDataChunk:_forexDataChunk displayDataCount:self.displayDataCount displaySize:viewSize];
     } else {
-        [self.indicatorChunk strokeIndicatorFromForexDataChunk:_displayedForexDataChunk displayDataCount:self.displayDataCount displaySize:_displayedViewSize];
+        [self.indicatorChunk strokeIndicatorFromForexDataChunk:_forexDataChunk displayDataCount:self.displayDataCount displaySize:viewSize];
     }
+    
+    _displayedForexDataChunk = _forexDataChunk;
+    _displayedViewSize = viewSize;
 }
 
 - (BOOL)isEqualChartIndex:(NSUInteger)index
@@ -97,6 +106,16 @@ static const NSUInteger FXSMaxDisplayDataCount = 80;
     }
     
     return NO;
+}
+
+- (void)setChartView:(ChartView *)chartView
+{
+    _chartView = chartView;
+}
+
+- (void)setForexDataChunk:(ForexDataChunk *)chunk
+{
+    _forexDataChunk = chunk;
 }
 
 #pragma mark - getter,setter
