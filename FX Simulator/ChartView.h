@@ -18,9 +18,4 @@
 */
 @property (nonatomic) Chart *chart;
 
-/**
- チャートを描写するために使うForexDataChunk
-*/
-@property (nonatomic) ForexDataChunk *forexDataChunk;
-
 @end

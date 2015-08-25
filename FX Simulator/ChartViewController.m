@@ -130,6 +130,7 @@ static const NSUInteger kMinDisplayForexDataCount = 40;
 {
     _chart = chart;
     self.chartView.chart = _chart;
+    [_chart setChartView:self.chartView];
     _store = [[ForexDataChunkStore alloc] initWithCurrencyPair:_chart.currencyPair timeScale:_chart.timeFrame getMaxLimit:[ChartViewController requireForexDataCountForChart]];
 }
 
@@ -140,7 +141,7 @@ static const NSUInteger kMinDisplayForexDataCount = 40;
     }
     
     _chunk = chunk;
-    self.chartView.forexDataChunk = _chunk;
+    [_chart setForexDataChunk:_chunk];
     [self.chartView setNeedsDisplay];
     _displayedForexDataChunk = _chunk;
 }

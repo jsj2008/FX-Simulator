@@ -14,6 +14,7 @@
 @class CurrencyPair;
 @class TimeFrame;
 @class ChartSource;
+@class ChartView;
 @class ForexDataChunk;
 @class ForexHistoryData;
 @class IndicatorChunk;
@@ -23,9 +24,11 @@
 + (instancetype)createNewSubChartFromSaveDataSource:(SaveDataSource *)source;
 + (instancetype)createChartFromChartSource:(ChartSource *)source;
 - (NSComparisonResult)compareDisplayOrder:(Chart *)chart;
-- (void)strokeFromForexDataChunk:(ForexDataChunk *)chunk viewSize:(CGSize)size;
+- (void)stroke;
 - (BOOL)isEqualChartIndex:(NSUInteger)index;
 - (ForexHistoryData *)getForexDataFromTouchPoint:(CGPoint)point displayCount:(NSUInteger)count viewSize:(CGSize)size;
+- (void)setChartView:(ChartView *)chartView;
+- (void)setForexDataChunk:(ForexDataChunk *)chunk;
 @property (nonatomic, readonly) ChartSource *chartSource;
 @property (nonatomic) NSUInteger chartIndex;
 @property (nonatomic) CurrencyPair *currencyPair;
