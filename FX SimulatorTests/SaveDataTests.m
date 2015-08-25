@@ -89,7 +89,6 @@
     XCTAssertTrue([newSaveData.subChartChunk existsChart], @"Exists SubChart");
     [newSaveData.subChartChunk enumerateCharts:^(Chart *chart) {
         XCTAssertEqualObjects(currencyPair, chart.currencyPair, @"Equal CurrencyPair");
-        XCTAssertEqualObjects(timeFrame, chart.timeFrame, @"Equal TimeFrame");
     }];
     
 }
