@@ -144,7 +144,7 @@
         Chart *subChart = [Chart createNewSubChartFromSaveDataSource:_saveDataSource];
         subChart.chartIndex = idx;
         subChart.currencyPair = self.currencyPair;
-        subChart.timeFrame = self.timeFrame;
+        subChart.timeFrame = timeFrame;
         
         if (idx == 0) {
             subChart.isSelected = YES;
