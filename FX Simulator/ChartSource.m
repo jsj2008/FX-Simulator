@@ -2,13 +2,13 @@
 //  ChartSource.m
 //  FXSimulator
 //
-//  Created by yuu on 2015/07/27.
+//  Created by yuu on 2015/08/25.
 //
 //
 
 #import "ChartSource.h"
 #import "CandleSource.h"
-//#import "NSManagedObject.h"
+#import "SaveDataSource.h"
 #import "SimpleMovingAverageSource.h"
 
 
@@ -16,6 +16,7 @@
 
 @dynamic chartIndex;
 @dynamic currencyPair;
+@dynamic displayDataCount;
 @dynamic isSelected;
 @dynamic timeFrame;
 @dynamic candleSource;

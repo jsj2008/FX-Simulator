@@ -2,23 +2,25 @@
 //  ChartSource.h
 //  FXSimulator
 //
-//  Created by yuu on 2015/07/27.
+//  Created by yuu on 2015/08/25.
 //
 //
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class CandleSource, NSManagedObject, SimpleMovingAverageSource;
+@class CandleSource, SaveDataSource, SimpleMovingAverageSource;
 
 @interface ChartSource : NSManagedObject
+
 @property (nonatomic) int32_t chartIndex;
 @property (nonatomic, retain) id currencyPair;
+@property (nonatomic) int32_t displayDataCount;
 @property (nonatomic) BOOL isSelected;
 @property (nonatomic, retain) id timeFrame;
 @property (nonatomic, retain) CandleSource *candleSource;
-@property (nonatomic, retain) NSManagedObject *saveDataSourceForMain;
-@property (nonatomic, retain) NSManagedObject *saveDataSourceForSub;
+@property (nonatomic, retain) SaveDataSource *saveDataSourceForMain;
+@property (nonatomic, retain) SaveDataSource *saveDataSourceForSub;
 @property (nonatomic, retain) NSSet *simpleMovingAverageSources;
 @end
 
