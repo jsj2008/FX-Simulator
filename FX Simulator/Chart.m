@@ -15,6 +15,10 @@
 #import "IndicatorChunk.h"
 #import "SaveDataSource.h"
 
+static const NSUInteger FXSDefaultDisplayDataCount = 40;
+static const NSUInteger FXSMinDisplayDataCount = 30;
+static const NSUInteger FXSMaxDisplayDataCount = 80;
+
 @implementation Chart {
     ForexDataChunk *_displayedForexDataChunk;
     NSUInteger _displayedForexDataCount;
@@ -139,7 +143,20 @@
 
 - (NSUInteger)displayDataCount
 {
-    return 50;
+    if (_chartSource.displayDataCount == 0) {
+        return FXSDefaultDisplayDataCount;
+    } else if (_chartSource.displayDataCount < FXSMinDisplayDataCount) {
+        return FXSMinDisplayDataCount;
+    } else if (FXSMaxDisplayDataCount < _chartSource.displayDataCount) {
+        return FXSMaxDisplayDataCount;
+    }
+    
+    return _chartSource.displayDataCount;
+}
+
+- (void)setDisplayDataCount:(NSUInteger)displayDataCount
+{
+    _chartSource.displayDataCount = displayDataCount;
 }
 
 @end
