@@ -14,19 +14,20 @@
 @class TimeFrame;
 
 @interface ChartChunk : NSObject
+
+@property (nonatomic) Chart *displayChart;
+
 - (instancetype)initWithChartArray:(NSArray *)chartArray;
 
 /**
- 表示順に取り出す。 
+ ChartIndexの順番に取り出す。 
 */
 - (void)enumerateCharts:(void (^)(Chart *chart))block;
 
 /**
  ChartIndexがindexなチャート。
 */
-- (Chart *)chartOfChartIndex:(NSUInteger)index;
-
-- (Chart *)selectedChart;
+- (Chart *)getChartFromChartIndex:(NSUInteger)index;
 
 - (BOOL)existsChart;
 

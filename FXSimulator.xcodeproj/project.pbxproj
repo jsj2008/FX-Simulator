@@ -78,7 +78,6 @@
 		70D2FAF41A9F56AE00CAB509 /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FAED1A9F56AE00CAB509 /* FMDatabaseQueue.m */; };
 		70D2FAF51A9F56AE00CAB509 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FAF01A9F56AE00CAB509 /* FMResultSet.m */; };
 		70D2FB251A9F572B00CAB509 /* SubChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FB1C1A9F572B00CAB509 /* SubChartViewController.m */; };
-		70D2FB291A9F572B00CAB509 /* SubChartViewData.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FB241A9F572B00CAB509 /* SubChartViewData.m */; };
 		70D2FB481A9F574000CAB509 /* TradeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FB2B1A9F574000CAB509 /* TradeViewController.m */; };
 		70D2FB491A9F574000CAB509 /* ChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FB2D1A9F574000CAB509 /* ChartViewController.m */; };
 		70D2FB4A1A9F574000CAB509 /* RatePanelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FB2F1A9F574000CAB509 /* RatePanelViewController.m */; };
@@ -1115,7 +1114,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				70D2FB291A9F572B00CAB509 /* SubChartViewData.m in Sources */,
 				7002F4A21B48D77000AF9DA7 /* Candle.m in Sources */,
 				70D2FB621A9F575900CAB509 /* ExecutionHistoryViewLabel.m in Sources */,
 				70D2FB9D1A9F57A000CAB509 /* ForexDatabase.m in Sources */,

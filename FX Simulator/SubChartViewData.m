@@ -33,7 +33,6 @@
         saveData = [SaveLoader load];
         market = [SimulationManager sharedSimulationManager].market;
         timeScaleList = [[Setting timeFrameList] getTimeFrameChunkExecept:saveData.timeFrame];
-        _selectedSegmentIndex = [self toSegmentIndexFromTimeScale:saveData.subChartChunk.selectedChart.timeFrame];
     }
     
     return self;
