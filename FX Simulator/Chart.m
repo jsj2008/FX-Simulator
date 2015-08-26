@@ -99,15 +99,6 @@ static const NSUInteger FXSMaxDisplayDataCount = 80;
     _displayedViewSize = viewSize;
 }
 
-- (BOOL)isEqualChartIndex:(NSUInteger)index
-{
-    if (_chartSource.chartIndex == index) {
-        return YES;
-    }
-    
-    return NO;
-}
-
 - (void)setChartView:(ChartView *)chartView
 {
     _chartView = chartView;

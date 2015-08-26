@@ -25,7 +25,6 @@
 + (instancetype)createChartFromChartSource:(ChartSource *)source;
 - (NSComparisonResult)compareDisplayOrder:(Chart *)chart;
 - (void)stroke;
-- (BOOL)isEqualChartIndex:(NSUInteger)index;
 - (ForexHistoryData *)getForexDataFromTouchPoint:(CGPoint)point displayCount:(NSUInteger)count viewSize:(CGSize)size;
 - (void)setChartView:(ChartView *)chartView;
 - (void)setForexDataChunk:(ForexDataChunk *)chunk;

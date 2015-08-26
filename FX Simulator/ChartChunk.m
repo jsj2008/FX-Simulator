@@ -34,28 +34,15 @@
     }];
 }
 
-- (Chart *)chartOfChartIndex:(NSUInteger)index
+- (Chart *)getChartFromChartIndex:(NSUInteger)index
 {
     for (Chart *chart in _chartArray) {
-        if ([chart isEqualChartIndex:index]) {
+        if (chart.chartIndex == index) {
             return chart;
         }
     }
     
     return nil;
-}
-
-- (Chart *)selectedChart
-{
-    __block Chart *selectedChart;
-    
-    [self enumerateCharts:^(Chart *chart) {
-        if (chart.isDisplay) {
-            selectedChart = chart;
-        }
-    }];
-    
-    return selectedChart;
 }
 
 - (BOOL)existsChart
@@ -64,6 +51,30 @@
         return YES;
     } else {
         return NO;
+    }
+}
+
+- (Chart *)displayChart
+{
+    __block Chart *displayChart;
+    
+    [self enumerateCharts:^(Chart *chart) {
+        if (chart.isDisplay) {
+            displayChart = chart;
+        }
+    }];
+    
+    return displayChart;
+}
+
+- (void)setDisplayChart:(Chart *)displayChart
+{
+    for (Chart *chart in _chartArray) {
+        if (displayChart.chartIndex == chart.chartIndex) {
+            chart.isDisplay = YES;
+        } else {
+            chart.isDisplay = NO;
+        }
     }
 }
 
