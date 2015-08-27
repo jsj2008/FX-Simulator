@@ -86,33 +86,6 @@
     [self enumerateForexDataAndAverageOHLCRatesUsingBlock:^(ForexHistoryData *obj, NSUInteger idx, Rate *averageOpen, Rate *averageHigh, Rate *averageLow, Rate *averageClose) {
         block(obj, idx, averageClose);
     } averageTerm:term limit:limit resultReverse:NO open:NO high:NO low:NO close:YES];
-    
-    /*if (!(0 < term)) {
-        return;
-    }
-    
-    NSEnumerationOptions option = 0;
-    
-    if (reverse) {
-        option = NSEnumerationReverse;
-    }
-    
-    [_forexDataArray enumerateObjectsWithOptions:NSEnumerationReverse usingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        
-        if (limit < (idx + 1)) {
-            *stop = YES;
-        }
-        
-        NSRange range = NSMakeRange(idx, term);
-        
-        if (![self validateRange:range forArray:_forexDataArray]) {
-            *stop = YES;
-        }
-        
-        Rate *averageClose = [self getAverageRate:Close range:range];
-        
-        block(obj, idx, averageClose);
-    }];*/
 }
 
 - (void)enumerateForexDataAndAverageOHLCRatesUsingBlock:(void (^)(ForexHistoryData *, NSUInteger, Rate *, Rate *, Rate *, Rate *))block averageTerm:(NSUInteger)term limit:(NSUInteger)limit
@@ -122,26 +95,6 @@
         block(obj, idx, averageOpen, averageHigh, averageLow, averageClose);
         
     } averageTerm:term limit:limit resultReverse:NO open:YES high:YES low:YES close:YES];
-    
-    /*if (term == 0) {
-        return;
-    }
-    
-    [_forexDataArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        
-        NSRange range = NSMakeRange(idx, term);
-        
-        if (![self validateRange:range forArray:_forexDataArray]) {
-            *stop = YES;
-        }
-        
-        Rate *averageOpen = [self getAverageRate:Open range:range];
-        Rate *averageHigh = [self getAverageRate:High range:range];
-        Rate *averageLow = [self getAverageRate:Low range:range];
-        Rate *averageClose = [self getAverageRate:Close range:range];
-        
-        block(obj, idx, averageOpen, averageHigh, averageLow, averageClose);
-    }];*/
 }
 
 - (void)enumerateForexDataAndAverageOHLCRatesUsingBlock:(void (^)(ForexHistoryData *obj, NSUInteger idx, Rate *averageOpen, Rate *averageHigh, Rate *averageLow, Rate *averageClose))block averageTerm:(NSUInteger)term limit:(NSUInteger)limit resultReverse:(BOOL)reverse open:(BOOL)open high:(BOOL)high low:(BOOL)low close:(BOOL)close
@@ -274,17 +227,6 @@
 
 - (Rate *)getMinRateLimit:(NSUInteger)limit
 {
-    //NSArray *limitArray = [self getArrayLimit:limit];
-    
-    /*NSPredicate *predicate = [NSPredicate predicateWithFormat:@"low.rateValue == %@.@min.low.rateValue", limitArray];
-    NSArray *results = [limitArray filteredArrayUsingPredicate:predicate];
-    
-    return ((ForexHistoryData *)results[0]).low;*/
-    
-    /*NSArray *rangeArray = [self getArrayLimit:limit];
-    
-    return [[Rate alloc] initWithRateValue:[[rangeArray valueForKeyPath:@"@min.low.rateValue"] doubleValue] currencyPair:nil timestamp:nil];*/
-    
     __block Rate *minRate = nil;
     
     [self enumerateForexDataUsingBlock:^(ForexHistoryData *obj, NSUInteger idx) {
@@ -311,21 +253,6 @@
     } limit:limit];
     
     return maxRate;
-}
-
--(NSArray*)getArrayLimit:(NSUInteger)limit
-{
-    if (!(0 < limit)) {
-        return nil;
-    }
-    
-    NSRange range = NSMakeRange(0, limit);
-    
-    if ([self isOverRange:range forArray:_forexDataArray]) {
-        range = NSMakeRange(0, _forexDataArray.count);
-    }
-    
-    return [_forexDataArray subarrayWithRange:range];
 }
 
 - (ForexDataChunk *)getChunkFromBaseTime:(MarketTime *)time relativePosition:(NSInteger)pos limit:(NSUInteger)limit
