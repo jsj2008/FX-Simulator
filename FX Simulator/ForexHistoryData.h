@@ -28,6 +28,12 @@ typedef NS_ENUM(NSUInteger, RateType) {
 @interface ForexHistoryData : NSObject
 -(id)initWithFMResultSet:(FMResultSet*)rs currencyPair:(CurrencyPair*)currencyPair timeScale:(TimeFrame *)timeScale;
 -(id)initWithForexDataChunk:(ForexDataChunk *)chunk timeScale:(TimeFrame *)timeScale;
+
+/**
+ CloseTimeを比較する。
+*/
+- (NSComparisonResult)compareTime:(ForexHistoryData *)data;
+
 - (Rate *)getRateForType:(RateType)type;
 - (BOOL)isEqualToForexData:(ForexHistoryData *)data;
 @property (nonatomic, readonly) int ratesID;
