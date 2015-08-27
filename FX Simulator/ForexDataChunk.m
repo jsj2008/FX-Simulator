@@ -23,7 +23,8 @@
     }
     
     if (self = [super init]) {
-        _forexDataArray = array;
+        // closeが新しい順に並び変える。
+        _forexDataArray = [[[array sortedArrayUsingSelector:@selector(compareTime:)] reverseObjectEnumerator] allObjects];
     }
 
     return self;
