@@ -62,7 +62,7 @@ static NSString* const FXSExecutionHistoryTableName = @"execution_history";
     
     [_tradeDatabase open];
     
-    FMResultSet *results = [_tradeDatabase executeQuery:sql, orderID, _saveSlotNumber];
+    FMResultSet *results = [_tradeDatabase executeQuery:sql, orderID, @(_saveSlotNumber)];
     
     while ([results next]) {
         record = [[ExecutionHistoryRecord alloc] initWithFMResultSet:results];
@@ -209,7 +209,7 @@ typedef struct{
         result.isSuccess = NO;
     }
     
-    if(![db executeUpdate:sql, _saveSlotNumber, currencyPair, usersOrderNumber, orderRate, orderRateTimestamp, orderSpread, orderType, positionSize, isClose, closeUsersOrderNumber, closeOrderRate, closeOrderSpread]) {
+    if(![db executeUpdate:sql, @(_saveSlotNumber), currencyPair, usersOrderNumber, orderRate, orderRateTimestamp, orderSpread, orderType, positionSize, isClose, closeUsersOrderNumber, closeOrderRate, closeOrderSpread]) {
         NSLog(@"db error: ExecutionHistoryManager saveExecutionOrders");
         result.isSuccess = NO;
     } else {
