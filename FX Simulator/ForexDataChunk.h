@@ -42,8 +42,6 @@
  */
 - (void)enumerateObjectsAndAverageOHLCRatesUsingBlock:(void (^)(ForexHistoryData *obj, NSUInteger idx, Rate *averageOpen, Rate *averageHigh, Rate *averageLow, Rate *averageClose))block averageTerm:(NSUInteger)term limit:(NSUInteger)limit resultReverse:(BOOL)reverse;
 
-//- (ForexDataChunk *)getForexDataLimit:(NSUInteger)limit;
-//- (ForexDataChunk *)getForexDataChunkInRange:(NSRange)range;
 - (Rate *)getMinRate;
 - (Rate *)getMaxRate;
 - (Rate *)getMinRateLimit:(NSUInteger)limit;
@@ -60,20 +58,14 @@
 - (ForexDataChunk *)getChunkFromBaseTime:(MarketTime *)time relativePosition:(NSInteger)pos limit:(NSUInteger)limit;
 
 /**
- 基準となるデータからの相対位置にあるデータを先頭に、最大Limit個のデータを取得する。
-*/
-- (ForexDataChunk *)getChunkFromBaseData:(ForexHistoryData *)data relativePosition:(NSInteger)pos limit:(NSUInteger)limit;
-
-/**
  最新のデータを先頭に追加する。
 */
 - (void)addCurrentData:(ForexHistoryData *)data;
 
 - (ForexHistoryData *)getForexDataFromTouchPoint:(CGPoint)point displayCount:(NSUInteger)count viewSize:(CGSize)size;
-/*- (ForexDataChunk *)getChunkFromHeadData:(ForexHistoryData *)data limit:(NSUInteger)limit;
-- (ForexDataChunk *)getChunkFromHeadData:(ForexHistoryData *)data back:(NSUInteger)back limit:(NSUInteger)limit;
-- (ForexDataChunk *)getChunkFromNextDataOf:(ForexHistoryData *)data limit:(NSUInteger)limit;*/
+
 @property (nonatomic, readonly) NSUInteger count;
 @property (nonatomic, readonly) ForexHistoryData *current;
 @property (nonatomic, readonly) ForexHistoryData *oldest;
+
 @end

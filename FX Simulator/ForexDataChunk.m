@@ -250,19 +250,6 @@
     return total;
 }
 
-/*- (ForexDataChunk *)getForexDataLimit:(NSUInteger)limit
-{
-    if ([self count] == 0 || limit == 0) {
-        return nil;
-    }
-    
-    if ([self count] < limit) {
-        limit = [self count];
-    }
-    
-    return [self getForexDataChunkInRange:NSMakeRange(0, limit)];
-}*/
-
 - (ForexDataChunk *)getForexDataChunkInRange:(NSRange)range
 {
     NSUInteger lastIndex = range.location + range.length - 1;
@@ -372,48 +359,6 @@
     }
     
     return [self getForexDataChunkInRange:NSMakeRange(startIndex, len)];
-}
-
-- (ForexDataChunk *)getChunkFromBaseData:(ForexHistoryData *)data relativePosition:(NSInteger)pos limit:(NSUInteger)limit
-{
-    NSUInteger baseIndex = [_forexDataArray indexOfObject:data];
-    
-    if (baseIndex == NSNotFound) {
-        return nil;
-    }
-    
-    NSInteger startIndex = baseIndex + (-pos);
-    
-    if (self.count-1 < startIndex) {
-        return nil;
-    }
-    
-    if (startIndex < 0) {
-        startIndex = 0;
-    }
-    
-    NSUInteger len = limit;
-    
-    if (self.count < (startIndex + len)) {
-        len = self.count - startIndex;
-    }
-    
-    return [self getForexDataChunkInRange:NSMakeRange(startIndex, len)];
-}
-
-- (ForexDataChunk *)getChunkFromHeadData:(ForexHistoryData *)data limit:(NSUInteger)limit
-{
-    return [self getChunkFromBaseData:data relativePosition:0 limit:limit];
-}
-
-- (ForexDataChunk *)getChunkFromHeadData:(ForexHistoryData *)data back:(NSUInteger)back limit:(NSUInteger)limit
-{
-    return [self getChunkFromBaseData:data relativePosition:-back limit:limit];
-}
-
-- (ForexDataChunk *)getChunkFromNextDataOf:(ForexHistoryData *)data limit:(NSUInteger)limit
-{
-    return [self getChunkFromBaseData:data relativePosition:1 limit:limit];
 }
 
 - (void)addCurrentData:(ForexHistoryData *)data
