@@ -25,7 +25,7 @@
  @param limit 列挙する最大数。
  @param reverse YESのときは,limitで得たForexDataを、古いものから列挙。
 */
-- (void)enumerateObjectsUsingBlock:(void (^)(ForexHistoryData *obj, NSUInteger idx))block limit:(NSUInteger)limit resultReverse:(BOOL)reverse;
+- (void)enumerateForexDataUsingBlock:(void (^)(ForexHistoryData *obj, NSUInteger idx))block limit:(NSUInteger)limit;
 
 /**
  最新の平均レート(Close)から順に列挙。
@@ -34,13 +34,13 @@
  @param obj 平均をとるデータの先頭データ。
  @param average closeのterm期間の平均レート
 */
-- (void)enumerateObjectsAndAverageRatesUsingBlock:(void (^)(ForexHistoryData *obj, NSUInteger idx, Rate *average))block averageTerm:(NSUInteger)term limit:(NSUInteger)limit resultReverse:(BOOL)reverse;
+- (void)enumerateForexDataAndAverageRatesUsingBlock:(void (^)(ForexHistoryData *obj, NSUInteger idx, Rate *average))block averageTerm:(NSUInteger)term limit:(NSUInteger)limit;
 
 /**
  最新の平均レート(Open, High, Low, Close)から順に列挙。
  残りのデータ数がterm未満だったら、そこで終了する。
  */
-- (void)enumerateObjectsAndAverageOHLCRatesUsingBlock:(void (^)(ForexHistoryData *obj, NSUInteger idx, Rate *averageOpen, Rate *averageHigh, Rate *averageLow, Rate *averageClose))block averageTerm:(NSUInteger)term limit:(NSUInteger)limit resultReverse:(BOOL)reverse;
+- (void)enumerateForexDataAndAverageOHLCRatesUsingBlock:(void (^)(ForexHistoryData *obj, NSUInteger idx, Rate *averageOpen, Rate *averageHigh, Rate *averageLow, Rate *averageClose))block averageTerm:(NSUInteger)term limit:(NSUInteger)limit;
 
 - (Rate *)getMinRate;
 - (Rate *)getMaxRate;

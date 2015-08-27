@@ -30,7 +30,7 @@
     return self;
 }
 
-- (void)enumerateObjectsUsingBlock:(void (^)(ForexHistoryData *, NSUInteger))block limit:(NSUInteger)limit resultReverse:(BOOL)revers
+- (void)enumerateForexDataUsingBlock:(void (^)(ForexHistoryData *, NSUInteger))block limit:(NSUInteger)limit
 {
     if (limit == 0) {
         return;
@@ -42,15 +42,15 @@
         range = NSMakeRange(0, _forexDataArray.count);
     }
     
-    [self enumerateObjectsUsingBlock:^(ForexHistoryData *obj, NSUInteger idx) {
+    [self enumerateForexDataUsingBlock:^(ForexHistoryData *obj, NSUInteger idx) {
         block(obj, idx);
-    } range:range resultReverse:revers];
+    } range:range resultReverse:NO];
 }
 
 /**
  Rangeが配列より大きいときは、実行されない。
 */
-- (void)enumerateObjectsUsingBlock:(void (^)(ForexHistoryData *, NSUInteger))block range:(NSRange)range resultReverse:(BOOL)reverse
+- (void)enumerateForexDataUsingBlock:(void (^)(ForexHistoryData *, NSUInteger))block range:(NSRange)range resultReverse:(BOOL)reverse
 {
     if ([self isOverRange:range forArray:_forexDataArray]) {
         return;
@@ -81,11 +81,11 @@
     }
 }
 
-- (void)enumerateObjectsAndAverageRatesUsingBlock:(void (^)(ForexHistoryData *, NSUInteger, Rate *))block averageTerm:(NSUInteger)term limit:(NSUInteger)limit resultReverse:(BOOL)reverse
+- (void)enumerateForexDataAndAverageRatesUsingBlock:(void (^)(ForexHistoryData *, NSUInteger, Rate *))block averageTerm:(NSUInteger)term limit:(NSUInteger)limit
 {
-    [self enumerateObjectsAndAverageOHLCRatesUsingBlock:^(ForexHistoryData *obj, NSUInteger idx, Rate *averageOpen, Rate *averageHigh, Rate *averageLow, Rate *averageClose) {
+    [self enumerateForexDataAndAverageOHLCRatesUsingBlock:^(ForexHistoryData *obj, NSUInteger idx, Rate *averageOpen, Rate *averageHigh, Rate *averageLow, Rate *averageClose) {
         block(obj, idx, averageClose);
-    } averageTerm:term limit:limit resultReverse:reverse open:NO high:NO low:NO close:YES];
+    } averageTerm:term limit:limit resultReverse:NO open:NO high:NO low:NO close:YES];
     
     /*if (!(0 < term)) {
         return;
@@ -115,13 +115,13 @@
     }];*/
 }
 
-- (void)enumerateObjectsAndAverageOHLCRatesUsingBlock:(void (^)(ForexHistoryData *, NSUInteger, Rate *, Rate *, Rate *, Rate *))block averageTerm:(NSUInteger)term limit:(NSUInteger)limit resultReverse:(BOOL)reverse
+- (void)enumerateForexDataAndAverageOHLCRatesUsingBlock:(void (^)(ForexHistoryData *, NSUInteger, Rate *, Rate *, Rate *, Rate *))block averageTerm:(NSUInteger)term limit:(NSUInteger)limit
 {
-    [self enumerateObjectsAndAverageOHLCRatesUsingBlock:^(ForexHistoryData *obj, NSUInteger idx, Rate *averageOpen, Rate *averageHigh, Rate *averageLow, Rate *averageClose) {
+    [self enumerateForexDataAndAverageOHLCRatesUsingBlock:^(ForexHistoryData *obj, NSUInteger idx, Rate *averageOpen, Rate *averageHigh, Rate *averageLow, Rate *averageClose) {
         
         block(obj, idx, averageOpen, averageHigh, averageLow, averageClose);
         
-    } averageTerm:term limit:limit resultReverse:reverse open:YES high:YES low:YES close:YES];
+    } averageTerm:term limit:limit resultReverse:NO open:YES high:YES low:YES close:YES];
     
     /*if (term == 0) {
         return;
@@ -144,7 +144,7 @@
     }];*/
 }
 
-- (void)enumerateObjectsAndAverageOHLCRatesUsingBlock:(void (^)(ForexHistoryData *obj, NSUInteger idx, Rate *averageOpen, Rate *averageHigh, Rate *averageLow, Rate *averageClose))block averageTerm:(NSUInteger)term limit:(NSUInteger)limit resultReverse:(BOOL)reverse open:(BOOL)open high:(BOOL)high low:(BOOL)low close:(BOOL)close
+- (void)enumerateForexDataAndAverageOHLCRatesUsingBlock:(void (^)(ForexHistoryData *obj, NSUInteger idx, Rate *averageOpen, Rate *averageHigh, Rate *averageLow, Rate *averageClose))block averageTerm:(NSUInteger)term limit:(NSUInteger)limit resultReverse:(BOOL)reverse open:(BOOL)open high:(BOOL)high low:(BOOL)low close:(BOOL)close
 {
     if (!(0 < term)) {
         return;
@@ -238,7 +238,7 @@
 {
     __block Rate *total = nil;
     
-    [self enumerateObjectsUsingBlock:^(ForexHistoryData *obj, NSUInteger idx) {
+    [self enumerateForexDataUsingBlock:^(ForexHistoryData *obj, NSUInteger idx) {
         
         if (idx == 0) {
             total = [obj getRateForType:type];
@@ -287,13 +287,13 @@
     
     __block Rate *minRate = nil;
     
-    [self enumerateObjectsUsingBlock:^(ForexHistoryData *obj, NSUInteger idx) {
+    [self enumerateForexDataUsingBlock:^(ForexHistoryData *obj, NSUInteger idx) {
         if (idx == 0) {
             minRate = obj.low;
         } else if (obj.low.rateValue < minRate.rateValue) {
             minRate = obj.low;
         }
-    } limit:limit resultReverse:NO];
+    } limit:limit];
     
     return minRate;
 }
@@ -302,13 +302,13 @@
 {
     __block Rate *maxRate = nil;
     
-    [self enumerateObjectsUsingBlock:^(ForexHistoryData *obj, NSUInteger idx) {
+    [self enumerateForexDataUsingBlock:^(ForexHistoryData *obj, NSUInteger idx) {
         if (idx == 0) {
             maxRate = obj.high;
         } else if (maxRate.rateValue < obj.high.rateValue) {
             maxRate = obj.high;
         }
-    } limit:limit resultReverse:NO];
+    } limit:limit];
     
     return maxRate;
 }
