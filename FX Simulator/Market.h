@@ -48,8 +48,6 @@
 */
 -(Rate*)getCurrentAskRate;
 
--(NSArray*)getForexDataLimit:(NSInteger)count;
-
 /**
  Startした瞬間、時間が進み、Observerのメソッドが呼ばれ、それぞれのObserverに値がセットされる。
 */
