@@ -9,6 +9,7 @@
 #import "ForexDataChunk.h"
 
 #import "ForexHistoryData.h"
+#import "MarketTime.h"
 #import "Rate.h"
 
 @implementation ForexDataChunk {
@@ -337,6 +338,40 @@
     }
     
     return [_forexDataArray subarrayWithRange:range];
+}
+
+- (ForexDataChunk *)getChunkFromBaseTime:(MarketTime *)time relativePosition:(NSInteger)pos limit:(NSUInteger)limit
+{
+    __block NSUInteger baseIndex = NSNotFound;
+    
+    [_forexDataArray enumerateObjectsUsingBlock:^(ForexHistoryData *obj, NSUInteger idx, BOOL *stop) {
+        if ([time isEqualTime:obj.close.timestamp]) {
+            baseIndex = idx;
+            *stop = YES;
+        }
+    }];
+    
+    if (baseIndex == NSNotFound) {
+        return nil;
+    }
+    
+    NSInteger startIndex = baseIndex + (-pos);
+    
+    if (self.count-1 < startIndex) {
+        return nil;
+    }
+    
+    if (startIndex < 0) {
+        startIndex = 0;
+    }
+    
+    NSUInteger len = limit;
+    
+    if (self.count < (startIndex + len)) {
+        len = self.count - startIndex;
+    }
+    
+    return [self getForexDataChunkInRange:NSMakeRange(startIndex, len)];
 }
 
 - (ForexDataChunk *)getChunkFromBaseData:(ForexHistoryData *)data relativePosition:(NSInteger)pos limit:(NSUInteger)limit

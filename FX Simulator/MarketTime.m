@@ -54,6 +54,17 @@ static NSString* const FXSTimeKey = @"time";
     return [self.date compare:time.date];
 }
 
+- (BOOL)isEqualTime:(MarketTime *)time
+{
+    NSComparisonResult result = [self compare:time];
+    
+    if (result == NSOrderedSame) {
+        return YES;
+    } else {
+        return NO;
+    }
+}
+
 -(NSString*)toDisplayTimeString
 {
     NSTimeInterval interval = _timestampValue;

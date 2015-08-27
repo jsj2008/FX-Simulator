@@ -84,18 +84,18 @@ static const NSUInteger kMinDisplayForexDataCount = 40;
 
 - (void)previousChart
 {
-    ForexHistoryData *newCurrentData = [_displayedForexDataChunk getForexDataFromCurrent:1];
+    /*ForexHistoryData *newCurrentData = [_displayedForexDataChunk getForexDataFromCurrent:1];
     if (newCurrentData == nil) {
         return;
     }
     _displayedForexDataChunk = [_store getChunkFromBaseData:newCurrentData limit:[ChartViewController requireForexDataCountForChart]];
-    [self updateChartFor:_displayedForexDataChunk];
+    [self updateChartFor:_displayedForexDataChunk];*/
 }
 
 - (void)nextChart
 {
-    _displayedForexDataChunk = [_store getChunkFromNextDataOf:_displayedForexDataChunk.current limit:[ChartViewController requireForexDataCountForChart]];
-    [self updateChartFor:_displayedForexDataChunk];
+    /*_displayedForexDataChunk = [_store getChunkFromNextDataOf:_displayedForexDataChunk.current limit:[ChartViewController requireForexDataCountForChart]];
+    [self updateChartFor:_displayedForexDataChunk];*/
 }
 
 
@@ -131,17 +131,13 @@ static const NSUInteger kMinDisplayForexDataCount = 40;
     _chart = chart;
     self.chartView.chart = _chart;
     [_chart setChartView:self.chartView];
-    _store = [[ForexDataChunkStore alloc] initWithCurrencyPair:_chart.currencyPair timeScale:_chart.timeFrame getMaxLimit:[ChartViewController requireForexDataCountForChart]];
+    _store = [[ForexDataChunkStore alloc] initWithCurrencyPair:_chart.currencyPair timeScale:_chart.timeFrame getMaxLimit:[[self class] requireForexDataCountForChart]];
 }
 
-- (void)updateChartFor:(ForexDataChunk *)chunk
+- (void)updateChartForTime:(MarketTime *)time
 {
-    if (chunk.count == 0) {
-        return;
-    }
-    
-    _chunk = chunk;
-    [_chart setForexDataChunk:_chunk];
+    ForexDataChunk *chunk = [_store getChunkFromBaseTime:time limit:[[self class] requireForexDataCountForChart]];
+    [_chart setForexDataChunk:chunk];
     [self.chartView setNeedsDisplay];
     _displayedForexDataChunk = _chunk;
 }

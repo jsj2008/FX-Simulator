@@ -14,6 +14,7 @@
 #import "ChartViewController.h"
 #import "Market.h"
 #import "ChartViewController.h"
+#import "Rate.h"
 #import "RatePanelViewController.h"
 #import "SimulationManager.h"
 #import "TradeDataViewController.h"
@@ -141,8 +142,8 @@
 
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
-    if ([keyPath isEqualToString:@"currentForexHistoryData"] && [object isKindOfClass:[Market class]]) {
-        [_chartViewController updateChartFor:((Market*)object).currentForexDataChunk];
+    if ([keyPath isEqualToString:@"currentTime"] && [object isKindOfClass:[Market class]]) {
+        [_chartViewController updateChartForTime:((Market*)object).currentRate.timestamp];
     }
 }
 

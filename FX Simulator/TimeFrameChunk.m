@@ -68,4 +68,11 @@
     return [_timeFrames count];
 }
 
+- (TimeFrame *)minTimeFrame
+{
+    NSArray *array = [_timeFrames sortedArrayUsingSelector:@selector(compare:)];
+    
+    return array.firstObject;
+}
+
 @end

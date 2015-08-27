@@ -72,7 +72,7 @@
 
 -(Money*)profitAndLoss
 {
-    return [self.openPosition profitAndLossForRate:_market.currentForexHistoryData.close];
+    return [self.openPosition profitAndLossForRate:_market.currentRate];
 }
 
 @end

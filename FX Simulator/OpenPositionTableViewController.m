@@ -135,7 +135,7 @@ static const unsigned int displayMaxOpenPositionDataRecords = 100;
     
     [self.tableView reloadData];
     
-    _currentRate = _market.currentForexHistoryData.close;
+    _currentRate = _market.currentRate;
 }
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath

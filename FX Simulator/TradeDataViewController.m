@@ -133,7 +133,7 @@
 {    
     if ([keyPath isEqualToString:@"currentForexHistoryData"] && [object isKindOfClass:[Market class]]) {
         Market *market = (Market*)object;
-        [_tradeDataViewData updateForexHistoryData:market.currentForexHistoryData];
+        [_tradeDataViewData updateFromCurrentRate:market.currentRate];
         self.profitAndLossLabel.text = _tradeDataViewData.displayProfitAndLoss;
         self.profitAndLossLabel.textColor = _tradeDataViewData.displayProfitAndLossColor;
         

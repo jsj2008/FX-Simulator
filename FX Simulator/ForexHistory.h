@@ -24,15 +24,10 @@
 -(id)initWithCurrencyPair:(CurrencyPair*)currencyPair timeScale:(TimeFrame*)timeScale;
 
 /**
- 基準となるデータを中心に、前後のLimitに基づきデータを取得する。
- @param data 基準データ
+ 基準となる時間(Close Time)を中心に、前後のLimitに基づきデータを取得する。
+ @param time 基準となる時間
 */
-- (ForexDataChunk *)selectBaseData:(ForexHistoryData *)data frontLimit:(NSUInteger)frontLimit backLimit:(NSUInteger)backLimit;
-
-/**
- 基準となるデータ(data)から、相対位置(pos)にあるデータを取得する。
-*/
-- (ForexHistoryData *)selectForexDataFromBaseData:(ForexHistoryData *)data relativePosition:(NSInteger)pos;
+- (ForexDataChunk *)selectBaseTime:(MarketTime *)time frontLimit:(NSUInteger)frontLimit backLimit:(NSUInteger)backLimit;
 
 - (ForexDataChunk *)selectMaxRowid:(int)rowid limit:(int)limit;
 
@@ -51,17 +46,16 @@
 */
 - (ForexDataChunk *)selectMaxCloseTime:(MarketTime *)closeTime newerThan:(MarketTime *)oldCloseTime;
 
-//-(NSArray*)selectMaxCloseTimestamp:(int)maxTimestamp minOpenTimestamp:(int)minTimestamp;
-//-(ForexHistoryData*)selectRowidLimitCloseTimestamp:(MarketTime*)maxTimestamp;
-//-(ForexHistoryData*)selectOpenTimestamp:(int)timestamp;
-//-(int)selectCloseTimestampFromRowid:(int)rowid;
 /**
  その通貨と時間軸のテーブルの始値の最初の時間。
  */
 -(MarketTime*)minOpenTime;
+
 /**
  その通貨と時間軸のテーブルの始値の最終の時間。
  */
 -(MarketTime*)maxOpenTime;
+
 -(ForexHistoryData*)lastRecord;
+
 @end

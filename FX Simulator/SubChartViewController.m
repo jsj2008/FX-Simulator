@@ -46,8 +46,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    ForexDataChunk *chunk = [_subChartViewData getCurrentChunk];
-    _chunkStore = [[ForexDataChunkStore alloc] initWithCurrencyPair:chunk.current.currencyPair timeScale:self.selectedTimeScale getMaxLimit:500];
+    //ForexDataChunk *chunk = [_subChartViewData getCurrentChunk];
+    //_chunkStore = [[ForexDataChunkStore alloc] initWithCurrencyPair:chunk.current.currencyPair timeScale:self.selectedTimeScale getMaxLimit:500];
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -142,9 +142,9 @@
     Chart *displayChart = [SaveLoader load].subChartChunk.displayChart;
     [_chartViewController setChart:displayChart];
     
-    ForexDataChunk *chunk = [_subChartViewData getCurrentChunk];
+    //ForexDataChunk *chunk = [_subChartViewData getCurrentChunk];
     
-    [_chartViewController updateChartFor:[_chunkStore getChunkFromBaseData:chunk.current limit:500]];
+    //[_chartViewController updateChartFor:[_chunkStore getChunkFromBaseData:chunk.current limit:500]];
     
     /*self.subChartView.chunk = [_chunkStore getChunkFromBaseData:chunk.current limit:500];
     

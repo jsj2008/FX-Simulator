@@ -12,7 +12,7 @@
 
 @class ForexHistoryData;
 @class Rate;
-
+@class MarketTime;
 
 /**
  連続するForexDataの集合を管理する。
@@ -53,6 +53,11 @@
  最新のForexDataからback個前のデータを取得する。
 */
 - (ForexHistoryData *)getForexDataFromCurrent:(NSUInteger)back;
+
+/**
+ 基準となる時間(Close Time)からの相対位置にあるデータを先頭に、最大Limit個のデータを取得する。
+ */
+- (ForexDataChunk *)getChunkFromBaseTime:(MarketTime *)time relativePosition:(NSInteger)pos limit:(NSUInteger)limit;
 
 /**
  基準となるデータからの相対位置にあるデータを先頭に、最大Limit個のデータを取得する。

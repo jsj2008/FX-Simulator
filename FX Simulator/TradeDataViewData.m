@@ -26,7 +26,7 @@
 @implementation TradeDataViewData {
     SaveData *saveData;
     SimulationManager *_simulationManager;
-    ForexHistoryData *_forexHistoryData;
+    Rate *_currentRate;
 }
 
 -(id)init
@@ -44,9 +44,9 @@
     [_simulationManager didOrder];
 }
 
--(void)updateForexHistoryData:(ForexHistoryData *)forexHistoryData
+-(void)updateFromCurrentRate:(Rate *)currentRate
 {
-    _forexHistoryData = forexHistoryData;
+    _currentRate = currentRate;
 }
 
 -(NSString*)displayCurrentSetting
@@ -111,7 +111,7 @@
  
 -(NSString*)displayOpenPositionMarketValue
 {
-    Money *marketValue = [_simulationManager.account.openPosition marketValueForRate:_forexHistoryData.close];
+    Money *marketValue = [_simulationManager.account.openPosition marketValueForRate:_currentRate];
     
     return marketValue.toDisplayString;
 }
