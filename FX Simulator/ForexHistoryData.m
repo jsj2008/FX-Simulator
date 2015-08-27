@@ -75,6 +75,11 @@
     }
 }
 
+- (NSComparisonResult)compareTime:(ForexHistoryData *)data
+{
+    return [self.close.timestamp compare:data.close.timestamp];
+}
+
 - (Rate *)getRateForType:(RateType)type
 {
     Rate *result;
