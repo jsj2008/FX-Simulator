@@ -43,7 +43,7 @@
     
     __block CGPoint previousLoaded;
     
-    [chunk enumerateObjectsAndAverageRatesUsingBlock:^(ForexHistoryData *obj, NSUInteger idx, Rate *average) {
+    [chunk enumerateForexDataAndAverageRatesUsingBlock:^(ForexHistoryData *obj, NSUInteger idx, Rate *average) {
         CGPoint p = [IndicatorUtils getChartViewPointFromRate:average ratePointNumber:idx minRate:[chunk getMinRateLimit:count] maxRate:[chunk getMaxRateLimit:count] ratePointCount:count viewSize:size];
         
         if (idx == 0) {
@@ -55,7 +55,7 @@
         
         previousLoaded = p;
         
-    } averageTerm:self.period limit:count resultReverse:NO];
+    } averageTerm:self.period limit:count];
     
     [path stroke];
 }
