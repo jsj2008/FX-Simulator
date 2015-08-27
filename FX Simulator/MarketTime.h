@@ -13,6 +13,7 @@
 -(instancetype)initWithDate:(NSDate*)date;
 -(MarketTime*)addDay:(int)day;
 -(NSComparisonResult)compare:(MarketTime*)time;
+- (BOOL)isEqualTime:(MarketTime *)time;
 -(NSString*)toDisplayTimeString;
 -(NSString*)toDisplayYMDString;
 -(NSString*)toDisplayHMSString;

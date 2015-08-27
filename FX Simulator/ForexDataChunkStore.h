@@ -24,23 +24,11 @@
 */
 - (instancetype)initWithCurrencyPair:(CurrencyPair *)currencyPair timeScale:(TimeFrame *)timeScale getMaxLimit:(NSUInteger)maxLimit;
 
-/**
- 基準となるデータを先頭に、最大Limit個のデータを取得する。
-*/
-- (ForexDataChunk *)getChunkFromBaseData:(ForexHistoryData *)data limit:(NSUInteger)limit;
-
-/**
- 基準となるデータのback個前のデータを先頭に、最大Limit個のデータを取得する。
-*/
-//- (ForexDataChunk *)getChunkFromBaseData:(ForexHistoryData *)data back:(NSUInteger)back limit:(NSUInteger)limit;
+- (ForexDataChunk *)getChunkFromBaseTime:(MarketTime *)time limit:(NSUInteger)limit;
 
 /**
  基準となるデータの次のデータを先頭に、最大Limit個のデータを取得する。
 */
-- (ForexDataChunk *)getChunkFromNextDataOf:(ForexHistoryData *)data limit:(NSUInteger)limit;
-
-/*- (ForexHistoryData *)getChunkFromCloseTime:(MarketTime *)closeTime limit:(NSUInteger)limit;
-
-- (ForexHistoryData *)getChunkFromCloseTime:(MarketTime *)closeTime back:(NSUInteger)back limit:(NSUInteger)limit;*/
+- (ForexDataChunk *)getChunkFromNextDataOfTime:(MarketTime *)time limit:(NSUInteger)limit;
 
 @end

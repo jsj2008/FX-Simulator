@@ -11,6 +11,9 @@
 @class TimeFrame;
 
 @interface TimeFrameChunk : NSObject
+
+@property (nonatomic, readonly) TimeFrame *minTimeFrame;
+
 - (instancetype)initWithTimeFrameArray:(NSArray *)timeframes;
 - (void)enumerateTimeFrames:(void (^)(TimeFrame *timeFrame))block;
 - (void)enumerateTimeFrames:(void (^)(NSUInteger idx, TimeFrame *timeFrame))block execept:(TimeFrame *)execeptTimeFrame;

@@ -13,8 +13,11 @@
 #import "ForexHistory.h"
 #import "ForexHistoryData.h"
 #import "ForexHistoryFactory.h"
+#import "MarketTime.h"
 #import "TimeFrame.h"
+#import "TimeFrameChunk.h"
 #import "Rate.h"
+#import "Setting.h"
 
 @implementation ForexDataChunkStore {
     CurrencyPair *_currencyPair;
@@ -48,75 +51,60 @@ static const NSUInteger buffer = 200;
 }
 
 // relativePositionは、relativePositionからLimitまでの範囲が、キャッシュの範囲を超えないような、数値にする。数値が、大きすぎると、nilになる。つまり、baseDataとrelativePositionが離れすぎると、nilになる。
-- (ForexDataChunk *)getChunkFromBaseData:(ForexHistoryData *)data relativePosition:(NSInteger)pos limit:(NSUInteger)limit
+- (ForexDataChunk *)getChunkFromBaseTime:(MarketTime *)time relativePosition:(NSInteger)pos limit:(NSUInteger)limit
 {
-    if (data == nil || ![_currencyPair isEqualCurrencyPair:data.currencyPair]) {
-        return nil;
+    if (_forexDataChunkCache == nil) {
+        _forexDataChunkCache = [_forexHistory selectBaseTime:time frontLimit:_frontLimit backLimit:_backLimit];
     }
     
-    if (_forexDataChunkCache == nil) {
-        _forexDataChunkCache = [_forexHistory selectBaseData:data frontLimit:_frontLimit backLimit:_backLimit];
-    }
-
-    ForexDataChunk *chunk = [_forexDataChunkCache getChunkFromBaseData:data relativePosition:pos limit:limit];
+    ForexDataChunk *chunk = [_forexDataChunkCache getChunkFromBaseTime:time relativePosition:pos limit:limit];
     
     if (chunk == nil || chunk.count < limit) {
-        _forexDataChunkCache = [_forexHistory selectBaseData:data frontLimit:_frontLimit backLimit:_backLimit];
-        chunk = [_forexDataChunkCache getChunkFromBaseData:data relativePosition:pos limit:limit];
+        _forexDataChunkCache = [_forexHistory selectBaseTime:time frontLimit:_frontLimit backLimit:_backLimit];
+        chunk = [_forexDataChunkCache getChunkFromBaseTime:time relativePosition:pos limit:limit];
     }
     
     return chunk;
 }
 
-- (ForexDataChunk *)getChunkFromBaseData:(ForexHistoryData *)data limit:(NSUInteger)limit
+- (ForexDataChunk *)getChunkFromBaseTime:(MarketTime *)time limit:(NSUInteger)limit
 {
-    NSComparisonResult result = [_timeScale compare:data.timeScale];
+    ForexDataChunk *chunk = [self getChunkFromBaseTime:time relativePosition:0 limit:limit];
     
-    // dataの時間軸の方が、短いとき。
-    if (result == NSOrderedDescending) {
-        ForexHistoryData *equalTimeData = [_forexHistory selectCloseTime:data.close.timestamp];
-        
-        if (equalTimeData == nil) {
-            // 短い時間軸のdataに、dataより古くて、一番近いこのStoreの時間軸(_timeScale)のデータを取得する。
-            ForexHistoryData *oldData = [_forexHistory selectMaxCloseTime:data.close.timestamp limit:1].firstObject;
-            ForexHistoryData *newTimeScaleData = [self toTimeScaleDataFromCurrentData:data newestThan:oldData.close.timestamp];
-            ForexDataChunk *chunk = [self getChunkFromBaseData:oldData relativePosition:0 limit:limit];
-            [chunk addCurrentData:newTimeScaleData];
-            
-            return chunk;
-        } else {
-            return [self getChunkFromBaseData:equalTimeData relativePosition:0 limit:limit];
-        }
-        
-    } else if (result == NSOrderedAscending) {
-        
-        ForexHistoryData *equalTimeData = [_forexHistory selectCloseTime:data.close.timestamp];
-        return [self getChunkFromBaseData:equalTimeData relativePosition:0 limit:limit];
-    
-    } else {
-        
-        return [self getChunkFromBaseData:data relativePosition:0 limit:limit];
-        
-    }
-}
-
-- (ForexDataChunk *)getChunkFromNextDataOf:(ForexHistoryData *)data limit:(NSUInteger)limit
-{
-    if (![_timeScale isEqualToTimeFrame:data.timeScale]) {
+    if (chunk == nil) {
         return nil;
     }
     
-    return [self getChunkFromBaseData:data relativePosition:1 limit:limit];
+    NSComparisonResult result = [time compare:chunk.current.close.timestamp];
+    
+    if (result == NSOrderedSame) {
+        return chunk;
+    } else if (result == NSOrderedDescending) {
+        ForexHistoryData *newTimeFrameData = [self getTimeFrameDataFromCurrentTime:time newestThan:chunk.current.close.timestamp];
+        [chunk addCurrentData:newTimeFrameData];
+        return chunk;
+    } else {
+        return nil;
+    }
+    
+}
+
+- (ForexDataChunk *)getChunkFromNextDataOfTime:(MarketTime *)time limit:(NSUInteger)limit
+{
+    return [self getChunkFromBaseTime:time relativePosition:1 limit:limit];
 }
 
 /**
- currentDataを先頭のデータとして、currentDataの時間軸で、oldTimeより新しいデータを取得し、それで一つの新しいForexData（実際のデータベース上にはない、このStoreと同じ時間軸のデータ）を作成する。
+ currentTimeとoldTimeの間の時間足データを作成する。
+ 例えば1時間足のチャートを、15分足にしてみると、1時間で割り切れる時間以外は、15分足の端数がでる。その端数を1時間足に変換して、オリジナルの1時間足を作成する。
 */
-- (ForexHistoryData *)toTimeScaleDataFromCurrentData:(ForexHistoryData *)currentData newestThan:(MarketTime *)oldTime;
+- (ForexHistoryData *)getTimeFrameDataFromCurrentTime:(MarketTime *)currentTime newestThan:(MarketTime *)oldTime
 {
-    ForexHistory *forexHistory = [ForexHistoryFactory createForexHistoryFromCurrencyPair:_currencyPair timeScale:currentData.timeScale];
+    TimeFrame *minTimeFrame = [[Setting timeFrameList] minTimeFrame];
     
-    ForexDataChunk *chunk = [forexHistory selectMaxCloseTime:currentData.close.timestamp newerThan:oldTime];
+    ForexHistory *forexHistory = [ForexHistoryFactory createForexHistoryFromCurrencyPair:_currencyPair timeScale:minTimeFrame];
+    
+    ForexDataChunk *chunk = [forexHistory selectMaxCloseTime:currentTime newerThan:oldTime];
     
     return [[ForexHistoryData alloc] initWithForexDataChunk:chunk timeScale:_timeScale];
 }

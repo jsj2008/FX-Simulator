@@ -23,11 +23,14 @@
 #import "Rates.h"
 
 
-static NSInteger kMaxForexDataStore;
-static NSString * const kKeyPath = @"currentForexHistoryData";
+static NSInteger FXSMaxForexDataStore = 500;
+static NSString * const kKeyPath = @"currentTime";
 
 @interface Market ()
 @property (nonatomic, readwrite) int currentLoadedRowid;
+@property (nonatomic) Rate *currentRate;
+@property (nonatomic) MarketTime *currentTime;
+@property (nonatomic) ForexHistoryData *currentForexData;
 @end
 
 @implementation Market {
@@ -37,18 +40,17 @@ static NSString * const kKeyPath = @"currentForexHistoryData";
     ForexDataChunkStore *_forexDataChunkStore;
     ForexHistory *forexHistory;
     ForexHistoryData *_lastData;
-    ForexHistoryData *_startForexData;
-}
-
-+(void)initialize
-{
-    kMaxForexDataStore = [Setting maxDisplayForexDataCountOfChartView] + [Setting maxIndicatorTerm] - 1;
 }
 
 -(id)init
 {
     if (self = [super init]) {
+        
+        /**
+         newした段階で、Marketに初期データをセットしておく。
+        */
         [self setInitData];
+        
         _observers = [NSMutableArray array];
     }
     
@@ -59,19 +61,19 @@ static NSString * const kKeyPath = @"currentForexHistoryData";
 {
     saveData = [SaveLoader load];
     
-    _forexDataChunkStore = [[ForexDataChunkStore alloc] initWithCurrencyPair:saveData.currencyPair timeScale:saveData.timeFrame getMaxLimit:kMaxForexDataStore];
-    
     forexHistory = [ForexHistoryFactory createForexHistoryFromCurrencyPair:saveData.currencyPair timeScale:saveData.timeFrame];
+    _currentTime = saveData.lastLoadedTime;
+    _currentForexData = [forexHistory selectMaxCloseTime:_currentTime limit:1].firstObject;
+    
+    _forexDataChunkStore = [[ForexDataChunkStore alloc] initWithCurrencyPair:saveData.currencyPair timeScale:saveData.timeFrame getMaxLimit:FXSMaxForexDataStore];
+    
     _lastData = [forexHistory lastRecord];
-    _startForexData = [forexHistory selectMaxCloseTime:saveData.lastLoadedTime limit:1].firstObject;
     
     _marketTimeManager = [MarketTimeManager new];
     [_marketTimeManager addObserver:self];
     
-    //_currentLoadedRowid = _marketTimeManager.currentLoadedRowid;
     _isStart = NO;
-#warning ここでもMarket更新している。
-    [self setMarketData];
+
 }
 
 -(void)addObserver:(UIViewController *)observer
@@ -83,47 +85,30 @@ static NSString * const kKeyPath = @"currentForexHistoryData";
 
 -(Rate*)getCurrentBidRate
 {
-    return self.currentForexHistoryData.close;
+    return self.currentForexData.close;
 }
 
 -(Rate*)getCurrentAskRate
 {
-    return [[[Rates alloc] initWithBidRtae:self.currentForexHistoryData.close] askRate];
+    return [[[Rates alloc] initWithBidRtae:self.currentForexData.close] askRate];
 }
 
-/*- (NSArray *)getForexDataLimit:(NSInteger)count
+/**
+ ObserverにMarketの更新前、更新、更新後を通知。
+*/
+- (void)updateMarketFromNewCurrentData:(ForexHistoryData *)data
 {
-    NSInteger lastIndex = self.currentForexHistoryDataArray.count - 1;
-    NSInteger getStartIndex = lastIndex - count + 1;
-    
-    if (lastIndex < 0 || getStartIndex < 0) {
-        return nil;
-    }
-    
-    return [self.currentForexHistoryDataArray subarrayWithRange:NSMakeRange(getStartIndex, lastIndex)];
-}*/
-
--(void)setDefaultData
-{
-    self.currentForexDataChunk = [_forexDataChunkStore getChunkFromBaseData:_startForexData limit:kMaxForexDataStore];
-    
-    [self updateMarketForCurrentData:_startForexData];
-    
-    /// observerが全て更新され、Marketのデータがセットされる。
-    //self.currentLoadedRowid = _marketTimeManager.currentLoadedRowid;
-}
-
-- (void)updateMarketForCurrentData:(ForexHistoryData *)data
-{
-    //self.currentForexDataChunk = [_forexDataChunkStore getChunkFromHeadData:self.currentForexHistoryData limit:kMaxForexDataStore];
-    
     // Market更新前を通知。
     if ([self.delegate respondsToSelector:@selector(willNotifyObservers)]) {
         [self.delegate willNotifyObservers];
     }
     
+    self.currentForexData = data;
+    self.currentRate = data.close;
+    
     // Market更新。
-    self.currentForexHistoryData = data;
+    self.currentTime = self.currentRate.timestamp;
+    
     // SimulatorManager
     // observeの呼ばれる順番は不規則
     // Marketの更新"直後"に実行したいものはObserverにしない
@@ -138,7 +123,8 @@ static NSString * const kKeyPath = @"currentForexHistoryData";
 
 -(void)start
 {
-    [self setDefaultData];
+    // 初期データでMarketを更新しておく。
+    [self updateMarketFromNewCurrentData:self.currentForexData];
     
     if (saveData.isAutoUpdate) {
         [self startTime];
@@ -189,27 +175,19 @@ static NSString * const kKeyPath = @"currentForexHistoryData";
     //saveData.isAutoUpdate = isAutoUpdate;
 }
 
--(void)setMarketData
-{
-    int getDataCount = kMaxForexDataStore; // MarketがあらかじめForexHistoryから取得するデータ数
-    
-    self.currentForexDataChunk = [forexHistory selectMaxRowid:_currentLoadedRowid limit:getDataCount];
-    self.currentForexHistoryData = self.currentForexDataChunk.current;
-    /*self.currentForexHistoryDataArray = [forexHistory selectMaxRowid:_currentLoadedRowid limit:getDataCount];
-    self.currentForexHistoryData = [self.currentForexHistoryDataArray lastObject];*/
-}
-
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
     if ([keyPath isEqualToString:@"currentLoadedRowid"] && [object isKindOfClass:[MarketTimeManager class]]) {
         
-        self.currentForexDataChunk = [_forexDataChunkStore getChunkFromNextDataOf:self.currentForexHistoryData limit:kMaxForexDataStore];
+        ForexDataChunk *currentForexDataChunk = [_forexDataChunkStore getChunkFromNextDataOfTime:self.currentTime limit:1];
         
-        if (self.currentForexDataChunk == nil) {
+        ForexHistoryData *newCurrentData = currentForexDataChunk.current;
+        
+        if (newCurrentData == nil) {
             return;
         }
         
-        [self updateMarketForCurrentData:self.currentForexDataChunk.current];
+        [self updateMarketFromNewCurrentData:newCurrentData];
     }
 }
 
@@ -220,7 +198,7 @@ static NSString * const kKeyPath = @"currentForexHistoryData";
 
 -(BOOL)didLoadLastData
 {
-    if (_lastData.ratesID == self.currentForexHistoryData.ratesID) {
+    if (_lastData.ratesID == self.currentForexData.ratesID) {
         return YES;
     } else {
         return NO;

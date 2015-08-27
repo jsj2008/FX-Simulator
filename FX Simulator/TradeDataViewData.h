@@ -12,9 +12,10 @@
 @class Equity;
 @class ForexHistoryData;
 @class Lot;
+@class Rate;
 
 @interface TradeDataViewData : NSObject
--(void)updateForexHistoryData:(ForexHistoryData*)forexHistoryData;
+-(void)updateFromCurrentRate:(Rate *)currentRate;
 -(void)didOrder;
 -(NSString*)displayCurrentSetting;
 @property (nonatomic, readonly) NSString *displayOrderType;
