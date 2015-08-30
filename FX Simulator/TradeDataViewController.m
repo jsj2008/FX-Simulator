@@ -83,11 +83,11 @@
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {    
     if ([keyPath isEqualToString:@"currentTime"] && [object isKindOfClass:[Market class]]) {
-        /*self.profitAndLossLabel.text = _tradeDataViewData.displayProfitAndLoss;
+        self.profitAndLossLabel.text = _tradeDataViewData.displayProfitAndLoss;
         self.profitAndLossLabel.textColor = _tradeDataViewData.displayProfitAndLossColor;
         self.openPositionMarketValueLabel.text = @"";
         self.equityLabel.text = _tradeDataViewData.displayEquity;
-        self.equityLabel.textColor = _tradeDataViewData.displayEquityColor;*/
+        self.equityLabel.textColor = _tradeDataViewData.displayEquityColor;
     }
 }
 
