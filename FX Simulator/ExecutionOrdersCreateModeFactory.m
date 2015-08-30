@@ -9,7 +9,7 @@
 #import "ExecutionOrdersCreateModeFactory.h"
 
 #import "OpenPosition.h"
-#import "ExecutionOrderMaterial.h"
+#import "Order.h"
 #import "OrderType.h"
 #import "OnlyCloseExecutionOrdersCreateMode.h"
 #import "OnlyNewExecutionOrdersCreateMode.h"
@@ -24,24 +24,12 @@
     ExecutionOrdersCreateMode *closeAndNew;
 }
 
-/*-(id)init
-{
-    if (self = [super init]) {
-        openPosition = [OpenPositionFactory createOpenPosition];
-        onlyClose = [OnlyCloseExecutionOrdersCreateMode new];
-        onlyNew = [OnlyNewExecutionOrdersCreateMode new];
-        closeAndNew = [CloseAndNewExecutionOrdersCreateMode new];
-    }
-    
-    return self;
-}*/
-
 -(id)init
 {
     return nil;
 }
 
--(id)initWithOpenPosition:(OpenPosition *)openPosition
+- (instancetype)initWithOpenPosition:(OpenPosition *)openPosition
 {
     if (self = [super init]) {
         _openPosition = openPosition;
@@ -54,12 +42,13 @@
     return self;
 }
 
--(ExecutionOrdersCreateMode*)createMode:(ExecutionOrderMaterial*)order
+#warning positionsize
+- (ExecutionOrdersCreateMode *)createMode:(Order *)order
 {
     [_openPosition update];
     
-    OrderType *orderType = _openPosition.orderType;
-    position_size_t totalPositionSize = _openPosition.totalPositionSize.sizeValue;
+    OrderType *orderType = [_openPosition orderTypeOfCurrencyPair:order.currencyPair];
+    position_size_t totalPositionSize = [_openPosition totalPositionSizeOfCurrencyPair:order.currencyPair].sizeValue;
     
     if (totalPositionSize == 0) {
         return onlyNew;

@@ -9,7 +9,7 @@
 #import "TradeDatabase.h"
 #import "FMDatabase.h"
 
-static NSString* const dbFileName = @"tradedb.sqlite3";
+static NSString* const dbFileName = @"trade_db.sqlite3";
 static NSString* const testDbFileName = @"TradeTestDb.sqlite3";
 
 @implementation TradeDatabase

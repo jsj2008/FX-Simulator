@@ -12,9 +12,9 @@
 @class Currency;
 
 @interface Money : NSObject <NSCoding>
--(id)initWithAmount:(amount_t)amount currency:(Currency*)currency;
--(Money*)addMoney:(Money*)money;
-//-(Money*)convertToCurrency:(Currency*)currency;
+- (instancetype)initWithAmount:(amount_t)amount currency:(Currency*)currency;
+- (Money *)addMoney:(Money*)money;
+- (Money *)convertToCurrency:(Currency *)currency;
 @property (nonatomic, readonly) amount_t amount;
 @property (nonatomic, readonly) NSNumber *toMoneyValueObj;
 @property (nonatomic, readonly) NSString *toDisplayString;

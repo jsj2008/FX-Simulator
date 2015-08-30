@@ -91,9 +91,9 @@ static const NSUInteger FXSMaxDisplayDataCount = 80;
     if (![self.indicatorChunk existsBaseIndicator]) {
         Candle *candle = [Candle createTemporaryDefaultCandle];
         [candle strokeIndicatorFromForexDataChunk:_forexDataChunk displayDataCount:self.displayDataCount displaySize:viewSize];
-    } else {
-        [self.indicatorChunk strokeIndicatorFromForexDataChunk:_forexDataChunk displayDataCount:self.displayDataCount displaySize:viewSize];
     }
+    
+    [self.indicatorChunk strokeIndicatorFromForexDataChunk:_forexDataChunk displayDataCount:self.displayDataCount displaySize:viewSize];
     
     _displayedForexDataChunk = _forexDataChunk;
     _displayedViewSize = viewSize;

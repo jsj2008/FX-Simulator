@@ -12,9 +12,11 @@
 #import "CurrencyPair.h"
 #import "Money.h"
 #import "ExecutionHistory.h"
-#import "ExecutionHistoryRecord.h"
+#import "ExecutionOrder.h"
 #import "CurrencyConverter.h"
 #import "ProfitAndLossCalculator.h"
+#import "SaveData.h"
+#import "SaveLoader.h"
 
 @implementation Balance {
     Money *_startBalance;
@@ -22,43 +24,36 @@
     NSArray *_executionHistoryRecords;
 }
 
--(id)initWithStartBalance:(Money*)balance ExecutionHistory:(ExecutionHistory*)executionHistory
++ (instancetype)loadBalance
+{
+    SaveData *saveData = [SaveLoader load];
+    
+    Money *startBalance = saveData.startBalance;
+    
+    ExecutionHistory *executionHistory = [ExecutionHistory loadExecutionHistory];
+    
+    return [[Balance alloc] initWithStartBalance:startBalance ExecutionHistory:executionHistory];
+}
+
+- (instancetype)initWithStartBalance:(Money *)balance ExecutionHistory:(ExecutionHistory *)executionHistory
 {
     if (self = [super init]) {
-        _currency = balance.currency;
-        _balance = balance;
         _startBalance = balance;
         _executionHistory = executionHistory;
-        //_executionHistoryRecords = [_executionHistory all];
-        [self updateBalance];
     }
     
     return self;
 }
 
--(void)updateBalance
+- (Money *)calculateBalance
 {
     _executionHistoryRecords = [_executionHistory all];
     
-    _balance = [self calculateBalance];
-}
-
--(Money*)calculateBalance
-{
-    /*BOOL existCloseRecord = NO;
-    
-    for (ExecutionHistoryRecord *record in _executionHistoryRecords) {
-        if (record.isClose) {
-            existCloseRecord = YES;
-            break;
-        }
-    }*/
-    
     amount_t balance = 0;
     
-    for (ExecutionHistoryRecord *record in _executionHistoryRecords) {
+    for (ExecutionOrder *record in _executionHistoryRecords) {
         if (record.isClose) {
-            Money *profitAndLoss = [ProfitAndLossCalculator calculateByTargetRate:record.orderRate valuationRate:record.closeOrderRate positionSize:record.positionSize orderType:record.orderType];
+            Money *profitAndLoss = record.profitAndLoss;
             Money *convertedProfitAndLoss = [CurrencyConverter convert:profitAndLoss to:_startBalance.currency];
             balance += convertedProfitAndLoss.amount;
         }
@@ -66,9 +61,12 @@
     
     balance += _startBalance.amount;
     
-    //Currency *currency = ((ExecutionHistoryRecord*)[_executionHistoryRecords firstObject]).currencyPair.baseCurrency;
-    
     return [[Money alloc] initWithAmount:balance currency:_startBalance.currency];
+}
+
+- (Money *)balanceInCurrency:(Currency *)currency
+{
+    return [[self calculateBalance] convertToCurrency:currency];
 }
 
 @end

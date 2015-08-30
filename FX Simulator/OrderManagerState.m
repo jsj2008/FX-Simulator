@@ -34,7 +34,7 @@
     return self;
 }
 
--(void)updateState:(UsersOrder *)usersOrder
+- (void)updateState:(Order *)order
 {
     _simulationManagerStop = [_simulationManager isStop];
     _openPositionMax = [_openPosition isMax];
@@ -42,7 +42,7 @@
     if (_simulationManagerStop) {
         _isExecutable = NO;
     } else if (_openPositionMax) {
-        if ([usersOrder includeCloseOrder]) {
+        if ([order includeCloseOrder]) {
             _isExecutable = YES;
         } else {
             _isExecutable = NO;

@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+@class Account;
 @class CoreDataManager;
 @class SaveDataSource;
 @class Chart;
@@ -42,6 +43,7 @@
 @property (nonatomic, readonly) OrderHistory *orderHistory;
 @property (nonatomic, readonly) OpenPosition *openPosition;
 @property (nonatomic, readonly) ExecutionHistory *executionHistory;
+@property (nonatomic, readonly) Account *account;
 
 /**
  CoreDataに新しいデフォルトのセーブデータを登録。

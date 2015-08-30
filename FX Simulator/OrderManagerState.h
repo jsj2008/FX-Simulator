@@ -9,13 +9,17 @@
 #import <Foundation/Foundation.h>
 
 @class UIViewController;
-@class UsersOrder;
+@class Order;
 
 @interface OrderManagerState : NSObject
--(void)updateState:(UsersOrder*)usersOrder;
+
+- (void)updateState:(Order *)usersOrder;
+
 /**
  Orderが実行可能かどうか。
 */
 -(BOOL)isExecutable;
+
 -(void)showAlert:(UIViewController*)controller;
+
 @end

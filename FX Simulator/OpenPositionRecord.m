@@ -10,10 +10,12 @@
 
 #import "ProfitAndLossCalculator.h"
 #import "CurrencyConverter.h"
-#import "NewExecutionOrder.h"
 #import "FMDatabase.h"
 #import "ForexHistoryData.h"
+#import "Market.h"
 #import "Rate.h"
+#import "Rates.h"
+#import "OrderHistory.h"
 #import "OrderType.h"
 #import "PositionSize.h"
 #import "Spread.h"
@@ -22,7 +24,7 @@
 
 @implementation OpenPositionRecord
 
--(id)initWithNewExecutionOrder:(NewExecutionOrder *)order
+/*- (instancetype)initWithNewExecutionOrder:(ExecutionOrder *)order
 {
     if (self = [super init]) {
         _executionOrderID = order.orderID;
@@ -37,7 +39,7 @@
     }
     
     return self;
-}
+}*/
 
 /*-(id)initWithFMResultSet:(FMResultSet *)rs currencyPair:(CurrencyPair *)currencyPair
 {
@@ -55,7 +57,27 @@
     return self;
 }*/
 
--(id)initWithOpenPositionRawRecord:(OpenPositionRawRecord*)rawRecord executionHistoryRecord:(ExecutionHistoryRecord*)record
+- (instancetype)initWithFMResultSet:(FMResultSet *)result orderHistory:(OrderHistory *)orderHistory
+{
+    NSUInteger orderHistoryId = [result intForColumn:@"order_history_id"];
+    
+    Order *order = [orderHistory getOrderFromOrderHistoryId:orderHistoryId];
+    
+    if (!order) {
+        return nil;
+    }
+    
+    PositionSize *openPositionSize = [[PositionSize alloc] initWithSizeValue:[result intForColumn:@"open_position_size"]];
+    
+    if (self = [super initWithOrderHistoryId:order.orderHistoryId CurrencyPair:order.currencyPair orderType:order.orderType orderRate:order.orderRate positionSize:openPositionSize orderSpread:order.orderSpread]) {
+        _openPositionId = [result intForColumn:@"id"];
+        _executionHistoryId = [result intForColumn:@"execution_history_id"];
+    }
+    
+    return self;
+}
+
+/*-(id)initWithOpenPositionRawRecord:(OpenPositionRawRecord*)rawRecord executionHistoryRecord:(ExecutionHistoryRecord*)record
 {
     if (![rawRecord.executionOrderID isEqualToNumber:record.orderID]) {
         return nil;
@@ -80,11 +102,23 @@
     }
     
     return self;
-}
+}*/
 
--(Money*)profitAndLossForRate:(Rate*)rate
+- (Money *)profitAndLossForMarket:(Market *)market
 {
-    Money *profitAndLoss = [ProfitAndLossCalculator calculateByTargetRate:self.orderRate valuationRate:rate positionSize:self.positionSize orderType:self.orderType];
+    Rates *valuationRates = [market getCurrentRatesOfCurrencyPair:self.currencyPair];
+    
+    Rate *valuationRate;
+    
+    if ([self.orderType isShort]) {
+        valuationRate = valuationRates.askRate;
+    } else if ([self.orderType isLong]) {
+        valuationRate = valuationRates.bidRate;
+    } else {
+        return nil;
+    }
+    
+    Money *profitAndLoss = [ProfitAndLossCalculator calculateByTargetRate:self.orderRate valuationRate:valuationRate positionSize:self.positionSize orderType:self.orderType];
     
     return profitAndLoss;
 }

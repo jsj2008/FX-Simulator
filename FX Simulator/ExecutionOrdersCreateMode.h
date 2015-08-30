@@ -8,15 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
-@class ExecutionOrderMaterial;
 @class OpenPosition;
-
-/*@protocol ExecutionOrdersCreateMode
--(NSArray*)create:(ExecutionOrderMaterial*)order;
-@end*/
+@class Order;
 
 @interface ExecutionOrdersCreateMode : NSObject
--(id)initWithOpenPosition:(OpenPosition*)openPosition;
--(NSArray*)create:(ExecutionOrderMaterial*)order __attribute__((objc_requires_super));
 @property (nonatomic, readonly) OpenPosition *openPosition;
+- (instancetype)initWithOpenPosition:(OpenPosition *)openPosition;
+- (NSArray *)create:(Order *)order __attribute__((objc_requires_super));
 @end

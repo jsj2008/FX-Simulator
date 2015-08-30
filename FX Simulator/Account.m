@@ -8,71 +8,86 @@
 
 #import "Account.h"
 
+#import "Balance.h"
 #import "Equity.h"
 #import "EquityFactory.h"
 #import "ForexHistoryData.h"
+#import "Lot.h"
 #import "Market.h"
 #import "Money.h"
+#import "Money+ConvertToAccountCurrency.h"
 #import "OpenPosition.h"
-
-@interface Account ()
-@property (nonatomic, readwrite) OpenPosition *openPosition;
-@property (nonatomic, readwrite) Money *profitAndLoss;
-@end
+#import "SaveData.h"
+#import "SaveLoader.h"
+#import "SimulationManager.h"
 
 @implementation Account {
-    Equity *_equityObj;
-    Market *_market;
+    Currency *_accountCurrency;
+    CurrencyPair *_currencyPair;
+    Balance *_balance;
+    OpenPosition *_openPosition;
 }
 
--(instancetype)initWithMarket:(Market *)market
+-(instancetype)initWithAccountCurrency:(Currency *)currency currencyPair:(CurrencyPair *)currencyPair balance:(Balance *)balance openPosition:(OpenPosition *)openPosition
 {
     if (self = [super init]) {
-        _market = market;
-        [self setInitData];
+        _accountCurrency = currency;
+        _currencyPair = currencyPair;
+        _balance = balance;
+        _openPosition = openPosition;
     }
     
     return self;
 }
 
--(void)setInitData
+- (void)updatedSaveData
 {
-    _equityObj = [EquityFactory createEquity];
+    _balance = [Balance loadBalance];
     _openPosition = [OpenPosition loadOpenPosition];
-    [self updatedMarket];
 }
 
--(void)updatedMarket
+- (void)didOrder
 {
-    [_equityObj setCurrentProfitAndLoss:self.profitAndLoss];
+    [_openPosition update];
 }
 
--(void)updatedSaveData
+- (BOOL)isShortage
 {
-    _equityObj = [EquityFactory createEquity];
-    _openPosition = [OpenPosition loadOpenPosition];
-    [self updatedMarket];
+    if (self.equity.amount <= 0) {
+        return YES;
+    } else {
+        return NO;
+    }
 }
 
--(void)didOrder
+- (Rate *)averageRate
 {
-    [self.openPosition update];
-    [_equityObj update];
+    return [_openPosition averageRateOfCurrencyPair:_currencyPair];
 }
 
--(BOOL)isShortage
+- (Money *)equity
 {
-    return [_equityObj isShortage];
+    Money *balance = [_balance balanceInCurrency:_accountCurrency];
+    Money *profitAndLoss = [self profitAndLoss];
+    
+    return [balance addMoney:profitAndLoss];
 }
 
--(Money*)equity
+- (OrderType *)orderType
 {
-    return _equityObj.equity;
+    return [_openPosition orderTypeOfCurrencyPair:_currencyPair];
 }
 
--(Money*)profitAndLoss
+- (Money *)profitAndLoss
 {
-    return [self.openPosition profitAndLossForRate:_market.currentRate];
+    Market *market = [SimulationManager sharedSimulationManager].market;
+    
+    return [_openPosition profitAndLossForMarket:market currencyPair:_currencyPair InCurrency:_accountCurrency];
+}
+
+- (Lot *)totalLot
+{
+    return [_openPosition totalLotOfCurrencyPair:_currencyPair];
 }
 
 @end

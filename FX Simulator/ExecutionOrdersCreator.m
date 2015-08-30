@@ -6,7 +6,8 @@
 //  
 //
 
-#import "ExecutionOrdersCreator.h"
+#import "ExecutionOrdersCreator.h" 
+
 #import "ExecutionOrdersCreateModeFactory.h"
 #import "ExecutionOrdersCreateMode.h"
 
@@ -15,21 +16,12 @@
     ExecutionOrdersCreateMode *mode;
 }
 
-/*-(id)init
-{
-    if (self = [super init]) {
-        factory = [ExecutionOrdersCreateModeFactory new];
-    }
-    
-    return self;
-}*/
-
 -(id)init
 {
     return nil;
 }
 
--(id)initWithOpenPosition:(OpenPosition*)openPosition
+- (instancetype)initWithOpenPosition:(OpenPosition *)openPosition
 {
     if (self = [super init]) {
         factory = [[ExecutionOrdersCreateModeFactory alloc] initWithOpenPosition:openPosition];
@@ -38,7 +30,7 @@
     return self;
 }
 
--(NSArray*)create:(ExecutionOrderMaterial*)order
+- (NSArray *)create:(Order *)order
 {
     mode = [factory createMode:order];
     NSArray *executionOrders = [mode create:order];

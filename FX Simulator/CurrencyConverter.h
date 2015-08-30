@@ -12,5 +12,5 @@
 @class Currency;
 
 @interface CurrencyConverter : NSObject
-+(Money*)convert:(Money*)money to:(Currency*)currency;
++ (Money *)convert:(Money *)money to:(Currency *)currency;
 @end

@@ -12,7 +12,8 @@
 #import "TradeDataViewData.h"
 #import "InputTradeLotViewController.h"
 #import "Market.h"
-
+#import "SaveData.h"
+#import "SaveLoader.h"
 
 @interface TradeDataViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *orderTypeLabel;
@@ -24,23 +25,13 @@
 @property (weak, nonatomic) IBOutlet UIButton *tradeLotSettingButton;
 @property (weak, nonatomic) IBOutlet UISwitch *autoUpdateSettingSwitch;
 @property (weak, nonatomic) IBOutlet UILabel *currentSettingLabel;
-//@property (nonatomic, readonly) TradeDataViewData *tradeDataViewData;
 @end
 
 @implementation TradeDataViewController {
     TradeDataViewData *_tradeDataViewData;
 }
 
-/*-(id)init
-{
-    if (self = [super init]) {
-        tradeDataViewData = [TradeDataViewData new];
-    }
-    
-    return self;
-}*/
-
--(instancetype)initWithCoder:(NSCoder *)aDecoder
+- (instancetype)initWithCoder:(NSCoder *)aDecoder
 {
     if (self = [super initWithCoder:aDecoder]) {
         _tradeDataViewData = [TradeDataViewData new];
@@ -48,15 +39,6 @@
     
     return self;
 }
-
-/*-(instancetype)initWithCoder:(NSCoder *)aDecoder
-{
-    if (self = [super initWithCoder:aDecoder]) {
-        _InputLotField.inputAccessoryView = [TestView new];
-    }
-    
-    return self;
-}*/
 
 /*- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -66,17 +48,6 @@
     }
     return self;
 }*/
-
--(void)loadView
-{
-    [super loadView];
-    
-    //tradeDataView = [TradeDataView new];
-    
-    //self.InputLotField.inputAccessoryView = [TestView new];
-    
-    //[self.view addSubview:tradeDataView];
-}
 
 - (void)viewDidLoad
 {
@@ -94,27 +65,7 @@
     self.currentSettingLabel.text = _tradeDataViewData.displayCurrentSetting;
     
     [self didOrder];
-    
-    /*NSNotificationCenter* nc = [NSNotificationCenter defaultCenter];
-    
-    [nc addObserver:self
-           selector:@selector(willShowKeyboard:)
-               name:UIKeyboardWillShowNotification
-             object:nil];*/
 }
-
-/*-(void)viewDidLayoutSubviews
-{
-    [super viewDidLayoutSubviews];
-    
-    selfViewY = self.view.frame.origin.y;
-    
-    float openPositionViewWidthSpace = 0;
-    float openPositionViewBottomSpace = 0;
-    
-    tradeDataView.frame = CGRectMake(openPositionViewWidthSpace, 0, self.view.frame.size.width - openPositionViewWidthSpace*2, self.view.frame.size.height - openPositionViewBottomSpace);
-}*/
-
 
 -(void)update
 {
@@ -131,15 +82,12 @@
 
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {    
-    if ([keyPath isEqualToString:@"currentForexHistoryData"] && [object isKindOfClass:[Market class]]) {
-        Market *market = (Market*)object;
-        [_tradeDataViewData updateFromCurrentRate:market.currentRate];
-        self.profitAndLossLabel.text = _tradeDataViewData.displayProfitAndLoss;
+    if ([keyPath isEqualToString:@"currentTime"] && [object isKindOfClass:[Market class]]) {
+        /*self.profitAndLossLabel.text = _tradeDataViewData.displayProfitAndLoss;
         self.profitAndLossLabel.textColor = _tradeDataViewData.displayProfitAndLossColor;
-        
-        self.openPositionMarketValueLabel.text = _tradeDataViewData.displayOpenPositionMarketValue;
+        self.openPositionMarketValueLabel.text = @"";
         self.equityLabel.text = _tradeDataViewData.displayEquity;
-        self.equityLabel.textColor = _tradeDataViewData.displayEquityColor;
+        self.equityLabel.textColor = _tradeDataViewData.displayEquityColor;*/
     }
 }
 
@@ -154,7 +102,7 @@
     
     self.profitAndLossLabel.text = _tradeDataViewData.displayProfitAndLoss;
     self.profitAndLossLabel.textColor = _tradeDataViewData.displayProfitAndLossColor;
-    self.openPositionMarketValueLabel.text = _tradeDataViewData.displayOpenPositionMarketValue;
+    self.openPositionMarketValueLabel.text = @"";
     self.equityLabel.text = _tradeDataViewData.displayEquity;
     self.equityLabel.textColor = _tradeDataViewData.displayEquityColor;
     

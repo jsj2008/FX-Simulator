@@ -18,18 +18,15 @@
 #import "TimeFrame.h"
 #import "TradeViewController.h"
 
-@interface SimulationManager ()
-//@property (nonatomic, readwrite) Market *market;
-@end
+static SimulationManager *sharedSimulationManager = nil;
 
 @implementation SimulationManager {
+    Account *_account;
     SaveData *_saveData;
     SimulationState *_simulationState;
 }
 
-static SimulationManager *sharedSimulationManager = nil;
-
-+(SimulationManager*)sharedSimulationManager
++ (SimulationManager *)sharedSimulationManager
 {
     @synchronized(self) {
         if (sharedSimulationManager == nil) {
@@ -40,30 +37,34 @@ static SimulationManager *sharedSimulationManager = nil;
     return sharedSimulationManager;
 }
 
--(instancetype)init
+- (instancetype)init
 {
     if (self = [super init]) {
         _market = [Market new];
         _market.delegate = self;
-        _account = [[Account alloc] initWithMarket:_market];
-        [self setInitData];
+        
+        [self loadSaveData:[SaveLoader load]];
     }
     
     return self;
 }
 
--(void)setInitData
+- (void)loadSaveData:(SaveData *)saveData
 {
-    _saveData = [SaveLoader load];
+    _saveData = saveData;
+    
+    [_market loadSaveData:_saveData];
+    
+    _account = _saveData.account;
     _simulationState = [[SimulationState alloc] initWithAccount:_account Market:_market];
 }
 
--(void)willNotifyObservers
+- (void)willNotifyObservers
 {
-    [_account updatedMarket];
+    //[_account updatedMarket];
 }
 
--(void)didNotifyObservers
+- (void)didNotifyObservers
 {
     [_simulationState updatedMarket];
     
@@ -73,12 +74,12 @@ static SimulationManager *sharedSimulationManager = nil;
     }
 }
 
--(void)didOrder
+- (void)didOrder
 {
-    [self.account didOrder];
+    [_account didOrder];
 }
 
--(void)autoUpdateSettingSwitchChanged:(BOOL)isSwitchOn
+- (void)autoUpdateSettingSwitchChanged:(BOOL)isSwitchOn
 {
     _saveData.isAutoUpdate = isSwitchOn;
     
@@ -87,34 +88,32 @@ static SimulationManager *sharedSimulationManager = nil;
     }
 }
 
--(void)updatedSaveData
+- (void)updatedSaveData
 {
-    [self.market updatedSaveData];
-    [self.account updatedSaveData];
-    [self setInitData];
+    [self loadSaveData:[SaveLoader load]];
 }
 
--(void)addObserver:(UIViewController *)observer
+- (void)addObserver:(UIViewController *)observer
 {
     [self.market addObserver:observer];
 }
 
--(void)start
+- (void)start
 {
     [self.market start];
 }
 
--(void)pause
+- (void)pause
 {
     [self.market pause];
 }
 
--(void)resume
+- (void)resume
 {
     [self.market resume];
 }
 
--(void)add
+- (void)add
 {    
     if (![_simulationState isStop]) {
         [self.market add];
@@ -123,27 +122,27 @@ static SimulationManager *sharedSimulationManager = nil;
     }
 }
 
--(BOOL)isStop
+- (BOOL)isStop
 {
     return [_simulationState isStop];
 }
 
--(void)showAlert:(UIViewController *)controller
+- (void)showAlert:(UIViewController *)controller
 {
     [_simulationState showAlert:controller];
 }
 
--(void)setIsAutoUpdate:(BOOL)isAutoUpdate
+- (void)setIsAutoUpdate:(BOOL)isAutoUpdate
 {
     self.market.isAutoUpdate = isAutoUpdate;
 }
 
--(BOOL)isAutoUpdate
+- (BOOL)isAutoUpdate
 {
     return self.market.isAutoUpdate;
 }
 
--(BOOL)isStart
+- (BOOL)isStart
 {
     return self.market.isStart;
 }

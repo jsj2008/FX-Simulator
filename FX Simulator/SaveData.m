@@ -9,6 +9,8 @@
 #import "SaveData.h"
 
 #import "SaveDataSource.h"
+#import "Account.h"
+#import "Balance.h"
 #import "CoreDataManager.h"
 #import "MarketTime.h"
 #import "TimeFrame.h"
@@ -41,6 +43,7 @@
 @synthesize orderHistory = _orderHistory;
 @synthesize openPosition = _openPosition;
 @synthesize executionHistory = _executionHistory;
+@synthesize account = _account;
 
 + (CoreDataManager *)coreDataManager
 {
@@ -332,7 +335,7 @@
         return _openPosition;
     }
     
-    return [OpenPosition createFromSlotNumber:self.slotNumber AccountCurrency:self.accountCurrency];
+    return [OpenPosition createFromSlotNumber:self.slotNumber];
 }
 
 - (ExecutionHistory *)executionHistory
@@ -342,6 +345,17 @@
     }
     
     return [ExecutionHistory createFromSlotNumber:self.slotNumber];
+}
+
+- (Account *)account
+{
+    if (_account != nil) {
+        return _account;
+    }
+    
+    Balance *balance = [[Balance alloc] initWithStartBalance:self.startBalance ExecutionHistory:self.executionHistory];
+    
+    return [[Account alloc] initWithAccountCurrency:self.accountCurrency currencyPair:self.currencyPair balance:balance openPosition:self.openPosition];
 }
 
 @end

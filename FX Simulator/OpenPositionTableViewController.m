@@ -8,21 +8,12 @@
 
 #import "OpenPositionTableViewController.h"
 
-/*#import "ForexHistoryData.h"
-#import "OrderType.h"
-#import "Rate.h"
-#import "PositionSize.h"
-#import "Lot.h"
-#import "FXTimestamp.h"
-#import "Currency.h"
-#import "Money.h"*/
 #import "Account.h"
 #import "Currency.h"
 #import "ForexHistoryData.h"
 #import "Market.h"
 #import "OpenPosition.h"
 #import "OpenPositionRecord.h"
-//#import "OpenPositionHeaderView.h"
 #import "OpenPositionTableViewCell.h"
 #import "SaveData.h"
 #import "SaveLoader.h"
@@ -36,34 +27,14 @@ static const unsigned int displayMaxOpenPositionDataRecords = 100;
 @end
 
 @implementation OpenPositionTableViewController {
-    //Currency *_accountCurrency;
-    Rate *_currentRate;
     Market *_market;
     NSArray *_openPositionDataRecords;
     OpenPosition *_openPosition;
 }
 
-//@synthesize tradeHistoryDatabase = _tradeHistoryDatabase;
-//@synthesize headerView = _headerView;
-
-/*-(id)init
-{
-    self = [super init];
-    if (self) {
-        _market = [MarketManager sharedMarket];
-        _openPosition = [OpenPositionFactory createOpenPosition];
-        //_headerView = [OpenPositionHeaderView new];
-        //_style = UITableViewStylePlain;
-    }
-    
-    return self;
-}*/
-
 -(instancetype)initWithCoder:(NSCoder *)aDecoder
 {
     if (self = [super initWithCoder:aDecoder]) {
-        //SaveData *saveData = [SaveLoader load];
-        //_accountCurrency = saveData.accountCurrency;
         [self setInitData];
     }
     
@@ -74,7 +45,7 @@ static const unsigned int displayMaxOpenPositionDataRecords = 100;
 {
     SimulationManager *simulationManager = [SimulationManager sharedSimulationManager];
     _market = simulationManager.market;
-    _openPosition = simulationManager.account.openPosition;
+    _openPosition = [SaveLoader load].openPosition;
 }
 
 
@@ -135,7 +106,6 @@ static const unsigned int displayMaxOpenPositionDataRecords = 100;
     
     [self.tableView reloadData];
     
-    _currentRate = _market.currentRate;
 }
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -146,7 +116,7 @@ static const unsigned int displayMaxOpenPositionDataRecords = 100;
     
     OpenPositionRecord *record = [_openPositionDataRecords objectAtIndex:indexPath.row];
     
-    [cell setDisplayData:record currentRate:_currentRate];
+    [cell setDisplayData:record currentMarket:_market];
     
     // セルが作成されていないか?
    /*if (!cell) { // yes

@@ -143,7 +143,7 @@
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
     if ([keyPath isEqualToString:@"currentTime"] && [object isKindOfClass:[Market class]]) {
-        [_chartViewController updateChartForTime:((Market*)object).currentRate.timestamp];
+        [_chartViewController updateChartForTime:((Market*)object).currentTime];
     }
 }
 

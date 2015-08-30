@@ -20,7 +20,7 @@
     NSMutableArray *_targets;
 }
 
--(id)initWithOpenPosition:(OpenPosition *)openPosition executionHistory:(ExecutionHistory *)executionHistory
+- (instancetype)initWithOpenPosition:(OpenPosition *)openPosition executionHistory:(ExecutionHistory *)executionHistory
 {
     if (self = [super init]) {
         _openPosition = openPosition;
@@ -33,12 +33,12 @@
     return self;
 }
 
--(void)addTransactionTarget:(id<ExecutionOrdersTransactionTarget>)target
+- (void)addTransactionTarget:(id<ExecutionOrdersTransactionTarget>)target
 {
     [_targets addObject:target];
 }
 
--(BOOL)execute:(NSArray *)orders
+- (BOOL)execute:(NSArray *)orders
 {
     FMDatabase *db = [TradeDatabase dbConnect];
     
@@ -63,7 +63,7 @@
     return YES;
 }
 
--(void)start:(FMDatabase *)db
+- (void)start:(FMDatabase *)db
 {
     if (_isStart == NO) {
         
@@ -78,7 +78,7 @@
     }
 }
 
--(void)commit:(FMDatabase *)db
+- (void)commit:(FMDatabase *)db
 {
     if (_isStart == YES) {
         [db commit];
@@ -86,7 +86,7 @@
     }
 }
 
--(void)rollback:(FMDatabase *)db
+- (void)rollback:(FMDatabase *)db
 {
     if (_isStart == YES) {
         [db rollback];
@@ -94,7 +94,7 @@
     }
 }
 
--(void)end:(FMDatabase *)db
+- (void)end:(FMDatabase *)db
 {
     if (_isStart == YES) {
         
@@ -107,6 +107,5 @@
         [db close];
     }
 }
-
 
 @end

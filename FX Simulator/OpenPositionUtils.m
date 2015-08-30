@@ -35,7 +35,7 @@
             } else if (positionSize.sizeValue < readTotalPositionSize) {
                 position_size_t closePositionSize = record.positionSize.sizeValue - (readTotalPositionSize - positionSize.sizeValue);
                 record.positionSize = [[PositionSize alloc] initWithSizeValue:closePositionSize];
-                record.isAllPositionSize = NO;
+                //record.isAllPositionSize = NO;
                 [resultArray addObject:record];
                 break;
             }

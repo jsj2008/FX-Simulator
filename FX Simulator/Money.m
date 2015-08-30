@@ -10,7 +10,10 @@
 
 #import "CurrencyConverter.h"
 #import "Currency.h"
+#import "CurrencyPair.h"
 #import "NSNumber+FXSNumberConverter.h"
+#import "Rate.h"
+#import "Setting.h"
 
 static NSString* const FXSMoneyValueKey = @"moneyValue";
 static NSString* const FXSCurrencyKey = @"currency";
@@ -46,7 +49,7 @@ static NSString* const FXSCurrencyKey = @"currency";
         return nil;
     }
     
-    if ([self.currency isEqualCurrency:money.currency] || money == nil) {
+    if ([self.currency isEqualCurrency:money.currency]) {
         return [[Money alloc] initWithAmount:(self.amount + money.amount) currency:self.currency];
     } else {
         return nil;
@@ -55,10 +58,6 @@ static NSString* const FXSCurrencyKey = @"currency";
 
 -(Money*)convertToCurrency:(Currency*)currency
 {
-    if (self.currency == nil) {
-        return nil;
-    }
-    
     return [CurrencyConverter convert:self to:currency];
 }
 

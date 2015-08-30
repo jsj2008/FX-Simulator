@@ -12,12 +12,12 @@
 
 @implementation ExecutionOrdersCreateMode
 
--(id)init
+- (instancetype)init
 {
     return nil;
 }
 
--(id)initWithOpenPosition:(OpenPosition *)openPosition
+- (instancetype)initWithOpenPosition:(OpenPosition *)openPosition
 {
     if (self = [super init]) {
         _openPosition = openPosition;
@@ -26,7 +26,7 @@
     return self;
 }
 
--(NSArray*)create:(ExecutionOrderMaterial *)order
+- (NSArray *)create:(Order *)order
 {
     [self.openPosition update];
     

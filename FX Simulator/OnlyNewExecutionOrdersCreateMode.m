@@ -7,19 +7,18 @@
 //
 
 #import "OnlyNewExecutionOrdersCreateMode.h"
-#import "ExecutionOrderMaterial.h"
-#import "NewExecutionOrder.h"
+
+#import "ExecutionOrder.h"
 
 @implementation OnlyNewExecutionOrdersCreateMode
 
--(NSArray*)create:(ExecutionOrderMaterial*)order
+- (NSArray *)create:(Order *)order
 {
     [super create:nil];
     
     NSMutableArray *executionOrders = [NSMutableArray array];
     
-    NewExecutionOrder *executionOrder = [[NewExecutionOrder alloc] initWithExecutionOrderMaterial:order];
-    //[executionOrder copy:order];
+    ExecutionOrder *executionOrder = [ExecutionOrder createNewExecutionOrderFromOrder:order];
     [executionOrders addObject:executionOrder];
     
     return [executionOrders copy];

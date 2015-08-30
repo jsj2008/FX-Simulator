@@ -8,10 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@class ExecutionHistoryRecord;
+@class ExecutionOrder;
 
 @interface ExecutionHistoryTableViewCell : UITableViewCell
--(void)setDisplayData:(ExecutionHistoryRecord*)record;
+- (void)setDisplayData:(ExecutionOrder *)record;
 /*@property (weak, nonatomic) IBOutlet UILabel *displayUsersOrderNumberValueLabel;
 @property (weak, nonatomic) IBOutlet UILabel *displayOrderTypeValueLabel;
 @property (weak, nonatomic) IBOutlet UILabel *displayOrderRateValueLabel;

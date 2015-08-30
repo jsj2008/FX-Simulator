@@ -40,9 +40,9 @@
     NSArray *labelList;*/
 }
 
--(void)setDisplayData:(OpenPositionRecord *)record currentRate:(Rate *)rate
+-(void)setDisplayData:(OpenPositionRecord *)record currentMarket:(Market *)market
 {
-    self.displayOrderNumberValueLabel.text = record.usersOrderNumber.stringValue;
+    self.displayOrderNumberValueLabel.text = @(record.orderHistoryId).stringValue;
     
     self.displayOrderTypeValueLabel.text = record.orderType.toDisplayString;
     
@@ -50,7 +50,7 @@
     
     self.displayOrderLotValueLabel.text = [[record.positionSize toLot] toDisplayString];
     
-    Money *displayProfitAndLoss = [[record profitAndLossForRate:rate] convertToAccountCurrency];
+    Money *displayProfitAndLoss = [[record profitAndLossForMarket:market] convertToAccountCurrency];
     self.displayProfitAndLossValueLabel.text = [displayProfitAndLoss toDisplayString];
     //self.displayProfitAndLossValueLabel.textColor;
     

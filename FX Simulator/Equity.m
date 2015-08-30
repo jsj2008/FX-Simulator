@@ -22,32 +22,26 @@
     Balance *_balance;
 }
 
--(id)initWithBalance:(Balance*)balance
+- (instancetype)initWithBalance:(Balance *)balance
 {
     if (self = [super init]) {
         _balance = balance;
-        [self update];
     }
     
     return self;
 }
 
--(void)update
-{
-    [_balance updateBalance];
-}
-
--(void)setCurrentProfitAndLoss:(Money*)profitAndLoss
+- (void)setCurrentProfitAndLoss:(Money *)profitAndLoss
 {
     _profitAndLoss = profitAndLoss;
 }
 
--(Money*)equity
+- (Money *)equity
 {
     return [_balance.balance addMoney:_profitAndLoss];
 }
 
--(BOOL)isShortage
+- (BOOL)isShortage
 {
     if (self.equity.amount < 0) {
         return YES;
