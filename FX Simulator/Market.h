@@ -23,12 +23,17 @@
 @end
 
 @class UIViewController;
+@class CurrencyPair;
 @class ForexDataChunk;
 @class ForexHistoryData;
 @class MarketTime;
 @class Rate;
+@class Rates;
+@class SaveData;
 
 @interface Market : NSObject
+
+- (void)loadSaveData:(SaveData *)saveData;
 
 /**
  UIViewControllerに限定。
@@ -36,45 +41,37 @@
  Marketの更新に応じて、データを更新する時は、オブザーバ(UIViewController)に通知が伝わる前にする。
  オブザーバ(UIViewController)に通知が伝わる前に、データを更新したとき、そのデータは表示(UIViewController)には反映されない。
 */
--(void)addObserver:(UIViewController*)observer;
+- (void)addObserver:(UIViewController *)observer;
 
 /**
- 最新のCloseのBidレートを取得。
-*/
--(Rate*)getCurrentBidRate;
-
-/**
- 最新のCloseのAskレートを取得。
-*/
--(Rate*)getCurrentAskRate;
+ 最新のRatesを取得。
+ */
+- (Rates *)getCurrentRatesOfCurrencyPair:(CurrencyPair *)currencyPair;
 
 /**
  Startした瞬間、時間が進み、Observerのメソッドが呼ばれ、それぞれのObserverに値がセットされる。
 */
--(void)start;
+- (void)start;
 
 /**
  ただの一時停止。セーブデータの自動更新設定は変更されない。
 */
--(void)pause;
+- (void)pause;
 
 /**
  セーブデータの自動更新設定(AutoUpdate)をそのまま反映するだけ。
 */
--(void)resume;
-
--(void)updatedSaveData;
+- (void)resume;
 
 /** 
  時間を進める。
 */
--(void)add;
+- (void)add;
 
--(BOOL)didLoadLastData;
+- (BOOL)didLoadLastData;
 
 @property (nonatomic, weak) id<MarketDelegate> delegate;
 @property (nonatomic, readonly) MarketTime *currentTime;
-@property (nonatomic, readonly) Rate *currentRate;
 
 /**
  Onなら自動更新になり、セーブデータの自動更新設定もOnに変更される。

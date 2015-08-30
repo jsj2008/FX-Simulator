@@ -19,21 +19,21 @@
 #import "SaveData.h"
 #import "SimulationManager.h"
 #import "Rate.h"
+#import "Rates.h"
 #import "PositionSize.h"
 #import "Lot.h"
 
 
 @implementation TradeDataViewData {
-    SaveData *saveData;
+    SaveData *_saveData;
     SimulationManager *_simulationManager;
-    Rate *_currentRate;
 }
 
 -(id)init
 {
     if (self = [super init]) {
         _simulationManager = [SimulationManager sharedSimulationManager];
-        saveData = [SaveLoader load];
+        _saveData = [SaveLoader load];
     }
     
     return self;
@@ -44,86 +44,61 @@
     [_simulationManager didOrder];
 }
 
--(void)updateFromCurrentRate:(Rate *)currentRate
-{
-    _currentRate = currentRate;
-}
-
 -(NSString*)displayCurrentSetting
 {
-    NSString *str = [NSString stringWithFormat:@"%@ %@", [saveData.currencyPair toDisplayString], [saveData.timeFrame toDisplayString]];
+    NSString *str = [NSString stringWithFormat:@"%@ %@", [_saveData.currencyPair toDisplayString], [_saveData.timeFrame toDisplayString]];
     
     return str;
 }
 
 -(NSString*)displayOrderType
 {
-    return _simulationManager.account.openPosition.orderType.toDisplayString;
+    return [_saveData.account.orderType toDisplayString];
 }
 
 -(UIColor*)displayOrderTypeColor
 {
-    return _simulationManager.account.openPosition.orderType.toColor;
+    return [_saveData.account.orderType toColor];
 }
 
 -(NSString*)displayTotalLot
 {
-    return _simulationManager.account.openPosition.totalLot.toDisplayString;
-    //return [NSString stringWithFormat:@"Lot %@", openPosition.totalLot.stringValue];
+    return [_saveData.account.totalLot toDisplayString];
 }
 
 -(NSString*)displayAverageRate
 {
-    return [_simulationManager.account.openPosition.averageRate toDisplayString];
+    return [_saveData.account.averageRate toDisplayString];
 }
  
 -(NSString*)displayProfitAndLoss
 {
-    //Money *profitAndLoss = [openPosition profitAndLossForRate:_forexHistoryData.close];
-    
-    return _simulationManager.account.profitAndLoss.toDisplayString;
+    return _saveData.account.profitAndLoss.toDisplayString;
 }
  
 -(UIColor*)displayProfitAndLossColor
 {
-    //Money *profitAndLoss = [openPosition profitAndLossForRate:_forexHistoryData.close];
-    
-    return _simulationManager.account.profitAndLoss.toDisplayColor;
+    return _saveData.account.profitAndLoss.toDisplayColor;
 }
 
 -(NSString*)displayEquity
 {
-    //Money *profitAndLoss = [openPosition profitAndLossForRate:_forexHistoryData.close];
-    
-    //[_equity setCurrentProfitAndLoss:profitAndLoss];
-    
-    return _simulationManager.account.equity.toDisplayString;
+    return _saveData.account.equity.toDisplayString;
 }
 
--(UIColor*)displayEquityColor
+- (UIColor *)displayEquityColor
 {
-    //Money *profitAndLoss = [openPosition profitAndLossForRate:_forexHistoryData.close];
-    
-    //[_equity setCurrentProfitAndLoss:profitAndLoss];
-    
-    return _simulationManager.account.equity.toDisplayColor;
-}
- 
--(NSString*)displayOpenPositionMarketValue
-{
-    Money *marketValue = [_simulationManager.account.openPosition marketValueForRate:_currentRate];
-    
-    return marketValue.toDisplayString;
+    return _saveData.account.equity.toDisplayColor;
 }
 
--(void)setTradeLot:(Lot *)tradeLot
+- (void)setTradeLot:(Lot *)tradeLot
 {
-    saveData.tradePositionSize = [tradeLot toPositionSize];
+    _saveData.tradePositionSize = [tradeLot toPositionSize];
 }
 
--(Lot*)tradeLot
+- (Lot *)tradeLot
 {
-    return [saveData.tradePositionSize toLot];
+    return [_saveData.tradePositionSize toLot];
 }
 
 /*-(NSString*)defaultTradeLotInputFieldValue
@@ -147,12 +122,12 @@
 
 -(BOOL)isAutoUpdate
 {
-    return saveData.isAutoUpdate;
+    return _saveData.isAutoUpdate;
 }
 
 -(void)setIsAutoUpdate:(BOOL)isAutoUpdate
 {
-    saveData.isAutoUpdate = isAutoUpdate;
+    _saveData.isAutoUpdate = isAutoUpdate;
 }
 
 @end

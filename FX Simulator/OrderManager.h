@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@class UsersOrder;
+@class Order;
 @class OrderHistory;
 @class ExecutionOrdersFactory;
 @class ExecutionOrdersManager;
@@ -22,6 +22,6 @@
 @interface OrderManager : NSObject
 + (instancetype)createOrderManager;
 - (instancetype)initWithOrderHistory:(OrderHistory*)orderHistory executionOrdersFactory:(ExecutionOrdersFactory*)executionOrdersFactory executionOrdersManager:(ExecutionOrdersManager*)executionOrdersManager;
-- (BOOL)execute:(UsersOrder*)order;
+- (BOOL)execute:(Order *)order;
 @property (nonatomic, weak) UIViewController *alertTarget;
 @end

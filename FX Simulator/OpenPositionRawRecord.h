@@ -16,9 +16,8 @@
 */
 
 @interface OpenPositionRawRecord : NSObject
--(id)initWithFMResultSet:(FMResultSet*)rs;
-@property (nonatomic, readonly) NSNumber *recordID;
-@property (nonatomic, readonly) NSNumber *executionOrderID;
-//@property (nonatomic, readonly) NSNumber *usersOrderNumber;
+@property (nonatomic, readonly) NSUInteger openPositionId;
+@property (nonatomic, readonly) NSUInteger executionHistoryId;
 @property (nonatomic, readonly) PositionSize *positionSize;
+- (instancetype)initWithFMResultSet:(FMResultSet*)rs;
 @end

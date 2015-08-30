@@ -10,17 +10,21 @@
 #import "ExecutionOrdersTransactionManager.h"
 
 @class FMDatabase;
-@class ExecutionHistoryRecord;
+@class ExecutionOrder;
+@class OrderHistory;
 
 @interface ExecutionHistory : NSObject <ExecutionOrdersTransactionTarget>
+
 + (instancetype)createFromSlotNumber:(NSUInteger)slotNumber;
 + (instancetype)loadExecutionHistory;
-- (instancetype)initWithSaveSlotNumber:(NSUInteger)slotNumber db:(FMDatabase *)db;
+- (instancetype)initWithSaveSlotNumber:(NSUInteger)slotNumber orderHistory:(OrderHistory *)orderHistory db:(FMDatabase *)db;
 // クローズ(Close)なオーダーの約定履歴はSelectしない???
--(ExecutionHistoryRecord*)selectRecordFromOrderID:(NSNumber*)orderID;
--(NSArray*)selectLatestDataLimit:(NSNumber *)num;
--(NSArray*)all;
+//- (ExecutionOrder *)selectRecordFromOrderID:(NSUInteger)orderID;
+- (ExecutionOrder *)orderAtExecutionHistoryId:(NSUInteger)recordId;
+- (NSArray *)selectLatestDataLimit:(NSNumber *)num;
+- (NSArray *)all;
 - (void)delete;
+
 /**
  ユーザーからのオーダーから生成した実行用のオーダーの配列をExecutionHistoryテーブルに保存するメソッド。トランザクションが有効でなければ実行されない。
  orderID(ExecutionHistoryTableのRowid)がセットされたExecutionOrdersを返す

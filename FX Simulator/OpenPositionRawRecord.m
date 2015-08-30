@@ -13,13 +13,12 @@
 
 @implementation OpenPositionRawRecord
 
--(id)initWithFMResultSet:(FMResultSet *)rs
+- (instancetype)initWithFMResultSet:(FMResultSet *)rs
 {
     if (self = [super init]) {
-        _recordID = [NSNumber numberWithInt:[rs intForColumn:@"id"]];
-        //_usersOrderNumber = [NSNumber numberWithInt:[rs intForColumn:@"users_order_number"]];
-        _executionOrderID = [NSNumber numberWithInt:[rs intForColumn:@"execution_order_id"]];
-        _positionSize = [[PositionSize alloc] initWithSizeValue:[rs intForColumn:@"position_size"]];
+        _openPositionId = [rs intForColumn:@"id"];
+        _executionHistoryId = [rs intForColumn:@"execution_history_id"];
+        _positionSize = [[PositionSize alloc] initWithSizeValue:[rs intForColumn:@"open_position_size"]];
     }
     
     return self;

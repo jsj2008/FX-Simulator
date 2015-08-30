@@ -12,6 +12,7 @@
 #import "Market.h"
 #import "OrderType.h"
 #import "Rate.h"
+#import "Rates.h"
 #import "SaveLoader.h"
 #import "SaveData.h"
 
@@ -37,22 +38,22 @@
 
 -(NSString*)getDisplayCurrentBidRate
 {
-    return [[_market getCurrentBidRate] toDisplayString];
+    return [[_market getCurrentRatesOfCurrencyPair:saveData.currencyPair].bidRate toDisplayString];
 }
 
 -(NSString*)getDisplayCurrentAskRate
 {
-    return [[_market getCurrentAskRate] toDisplayString];
+    return [[_market getCurrentRatesOfCurrencyPair:saveData.currencyPair].askRate toDisplayString];
 }
 
 -(Rate*)getCurrentRateForOrderType:(OrderType *)orderType
 {
     if (orderType.isShort) {
         // return Bid Rate
-        return [_market getCurrentBidRate];
+        return [_market getCurrentRatesOfCurrencyPair:saveData.currencyPair].bidRate;
     } else if (orderType.isLong) {
         // return Ask Rate
-        return [_market getCurrentAskRate];
+        return [_market getCurrentRatesOfCurrencyPair:saveData.currencyPair].askRate;
     }
     
     return nil;

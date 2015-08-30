@@ -8,11 +8,11 @@
 
 #import "CloseAndNewExecutionOrdersCreateMode.h"
 
-#import "OpenPosition.h"
-#import "Order.h"
-#import "ExecutionOrderMaterial.h"
+#import "ExecutionOrder.h"
 #import "OnlyCloseExecutionOrdersCreateMode.h"
 #import "OnlyNewExecutionOrdersCreateMode.h"
+#import "OpenPosition.h"
+#import "Order.h"
 #import "PositionSize.h"
 
 @implementation CloseAndNewExecutionOrdersCreateMode {
@@ -20,7 +20,7 @@
     OnlyNewExecutionOrdersCreateMode *newMode;
 }
 
--(id)initWithOpenPosition:(OpenPosition *)openPosition
+- (instancetype)initWithOpenPosition:(OpenPosition *)openPosition
 {
     if (self = [super initWithOpenPosition:openPosition]) {
         closeMode = [[OnlyCloseExecutionOrdersCreateMode alloc] initWithOpenPosition:openPosition];
@@ -30,21 +30,21 @@
     return self;
 }
 
--(NSArray*)create:(ExecutionOrderMaterial*)order
+- (NSArray *)create:(Order *)order
 {
     [super create:nil];
     
-    PositionSize *closePositionSize = super.openPosition.totalPositionSize;
+    PositionSize *closePositionSize = [super.openPosition totalPositionSizeOfCurrencyPair:order.currencyPair];
     PositionSize *newPositionSize = [[PositionSize alloc] initWithSizeValue:order.positionSize.sizeValue - closePositionSize.sizeValue];
     
-    Order *closeOrder = [[ExecutionOrderMaterial alloc] initWithCurrencyPair:order.currencyPair orderType:order.orderType orderRate:order.orderRate positionSize:closePositionSize orderSpread:order.orderSpread];
-    Order *newOrder = [[ExecutionOrderMaterial alloc] initWithCurrencyPair:order.currencyPair orderType:order.orderType orderRate:order.orderRate positionSize:newPositionSize orderSpread:order.orderSpread];
+    Order *closeOrder = [order copyOrder];
+    closeOrder.positionSize = closePositionSize;
     
-    ExecutionOrderMaterial *closeOrderMaterial = [[ExecutionOrderMaterial alloc] initWithOrder:closeOrder usersOrderNumber:order.usersOrderNumber];
-    ExecutionOrderMaterial *newOrderMaterial = [[ExecutionOrderMaterial alloc] initWithOrder:newOrder usersOrderNumber:order.usersOrderNumber];
+    Order *newOrder = [order copyOrder];
+    newOrder.positionSize = newPositionSize;
     
-    NSArray *closeOrders = [closeMode create:closeOrderMaterial];
-    NSArray *newOrders = [newMode create:newOrderMaterial];
+    NSArray *closeOrders = [closeMode create:closeOrder];
+    NSArray *newOrders = [newMode create:newOrder];
     
     return [closeOrders arrayByAddingObjectsFromArray:newOrders];
 }

@@ -16,17 +16,22 @@
 
 @implementation CurrencyConverter
 
-+(Money*)convert:(Money*)money to:(Currency*)currency
++ (Money *)convert:(Money *)money to:(Currency *)currency
 {
+    if (money == nil || currency == nil) {
+        return nil;
+    }
+    
     if ([money.currency isEqualCurrency:currency]) {
         return money;
     }
     
     CurrencyPair *currencyPair = [[CurrencyPair alloc] initWithBaseCurrency:money.currency QuoteCurrency:currency];
-    
     Rate *baseRate = [Setting baseRateOfCurrencyPair:currencyPair];
     
-    //[money.amount unsignedLongLongValue] * [baseRate doubleValue];
+    if (!baseRate) {
+        return nil;
+    }
     
     amount_t amount = money.amount * baseRate.rateValue;
     

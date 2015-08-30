@@ -34,63 +34,76 @@ static NSString * const kKeyPath = @"currentTime";
 @end
 
 @implementation Market {
-    SaveData *saveData;
     MarketTimeManager *_marketTimeManager;
     NSMutableArray *_observers;
     ForexDataChunkStore *_forexDataChunkStore;
-    ForexHistory *forexHistory;
+    ForexHistory *_forexHistory;
     ForexHistoryData *_lastData;
 }
 
--(id)init
+- (instancetype)init
 {
     if (self = [super init]) {
-        
-        /**
-         newした段階で、Marketに初期データをセットしておく。
-        */
-        [self setInitData];
-        
         _observers = [NSMutableArray array];
     }
     
     return self;
 }
 
--(void)setInitData
+- (void)loadSaveData:(SaveData *)saveData
 {
-    saveData = [SaveLoader load];
+    _isAutoUpdate = saveData.isAutoUpdate;
     
-    forexHistory = [ForexHistoryFactory createForexHistoryFromCurrencyPair:saveData.currencyPair timeScale:saveData.timeFrame];
+    _forexHistory = [ForexHistoryFactory createForexHistoryFromCurrencyPair:saveData.currencyPair timeScale:saveData.timeFrame];
     _currentTime = saveData.lastLoadedTime;
-    _currentForexData = [forexHistory selectMaxCloseTime:_currentTime limit:1].firstObject;
+    _currentForexData = [_forexHistory selectMaxCloseTime:_currentTime limit:1].firstObject;
     
     _forexDataChunkStore = [[ForexDataChunkStore alloc] initWithCurrencyPair:saveData.currencyPair timeScale:saveData.timeFrame getMaxLimit:FXSMaxForexDataStore];
     
-    _lastData = [forexHistory lastRecord];
+    _lastData = [_forexHistory lastRecord];
     
     _marketTimeManager = [MarketTimeManager new];
     [_marketTimeManager addObserver:self];
     
     _isStart = NO;
-
 }
 
--(void)addObserver:(UIViewController *)observer
+- (void)addObserver:(UIViewController *)observer
 {
     [_observers addObject:observer];
     
     [self addObserver:(NSObject*)observer forKeyPath:kKeyPath options:NSKeyValueObservingOptionNew context:NULL];
 }
 
--(Rate*)getCurrentBidRate
+- (Rates *)getCurrentRatesOfCurrencyPair:(CurrencyPair *)currencyPair
 {
-    return self.currentForexData.close;
+    Rate *currentBidRate = [self getCurrentBidRateOfCurrencyPair:currencyPair];
+    
+    if (!currentBidRate) {
+        return nil;
+    }
+    
+    return [[Rates alloc] initWithBidRtae:currentBidRate];
 }
 
--(Rate*)getCurrentAskRate
+- (Rate *)getCurrentBidRateOfCurrencyPair:(CurrencyPair *)currencyPair
 {
-    return [[[Rates alloc] initWithBidRtae:self.currentForexData.close] askRate];
+    if ([self.currentForexData.close.currencyPair isEqualCurrencyPair:currencyPair]) {
+        return self.currentForexData.close;
+    } else {
+        return nil;
+    }
+}
+
+- (Rate *)getCurrentAskRateOfCurrencyPair:(CurrencyPair *)currencyPair
+{
+    Rate *currentBidRate = [self getCurrentBidRateOfCurrencyPair:currencyPair];
+    
+    if (!currentBidRate) {
+        return nil;
+    }
+    
+    return [[[Rates alloc] initWithBidRtae:currentBidRate] askRate];
 }
 
 /**
@@ -121,61 +134,51 @@ static NSString * const kKeyPath = @"currentTime";
     }
 }
 
--(void)start
+- (void)start
 {
     // 初期データでMarketを更新しておく。
     [self updateMarketFromNewCurrentData:self.currentForexData];
     
-    if (saveData.isAutoUpdate) {
+    if (_isAutoUpdate) {
         [self startTime];
     }
 }
 
--(void)pause
+- (void)pause
 {
     [_marketTimeManager pause];
 }
 
--(void)resume
+- (void)resume
 {
     [_marketTimeManager resume];
 }
 
--(void)updatedSaveData
-{
-    [_marketTimeManager end];
-    [self setInitData];
-}
-
--(void)add
+- (void)add
 {
     [_marketTimeManager add];
 }
 
--(void)startTime
+- (void)startTime
 {
     _isStart = YES;
     [_marketTimeManager start];
 }
 
--(void)setIsAutoUpdate:(BOOL)isAutoUpdate
+- (void)setIsAutoUpdate:(BOOL)isAutoUpdate
 {
+    _isAutoUpdate = isAutoUpdate;
+    
     if (_isStart) {
-        if (YES == isAutoUpdate) {
+        if (_isAutoUpdate == YES) {
             [_marketTimeManager resume];
         } else {
             [_marketTimeManager pause];
         }
-    } else {
-        if (YES == saveData.isAutoUpdate) {
-            [self startTime];
-        }
     }
-    //[marketTime setIsAutoUpdate:isAutoUpdate];
-    //saveData.isAutoUpdate = isAutoUpdate;
 }
 
--(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
     if ([keyPath isEqualToString:@"currentLoadedRowid"] && [object isKindOfClass:[MarketTimeManager class]]) {
         
@@ -191,12 +194,12 @@ static NSString * const kKeyPath = @"currentTime";
     }
 }
 
--(void)setAutoUpdateInterval:(NSNumber *)autoUpdateInterval
+- (void)setAutoUpdateInterval:(NSNumber *)autoUpdateInterval
 {
     _marketTimeManager.autoUpdateInterval = autoUpdateInterval;
 }
 
--(BOOL)didLoadLastData
+- (BOOL)didLoadLastData
 {
     if (_lastData.ratesID == self.currentForexData.ratesID) {
         return YES;
@@ -205,7 +208,7 @@ static NSString * const kKeyPath = @"currentTime";
     }
 }
 
--(void)dealloc
+- (void)dealloc
 {
     for (NSObject *obj in _observers) {
         [self removeObserver:obj forKeyPath:kKeyPath];

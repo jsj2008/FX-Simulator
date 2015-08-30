@@ -12,10 +12,8 @@
 @class Equity;
 @class ForexHistoryData;
 @class Lot;
-@class Rate;
 
 @interface TradeDataViewData : NSObject
--(void)updateFromCurrentRate:(Rate *)currentRate;
 -(void)didOrder;
 -(NSString*)displayCurrentSetting;
 @property (nonatomic, readonly) NSString *displayOrderType;
@@ -26,9 +24,6 @@
 @property (nonatomic, readonly) UIColor *displayProfitAndLossColor;
 @property (nonatomic, readonly) NSString *displayEquity;
 @property (nonatomic, readonly) UIColor *displayEquityColor;
-@property (nonatomic, readonly) NSString *displayOpenPositionMarketValue;
-//@property (nonatomic, readonly) NSString *defaultTradeLotInputFieldValue;
 @property (nonatomic, readwrite) Lot *tradeLot;
-//@property (nonatomic, readonly) Equity *equity;
 @property (nonatomic, readwrite) BOOL isAutoUpdate;
 @end

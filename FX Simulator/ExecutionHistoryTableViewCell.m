@@ -9,7 +9,7 @@
 #import "ExecutionHistoryTableViewCell.h"
 
 #import "ForexHistoryData.h"
-#import "ExecutionHistoryRecord.h"
+#import "ExecutionOrder.h"
 #import "OrderType.h"
 #import "Rate.h"
 #import "PositionSize.h"
@@ -113,9 +113,9 @@
     // Configure the view for the selected state
 }
 
--(void)setDisplayData:(ExecutionHistoryRecord*)record;
+- (void)setDisplayData:(ExecutionOrder *)record
 {
-    self.displayUsersOrderNumberValueLabel.text = record.usersOrderNumber.stringValue;
+    self.displayUsersOrderNumberValueLabel.text = @(record.orderHistoryId).stringValue;
     
     self.displayOrderTypeValueLabel.text = record.orderType.toDisplayString;
     
@@ -123,10 +123,10 @@
     
     self.displayOrderLotValueLabel.text = [[record.positionSize toLot] toDisplayString];
     
-    self.displayCloseUsersOrderNumberValueLabel.text = record.closeUsersOrderNumber.stringValue;
+    //self.displayCloseUsersOrderNumberValueLabel.text = record.closeUsersOrderNumber.stringValue;
     
-    Money *displayProfitAndLoss = [record.profitAndLoss convertToAccountCurrency];
-    self.displayProfitAndLossValueLabel.text = [displayProfitAndLoss toDisplayString];
+    //Money *displayProfitAndLoss = [record.profitAndLoss convertToAccountCurrency];
+    //self.displayProfitAndLossValueLabel.text = [displayProfitAndLoss toDisplayString];
     //self.displayProfitAndLossValueLabel.textColor;
     
     self.displayOrderYMDTimeValueLabel.text = [record.orderRate.timestamp toDisplayYMDString];

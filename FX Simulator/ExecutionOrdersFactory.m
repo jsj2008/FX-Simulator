@@ -15,17 +15,7 @@
     ExecutionOrdersCreator *creator;
 }
 
-/*-(id)init
-{
-    if (self = [super init]) {
-        OpenPosition *openPosition = [OpenPositionFactory createOpenPosition];
-        creator = [[ExecutionOrdersCreator alloc] initWithOpenPosition:openPosition];
-    }
-    
-    return self;
-}*/
-
--(id)initWithOpenPosition:(OpenPosition *)openPosition
+- (instancetype)initWithOpenPosition:(OpenPosition *)openPosition
 {
     if (self = [super init]) {
         creator = [[ExecutionOrdersCreator alloc] initWithOpenPosition:openPosition];
@@ -34,7 +24,7 @@
     return self;
 }
 
--(NSArray*)create:(ExecutionOrderMaterial*)order
+- (NSArray *)create:(Order *)order
 {
     return [creator create:order];
 }

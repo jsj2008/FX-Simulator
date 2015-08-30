@@ -8,25 +8,13 @@
 
 #import "OnlyCloseExecutionOrdersCreateMode.h"
 
+#import "ExecutionOrder.h"
 #import "OpenPosition.h"
-#import "ExecutionOrderMaterial.h"
 #import "OpenPositionRecord.h"
-#import "CloseExecutionOrder.h"
 
-@implementation OnlyCloseExecutionOrdersCreateMode {
-    //OpenPosition *openPosition;
-}
+@implementation OnlyCloseExecutionOrdersCreateMode
 
-/*-(id)init
-{
-    if (self = [super init]) {
-        openPosition = [OpenPositionFactory createOpenPosition];
-    }
-    
-    return self;
-}*/
-
--(NSArray*)create:(ExecutionOrderMaterial*)order
+- (NSArray *)create:(Order *)order
 {
     [super create:nil];
     
@@ -35,8 +23,11 @@
     NSMutableArray *executionOrders = [NSMutableArray array];
     
     for (OpenPositionRecord *record in openPositionRecordArray) {
-        CloseExecutionOrder *executionOrder = [[CloseExecutionOrder alloc] initWithExecutionOrderMaterial:order OpenPositionRecord:record];
-        //CloseExecutionOrder *executionOrder = [[CloseExecutionOrder alloc] initWithForexHistoryData:order.forexHistoryData orderType:order.orderType positionSize:record.positionSize closeOpenPositionNumber:record.openPositionNumber closeUsersOrderNumber:record.orderNumber closeOrderRate:record.orderRate isCloseAll:record.isAllPositionSize];
+        ExecutionOrder *executionOrder = [ExecutionOrder createCloseExecutionOrderFromOrder:order];
+        executionOrder.closeTargetExecutionHistoryId = record.executionHistoryId;
+        executionOrder.closeTargetOrderHistoryId = record.orderHistoryId;
+        executionOrder.closeTargetOpenPositionId = record.openPositionId;
+        executionOrder.positionSize = record.positionSize;
         [executionOrders addObject:executionOrder];
     }
     

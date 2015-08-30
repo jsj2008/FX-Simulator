@@ -22,7 +22,7 @@
     OrderManagerState *_orderManagerState;
     ExecutionOrdersFactory *_executionOrdersFactory;
     ExecutionOrdersManager *_executionOrdersManager;
-}
+} 
 
 + (instancetype)createOrderManager
 {    
@@ -49,7 +49,7 @@
     return self;
 }
 
-- (BOOL)execute:(UsersOrder*)order
+- (BOOL)execute:(Order *)order
 {
     [_orderManagerState updateState:order];
     
@@ -58,15 +58,15 @@
         return NO;
     }
     
-    int orderNumber = [_orderHistory saveUsersOrder:order];
+    NSUInteger orderHistoryId = [_orderHistory saveOrder:order];
     
-    if (orderNumber < 1) {
+    if (orderHistoryId < 1) {
         return false;
     }
     
-    ExecutionOrderMaterial *material = [[ExecutionOrderMaterial alloc] initWithOrder:order usersOrderNumber:orderNumber];
+    order.orderHistoryId = orderHistoryId;
     
-    NSArray *executionOrders = [_executionOrdersFactory create:material];
+    NSArray *executionOrders = [_executionOrdersFactory create:order];
     
     [_executionOrdersManager executeOrders:executionOrders];
     

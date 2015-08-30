@@ -15,7 +15,7 @@
 #import "PositionSize.h"
 #import "Lot.h"
 #import "Money.h"
-#import "ExecutionHistoryRecord.h"
+#import "ExecutionOrder.h"
 //#import "ExecutionHistoryHeaderView.h"
 #import "ExecutionHistoryTableViewCell.h"
 
@@ -116,9 +116,9 @@ static const unsigned int displayMaxExecutionHistoryRecords = 100;
     //UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     ExecutionHistoryTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     
-    ExecutionHistoryRecord *record = [_executionHistoryRecords objectAtIndex:indexPath.row];
+    ExecutionOrder *order = [_executionHistoryRecords objectAtIndex:indexPath.row];
     
-    [cell setDisplayData:record];
+    [cell setDisplayData:order];
     
     // セルが作成されていないか?
     //if (!cell) { // yes

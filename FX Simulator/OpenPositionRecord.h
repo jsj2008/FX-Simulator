@@ -6,40 +6,25 @@
 //  
 //
 
-#import <Foundation/Foundation.h>
+#import "Order.h"
 
-@class NewExecutionOrder;
 @class FMResultSet;
-@class OpenPositionRawRecord;
+@class OrderHistory;
 @class ExecutionHistoryRecord;
 @class CurrencyPair;
+@class Market;
 @class OrderType;
 @class Rate;
 @class PositionSize;
 @class Spread;
 @class Money;
 
-/*@protocol OpenPositionRecord
-@property int openPositionNumber;
-@property int orderNumber;
-@property int ratesId;
-@property double orderRate;
-@property OrderType *orderType;
-@property unsigned long long positionSize;
-@end*/
-
-@interface OpenPositionRecord : NSObject
--(id)initWithNewExecutionOrder:(NewExecutionOrder*)order;
--(id)initWithOpenPositionRawRecord:(OpenPositionRawRecord*)rawRecord executionHistoryRecord:(ExecutionHistoryRecord*)record;
--(Money*)profitAndLossForRate:(Rate*)rate;
-@property (nonatomic, readonly) int executionOrderID;
-@property (nonatomic, readonly) int openPositionNumber;
-@property (nonatomic, readonly) NSNumber *usersOrderNumber;
-@property (nonatomic, readonly) CurrencyPair *currencyPair;
-//@property (nonatomic, readonly) int ratesId;
-@property (nonatomic, readonly) Rate *orderRate;
-@property (nonatomic, readonly) Spread *orderSpread;
-@property (nonatomic, readonly) OrderType *orderType;
-@property (nonatomic) PositionSize *positionSize;
-@property (nonatomic) BOOL isAllPositionSize;
+@interface OpenPositionRecord : Order
+@property (nonatomic, readonly) NSUInteger executionHistoryId;
+@property (nonatomic, readonly) NSUInteger openPositionId;
+- (instancetype)initWithFMResultSet:(FMResultSet *)result orderHistory:(OrderHistory *)orderHistory;
+//- (instancetype)initWithNewExecutionOrder:(NewExecutionOrder *)order;
+//- (instancetype)initWithOpenPositionRawRecord:(OpenPositionRawRecord *)rawRecord executionHistoryRecord:(ExecutionHistoryRecord *)record;
+- (Money *)profitAndLossForMarket:(Market *)market;
+//@property (nonatomic) BOOL isAllPositionSize;
 @end

@@ -7,8 +7,6 @@
 //
 #import "ExecutionOrdersCreateMode.h"
 
-@class ExecutionOrderMaterial;
-
 @interface OnlyNewExecutionOrdersCreateMode : ExecutionOrdersCreateMode
-//-(NSArray*)create:(ExecutionOrderMaterial*)order;
+
 @end

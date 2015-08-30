@@ -9,9 +9,9 @@
 #import <Foundation/Foundation.h>
 
 @class OpenPosition;
-@class ExecutionOrderMaterial;
+@class Order;
 
 @interface ExecutionOrdersCreator : NSObject
--(id)initWithOpenPosition:(OpenPosition*)openPosition;
--(NSArray*)create:(ExecutionOrderMaterial*)order;
+- (instancetype)initWithOpenPosition:(OpenPosition *)openPosition;
+- (NSArray *)create:(Order *)order;
 @end

@@ -9,13 +9,14 @@
 #import <Foundation/Foundation.h>
 
 @class FMDatabase;
+@class Order;
 @class TradeDbDataSource;
-@class UsersOrder;
 
 @interface OrderHistory : NSObject
 + (instancetype)createFromSlotNumber:(NSUInteger)slotNumber;
 + (instancetype)loadOrderHistory;
 - (instancetype)initWithSaveSlotNumber:(NSUInteger)slotNumber db:(FMDatabase *)db;
-- (int)saveUsersOrder:(UsersOrder*)order;
+- (Order *)getOrderFromOrderHistoryId:(NSUInteger)orderHistoryId;
+- (int)saveOrder:(Order *)order;
 - (void)delete;
 @end

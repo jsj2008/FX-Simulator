@@ -10,13 +10,13 @@
 
 @class Currency;
 @class OpenPositionRecord;
-@class Rate;
+@class Market;
 
 @interface OpenPositionTableViewCell : UITableViewCell
 /**
  OpenPositionRecordと最新のレートによって表示するデータをセットする。損益は口座の設定通貨に変換する。
 */
--(void)setDisplayData:(OpenPositionRecord*)record currentRate:(Rate*)rate;
+-(void)setDisplayData:(OpenPositionRecord*)record currentMarket:(Market*)rate;
 /*@property (weak, nonatomic) IBOutlet UILabel *displayOrderNumberValueLabel;
 @property (weak, nonatomic) IBOutlet UILabel *displayOrderTypeValueLabel;
 @property (weak, nonatomic) IBOutlet UILabel *displayOrderRateValueLabel;

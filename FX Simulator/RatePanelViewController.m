@@ -9,7 +9,7 @@
 #import "RatePanelViewController.h"
 
 #import "RatePanelButton.h"
-#import "UsersOrder.h"
+#import "Order.h"
 #import "OrderType.h"
 #import "OrderManager.h"
 #import "RatePanelViewData.h"
@@ -24,7 +24,6 @@
 @implementation RatePanelViewController {
     OrderManager *orderManager;
     RatePanelViewData *ratePanelViewData;
-    //__weak id<RatePanelViewControllerDelegate> _delegate; //!?
 }
 
 @synthesize delegate = _delegate;
@@ -38,7 +37,7 @@
     return self;
 }*/
 
--(instancetype)initWithCoder:(NSCoder *)aDecoder
+- (instancetype)initWithCoder:(NSCoder *)aDecoder
 {
     if (self = [super initWithCoder:aDecoder]) {
         [self setInitData];
@@ -47,7 +46,7 @@
     return self;
 }
 
--(void)setInitData
+- (void)setInitData
 {
     orderManager = [OrderManager createOrderManager];
     orderManager.alertTarget = self;
@@ -60,25 +59,22 @@
     // Do any additional setup after loading the view.
 }
 
--(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
     if ([keyPath isEqualToString:@"currentTime"] && [object isKindOfClass:[Market class]]) {
         
         [ratePanelViewData updateCurrentMarket:(Market*)object];
     
         self.rateValueLabel.text = [ratePanelViewData getDisplayCurrentBidRate];
-        
-        /*[self.BidRatePanelButton setTitle:[ratePanelViewData getDisplayCurrentBidRate] forState:UIControlStateNormal];
-        [self.AskRatePanelButton setTitle:[ratePanelViewData getDisplayCurrentAskRate] forState:UIControlStateNormal];*/
     }
 }
 
 /// Order執行
--(void)order:(OrderType *)orderType
-{    
-    UsersOrder *usersOrder = [UsersOrder createFromCurrencyPair:ratePanelViewData.currencyPair  orderType:orderType  positionSize:ratePanelViewData.currentPositionSize rate:[ratePanelViewData getCurrentRateForOrderType:orderType] orderSpread:ratePanelViewData.spread];
-    
-    BOOL result = [orderManager execute:usersOrder];
+- (void)order:(OrderType *)orderType
+{
+    Order *order = [[Order alloc] initWithOrderHistoryId:-1 CurrencyPair:ratePanelViewData.currencyPair orderType:orderType orderRate:[ratePanelViewData getCurrentRateForOrderType:orderType] positionSize:ratePanelViewData.currentPositionSize orderSpread:ratePanelViewData.spread];
+
+    BOOL result = [orderManager execute:order];
     
     if (result) {
         if ([_delegate respondsToSelector:@selector(didOrder)]) {
@@ -97,20 +93,10 @@
     [self order:orderType];
 }
 
--(void)updatedSaveData
+- (void)updatedSaveData
 {
     [self setInitData];
 }
-
-/*- (IBAction)bidRateButtonTouched:(id)sender {
-    OrderType *orderType = [[OrderType alloc] initWithShort];
-    [self order:orderType];
-}
-
-- (IBAction)askRateButtonTouched:(id)sender {
-    OrderType *orderType = [[OrderType alloc] initWithLong];
-    [self order:orderType];
-}*/
 
 - (void)didReceiveMemoryWarning
 {

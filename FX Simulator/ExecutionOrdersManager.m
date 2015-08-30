@@ -25,7 +25,7 @@
     return self;
 }
 
-- (BOOL)executeOrders:(NSArray*)orders
+- (BOOL)executeOrders:(NSArray *)orders
 {
     return [_transactionManager execute:orders];
 }
