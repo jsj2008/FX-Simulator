@@ -10,8 +10,7 @@
 
 #import "RatePanelButton.h"
 #import "Order.h"
-#import "OrderType.h"
-#import "OrderManager.h"
+#import "PositionType.h"
 #import "RatePanelViewData.h"
 #import "Market.h"
 
@@ -22,7 +21,6 @@
 @end
 
 @implementation RatePanelViewController {
-    OrderManager *orderManager;
     RatePanelViewData *ratePanelViewData;
 }
 
@@ -48,8 +46,6 @@
 
 - (void)setInitData
 {
-    orderManager = [OrderManager createOrderManager];
-    orderManager.alertTarget = self;
     ratePanelViewData = [RatePanelViewData new];
 }
 
@@ -70,26 +66,26 @@
 }
 
 /// Order執行
-- (void)order:(OrderType *)orderType
+- (void)order:(PositionType *)orderType
 {
-    Order *order = [[Order alloc] initWithOrderHistoryId:-1 CurrencyPair:ratePanelViewData.currencyPair orderType:orderType orderRate:[ratePanelViewData getCurrentRateForOrderType:orderType] positionSize:ratePanelViewData.currentPositionSize orderSpread:ratePanelViewData.spread];
-
-    BOOL result = [orderManager execute:order];
+    Order *order = [[Order alloc] initWithCurrencyPair:ratePanelViewData.currencyPair positionType:orderType rate:[ratePanelViewData getCurrentRateForOrderType:orderType] positionSize:ratePanelViewData.currentPositionSize];
     
-    if (result) {
-        if ([_delegate respondsToSelector:@selector(didOrder)]) {
-            [_delegate didOrder];
-        }
+    order.alertTargetController = self;
+    
+    [order execute];
+    
+    if ([self.delegate respondsToSelector:@selector(didOrder)]) {
+        [self.delegate didOrder];
     }
 }
 
 - (IBAction)sellButtonTouched:(id)sender {
-    OrderType *orderType = [[OrderType alloc] initWithShort];
+    PositionType *orderType = [[PositionType alloc] initWithShort];
     [self order:orderType];
 }
 
 - (IBAction)buyButtonTouched:(id)sender {
-    OrderType *orderType = [[OrderType alloc] initWithLong];
+    PositionType *orderType = [[PositionType alloc] initWithLong];
     [self order:orderType];
 }
 

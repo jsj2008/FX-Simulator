@@ -11,7 +11,7 @@
 @class CurrencyPair;
 @class ForexHistoryData;
 @class Market;
-@class OrderType;
+@class PositionType;
 @class Rate;
 @class PositionSize;
 @class Spread;
@@ -26,7 +26,7 @@
 /**
  OrderTypeに対応する最新のレートを返す。例えば、OrderTypeが買いなら、Askレートを返す。売りなら、Bidレートを返す。
 */
--(Rate*)getCurrentRateForOrderType:(OrderType*)orderType;
+-(Rate*)getCurrentRateForOrderType:(PositionType*)orderType;
 /**
  現在、何Lot取引するのかをポジションサイズに変換して返す。
 */

@@ -257,13 +257,33 @@
 
 - (ForexDataChunk *)getChunkFromBaseTime:(MarketTime *)time relativePosition:(NSInteger)pos limit:(NSUInteger)limit
 {
+    MarketTime *newestDataTime = ((ForexHistoryData *)_forexDataArray.firstObject).close.timestamp;
+    MarketTime *oldestDataTime = ((ForexHistoryData *)_forexDataArray.lastObject).close.timestamp;
+    
+    NSComparisonResult result1 = [time compare:newestDataTime];
+    NSComparisonResult result2 = [time compare:oldestDataTime];
+    
+    if (result1 == NSOrderedDescending || result2 == NSOrderedAscending) {
+        return nil;
+    }
+    
     __block NSUInteger baseIndex = NSNotFound;
     
     [_forexDataArray enumerateObjectsUsingBlock:^(ForexHistoryData *obj, NSUInteger idx, BOOL *stop) {
-        if ([time isEqualTime:obj.close.timestamp]) {
+        NSComparisonResult result = [time compare:obj.close.timestamp];
+        if (result == NSOrderedSame) {
             baseIndex = idx;
             *stop = YES;
+        } else if (result == NSOrderedDescending) {
+            if (0 < idx) {
+                baseIndex = idx;
+                *stop = YES;
+            }
         }
+        /*if ([time isEqualTime:obj.close.timestamp]) {
+            baseIndex = idx;
+            *stop = YES;
+        }*/
     }];
     
     if (baseIndex == NSNotFound) {

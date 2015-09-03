@@ -10,6 +10,7 @@
 
 #import "Account.h"
 #import "Currency.h"
+#import "CurrencyPair.h"
 #import "ForexHistoryData.h"
 #import "Market.h"
 #import "OpenPosition.h"
@@ -27,9 +28,9 @@ static const unsigned int displayMaxOpenPositionDataRecords = 100;
 @end
 
 @implementation OpenPositionTableViewController {
+    CurrencyPair *_currencyPair;
     Market *_market;
     NSArray *_openPositionDataRecords;
-    OpenPosition *_openPosition;
 }
 
 -(instancetype)initWithCoder:(NSCoder *)aDecoder
@@ -45,7 +46,7 @@ static const unsigned int displayMaxOpenPositionDataRecords = 100;
 {
     SimulationManager *simulationManager = [SimulationManager sharedSimulationManager];
     _market = simulationManager.market;
-    _openPosition = [SaveLoader load].openPosition;
+    _currencyPair = [SaveLoader load].currencyPair;
 }
 
 
@@ -102,7 +103,7 @@ static const unsigned int displayMaxOpenPositionDataRecords = 100;
 {
     [super viewWillAppear:animated];
     
-    _openPositionDataRecords = [_openPosition selectLatestDataLimit:[NSNumber numberWithUnsignedInt:displayMaxOpenPositionDataRecords]];
+    _openPositionDataRecords = [OpenPosition selectNewestFirstLimit:displayMaxOpenPositionDataRecords currencyPair:_currencyPair];
     
     [self.tableView reloadData];
     

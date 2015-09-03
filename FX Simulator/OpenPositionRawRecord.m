@@ -16,9 +16,9 @@
 - (instancetype)initWithFMResultSet:(FMResultSet *)rs
 {
     if (self = [super init]) {
-        _openPositionId = [rs intForColumn:@"id"];
-        _executionHistoryId = [rs intForColumn:@"execution_history_id"];
-        _positionSize = [[PositionSize alloc] initWithSizeValue:[rs intForColumn:@"open_position_size"]];
+        _recordId = [rs intForColumn:@"id"];
+        _executionOrderId = [rs intForColumn:@"execution_order_id"];
+        _positionSize = [[PositionSize alloc] initWithSizeValue:[rs intForColumn:@"position_size"]];
     }
     
     return self;

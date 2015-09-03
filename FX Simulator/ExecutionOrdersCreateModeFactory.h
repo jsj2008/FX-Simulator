@@ -9,10 +9,8 @@
 #import <Foundation/Foundation.h>
 
 @class ExecutionOrdersCreateMode;
-@class OpenPosition;
 @class Order;
 
 @interface ExecutionOrdersCreateModeFactory : NSObject
-- (instancetype)initWithOpenPosition:(OpenPosition *)openPosition;
-- (ExecutionOrdersCreateMode *)createMode:(Order *)order;
+- (ExecutionOrdersCreateMode *)createModeFromOrder:(Order *)order;
 @end

@@ -11,5 +11,8 @@
 @class UIViewController;
 
 @interface FXSAlert : NSObject
-+(void)showAlert:(UIViewController*)controller title:(NSString*)title message:(NSString*)message;
+@property (nonatomic, weak) UIViewController *controller;
++ (void)showAlertTitle:(NSString *)title message:(NSString *)message controller:(UIViewController *)controller;
+- (instancetype)initWithTitle:(NSString *)title message:(NSString *)message;
+- (void)show;
 @end

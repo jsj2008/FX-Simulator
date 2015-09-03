@@ -27,7 +27,7 @@ static NSString* const FXSPositionSizeKey = @"positionSize";
     [aCoder encodeInt64:self.sizeValue forKey:FXSPositionSizeKey];
 }
 
--(id)initWithSizeValue:(position_size_t)size
+- (instancetype)initWithSizeValue:(position_size_t)size
 {
     if (self = [super init]) {
         _sizeValue = size;
@@ -36,12 +36,21 @@ static NSString* const FXSPositionSizeKey = @"positionSize";
     return self;
 }
 
--(NSString*)toDisplayString
+- (BOOL)existsPosition
+{
+    if (0 < self.sizeValue) {
+        return YES;
+    } else {
+        return NO;
+    }
+}
+
+- (NSString *)toDisplayString
 {
     return [self.sizeValueObj fxs_toDisplayString];
 }
 
--(Lot*)toLot
+- (Lot *)toLot
 {
     SaveData *saveData = [SaveLoader load];
     
@@ -50,7 +59,7 @@ static NSString* const FXSPositionSizeKey = @"positionSize";
     return [[Lot alloc] initWithLotValue:lotValue];
 }
 
--(BOOL)isEqualPositionSize:(PositionSize *)positionsize
+- (BOOL)isEqualPositionSize:(PositionSize *)positionsize
 {
     if (self.sizeValue == positionsize.sizeValue) {
         return YES;
@@ -59,7 +68,7 @@ static NSString* const FXSPositionSizeKey = @"positionSize";
     }
 }
 
--(NSNumber*)sizeValueObj
+- (NSNumber *)sizeValueObj
 {
     return [NSNumber numberWithUnsignedLongLong:self.sizeValue];
 }

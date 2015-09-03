@@ -6,47 +6,56 @@
 //  
 //
 
-#import <Foundation/Foundation.h>
-#import "ExecutionOrdersTransactionManager.h"
+#import "PositionBase.h"
 
-@class FMDatabase;
 @class Currency;
 @class CurrencyPair;
-@class OrderHistory;
-@class OrderType;
-@class PositionSize;
+@class ExecutionOrder;
 @class Lot;
-@class Rate;
-@class Rates;
 @class Market;
 @class Money;
+@class PositionType;
+@class PositionSize;
+@class Rate;
 
-@interface OpenPosition : NSObject <ExecutionOrdersTransactionTarget>
+@interface OpenPosition : PositionBase
 
-+ (instancetype)createFromSlotNumber:(NSUInteger)slotNumber;
-+ (instancetype)loadOpenPosition;
-- (instancetype)initWithSaveSlotNumber:(NSUInteger)slotNumber orderHistory:(OrderHistory *)orderHistory db:(FMDatabase *)db;
+@property (nonatomic, readonly) NSUInteger executionOrderId;
+@property (nonatomic, readonly) NSUInteger orderId;
 
--(NSArray*)selectLatestDataLimit:(NSNumber *)num;
--(NSArray*)selectLimitPositionSize:(PositionSize*)positionSize;
--(void)update;
++ (instancetype)createNewOpenPositionFromExecutionOrder:(ExecutionOrder *)order executionOrderId:(NSUInteger)executionOrderId;
 
-- (OrderType *)orderTypeOfCurrencyPair:(CurrencyPair *)currencyPAir;
-- (Money *)profitAndLossForMarket:(Market *)market currencyPair:(CurrencyPair *)currencyPair InCurrency:(Currency *)currency;
-- (PositionSize *)totalPositionSizeOfCurrencyPair:(CurrencyPair *)currencyPair;
-- (Lot *)totalLotOfCurrencyPair:(CurrencyPair *)currencyPair;
-- (Rate *)averageRateOfCurrencyPair:(CurrencyPair *)currencyPair;
+/**
+ 新しいレコードからselectする
+*/
++ (NSArray *)selectNewestFirstLimit:(NSUInteger)limit currencyPair:(CurrencyPair *)currencyPair;
+
+/**
+ 古いポジションからselectする
+*/
++ (NSArray *)selectCloseTargetOpenPositionsLimitClosePositionSize:(PositionSize *)limitPositionSize currencyPair:(CurrencyPair *)currencyPair;
+
++ (PositionType *)positionTypeOfCurrencyPair:(CurrencyPair *)currencyPAir;
+
++ (Money *)profitAndLossOfCurrencyPair:(CurrencyPair *)currencyPair ForMarket:(Market *)market InCurrency:(Currency *)currency;
+
++ (PositionSize *)totalPositionSizeOfCurrencyPair:(CurrencyPair *)currencyPair;
+
++ (Lot *)totalLotOfCurrencyPair:(CurrencyPair *)currencyPair;
+
++ (Rate *)averageRateOfCurrencyPair:(CurrencyPair *)currencyPair;
 
 /**
  レコード数が最大かどうか。
-*/
--(BOOL)isMax;
+ */
++ (BOOL)isExecutableNewPosition;
 
-/**
- @param db transaction用。
-*/
--(BOOL)execute:(NSArray*)orders db:(FMDatabase *)db;
-- (void)delete;
-@property (nonatomic, readwrite) BOOL inExecutionOrdersTransaction;
+- (BOOL)isNewPosition;
+
+- (void)new;
+
+- (void)close;
+
+- (Money *)profitAndLossFromMarket:(Market *)market;
 
 @end

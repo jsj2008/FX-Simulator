@@ -40,9 +40,6 @@
 @property (nonatomic) float autoUpdateIntervalSeconds;
 @property (nonatomic, readonly) Chart *mainChart;
 @property (nonatomic, readonly) ChartChunk *subChartChunk;
-@property (nonatomic, readonly) OrderHistory *orderHistory;
-@property (nonatomic, readonly) OpenPosition *openPosition;
-@property (nonatomic, readonly) ExecutionHistory *executionHistory;
 @property (nonatomic, readonly) Account *account;
 
 /**

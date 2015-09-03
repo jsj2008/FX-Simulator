@@ -12,7 +12,7 @@
 @class CurrencyPair;
 @class Rate;
 @class Spread;
-@class OrderType;
+@class PositionType;
 @class PositionSize;
 @class Money;
 
@@ -25,7 +25,7 @@
 //@property (nonatomic, readonly) NSNumber *ratesId;
 @property (nonatomic, readonly) Rate *orderRate;
 @property (nonatomic, readonly) Spread *orderSpread;
-@property (nonatomic, readonly) OrderType *orderType;
+@property (nonatomic, readonly) PositionType *orderType;
 @property (nonatomic) PositionSize *positionSize;
 @property (nonatomic) BOOL isClose;
 /** 

@@ -14,7 +14,7 @@
 #import "Money.h"
 #import "ForexHistoryData.h"
 #import "TimeFrame.h"
-#import "OrderType.h"
+#import "PositionType.h"
 #import "SaveLoader.h"
 #import "SaveData.h"
 #import "SimulationManager.h"
@@ -37,11 +37,6 @@
     }
     
     return self;
-}
-
--(void)didOrder
-{
-    [_simulationManager didOrder];
 }
 
 -(NSString*)displayCurrentSetting

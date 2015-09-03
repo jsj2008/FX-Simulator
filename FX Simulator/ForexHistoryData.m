@@ -40,8 +40,8 @@
     if (self = [self init]) {
         _currencyPair = chunk.current.currencyPair;
         _timeScale = timeScale;
-        _open = chunk.current.open;
-        _close = chunk.oldest.close;
+        _open = chunk.oldest.open;
+        _close = chunk.current.close;
         _high = [chunk getMaxRate];
         _low = [chunk getMinRate];
     }

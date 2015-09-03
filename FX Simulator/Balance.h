@@ -21,7 +21,7 @@
 
 + (instancetype)loadBalance;
 
-- (instancetype)initWithStartBalance:(Money *)balance ExecutionHistory:(ExecutionHistory *)executionHistory;
+- (instancetype)initWithStartBalance:(Money *)balance;
 
 - (Money *)balanceInCurrency:(Currency *)currency;
 
