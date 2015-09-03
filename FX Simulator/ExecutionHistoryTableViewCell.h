@@ -11,7 +11,7 @@
 @class ExecutionOrder;
 
 @interface ExecutionHistoryTableViewCell : UITableViewCell
-- (void)setDisplayData:(ExecutionOrder *)record;
+- (void)setDisplayData:(ExecutionOrder *)order;
 /*@property (weak, nonatomic) IBOutlet UILabel *displayUsersOrderNumberValueLabel;
 @property (weak, nonatomic) IBOutlet UILabel *displayOrderTypeValueLabel;
 @property (weak, nonatomic) IBOutlet UILabel *displayOrderRateValueLabel;

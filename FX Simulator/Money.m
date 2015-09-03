@@ -31,6 +31,11 @@ static NSString* const FXSCurrencyKey = @"currency";
     [aCoder encodeObject:self.currency forKey:FXSCurrencyKey];
 }
 
+- (instancetype)init
+{
+    return nil;
+}
+
 // NewStartの新しいSaveData作成のところでは、currencyにnil入れている。
 -(id)initWithAmount:(amount_t)amount currency:(Currency*)currency
 {
@@ -44,15 +49,16 @@ static NSString* const FXSCurrencyKey = @"currency";
 
 -(Money*)addMoney:(Money*)money
 {
-    if (self.currency == nil || money == nil) {
-        DLog(@"Currency or Money nil");
-        return nil;
+    if (money == nil) {
+        DLog(@"money is nil");
+        return self;
     }
     
     if ([self.currency isEqualCurrency:money.currency]) {
         return [[Money alloc] initWithAmount:(self.amount + money.amount) currency:self.currency];
     } else {
-        return nil;
+        DLog(@"different currency");
+        return self;
     }
 }
 

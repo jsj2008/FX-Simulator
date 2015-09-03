@@ -10,7 +10,7 @@
 
 #import "ForexHistoryData.h"
 #import "ExecutionOrder.h"
-#import "OrderType.h"
+#import "PositionType.h"
 #import "Rate.h"
 #import "PositionSize.h"
 #import "Lot.h"
@@ -113,25 +113,25 @@
     // Configure the view for the selected state
 }
 
-- (void)setDisplayData:(ExecutionOrder *)record
+- (void)setDisplayData:(ExecutionOrder *)order
 {
-    self.displayUsersOrderNumberValueLabel.text = @(record.orderHistoryId).stringValue;
+    self.displayUsersOrderNumberValueLabel.text = @(order.orderId).stringValue;
     
-    self.displayOrderTypeValueLabel.text = record.orderType.toDisplayString;
+    self.displayOrderTypeValueLabel.text = order.positionType.toDisplayString;
     
-    self.displayOrderRateValueLabel.text = [record.orderRate toDisplayString];
+    self.displayOrderRateValueLabel.text = [order.rate toDisplayString];
     
-    self.displayOrderLotValueLabel.text = [[record.positionSize toLot] toDisplayString];
+    self.displayOrderLotValueLabel.text = [[order.positionSize toLot] toDisplayString];
     
-    //self.displayCloseUsersOrderNumberValueLabel.text = record.closeUsersOrderNumber.stringValue;
+    self.displayCloseUsersOrderNumberValueLabel.text = @(order.closeTargetOrderId).stringValue;
     
-    //Money *displayProfitAndLoss = [record.profitAndLoss convertToAccountCurrency];
-    //self.displayProfitAndLossValueLabel.text = [displayProfitAndLoss toDisplayString];
-    //self.displayProfitAndLossValueLabel.textColor;
+    Money *displayProfitAndLoss = [order.profitAndLoss convertToAccountCurrency];
+    self.displayProfitAndLossValueLabel.text = [displayProfitAndLoss toDisplayString];
+    self.displayProfitAndLossValueLabel.textColor = [displayProfitAndLoss toDisplayColor];
     
-    self.displayOrderYMDTimeValueLabel.text = [record.orderRate.timestamp toDisplayYMDString];
+    self.displayOrderYMDTimeValueLabel.text = [order.rate.timestamp toDisplayYMDString];
     
-    self.displayOrderHMSTimeValueLabel.text = [record.orderRate.timestamp toDisplayHMSString];
+    self.displayOrderHMSTimeValueLabel.text = [order.rate.timestamp toDisplayHMSString];
 }
 
 /*-(void)setDisplayUsersOrderNumber:(NSString *)displayUsersOrderNumber

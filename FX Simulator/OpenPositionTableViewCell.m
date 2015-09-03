@@ -9,8 +9,8 @@
 #import "OpenPositionTableViewCell.h"
 
 #import "ForexHistoryData.h"
-#import "OpenPositionRecord.h"
-#import "OrderType.h"
+#import "OpenPosition.h"
+#import "PositionType.h"
 #import "Rate.h"
 #import "PositionSize.h"
 #import "Lot.h"
@@ -40,23 +40,23 @@
     NSArray *labelList;*/
 }
 
--(void)setDisplayData:(OpenPositionRecord *)record currentMarket:(Market *)market
+-(void)setDisplayData:(OpenPosition *)openPosition currentMarket:(Market *)market
 {
-    self.displayOrderNumberValueLabel.text = @(record.orderHistoryId).stringValue;
+    self.displayOrderNumberValueLabel.text = @(openPosition.orderId).stringValue;
     
-    self.displayOrderTypeValueLabel.text = record.orderType.toDisplayString;
+    self.displayOrderTypeValueLabel.text = openPosition.positionType.toDisplayString;
     
-    self.displayOrderRateValueLabel.text = [record.orderRate toDisplayString];
+    self.displayOrderRateValueLabel.text = [openPosition.rate toDisplayString];
     
-    self.displayOrderLotValueLabel.text = [[record.positionSize toLot] toDisplayString];
+    self.displayOrderLotValueLabel.text = [[openPosition.positionSize toLot] toDisplayString];
     
-    Money *displayProfitAndLoss = [[record profitAndLossForMarket:market] convertToAccountCurrency];
+    Money *displayProfitAndLoss = [[openPosition profitAndLossFromMarket:market] convertToAccountCurrency];
     self.displayProfitAndLossValueLabel.text = [displayProfitAndLoss toDisplayString];
     //self.displayProfitAndLossValueLabel.textColor;
     
-    self.displayOrderYMDTimeValueLabel.text = [record.orderRate.timestamp toDisplayYMDString];
+    self.displayOrderYMDTimeValueLabel.text = [openPosition.rate.timestamp toDisplayYMDString];
     
-    self.displayOrderHMSTimeValueLabel.text = [record.orderRate.timestamp toDisplayHMSString];
+    self.displayOrderHMSTimeValueLabel.text = [openPosition.rate.timestamp toDisplayHMSString];
 }
 
 /*- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier

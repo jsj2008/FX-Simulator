@@ -13,13 +13,15 @@
 #import "ChartViewController.h"
 #import "Chart.h"
 #import "ChartChunk.h"
+#import "Market.h"
 #import "SubChartDataViewController.h"
 #import "TimeFrame.h"
 #import "Rate.h"
+#import "SimulationManager.h"
 #import "ForexDataChunk.h"
 #import "ForexDataChunkStore.h"
 #import "ForexHistoryData.h"
-
+#import "CurrencyPair.h"
 
 @interface SubChartViewController ()
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segment;
@@ -28,6 +30,7 @@
 @implementation SubChartViewController {
     ChartViewController *_chartViewController;
     ForexDataChunkStore *_chunkStore;
+    Market *_market;
     SubChartDataViewController *_subChartDataViewController;
     NSArray *_charts;
 }
@@ -55,6 +58,8 @@
     [super viewWillAppear:animated];
     
     [self setInit];
+    
+    _market = [SimulationManager sharedSimulationManager].market;
     
     [self strokeChartView];
 }
@@ -141,6 +146,8 @@
 {
     Chart *displayChart = [SaveLoader load].subChartChunk.displayChart;
     [_chartViewController setChart:displayChart];
+    
+    [_chartViewController updateChartForTime:_market.currentTime];
     
     //ForexDataChunk *chunk = [_subChartViewData getCurrentChunk];
     

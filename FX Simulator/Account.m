@@ -9,8 +9,7 @@
 #import "Account.h"
 
 #import "Balance.h"
-#import "Equity.h"
-#import "EquityFactory.h"
+#import "ExecutionOrder.h"
 #import "ForexHistoryData.h"
 #import "Lot.h"
 #import "Market.h"
@@ -24,31 +23,18 @@
 @implementation Account {
     Currency *_accountCurrency;
     CurrencyPair *_currencyPair;
-    Balance *_balance;
-    OpenPosition *_openPosition;
+    Money *_startBalance;
 }
 
--(instancetype)initWithAccountCurrency:(Currency *)currency currencyPair:(CurrencyPair *)currencyPair balance:(Balance *)balance openPosition:(OpenPosition *)openPosition
+-(instancetype)initWithAccountCurrency:(Currency *)currency currencyPair:(CurrencyPair *)currencyPair startBalance:(Money *)balance
 {
     if (self = [super init]) {
         _accountCurrency = currency;
         _currencyPair = currencyPair;
-        _balance = balance;
-        _openPosition = openPosition;
+        _startBalance = balance;
     }
     
     return self;
-}
-
-- (void)updatedSaveData
-{
-    _balance = [Balance loadBalance];
-    _openPosition = [OpenPosition loadOpenPosition];
-}
-
-- (void)didOrder
-{
-    [_openPosition update];
 }
 
 - (BOOL)isShortage
@@ -62,32 +48,36 @@
 
 - (Rate *)averageRate
 {
-    return [_openPosition averageRateOfCurrencyPair:_currencyPair];
+    return [OpenPosition averageRateOfCurrencyPair:_currencyPair];
+}
+
+- (Money *)balance
+{
+    Money *profitAndLoss = [[ExecutionOrder profitAndLossOfCurrencyPair:_currencyPair] convertToCurrency:_accountCurrency];
+    
+    return [_startBalance addMoney:profitAndLoss];
 }
 
 - (Money *)equity
 {
-    Money *balance = [_balance balanceInCurrency:_accountCurrency];
-    Money *profitAndLoss = [self profitAndLoss];
-    
-    return [balance addMoney:profitAndLoss];
+    return [self.balance addMoney:self.profitAndLoss];
 }
 
-- (OrderType *)orderType
+- (PositionType *)orderType
 {
-    return [_openPosition orderTypeOfCurrencyPair:_currencyPair];
+    return [OpenPosition positionTypeOfCurrencyPair:_currencyPair];
 }
 
 - (Money *)profitAndLoss
 {
     Market *market = [SimulationManager sharedSimulationManager].market;
     
-    return [_openPosition profitAndLossForMarket:market currencyPair:_currencyPair InCurrency:_accountCurrency];
+    return [OpenPosition profitAndLossOfCurrencyPair:_currencyPair ForMarket:market InCurrency:_accountCurrency];
 }
 
 - (Lot *)totalLot
 {
-    return [_openPosition totalLotOfCurrencyPair:_currencyPair];
+    return [OpenPosition totalLotOfCurrencyPair:_currencyPair];
 }
 
 @end

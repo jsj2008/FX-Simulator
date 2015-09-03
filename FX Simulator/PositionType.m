@@ -6,14 +6,14 @@
 //  
 //
 
-#import "OrderType.h"
+#import "PositionType.h"
 
 static NSString* const buy = @"BUY";
 static NSString* const sell = @"SELL";
 static NSString* const displayBuy = @"Buy";
 static NSString* const displaySell = @"Sell";
 
-@implementation OrderType {
+@implementation PositionType {
     NSString *type;
 }
 
@@ -72,7 +72,7 @@ static NSString* const displaySell = @"Sell";
     _isLong = YES;
 }
 
--(BOOL)isEqualOrderType:(OrderType *)orderType
+-(BOOL)isEqualOrderType:(PositionType *)orderType
 {
     if ((self.isLong && orderType.isLong) || (self.isShort && orderType.isShort)) {
         return YES;

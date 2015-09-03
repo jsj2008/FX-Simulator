@@ -15,7 +15,7 @@
 @class Market;
 @class Money;
 @class OpenPosition;
-@class OrderType;
+@class PositionType;
 @class Rate;
 
 /**
@@ -25,16 +25,7 @@
 
 @interface Account : NSObject
 
--(instancetype)initWithAccountCurrency:(Currency *)currency currencyPair:(CurrencyPair *)currencyPair balance:(Balance *)balance openPosition:(OpenPosition *)openPosition;
-
-/**
- マーケットが更新されたときに使う。
- マーケットの状態に応じて、アカウント情報を更新する。
-*/
-//-(void)updatedMarket;
-
--(void)updatedSaveData;
--(void)didOrder;
+-(instancetype)initWithAccountCurrency:(Currency *)currency currencyPair:(CurrencyPair *)currencyPair startBalance:(Money *)balance;
 
 /**
  総資産が０以下かどうか。
@@ -48,7 +39,7 @@
 */
 @property (nonatomic, readonly) Money *equity;
 
-@property (nonatomic, readonly) OrderType *orderType;
+@property (nonatomic, readonly) PositionType *orderType;
 
 /**
  損益

@@ -13,7 +13,7 @@
 @class ExecutionHistoryRecord;
 @class CurrencyPair;
 @class Market;
-@class OrderType;
+@class PositionType;
 @class Rate;
 @class PositionSize;
 @class Spread;

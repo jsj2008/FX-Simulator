@@ -10,7 +10,7 @@
 
 #import "ExecutionOrder.h"
 #import "OpenPosition.h"
-#import "OpenPositionRecord.h"
+#import "Order.h"
 
 @implementation OnlyCloseExecutionOrdersCreateMode
 
@@ -18,16 +18,12 @@
 {
     [super create:nil];
     
-    NSArray *openPositionRecordArray = [super.openPosition selectLimitPositionSize:order.positionSize];
+    NSArray *openPositions = [OpenPosition selectCloseTargetOpenPositionsLimitClosePositionSize:order.positionSize currencyPair:order.currencyPair];
     
     NSMutableArray *executionOrders = [NSMutableArray array];
     
-    for (OpenPositionRecord *record in openPositionRecordArray) {
-        ExecutionOrder *executionOrder = [ExecutionOrder createCloseExecutionOrderFromOrder:order];
-        executionOrder.closeTargetExecutionHistoryId = record.executionHistoryId;
-        executionOrder.closeTargetOrderHistoryId = record.orderHistoryId;
-        executionOrder.closeTargetOpenPositionId = record.openPositionId;
-        executionOrder.positionSize = record.positionSize;
+    for (OpenPosition *openPosition in openPositions) {
+        ExecutionOrder *executionOrder = [ExecutionOrder createCloseExecutionOrderFromCloseTargetOpenPosition:openPosition order:order];
         [executionOrders addObject:executionOrder];
     }
     

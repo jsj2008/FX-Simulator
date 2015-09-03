@@ -15,7 +15,7 @@
 #import "ExecutionOrder.h"
 #import "ForexHistoryData.h"
 #import "OrderHistory.h"
-#import "OrderType.h"
+#import "PositionType.h"
 #import "CurrencyPair.h"
 #import "Rate.h"
 #import "MarketTime.h"

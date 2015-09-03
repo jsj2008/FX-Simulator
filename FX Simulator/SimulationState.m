@@ -55,7 +55,7 @@ static NSString* const chartEndAlertTitle = @"チャートが端まで読み込�
         title = chartEndAlertTitle;
     }
     
-    [FXSAlert showAlert:controller title:title message:nil];
+    [FXSAlert showAlertTitle:title message:nil controller:controller];
 }
 
 -(void)updatedMarket

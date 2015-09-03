@@ -12,7 +12,7 @@
 
 @protocol ChartViewControllerDelegate <NSObject>
 @optional
--(void)chartViewTouched;
+- (void)chartViewTouched;
 - (void)longPressedForexData:(ForexHistoryData *)data;
 - (void)longPressedEnd;
 @end
@@ -22,9 +22,9 @@
 @class MarketTime;
 
 @interface ChartViewController : UIViewController
+@property (nonatomic, weak) id<ChartViewControllerDelegate> delegate;
++ (NSUInteger)requireForexDataCountForChart;
 - (void)setChart:(Chart *)chart;
 - (void)updateChartForTime:(MarketTime *)time;
 - (void)updatedSaveData;
-+ (NSUInteger)requireForexDataCountForChart;
-@property (nonatomic, weak) id<ChartViewControllerDelegate> delegate;
 @end

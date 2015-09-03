@@ -10,13 +10,13 @@
 
 #import "Money.h"
 #import "CurrencyPair.h"
-#import "OrderType.h"
+#import "PositionType.h"
 #import "Rate.h"
 #import "PositionSize.h"
 
 @implementation ProfitAndLossCalculator
 
-+(Money*)calculateByTargetRate:(Rate*)targetRate valuationRate:(Rate *)valuationRate positionSize:(PositionSize *)positionSize orderType:(OrderType *)orderType
++(Money*)calculateByTargetRate:(Rate*)targetRate valuationRate:(Rate *)valuationRate positionSize:(PositionSize *)positionSize orderType:(PositionType *)orderType
 {
     if (![targetRate isEqualCurrencyPair:valuationRate]) {
         return nil;

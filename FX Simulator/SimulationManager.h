@@ -17,6 +17,7 @@
 
 @class UIViewController;
 @class Account;
+@class FXSAlert;
 @class Balance;
 @class Market;
 @class TradeViewController;
@@ -54,8 +55,9 @@
 /// 手動で時間を進める。
 -(void)add;
 
+- (BOOL)isExecutableOrder;
+
 -(BOOL)isStop;
--(void)showAlert:(UIViewController*)controller;
 
 /**
  アラート(チャートが端まで読み込まれたとき、資産が０以下になったときなど)を表示するUIViewController

@@ -20,26 +20,13 @@
 
 @implementation Balance {
     Money *_startBalance;
-    ExecutionHistory *_executionHistory;
     NSArray *_executionHistoryRecords;
 }
 
-+ (instancetype)loadBalance
-{
-    SaveData *saveData = [SaveLoader load];
-    
-    Money *startBalance = saveData.startBalance;
-    
-    ExecutionHistory *executionHistory = [ExecutionHistory loadExecutionHistory];
-    
-    return [[Balance alloc] initWithStartBalance:startBalance ExecutionHistory:executionHistory];
-}
-
-- (instancetype)initWithStartBalance:(Money *)balance ExecutionHistory:(ExecutionHistory *)executionHistory
+- (instancetype)initWithStartBalance:(Money *)balance
 {
     if (self = [super init]) {
         _startBalance = balance;
-        _executionHistory = executionHistory;
     }
     
     return self;
@@ -47,7 +34,7 @@
 
 - (Money *)calculateBalance
 {
-    _executionHistoryRecords = [_executionHistory all];
+    /*_executionHistoryRecords = [_executionHistory all];
     
     amount_t balance = 0;
     
@@ -59,7 +46,9 @@
         }
     }
     
-    balance += _startBalance.amount;
+    balance += _startBalance.amount;*/
+    
+    Money *profitAndLoss = [ExecutionOrder profitAndLossOfCurrencyPair:];
     
     return [[Money alloc] initWithAmount:balance currency:_startBalance.currency];
 }

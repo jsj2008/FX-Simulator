@@ -9,7 +9,7 @@
 #import "ExecutionOrder.h"
 
 @class Order;
-@class OrderType;
+@class PositionType;
 
 @interface ExecutionOrderMaterial : ExecutionOrder
 -(id)initWithOrder:(Order*)order usersOrderNumber:(int)number;

@@ -16,6 +16,7 @@
 #import "SaveLoader.h"
 #import "SimulationState.h"
 #import "TimeFrame.h"
+#import "TradeDatabase.h"
 #import "TradeViewController.h"
 
 static SimulationManager *sharedSimulationManager = nil;
@@ -53,6 +54,8 @@ static SimulationManager *sharedSimulationManager = nil;
 {
     _saveData = saveData;
     
+    [TradeDatabase loadSaveData:_saveData];
+    
     [_market loadSaveData:_saveData];
     
     _account = _saveData.account;
@@ -72,11 +75,6 @@ static SimulationManager *sharedSimulationManager = nil;
         [self pause];
         [_simulationState showAlert:self.alertTargetController];;
     }
-}
-
-- (void)didOrder
-{
-    [_account didOrder];
 }
 
 - (void)autoUpdateSettingSwitchChanged:(BOOL)isSwitchOn
@@ -120,6 +118,11 @@ static SimulationManager *sharedSimulationManager = nil;
     } else {
         [_simulationState showAlert:self.alertTargetController];
     }
+}
+
+- (BOOL)isExecutableOrder
+{
+    return ![self isStop];
 }
 
 - (BOOL)isStop

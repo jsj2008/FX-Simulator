@@ -28,9 +28,6 @@
 #import "Lot.h"
 #import "Money.h"
 #import "TimeScaleUtils.h"
-#import "OrderHistory.h"
-#import "OpenPosition.h"
-#import "ExecutionHistory.h"
 
 @interface SaveData ()
 @property (nonatomic) NSUInteger slotNumber;
@@ -40,9 +37,6 @@
     SaveDataSource *_saveDataSource;
 }
 
-@synthesize orderHistory = _orderHistory;
-@synthesize openPosition = _openPosition;
-@synthesize executionHistory = _executionHistory;
 @synthesize account = _account;
 
 + (CoreDataManager *)coreDataManager
@@ -207,7 +201,7 @@
 
 - (void)setSlotNumber:(NSUInteger)slotNumber
 {
-    _saveDataSource.slotNumber = slotNumber;
+    _saveDataSource.slotNumber = (int)slotNumber;
 }
 
 - (CurrencyPair *)currencyPair
@@ -320,42 +314,13 @@
     _saveDataSource.autoUpdateIntervalSeconds = autoUpdateInterval;
 }
 
-- (OrderHistory *)orderHistory
-{
-    if (_orderHistory != nil) {
-        return _orderHistory;
-    }
-    
-    return [OrderHistory createFromSlotNumber:self.slotNumber];
-}
-
-- (OpenPosition *)openPosition
-{
-    if (_openPosition != nil) {
-        return _openPosition;
-    }
-    
-    return [OpenPosition createFromSlotNumber:self.slotNumber];
-}
-
-- (ExecutionHistory *)executionHistory
-{
-    if (_executionHistory != nil) {
-        return _executionHistory;
-    }
-    
-    return [ExecutionHistory createFromSlotNumber:self.slotNumber];
-}
-
 - (Account *)account
 {
     if (_account != nil) {
         return _account;
     }
     
-    Balance *balance = [[Balance alloc] initWithStartBalance:self.startBalance ExecutionHistory:self.executionHistory];
-    
-    return [[Account alloc] initWithAccountCurrency:self.accountCurrency currencyPair:self.currencyPair balance:balance openPosition:self.openPosition];
+    return [[Account alloc] initWithAccountCurrency:self.accountCurrency currencyPair:self.currencyPair startBalance:self.startBalance];
 }
 
 @end

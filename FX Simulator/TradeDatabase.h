@@ -6,16 +6,16 @@
 //  
 //
 
-//#import "DatabaseProtocol.h"
-//#import "Database.h"
-
 #import <Foundation/Foundation.h>
 
 
 @class FMDatabase;
+@class SaveData;
 
 @interface TradeDatabase : NSObject
-+(FMDatabase*)dbConnect;
-+(FMDatabase*)testDbConnect;
-//-(FMDatabase*)dbConnect;
+
++ (void)loadSaveData:(SaveData *)saveData;
+
++ (void)transaction:(void (^)())block;
+
 @end

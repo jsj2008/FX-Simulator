@@ -8,8 +8,7 @@
 
 #import "ExecutionHistoryTableViewController.h"
 
-#import "ExecutionHistory.h"
-#import "OrderType.h"
+#import "PositionType.h"
 #import "Rate.h"
 #import "MarketTime.h"
 #import "PositionSize.h"
@@ -28,7 +27,6 @@ static const unsigned int displayMaxExecutionHistoryRecords = 100;
 @end
 
 @implementation ExecutionHistoryTableViewController {
-    ExecutionHistory *_executionHistory;
     //ExecutionHistoryRecord *_executionHistoryRecord;
     //UITableViewStyle _style;
     //UIView *mainView;
@@ -55,15 +53,10 @@ static const unsigned int displayMaxExecutionHistoryRecords = 100;
 -(instancetype)initWithCoder:(NSCoder *)aDecoder
 {
     if (self = [super initWithCoder:aDecoder]) {
-        [self setInitData];
+
     }
     
     return self;
-}
-
--(void)setInitData
-{
-    _executionHistory = [ExecutionHistory loadExecutionHistory];
 }
 
 /*-(void)loadView
@@ -176,15 +169,10 @@ static const unsigned int displayMaxExecutionHistoryRecords = 100;
 {
     [super viewWillAppear:animated];
     
-    _executionHistoryRecords = [_executionHistory selectLatestDataLimit:[NSNumber numberWithUnsignedInt:displayMaxExecutionHistoryRecords]];
+    _executionHistoryRecords = [ExecutionOrder selectNewestFirstLimit:displayMaxExecutionHistoryRecords];
     //_executionHistoryRecords = [[_executionHistoryRecords reverseObjectEnumerator] allObjects];
     
     [self.tableView reloadData];
-}
-
--(void)updatedSaveData
-{
-    [self setInitData];
 }
 
 #pragma mark - Table view data source

@@ -9,7 +9,7 @@
 #import "Order.h"
 
 @class CurrencyPair;
-@class OrderType;
+@class PositionType;
 @class ForexHistoryData;
 @class PositionSize;
 @class Rate;

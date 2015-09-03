@@ -8,61 +8,126 @@
 
 #import "Order.h"
 
+#import "TradeDatabase+Protected.h"
+#import "FMDatabase.h"
 #import "FMResultSet.h"
+#import "FXSAlert.h"
 #import "CurrencyPair.h"
+#import "ExecutionOrder.h"
+#import "ExecutionOrdersCreateMode.h"
+#import "ExecutionOrdersCreateModeFactory.h"
 #import "MarketTime.h"
 #import "OpenPosition.h"
-#import "OrderType.h"
+#import "PositionType.h"
 #import "PositionSize.h"
 #import "Rate.h"
+#import "SimulationManager.h"
 #import "Spread.h"
+
+static NSString* const FXSOrdersTableName = @"orders";
+
+@interface Order ()
+@property (nonatomic) NSUInteger orderId;
+@property (nonatomic, readonly) BOOL isNew;
+@property (nonatomic, readonly) BOOL isClose;
+@end
 
 @implementation Order
 
-- (instancetype)initWithFMResultSet:(FMResultSet*)resultSet
-{
+- (instancetype)initWithFMResultSet:(FMResultSet *)resultSet
+{    
+    _orderId = [resultSet intForColumn:@"id"];
+    
+    if (_orderId < 1) {
+        return nil;
+    }
+    
     if (self = [super init]) {
-        _orderHistoryId = [resultSet intForColumn:@"id"];
-        _currencyPair = [[CurrencyPair alloc] initWithCurrencyPairString:[resultSet stringForColumn:@"code"]];
-#warning fix
-        MarketTime *orderRateTimestamp = [[MarketTime alloc] initWithTimestamp:[resultSet intForColumn:@"order_timestamp"]];
-        _orderRate = [[Rate alloc] initWithRateValue:[resultSet doubleForColumn:@"order_bid_rate"] currencyPair:_currencyPair timestamp:orderRateTimestamp];
-        _orderSpread = [[Spread alloc] initWithPips:[resultSet doubleForColumn:@"order_spread"] currencyPair:_currencyPair];
-        _orderType = [[OrderType alloc] initWithString:[resultSet stringForColumn:@"order_type"]];
-        _positionSize = [[PositionSize alloc] initWithSizeValue:[resultSet intForColumn:@"position_size"]];
+        
     }
     
     return self;
 }
 
-- (instancetype)initWithOrderHistoryId:(NSUInteger)orderHistoryId CurrencyPair:(CurrencyPair *)currencyPair orderType:(OrderType *)orderType orderRate:(Rate *)orderRate positionSize:(PositionSize *)positionSize orderSpread:(Spread *)spread
+- (instancetype)copyOrderNewPositionSize:(PositionSize *)positionSize
 {
-    if (self = [super init]) {
-        _orderHistoryId = orderHistoryId;
-        _currencyPair = currencyPair;
-        _orderType = orderType;
-        _orderRate = orderRate;
-        _positionSize = positionSize;
-        _orderSpread = spread;
-    }
+    Order *order = [self initWithCurrencyPair:self.currencyPair positionType:self.positionType rate:self.rate positionSize:positionSize];
+    order.orderId = self.orderId;
     
-    return self;
+    return order;
 }
 
-- (instancetype)copyOrder
+- (void)execute
 {
-    return [self initWithOrderHistoryId:self.orderHistoryId CurrencyPair:self.currencyPair orderType:self.orderType orderRate:self.orderRate positionSize:self.positionSize orderSpread:self.orderSpread];
+    SimulationManager *simulationManager = [SimulationManager sharedSimulationManager];
+    
+    if (![simulationManager isExecutableOrder]) {
+        return;
+    }
+    
+    if (![OpenPosition isExecutableNewPosition]) {
+        [FXSAlert showAlertTitle:@"Max Open Position" message:nil controller:self.alertTargetController];
+        return;
+    }
+    
+    [self save];
+    
+    ExecutionOrdersCreateModeFactory *factory = [ExecutionOrdersCreateModeFactory new];
+    
+    ExecutionOrdersCreateMode *createMode = [factory createModeFromOrder:self];
+    
+    NSArray *executionOrders = [createMode create:self];
+    
+    @try {
+        [[self class] transaction:^{
+            for (ExecutionOrder *order in executionOrders) {
+                [order execute];
+            }
+        }];
+    }
+    @catch (NSException *exception) {
+        [FXSAlert showAlertTitle:exception.name message:exception.reason controller:self.alertTargetController];
+    }
+    @finally {
+        
+    }
+
 }
 
 - (BOOL)includeCloseOrder
 {
-    OpenPosition *openPosition = [OpenPosition loadOpenPosition];
+    PositionType *positionType = [OpenPosition positionTypeOfCurrencyPair:self.currencyPair];
     
-    if ([self.orderType isEqualOrderType:[openPosition orderTypeOfCurrencyPair:self.currencyPair]]) {
+    if (positionType == nil) {
         return NO;
-    } else {
-        return YES;
     }
+    
+    if (![self.positionType isEqualOrderType:positionType]) {
+        return YES;
+    } else {
+        return NO;
+    }
+}
+
+- (void)save
+{
+    [[self class] execute:^(FMDatabase *db, NSUInteger saveSlot) {
+        
+        NSString *sql = [NSString stringWithFormat:@"INSERT INTO %@ ( save_slot, code, is_short, is_long, rate, timestamp, position_size, is_new, is_close ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", FXSOrdersTableName];
+        
+        if([db executeUpdate:sql, @(saveSlot), self.currencyPair.toCodeString, @(self.positionType.isShort), @(self.positionType.isLong), self.rate.rateValueObj, self.rate.timestamp.timestampValueObj, self.positionSize.sizeValueObj, @(self.isNew), @(self.isClose)]) {
+            
+            NSString *sql = [NSString stringWithFormat:@"select MAX(id) as MAX_ID from %@;", FXSOrdersTableName];
+            
+            FMResultSet *result = [db executeQuery:sql];
+            
+            while ([result next]) {
+                self.orderId = [result intForColumn:@"MAX_ID"];
+            }
+            
+        }
+
+    }];
 }
 
 @end

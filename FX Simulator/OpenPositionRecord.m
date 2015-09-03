@@ -16,7 +16,7 @@
 #import "Rate.h"
 #import "Rates.h"
 #import "OrderHistory.h"
-#import "OrderType.h"
+#import "PositionType.h"
 #import "PositionSize.h"
 #import "Spread.h"
 #import "OpenPositionRawRecord.h"

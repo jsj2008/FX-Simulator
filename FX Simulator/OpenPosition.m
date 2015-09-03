@@ -8,21 +8,19 @@
 
 #import "OpenPosition.h"
 
-#import "SaveData.h"
-#import "SaveLoader.h"
-#import "TradeDatabase.h"
+#import "TradeDatabase+Protected.h"
 #import "FMDatabase.h"
-#import "OpenPositionRecord.h"
-#import "OpenPositionRawRecord.h"
 #import "OpenPositionUtils.h"
-#import "OrderType.h"
+#import "OpenPositionRawRecord.h"
+#import "Order.h"
+#import "PositionSize.h"
+#import "PositionType.h"
 #import "Lot.h"
 #import "Rate.h"
 #import "Rates.h"
 #import "ProfitAndLossCalculator.h"
 #import "Common.h"
 #import "PositionSize.h"
-#import "ExecutionHistory.h"
 #import "ExecutionOrder.h"
 #import "CurrencyConverter.h"
 #import "Market.h"
@@ -30,44 +28,23 @@
 #import "ForexHistoryData.h"
 #import "CurrencyPair.h"
 
-static NSString* const FXSOpenPositionTableName = @"open_position";
+static NSString* const FXSOpenPositionsTableName = @"open_positions";
 static const int maxRecords = 50;
 
-@implementation OpenPosition {
-    OrderHistory *_orderHistory;
-    //ExecutionHistory *_executionHistory;
-    FMDatabase *_tradeDatabase;
-    NSUInteger _saveSlotNumber;
-    NSArray *_allRecords;
-}
+@interface OpenPosition ()
 
-+ (instancetype)createFromSlotNumber:(NSUInteger)slotNumber
-{
-    SaveData *saveData = [SaveLoader load];
-    
-    return [[self alloc] initWithSaveSlotNumber:slotNumber orderHistory:saveData.orderHistory db:[TradeDatabase dbConnect]];
-}
+@property (nonatomic) NSUInteger recordId;
+@property (nonatomic) NSUInteger executionOrderId;
+@property (nonatomic) NSUInteger orderId;
+@property (nonatomic) BOOL isNewPosition;
 
-/*+ (instancetype)createFromSlotNumber:(NSUInteger)slotNumber
-{
-    SaveData *saveData = [SaveLoader load];
-    
-    return [[self alloc] initWithSaveSlotNumber:slotNumber executionHistory:saveData.executionHistory db:[TradeDatabase dbConnect]];
-}*/
+@end
 
-+ (instancetype)loadOpenPosition
-{
-    SaveData *saveData = [SaveLoader load];
-    
-    return saveData.openPosition;
-}
+@implementation OpenPosition
 
--(id)init
-{
-    return nil;
-}
+//@dynamic positionSize;
 
-- (instancetype)initWithSaveSlotNumber:(NSUInteger)slotNumber orderHistory:(OrderHistory *)orderHistory db:(FMDatabase *)db
+/*- (instancetype)initWithSaveSlotNumber:(NSUInteger)slotNumber orderHistory:(OrderHistory *)orderHistory db:(FMDatabase *)db
 {
     if (self = [super init]) {
         _tradeDatabase = db;
@@ -78,7 +55,7 @@ static const int maxRecords = 50;
     }
     
     return self;
-}
+}*/
 
 /*- (instancetype)initWithSaveSlotNumber:(NSUInteger)slotNumber executionHistory:(ExecutionHistory *)executionHistory db:(FMDatabase *)db
 {
@@ -93,13 +70,64 @@ static const int maxRecords = 50;
     return self;
 }*/
 
--(void)update
+/*-(void)update
 {
     _allRecords = [self selectAll];
+}*/
+
++ (instancetype)createNewOpenPositionFromExecutionOrder:(ExecutionOrder *)order executionOrderId:(NSUInteger)executionOrderId
+{
+    OpenPosition *newOpenPosition = [[[self class] alloc] initWithCurrencyPair:order.currencyPair positionType:order.positionType rate:order.rate positionSize:order.positionSize];
+    newOpenPosition.recordId = 0;
+    newOpenPosition.executionOrderId = executionOrderId;
+    newOpenPosition.isNewPosition = YES;
+    
+    return newOpenPosition;
+}
+
++ (instancetype)createOpenPositionFromRawRecord:(OpenPositionRawRecord *)rawRecord
+{
+    NSUInteger executionOrderId = rawRecord.executionOrderId;
+    
+    ExecutionOrder *order = [ExecutionOrder orderAtId:executionOrderId];
+    
+    if (!order) {
+        return nil;
+    }
+    
+    PositionSize *openPositionSize = rawRecord.positionSize;
+    
+    OpenPosition *openPosition = [[[self class] alloc] initWithCurrencyPair:order.currencyPair positionType:order.positionType rate:order.rate positionSize:openPositionSize];
+    openPosition.recordId = rawRecord.recordId;
+    openPosition.executionOrderId = rawRecord.executionOrderId;
+    openPosition.orderId = order.orderId;
+    openPosition.isNewPosition = NO;
+    
+    return openPosition;
+}
+
+/**
+ ポジションが新しい順
+*/
++ (NSArray *)selectNewestFirstLimit:(NSUInteger)limit currencyPair:(CurrencyPair *)currencyPair
+{
+    NSArray *allPositions = [[self allOpenPositionRecordsOfCurrencyPair:currencyPair] reverseObjectEnumerator].allObjects;
+    
+    NSUInteger len;
+    
+    if (allPositions.count < limit) {
+        len = allPositions.count;
+    } else {
+        len = limit;
+    }
+    
+    NSArray *selectArray = [allPositions subarrayWithRange:NSMakeRange(0, len)];
+    
+    return selectArray;
 }
 
 #warning Limit(OpenPositionViewController);
--(NSArray*)selectLatestDataLimit:(NSNumber *)num
++ (NSArray *)selectLatestDataLimit:(NSNumber *)num
 {
     NSArray *all = [self selectAll];
     
@@ -107,90 +135,132 @@ static const int maxRecords = 50;
     return [[all reverseObjectEnumerator] allObjects];
 }
 
--(NSArray*)selectLimitPositionSize:(PositionSize*)positionSize
+/**
+ ポジションが古い順
+*/
++ (NSArray *)selectCloseTargetOpenPositionsLimitClosePositionSize:(PositionSize *)limitPositionSize currencyPair:(CurrencyPair *)currencyPair
 {
-    NSArray *all = [self selectAll];
+    NSMutableArray *resultArray = [NSMutableArray array];
     
-    return [OpenPositionUtils selectLimitPositionSize:positionSize fromOpenPositionRecords:all];
-}
-
--(NSArray*)selectAll
-{
-    NSString *sql = [NSString stringWithFormat:@"select * from %@ WHERE save_slot = ?", FXSOpenPositionTableName];
+    NSArray *allPositions = [self allOpenPositionRecordsOfCurrencyPair:currencyPair];
     
-    NSMutableArray *records = [NSMutableArray array];
+    position_size_t readTotalPositionSize = 0;
     
-    [_tradeDatabase open];
-    
-    FMResultSet *rs;
-    
-    rs = [_tradeDatabase executeQuery:sql, @(_saveSlotNumber)];
-    
-    while ([rs next]) {
-        OpenPositionRecord *record = [[OpenPositionRecord alloc] initWithFMResultSet:rs orderHistory:_orderHistory];
-        // ポジションサイズが０以上のものだけOpenPositionにする
-        if (0 < record.positionSize.sizeValue) {
-            [records addObject:record];
+    for (OpenPosition *openPosition in allPositions) {
+        readTotalPositionSize += openPosition.positionSize.sizeValue;
+        
+        // selectサイズ以上のオープンポジションを読み込んだとき
+        if (limitPositionSize.sizeValue <= readTotalPositionSize) {
+            /*
+             読み込んだサイズの合計と、selectサイズがちょうど同じならそのまま追加
+             読み込んだサイズの方が大きければ、selectサイズより多い部分をカットして、
+             そのオープンポジションの一部分をクローズ対象として追加
+             */
+            if (limitPositionSize.sizeValue == readTotalPositionSize) {
+                [resultArray addObject:openPosition];
+                break;
+            } else if (limitPositionSize.sizeValue < readTotalPositionSize) {
+                position_size_t closePositionSize = openPosition.positionSize.sizeValue - (readTotalPositionSize - limitPositionSize.sizeValue);
+                openPosition.positionSize = [[PositionSize alloc] initWithSizeValue:closePositionSize];
+                [resultArray addObject:openPosition];
+                break;
+            }
+        } else {
+            [resultArray addObject:openPosition];
         }
     }
     
-    [_tradeDatabase close];
+    return [resultArray copy];
+}
+
+/** 
+ ポジションが古い順
+*/
++ (NSArray *)selectAll
+{
+    NSString *sql = [NSString stringWithFormat:@"select * from %@ WHERE save_slot = ?", FXSOpenPositionsTableName];
     
-    return records;
+    NSMutableArray *openPositionRawRecords = [NSMutableArray array];
+    
+    [self execute:^(FMDatabase *db, NSUInteger saveSlot) {
+        
+        FMResultSet *rs;
+        
+        rs = [db executeQuery:sql, @(saveSlot)];
+        
+        while ([rs next]) {
+            OpenPositionRawRecord *openPositionRawRecord = [[OpenPositionRawRecord alloc] initWithFMResultSet:rs];
+            
+            // ポジションサイズが０以上のものだけOpenPositionにする
+            if (0 < openPositionRawRecord.positionSize.sizeValue) {
+                [openPositionRawRecords addObject:openPositionRawRecord];
+            }
+        }
+        
+        /*while ([rs next]) {
+            OpenPosition *openPosition = [[self alloc] initWithFMResultSet:rs];
+            
+            // ポジションサイズが０以上のものだけOpenPositionにする
+            if (0 < openPosition.positionSize.sizeValue) {
+                [openPositions addObject:openPosition];
+            }
+        }*/
+        
+        [rs close];
+
+    }];
+    
+    
+    
+    NSMutableArray *openPositions = [NSMutableArray array];
+    
+    [openPositionRawRecords enumerateObjectsUsingBlock:^(OpenPositionRawRecord *obj, NSUInteger idx, BOOL *stop) {
+        OpenPosition *openPosition = [self createOpenPositionFromRawRecord:obj];
+        if (openPosition) {
+            [openPositions addObject:openPosition];
+        }
+    }];
+    
+    return openPositions;
 }
 
 /**
- @param rawRecords OpenPositionRawRecordの配列
+ ポジションが古い順
 */
-
-/*-(NSArray*)convertToOpenPositionRecordsFromRawRecords:(NSArray*)rawRecords
++ (NSArray *)allOpenPositionRecordsOfCurrencyPair:(CurrencyPair *)currencyPair
 {
-    // TODO: このメソッドだけ別クラスにする。 OpenPositionRecordConverter
-    
-    NSMutableArray *records = [NSMutableArray array];
-    
-    for (OpenPositionRawRecord *rawRecord in rawRecords) {
-        ExecutionHistoryRecord *executionHistoryRecord = [_executionHistory selectRecordFromOrderID:rawRecord.executionHistoryId];
-        OpenPositionRecord *record = [[OpenPositionRecord alloc] initWithOpenPositionRawRecord:rawRecord executionHistoryRecord:executionHistoryRecord];
-        [records addObject:record];
-    }
-    
-    return [records copy];
-}*/
-
-- (NSArray *)allOpenPositionRecordsOfCurrencyPair:(CurrencyPair *)currencyPair
-{
-    NSArray *allOpenPositionRecords = [self selectAll];
+    NSArray *allOpenPositions = [self selectAll];
     
     NSMutableArray *array = [NSMutableArray array];
     
-    for (OpenPositionRecord *record in allOpenPositionRecords) {
-        if ([record.currencyPair isEqualCurrencyPair:currencyPair]) {
-            [array addObject:record];
+    for (OpenPosition *openPosition in allOpenPositions) {
+        if ([openPosition.currencyPair isEqualCurrencyPair:currencyPair]) {
+            [array addObject:openPosition];
         }
     }
     
     return [array copy];
 }
 
-- (OrderType *)orderTypeOfCurrencyPair:(CurrencyPair *)currencyPair
++ (PositionType *)positionTypeOfCurrencyPair:(CurrencyPair *)currencyPair
 {
-    OpenPositionRecord *record = [self allOpenPositionRecordsOfCurrencyPair:currencyPair].firstObject;
+    // 両建て可能にしたときは、Long、Shortを比較して、多い方をPositionTypeにする。
+    OpenPosition *openPosition = [self allOpenPositionRecordsOfCurrencyPair:currencyPair].firstObject;
     
-    return record.orderType;
+    return openPosition.positionType;
 }
 
-- (Money *)profitAndLossForMarket:(Market *)market currencyPair:(CurrencyPair *)currencyPair InCurrency:(Currency *)currency
++ (Money *)profitAndLossOfCurrencyPair:(CurrencyPair *)currencyPair ForMarket:(Market *)market InCurrency:(Currency *)currency
 {
-    OrderType *orderType = [self orderTypeOfCurrencyPair:currencyPair];
+    PositionType *positionType = [self positionTypeOfCurrencyPair:currencyPair];
     
     Rates *valuationRates = [market getCurrentRatesOfCurrencyPair:currencyPair];
     
     Rate *valuationRate;
     
-    if ([orderType isShort]) {
+    if ([positionType isShort]) {
         valuationRate = valuationRates.askRate;
-    } else if ([orderType isLong]) {
+    } else if ([positionType isLong]) {
         valuationRate = valuationRates.bidRate;
     } else {
         return [[Money alloc] initWithAmount:0 currency:currency];
@@ -199,46 +269,46 @@ static const int maxRecords = 50;
     PositionSize *totalPositionSize = [self totalPositionSizeOfCurrencyPair:currencyPair];
     Rate *averageRate = [self averageRateOfCurrencyPair:currencyPair];
     
-    Money *profitAndLoss = [ProfitAndLossCalculator calculateByTargetRate:averageRate valuationRate:valuationRate positionSize:totalPositionSize orderType:orderType];
+    Money *profitAndLoss = [ProfitAndLossCalculator calculateByTargetRate:averageRate valuationRate:valuationRate positionSize:totalPositionSize orderType:positionType];
     
     return [profitAndLoss convertToCurrency:currency];
 }
 
-- (PositionSize *)totalPositionSizeOfCurrencyPair:(CurrencyPair *)currencyPair
++ (PositionSize *)totalPositionSizeOfCurrencyPair:(CurrencyPair *)currencyPair
 {
-    NSArray *allRecords = [self allOpenPositionRecordsOfCurrencyPair:currencyPair];
+    NSArray *allOpenPositions = [self allOpenPositionRecordsOfCurrencyPair:currencyPair];
     
     position_size_t positionSize = 0;
     
-    for (OpenPositionRecord *record in allRecords) {
-        positionSize += record.positionSize.sizeValue;
+    for (OpenPosition *openPosition in allOpenPositions) {
+        positionSize += openPosition.positionSize.sizeValue;
     }
     
     return [[PositionSize alloc] initWithSizeValue:positionSize];
 }
 
-- (Lot *)totalLotOfCurrencyPair:(CurrencyPair *)currencyPair
++ (Lot *)totalLotOfCurrencyPair:(CurrencyPair *)currencyPair
 {
     return [[self totalPositionSizeOfCurrencyPair:currencyPair] toLot];
 }
 
-- (Rate *)averageRateOfCurrencyPair:(CurrencyPair *)currencyPair
++ (Rate *)averageRateOfCurrencyPair:(CurrencyPair *)currencyPair
 {
-    NSArray *allRecords = [self allOpenPositionRecordsOfCurrencyPair:currencyPair];
+    NSArray *allPositions = [self allOpenPositionRecordsOfCurrencyPair:currencyPair];
     PositionSize *totalPositionSize = [self totalPositionSizeOfCurrencyPair:currencyPair];
     
     rate_t averageRate = 0;
     
-    for (OpenPositionRecord *record in allRecords) {
-        averageRate += record.orderRate.rateValue * record.positionSize.sizeValue / totalPositionSize.sizeValue;
+    for (OpenPosition *openPosition in allPositions) {
+        averageRate += openPosition.rate.rateValue * openPosition.positionSize.sizeValue / totalPositionSize.sizeValue;
     }
     
     return [[Rate alloc] initWithRateValue:averageRate currencyPair:currencyPair timestamp:nil];
 }
 
--(BOOL)isMax
++ (BOOL)isExecutableNewPosition
 {
-    if (maxRecords < [self countAllRecords]) {
+    if ([self countAllPositions] <= maxRecords) {
         return YES;
     } else {
         return NO;
@@ -248,42 +318,148 @@ static const int maxRecords = 50;
 /**
  レコード数をカウント
 */
--(int)countAllRecords
++ (NSUInteger)countAllPositions
 {
-    NSString *sql = [NSString stringWithFormat:@"select count(*) as count from %@;", FXSOpenPositionTableName];
+    NSString *sql = [NSString stringWithFormat:@"select count(*) as count from %@;", FXSOpenPositionsTableName];
     
-    [_tradeDatabase open];
+    __block NSUInteger count;
     
-    FMResultSet *rs = [_tradeDatabase executeQuery:sql];
-    
-    int count = 0;
-    
-    while ([rs next]) {
-        count  = [rs intForColumn:@"count"];
-    }
-    
-    [_tradeDatabase close];
+    [self execute:^(FMDatabase *db, NSUInteger saveSlot) {
+        
+        FMResultSet *rs = [db executeQuery:sql];
+        
+        while ([rs next]) {
+            count  = [rs intForColumn:@"count"];
+        }
+    }];
     
     return count;
 }
 
-- (void)delete
+/*- (instancetype)initWithFMResultSet:(FMResultSet *)result
 {
-    NSString *sql = [NSString stringWithFormat:@"DELETE FROM %@ WHERE save_slot = ?;", FXSOpenPositionTableName];
+    NSUInteger executionOrderId = [result intForColumn:@"execution_order_id"];
     
-    [_tradeDatabase open];
-    [_tradeDatabase executeUpdate:sql, @(_saveSlotNumber)];
-    [_tradeDatabase close];
+    ExecutionOrder *order = [ExecutionOrder orderAtId:executionOrderId];
+    
+    if (!order) {
+        return nil;
+    }
+    
+    PositionSize *openPositionSize = [[PositionSize alloc] initWithSizeValue:[result intForColumn:@"position_size"]];
+    
+    if (self = [super initWithCurrencyPair:order.currencyPair positionType:order.positionType rate:order.rate positionSize:openPositionSize]) {
+        _recordId = [result intForColumn:@"id"];
+        _executionOrderId = executionOrderId;
+        _orderId = order.orderId;
+        self.isNewPosition = NO;
+    }
+    
+    return self;
+}*/
+
+- (void)setPositionSize:(PositionSize *)positionSize
+{
+    _positionSize = positionSize;
 }
 
-/*-(Money*)totalPositionMarketValue
+- (void)new
+{    
+    if ([self isNewPosition]) {
+        NSString *sql = [NSString stringWithFormat:@"INSERT INTO %@ (save_slot, execution_order_id, position_size) VALUES (?, ?, ?);", FXSOpenPositionsTableName];
+        
+        [[self class] execute:^(FMDatabase *db, NSUInteger saveSlot) {
+            if ([db executeUpdate:sql, @(saveSlot), @(self.executionOrderId), self.positionSize.sizeValueObj]) {
+                self.isNewPosition = NO;
+            } else {
+                [NSException raise:@"OpenPositionException" format:@"DB Error: new failed"];
+            }
+        }];
+    } else {
+        [NSException raise:@"OpenPositionException" format:@"Close Error: open position is not new position"];
+    }
+}
+
+- (void)close
 {
+    if (![self isNewPosition]) {
+        
+        // position_sizeが0になっても、deleteしない
+        NSString *sql = [NSString stringWithFormat:@"update %@ set position_size = position_size - ? where id = ? AND save_slot = ?", FXSOpenPositionsTableName];
+        
+        [[self class] execute:^(FMDatabase *db, NSUInteger saveSlot) {
+            if (![db executeUpdate:sql, self.positionSize.sizeValueObj, @(self.recordId), @(saveSlot)]) {
+                [NSException raise:@"OpenPositionException" format:@"DB Error: close failed"];
+            }
+        }];
+    } else {
+        [NSException raise:@"OpenPositionException" format:@"Close Error: open position is not close position"];
+    }
+}
+
+/*- (void)save
+{
+    if ([self isNewPosition]) {
+        
+        NSString *sql = [NSString stringWithFormat:@"INSERT INTO %@ (save_slot, execution_order_id, position_size) VALUES (?, ?, ?);", FXSOpenPositionsTableName];
+        
+        [[self class] execute:^(FMDatabase *db, NSUInteger saveSlot) {
+            if ([db executeUpdate:sql, @(saveSlot), @(self.executionOrderId), self.positionSize.sizeValueObj]) {
+                self.isNewPosition = NO;
+            }
+        }];
+        
+    } else {
+        
+        NSString *sql = [NSString stringWithFormat:@"update %@ set position_size = ? where id = ? AND save_slot = ?", FXSOpenPositionsTableName];
+        
+        [[self class] execute:^(FMDatabase *db, NSUInteger saveSlot) {
+            [db executeQuery:sql, self.positionSize.sizeValueObj, @(self.recordId), @(saveSlot)];
+        }];
+        
+    }
+}*/
+
+- (BOOL)isNewPosition
+{
+    if (self.recordId == 0 && _isNewPosition) {
+        return YES;
+    } else {
+        return NO;
+    }
+}
+
+- (Money *)profitAndLossFromMarket:(Market *)market
+{
+    Rates *valuationRates = [market getCurrentRatesOfCurrencyPair:self.currencyPair];
     
+    Rate *valuationRate;
+    
+    if ([self.positionType isShort]) {
+        valuationRate = valuationRates.askRate;
+    } else if ([self.positionType isLong]) {
+        valuationRate = valuationRates.bidRate;
+    } else {
+        return nil;
+    }
+    
+    Money *profitAndLoss = [ProfitAndLossCalculator calculateByTargetRate:self.rate valuationRate:valuationRate positionSize:self.positionSize orderType:self.positionType];
+    
+    return profitAndLoss;
+}
+
+/*- (void)delete
+{
+    NSString *sql = [NSString stringWithFormat:@"DELETE FROM %@ WHERE id = ? AND save_slot = ?;", FXSOpenPositionsTableName];
+    
+    [[self class] execute:^(FMDatabase *db, NSUInteger saveSlot) {
+        [db executeUpdate:sql, @(self.recordId), @(saveSlot)];
+    }];
 }*/
 
 #pragma mark - execute orders
 
--(BOOL)execute:(NSArray *)orders db:(FMDatabase *)db
+/*-(BOOL)execute:(NSArray *)orders db:(FMDatabase *)db
 {
     if (!self.inExecutionOrdersTransaction) {
         return NO;
@@ -297,13 +473,6 @@ static const int maxRecords = 50;
         } else {
             isSuccess = [self newOpenPosition:order db:db];
         }
-        /*if ([order isKindOfClass:[CloseExecutionOrder class]]) {
-            isSuccess = [self closeOpenPosition:order db:db];
-        } else if ([order isKindOfClass:[NewExecutionOrder class]]) {
-            isSuccess = [self newOpenPosition:order db:db];
-        } else {
-            return NO;
-        }*/
         
         if (!isSuccess) {
             return NO;
@@ -316,12 +485,6 @@ static const int maxRecords = 50;
 - (BOOL)closeOpenPosition:(ExecutionOrder *)closeOrder db:(FMDatabase *)db
 {
     return [self updateOpenPositionNumber:closeOrder.closeTargetOpenPositionId closePositionSize:closeOrder.positionSize db:db];
-    
-    /*if (closeOrder.isCloseAllPositionOfRecord) {
-        return [self deleteOpenPositionNumber:closeOrder.closeOpenPositionNumber db:db];
-    } else {
-        return [self updateOpenPositionNumber:closeOrder.closeOpenPositionNumber closePositionSize:closeOrder.positionSize db:db];
-    }*/
 }
 
 - (BOOL)newOpenPosition:(ExecutionOrder *)newOrder db:(FMDatabase *)db
@@ -363,6 +526,6 @@ static const int maxRecords = 50;
         return NO;
     }
     
-}
+}*/
 
 @end

@@ -10,7 +10,7 @@
 
 #import "ForexHistoryData.h"
 #import "Market.h"
-#import "OrderType.h"
+#import "PositionType.h"
 #import "Rate.h"
 #import "Rates.h"
 #import "SaveLoader.h"
@@ -46,7 +46,7 @@
     return [[_market getCurrentRatesOfCurrencyPair:saveData.currencyPair].askRate toDisplayString];
 }
 
--(Rate*)getCurrentRateForOrderType:(OrderType *)orderType
+-(Rate*)getCurrentRateForOrderType:(PositionType *)orderType
 {
     if (orderType.isShort) {
         // return Bid Rate

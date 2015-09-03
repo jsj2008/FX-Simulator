@@ -92,9 +92,7 @@
 }
 
 -(void)didOrder
-{
-    [_tradeDataViewData didOrder];
-    
+{    
     self.orderTypeLabel.text = _tradeDataViewData.displayOrderType;
     self.orderTypeLabel.textColor = _tradeDataViewData.displayOrderTypeColor;
     self.totalOpenLotLabel.text = _tradeDataViewData.displayTotalLot;

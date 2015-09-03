@@ -13,7 +13,7 @@
 #import "Rate.h"
 #import "MarketTime.h"
 #import "Spread.h"
-#import "OrderType.h"
+#import "PositionType.h"
 #import "PositionSize.h"
 #import "ProfitAndLossCalculator.h"
 
@@ -30,7 +30,7 @@
         MarketTime *orderRateTimestamp = [[MarketTime alloc] initWithTimestamp:[rs intForColumn:@"order_rate_timestamp"]];
         _orderRate = [[Rate alloc] initWithRateValue:[rs doubleForColumn:@"order_rate"] currencyPair:_currencyPair timestamp:orderRateTimestamp];
         _orderSpread = [[Spread alloc] initWithPips:[rs doubleForColumn:@"order_spread"] currencyPair:_currencyPair];
-        _orderType = [[OrderType alloc] initWithString:[rs stringForColumn:@"order_type"]];
+        _orderType = [[PositionType alloc] initWithString:[rs stringForColumn:@"order_type"]];
         _positionSize = [[PositionSize alloc] initWithSizeValue:[rs intForColumn:@"position_size"]];
         
         if (_isClose) {

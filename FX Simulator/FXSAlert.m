@@ -10,11 +10,19 @@
 
 #import <UIKit/UIKit.h>
 
-@implementation FXSAlert
+@implementation FXSAlert {
+    NSString *_title;
+    NSString *_message;
+}
 
-+(void)showAlert:(UIViewController*)controller title:(NSString*)title message:(NSString*)message
++ (void)showAlertTitle:(NSString *)title message:(NSString *)message controller:(UIViewController *)controller
 {
+    if (!controller) {
+        return;
+    }
+    
     Class class = NSClassFromString(@"UIAlertController");
+    
     if(class){
         // UIAlertControllerを使ってアラートを表示
         UIAlertController *alert = nil;
@@ -34,7 +42,22 @@
                                               otherButtonTitles:@"OK", nil];
         [alert show];
     }
+    
+}
 
+- (instancetype)initWithTitle:(NSString *)title message:(NSString *)message
+{
+    if (self = [super init]) {
+        _title = title;
+        _message = message;
+    }
+    
+    return self;
+}
+
+- (void)show
+{
+    [[self class] showAlertTitle:_title message:_message controller:self.controller];
 }
 
 @end

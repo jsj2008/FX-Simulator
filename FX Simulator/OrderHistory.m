@@ -18,7 +18,7 @@
 #import "ForexHistoryData.h"
 #import "MarketTime.h"
 #import "Rate.h"
-#import "OrderType.h"
+#import "PositionType.h"
 #import "PositionSize.h"
 
 static NSString* const FXSOrderHistoryTableName = @"order_history";
