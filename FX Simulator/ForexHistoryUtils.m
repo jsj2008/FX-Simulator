@@ -10,7 +10,7 @@
 
 @implementation ForexHistoryUtils
 
-+(NSString*)createTableName:(NSString*)currencyPair timeScale:(int)minute
++ (NSString *)createTableName:(NSString*)currencyPair timeScale:(int)minute
 {
     return [NSString stringWithFormat:@"%@_%d_minute", currencyPair, minute];
 }

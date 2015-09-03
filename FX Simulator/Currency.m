@@ -24,7 +24,7 @@ static NSString* const FXSCurrencyKey = @"currency";
     [aCoder encodeObject:[self toCodeString] forKey:FXSCurrencyKey];
 }
 
--(id)initWithCurrencyType:(CurrencyType)currencyType
+- (instancetype)initWithCurrencyType:(CurrencyType)currencyType
 {
     if (self = [super init]) {
         _currencyType = currencyType;
@@ -37,14 +37,14 @@ static NSString* const FXSCurrencyKey = @"currency";
     return self;
 }
 
--(id)initWithString:(NSString *)currencyString
+- (instancetype)initWithString:(NSString *)currencyString
 {
     _currencyType = [self stringToCurrencyType:currencyString];
     
     return [self initWithCurrencyType:_currencyType];
 }
 
--(BOOL)isEqual:(id)other {
+- (BOOL)isEqual:(id)other {
     if (other == self) {
         return YES;
     } else if ([other isKindOfClass:[self class]]) {
@@ -56,7 +56,7 @@ static NSString* const FXSCurrencyKey = @"currency";
     return NO;
 }
 
--(BOOL)isEqualCurrency:(Currency *)currency
+- (BOOL)isEqualCurrency:(Currency *)currency
 {
     if (self.type == currency.type) {
         return YES;
@@ -65,27 +65,27 @@ static NSString* const FXSCurrencyKey = @"currency";
     }
 }
 
--(NSString*)toCodeString
+- (NSString *)toCodeString
 {
     return [self currencyTypeToString:_currencyType];
 }
 
--(NSString*)toDisplayString
+- (NSString *)toDisplayString
 {
     return [self currencyTypeToString:_currencyType];
 }
 
--(NSString*)toString
+- (NSString *)toString
 {
     return [self currencyTypeToString:_currencyType];
 }
 
--(CurrencyType)type
+- (CurrencyType)type
 {
     return _currencyType;
 }
 
--(NSString*)currencyTypeToString:(CurrencyType)currencyType
+- (NSString *)currencyTypeToString:(CurrencyType)currencyType
 {
     NSString *result;
     
@@ -114,7 +114,7 @@ static NSString* const FXSCurrencyKey = @"currency";
     return result;
 }
 
--(CurrencyType)stringToCurrencyType:(NSString*)currencyString
+- (CurrencyType)stringToCurrencyType:(NSString *)currencyString
 {
     CurrencyType result;
     

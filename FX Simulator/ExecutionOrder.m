@@ -12,7 +12,6 @@
 #import "FMDatabase.h"
 #import "FMResultSet.h"
 #import "CurrencyPair.h"
-#import "MarketTime.h"
 #import "Money.h"
 #import "OpenPosition.h"
 #import "Order.h"
@@ -21,6 +20,7 @@
 #import "ProfitAndLossCalculator.h"
 #import "Rate.h"
 #import "Spread.h"
+#import "Time.h"
 
 static NSString* const FXSExecutionOrdersTableName = @"execution_orders";
 
@@ -145,7 +145,7 @@ static NSString* const FXSExecutionOrdersTableName = @"execution_orders";
 - (instancetype)initWithFMResultSet:(FMResultSet *)result
 {
     CurrencyPair *currencyPair = [[CurrencyPair alloc] initWithCurrencyPairString:[result stringForColumn:@"code"]];
-    MarketTime *rateTime = [[MarketTime alloc] initWithTimestamp:[result intForColumn:@"timestamp"]];
+    Time *rateTime = [[Time alloc] initWithTimestamp:[result intForColumn:@"timestamp"]];
     Rate *rate = [[Rate alloc] initWithRateValue:[result doubleForColumn:@"rate"] currencyPair:currencyPair timestamp:rateTime];
     PositionType *positionType = [PositionType new];
     

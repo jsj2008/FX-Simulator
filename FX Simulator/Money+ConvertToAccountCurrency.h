@@ -9,5 +9,5 @@
 #import "Money.h"
 
 @interface Money (ConvertToAccountCurrency)
--(Money*)convertToAccountCurrency;
+- (Money *)convertToAccountCurrency;
 @end

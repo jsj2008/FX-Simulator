@@ -17,7 +17,7 @@ static NSString* const displaySell = @"Sell";
     NSString *type;
 }
 
--(id)init
+- (instancetype)init
 {
     if (self = [super init]) {
         _isShort = NO;
@@ -27,7 +27,7 @@ static NSString* const displaySell = @"Sell";
     return self;
 }
 
--(instancetype)initWithShort
+- (instancetype)initWithShort
 {
     if (self = [super init]) {
         _isShort = YES;
@@ -37,7 +37,7 @@ static NSString* const displaySell = @"Sell";
     return self;
 }
 
--(instancetype)initWithLong
+- (instancetype)initWithLong
 {
     if (self = [super init]) {
         _isShort = NO;
@@ -47,7 +47,7 @@ static NSString* const displaySell = @"Sell";
     return self;
 }
 
--(id)initWithString:(NSString *)typeString
+- (instancetype)initWithString:(NSString *)typeString
 {
     if (self = [self init]) {
         if ([sell isEqualToString:typeString]) {
@@ -62,17 +62,17 @@ static NSString* const displaySell = @"Sell";
     return self;
 }
 
--(void)setShort
+- (void)setShort
 {
     _isShort = YES;
 }
 
--(void)setLong
+- (void)setLong
 {
     _isLong = YES;
 }
 
--(BOOL)isEqualOrderType:(PositionType *)orderType
+- (BOOL)isEqualOrderType:(PositionType *)orderType
 {
     if ((self.isLong && orderType.isLong) || (self.isShort && orderType.isShort)) {
         return YES;
@@ -81,7 +81,7 @@ static NSString* const displaySell = @"Sell";
     }
 }
 
--(NSString*)toDisplayString
+- (NSString *)toDisplayString
 {
     if (self.isShort == YES) {
         return displaySell;
@@ -92,7 +92,7 @@ static NSString* const displaySell = @"Sell";
     return nil;
 }
 
--(NSString*)toTypeString
+- (NSString *)toTypeString
 {
     if (self.isShort == YES) {
         return sell;
@@ -103,8 +103,7 @@ static NSString* const displaySell = @"Sell";
     return nil;
 }
 
-
--(UIColor*)toColor
+- (UIColor *)toColor
 {
     if (self.isShort) {
         return [UIColor redColor];

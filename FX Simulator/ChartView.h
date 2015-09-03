@@ -9,7 +9,6 @@
 @import UIKit;
 
 @class Chart;
-@class ForexDataChunk;
 
 @interface ChartView : UIView
 

@@ -10,24 +10,22 @@
 
 #import "SaveDataSource.h"
 #import "Account.h"
-#import "Balance.h"
-#import "CoreDataManager.h"
-#import "MarketTime.h"
-#import "TimeFrame.h"
-#import "TimeFrameChunk.h"
 #import "Chart.h"
 #import "ChartSource.h"
 #import "ChartChunk.h"
+#import "CoreDataManager.h"
 #import "Currency.h"
 #import "CurrencyPair.h"
 #import "FXSTimeRange.h"
 #import "FXSTest.h"
-#import "Setting.h"
-#import "Spread.h"
-#import "PositionSize.h"
 #import "Lot.h"
 #import "Money.h"
-#import "TimeScaleUtils.h"
+#import "PositionSize.h"
+#import "Setting.h"
+#import "Spread.h"
+#import "Time.h"
+#import "TimeFrame.h"
+#import "TimeFrameChunk.h"
 
 @interface SaveData ()
 @property (nonatomic) NSUInteger slotNumber;
@@ -224,12 +222,12 @@
     _saveDataSource.timeFrame = timeFrame;
 }
 
-- (MarketTime *)startTime
+- (Time *)startTime
 {
     return _saveDataSource.startTime;
 }
 
-- (void)setStartTime:(MarketTime *)startTime
+- (void)setStartTime:(Time *)startTime
 {
     _saveDataSource.startTime = startTime;
 }
@@ -244,12 +242,12 @@
     _saveDataSource.spread = spread;
 }
 
-- (MarketTime *)lastLoadedTime
+- (Time *)lastLoadedTime
 {
     return _saveDataSource.lastLoadedTime;
 }
 
-- (void)setLastLoadedTime:(MarketTime *)lastLoadedTime
+- (void)setLastLoadedTime:(Time *)lastLoadedTime
 {
     _saveDataSource.lastLoadedTime = lastLoadedTime;
 }

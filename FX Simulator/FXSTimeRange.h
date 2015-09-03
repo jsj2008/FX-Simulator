@@ -8,10 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
-@class MarketTime;
+@class Time;
 
 @interface FXSTimeRange : NSObject
--(instancetype)initWithRangeStart:(MarketTime*)start end:(MarketTime*)end;
-@property (nonatomic, readonly) MarketTime *start;
-@property (nonatomic, readonly) MarketTime *end;
+-(instancetype)initWithRangeStart:(Time*)start end:(Time*)end;
+@property (nonatomic, readonly) Time *start;
+@property (nonatomic, readonly) Time *end;
 @end

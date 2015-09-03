@@ -10,7 +10,6 @@
 
 #import "Account.h"
 #import "CurrencyPair.h"
-#import "Equity.h"
 #import "Market.h"
 #import "SaveData.h"
 #import "SaveLoader.h"

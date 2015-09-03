@@ -13,16 +13,15 @@
 #import "PositionType.h"
 #import "Rate.h"
 #import "Rates.h"
-#import "SaveLoader.h"
 #import "SaveData.h"
-
+#import "SaveLoader.h"
 
 @implementation RatePanelViewData {
     Market *_market;
     SaveData *saveData;
 }
 
--(id)init
+- (instancetype)init
 {
     if (self = [super init]) {
         saveData = [SaveLoader load];
@@ -31,22 +30,22 @@
     return self;
 }
 
--(void)updateCurrentMarket:(Market *)market
+- (void)updateCurrentMarket:(Market *)market
 {
     _market = market;
 }
 
--(NSString*)getDisplayCurrentBidRate
+- (NSString *)getDisplayCurrentBidRate
 {
     return [[_market getCurrentRatesOfCurrencyPair:saveData.currencyPair].bidRate toDisplayString];
 }
 
--(NSString*)getDisplayCurrentAskRate
+- (NSString *)getDisplayCurrentAskRate
 {
     return [[_market getCurrentRatesOfCurrencyPair:saveData.currencyPair].askRate toDisplayString];
 }
 
--(Rate*)getCurrentRateForOrderType:(PositionType *)orderType
+- (Rate *)getCurrentRateForOrderType:(PositionType *)orderType
 {
     if (orderType.isShort) {
         // return Bid Rate
@@ -59,17 +58,17 @@
     return nil;
 }
 
--(PositionSize*)currentPositionSize
+- (PositionSize *)currentPositionSize
 {
     return saveData.tradePositionSize;
 }
 
--(CurrencyPair*)currencyPair
+- (CurrencyPair *)currencyPair
 {
     return saveData.currencyPair;
 }
 
--(Spread*)spread
+- (Spread *)spread
 {
     return saveData.spread;
 }

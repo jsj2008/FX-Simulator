@@ -9,7 +9,7 @@
 #import "ForexDataChunk.h"
 
 #import "ForexHistoryData.h"
-#import "MarketTime.h"
+#import "Time.h"
 #import "Rate.h"
 
 @implementation ForexDataChunk {
@@ -255,10 +255,10 @@
     return maxRate;
 }
 
-- (ForexDataChunk *)getChunkFromBaseTime:(MarketTime *)time relativePosition:(NSInteger)pos limit:(NSUInteger)limit
+- (ForexDataChunk *)getChunkFromBaseTime:(Time *)time relativePosition:(NSInteger)pos limit:(NSUInteger)limit
 {
-    MarketTime *newestDataTime = ((ForexHistoryData *)_forexDataArray.firstObject).close.timestamp;
-    MarketTime *oldestDataTime = ((ForexHistoryData *)_forexDataArray.lastObject).close.timestamp;
+    Time *newestDataTime = ((ForexHistoryData *)_forexDataArray.firstObject).close.timestamp;
+    Time *oldestDataTime = ((ForexHistoryData *)_forexDataArray.lastObject).close.timestamp;
     
     NSComparisonResult result1 = [time compare:newestDataTime];
     NSComparisonResult result2 = [time compare:oldestDataTime];

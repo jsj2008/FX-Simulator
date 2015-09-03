@@ -8,27 +8,26 @@
 
 #import "ForexHistory.h"
 
-#import "MarketTime.h"
-#import "TimeFrame.h"
-#import "ForexDatabase.h"
-#import "ForexDataChunk.h"
-#import "ForexHistoryData.h"
 #import "FMDatabase.h"
 #import "FMResultSet.h"
 #import "CurrencyPair.h"
+#import "ForexDatabase.h"
+#import "ForexDataChunk.h"
+#import "ForexHistoryData.h"
 #import "ForexHistoryUtils.h"
+#import "Time.h"
 #import "Rate.h"
-
+#import "TimeFrame.h"
 
 @implementation ForexHistory  {
     FMDatabase *forexDatabase;
     CurrencyPair *_currencyPair;
     TimeFrame *_timeScale;
-    int _timeScaleInt;
+    NSUInteger _timeScaleInt;
     NSString *_forexHistoryTableName;
 }
 
--(id)init
+- (instancetype)init
 {
     if (self = [super init]) {
         forexDatabase = [ForexDatabase dbConnect];
@@ -37,7 +36,7 @@
     return self;
 }
 
--(id)initWithCurrencyPair:(CurrencyPair *)currencyPair timeScale:(TimeFrame*)timeScale
+- (instancetype)initWithCurrencyPair:(CurrencyPair *)currencyPair timeScale:(TimeFrame *)timeScale
 {
     if (currencyPair == nil || timeScale == nil) {
         DLog(@"CurrencyPair or TimeScale nil");
@@ -54,7 +53,7 @@
     return self;
 }
 
-- (ForexDataChunk *)selectBaseTime:(MarketTime *)time frontLimit:(NSUInteger)frontLimit backLimit:(NSUInteger)backLimit
+- (ForexDataChunk *)selectBaseTime:(Time *)time frontLimit:(NSUInteger)frontLimit backLimit:(NSUInteger)backLimit
 {
     NSString *getFrontDataSql = [NSString stringWithFormat:@"SELECT rowid,* FROM (SELECT rowid,* FROM %@ WHERE ? <= close_minute_close_timestamp ORDER BY close_minute_close_timestamp ASC LIMIT ?) ORDER BY close_minute_close_timestamp DESC", _forexHistoryTableName];
     NSString *getBackDataSql = [NSString stringWithFormat:@"SELECT rowid,* FROM %@ WHERE close_minute_close_timestamp < ? ORDER BY close_minute_close_timestamp DESC LIMIT ?", _forexHistoryTableName];
@@ -94,7 +93,7 @@
     return [[ForexDataChunk alloc] initWithForexDataArray:array];
 }
 
--(NSArray*)selectMaxCloseTime:(MarketTime *)closeTime limit:(NSUInteger)limit
+- (NSArray *)selectMaxCloseTime:(Time *)closeTime limit:(NSUInteger)limit
 {
     NSString *sql = [NSString stringWithFormat:@"SELECT rowid,* FROM %@ WHERE close_minute_close_timestamp <= ? ORDER BY close_minute_close_timestamp DESC LIMIT ?", _forexHistoryTableName];
     
@@ -114,7 +113,7 @@
     return [array copy];
 }
 
-- (ForexDataChunk *)selectMaxCloseTime:(MarketTime *)closeTime newerThan:(MarketTime *)oldCloseTime
+- (ForexDataChunk *)selectMaxCloseTime:(Time *)closeTime newerThan:(Time *)oldCloseTime
 {
     NSString *sql = [NSString stringWithFormat:@"SELECT rowid,* FROM %@ WHERE close_minute_close_timestamp <= ? AND ? < close_minute_close_timestamp ORDER BY close_minute_close_timestamp DESC", _forexHistoryTableName];
     
@@ -134,17 +133,17 @@
     return [[ForexDataChunk alloc] initWithForexDataArray:array];
 }
 
--(MarketTime*)minOpenTime
+- (Time *)minOpenTime
 {
     return [self firstRecord].open.timestamp;
 }
 
--(MarketTime*)maxOpenTime
+- (Time *)maxOpenTime
 {
     return [self lastRecord].close.timestamp;
 }
 
--(ForexHistoryData*)firstRecord
+- (ForexHistoryData *)firstRecord
 {
     ForexHistoryData *data;
     
@@ -163,7 +162,7 @@
     return data;
 }
 
--(ForexHistoryData*)lastRecord
+- (ForexHistoryData *)lastRecord
 {
     ForexHistoryData *data;
     

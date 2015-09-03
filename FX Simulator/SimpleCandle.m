@@ -10,7 +10,7 @@
 
 @implementation SimpleCandle
 
--(void)stroke
+- (void)stroke
 {
     [[UIColor colorWithRed:self.colorR green:self.colorG blue:self.colorB alpha:1.0] setStroke];
     [[UIColor colorWithRed:self.colorR green:self.colorG blue:self.colorB alpha:1.0] setFill];

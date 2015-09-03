@@ -10,7 +10,7 @@
 
 #import "Currency.h"
 #import "CurrencyPair.h"
-#import "MarketTime.h"
+#import "Time.h"
 #import "Money.h"
 #import "PositionSize.h"
 #import "Spread.h"

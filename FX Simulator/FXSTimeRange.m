@@ -8,11 +8,11 @@
 
 #import "FXSTimeRange.h"
 
-#import "MarketTime.h"
+#import "Time.h"
 
 @implementation FXSTimeRange
 
--(instancetype)initWithRangeStart:(MarketTime *)start end:(MarketTime *)end
+-(instancetype)initWithRangeStart:(Time *)start end:(Time *)end
 {
     if (start == nil || end == nil) {
         return nil;

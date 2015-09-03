@@ -19,7 +19,3 @@ typedef double spread_t;
 typedef unsigned long long position_size_t;
 
 typedef int timestamp_t;
-
-/*@interface Common : NSObject
-
-@end*/

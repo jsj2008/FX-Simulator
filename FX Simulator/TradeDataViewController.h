@@ -11,12 +11,12 @@
 
 @protocol TradeDataViewControllerDelegate <NSObject>
 /// 自動更新を設定するボタンが変更されたとき。
--(void)autoUpdateSettingSwitchChanged:(BOOL)isSwitchOn;
+- (void)autoUpdateSettingSwitchChanged:(BOOL)isSwitchOn;
 @end
 
 @interface TradeDataViewController : UIViewController <RatePanelViewControllerDelegate, UITextFieldDelegate>
 @property (nonatomic, weak) id<TradeDataViewControllerDelegate> delegate;
--(void)didOrder;
--(void)tradeViewTouchesBegan;
--(void)updatedSaveData;
+- (void)didOrder;
+- (void)tradeViewTouchesBegan;
+- (void)updatedSaveData;
 @end

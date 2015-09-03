@@ -13,5 +13,5 @@
 @class Market;
 
 @interface TradeViewController : UIViewController <ChartViewControllerDelegate, NewStartViewControllerDelegate>
--(void)updatedSaveData;
+- (void)updatedSaveData;
 @end

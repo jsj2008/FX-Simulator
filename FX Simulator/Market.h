@@ -26,12 +26,24 @@
 @class CurrencyPair;
 @class ForexDataChunk;
 @class ForexHistoryData;
-@class MarketTime;
+@class Time;
 @class Rate;
 @class Rates;
 @class SaveData;
 
 @interface Market : NSObject
+
+@property (nonatomic, weak) id<MarketDelegate> delegate;
+@property (nonatomic, readonly) Time *currentTime;
+
+/**
+ Onなら自動更新になり、セーブデータの自動更新設定もOnに変更される。
+ Offでも同じ。
+ */
+@property (nonatomic) BOOL isAutoUpdate;
+
+@property (nonatomic, readonly) BOOL isStart;
+@property (nonatomic, readwrite) NSNumber *autoUpdateInterval;
 
 - (void)loadSaveData:(SaveData *)saveData;
 
@@ -69,17 +81,5 @@
 - (void)add;
 
 - (BOOL)didLoadLastData;
-
-@property (nonatomic, weak) id<MarketDelegate> delegate;
-@property (nonatomic, readonly) MarketTime *currentTime;
-
-/**
- Onなら自動更新になり、セーブデータの自動更新設定もOnに変更される。
- Offでも同じ。
-*/
-@property (nonatomic) BOOL isAutoUpdate;
-
-@property (nonatomic, readonly) BOOL isStart;
-@property (nonatomic, readwrite) NSNumber *autoUpdateInterval;
 
 @end

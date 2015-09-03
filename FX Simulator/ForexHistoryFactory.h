@@ -8,10 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
-@class ForexHistory;
 @class CurrencyPair;
+@class ForexHistory;
 @class TimeFrame;
 
 @interface ForexHistoryFactory : NSObject
-+(ForexHistory*)createForexHistoryFromCurrencyPair:(CurrencyPair*)currencyPair timeScale:(TimeFrame*)timeScale;
++ (ForexHistory *)createForexHistoryFromCurrencyPair:(CurrencyPair *)currencyPair timeScale:(TimeFrame *)timeScale;
 @end

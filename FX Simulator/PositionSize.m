@@ -8,10 +8,10 @@
 
 #import "PositionSize.h"
 
-#import "NSNumber+FXSNumberConverter.h"
-#import "SaveLoader.h"
-#import "SaveData.h"
 #import "Lot.h"
+#import "NSNumber+FXSNumberConverter.h"
+#import "SaveData.h"
+#import "SaveLoader.h"
 
 static NSString* const FXSPositionSizeKey = @"positionSize";
 

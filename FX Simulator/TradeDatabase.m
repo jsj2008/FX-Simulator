@@ -20,14 +20,12 @@ static NSString* const testDbFileName = @"TradeTestDb.sqlite3";
 
 @implementation TradeDatabase
 
-+ (FMDatabase *)db
++ (void)loadSaveData:(SaveData *)saveData
 {
-    if (!db) {
-        db = [self dbConnect];
-    }
-    
-    return db;
+    FXSSaveSlot = saveData.slotNumber;
 }
+
+#pragma mark - execute
 
 + (void)execute:(void (^)(FMDatabase *, NSUInteger))block
 {
@@ -76,9 +74,15 @@ static NSString* const testDbFileName = @"TradeTestDb.sqlite3";
     
 }
 
-+ (void)loadSaveData:(SaveData *)saveData
+#pragma mark - database
+
++ (FMDatabase *)db
 {
-    FXSSaveSlot = saveData.slotNumber;
+    if (!db) {
+        db = [self dbConnect];
+    }
+    
+    return db;
 }
 
 + (FMDatabase *)dbConnect
@@ -98,7 +102,6 @@ static NSString* const testDbFileName = @"TradeTestDb.sqlite3";
     BOOL ret;
     NSFileManager *fm = [NSFileManager defaultManager];
     NSArray  *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    //NSArray  *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
     dbPath = [documentsDirectory stringByAppendingPathComponent:fileName];
     ret = [fm fileExistsAtPath:dbPath];
@@ -108,7 +111,6 @@ static NSString* const testDbFileName = @"TradeTestDb.sqlite3";
     if(!ret){
         NSString *bundleDbPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:fileName];
         BOOL result = [fm copyItemAtPath:bundleDbPath toPath:dbPath error:&error];
-        //[fm createFileAtPath:dbPath contents:nil attributes:nil];
         
         if (result) {
             DLog(@"ファイルのコピーに成功：%@ → %@", bundleDbPath, dbPath);

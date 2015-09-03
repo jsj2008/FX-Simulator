@@ -31,6 +31,15 @@
     TradeDataViewData *_tradeDataViewData;
 }
 
+/*- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+ {
+ self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+ if (self) {
+ // Custom initialization
+ }
+ return self;
+}*/
+
 - (instancetype)initWithCoder:(NSCoder *)aDecoder
 {
     if (self = [super initWithCoder:aDecoder]) {
@@ -40,14 +49,13 @@
     return self;
 }
 
-/*- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
+    if ([segue.identifier isEqualToString:@"InputTradeLotViewControllerSegue"]) {
+        InputTradeLotViewController *controller = segue.destinationViewController;
+        controller.defaultInputTradeLot = _tradeDataViewData.tradeLot;
     }
-    return self;
-}*/
+}
 
 - (void)viewDidLoad
 {
@@ -56,7 +64,7 @@
     
 }
 
--(void)viewWillAppear:(BOOL)animated {
+- (void)viewWillAppear:(BOOL)animated {
     
     [super viewWillAppear:animated];
     
@@ -67,20 +75,7 @@
     [self didOrder];
 }
 
--(void)update
-{
-    /*NSMutableArray *array = openPositionData.allPositions;
-    
-    openPositionView.totalLot = [NSNumber numberWithUnsignedLongLong:openPositionData.totalLot];
-    
-    for (OpenPositionRecord *record in array) {
-        NSLog(@"ratesID %d orderRate %f", record.ratesId, record.orderRate);
-    }*/
-    
-    //[openPositionView update];
-}
-
--(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {    
     if ([keyPath isEqualToString:@"currentTime"] && [object isKindOfClass:[Market class]]) {
         self.profitAndLossLabel.text = _tradeDataViewData.displayProfitAndLoss;
@@ -91,7 +86,7 @@
     }
 }
 
--(void)didOrder
+- (void)didOrder
 {    
     self.orderTypeLabel.text = _tradeDataViewData.displayOrderType;
     self.orderTypeLabel.textColor = _tradeDataViewData.displayOrderTypeColor;
@@ -103,90 +98,6 @@
     self.openPositionMarketValueLabel.text = @"";
     self.equityLabel.text = _tradeDataViewData.displayEquity;
     self.equityLabel.textColor = _tradeDataViewData.displayEquityColor;
-    
-    /*tradeDataView.displayAverageRate = tradeDataViewData.displayAverageRate;
-    tradeDataView.displayOrderType = tradeDataViewData.displayOrderType;
-    tradeDataView.displayOrderTypeColor = tradeDataViewData.displayOrderTypeColor;
-    tradeDataView.displayTotalLot = tradeDataViewData.displayTotalLot;
-    
-    tradeDataView.displayProfitAndLoss = tradeDataViewData.displayProfitAndLoss;
-    tradeDataView.displayProfitAndLossColor = tradeDataViewData.displayProfitAndLossColor;
-    tradeDataView.displayOpenPositionMarketValue = tradeDataViewData.displayOpenPositionMarketValue;
-    tradeDataView.displayEquity = tradeDataViewData.displayEquity;
-    tradeDataView.displayEquityColor = tradeDataViewData.displayEquityColor;*/
-}
-
-/*-(BOOL)textFieldShouldBeginEditing:
-(UITextField*)textField
-{
-    //self.view.transform = CGAffineTransformMakeTranslation(0, 300);
-    //openPositionView.frame = CGRectMake(openPositionView.frame.origin.x, -100, openPositionView.frame.size.width, openPositionView.frame.size.height);
-    //self.view.frame = CGRectMake(self.view.frame.origin.x, selfViewY - keyboardHigh, self.view.frame.size.width, self.view.frame.size.height);
-    
-    return YES;
-}*/
-
-// Return がタップされたとき
-/*-(BOOL)textFieldShouldReturn:(UITextField *)textField
-{
-    //openPositionView.frame = CGRectMake(openPositionView.frame.origin.x, 0, openPositionView.frame.size.width, openPositionView.frame.size.height);
-    self.view.frame = CGRectMake(self.view.frame.origin.x, selfViewY, self.view.frame.size.width, self.view.frame.size.height);
-    
-    [textField resignFirstResponder];
-    
-    return YES;
-}*/
-
-/*-(void)textFieldDidEndEditing:(UITextField*)textField
-{
-    tradeDataViewData.tradeLotInputFieldValue = textField.text;
-}*/
-
-/*-(void)switchValueChanged:(id)sender
-{
-    UISwitch *sw = sender;
-    
-    tradeDataViewData.isAutoUpdate = sw.on;
-    
-    if ([_delegate respondsToSelector:@selector(autoUpdateSettingSwitchChanged:)]) {
-        [_delegate autoUpdateSettingSwitchChanged:tradeDataViewData.isAutoUpdate];
-    }
-}*/
-
-// Lot 入力のキーボードが立ち上がっているときに、タッチされたらキーボードをしまう
-/*-(void)tradeViewTouchesBegan
-{
-    if ([tradeDataView.tradeLotInputField isFirstResponder]) {
-        [tradeDataView.tradeLotInputField resignFirstResponder];
-        self.view.frame = CGRectMake(self.view.frame.origin.x, selfViewY, self.view.frame.size.width, self.view.frame.size.height);
-        //openPositionView.frame = CGRectMake(openPositionView.frame.origin.x, 0, openPositionView.frame.size.width, openPositionView.frame.size.height);
-    }
-}*/
-
-// Lot 入力のためのキーボード
-/*-(void)willShowKeyboard:(NSNotification*)notification
-{
-    CGRect keyboard;
-    keyboard = [[notification.userInfo
-                 objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
-    keyboardHigh = keyboard.size.height;
-    
-    CGRect mainScreenRect = [[UIScreen mainScreen] bounds];
-    float newSelfViewY = mainScreenRect.size.height - keyboardHigh - tradeDataView.tradeLotInputField.frame.size.height - 15;
-    
-    self.view.frame = CGRectMake(self.view.frame.origin.x, newSelfViewY, self.view.frame.size.width, self.view.frame.size.height);
-}*/
-
--(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    if ([segue.identifier isEqualToString:@"InputTradeLotViewControllerSegue"]) {
-        InputTradeLotViewController *controller = segue.destinationViewController;
-        //if (controller.isFirstAccess) {
-        controller.defaultInputTradeLot = _tradeDataViewData.tradeLot;
-        
-            //controller.isFirstAccess = NO;
-        //}
-    }
 }
 
 - (IBAction)tradeDataViewReturnActionForSegue:(UIStoryboardSegue *)segue

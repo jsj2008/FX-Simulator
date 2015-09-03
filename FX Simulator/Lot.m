@@ -9,13 +9,13 @@
 #import "Lot.h"
 
 #import "NSNumber+FXSNumberConverter.h"
-#import "SaveLoader.h"
-#import "SaveData.h"
 #import "PositionSize.h"
+#import "SaveData.h"
+#import "SaveLoader.h"
 
 @implementation Lot
 
--(id)initWithLotValue:(lot_t)value
+- (instancetype)initWithLotValue:(lot_t)value
 {
     if (self = [super init]) {
         _lotValue = value;
@@ -24,7 +24,7 @@
     return self;
 }
 
--(PositionSize*)toPositionSize
+- (PositionSize *)toPositionSize
 {
     SaveData *saveData = [SaveLoader load];
     
@@ -33,20 +33,14 @@
     return [[PositionSize alloc] initWithSizeValue:size];
 }
 
--(NSString*)toDisplayString
+- (NSString *)toDisplayString
 {
     return [self.valueObj fxs_toDisplayString];
-    //return [NSString stringWithFormat:@"%llu", self.lotValue];
 }
 
--(NSNumber*)valueObj
+- (NSNumber *)valueObj
 {
     return [NSNumber numberWithUnsignedLongLong:self.lotValue];
 }
-
-/*-(NSString*)stringValue
-{
-    return [NSString stringWithFormat:@"%llu", self.lotValue];
-}*/
 
 @end

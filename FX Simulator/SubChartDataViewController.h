@@ -11,6 +11,6 @@
 @class ForexHistoryData;
 
 @interface SubChartDataViewController : UIViewController
--(void)displayForexHistoryData:(ForexHistoryData*)forexHistoryData;
--(void)hiddenForexHistoryData;
+- (void)displayForexHistoryData:(ForexHistoryData *)forexHistoryData;
+- (void)hiddenForexHistoryData;
 @end

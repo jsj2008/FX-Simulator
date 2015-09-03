@@ -10,7 +10,5 @@
 #import "NewStartViewController.h"
 
 @interface ExecutionHistoryTableViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, NewStartViewControllerDelegate>
--(void)updatedSaveData;
-//-(id)initWithStyle:(UITableViewStyle)style;
-//@property (nonatomic, retain) UITableView *tableView;
+- (void)updatedSaveData;
 @end

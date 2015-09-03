@@ -8,15 +8,15 @@
 
 #import "Common.h"
 
-@interface MarketTime : NSObject <NSCoding>
+@interface Time : NSObject <NSCoding>
 @property (nonatomic, readonly) NSDate *date;
 @property (nonatomic, readonly) timestamp_t timestampValue;
 @property (nonatomic, readonly) NSNumber *timestampValueObj;
 - (instancetype)initWithDate:(NSDate*)date;
 - (instancetype)initWithTimestamp:(timestamp_t)timestamp;
-- (MarketTime *)addDay:(int)day;
-- (NSComparisonResult)compare:(MarketTime*)time;
-- (BOOL)isEqualTime:(MarketTime *)time;
+- (Time *)addDay:(int)day;
+- (NSComparisonResult)compare:(Time*)time;
+- (BOOL)isEqualTime:(Time *)time;
 - (NSString *)toDisplayTimeString;
 - (NSString *)toDisplayYMDString;
 - (NSString *)toDisplayHMSString;

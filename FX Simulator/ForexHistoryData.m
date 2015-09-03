@@ -11,7 +11,7 @@
 #import "FMResultSet.h"
 #import "CurrencyPair.h"
 #import "Rate.h"
-#import "MarketTime.h"
+#import "Time.h"
 #import "TimeFrame.h"
 #import "ForexDataChunk.h"
 #import "ForexHistoryDataArrayUtils.h"
@@ -24,8 +24,8 @@
         _ratesID = [rs intForColumn:@"rowid"];
         _currencyPair = currencyPair;
         _timeScale = timeScale;
-        MarketTime *openTimestamp = [[MarketTime alloc] initWithTimestamp:[rs intForColumn:@"open_minute_open_timestamp"]];
-        MarketTime *closeTimestamp = [[MarketTime alloc] initWithTimestamp:[rs intForColumn:@"close_minute_close_timestamp"]];
+        Time *openTimestamp = [[Time alloc] initWithTimestamp:[rs intForColumn:@"open_minute_open_timestamp"]];
+        Time *closeTimestamp = [[Time alloc] initWithTimestamp:[rs intForColumn:@"close_minute_close_timestamp"]];
         _open = [[Rate alloc] initWithRateValue:[rs doubleForColumn:@"open"] currencyPair:currencyPair timestamp:openTimestamp];
         _close = [[Rate alloc] initWithRateValue:[rs doubleForColumn:@"close"] currencyPair:currencyPair timestamp:closeTimestamp];
         _high = [[Rate alloc] initWithRateValue:[rs doubleForColumn:@"high"] currencyPair:currencyPair timestamp:nil];

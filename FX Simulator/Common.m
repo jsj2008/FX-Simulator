@@ -8,6 +8,3 @@
 
 #import "Common.h"
 
-/*@implementation Common
-
-@end*/

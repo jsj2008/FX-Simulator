@@ -9,7 +9,7 @@
 #import "TradeDatabase.h"
 
 @class CurrencyPair;
-@class MarketTime;
+@class Time;
 @class PositionSize;
 @class PositionType;
 @class Rate;

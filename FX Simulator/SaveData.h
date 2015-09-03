@@ -9,29 +9,25 @@
 #import <Foundation/Foundation.h>
 
 @class Account;
-@class CoreDataManager;
-@class SaveDataSource;
 @class Chart;
 @class ChartChunk;
 @class Currency;
 @class CurrencyPair;
-@class Spread;
-@class PositionSize;
+@class Time;
 @class Lot;
 @class Money;
+@class PositionSize;
+@class Spread;
 @class TimeFrame;
-@class MarketTime;
-@class OrderHistory;
-@class OpenPosition;
-@class ExecutionHistory;
 
 @interface SaveData : NSObject
+
 @property (nonatomic, readonly) NSUInteger slotNumber;
 @property (nonatomic) CurrencyPair* currencyPair;
 @property (nonatomic) TimeFrame *timeFrame;
-@property (nonatomic) MarketTime *startTime;
+@property (nonatomic) Time *startTime;
 @property (nonatomic) Spread *spread;
-@property (nonatomic) MarketTime *lastLoadedTime;
+@property (nonatomic) Time *lastLoadedTime;
 @property (nonatomic) Currency* accountCurrency;
 @property (nonatomic) PositionSize *positionSizeOfLot;
 @property (nonatomic) PositionSize *tradePositionSize;

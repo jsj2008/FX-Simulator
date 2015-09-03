@@ -8,30 +8,34 @@
 
 #import "Common.h"
 
-@class MarketTime;
 @class CurrencyPair;
+@class Money;
 @class PositionSize;
 @class Spread;
-@class Money;
+@class Time;
 
 @interface Rate : NSObject
--(id)initWithRateValue:(rate_t)rate currencyPair:(CurrencyPair*)currencyPair timestamp:(MarketTime*)timestamp;
-/**
- このRateと対象のRateのCurrencyPairが同じかどうか。
-*/
--(BOOL)isEqualCurrencyPair:(Rate*)rate;
-- (Rate *)addRate:(Rate *)rate;
-/**
- このRateにスプレッドを追加したRateを返す。
-*/
--(Rate*)addSpread:(Spread*)spread;
-- (Rate *)divide:(NSUInteger)num;
--(Rate*)subRate:(Rate*)rate;
--(NSComparisonResult)compare:(Rate*)rate;
--(Money*)multiplyPositionSize:(PositionSize*)positionSize;
--(NSString*)toDisplayString;
-@property (nonatomic, readonly) MarketTime *timestamp;
+
+@property (nonatomic, readonly) Time *timestamp;
 @property (nonatomic, readonly) CurrencyPair *currencyPair;
 @property (nonatomic, readonly) rate_t rateValue;
 @property (nonatomic, readonly) NSNumber *rateValueObj;
+
+- (instancetype)initWithRateValue:(rate_t)rate currencyPair:(CurrencyPair *)currencyPair timestamp:(Time *)timestamp;
+
+/**
+ このRateと対象のRateのCurrencyPairが同じかどうか。
+*/
+- (BOOL)isEqualCurrencyPair:(Rate *)rate;
+- (Rate *)addRate:(Rate *)rate;
+
+/**
+ このRateにスプレッドを追加したRateを返す。
+*/
+- (Rate *)addSpread:(Spread *)spread;
+- (Rate *)divide:(NSUInteger)num;
+- (Rate *)subRate:(Rate *)rate;
+- (NSComparisonResult)compare:(Rate *)rate;
+- (Money *)multiplyPositionSize:(PositionSize *)positionSize;
+- (NSString *)toDisplayString;
 @end

@@ -12,7 +12,7 @@
 
 @class ForexHistoryData;
 @class Rate;
-@class MarketTime;
+@class Time;
 
 /**
  連続するForexDataの集合を管理する。
@@ -55,7 +55,7 @@
 /**
  基準となる時間(Close Time)からの相対位置にあるデータを先頭に、最大Limit個のデータを取得する。
  */
-- (ForexDataChunk *)getChunkFromBaseTime:(MarketTime *)time relativePosition:(NSInteger)pos limit:(NSUInteger)limit;
+- (ForexDataChunk *)getChunkFromBaseTime:(Time *)time relativePosition:(NSInteger)pos limit:(NSUInteger)limit;
 
 /**
  最新のデータを先頭に追加する。

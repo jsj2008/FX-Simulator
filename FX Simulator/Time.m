@@ -6,11 +6,11 @@
 //  
 //
 
-#import "MarketTime.h"
+#import "Time.h"
 
 static NSString* const FXSTimeKey = @"time";
 
-@implementation MarketTime
+@implementation Time
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder
 {
@@ -38,7 +38,7 @@ static NSString* const FXSTimeKey = @"time";
     return [self initWithTimestamp:[date timeIntervalSince1970]];
 }
 
--(MarketTime*)addDay:(int)day
+- (Time *)addDay:(int)day
 {
     NSCalendar *calendar = [NSCalendar currentCalendar];
     
@@ -46,15 +46,15 @@ static NSString* const FXSTimeKey = @"time";
     comps1.day = day;
     NSDate *result = [calendar dateByAddingComponents:comps1 toDate:self.date options:0];
     
-    return [[MarketTime alloc] initWithDate:result];
+    return [[Time alloc] initWithDate:result];
 }
 
--(NSComparisonResult)compare:(MarketTime *)time
+- (NSComparisonResult)compare:(Time *)time
 {
     return [self.date compare:time.date];
 }
 
-- (BOOL)isEqualTime:(MarketTime *)time
+- (BOOL)isEqualTime:(Time *)time
 {
     NSComparisonResult result = [self compare:time];
     
@@ -65,7 +65,7 @@ static NSString* const FXSTimeKey = @"time";
     }
 }
 
--(NSString*)toDisplayTimeString
+- (NSString *)toDisplayTimeString
 {
     NSTimeInterval interval = _timestampValue;
     NSDate* date = [NSDate dateWithTimeIntervalSince1970:interval];
@@ -76,7 +76,7 @@ static NSString* const FXSTimeKey = @"time";
     return [dateFormatter stringFromDate:date];
 }
 
--(NSString*)toDisplayYMDString
+- (NSString *)toDisplayYMDString
 {
     NSTimeInterval interval = _timestampValue;
     NSDate* date = [NSDate dateWithTimeIntervalSince1970:interval];
@@ -87,7 +87,7 @@ static NSString* const FXSTimeKey = @"time";
     return [dateFormatter stringFromDate:date];
 }
 
--(NSString*)toDisplayHMSString
+- (NSString *)toDisplayHMSString
 {
     NSTimeInterval interval = _timestampValue;
     NSDate* date = [NSDate dateWithTimeIntervalSince1970:interval];

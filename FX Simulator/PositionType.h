@@ -10,17 +10,21 @@
 #import <UIKit/UIKit.h>
 
 @interface PositionType : NSObject
-//-(id)init;
--(instancetype)initWithShort;
--(instancetype)initWithLong;
--(id)initWithString:(NSString*)typeString;
--(void)setShort;
--(void)setLong;
--(BOOL)isEqualOrderType:(PositionType*)orderType;
--(NSString*)toDisplayString;
-/// DBなどに使う。
--(NSString*)toTypeString;
--(UIColor*)toColor;
+
 @property (nonatomic, readonly) BOOL isShort;
 @property (nonatomic, readonly) BOOL isLong;
+
+- (instancetype)initWithShort;
+- (instancetype)initWithLong;
+- (instancetype)initWithString:(NSString*)typeString;
+- (void)setShort;
+- (void)setLong;
+- (BOOL)isEqualOrderType:(PositionType*)orderType;
+- (NSString *)toDisplayString;
+
+/// DBなどに使う。
+- (NSString *)toTypeString;
+
+- (UIColor *)toColor;
+
 @end

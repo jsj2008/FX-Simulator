@@ -22,7 +22,7 @@ static NSString* const FXSTimeFrameKey = @"timeFrame";
     [aCoder encodeInteger:self.minute forKey:FXSTimeFrameKey];
 }
 
--(id)initWithMinute:(NSUInteger)minute
+- (instancetype)initWithMinute:(NSUInteger)minute
 {
     if (!(0 < minute)) {
         return nil;
@@ -35,7 +35,7 @@ static NSString* const FXSTimeFrameKey = @"timeFrame";
     return self;
 }
 
--(BOOL)isEqual:(id)other {
+- (BOOL)isEqual:(id)other {
     if (other == self) {
         return YES;
     } else if ([other isKindOfClass:[self class]]) {
@@ -47,7 +47,7 @@ static NSString* const FXSTimeFrameKey = @"timeFrame";
     return NO;
 }
 
--(BOOL)isEqualToTimeFrame:(TimeFrame*)timeFrame
+- (BOOL)isEqualToTimeFrame:(TimeFrame *)timeFrame
 {
     if (self.minute == timeFrame.minute) {
         return YES;
@@ -61,7 +61,7 @@ static NSString* const FXSTimeFrameKey = @"timeFrame";
     return [self.minuteValueObj compare:timeFrame.minuteValueObj];
 }
 
--(NSString*)toDisplayString
+- (NSString *)toDisplayString
 {
     int dayTimeScaleMinute = 1440;
     int hourTimeScaleMinute = 60;
@@ -70,12 +70,12 @@ static NSString* const FXSTimeFrameKey = @"timeFrame";
         if (dayTimeScaleMinute == self.minute) {
             return @"日足";
         } else {
-            return [NSString stringWithFormat:@"%d足", self.minute / dayTimeScaleMinute];
+            return [NSString stringWithFormat:@"%lu足", self.minute / dayTimeScaleMinute];
         }
     } else if (hourTimeScaleMinute <= self.minute) {
-        return [NSString stringWithFormat:@"%d時間足", self.minute / hourTimeScaleMinute];
+        return [NSString stringWithFormat:@"%lu時間足", self.minute / hourTimeScaleMinute];
     } else if (0 < self.minute) {
-        return [NSString stringWithFormat:@"%d分足", self.minute];
+        return [NSString stringWithFormat:@"%lu分足", self.minute];
     }
     
     return nil;
@@ -83,7 +83,7 @@ static NSString* const FXSTimeFrameKey = @"timeFrame";
 
 -(NSNumber*)minuteValueObj
 {
-    return [NSNumber numberWithInt:self.minute];
+    return @(self.minute);
 }
 
 @end

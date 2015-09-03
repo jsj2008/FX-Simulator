@@ -10,7 +10,6 @@
 
 #import "Chart.h"
 #import "ChartView.h"
-#import "ChartViewData.h"
 #import "ForexDataChunk.h"
 #import "ForexDataChunkStore.h"
 #import "Indicator.h"
@@ -134,7 +133,7 @@ static const NSUInteger kMinDisplayForexDataCount = 40;
     _store = [[ForexDataChunkStore alloc] initWithCurrencyPair:_chart.currencyPair timeScale:_chart.timeFrame getMaxLimit:[[self class] requireForexDataCountForChart]];
 }
 
-- (void)updateChartForTime:(MarketTime *)time
+- (void)updateChartForTime:(Time *)time
 {
     ForexDataChunk *chunk = [_store getChunkFromBaseTime:time limit:[[self class] requireForexDataCountForChart]];
     [_chart setForexDataChunk:chunk];

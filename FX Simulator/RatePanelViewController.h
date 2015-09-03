@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @protocol RatePanelViewControllerDelegate <NSObject>
--(void)didOrder;;
+- (void)didOrder;;
 @end
 
 @interface RatePanelViewController : UIViewController
