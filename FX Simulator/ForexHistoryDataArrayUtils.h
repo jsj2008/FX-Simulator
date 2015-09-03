@@ -11,6 +11,6 @@
 @class Rate;
 
 @interface ForexHistoryDataArrayUtils : NSObject
-+(double)maxRateOfArray:(NSArray*)array;
-+(double)minRateOfArray:(NSArray*)array;
++ (double)maxRateOfArray:(NSArray *)array;
++ (double)minRateOfArray:(NSArray *)array;
 @end

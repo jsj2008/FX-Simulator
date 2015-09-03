@@ -28,7 +28,7 @@
     // Do any additional setup after loading the view.
 }
 
--(void)displayForexHistoryData:(ForexHistoryData *)forexHistoryData
+- (void)displayForexHistoryData:(ForexHistoryData *)forexHistoryData
 {
     self.subChartDataView.hidden = NO;
     self.startTimeValueLabel.text = [forexHistoryData displayOpenTimestamp];
@@ -39,7 +39,7 @@
     self.closeValueLabel.text = [forexHistoryData.close toDisplayString];
 }
 
--(void)hiddenForexHistoryData
+- (void)hiddenForexHistoryData
 {
     self.subChartDataView.hidden = YES;
 }

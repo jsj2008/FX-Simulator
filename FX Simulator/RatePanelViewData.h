@@ -11,9 +11,9 @@
 @class CurrencyPair;
 @class ForexHistoryData;
 @class Market;
+@class PositionSize;
 @class PositionType;
 @class Rate;
-@class PositionSize;
 @class Spread;
 
 /**
@@ -21,17 +21,23 @@
 */
 
 @interface RatePanelViewData : NSObject
--(NSString*)getDisplayCurrentBidRate;
--(NSString*)getDisplayCurrentAskRate;
+
+@property (nonatomic, readonly) CurrencyPair *currencyPair;
+@property (nonatomic, readonly) Spread *spread;
+
+- (NSString *)getDisplayCurrentBidRate;
+- (NSString *)getDisplayCurrentAskRate;
+
 /**
  OrderTypeに対応する最新のレートを返す。例えば、OrderTypeが買いなら、Askレートを返す。売りなら、Bidレートを返す。
 */
--(Rate*)getCurrentRateForOrderType:(PositionType*)orderType;
+- (Rate *)getCurrentRateForOrderType:(PositionType *)orderType;
+
 /**
  現在、何Lot取引するのかをポジションサイズに変換して返す。
 */
--(PositionSize*)currentPositionSize;
--(void)updateCurrentMarket:(Market*)market;
-@property (nonatomic, readonly) CurrencyPair *currencyPair;
-@property (nonatomic, readonly) Spread *spread;
+- (PositionSize *)currentPositionSize;
+
+- (void)updateCurrentMarket:(Market *)market;
+
 @end

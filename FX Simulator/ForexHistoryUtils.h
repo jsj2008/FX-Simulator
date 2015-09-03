@@ -9,5 +9,5 @@
 #import <Foundation/Foundation.h>
 
 @interface ForexHistoryUtils : NSObject
-+(NSString*)createTableName:(NSString*)currencyPair timeScale:(int)minute;
++ (NSString *)createTableName:(NSString *)currencyPair timeScale:(int)minute;
 @end

@@ -8,20 +8,19 @@
 
 #import "Market.h"
 
-#import "SaveLoader.h"
-#import "SaveData.h"
-#import "MarketTimeManager.h"
 #import "CurrencyPair.h"
-#import "Rate.h"
-#import "Setting.h"
-#import "MarketTime.h"
 #import "ForexDataChunk.h"
 #import "ForexDataChunkStore.h"
 #import "ForexHistoryFactory.h"
 #import "ForexHistory.h"
 #import "ForexHistoryData.h"
+#import "Time.h"
+#import "MarketTimeManager.h"
+#import "Rate.h"
 #import "Rates.h"
-
+#import "SaveData.h"
+#import "SaveLoader.h"
+#import "Setting.h"
 
 static NSInteger FXSMaxForexDataStore = 500;
 static NSString * const kKeyPath = @"currentTime";
@@ -29,7 +28,7 @@ static NSString * const kKeyPath = @"currentTime";
 @interface Market ()
 @property (nonatomic, readwrite) int currentLoadedRowid;
 @property (nonatomic) Rate *currentRate;
-@property (nonatomic) MarketTime *currentTime;
+@property (nonatomic) Time *currentTime;
 @property (nonatomic) ForexHistoryData *currentForexData;
 @end
 

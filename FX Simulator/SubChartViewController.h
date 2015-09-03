@@ -11,5 +11,5 @@
 #import "NewStartViewController.h"
 
 @interface SubChartViewController : UIViewController <ChartViewControllerDelegate, NewStartViewControllerDelegate>
--(void)updatedSaveData;
+- (void)updatedSaveData;
 @end

@@ -14,7 +14,7 @@
 
 @implementation Money (ConvertToAccountCurrency)
 
--(Money*)convertToAccountCurrency
+- (Money *)convertToAccountCurrency
 {
     SaveData *saveData = [SaveLoader load];
     

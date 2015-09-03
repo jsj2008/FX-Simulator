@@ -48,9 +48,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
-    //ForexDataChunk *chunk = [_subChartViewData getCurrentChunk];
-    //_chunkStore = [[ForexDataChunkStore alloc] initWithCurrencyPair:chunk.current.currencyPair timeScale:self.selectedTimeScale getMaxLimit:500];
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -93,17 +90,6 @@
         }
     }
 }
-
-/*-(void)viewDidLayoutSubviews
-{
-    [super viewDidLayoutSubviews];*/
-    
-    /*NSArray *forexTimeScaleDataArray = [_subChartViewData getChartDataArray];
-    
-    self.subChartView.candles = [CandlesFactory createCandlesFromForexHistoryDataArray:forexTimeScaleDataArray chartViewWidth:self.subChartView.frame.size.width chartViewHeight:self.subChartView.frame.size.height];
-    
-    [self.subChartView setNeedsDisplay];*/
-//}
 
 - (IBAction)panGesture:(UIPanGestureRecognizer*)sender {
     /*if (sender.state != UIGestureRecognizerStateEnded) {
@@ -148,14 +134,6 @@
     [_chartViewController setChart:displayChart];
     
     [_chartViewController updateChartForTime:_market.currentTime];
-    
-    //ForexDataChunk *chunk = [_subChartViewData getCurrentChunk];
-    
-    //[_chartViewController updateChartFor:[_chunkStore getChunkFromBaseData:chunk.current limit:500]];
-    
-    /*self.subChartView.chunk = [_chunkStore getChunkFromBaseData:chunk.current limit:500];
-    
-    [self.subChartView setNeedsDisplay];*/
 }
 
 /*-(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event

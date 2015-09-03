@@ -7,16 +7,17 @@
 //
 
 #import "ForexHistoryDataArrayUtils.h"
+
 #import "ForexHistoryData.h"
 
 @implementation ForexHistoryDataArrayUtils
 
-+(double)maxRateOfArray:(NSArray*)array
++ (double)maxRateOfArray:(NSArray *)array
 {
     return [[array valueForKeyPath:@"@max.high.rateValue"] doubleValue];
 }
 
-+(double)minRateOfArray:(NSArray*)array
++ (double)minRateOfArray:(NSArray *)array
 {
     return [[array valueForKeyPath:@"@min.low.rateValue"] doubleValue];
 }

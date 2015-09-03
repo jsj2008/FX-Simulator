@@ -19,12 +19,12 @@
 
 @class Chart;
 @class ForexDataChunk;
-@class MarketTime;
+@class Time;
 
 @interface ChartViewController : UIViewController
 @property (nonatomic, weak) id<ChartViewControllerDelegate> delegate;
 + (NSUInteger)requireForexDataCountForChart;
 - (void)setChart:(Chart *)chart;
-- (void)updateChartForTime:(MarketTime *)time;
+- (void)updateChartForTime:(Time *)time;
 - (void)updatedSaveData;
 @end

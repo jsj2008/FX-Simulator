@@ -15,7 +15,7 @@
 static SaveData *sharedSaveData;
 static NSUInteger FXSDefaultSlotNumber = 1;
 
-+ (SaveData*)load
++ (SaveData *)load
 {
     @synchronized(self) {
         if (sharedSaveData == nil) {

@@ -29,7 +29,7 @@
     SimulationManager *_simulationManager;
 }
 
--(id)init
+- (instancetype)init
 {
     if (self = [super init]) {
         _simulationManager = [SimulationManager sharedSimulationManager];
@@ -39,44 +39,44 @@
     return self;
 }
 
--(NSString*)displayCurrentSetting
+- (NSString *)displayCurrentSetting
 {
     NSString *str = [NSString stringWithFormat:@"%@ %@", [_saveData.currencyPair toDisplayString], [_saveData.timeFrame toDisplayString]];
     
     return str;
 }
 
--(NSString*)displayOrderType
+- (NSString *)displayOrderType
 {
     return [_saveData.account.orderType toDisplayString];
 }
 
--(UIColor*)displayOrderTypeColor
+- (UIColor *)displayOrderTypeColor
 {
     return [_saveData.account.orderType toColor];
 }
 
--(NSString*)displayTotalLot
+- (NSString *)displayTotalLot
 {
     return [_saveData.account.totalLot toDisplayString];
 }
 
--(NSString*)displayAverageRate
+- (NSString *)displayAverageRate
 {
     return [_saveData.account.averageRate toDisplayString];
 }
  
--(NSString*)displayProfitAndLoss
+- (NSString *)displayProfitAndLoss
 {
     return _saveData.account.profitAndLoss.toDisplayString;
 }
  
--(UIColor*)displayProfitAndLossColor
+- (UIColor *)displayProfitAndLossColor
 {
     return _saveData.account.profitAndLoss.toDisplayColor;
 }
 
--(NSString*)displayEquity
+- (NSString *)displayEquity
 {
     return _saveData.account.equity.toDisplayString;
 }
@@ -96,31 +96,12 @@
     return [_saveData.tradePositionSize toLot];
 }
 
-/*-(NSString*)defaultTradeLotInputFieldValue
-{
-    return [[saveData.tradePositionSize toLot] toDisplayString];
-}
-
--(void)setTradeLotInputFieldValue:(NSString *)tradeLotInputFieldValue
-{
-    NSNumberFormatter *formatter = [NSNumberFormatter new];
-    
-    Lot *lot = [[Lot alloc] initWithLotValue:[[formatter numberFromString:tradeLotInputFieldValue] unsignedLongLongValue]];
-    
-    saveData.tradePositionSize = [lot toPositionSize];
-}
-
--(NSString*)tradeLotInputFieldValue
-{
-    return [[saveData.tradePositionSize toLot] toDisplayString];
-}*/
-
--(BOOL)isAutoUpdate
+- (BOOL)isAutoUpdate
 {
     return _saveData.isAutoUpdate;
 }
 
--(void)setIsAutoUpdate:(BOOL)isAutoUpdate
+- (void)setIsAutoUpdate:(BOOL)isAutoUpdate
 {
     _saveData.isAutoUpdate = isAutoUpdate;
 }

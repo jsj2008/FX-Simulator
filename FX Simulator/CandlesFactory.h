@@ -11,5 +11,5 @@
 @class ForexDataChunk;
 
 @interface CandlesFactory : NSObject
-+(NSArray*)createCandlesFromForexHistoryDataChunk:(ForexDataChunk*)chunk displayForexDataCount:(NSInteger)count chartViewWidth:(float)width chartViewHeight:(float)height;
++ (NSArray *)createCandlesFromForexHistoryDataChunk:(ForexDataChunk *)chunk displayForexDataCount:(NSInteger)count chartViewWidth:(float)width chartViewHeight:(float)height;
 @end

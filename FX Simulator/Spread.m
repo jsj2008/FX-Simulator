@@ -29,7 +29,7 @@ static NSString* const FXSCurrencyPairKey = @"currencyPair";
 }
 
 // NewStartの新しいSaveData作成のところでは、currencyPairにnil入れている。
--(id)initWithPips:(spread_t)pips currencyPair:(CurrencyPair *)currencyPair
+- (instancetype)initWithPips:(spread_t)pips currencyPair:(CurrencyPair *)currencyPair
 {
     if (self = [super init]) {
         _spreadValue = pips;
@@ -39,12 +39,12 @@ static NSString* const FXSCurrencyPairKey = @"currencyPair";
     return self;
 }
 
--(NSNumber*)spreadValueObj
+- (NSNumber *)spreadValueObj
 {
     return [NSNumber numberWithDouble:self.spreadValue];
 }
 
--(Rate*)toRate
+- (Rate *)toRate
 {
     if (self.currencyPair == nil) {
         return nil;
@@ -55,7 +55,7 @@ static NSString* const FXSCurrencyPairKey = @"currencyPair";
     return [[Rate alloc] initWithRateValue:spreadRate.rateValue*self.spreadValue currencyPair:self.currencyPair timestamp:nil];
 }
 
--(NSString*)toDisplayString
+- (NSString *)toDisplayString
 {
     return [self.spreadValueObj stringValue];
 }

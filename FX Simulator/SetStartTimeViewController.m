@@ -9,7 +9,7 @@
 #import "SetStartTimeViewController.h"
 
 #import "FXSTimeRange.h"
-#import "MarketTime.h"
+#import "Time.h"
 #import "NSDate+FXSDateData.h"
 #import "SaveData.h"
 #import "Setting.h"
@@ -140,7 +140,7 @@ numberOfRowsInComponent:(NSInteger)component
         selectedDate = _maxStartDate;
     }
     
-    self.saveData.startTime = [[MarketTime alloc] initWithDate:selectedDate];
+    self.saveData.startTime = [[Time alloc] initWithDate:selectedDate];
 }
 
 /**

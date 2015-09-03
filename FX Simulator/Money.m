@@ -8,8 +8,8 @@
 
 #import "Money.h"
 
-#import "CurrencyConverter.h"
 #import "Currency.h"
+#import "CurrencyConverter.h"
 #import "CurrencyPair.h"
 #import "NSNumber+FXSNumberConverter.h"
 #import "Rate.h"
@@ -37,7 +37,7 @@ static NSString* const FXSCurrencyKey = @"currency";
 }
 
 // NewStartの新しいSaveData作成のところでは、currencyにnil入れている。
--(id)initWithAmount:(amount_t)amount currency:(Currency*)currency
+- (instancetype )initWithAmount:(amount_t)amount currency:(Currency *)currency
 {
     if (self = [super init]){
         _amount = amount;
@@ -47,7 +47,7 @@ static NSString* const FXSCurrencyKey = @"currency";
     return self;
 }
 
--(Money*)addMoney:(Money*)money
+- (Money *)addMoney:(Money *)money
 {
     if (money == nil) {
         DLog(@"money is nil");
@@ -62,22 +62,22 @@ static NSString* const FXSCurrencyKey = @"currency";
     }
 }
 
--(Money*)convertToCurrency:(Currency*)currency
+- (Money *)convertToCurrency:(Currency *)currency
 {
     return [CurrencyConverter convert:self to:currency];
 }
 
--(NSNumber*)toMoneyValueObj
+- (NSNumber *)toMoneyValueObj
 {
     return [NSNumber numberWithLongLong:_amount];
 }
 
--(NSString*)toDisplayString
+- (NSString *)toDisplayString
 {
     return [self.toMoneyValueObj fxs_toDisplayString];
 }
 
--(UIColor*)toDisplayColor
+- (UIColor *)toDisplayColor
 {
     if (0 <= _amount) {
         return [UIColor whiteColor];

@@ -8,8 +8,8 @@
 
 #import "CurrencyPair.h"
 
-#import "Setting.h"
 #import "Currency.h"
+#import "Setting.h"
 
 static NSString* const FXSCurrencyPairKey = @"currencyPair";
 
@@ -28,7 +28,7 @@ static NSString* const FXSCurrencyPairKey = @"currencyPair";
     [aCoder encodeObject:[self toCodeString] forKey:FXSCurrencyPairKey];
 }
 
--(id)initWithBaseCurrency:(Currency *)baseCurrency QuoteCurrency:(Currency *)quoteCurrency
+- (instancetype)initWithBaseCurrency:(Currency *)baseCurrency QuoteCurrency:(Currency *)quoteCurrency
 {
     if (self = [super init]) {
         _baseCurrency = baseCurrency;
@@ -42,14 +42,14 @@ static NSString* const FXSCurrencyPairKey = @"currencyPair";
     return self;
 }
 
--(id)initWithCurrencyPairString:(NSString *)currencyPairString
+- (instancetype)initWithCurrencyPairString:(NSString *)currencyPairString
 {
     CurrencyPair *currencyPair = [[Setting currencyPairDictionaryList] objectForKey:currencyPairString];
     
     return currencyPair;
 }
 
--(BOOL)isEqual:(id)other {
+- (BOOL)isEqual:(id)other {
     if (other == self) {
         return YES;
     } else if ([other isKindOfClass:[self class]]) {
@@ -61,7 +61,7 @@ static NSString* const FXSCurrencyPairKey = @"currencyPair";
     return NO;
 }
 
--(BOOL)isQuoteCurrencyEqualJPY
+- (BOOL)isQuoteCurrencyEqualJPY
 {
     if (JPY == _quoteCurrency.type) {
         return YES;
@@ -70,7 +70,7 @@ static NSString* const FXSCurrencyPairKey = @"currencyPair";
     }
 }
 
--(BOOL)isEqualCurrencyPair:(CurrencyPair *)currencyPair
+- (BOOL)isEqualCurrencyPair:(CurrencyPair *)currencyPair
 {
     if (self.baseCurrency.type == currencyPair.baseCurrency.type && self.quoteCurrency.type == currencyPair.quoteCurrency.type) {
         return YES;
@@ -79,22 +79,22 @@ static NSString* const FXSCurrencyPairKey = @"currencyPair";
     }
 }
 
--(NSString*)toCodeString
+- (NSString *)toCodeString
 {
     return [NSString stringWithFormat:@"%@%@", _baseCurrency.toCodeString, _quoteCurrency.toCodeString];
 }
 
--(NSString*)toDisplayString
+- (NSString *)toDisplayString
 {
     return [NSString stringWithFormat:@"%@/%@", _baseCurrency.toCodeString, _quoteCurrency.toCodeString];
 }
 
--(NSString*)toCodeReverseString
+- (NSString *)toCodeReverseString
 {
     return [NSString stringWithFormat:@"%@%@", _quoteCurrency.toCodeString, _baseCurrency.toCodeString];
 }
 
--(NSArray*)toArray
+- (NSArray *)toArray
 {
     return @[_baseCurrency.toCodeString, _quoteCurrency.toCodeString];
 }

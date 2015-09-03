@@ -13,11 +13,10 @@
 #import "ForexHistory.h"
 #import "ForexHistoryFactory.h"
 #import "FXSTimeRange.h"
-#import "MarketTime.h"
+#import "Rate.h"
+#import "Time.h"
 #import "TimeFrame.h"
 #import "TimeFrameChunk.h"
-#import "Rate.h"
-
 
 static NSDictionary *spreadRateDic;
 
@@ -194,8 +193,8 @@ static NSDictionary *spreadRateDic;
 {
     ForexHistory *forexHistory = [ForexHistoryFactory createForexHistoryFromCurrencyPair:currencyPair timeScale:timeScale];
     
-    MarketTime *rangeStart = [[forexHistory minOpenTime] addDay:50];
-    MarketTime *rangeEnd = [[forexHistory maxOpenTime] addDay:-50];
+    Time *rangeStart = [[forexHistory minOpenTime] addDay:50];
+    Time *rangeEnd = [[forexHistory maxOpenTime] addDay:-50];
     
     return [[FXSTimeRange alloc] initWithRangeStart:rangeStart end:rangeEnd];
 }

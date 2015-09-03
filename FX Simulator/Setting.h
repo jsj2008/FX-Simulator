@@ -10,10 +10,10 @@
 
 @class CurrencyPair;
 @class FXSTimeRange;
-@class MarketTime;
+@class Rate;
+@class Time;
 @class TimeFrame;
 @class TimeFrameChunk;
-@class Rate;
 
 
 /**
@@ -21,48 +21,49 @@
 **/
 
 @interface Setting : NSObject
-+(BOOL)isLocaleJapanese;
+
++ (BOOL)isLocaleJapanese;
 
 /**
  シュミレーション対象の通貨リスト。新たにシュミレートできる通貨を増やす場合、手動で追加する必要。
  Localeによって配列の並び順が違う。
 */
-+(NSArray*)currencyPairList;
++ (NSArray *)currencyPairList;
 
 /**
  シュミレーション対象の通貨リスト。新たにシュミレートできる通貨を増やす場合、手動で追加する必要。
  並び順はLocaleが違っても同じ。
  */
-+(NSDictionary*)currencyPairDictionaryList;
++ (NSDictionary *)currencyPairDictionaryList;
 
 /**
  シュミレーション対象の時間軸(15分足など)リスト。新たにシュミレートできる時間軸を増やす場合、手動で追加する必要。
  時間軸の短い順。
  */
-+(TimeFrameChunk *)timeFrameList;
++ (TimeFrameChunk *)timeFrameList;
 
 /**
  口座通貨に使うことができる通貨のリスト。ドル建て、円建てなど。
  Localeによって並び順が違う。
 */
-+(NSArray*)accountCurrencyList;
++ (NSArray *)accountCurrencyList;
 
 /**
  1pipが何レートか。例 USD/JPY 1pip = 0.01円
 */
-+(Rate*)onePipValueOfCurrencyPair:(CurrencyPair*)currencyPair;
++ (Rate *)onePipValueOfCurrencyPair:(CurrencyPair *)currencyPair;
 
-+(NSString*)toStringFromRate:(Rate*)rate;
++ (NSString *)toStringFromRate:(Rate *)rate;
 
 /**
  通貨の変換などに使うレート。例 USD/JPY １ドル = 100円
 */
-+(Rate*)baseRateOfCurrencyPair:(CurrencyPair*)currencyPair;
++ (Rate *)baseRateOfCurrencyPair:(CurrencyPair *)currencyPair;
 
 /**
  その通貨と時間軸で、シュミレーションを開始できる時間の範囲。
 */
-+(FXSTimeRange*)rangeForCurrencyPair:(CurrencyPair*)currencyPair timeScale:(TimeFrame*)timeScale;
++ (FXSTimeRange *)rangeForCurrencyPair:(CurrencyPair *)currencyPair timeScale:(TimeFrame *)timeScale;
 
 /**
  ChartView(SubChart含む)に表示するForexDataの最大数。

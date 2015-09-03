@@ -14,7 +14,7 @@
 #import "Rate.h"
 #import "PositionSize.h"
 #import "Lot.h"
-#import "MarketTime.h"
+#import "Time.h"
 #import "Currency.h"
 #import "Money.h"
 #import "Money+ConvertToAccountCurrency.h"

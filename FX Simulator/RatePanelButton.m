@@ -14,13 +14,6 @@
 {
     [super layoutSubviews];
     
-    /*self.titleLabel.numberOfLines = 0;
-    self.titleLabel.adjustsFontSizeToFitWidth = YES;
-    self.titleLabel.minimumScaleFactor = 0.1;
-    self.titleLabel.lineBreakMode = NSLineBreakByClipping;*/
-    //[self sizeToFit];
-    //[self.titleLabel sizeToFit];
-    
     self.layer.borderWidth = 2.0;
     self.layer.borderColor = self.currentTitleColor.CGColor;
     self.layer.cornerRadius = 5.0;

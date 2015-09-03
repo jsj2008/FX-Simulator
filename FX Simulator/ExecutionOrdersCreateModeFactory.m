@@ -8,14 +8,14 @@
 
 #import "ExecutionOrdersCreateModeFactory.h"
 
-#import "OpenPosition.h"
-#import "Order.h"
-#import "PositionType.h"
-#import "OnlyCloseExecutionOrdersCreateMode.h"
-#import "OnlyNewExecutionOrdersCreateMode.h"
 #import "CloseAndNewExecutionOrdersCreateMode.h"
 #import "Common.h"
+#import "OnlyCloseExecutionOrdersCreateMode.h"
+#import "OnlyNewExecutionOrdersCreateMode.h"
+#import "OpenPosition.h"
+#import "Order.h"
 #import "PositionSize.h"
+#import "PositionType.h"
 
 @implementation ExecutionOrdersCreateModeFactory {
     ExecutionOrdersCreateMode *_onlyClose;
