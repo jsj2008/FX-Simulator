@@ -12,6 +12,7 @@
 #import "TradeDataViewData.h"
 #import "InputTradeLotViewController.h"
 #import "Market.h"
+#import "PositionSize.h"
 #import "SaveData.h"
 #import "SaveLoader.h"
 
@@ -28,6 +29,7 @@
 @end
 
 @implementation TradeDataViewController {
+    PositionSize *_positionSizeOfLot;
     TradeDataViewData *_tradeDataViewData;
 }
 
@@ -43,7 +45,9 @@
 - (instancetype)initWithCoder:(NSCoder *)aDecoder
 {
     if (self = [super initWithCoder:aDecoder]) {
+        _positionSizeOfLot = [SaveLoader load].positionSizeOfLot;
         _tradeDataViewData = [TradeDataViewData new];
+        _tradeDataViewData.positionSizeOfLot = _positionSizeOfLot;
     }
     
     return self;
@@ -54,6 +58,7 @@
     if ([segue.identifier isEqualToString:@"InputTradeLotViewControllerSegue"]) {
         InputTradeLotViewController *controller = segue.destinationViewController;
         controller.defaultInputTradeLot = _tradeDataViewData.tradeLot;
+        controller.positionSizeOfLot = _positionSizeOfLot;
     }
 }
 

@@ -19,17 +19,6 @@
 #import "Rate.h"
 #import "PositionSize.h"
 
-@interface ExecutionHistoryTableViewCell ()
-@property (weak, nonatomic) IBOutlet UILabel *displayUsersOrderNumberValueLabel;
-@property (weak, nonatomic) IBOutlet UILabel *displayOrderTypeValueLabel;
-@property (weak, nonatomic) IBOutlet UILabel *displayOrderRateValueLabel;
-@property (weak, nonatomic) IBOutlet UILabel *displayOrderLotValueLabel;
-@property (weak, nonatomic) IBOutlet UILabel *displayCloseUsersOrderNumberValueLabel;
-@property (weak, nonatomic) IBOutlet UILabel *displayProfitAndLossValueLabel;
-@property (weak, nonatomic) IBOutlet UILabel *displayOrderYMDTimeValueLabel;
-@property (weak, nonatomic) IBOutlet UILabel *displayOrderHMSTimeValueLabel;
-@end
-
 @implementation ExecutionHistoryTableViewCell
 
 - (void)awakeFromNib
@@ -44,7 +33,7 @@
     // Configure the view for the selected state
 }
 
-- (void)setDisplayData:(ExecutionOrder *)order
+/*- (void)setDisplayData:(ExecutionOrder *)order
 {
     self.displayUsersOrderNumberValueLabel.text = @(order.orderId).stringValue;
     
@@ -63,6 +52,6 @@
     self.displayOrderYMDTimeValueLabel.text = [order.rate.timestamp toDisplayYMDString];
     
     self.displayOrderHMSTimeValueLabel.text = [order.rate.timestamp toDisplayHMSString];
-}
+}*/
 
 @end

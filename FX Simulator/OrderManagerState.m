@@ -1,71 +1,51 @@
 //
 //  OrderManagerState.m
-//  FX Simulator
+//  FXSimulator
 //
-//  Created by yuu on 2015/06/12.
+//  Created by yuu on 2015/09/07.
 //
 //
 
 #import "OrderManagerState.h"
 
-#import "FXSAlert.h"
 #import "OpenPosition.h"
-#import "SimulationManager.h"
-#import "UsersOrder.h"
+#import "Order.h"
+#import "OrderResult.h"
 
 @implementation OrderManagerState {
-    OpenPosition *_openPosition;
-    SimulationManager *_simulationManager;
-    BOOL _simulationManagerStop;
-    BOOL _openPositionMax;
-    BOOL _isExecutable;
+    NSHashTable *_states;
 }
 
--(instancetype)init
+- (instancetype)init
 {
     if (self = [super init]) {
-        _openPosition = [OpenPosition loadOpenPosition];
-        _simulationManager = [SimulationManager sharedSimulationManager];
-        _simulationManagerStop = NO;
-        _openPositionMax = NO;
-        _isExecutable = NO;
+        _states = [NSHashTable weakObjectsHashTable];
     }
     
     return self;
 }
 
-- (void)updateState:(Order *)order
+- (void)addState:(id<OrderManagerState>)state
 {
-    _simulationManagerStop = [_simulationManager isStop];
-    _openPositionMax = [_openPosition isMax];
+    [_states addObject:state];
+}
+
+- (OrderResult *)isOrderable:(Order *)order
+{
+    for (id<OrderManagerState> state in _states) {
+        if ([state respondsToSelector:@selector(isOrderable:)]) {
+            OrderResult *result = [state isOrderable:order];
+            if (!result.isSuccess) {
+                return result;
+            }
+        }
+    }
     
-    if (_simulationManagerStop) {
-        _isExecutable = NO;
-    } else if (_openPositionMax) {
-        if ([order includeCloseOrder]) {
-            _isExecutable = YES;
-        } else {
-            _isExecutable = NO;
-        }
-    } else {
-        _isExecutable = YES;
+    if (![OpenPosition isExecutableNewPosition] && order.isNew) {
+        return [[OrderResult alloc] initWithIsSuccess:NO title:@"Max Open Position" message:nil];
     }
-}
-
--(BOOL)isExecutable
-{
-    return _isExecutable;
-}
-
--(void)showAlert:(UIViewController*)controller
-{
-    if (![self isExecutable]) {
-        if (_simulationManagerStop) {
-            [_simulationManager showAlert:controller];
-        } else if (_openPositionMax) {
-            [FXSAlert showAlert:controller title:@"オープンポジションが最大になりました。" message:nil];
-        }
-    }
+    
+    return [[OrderResult alloc] initWithIsSuccess:YES title:nil message:nil];
 }
 
 @end

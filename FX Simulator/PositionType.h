@@ -17,9 +17,8 @@
 - (instancetype)initWithShort;
 - (instancetype)initWithLong;
 - (instancetype)initWithString:(NSString*)typeString;
-- (void)setShort;
-- (void)setLong;
 - (BOOL)isEqualOrderType:(PositionType*)orderType;
+- (instancetype)reverseType;
 - (NSString *)toDisplayString;
 
 /// DBなどに使う。

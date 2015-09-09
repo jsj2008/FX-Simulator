@@ -15,16 +15,18 @@
 
 @interface Order : PositionBase
 
-@property (nonatomic, readonly) NSUInteger orderId;
-@property (nonatomic, weak) UIViewController *alertTargetController;
+@property (nonatomic, readonly) CurrencyPair *currencyPair;
+@property (nonatomic, readonly) PositionType *positionType;
+@property (nonatomic, readonly) PositionSize *positionSize;
+@property (nonatomic, readonly) BOOL isNew;
+@property (nonatomic, readonly) BOOL isClose;
 
-- (instancetype)initWithFMResultSet:(FMResultSet *)resultSet;
+- (instancetype)copyOrderForNewPositionSize:(PositionSize *)positionSize;
 
-/**
- 単純なコピー
-*/
-- (instancetype)copyOrderNewPositionSize:(PositionSize *)positionSize;
+- (NSArray *)createExecutionOrders;
 
-- (void)execute;
+- (void)setNewOrder;
+
+- (void)setCloseOrder;
 
 @end

@@ -8,22 +8,22 @@
 
 #import "PositionBase.h"
 
+@import UIKit;
+
 @class Currency;
 @class CurrencyPair;
 @class ExecutionOrder;
 @class Lot;
 @class Market;
 @class Money;
+@class OpenPositionComponents;
 @class PositionType;
 @class PositionSize;
 @class Rate;
 
 @interface OpenPosition : PositionBase
 
-@property (nonatomic, readonly) NSUInteger executionOrderId;
-@property (nonatomic, readonly) NSUInteger orderId;
-
-+ (instancetype)createNewOpenPositionFromExecutionOrder:(ExecutionOrder *)order executionOrderId:(NSUInteger)executionOrderId;
++ (instancetype)openPositionWithBlock:(void (^)(OpenPositionComponents *components))block;
 
 /**
  新しいレコードからselectする
@@ -41,14 +41,14 @@
 
 + (PositionSize *)totalPositionSizeOfCurrencyPair:(CurrencyPair *)currencyPair;
 
-+ (Lot *)totalLotOfCurrencyPair:(CurrencyPair *)currencyPair;
-
 + (Rate *)averageRateOfCurrencyPair:(CurrencyPair *)currencyPair;
 
 /**
- レコード数が最大かどうか。
- */
+ 新規のポジションを追加できるかどうか
+*/
 + (BOOL)isExecutableNewPosition;
+
+- (ExecutionOrder *)createCloseExecutionOrderFromOrderId:(NSUInteger)orderId;
 
 - (BOOL)isNewPosition;
 
@@ -57,5 +57,7 @@
 - (void)close;
 
 - (Money *)profitAndLossFromMarket:(Market *)market;
+
+- (void)displayDataUsingBlock:(void (^)(NSString *currencyPair, NSString *positionType, NSString *rate, NSString *lot, NSString *orderId, NSString *profitAndLoss, NSString *ymdTime, NSString *hmsTime, UIColor *profitAndLossColor))block market:(Market *)market sizeOfLot:(PositionSize *)size displayCurrency:(Currency *)displayCurrency;
 
 @end

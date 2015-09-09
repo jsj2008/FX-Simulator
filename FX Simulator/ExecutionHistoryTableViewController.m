@@ -16,6 +16,8 @@
 #import "PositionSize.h"
 #import "PositionType.h"
 #import "Rate.h"
+#import "SaveData.h"
+#import "SaveLoader.h"
 
 static const unsigned int displayMaxExecutionHistoryRecords = 100;
 
@@ -25,7 +27,20 @@ static const unsigned int displayMaxExecutionHistoryRecords = 100;
 @end
 
 @implementation ExecutionHistoryTableViewController {
+    Currency *_displayCurrency;
     NSArray *_executionHistoryRecords;
+    PositionSize *_positionSizeOfLot;
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder
+{
+    if (self = [super initWithCoder:aDecoder]) {
+        SaveData *saveData = [SaveLoader load];
+        _displayCurrency = saveData.accountCurrency;
+        _positionSizeOfLot = saveData.positionSizeOfLot;
+    }
+    
+    return self;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -36,7 +51,19 @@ static const unsigned int displayMaxExecutionHistoryRecords = 100;
     
     ExecutionOrder *order = [_executionHistoryRecords objectAtIndex:indexPath.row];
     
-    [cell setDisplayData:order];
+    [order displayDataUsingBlock:^(NSString *currencyPair, NSString *positionType, NSString *rate, NSString *lot, NSString *orderId, NSString *closeTargetOrderId, NSString *profitAndLoss, NSString *ymdTime, NSString *hmsTime, UIColor *profitAndLossColor) {
+        cell.displayUsersOrderNumberValueLabel.text = orderId;
+        cell.displayOrderTypeValueLabel.text = positionType;
+        cell.displayOrderRateValueLabel.text = rate;
+        cell.displayOrderLotValueLabel.text = lot;
+        cell.displayCloseUsersOrderNumberValueLabel.text = closeTargetOrderId;
+        cell.displayProfitAndLossValueLabel.text = profitAndLoss;
+        cell.displayProfitAndLossValueLabel.textColor = profitAndLossColor;
+        cell.displayOrderYMDTimeValueLabel.text = ymdTime;
+        cell.displayOrderHMSTimeValueLabel.text = hmsTime;
+    } sizeOfLot:_positionSizeOfLot displayCurrency:_displayCurrency];
+    
+    //[cell setDisplayData:order];
     
     return cell;
 }

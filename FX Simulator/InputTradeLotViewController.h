@@ -9,8 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @class Lot;
+@class PositionSize;
 
 @interface InputTradeLotViewController : UIViewController
 @property (nonatomic, readwrite) Lot *defaultInputTradeLot;
 @property (nonatomic, readwrite) Lot *inputTradeLot;
+@property (nonatomic) PositionSize *positionSizeOfLot;
 @end

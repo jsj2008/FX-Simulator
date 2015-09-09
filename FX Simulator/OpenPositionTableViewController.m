@@ -26,9 +26,11 @@ static const unsigned int displayMaxOpenPositionDataRecords = 100;
 @end
 
 @implementation OpenPositionTableViewController {
+    Currency *_displayCurrency;
     CurrencyPair *_currencyPair;
     Market *_market;
     NSArray *_openPositionDataRecords;
+    PositionSize *_positionSizeOfLot;
 }
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder
@@ -44,7 +46,10 @@ static const unsigned int displayMaxOpenPositionDataRecords = 100;
 {
     SimulationManager *simulationManager = [SimulationManager sharedSimulationManager];
     _market = simulationManager.market;
-    _currencyPair = [SaveLoader load].currencyPair;
+    SaveData *saveData = [SaveLoader load];
+    _currencyPair = saveData.currencyPair;
+    _displayCurrency = saveData.accountCurrency;
+    _positionSizeOfLot = saveData.positionSizeOfLot;
 }
 
 - (void)viewDidLoad {
@@ -68,9 +73,20 @@ static const unsigned int displayMaxOpenPositionDataRecords = 100;
     
     OpenPositionTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     
-    OpenPosition *record = [_openPositionDataRecords objectAtIndex:indexPath.row];
+    OpenPosition *openPosition = [_openPositionDataRecords objectAtIndex:indexPath.row];
     
-    [cell setDisplayData:record currentMarket:_market];
+    [openPosition displayDataUsingBlock:^(NSString *currencyPair, NSString *positionType, NSString *rate, NSString *lot, NSString *orderId, NSString *profitAndLoss, NSString *ymdTime, NSString *hmsTime, UIColor *profitAndLossColor) {
+        cell.displayOrderNumberValueLabel.text = orderId;
+        cell.displayOrderTypeValueLabel.text = positionType;
+        cell.displayOrderRateValueLabel.text = rate;
+        cell.displayOrderLotValueLabel.text = lot;
+        cell.displayProfitAndLossValueLabel.text = profitAndLoss;
+        cell.displayProfitAndLossValueLabel.textColor = profitAndLossColor;
+        cell.displayOrderYMDTimeValueLabel.text = ymdTime;
+        cell.displayOrderHMSTimeValueLabel.text = hmsTime;
+    } market:_market sizeOfLot:_positionSizeOfLot displayCurrency:_displayCurrency];
+    
+    //[cell setDisplayData:record currentMarket:_market];
     
     return cell;
 }
