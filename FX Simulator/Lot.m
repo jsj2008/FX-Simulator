@@ -10,15 +10,34 @@
 
 #import "NSNumber+FXSNumberConverter.h"
 #import "PositionSize.h"
-#import "SaveData.h"
-#import "SaveLoader.h"
 
-@implementation Lot
+@interface Lot ()
+@property (nonatomic ,readonly) lot_t lotValue;
+@property (nonatomic, readonly) NSNumber *valueObj;
+@end
 
-- (instancetype)initWithLotValue:(lot_t)value
+@implementation Lot {
+    PositionSize *_positionSize;
+    PositionSize *_positionSizeOfLot;
+}
+
+- (instancetype)initWithLotValue:(lot_t)lotValue positionSizeOfLot:(PositionSize *)sizeOfLot
+{
+    PositionSize *positionSize = [[PositionSize alloc] initWithSizeValue:lotValue * sizeOfLot.sizeValue];
+    
+    return [self initWithPositionSize:positionSize positionSizeOfLot:sizeOfLot];
+}
+
+- (instancetype)initWithPositionSize:(PositionSize *)size positionSizeOfLot:(PositionSize *)sizeOfLot
 {
     if (self = [super init]) {
-        _lotValue = value;
+        _positionSize = size;
+        _positionSizeOfLot = sizeOfLot;
+        if (_positionSizeOfLot.sizeValue) {
+            _lotValue = _positionSize.sizeValue / _positionSizeOfLot.sizeValue;
+        } else {
+            DLog(@"sizeOfLot is 0");
+        }
     }
     
     return self;
@@ -26,11 +45,7 @@
 
 - (PositionSize *)toPositionSize
 {
-    SaveData *saveData = [SaveLoader load];
-    
-    position_size_t size = self.lotValue * saveData.positionSizeOfLot.sizeValue;
-    
-    return [[PositionSize alloc] initWithSizeValue:size];
+    return _positionSize;
 }
 
 - (NSString *)toDisplayString

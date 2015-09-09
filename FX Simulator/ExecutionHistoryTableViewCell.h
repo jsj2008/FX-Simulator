@@ -11,5 +11,12 @@
 @class ExecutionOrder;
 
 @interface ExecutionHistoryTableViewCell : UITableViewCell
-- (void)setDisplayData:(ExecutionOrder *)order;
+@property (weak, nonatomic) IBOutlet UILabel *displayUsersOrderNumberValueLabel;
+@property (weak, nonatomic) IBOutlet UILabel *displayOrderTypeValueLabel;
+@property (weak, nonatomic) IBOutlet UILabel *displayOrderRateValueLabel;
+@property (weak, nonatomic) IBOutlet UILabel *displayOrderLotValueLabel;
+@property (weak, nonatomic) IBOutlet UILabel *displayCloseUsersOrderNumberValueLabel;
+@property (weak, nonatomic) IBOutlet UILabel *displayProfitAndLossValueLabel;
+@property (weak, nonatomic) IBOutlet UILabel *displayOrderYMDTimeValueLabel;
+@property (weak, nonatomic) IBOutlet UILabel *displayOrderHMSTimeValueLabel;
 @end

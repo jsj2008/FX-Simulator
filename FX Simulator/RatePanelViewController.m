@@ -10,6 +10,7 @@
 
 #import "RatePanelButton.h"
 #import "Order.h"
+#import "OrderManager.h"
 #import "PositionType.h"
 #import "RatePanelViewData.h"
 #import "Market.h"
@@ -21,6 +22,7 @@
 @end
 
 @implementation RatePanelViewController {
+    OrderManager *_orderManager;
     RatePanelViewData *ratePanelViewData;
 }
 
@@ -38,6 +40,7 @@
 - (instancetype)initWithCoder:(NSCoder *)aDecoder
 {
     if (self = [super initWithCoder:aDecoder]) {
+        _orderManager = [OrderManager new];
         [self setInitData];
     }
     
@@ -70,9 +73,7 @@
 {
     Order *order = [[Order alloc] initWithCurrencyPair:ratePanelViewData.currencyPair positionType:orderType rate:[ratePanelViewData getCurrentRateForOrderType:orderType] positionSize:ratePanelViewData.currentPositionSize];
     
-    order.alertTargetController = self;
-    
-    [order execute];
+    [_orderManager order:order];
     
     if ([self.delegate respondsToSelector:@selector(didOrder)]) {
         [self.delegate didOrder];

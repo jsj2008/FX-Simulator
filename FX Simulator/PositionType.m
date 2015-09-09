@@ -62,14 +62,15 @@ static NSString* const displaySell = @"Sell";
     return self;
 }
 
-- (void)setShort
+- (instancetype)reverseType
 {
-    _isShort = YES;
-}
-
-- (void)setLong
-{
-    _isLong = YES;
+    if (self.isShort) {
+        return [[[self class] alloc] initWithLong];
+    } else if (self.isLong) {
+        return [[[self class] alloc] initWithShort];
+    }
+    
+    return nil;
 }
 
 - (BOOL)isEqualOrderType:(PositionType *)orderType

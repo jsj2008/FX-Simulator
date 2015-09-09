@@ -11,9 +11,8 @@
 @class PositionSize;
 
 @interface Lot : NSObject
-@property (nonatomic ,readonly) lot_t lotValue;
-@property (nonatomic, readonly) NSNumber *valueObj;
-- (instancetype)initWithLotValue:(lot_t)value;
+- (instancetype)initWithLotValue:(lot_t)lotValue positionSizeOfLot:(PositionSize *)sizeOfLot;
+- (instancetype)initWithPositionSize:(PositionSize *)size positionSizeOfLot:(PositionSize *)sizeOfLot;
 - (PositionSize *)toPositionSize;
 - (NSString *)toDisplayString;
 @end

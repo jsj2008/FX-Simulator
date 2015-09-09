@@ -58,7 +58,7 @@
 
 - (NSString *)displayTotalLot
 {
-    return [_saveData.account.totalLot toDisplayString];
+    return [_saveData.account.totalPositionSize toLotFromPositionSizeOfLot:self.positionSizeOfLot].toDisplayString;
 }
 
 - (NSString *)displayAverageRate
@@ -93,7 +93,7 @@
 
 - (Lot *)tradeLot
 {
-    return [_saveData.tradePositionSize toLot];
+    return [_saveData.tradePositionSize toLotFromPositionSizeOfLot:self.positionSizeOfLot];
 }
 
 - (BOOL)isAutoUpdate

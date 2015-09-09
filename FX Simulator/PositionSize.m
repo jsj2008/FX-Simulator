@@ -10,8 +10,6 @@
 
 #import "Lot.h"
 #import "NSNumber+FXSNumberConverter.h"
-#import "SaveData.h"
-#import "SaveLoader.h"
 
 static NSString* const FXSPositionSizeKey = @"positionSize";
 
@@ -50,13 +48,9 @@ static NSString* const FXSPositionSizeKey = @"positionSize";
     return [self.sizeValueObj fxs_toDisplayString];
 }
 
-- (Lot *)toLot
+- (Lot *)toLotFromPositionSizeOfLot:(PositionSize *)sizeOfLot
 {
-    SaveData *saveData = [SaveLoader load];
-    
-    lot_t lotValue = self.sizeValue / saveData.positionSizeOfLot.sizeValue;
-    
-    return [[Lot alloc] initWithLotValue:lotValue];
+    return [[Lot alloc] initWithPositionSize:self positionSizeOfLot:sizeOfLot];
 }
 
 - (BOOL)isEqualPositionSize:(PositionSize *)positionsize

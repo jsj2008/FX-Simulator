@@ -13,26 +13,15 @@
 @class Market;
 
 @interface OpenPositionTableViewCell : UITableViewCell
-/**
- OpenPositionRecordと最新のレートによって表示するデータをセットする。損益は口座の設定通貨に変換する。
-*/
-- (void)setDisplayData:(OpenPosition *)openPosition currentMarket:(Market *)market;
-/*@property (weak, nonatomic) IBOutlet UILabel *displayOrderNumberValueLabel;
+@property (weak, nonatomic) IBOutlet UILabel *displayOrderNumberValueLabel;
 @property (weak, nonatomic) IBOutlet UILabel *displayOrderTypeValueLabel;
 @property (weak, nonatomic) IBOutlet UILabel *displayOrderRateValueLabel;
 @property (weak, nonatomic) IBOutlet UILabel *displayOrderLotValueLabel;
 @property (weak, nonatomic) IBOutlet UILabel *displayProfitAndLossValueLabel;
-@property (weak, nonatomic) IBOutlet UILabel *displayOrderTimeValueLabel;*/
-
-
-/*@property (nonatomic, readwrite) NSString *displayUsersOrderNumber;
-@property (nonatomic, readwrite) NSString *displayTradeType;
-@property (nonatomic, readwrite) UIColor *displayTradeTypeColor;
-@property (nonatomic, readwrite) NSString *displayTradeRate;
-@property (nonatomic, readwrite) NSString *displayTradeLot;
-//@property (nonatomic, readwrite) NSString *displayCloseUsersOrderNumber;
-@property (nonatomic, readwrite) NSString *displayProfitAndLoss;
-@property (nonatomic, readwrite) UIColor *displayProfitAndLossColor;
-@property (nonatomic, readwrite) NSString *displayTradeYMDTime;
-@property (nonatomic, readwrite) NSString *displayTradeHMSTime;*/
+@property (weak, nonatomic) IBOutlet UILabel *displayOrderYMDTimeValueLabel;
+@property (weak, nonatomic) IBOutlet UILabel *displayOrderHMSTimeValueLabel;
+/**
+ OpenPositionRecordと最新のレートによって表示するデータをセットする。損益は口座の設定通貨に変換する。
+*/
+//- (void)setDisplayData:(OpenPosition *)openPosition currentMarket:(Market *)market;
 @end

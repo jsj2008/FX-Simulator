@@ -12,8 +12,11 @@
 #import "FMDatabase.h"
 #import "FMResultSet.h"
 #import "CurrencyPair.h"
+#import "ExecutionOrderComponents.h"
+#import "Lot.h"
 #import "Money.h"
 #import "OpenPosition.h"
+#import "OpenPositionComponents.h"
 #import "Order.h"
 #import "PositionSize.h"
 #import "PositionType.h"
@@ -25,48 +28,29 @@
 static NSString* const FXSExecutionOrdersTableName = @"execution_orders";
 
 @interface ExecutionOrder ()
-
+@property (nonatomic, readonly) CurrencyPair *currencyPair;
+@property (nonatomic, readonly) PositionType *positionType;
+@property (nonatomic, readonly) Rate *rate;
+@property (nonatomic, readonly) PositionSize *positionSize;
+@property (nonatomic, readonly) NSUInteger orderId;
 @property (nonatomic) NSUInteger recordId;
-@property (nonatomic) NSUInteger orderId;
-@property (nonatomic) BOOL isClose;
-@property (nonatomic) NSUInteger closeTargetExecutionOrderId;
-@property (nonatomic) NSUInteger closeTargetOrderId;
-@property (nonatomic) BOOL isExecuteOrder;
-@property (nonatomic) OpenPosition *executeCloseTargetOpenPosition;
+@property (nonatomic, readonly) BOOL isNew;
+@property (nonatomic, readonly) BOOL isClose;
+@property (nonatomic, readonly) NSUInteger closeTargetExecutionOrderId;
+@property (nonatomic, readonly) NSUInteger closeTargetOrderId;
+@property (nonatomic, readonly) BOOL willExecuteOrder;
+@property (nonatomic, readonly) OpenPosition *willExecuteCloseTargetOpenPosition;
 @end
 
 @implementation ExecutionOrder
 
-+ (instancetype)createNewExecutionOrderFromOrder:(Order *)order
++ (instancetype)orderWithBlock:(void (^)(ExecutionOrderComponents *))block
 {
-    ExecutionOrder *executionOrder = [[[self class] alloc] initWithCurrencyPair:order.currencyPair positionType:order.positionType rate:order.rate positionSize:order.positionSize];
-    executionOrder.recordId = 0;
-    executionOrder.orderId = order.orderId;
-    executionOrder.isClose = NO;
+    ExecutionOrderComponents *components = [ExecutionOrderComponents new];
     
-    executionOrder.isExecuteOrder = YES;
-    executionOrder.executeCloseTargetOpenPosition = nil;
+    block(components);
     
-    return executionOrder;
-}
-
-+ (instancetype)createCloseExecutionOrderFromCloseTargetOpenPosition:(OpenPosition *)openPosition order:(Order *)order
-{
-    if ([openPosition isNewPosition]) {
-        return nil;
-    }
-    
-    ExecutionOrder *executionOrder = [[[self class] alloc] initWithCurrencyPair:order.currencyPair positionType:order.positionType rate:order.rate positionSize:openPosition.positionSize];
-    executionOrder.recordId = 0;
-    executionOrder.orderId = order.orderId;
-    executionOrder.isClose = YES;
-    executionOrder.closeTargetExecutionOrderId = openPosition.executionOrderId;
-    executionOrder.closeTargetOrderId = openPosition.orderId;
-    
-    executionOrder.isExecuteOrder = YES;
-    executionOrder.executeCloseTargetOpenPosition = openPosition;
-    
-    return executionOrder;
+    return [[[self class] alloc] initWithComponents:components];
 }
 
 + (NSArray *)allClosedOrdersOfCurrencyPair:(CurrencyPair *)currencyPair
@@ -86,6 +70,19 @@ static NSString* const FXSExecutionOrdersTableName = @"execution_orders";
     }];
     
     return [allOrders copy];
+}
+
++ (void)executionOrderDetail:(void (^)(CurrencyPair *currencyPair, PositionType *positionType, Rate *rate, NSUInteger orderId))block fromExecutionOrderId:(NSUInteger)executionOrderId
+{
+    if (!block) {
+        return;
+    }
+    
+    ExecutionOrder *order = [ExecutionOrder orderAtId:executionOrderId];
+    
+    if (order) {
+        block(order.currencyPair, order.positionType, order.rate, order.orderId);
+    }
 }
 
 + (ExecutionOrder *)orderAtId:(NSUInteger)recordId
@@ -142,29 +139,50 @@ static NSString* const FXSExecutionOrdersTableName = @"execution_orders";
     return array;
 }
 
+- (instancetype)initWithComponents:(ExecutionOrderComponents *)components
+{
+    if (self = [self initWithCurrencyPair:components.currencyPair positionType:components.positionType rate:components.rate positionSize:components.positionSize]) {
+        _recordId = components.recordId;
+        _orderId = components.orderId;
+        _isNew = components.isNew;
+        _isClose = components.isClose;
+        _closeTargetExecutionOrderId = components.closeTargetExecutionOrderId;
+        _closeTargetOrderId = components.closeTargetOrderId;
+        _willExecuteOrder = components.willExecuteOrder;
+        _willExecuteCloseTargetOpenPosition = components.willExecuteCloseTargetOpenPosition;
+    }
+    
+    return self;
+}
+
 - (instancetype)initWithFMResultSet:(FMResultSet *)result
 {
     CurrencyPair *currencyPair = [[CurrencyPair alloc] initWithCurrencyPairString:[result stringForColumn:@"code"]];
     Time *rateTime = [[Time alloc] initWithTimestamp:[result intForColumn:@"timestamp"]];
     Rate *rate = [[Rate alloc] initWithRateValue:[result doubleForColumn:@"rate"] currencyPair:currencyPair timestamp:rateTime];
-    PositionType *positionType = [PositionType new];
+    PositionType *positionType;
     
     if ([result boolForColumn:@"is_long"]) {
-        [positionType setLong];
+        positionType = [[PositionType alloc] initWithLong];
     } else if ([result boolForColumn:@"is_short"]) {
-        [positionType setShort];
+        positionType = [[PositionType alloc] initWithShort];
     }
     
     PositionSize *positionSize = [[PositionSize alloc] initWithSizeValue:[result intForColumn:@"position_size"]];
     
-    if (self = [super initWithCurrencyPair:currencyPair positionType:positionType rate:rate positionSize:positionSize]) {
-        _recordId = [result intForColumn:@"id"];
-        _orderId = [result intForColumn:@"order_id"];
-        _isClose = [result boolForColumn:@"is_close"];
-        _closeTargetExecutionOrderId = [result intForColumn:@"close_target_execution_order_id"];
-        _closeTargetOrderId = [result intForColumn:@"close_target_order_id"];
-        self.isExecuteOrder = NO;
-    }
+    return [[self class] orderWithBlock:^(ExecutionOrderComponents *components) {
+        components.currencyPair = currencyPair;
+        components.positionType = positionType;
+        components.rate = rate;
+        components.positionSize = positionSize;
+        components.recordId = [result intForColumn:@"id"];
+        components.orderId = [result intForColumn:@"order_id"];
+        components.isNew = [result boolForColumn:@"is_new"];
+        components.isClose = [result boolForColumn:@"is_close"];
+        components.closeTargetExecutionOrderId = [result intForColumn:@"close_target_execution_order_id"];
+        components.closeTargetOrderId = [result intForColumn:@"close_target_order_id"];
+        components.willExecuteOrder = NO;
+    }];
     
     return self;
 }
@@ -172,11 +190,18 @@ static NSString* const FXSExecutionOrdersTableName = @"execution_orders";
 - (void)execute
 {
     if (self.isClose) {
-        [self.executeCloseTargetOpenPosition close];
+        [self.willExecuteCloseTargetOpenPosition close];
         [self save];
     } else {
         [self save];
-        OpenPosition *newOpenPosition = [OpenPosition createNewOpenPositionFromExecutionOrder:self executionOrderId:self.recordId];
+        OpenPosition *newOpenPosition = [OpenPosition openPositionWithBlock:^(OpenPositionComponents *components) {
+            components.currencyPair = self.currencyPair;
+            components.positionType = self.positionType;
+            components.rate = self.rate;
+            components.positionSize = self.positionSize;
+            components.executionOrderId = self.recordId;
+            components.isNewPosition = YES;
+        }];
         [newOpenPosition new];
     }    
 }
@@ -215,7 +240,7 @@ static NSString* const FXSExecutionOrdersTableName = @"execution_orders";
 
 - (BOOL)validate
 {
-    if (!self.isExecuteOrder || ![self.positionSize existsPosition]) {
+    if (!self.willExecuteOrder || ![self.positionSize existsPosition]) {
         return NO;
     }
     
@@ -230,7 +255,7 @@ static NSString* const FXSExecutionOrdersTableName = @"execution_orders";
 
 - (Money *)profitAndLoss
 {
-    if (!self.isClose || self.isExecuteOrder) {
+    if (!self.isClose || self.willExecuteOrder) {
         return nil;
     }
     
@@ -241,6 +266,54 @@ static NSString* const FXSExecutionOrdersTableName = @"execution_orders";
     }
     
     return [ProfitAndLossCalculator calculateByTargetRate:self.rate valuationRate:closeTargetOrder.rate positionSize:self.positionSize orderType:self.positionType];
+}
+
+#pragma mark - display
+
+- (void)displayDataUsingBlock:(void (^)(NSString *currencyPair, NSString *positionType, NSString *rate, NSString *lot, NSString *orderId, NSString *closeTargetOrderId, NSString *profitAndLoss, NSString *ymdTime, NSString *hmsTime, UIColor *profitAndLossColor))block sizeOfLot:(PositionSize *)size displayCurrency:(Currency *)displayCurrency
+{
+    NSString *lot = [self.positionSize toLotFromPositionSizeOfLot:size].toDisplayString;
+    
+    NSString *closeTargetOrderId;
+    NSString *profitAndLossString;
+    
+    Money *profitAndLoss = self.profitAndLoss;
+    
+    if (self.isClose) {
+        closeTargetOrderId = @(self.closeTargetOrderId).stringValue;
+        profitAndLossString = [profitAndLoss convertToCurrency:displayCurrency].toDisplayString;
+    } else {
+        closeTargetOrderId = @"";
+        profitAndLossString = @"";
+    }
+    
+    NSString *ymdTime = self.rate.timestamp.toDisplayYMDString;
+    NSString *hmsTime = self.rate.timestamp.toDisplayHMSString;
+    
+    block(self.currencyPair.toDisplayString, self.positionType.toDisplayString, self.rate.toDisplayString, lot, @(self.orderId).stringValue, closeTargetOrderId, profitAndLossString, ymdTime, hmsTime, profitAndLoss.toDisplayColor);
+    
+}
+
+#pragma mark - super
+
+- (CurrencyPair *)currencyPair
+{
+    return _currencyPair;
+}
+
+- (PositionType *)positionType
+{
+    return _positionType;
+}
+
+- (Rate *)rate
+{
+    return _rate;
+}
+
+- (PositionSize *)positionSize
+{
+    return _positionSize;
 }
 
 @end

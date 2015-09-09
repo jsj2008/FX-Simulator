@@ -1,25 +1,17 @@
 //
 //  OrderManagerState.h
-//  FX Simulator
+//  FXSimulator
 //
-//  Created by yuu on 2015/06/12.
+//  Created by yuu on 2015/09/07.
 //
 //
 
-#import <Foundation/Foundation.h>
+#import "OrderManager.h"
 
-@class UIViewController;
 @class Order;
+@class OrderResult;
 
-@interface OrderManagerState : NSObject
-
-- (void)updateState:(Order *)usersOrder;
-
-/**
- Orderが実行可能かどうか。
-*/
--(BOOL)isExecutable;
-
--(void)showAlert:(UIViewController*)controller;
-
+@interface OrderManagerState : NSObject <OrderManagerState>
+- (void)addState:(id<OrderManagerState>)state;
+- (OrderResult *)isOrderable:(Order *)order;
 @end

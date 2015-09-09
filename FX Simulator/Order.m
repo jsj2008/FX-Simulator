@@ -13,8 +13,9 @@
 #import "FMResultSet.h"
 #import "CurrencyPair.h"
 #import "ExecutionOrder.h"
-#import "ExecutionOrdersCreateMode.h"
-#import "ExecutionOrdersCreateModeFactory.h"
+#import "ExecutionOrderComponents.h"
+#import "OrdersCreateMode.h"
+#import "OrdersCreateModeFactory.h"
 #import "FXSAlert.h"
 #import "Time.h"
 #import "OpenPosition.h"
@@ -27,9 +28,10 @@
 static NSString* const FXSOrdersTableName = @"orders";
 
 @interface Order ()
+@property (nonatomic, readonly) Rate *rate;
 @property (nonatomic) NSUInteger orderId;
-@property (nonatomic, readonly) BOOL isNew;
-@property (nonatomic, readonly) BOOL isClose;
+@property (nonatomic) BOOL isNew;
+@property (nonatomic) BOOL isClose;
 @end
 
 @implementation Order
@@ -49,49 +51,77 @@ static NSString* const FXSOrdersTableName = @"orders";
     return self;
 }
 
-- (instancetype)copyOrderNewPositionSize:(PositionSize *)positionSize
+- (instancetype)copyOrderForNewPositionSize:(PositionSize *)positionSize
 {
-    Order *order = [self initWithCurrencyPair:self.currencyPair positionType:self.positionType rate:self.rate positionSize:positionSize];
+    Order *order = [[[self class] alloc] initWithCurrencyPair:self.currencyPair positionType:self.positionType rate:self.rate positionSize:positionSize];
     order.orderId = self.orderId;
     
     return order;
 }
 
-- (void)execute
+- (NSArray *)createExecutionOrders
 {
-    SimulationManager *simulationManager = [SimulationManager sharedSimulationManager];
-    
-    if (![simulationManager isExecutableOrder]) {
-        return;
+    if (![self isExecutable]) {
+        return nil;
     }
     
-    if (![OpenPosition isExecutableNewPosition]) {
-        [FXSAlert showAlertTitle:@"Max Open Position" message:nil controller:self.alertTargetController];
-        return;
+    NSMutableArray *orders = [NSMutableArray array];
+    
+    if (self.isNew) {
+        ExecutionOrder *newOrder = [self createNewExecutionOrder];
+        if (newOrder) {
+            [orders addObject:newOrder];
+        }
+    } else if (self.isClose) {
+        orders = [[self createCloseExecutionOrders] copy];
     }
     
-    [self save];
-    
-    ExecutionOrdersCreateModeFactory *factory = [ExecutionOrdersCreateModeFactory new];
-    
-    ExecutionOrdersCreateMode *createMode = [factory createModeFromOrder:self];
-    
-    NSArray *executionOrders = [createMode create:self];
-    
-    @try {
-        [[self class] transaction:^{
-            for (ExecutionOrder *order in executionOrders) {
-                [order execute];
-            }
-        }];
+    return [orders copy];
+}
+
+- (ExecutionOrder *)createNewExecutionOrder
+{
+    if (!self.isNew) {
+        return nil;
     }
-    @catch (NSException *exception) {
-        [FXSAlert showAlertTitle:exception.name message:exception.reason controller:self.alertTargetController];
+    
+    if (![self save]) {
+        return nil;
     }
-    @finally {
-        
+    
+    return [ExecutionOrder orderWithBlock:^(ExecutionOrderComponents *components) {
+        components.currencyPair = self.currencyPair;
+        components.positionType = self.positionType;
+        components.rate = self.rate;
+        components.positionSize = self.positionSize;
+        components.orderId = self.orderId;
+        components.isNew = YES;
+        components.willExecuteOrder = YES;
+    }];
+}
+
+- (NSArray *)createCloseExecutionOrders
+{
+    if (!self.isClose) {
+        return nil;
+    }
+    
+    if (![self save]) {
+        return nil;
+    }
+    
+    NSArray *openPositions = [OpenPosition selectCloseTargetOpenPositionsLimitClosePositionSize:self.positionSize currencyPair:self.currencyPair];
+    
+    NSMutableArray *executionOrders = [NSMutableArray array];
+    
+    for (OpenPosition *openPosition in openPositions) {
+        ExecutionOrder *executionOrder = [openPosition createCloseExecutionOrderFromOrderId:self.orderId];
+        if (executionOrder) {
+            [executionOrders addObject:executionOrder];
+        }
     }
 
+    return executionOrders;
 }
 
 - (BOOL)includeCloseOrder
@@ -109,8 +139,19 @@ static NSString* const FXSOrdersTableName = @"orders";
     }
 }
 
-- (void)save
+- (BOOL)isExecutable
 {
+    if ((self.isNew && !self.isClose) || (!self.isNew && self.isClose)) {
+        return YES;
+    } else {
+        return NO;
+    }
+}
+
+- (BOOL)save
+{
+    __block BOOL isSuccess;
+    
     [[self class] execute:^(FMDatabase *db, NSUInteger saveSlot) {
         
         NSString *sql = [NSString stringWithFormat:@"INSERT INTO %@ ( save_slot, code, is_short, is_long, rate, timestamp, position_size, is_new, is_close ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", FXSOrdersTableName];
@@ -125,9 +166,55 @@ static NSString* const FXSOrdersTableName = @"orders";
                 self.orderId = [result intForColumn:@"MAX_ID"];
             }
             
+            isSuccess = YES;
+            
+        } else {
+            isSuccess = NO;
         }
 
     }];
+    
+    return isSuccess;
+}
+
+- (void)setNewOrder
+{
+    if (self.isNew || self.isClose) {
+        return;
+    }
+    
+    self.isNew = YES;
+}
+
+- (void)setCloseOrder
+{
+    if (self.isNew || self.isClose) {
+        return;
+    }
+    
+    self.isClose = YES;
+}
+
+#pragma mark - super
+
+- (CurrencyPair *)currencyPair
+{
+    return _currencyPair;
+}
+
+- (PositionType *)positionType
+{
+    return _positionType;
+}
+
+- (Rate *)rate
+{
+    return _rate;
+}
+
+- (PositionSize *)positionSize
+{
+    return _positionSize;
 }
 
 @end

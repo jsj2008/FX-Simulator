@@ -10,6 +10,6 @@
 
 @class Order;
 
-@interface ExecutionOrdersCreateMode : NSObject
-- (NSArray *)create:(Order *)order __attribute__((objc_requires_super));
+@interface OrdersCreateMode : NSObject
+- (NSArray *)create:(Order *)order;
 @end

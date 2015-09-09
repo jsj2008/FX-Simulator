@@ -15,6 +15,7 @@
 @class Market;
 @class Money;
 @class OpenPosition;
+@class PositionSize;
 @class PositionType;
 @class Rate;
 
@@ -46,6 +47,6 @@
 */
 @property (nonatomic, readonly) Money *profitAndLoss;
 
-@property (nonatomic, readonly) Lot *totalLot;
+@property (nonatomic, readonly) PositionSize *totalPositionSize;
 
 @end

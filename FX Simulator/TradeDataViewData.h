@@ -11,8 +11,10 @@
 
 @class ForexHistoryData;
 @class Lot;
+@class PositionSize;
 
 @interface TradeDataViewData : NSObject
+@property (nonatomic) PositionSize *positionSizeOfLot;
 @property (nonatomic, readonly) NSString *displayOrderType;
 @property (nonatomic, readonly) UIColor *displayOrderTypeColor;
 @property (nonatomic, readonly) NSString *displayTotalLot;

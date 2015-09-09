@@ -55,7 +55,7 @@
 {
     NSNumberFormatter *formatter = [NSNumberFormatter new];
     
-    Lot *lot = [[Lot alloc] initWithLotValue:[[formatter numberFromString:self.inputTradeLotTextField.text] unsignedLongLongValue]];
+    Lot *lot = [[Lot alloc] initWithLotValue:[[formatter numberFromString:self.inputTradeLotTextField.text] unsignedLongLongValue] positionSizeOfLot:self.positionSizeOfLot];
     
     return lot;
 }

@@ -14,10 +14,12 @@
 #import "CurrencyConverter.h"
 #import "CurrencyPair.h"
 #import "ExecutionOrder.h"
+#import "ExecutionOrderComponents.h"
 #import "ForexHistoryData.h"
 #import "Lot.h"
 #import "Market.h"
 #import "Money.h"
+#import "OpenPositionComponents.h"
 #import "OpenPositionRawRecord.h"
 #import "Order.h"
 #import "PositionSize.h"
@@ -25,46 +27,50 @@
 #import "ProfitAndLossCalculator.h"
 #import "Rate.h"
 #import "Rates.h"
+#import "Time.h"
 
 static NSString* const FXSOpenPositionsTableName = @"open_positions";
 static const int maxRecords = 50;
 
 @interface OpenPosition ()
-@property (nonatomic) NSUInteger recordId;
-@property (nonatomic) NSUInteger executionOrderId;
-@property (nonatomic) NSUInteger orderId;
+@property (nonatomic, readonly) CurrencyPair *currencyPair;
+@property (nonatomic, readonly) PositionType *positionType;
+@property (nonatomic, readonly) Rate *rate;
+@property (nonatomic, readonly) PositionSize *positionSize;
+@property (nonatomic, readonly) NSUInteger recordId;
+@property (nonatomic, readonly) NSUInteger executionOrderId;
+@property (nonatomic, readonly) NSUInteger orderId;
 @property (nonatomic) BOOL isNewPosition;
 @end
 
 @implementation OpenPosition
 
-+ (instancetype)createNewOpenPositionFromExecutionOrder:(ExecutionOrder *)order executionOrderId:(NSUInteger)executionOrderId
++ (instancetype)openPositionWithBlock:(void (^)(OpenPositionComponents *components))block
 {
-    OpenPosition *newOpenPosition = [[[self class] alloc] initWithCurrencyPair:order.currencyPair positionType:order.positionType rate:order.rate positionSize:order.positionSize];
-    newOpenPosition.recordId = 0;
-    newOpenPosition.executionOrderId = executionOrderId;
-    newOpenPosition.isNewPosition = YES;
+    OpenPositionComponents *components = [OpenPositionComponents new];
     
-    return newOpenPosition;
+    block(components);
+    
+    return [[[self class] alloc] initWithComponents:components];
 }
 
 + (instancetype)createOpenPositionFromRawRecord:(OpenPositionRawRecord *)rawRecord
-{
-    NSUInteger executionOrderId = rawRecord.executionOrderId;
+{    
+    __block OpenPosition *openPosition;
     
-    ExecutionOrder *order = [ExecutionOrder orderAtId:executionOrderId];
-    
-    if (!order) {
-        return nil;
-    }
-    
-    PositionSize *openPositionSize = rawRecord.positionSize;
-    
-    OpenPosition *openPosition = [[[self class] alloc] initWithCurrencyPair:order.currencyPair positionType:order.positionType rate:order.rate positionSize:openPositionSize];
-    openPosition.recordId = rawRecord.recordId;
-    openPosition.executionOrderId = rawRecord.executionOrderId;
-    openPosition.orderId = order.orderId;
-    openPosition.isNewPosition = NO;
+    [ExecutionOrder executionOrderDetail:^(CurrencyPair *currencyPair, PositionType *positionType, Rate *rate, NSUInteger orderId) {
+        
+        openPosition = [self openPositionWithBlock:^(OpenPositionComponents *components) {
+            components.currencyPair = currencyPair;
+            components.positionType = positionType;
+            components.rate = rate;
+            components.positionSize = rawRecord.positionSize;
+            components.recordId = rawRecord.recordId;
+            components.executionOrderId = rawRecord.executionOrderId;
+            components.orderId = orderId;
+        }];
+        
+    } fromExecutionOrderId:rawRecord.executionOrderId];
     
     return openPosition;
 }
@@ -230,11 +236,6 @@ static const int maxRecords = 50;
     return [[PositionSize alloc] initWithSizeValue:positionSize];
 }
 
-+ (Lot *)totalLotOfCurrencyPair:(CurrencyPair *)currencyPair
-{
-    return [[self totalPositionSizeOfCurrencyPair:currencyPair] toLot];
-}
-
 + (Rate *)averageRateOfCurrencyPair:(CurrencyPair *)currencyPair
 {
     NSArray *allPositions = [self allOpenPositionRecordsOfCurrencyPair:currencyPair];
@@ -279,6 +280,38 @@ static const int maxRecords = 50;
     return count;
 }
 
+- (instancetype)initWithComponents:(OpenPositionComponents *)components
+{
+    if (self = [self initWithCurrencyPair:components.currencyPair positionType:components.positionType rate:components.rate positionSize:components.positionSize]) {
+        _recordId = components.recordId;
+        _executionOrderId = components.executionOrderId;
+        _orderId = components.orderId;
+        _isNewPosition = components.isNewPosition;
+    }
+    
+    return self;
+}
+
+- (ExecutionOrder *)createCloseExecutionOrderFromOrderId:(NSUInteger)orderId
+{
+    if (!self.isExecutableClose) {
+        return nil;
+    }
+    
+    return [ExecutionOrder orderWithBlock:^(ExecutionOrderComponents *components) {
+        components.currencyPair = self.currencyPair;
+        components.positionType = [self.positionType reverseType];
+        components.rate = self.rate;
+        components.positionSize = self.positionSize;
+        components.orderId = orderId;
+        components.isClose = YES;
+        components.willExecuteOrder = YES;
+        components.closeTargetExecutionOrderId = self.executionOrderId;
+        components.closeTargetOrderId = self.orderId;
+        components.willExecuteCloseTargetOpenPosition = self;
+    }];
+}
+
 - (void)setPositionSize:(PositionSize *)positionSize
 {
     _positionSize = positionSize;
@@ -318,12 +351,12 @@ static const int maxRecords = 50;
     }
 }
 
-- (BOOL)isNewPosition
+- (BOOL)isExecutableClose
 {
-    if (self.recordId == 0 && _isNewPosition) {
-        return YES;
-    } else {
+    if (self.recordId == 0 || self.isNewPosition) {
         return NO;
+    } else {
+        return YES;
     }
 }
 
@@ -344,6 +377,42 @@ static const int maxRecords = 50;
     Money *profitAndLoss = [ProfitAndLossCalculator calculateByTargetRate:self.rate valuationRate:valuationRate positionSize:self.positionSize orderType:self.positionType];
     
     return profitAndLoss;
+}
+
+#pragma mark - display
+
+- (void)displayDataUsingBlock:(void (^)(NSString *currencyPair, NSString *positionType, NSString *rate, NSString *lot, NSString *orderId, NSString *profitAndLoss, NSString *ymdTime, NSString *hmsTime, UIColor *profitAndLossColor))block market:(Market *)market sizeOfLot:(PositionSize *)size displayCurrency:(Currency *)displayCurrency
+{
+    NSString *lot = [self.positionSize toLotFromPositionSizeOfLot:size].toDisplayString;
+    
+    Money *profitAndLoss = [[self profitAndLossFromMarket:market] convertToCurrency:displayCurrency];
+    
+    NSString *ymdTime = self.rate.timestamp.toDisplayYMDString;
+    NSString *hmsTime = self.rate.timestamp.toDisplayHMSString;
+    
+    block(self.currencyPair.toDisplayString, self.positionType.toDisplayString, self.rate.toDisplayString, lot, @(self.orderId).stringValue, profitAndLoss.toDisplayString, ymdTime, hmsTime, profitAndLoss.toDisplayColor);
+}
+
+#pragma mark - super
+
+- (CurrencyPair *)currencyPair
+{
+    return _currencyPair;
+}
+
+- (PositionType *)positionType
+{
+    return _positionType;
+}
+
+- (Rate *)rate
+{
+    return _rate;
+}
+
+- (PositionSize *)positionSize
+{
+    return _positionSize;
 }
 
 @end

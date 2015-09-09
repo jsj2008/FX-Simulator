@@ -74,9 +74,9 @@
     return [OpenPosition profitAndLossOfCurrencyPair:_currencyPair ForMarket:market InCurrency:_accountCurrency];
 }
 
-- (Lot *)totalLot
+- (PositionSize *)totalPositionSize
 {
-    return [OpenPosition totalLotOfCurrencyPair:_currencyPair];
+    return [OpenPosition totalPositionSizeOfCurrencyPair:_currencyPair];
 }
 
 @end

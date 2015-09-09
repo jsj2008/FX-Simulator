@@ -15,13 +15,16 @@
 @class Rate;
 
 @interface PositionBase : TradeDatabase {
+    CurrencyPair *_currencyPair;
+    PositionType *_positionType;
+    Rate *_rate;
     PositionSize *_positionSize;
 }
 
-@property (nonatomic ,readonly) CurrencyPair *currencyPair;
+/*@property (nonatomic ,readonly) CurrencyPair *currencyPair;
 @property (nonatomic, readonly) PositionType *positionType;
 @property (nonatomic, readonly) Rate *rate;
-@property (nonatomic, readonly) PositionSize *positionSize;
+@property (nonatomic, readonly) PositionSize *positionSize;*/
 
 - (instancetype)initWithCurrencyPair:(CurrencyPair *)currencyPair positionType:(PositionType *)positionType rate:(Rate *)rate positionSize:(PositionSize *)positionSize;
 
