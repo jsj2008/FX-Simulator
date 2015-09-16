@@ -24,16 +24,18 @@
     <entity name="SaveDataSource" representedClassName="SaveDataSource" syncable="YES">
         <attribute name="accountCurrency" attributeType="Transformable" syncable="YES"/>
         <attribute name="autoUpdateIntervalSeconds" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
-        <attribute name="currencyPair" attributeType="Transformable" syncable="YES"/>
+        <attribute name="currencyPairs" attributeType="Transformable" syncable="YES"/>
         <attribute name="isAutoUpdate" attributeType="Boolean" syncable="YES"/>
-        <attribute name="lastLoadedTime" attributeType="Transformable" syncable="YES"/>
-        <attribute name="positionSizeOfLot" attributeType="Transformable" syncable="YES"/>
+        <attribute name="lastLoadedTime" attributeType="Date" syncable="YES"/>
+        <attribute name="maxLeverage" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="positionSizeOfLot" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="slotNumber" attributeType="Integer 32" defaultValueString="-1" syncable="YES"/>
-        <attribute name="spread" attributeType="Transformable" syncable="YES"/>
+        <attribute name="spreads" attributeType="Transformable" syncable="YES"/>
         <attribute name="startBalance" attributeType="Transformable" syncable="YES"/>
-        <attribute name="startTime" attributeType="Transformable" syncable="YES"/>
-        <attribute name="timeFrame" attributeType="Transformable" syncable="YES"/>
-        <attribute name="tradePositionSize" attributeType="Transformable" syncable="YES"/>
+        <attribute name="startTime" attributeType="Date" syncable="YES"/>
+        <attribute name="stopOutLevel" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="timeFrame" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="tradePositionSize" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <relationship name="mainChartSources" toMany="YES" deletionRule="Cascade" destinationEntity="ChartSource" inverseName="saveDataSourceForMain" inverseEntity="ChartSource" syncable="YES"/>
         <relationship name="subChartSources" toMany="YES" deletionRule="Cascade" destinationEntity="ChartSource" inverseName="saveDataSourceForSub" inverseEntity="ChartSource" syncable="YES"/>
     </entity>
@@ -43,10 +45,10 @@
         <relationship name="chartSource" maxCount="1" deletionRule="Nullify" destinationEntity="ChartSource" inverseName="simpleMovingAverageSources" inverseEntity="ChartSource" syncable="YES"/>
     </entity>
     <elements>
-        <element name="CandleSource" positionX="196" positionY="54" width="128" height="120"/>
-        <element name="ChartSource" positionX="-99" positionY="-180" width="128" height="180"/>
-        <element name="IndicatorSource" positionX="151" positionY="-144" width="128" height="60"/>
-        <element name="SaveDataSource" positionX="-270" positionY="-72" width="128" height="255"/>
-        <element name="SimpleMovingAverageSource" positionX="-81" positionY="177" width="128" height="90"/>
+        <element name="CandleSource" positionX="0" positionY="0" width="128" height="120"/>
+        <element name="ChartSource" positionX="0" positionY="0" width="128" height="180"/>
+        <element name="IndicatorSource" positionX="0" positionY="0" width="128" height="60"/>
+        <element name="SaveDataSource" positionX="0" positionY="0" width="128" height="285"/>
+        <element name="SimpleMovingAverageSource" positionX="0" positionY="0" width="128" height="90"/>
     </elements>
 </model>
