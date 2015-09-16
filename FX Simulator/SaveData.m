@@ -226,52 +226,60 @@
 
 - (CurrencyPair *)currencyPair
 {
-    return _saveDataSource.currencyPair;
+    return ((NSArray *)_saveDataSource.currencyPairs).firstObject;
 }
 
 - (void)setCurrencyPair:(CurrencyPair *)currencyPair
 {
-    _saveDataSource.currencyPair = currencyPair;
+    NSArray *currencyPairs = @[currencyPair];
+    
+    _saveDataSource.currencyPairs = currencyPairs;
 }
 
 - (TimeFrame *)timeFrame
 {
-    return _saveDataSource.timeFrame;
+    return [[TimeFrame alloc] initWithMinute:_saveDataSource.timeFrame];
 }
 
 - (void)setTimeFrame:(TimeFrame *)timeFrame
 {
-    _saveDataSource.timeFrame = timeFrame;
+    _saveDataSource.timeFrame = (int)timeFrame.minute;
 }
 
 - (Time *)startTime
 {
-    return _saveDataSource.startTime;
+    NSDate *startDate = [NSDate dateWithTimeIntervalSince1970:_saveDataSource.startTime];
+    
+    return [[Time alloc] initWithDate:startDate];
 }
 
 - (void)setStartTime:(Time *)startTime
 {
-    _saveDataSource.startTime = startTime;
+    _saveDataSource.startTime = startTime.date.timeIntervalSince1970;
 }
 
 - (Spread *)spread
 {
-    return _saveDataSource.spread;
+    return ((NSArray *)_saveDataSource.spreads).firstObject;
 }
 
 - (void)setSpread:(Spread *)spread
 {
-    _saveDataSource.spread = spread;
+    NSArray *spreads = @[spread];
+    
+    _saveDataSource.spreads = spreads;
 }
 
 - (Time *)lastLoadedTime
 {
-    return _saveDataSource.lastLoadedTime;
+    NSDate *lastLoadedDate = [NSDate dateWithTimeIntervalSince1970:_saveDataSource.lastLoadedTime];
+    
+    return [[Time alloc] initWithDate:lastLoadedDate];
 }
 
 - (void)setLastLoadedTime:(Time *)lastLoadedTime
 {
-    _saveDataSource.lastLoadedTime = lastLoadedTime;
+    _saveDataSource.lastLoadedTime = lastLoadedTime.date.timeIntervalSince1970;
 }
 
 - (Currency *)accountCurrency
@@ -286,22 +294,22 @@
 
 - (PositionSize *)positionSizeOfLot
 {
-    return _saveDataSource.positionSizeOfLot;
+    return [[PositionSize alloc] initWithSizeValue:_saveDataSource.positionSizeOfLot];
 }
 
 - (void)setPositionSizeOfLot:(PositionSize *)positionSizeOfLot
 {
-    _saveDataSource.positionSizeOfLot = positionSizeOfLot;
+    _saveDataSource.positionSizeOfLot = (int)positionSizeOfLot.sizeValue;
 }
 
 - (PositionSize *)tradePositionSize
 {
-    return _saveDataSource.tradePositionSize;
+    return [[PositionSize alloc] initWithSizeValue:_saveDataSource.tradePositionSize];
 }
 
 - (void)setTradePositionSize:(PositionSize *)tradePositionSize
 {
-    _saveDataSource.tradePositionSize = tradePositionSize;
+    _saveDataSource.tradePositionSize = tradePositionSize.sizeValue;
 }
 
 - (Money *)startBalance

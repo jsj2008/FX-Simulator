@@ -61,7 +61,7 @@
     TimeFrame *timeFrame = [[TimeFrame alloc] initWithMinute:15];
     
     SaveData *saveData = [SaveData createNewSaveDataFromSlotNumber:slotNumber currencyPair:currencyPair timeFrame:timeFrame];
-    saveData.startTime = [Setting rangeForCurrencyPair:saveData.currencyPair timeScale:saveData.timeFrame].start;
+    saveData.startTime = [Setting rangeForSimulation].start;
     saveData.lastLoadedTime = saveData.startTime;
     saveData.spread = [[Spread alloc] initWithPips:1 currencyPair:saveData.currencyPair];
     saveData.accountCurrency = [[Currency alloc] initWithCurrencyType:JPY];
