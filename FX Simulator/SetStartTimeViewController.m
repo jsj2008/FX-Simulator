@@ -30,6 +30,7 @@ typedef struct PickerRowSet {
     NSMutableArray *_displayPickerYearStringArray;
     NSMutableArray *_displayPickerMonthStringArray;
     NSMutableArray *_displayPickerDayStringArray;
+    Time *_selectedTime;
 }
 
 // TODO: Default
@@ -39,14 +40,14 @@ typedef struct PickerRowSet {
     
     // Do any additional setup after loading the view.
     
-    _minStartDate = [Setting rangeForCurrencyPair:self.saveData.currencyPair timeScale:self.saveData.timeFrame].start.date;
-    _maxStartDate = [Setting rangeForCurrencyPair:self.saveData.currencyPair timeScale:self.saveData.timeFrame].end.date;
+    _minStartDate = [Setting rangeForSimulation].start.date;
+    _maxStartDate = [Setting rangeForSimulation].end.date;
     
     _displayPickerYearStringArray = [NSMutableArray array];
     _displayPickerMonthStringArray = [NSMutableArray array];
     _displayPickerDayStringArray = [NSMutableArray array];
     
-    for (int i = _minStartDate.fxs_year; i <= _maxStartDate.fxs_year; i++) {
+    for (int i = (int)_minStartDate.fxs_year; i <= _maxStartDate.fxs_year; i++) {
         [_displayPickerYearStringArray addObject:[NSString stringWithFormat:@"%d", i]];
     }
     for (int i = 1; i <= 12; i++) {
@@ -57,14 +58,23 @@ typedef struct PickerRowSet {
     }
 }
 
--(void)viewWillAppear:(BOOL)animated
+- (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     
-    [self selectRowForDate:self.saveData.startTime.date];
+    [self selectRowForDate:self.defaultStartTime.date];
     
     /*NSUInteger index = [_currencyPairList indexOfObject:self.delegate.currencyPair];
     [self.pickerView selectRow:index inComponent:0 animated:NO];*/
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    if (self.setStartTime && _selectedTime) {
+        self.setStartTime(_selectedTime);
+    }
 }
 
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
@@ -140,7 +150,7 @@ numberOfRowsInComponent:(NSInteger)component
         selectedDate = _maxStartDate;
     }
     
-    self.saveData.startTime = [[Time alloc] initWithDate:selectedDate];
+    _selectedTime = [[Time alloc] initWithDate:selectedDate];
 }
 
 /**

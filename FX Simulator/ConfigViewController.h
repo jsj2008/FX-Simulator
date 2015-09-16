@@ -7,11 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "NewStartViewController.h"
 #import "SetAutoUpdateIntervalViewController.h"
+#import "SimulationManager.h"
 
-
-@interface ConfigViewController : UITableViewController <NewStartViewControllerDelegate, SetAutoUpdateIntervalViewControllerDelegate>
--(void)updatedSaveData;
-@property (nonatomic, readwrite) NSNumber *autoUpdateInterval;
+@interface ConfigViewController : UITableViewController < SetAutoUpdateIntervalViewControllerDelegate, SimulationManagerDelegate>
+@property (nonatomic) float autoUpdateIntervalSeconds;
 @end

@@ -81,7 +81,9 @@ static const NSUInteger buffer = 200;
         return chunk;
     } else if (result == NSOrderedDescending) {
         ForexHistoryData *newTimeFrameData = [self getTimeFrameDataFromCurrentTime:time newestThan:chunk.current.close.timestamp];
-        [chunk addCurrentData:newTimeFrameData];
+        if (newTimeFrameData) {
+            [chunk addCurrentData:newTimeFrameData];
+        }
         return chunk;
     } else {
         return nil;

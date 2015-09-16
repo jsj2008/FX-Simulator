@@ -51,4 +51,9 @@
 + (instancetype)createNewSaveDataFromSlotNumber:(NSUInteger)slotNumber currencyPair:(CurrencyPair *)currencyPair timeFrame:(TimeFrame *)timeFrame;
 
 + (instancetype)loadFromSlotNumber:(NSUInteger)slotNumber;
+
+- (void)delete;
+
+- (void)newSave;
+
 @end

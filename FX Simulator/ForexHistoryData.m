@@ -18,7 +18,7 @@
 
 @implementation ForexHistoryData
 
--(id)initWithFMResultSet:(FMResultSet*)rs currencyPair:(CurrencyPair *)currencyPair timeScale:(TimeFrame *)timeScale
+- (instancetype)initWithFMResultSet:(FMResultSet*)rs currencyPair:(CurrencyPair *)currencyPair timeScale:(TimeFrame *)timeScale
 {
     if (self = [self init]) {
         _ratesID = [rs intForColumn:@"rowid"];
@@ -35,8 +35,12 @@
     return self;
 }
 
--(id)initWithForexDataChunk:(ForexDataChunk *)chunk timeScale:(TimeFrame *)timeScale
+- (instancetype)initWithForexDataChunk:(ForexDataChunk *)chunk timeScale:(TimeFrame *)timeScale
 {
+    if (!chunk) {
+        return nil;
+    }
+    
     if (self = [self init]) {
         _currencyPair = chunk.current.currencyPair;
         _timeScale = timeScale;

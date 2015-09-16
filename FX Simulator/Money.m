@@ -47,6 +47,16 @@ static NSString* const FXSCurrencyKey = @"currency";
     return self;
 }
 
+- (instancetype)initWithNumber:(NSNumber *)number currency:(Currency*)currency
+{
+    return [self initWithAmount:number.longLongValue currency:currency];
+}
+
+- (instancetype)initWithString:(NSString *)string currency:(Currency*)currency
+{
+    return [self initWithAmount:string.longLongValue currency:currency];
+}
+
 - (Money *)addMoney:(Money *)money
 {
     if (money == nil) {

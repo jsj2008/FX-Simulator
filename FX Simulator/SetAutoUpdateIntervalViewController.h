@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @protocol SetAutoUpdateIntervalViewControllerDelegate
-@property (nonatomic, readwrite) NSNumber *autoUpdateInterval;
+@property (nonatomic) float autoUpdateIntervalSeconds;
 @end
 
 @interface SetAutoUpdateIntervalViewController : UIViewController

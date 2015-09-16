@@ -8,8 +8,6 @@
 
 #import "SubChartViewController.h"
 
-#import "SaveLoader.h"
-#import "SaveData.h"
 #import "ChartViewController.h"
 #import "Chart.h"
 #import "ChartChunk.h"
@@ -17,6 +15,7 @@
 #import "SubChartDataViewController.h"
 #import "TimeFrame.h"
 #import "Rate.h"
+#import "SaveData.h"
 #import "SimulationManager.h"
 #import "ForexDataChunk.h"
 #import "ForexDataChunkStore.h"
@@ -31,11 +30,18 @@
     ChartViewController *_chartViewController;
     ForexDataChunkStore *_chunkStore;
     Market *_market;
+    ChartChunk *_subChartChunk;
     SubChartDataViewController *_subChartDataViewController;
     NSArray *_charts;
 }
 
--(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+- (void)loadSaveData:(SaveData *)saveData market:(Market *)market
+{
+    _subChartChunk = saveData.subChartChunk;
+    _market = market;
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqualToString:@"ChartViewControllerSeg"]) {
         _chartViewController = segue.destinationViewController;
@@ -50,13 +56,15 @@
     // Do any additional setup after loading the view.
 }
 
--(void)viewWillAppear:(BOOL)animated
+- (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     
-    [self setInit];
+    [self setSegment];
     
-    _market = [SimulationManager sharedSimulationManager].market;
+    //[self setInit];
+    
+    //_market = [SimulationManager sharedSimulationManager].market;
     
     [self strokeChartView];
 }
@@ -71,17 +79,17 @@
     [_subChartDataViewController hiddenForexHistoryData];
 }
 
-- (void)setInit
+/*- (void)setInit
 {
     [self setSegment];
-}
+}*/
 
 -(void)setSegment
 {
-    ChartChunk *subChartChunk = [SaveLoader load].subChartChunk;
+    //ChartChunk *subChartChunk = [SaveLoader load].subChartChunk;
     
     for (int i = 0; i < self.segment.numberOfSegments; i++) {
-        Chart *subChart = [subChartChunk getChartFromChartIndex:i];
+        Chart *subChart = [_subChartChunk getChartFromChartIndex:i];
         
         [self.segment setTitle:[subChart.timeFrame toDisplayString] forSegmentAtIndex:i];
         
@@ -115,13 +123,13 @@
 
 - (IBAction)segmentValueChanged:(id)sender {
     
-    ChartChunk *subChartChunk = [SaveLoader load].subChartChunk;
+    //ChartChunk *subChartChunk = [SaveLoader load].subChartChunk;
     
-    Chart *newDisplayChart = [subChartChunk getChartFromChartIndex:self.segment.selectedSegmentIndex];
+    Chart *newDisplayChart = [_subChartChunk getChartFromChartIndex:self.segment.selectedSegmentIndex];
     
-    subChartChunk.displayChart = newDisplayChart;
+    _subChartChunk.displayChart = newDisplayChart;
     
-    Chart *displayChart = subChartChunk.displayChart;
+    Chart *displayChart = _subChartChunk.displayChart;
     
     _chunkStore = [[ForexDataChunkStore alloc] initWithCurrencyPair:displayChart.currencyPair timeScale:displayChart.timeFrame getMaxLimit:500];
     
@@ -130,7 +138,7 @@
 
 - (void)strokeChartView
 {
-    Chart *displayChart = [SaveLoader load].subChartChunk.displayChart;
+    Chart *displayChart = _subChartChunk.displayChart;
     [_chartViewController setChart:displayChart];
     
     [_chartViewController updateChartForTime:_market.currentTime];
@@ -159,11 +167,6 @@
 {
     [subChartDataView hiddenData];
 }*/
-
--(void)updatedSaveData
-{
-    
-}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

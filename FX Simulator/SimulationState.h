@@ -8,10 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
-
-@class UIViewController;
 @class Account;
 @class Market;
+@class SimulationStateResult;
 
 /**
  シミュレーションを停止すべきかどうか、などのシュミレーションの状態を管理する。
@@ -20,13 +19,13 @@
 */
 
 @interface SimulationState : NSObject
--(instancetype)initWithAccount:(Account*)account Market:(Market*)market;
+- (instancetype)initWithAccount:(Account*)account Market:(Market*)market;
+- (SimulationStateResult *)isStop;
 /**
  資産が0以下なのか、チャートが端まで読み込まれたのかなど、その状態に応じて、異なるアラートを出す。
  シュミレーションがストップしていないときは、アラートは表示されない。
 */
--(void)showAlert:(UIViewController*)controller;
--(void)updatedMarket;
--(void)reset;
-@property (nonatomic, readonly) BOOL isStop;
+//- (void)showAlert:(UIViewController*)controller;
+//- (void)updatedMarket;
+//- (void)reset;
 @end

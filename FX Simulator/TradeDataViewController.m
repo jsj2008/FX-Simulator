@@ -8,13 +8,16 @@
 
 #import "TradeDataViewController.h"
 
+#import "Account.h"
+#import "CurrencyPair.h"
 #import "Lot.h"
-#import "TradeDataViewData.h"
+#import "Money.h"
 #import "InputTradeLotViewController.h"
 #import "Market.h"
+#import "OrderResult.h"
 #import "PositionSize.h"
 #import "SaveData.h"
-#import "SaveLoader.h"
+#import "TimeFrame.h"
 
 @interface TradeDataViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *orderTypeLabel;
@@ -29,8 +32,12 @@
 @end
 
 @implementation TradeDataViewController {
+    Account *_account;
+    CurrencyPair *_currencyPair;
+    SaveData *_saveData;
+    Market *_market;
     PositionSize *_positionSizeOfLot;
-    TradeDataViewData *_tradeDataViewData;
+    TimeFrame *_timeFrame;
 }
 
 /*- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -42,24 +49,27 @@
  return self;
 }*/
 
-- (instancetype)initWithCoder:(NSCoder *)aDecoder
-{
-    if (self = [super initWithCoder:aDecoder]) {
-        _positionSizeOfLot = [SaveLoader load].positionSizeOfLot;
-        _tradeDataViewData = [TradeDataViewData new];
-        _tradeDataViewData.positionSizeOfLot = _positionSizeOfLot;
-    }
-    
-    return self;
-}
-
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqualToString:@"InputTradeLotViewControllerSegue"]) {
         InputTradeLotViewController *controller = segue.destinationViewController;
-        controller.defaultInputTradeLot = _tradeDataViewData.tradeLot;
+        [controller setDefaultTradePositionSize:_saveData.tradePositionSize];
         controller.positionSizeOfLot = _positionSizeOfLot;
     }
+}
+
+- (void)loadSaveData:(SaveData *)saveData
+{
+    _saveData = saveData;
+    _account = saveData.account;
+    _positionSizeOfLot = _saveData.positionSizeOfLot;
+    _currencyPair = saveData.currencyPair;
+    _timeFrame = saveData.timeFrame;
+}
+
+- (void)loadMarket:(Market *)market
+{
+    _market = market;
 }
 
 - (void)viewDidLoad
@@ -73,45 +83,37 @@
     
     [super viewWillAppear:animated];
     
-    [self.tradeLotSettingButton setTitle:[_tradeDataViewData.tradeLot toDisplayString] forState:self.tradeLotSettingButton.state];
+    [self setTradeLotView];
     
-    self.currentSettingLabel.text = _tradeDataViewData.displayCurrentSetting;
+    self.currentSettingLabel.text = [NSString stringWithFormat:@"%@ %@", [_currencyPair toDisplayString], [_timeFrame toDisplayString]];
     
-    [self didOrder];
+    [self setTradeDataView];
 }
 
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
-{    
-    if ([keyPath isEqualToString:@"currentTime"] && [object isKindOfClass:[Market class]]) {
-        self.profitAndLossLabel.text = _tradeDataViewData.displayProfitAndLoss;
-        self.profitAndLossLabel.textColor = _tradeDataViewData.displayProfitAndLossColor;
-        self.openPositionMarketValueLabel.text = @"";
-        self.equityLabel.text = _tradeDataViewData.displayEquity;
-        self.equityLabel.textColor = _tradeDataViewData.displayEquityColor;
+- (void)didOrder:(OrderResult *)result
+{
+    if (result.isSuccess) {
+        [self setTradeDataView];
     }
 }
 
-- (void)didOrder
-{    
-    self.orderTypeLabel.text = _tradeDataViewData.displayOrderType;
-    self.orderTypeLabel.textColor = _tradeDataViewData.displayOrderTypeColor;
-    self.totalOpenLotLabel.text = _tradeDataViewData.displayTotalLot;
-    self.averageRateLabel.text = _tradeDataViewData.displayAverageRate;
-    
-    self.profitAndLossLabel.text = _tradeDataViewData.displayProfitAndLoss;
-    self.profitAndLossLabel.textColor = _tradeDataViewData.displayProfitAndLossColor;
-    self.openPositionMarketValueLabel.text = @"";
-    self.equityLabel.text = _tradeDataViewData.displayEquity;
-    self.equityLabel.textColor = _tradeDataViewData.displayEquityColor;
+- (void)update
+{
+    [_account displayDataUsingBlock:^(NSString *equityStringValue, NSString *profitAndLossStringValue, NSString *orderTypeStringValue, NSString *averageRateStringValue, NSString *totalPositionSizeStringValue, UIColor *equityColor, UIColor *profitAndLossColor) {
+        self.equityLabel.text = equityStringValue;
+        self.equityLabel.textColor = equityColor;
+        self.profitAndLossLabel.text = profitAndLossStringValue;
+        self.profitAndLossLabel.textColor = profitAndLossColor;
+    } market:_market positionSizeOfLot:_positionSizeOfLot];
 }
 
 - (IBAction)tradeDataViewReturnActionForSegue:(UIStoryboardSegue *)segue
 {
     InputTradeLotViewController *controller = segue.sourceViewController;
     
-    _tradeDataViewData.tradeLot = controller.inputTradeLot;
+    _saveData.tradePositionSize = controller.tradePositionSize;
     
-    [self.tradeLotSettingButton setTitle:[_tradeDataViewData.tradeLot toDisplayString] forState:self.tradeLotSettingButton.state];
+    [self setTradeLotView];
 }
 
 - (IBAction)autoUpdateSettingSwitchChanged:(id)sender {
@@ -126,9 +128,26 @@
     [[UIApplication sharedApplication] openURL:url];
 }
 
--(void)updatedSaveData
+- (void)setTradeDataView
 {
-    _tradeDataViewData = [TradeDataViewData new];
+    [_account displayDataUsingBlock:^(NSString *equityStringValue, NSString *profitAndLossStringValue, NSString *positionTypeStringValue, NSString *averageRateStringValue, NSString *totalLotStringValue, UIColor *equityStringColor, UIColor *profitAndLossStringColor) {
+        self.equityLabel.text = equityStringValue;
+        self.equityLabel.textColor = equityStringColor;
+        self.profitAndLossLabel.text = profitAndLossStringValue;
+        self.profitAndLossLabel.textColor = profitAndLossStringColor;
+        self.orderTypeLabel.text = positionTypeStringValue;
+        self.totalOpenLotLabel.text = totalLotStringValue;
+        self.averageRateLabel.text = averageRateStringValue;
+        self.equityLabel.text = equityStringValue;
+        self.equityLabel.textColor = equityStringColor;
+    } market:_market positionSizeOfLot:_positionSizeOfLot];
+}
+
+- (void)setTradeLotView
+{
+    Lot *tradeLot = [_saveData.tradePositionSize toLotFromPositionSizeOfLot:_positionSizeOfLot];
+    
+    [self.tradeLotSettingButton setTitle:tradeLot.toDisplayString forState:self.tradeLotSettingButton.state];
 }
 
 - (void)didReceiveMemoryWarning

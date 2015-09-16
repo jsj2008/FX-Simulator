@@ -10,54 +10,31 @@
 
 #import "Currency.h"
 #import "CurrencyPair.h"
+#import "CheckmarkViewController.h"
 #import "Time.h"
 #import "Money.h"
 #import "PositionSize.h"
+#import "SetSaveDataTableViewController.h"
+#import "Setting.h"
 #import "Spread.h"
 #import "TimeFrame.h"
 #import "SaveData.h"
-#import "SaveLoader.h"
-#import "SetNewStartDataViewController.h"
 #import "SimulationManager.h"
 
-
-@interface NewStartViewController ()
-@property (weak, nonatomic) IBOutlet UIButton *setCurrencyPairButton;
-@property (weak, nonatomic) IBOutlet UIButton *setTimeScaleButton;
-@property (weak, nonatomic) IBOutlet UIButton *setStartTimeButton;
-@property (weak, nonatomic) IBOutlet UIButton *setSpreadButton;
-@property (weak, nonatomic) IBOutlet UIButton *setAccountCurrencyButton;
-@property (weak, nonatomic) IBOutlet UIButton *setStartBalanceButton;
-@property (weak, nonatomic) IBOutlet UIButton *setPositionSizeOfLotButton;
-@end
-
 @implementation NewStartViewController {
+    SimulationManager *_simulationManager;
     NSHashTable *_delegates;
-    SaveData *_newSaveData;
+    SaveData *_saveData;
 }
 
-/*-(instancetype)initWithCoder:(NSCoder *)aDecoder
+- (void)loadSimulationManager:(SimulationManager *)simulationManager
 {
-    if (self = [super initWithCoder:aDecoder]) {
-        _newSaveData = [[SaveData alloc] initWithDefaultDataAndSlotNumber:1];
-        [self setDefaultNewSaveData];
-        _delegates = [NSHashTable weakObjectsHashTable];
-    }
-    
-    return self;
-}*/
+    _simulationManager = simulationManager;
+}
 
--(void)setDefaultNewSaveData
+- (void)loadSaveData:(SaveData *)saveData market:(Market *)market
 {
-    SaveData *saveData = [SaveLoader load];
-    
-    _newSaveData.currencyPair = saveData.currencyPair;
-    _newSaveData.startTime = saveData.startTime;
-    _newSaveData.timeFrame = saveData.timeFrame;
-    _newSaveData.spread = saveData.spread;
-    _newSaveData.accountCurrency = saveData.accountCurrency;
-    _newSaveData.startBalance = saveData.startBalance;
-    _newSaveData.positionSizeOfLot = saveData.positionSizeOfLot;
+    _saveData = saveData;
 }
 
 - (void)viewDidLoad {
@@ -65,54 +42,36 @@
     // Do any additional setup after loading the view.
 }
 
--(void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    
-    [self.setCurrencyPairButton setTitle:[_newSaveData.currencyPair toDisplayString] forState:self.setCurrencyPairButton.state];
-    [self.setTimeScaleButton setTitle:[_newSaveData.timeFrame toDisplayString] forState:self.setTimeScaleButton.state];
-    [self.setStartTimeButton setTitle:[_newSaveData.startTime toDisplayYMDString] forState:self.setStartTimeButton.state];
-    [self.setSpreadButton setTitle:[_newSaveData.spread toDisplayString] forState:self.setSpreadButton.state];
-    [self.setAccountCurrencyButton setTitle:[_newSaveData.accountCurrency toDisplayString] forState:self.setAccountCurrencyButton.state];
-    [self.setStartBalanceButton setTitle:[_newSaveData.startBalance toDisplayString] forState:self.setStartBalanceButton.state];
-    [self.setPositionSizeOfLotButton setTitle:[_newSaveData.positionSizeOfLot toDisplayString] forState:self.setPositionSizeOfLotButton.state];
-}
-
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if ([segue.identifier isEqualToString:@"SetCurrencyPairViewControllerSegue"] || [segue.identifier isEqualToString:@"SetTimeScaleViewControllerSegue"] || [segue.identifier isEqualToString:@"SetStartTimeViewControllerSegue"] || [segue.identifier isEqualToString:@"SetSpreadViewControllerSegue"] || [segue.identifier isEqualToString:@"SetAccountCurrencyViewControllerSegue"] || [segue.identifier isEqualToString:@"SetStartBalanceViewControllerSegue"] || [segue.identifier isEqualToString:@"SetPositionSizeOfLotViewControllerSegue"]) {
-        SetNewStartDataViewController *controller = segue.destinationViewController;
-        controller.saveData = _newSaveData;
+    if ([segue.identifier isEqualToString:@"SetSaveDataTableViewControllerSegue"]) {
+        NSArray *viewControllers = ((UINavigationController *)segue.destinationViewController).viewControllers;
+        SetSaveDataTableViewController *rootViewController = viewControllers.firstObject;
+        rootViewController.currencyPair = _saveData.currencyPair;
+        rootViewController.timeFrame = _saveData.timeFrame;
+        rootViewController.startTime = _saveData.startTime;
+        rootViewController.accountCurrency = _saveData.accountCurrency;
+        rootViewController.spread = _saveData.spread;
+        rootViewController.startBalance = _saveData.startBalance;
+        rootViewController.positionSizeOfLot = _saveData.positionSizeOfLot;
     }
 }
 
 - (IBAction)newStartButtonPushed:(id)sender {
     
-    //SaveData *newSaveData = [SaveData ];
     
-    [SaveLoader reloadSaveData];
-    
-    SimulationManager *simulationManager = [SimulationManager sharedSimulationManager];
-    [simulationManager updatedSaveData];
-    
-    for (id<NewStartViewControllerDelegate> delegate in _delegates) {
-        [delegate updatedSaveData];
-    }
-    
-    [self.delegate updatedSaveData];
-    
-    [self updatedSaveData];
 }
 
--(void)addDelegate:(id<NewStartViewControllerDelegate>)delegate
+- (IBAction)unwindFromCancelButton:(UIStoryboardSegue *)segue
 {
-    [_delegates addObject:delegate];
+    
 }
 
--(void)updatedSaveData
+- (IBAction)unwindFromDoneButton:(UIStoryboardSegue *)segue
 {
-    [self setDefaultNewSaveData];
+    
 }
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

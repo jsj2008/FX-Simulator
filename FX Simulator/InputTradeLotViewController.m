@@ -8,21 +8,23 @@
 
 #import "InputTradeLotViewController.h"
 
-
-#import "PositionSize.h"
 #import "Lot.h"
+#import "PositionSize.h"
 
 @interface InputTradeLotViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *inputTradeLotTextField;
 @end
 
-@implementation InputTradeLotViewController
+@implementation InputTradeLotViewController {
+    PositionSize *_defaultTradePositionSize;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    //self.inputTradeLotTextField.text = [[self.saveData.tradePositionSize toLot] toDisplayString];
-    self.inputTradeLotTextField.text = [self.defaultInputTradeLot toDisplayString];
+    
+    Lot *lot = [[Lot alloc] initWithPositionSize:_defaultTradePositionSize positionSizeOfLot:self.positionSizeOfLot];
+    self.inputTradeLotTextField.text = lot.toDisplayString;
     
 }
 
@@ -38,26 +40,20 @@
     [super viewWillDisappear:animated];
     
     [self.inputTradeLotTextField resignFirstResponder];
-    
-    /*NSNumberFormatter *formatter = [NSNumberFormatter new];
-    
-    Lot *lot = [[Lot alloc] initWithLotValue:[[formatter numberFromString:self.inputTradeLotTextField.text] unsignedLongLongValue]];
-    
-    self.inputTradeLot = lot;*/
 }
 
-/*-(void)setInputTradeLot:(Lot *)inputTradeLot
+- (void)setDefaultTradePositionSize:(PositionSize *)positionSize
 {
-    self.inputTradeLotTextField.text = inputTradeLot;
-}*/
+    _defaultTradePositionSize = positionSize;
+}
 
--(Lot*)inputTradeLot
+- (PositionSize *)tradePositionSize
 {
     NSNumberFormatter *formatter = [NSNumberFormatter new];
     
     Lot *lot = [[Lot alloc] initWithLotValue:[[formatter numberFromString:self.inputTradeLotTextField.text] unsignedLongLongValue] positionSizeOfLot:self.positionSizeOfLot];
     
-    return lot;
+    return [lot toPositionSize];
 }
 
 - (void)didReceiveMemoryWarning {

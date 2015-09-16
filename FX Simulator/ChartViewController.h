@@ -26,5 +26,4 @@
 + (NSUInteger)requireForexDataCountForChart;
 - (void)setChart:(Chart *)chart;
 - (void)updateChartForTime:(Time *)time;
-- (void)updatedSaveData;
 @end

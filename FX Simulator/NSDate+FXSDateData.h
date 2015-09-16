@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @interface NSDate (FXSDateData)
--(NSInteger)fxs_year;
--(NSInteger)fxs_month;
--(NSInteger)fxs_day;
+-(NSUInteger)fxs_year;
+-(NSUInteger)fxs_month;
+-(NSUInteger)fxs_day;
 @end

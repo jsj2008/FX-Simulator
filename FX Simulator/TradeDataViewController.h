@@ -7,16 +7,22 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "RatePanelViewController.h"
+#import "OrderManager.h"
 
 @protocol TradeDataViewControllerDelegate <NSObject>
 /// 自動更新を設定するボタンが変更されたとき。
 - (void)autoUpdateSettingSwitchChanged:(BOOL)isSwitchOn;
 @end
 
-@interface TradeDataViewController : UIViewController <RatePanelViewControllerDelegate, UITextFieldDelegate>
+@class Market;
+@class OrderResult;
+@class SaveData;
+
+@interface TradeDataViewController : UIViewController < UITextFieldDelegate, OrderManagerDelegate>
 @property (nonatomic, weak) id<TradeDataViewControllerDelegate> delegate;
-- (void)didOrder;
+- (void)didOrder:(OrderResult *)result;
+- (void)loadMarket:(Market *)market;
+- (void)loadSaveData:(SaveData *)saveData;
+- (void)update;
 - (void)tradeViewTouchesBegan;
-- (void)updatedSaveData;
 @end

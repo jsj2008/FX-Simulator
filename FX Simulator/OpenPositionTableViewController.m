@@ -33,24 +33,23 @@ static const unsigned int displayMaxOpenPositionDataRecords = 100;
     PositionSize *_positionSizeOfLot;
 }
 
-- (instancetype)initWithCoder:(NSCoder *)aDecoder
+- (void)loadSaveData:(SaveData *)saveData market:(Market *)market
 {
-    if (self = [super initWithCoder:aDecoder]) {
-        [self setInitData];
-    }
-    
-    return self;
+    _currencyPair = saveData.currencyPair;
+    _displayCurrency = saveData.accountCurrency;
+    _positionSizeOfLot = saveData.positionSizeOfLot;
+    _market = market;
 }
 
-- (void)setInitData
+/*- (void)setInitData
 {
-    SimulationManager *simulationManager = [SimulationManager sharedSimulationManager];
-    _market = simulationManager.market;
+    //SimulationManager *simulationManager = [SimulationManager sharedSimulationManager];
+    //_market = simulationManager.market;
     SaveData *saveData = [SaveLoader load];
     _currencyPair = saveData.currencyPair;
     _displayCurrency = saveData.accountCurrency;
     _positionSizeOfLot = saveData.positionSizeOfLot;
-}
+}*/
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -107,11 +106,6 @@ static const unsigned int displayMaxOpenPositionDataRecords = 100;
     // Return the number of rows in the section.
     
     return [_openPositionDataRecords count];
-}
-
--(void)updatedSaveData
-{
-    [self setInitData];
 }
 
 - (void)didReceiveMemoryWarning {

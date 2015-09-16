@@ -7,8 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "NewStartViewController.h"
 
-@interface MainViewController : UITabBarController <NewStartViewControllerDelegate>
--(void)updatedSaveData;
+@interface MainViewController : UITabBarController
+
 @end

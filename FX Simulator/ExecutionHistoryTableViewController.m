@@ -17,7 +17,6 @@
 #import "PositionType.h"
 #import "Rate.h"
 #import "SaveData.h"
-#import "SaveLoader.h"
 
 static const unsigned int displayMaxExecutionHistoryRecords = 100;
 
@@ -32,15 +31,10 @@ static const unsigned int displayMaxExecutionHistoryRecords = 100;
     PositionSize *_positionSizeOfLot;
 }
 
-- (instancetype)initWithCoder:(NSCoder *)aDecoder
+- (void)loadSaveData:(SaveData *)saveData market:(Market *)market
 {
-    if (self = [super initWithCoder:aDecoder]) {
-        SaveData *saveData = [SaveLoader load];
-        _displayCurrency = saveData.accountCurrency;
-        _positionSizeOfLot = saveData.positionSizeOfLot;
-    }
-    
-    return self;
+    _displayCurrency = saveData.accountCurrency;
+    _positionSizeOfLot = saveData.positionSizeOfLot;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath

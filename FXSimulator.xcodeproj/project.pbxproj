@@ -28,12 +28,12 @@
 		70467D2E1B8316A300B75BD3 /* CoreDataInMemoryManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 70467D2D1B8316A300B75BD3 /* CoreDataInMemoryManager.m */; };
 		704D3E771B5A7AFB00A8B9AB /* Chart.m in Sources */ = {isa = PBXBuildFile; fileRef = 704D3E761B5A7AFB00A8B9AB /* Chart.m */; };
 		704D3E7A1B5A7B0C00A8B9AB /* ChartChunk.m in Sources */ = {isa = PBXBuildFile; fileRef = 704D3E791B5A7B0C00A8B9AB /* ChartChunk.m */; };
-		705C2E101ADE4C270089D510 /* Money+ConvertToAccountCurrency.m in Sources */ = {isa = PBXBuildFile; fileRef = 705C2E0F1ADE4C270089D510 /* Money+ConvertToAccountCurrency.m */; };
 		705DCE4B1AE7C84300BCF710 /* Rates.m in Sources */ = {isa = PBXBuildFile; fileRef = 70B5AAEE1AC7FF44001F8823 /* Rates.m */; };
 		705DCE4C1AE7CE9800BCF710 /* RatePanelButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 70AD14751AADD0AA0099F0BA /* RatePanelButton.m */; };
 		7062E5BB1B60BB0100BDA666 /* CoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7062E5BA1B60BB0100BDA666 /* CoreDataManager.m */; };
+		70634FE71BA91EF9009ACCEE /* InputNumberValueViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70634FE61BA91EF9009ACCEE /* InputNumberValueViewController.m */; };
 		7076F5A71AECCBBB004CC6BA /* NewStartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7076F5A61AECCBBB004CC6BA /* NewStartViewController.m */; };
-		7076F5AA1AECCDB7004CC6BA /* SetCurrencyPairViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7076F5A91AECCDB7004CC6BA /* SetCurrencyPairViewController.m */; };
+		7076F5AA1AECCDB7004CC6BA /* CheckmarkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7076F5A91AECCDB7004CC6BA /* CheckmarkViewController.m */; };
 		7076F5AB1AECCEB3004CC6BA /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FC031A9F58D100CAB509 /* MainViewController.m */; };
 		7079FEE81AF4FF23004D3CEA /* SetStartTimeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7079FEE71AF4FF23004D3CEA /* SetStartTimeViewController.m */; };
 		7079FEEB1AF9E688004D3CEA /* NSDate+FXSDateData.m in Sources */ = {isa = PBXBuildFile; fileRef = 7079FEEA1AF9E688004D3CEA /* NSDate+FXSDateData.m */; };
@@ -84,12 +84,11 @@
 		70D2FB491A9F574000CAB509 /* ChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FB2D1A9F574000CAB509 /* ChartViewController.m */; };
 		70D2FB4A1A9F574000CAB509 /* RatePanelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FB2F1A9F574000CAB509 /* RatePanelViewController.m */; };
 		70D2FB4B1A9F574000CAB509 /* TradeDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FB311A9F574000CAB509 /* TradeDataViewController.m */; };
-		70D2FB4C1A9F574000CAB509 /* TradeDataViewData.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FB331A9F574000CAB509 /* TradeDataViewData.m */; };
 		70D2FB501A9F574000CAB509 /* ChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FB3B1A9F574000CAB509 /* ChartView.m */; };
 		70D2FB5F1A9F575900CAB509 /* ExecutionHistoryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FB581A9F575900CAB509 /* ExecutionHistoryTableViewController.m */; };
 		70D2FB601A9F575900CAB509 /* ExecutionHistoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FB5A1A9F575900CAB509 /* ExecutionHistoryTableViewCell.m */; };
 		70D2FB691A9F576500CAB509 /* Market.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FB641A9F576500CAB509 /* Market.m */; };
-		70D2FB6B1A9F576500CAB509 /* MarketTimeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FB681A9F576500CAB509 /* MarketTimeManager.m */; };
+		70D2FB6B1A9F576500CAB509 /* SimulationTimeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FB681A9F576500CAB509 /* SimulationTimeManager.m */; };
 		70D2FB701A9F577200CAB509 /* CandlesFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FB6D1A9F577200CAB509 /* CandlesFactory.m */; };
 		70D2FB711A9F577200CAB509 /* SimpleCandle.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FB6F1A9F577200CAB509 /* SimpleCandle.m */; };
 		70D2FB9C1A9F57A000CAB509 /* ForexHistory.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FB8B1A9F57A000CAB509 /* ForexHistory.m */; };
@@ -113,7 +112,6 @@
 		70D2FC0F1A9F58F700CAB509 /* TradeDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FC0C1A9F58F700CAB509 /* TradeDatabase.m */; };
 		70D2FC101A9F58F700CAB509 /* CurrencyPair.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FC0E1A9F58F700CAB509 /* CurrencyPair.m */; };
 		70D2FC3D1A9F591600CAB509 /* PositionType.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FC121A9F591500CAB509 /* PositionType.m */; };
-		70D2FC3F1A9F591600CAB509 /* RatePanelViewData.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FC161A9F591500CAB509 /* RatePanelViewData.m */; };
 		70D2FC401A9F591600CAB509 /* Currency.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FC181A9F591500CAB509 /* Currency.m */; };
 		70D2FC421A9F591600CAB509 /* Setting.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FC1C1A9F591500CAB509 /* Setting.m */; };
 		70D2FC431A9F591600CAB509 /* TimeFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FC1E1A9F591500CAB509 /* TimeFrame.m */; };
@@ -130,12 +128,6 @@
 		70EACE621B1ED17700A2E532 /* SimulationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 70EACE611B1ED17700A2E532 /* SimulationManager.m */; };
 		70EACE661B296F1100A2E532 /* SimulationState.m in Sources */ = {isa = PBXBuildFile; fileRef = 70EACE651B296F1100A2E532 /* SimulationState.m */; };
 		70EACE691B2AACBE00A2E532 /* FXSAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = 70EACE681B2AACBE00A2E532 /* FXSAlert.m */; };
-		70ED621E1AFCA11F0008F939 /* SetSpreadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70ED621D1AFCA11F0008F939 /* SetSpreadViewController.m */; };
-		70ED62211AFCA1400008F939 /* SetAccountCurrencyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70ED62201AFCA1400008F939 /* SetAccountCurrencyViewController.m */; };
-		70ED62241AFCA17E0008F939 /* SetStartBalanceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70ED62231AFCA17E0008F939 /* SetStartBalanceViewController.m */; };
-		70ED62271AFCA2620008F939 /* SetNewStartDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70ED62261AFCA2620008F939 /* SetNewStartDataViewController.m */; };
-		70ED622B1B01C0330008F939 /* SetPositionSizeOfLotViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70ED622A1B01C0330008F939 /* SetPositionSizeOfLotViewController.m */; };
-		70ED622E1B0211630008F939 /* SetTimeScaleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70ED622D1B0211630008F939 /* SetTimeScaleViewController.m */; };
 		70FC8ADE1B87895F009B121C /* SaveDataTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 70467D6F1B87030900B75BD3 /* SaveDataTests.m */; };
 		70FCD5A41B9B187900500B40 /* NormalizedOrdersFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 70FCD5A31B9B187900500B40 /* NormalizedOrdersFactory.m */; };
 		70FCD5A71B9B1B2400500B40 /* OrderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 70FCD5A61B9B1B2400500B40 /* OrderManager.m */; };
@@ -143,6 +135,8 @@
 		70FCD5B01B9D46E300500B40 /* OrderManagerState.m in Sources */ = {isa = PBXBuildFile; fileRef = 70FCD5AF1B9D46E200500B40 /* OrderManagerState.m */; };
 		70FCD5B31B9EB40300500B40 /* OpenPositionComponents.m in Sources */ = {isa = PBXBuildFile; fileRef = 70FCD5B21B9EB40300500B40 /* OpenPositionComponents.m */; };
 		70FCD5B61B9EB49400500B40 /* ExecutionOrderComponents.m in Sources */ = {isa = PBXBuildFile; fileRef = 70FCD5B51B9EB49400500B40 /* ExecutionOrderComponents.m */; };
+		70FCD5B91BA0812500500B40 /* SimulationStateResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 70FCD5B81BA0812500500B40 /* SimulationStateResult.m */; };
+		70FCD5F11BA6FAF900500B40 /* SetSaveDataTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70FCD5F01BA6FAF900500B40 /* SetSaveDataTableViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -204,10 +198,12 @@
 		705C2E0F1ADE4C270089D510 /* Money+ConvertToAccountCurrency.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Money+ConvertToAccountCurrency.m"; sourceTree = "<group>"; };
 		7062E5B91B60BB0100BDA666 /* CoreDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataManager.h; sourceTree = "<group>"; };
 		7062E5BA1B60BB0100BDA666 /* CoreDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataManager.m; sourceTree = "<group>"; };
+		70634FE51BA91EF9009ACCEE /* InputNumberValueViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputNumberValueViewController.h; sourceTree = "<group>"; };
+		70634FE61BA91EF9009ACCEE /* InputNumberValueViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InputNumberValueViewController.m; sourceTree = "<group>"; };
 		7076F5A51AECCBBB004CC6BA /* NewStartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewStartViewController.h; sourceTree = "<group>"; };
 		7076F5A61AECCBBB004CC6BA /* NewStartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewStartViewController.m; sourceTree = "<group>"; };
-		7076F5A81AECCDB7004CC6BA /* SetCurrencyPairViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetCurrencyPairViewController.h; sourceTree = "<group>"; };
-		7076F5A91AECCDB7004CC6BA /* SetCurrencyPairViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetCurrencyPairViewController.m; sourceTree = "<group>"; };
+		7076F5A81AECCDB7004CC6BA /* CheckmarkViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckmarkViewController.h; sourceTree = "<group>"; };
+		7076F5A91AECCDB7004CC6BA /* CheckmarkViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckmarkViewController.m; sourceTree = "<group>"; };
 		7079FEE61AF4FF23004D3CEA /* SetStartTimeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetStartTimeViewController.h; sourceTree = "<group>"; };
 		7079FEE71AF4FF23004D3CEA /* SetStartTimeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetStartTimeViewController.m; sourceTree = "<group>"; };
 		7079FEE91AF9E688004D3CEA /* NSDate+FXSDateData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+FXSDateData.h"; sourceTree = "<group>"; };
@@ -287,8 +283,6 @@
 		70D2FB2F1A9F574000CAB509 /* RatePanelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RatePanelViewController.m; sourceTree = "<group>"; };
 		70D2FB301A9F574000CAB509 /* TradeDataViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TradeDataViewController.h; sourceTree = "<group>"; };
 		70D2FB311A9F574000CAB509 /* TradeDataViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TradeDataViewController.m; sourceTree = "<group>"; };
-		70D2FB321A9F574000CAB509 /* TradeDataViewData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TradeDataViewData.h; sourceTree = "<group>"; };
-		70D2FB331A9F574000CAB509 /* TradeDataViewData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TradeDataViewData.m; sourceTree = "<group>"; };
 		70D2FB3A1A9F574000CAB509 /* ChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChartView.h; sourceTree = "<group>"; };
 		70D2FB3B1A9F574000CAB509 /* ChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChartView.m; sourceTree = "<group>"; };
 		70D2FB571A9F575900CAB509 /* ExecutionHistoryTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExecutionHistoryTableViewController.h; sourceTree = "<group>"; };
@@ -297,8 +291,8 @@
 		70D2FB5A1A9F575900CAB509 /* ExecutionHistoryTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExecutionHistoryTableViewCell.m; sourceTree = "<group>"; };
 		70D2FB631A9F576500CAB509 /* Market.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Market.h; sourceTree = "<group>"; };
 		70D2FB641A9F576500CAB509 /* Market.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Market.m; sourceTree = "<group>"; };
-		70D2FB671A9F576500CAB509 /* MarketTimeManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarketTimeManager.h; sourceTree = "<group>"; };
-		70D2FB681A9F576500CAB509 /* MarketTimeManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarketTimeManager.m; sourceTree = "<group>"; };
+		70D2FB671A9F576500CAB509 /* SimulationTimeManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimulationTimeManager.h; sourceTree = "<group>"; };
+		70D2FB681A9F576500CAB509 /* SimulationTimeManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimulationTimeManager.m; sourceTree = "<group>"; };
 		70D2FB6C1A9F577200CAB509 /* CandlesFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CandlesFactory.h; sourceTree = "<group>"; };
 		70D2FB6D1A9F577200CAB509 /* CandlesFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CandlesFactory.m; sourceTree = "<group>"; };
 		70D2FB6E1A9F577200CAB509 /* SimpleCandle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleCandle.h; sourceTree = "<group>"; };
@@ -347,8 +341,6 @@
 		70D2FC0E1A9F58F700CAB509 /* CurrencyPair.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurrencyPair.m; sourceTree = "<group>"; };
 		70D2FC111A9F591500CAB509 /* PositionType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PositionType.h; sourceTree = "<group>"; };
 		70D2FC121A9F591500CAB509 /* PositionType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PositionType.m; sourceTree = "<group>"; };
-		70D2FC151A9F591500CAB509 /* RatePanelViewData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RatePanelViewData.h; sourceTree = "<group>"; };
-		70D2FC161A9F591500CAB509 /* RatePanelViewData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RatePanelViewData.m; sourceTree = "<group>"; };
 		70D2FC171A9F591500CAB509 /* Currency.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Currency.h; sourceTree = "<group>"; };
 		70D2FC181A9F591500CAB509 /* Currency.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Currency.m; sourceTree = "<group>"; };
 		70D2FC1B1A9F591500CAB509 /* Setting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Setting.h; sourceTree = "<group>"; };
@@ -381,18 +373,6 @@
 		70EACE651B296F1100A2E532 /* SimulationState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimulationState.m; sourceTree = "<group>"; };
 		70EACE671B2AACBE00A2E532 /* FXSAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FXSAlert.h; sourceTree = "<group>"; };
 		70EACE681B2AACBE00A2E532 /* FXSAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FXSAlert.m; sourceTree = "<group>"; };
-		70ED621C1AFCA11F0008F939 /* SetSpreadViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetSpreadViewController.h; sourceTree = "<group>"; };
-		70ED621D1AFCA11F0008F939 /* SetSpreadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetSpreadViewController.m; sourceTree = "<group>"; };
-		70ED621F1AFCA1400008F939 /* SetAccountCurrencyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetAccountCurrencyViewController.h; sourceTree = "<group>"; };
-		70ED62201AFCA1400008F939 /* SetAccountCurrencyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetAccountCurrencyViewController.m; sourceTree = "<group>"; };
-		70ED62221AFCA17E0008F939 /* SetStartBalanceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetStartBalanceViewController.h; sourceTree = "<group>"; };
-		70ED62231AFCA17E0008F939 /* SetStartBalanceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetStartBalanceViewController.m; sourceTree = "<group>"; };
-		70ED62251AFCA2620008F939 /* SetNewStartDataViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetNewStartDataViewController.h; sourceTree = "<group>"; };
-		70ED62261AFCA2620008F939 /* SetNewStartDataViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetNewStartDataViewController.m; sourceTree = "<group>"; };
-		70ED62291B01C0330008F939 /* SetPositionSizeOfLotViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetPositionSizeOfLotViewController.h; sourceTree = "<group>"; };
-		70ED622A1B01C0330008F939 /* SetPositionSizeOfLotViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetPositionSizeOfLotViewController.m; sourceTree = "<group>"; };
-		70ED622C1B0211630008F939 /* SetTimeScaleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetTimeScaleViewController.h; sourceTree = "<group>"; };
-		70ED622D1B0211630008F939 /* SetTimeScaleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetTimeScaleViewController.m; sourceTree = "<group>"; };
 		70FCD5A21B9B187900500B40 /* NormalizedOrdersFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NormalizedOrdersFactory.h; sourceTree = "<group>"; };
 		70FCD5A31B9B187900500B40 /* NormalizedOrdersFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NormalizedOrdersFactory.m; sourceTree = "<group>"; };
 		70FCD5A51B9B1B2400500B40 /* OrderManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderManager.h; sourceTree = "<group>"; };
@@ -405,6 +385,10 @@
 		70FCD5B21B9EB40300500B40 /* OpenPositionComponents.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenPositionComponents.m; sourceTree = "<group>"; };
 		70FCD5B41B9EB49400500B40 /* ExecutionOrderComponents.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExecutionOrderComponents.h; sourceTree = "<group>"; };
 		70FCD5B51B9EB49400500B40 /* ExecutionOrderComponents.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExecutionOrderComponents.m; sourceTree = "<group>"; };
+		70FCD5B71BA0812500500B40 /* SimulationStateResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimulationStateResult.h; sourceTree = "<group>"; };
+		70FCD5B81BA0812500500B40 /* SimulationStateResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimulationStateResult.m; sourceTree = "<group>"; };
+		70FCD5EF1BA6FAF900500B40 /* SetSaveDataTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetSaveDataTableViewController.h; sourceTree = "<group>"; };
+		70FCD5F01BA6FAF900500B40 /* SetSaveDataTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetSaveDataTableViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -506,8 +490,6 @@
 				70D2FC0E1A9F58F700CAB509 /* CurrencyPair.m */,
 				70D2FC111A9F591500CAB509 /* PositionType.h */,
 				70D2FC121A9F591500CAB509 /* PositionType.m */,
-				70D2FC151A9F591500CAB509 /* RatePanelViewData.h */,
-				70D2FC161A9F591500CAB509 /* RatePanelViewData.m */,
 				70D2FC171A9F591500CAB509 /* Currency.h */,
 				70D2FC181A9F591500CAB509 /* Currency.m */,
 				70D2FC1B1A9F591500CAB509 /* Setting.h */,
@@ -538,24 +520,12 @@
 				705C2E0F1ADE4C270089D510 /* Money+ConvertToAccountCurrency.m */,
 				7076F5A51AECCBBB004CC6BA /* NewStartViewController.h */,
 				7076F5A61AECCBBB004CC6BA /* NewStartViewController.m */,
-				70ED62251AFCA2620008F939 /* SetNewStartDataViewController.h */,
-				70ED62261AFCA2620008F939 /* SetNewStartDataViewController.m */,
-				7076F5A81AECCDB7004CC6BA /* SetCurrencyPairViewController.h */,
-				7076F5A91AECCDB7004CC6BA /* SetCurrencyPairViewController.m */,
+				7076F5A81AECCDB7004CC6BA /* CheckmarkViewController.h */,
+				7076F5A91AECCDB7004CC6BA /* CheckmarkViewController.m */,
 				7079FEE61AF4FF23004D3CEA /* SetStartTimeViewController.h */,
 				7079FEE71AF4FF23004D3CEA /* SetStartTimeViewController.m */,
-				70ED621C1AFCA11F0008F939 /* SetSpreadViewController.h */,
-				70ED621D1AFCA11F0008F939 /* SetSpreadViewController.m */,
-				70ED621F1AFCA1400008F939 /* SetAccountCurrencyViewController.h */,
-				70ED62201AFCA1400008F939 /* SetAccountCurrencyViewController.m */,
-				70ED62221AFCA17E0008F939 /* SetStartBalanceViewController.h */,
-				70ED62231AFCA17E0008F939 /* SetStartBalanceViewController.m */,
 				7079FEE91AF9E688004D3CEA /* NSDate+FXSDateData.h */,
 				7079FEEA1AF9E688004D3CEA /* NSDate+FXSDateData.m */,
-				70ED62291B01C0330008F939 /* SetPositionSizeOfLotViewController.h */,
-				70ED622A1B01C0330008F939 /* SetPositionSizeOfLotViewController.m */,
-				70ED622C1B0211630008F939 /* SetTimeScaleViewController.h */,
-				70ED622D1B0211630008F939 /* SetTimeScaleViewController.m */,
 				70D2FA871A9F305700CAB509 /* Supporting Files */,
 				709BC75C1B0700320059C940 /* SetAutoUpdateIntervalViewController.h */,
 				709BC75D1B0700320059C940 /* SetAutoUpdateIntervalViewController.m */,
@@ -611,6 +581,12 @@
 				70FCD5B21B9EB40300500B40 /* OpenPositionComponents.m */,
 				70FCD5B41B9EB49400500B40 /* ExecutionOrderComponents.h */,
 				70FCD5B51B9EB49400500B40 /* ExecutionOrderComponents.m */,
+				70FCD5B71BA0812500500B40 /* SimulationStateResult.h */,
+				70FCD5B81BA0812500500B40 /* SimulationStateResult.m */,
+				70FCD5EF1BA6FAF900500B40 /* SetSaveDataTableViewController.h */,
+				70FCD5F01BA6FAF900500B40 /* SetSaveDataTableViewController.m */,
+				70634FE51BA91EF9009ACCEE /* InputNumberValueViewController.h */,
+				70634FE61BA91EF9009ACCEE /* InputNumberValueViewController.m */,
 			);
 			path = "FX Simulator";
 			sourceTree = "<group>";
@@ -774,8 +750,8 @@
 			children = (
 				70D2FB631A9F576500CAB509 /* Market.h */,
 				70D2FB641A9F576500CAB509 /* Market.m */,
-				70D2FB671A9F576500CAB509 /* MarketTimeManager.h */,
-				70D2FB681A9F576500CAB509 /* MarketTimeManager.m */,
+				70D2FB671A9F576500CAB509 /* SimulationTimeManager.h */,
+				70D2FB681A9F576500CAB509 /* SimulationTimeManager.m */,
 			);
 			name = Market;
 			sourceTree = "<group>";
@@ -802,8 +778,6 @@
 				70D2FB2F1A9F574000CAB509 /* RatePanelViewController.m */,
 				70D2FB301A9F574000CAB509 /* TradeDataViewController.h */,
 				70D2FB311A9F574000CAB509 /* TradeDataViewController.m */,
-				70D2FB321A9F574000CAB509 /* TradeDataViewData.h */,
-				70D2FB331A9F574000CAB509 /* TradeDataViewData.m */,
 				70D2FB3A1A9F574000CAB509 /* ChartView.h */,
 				70D2FB3B1A9F574000CAB509 /* ChartView.m */,
 				70AD14741AADD0AA0099F0BA /* RatePanelButton.h */,
@@ -991,24 +965,24 @@
 				70D2FB9D1A9F57A000CAB509 /* ForexDatabase.m in Sources */,
 				70D2FBC71A9F57BD00CAB509 /* OpenPositionRawRecord.m in Sources */,
 				70D2FB491A9F574000CAB509 /* ChartViewController.m in Sources */,
+				70634FE71BA91EF9009ACCEE /* InputNumberValueViewController.m in Sources */,
 				70D2FB601A9F575900CAB509 /* ExecutionHistoryTableViewCell.m in Sources */,
-				70ED62271AFCA2620008F939 /* SetNewStartDataViewController.m in Sources */,
 				70EACE691B2AACBE00A2E532 /* FXSAlert.m in Sources */,
-				70D2FB6B1A9F576500CAB509 /* MarketTimeManager.m in Sources */,
+				70D2FB6B1A9F576500CAB509 /* SimulationTimeManager.m in Sources */,
 				70D2FBF81A9F57DC00CAB509 /* OrdersCreateModeFactory.m in Sources */,
 				70D2FB481A9F574000CAB509 /* TradeViewController.m in Sources */,
 				70D2FB4B1A9F574000CAB509 /* TradeDataViewController.m in Sources */,
-				70ED622E1B0211630008F939 /* SetTimeScaleViewController.m in Sources */,
 				700B95851B0C3C97003F160B /* InputTradeLotViewController.m in Sources */,
 				704D3E7A1B5A7B0C00A8B9AB /* ChartChunk.m in Sources */,
 				705DCE4B1AE7C84300BCF710 /* Rates.m in Sources */,
 				70D2FC441A9F591600CAB509 /* Spread.m in Sources */,
 				70467D2E1B8316A300B75BD3 /* CoreDataInMemoryManager.m in Sources */,
 				70042C6D1B480D6800C1A22E /* ForexDataChunk.m in Sources */,
+				70FCD5F11BA6FAF900500B40 /* SetSaveDataTableViewController.m in Sources */,
 				70D2FB9F1A9F57A000CAB509 /* ForexHistoryData.m in Sources */,
 				700C9E811B786C800084320E /* TimeFrameChunk.m in Sources */,
 				70FCD5A41B9B187900500B40 /* NormalizedOrdersFactory.m in Sources */,
-				7076F5AA1AECCDB7004CC6BA /* SetCurrencyPairViewController.m in Sources */,
+				7076F5AA1AECCDB7004CC6BA /* CheckmarkViewController.m in Sources */,
 				709BC75E1B0700320059C940 /* SetAutoUpdateIntervalViewController.m in Sources */,
 				7076F5A71AECCBBB004CC6BA /* NewStartViewController.m in Sources */,
 				70FCD5A71B9B1B2400500B40 /* OrderManager.m in Sources */,
@@ -1018,6 +992,7 @@
 				70D2FB501A9F574000CAB509 /* ChartView.m in Sources */,
 				7079FEEB1AF9E688004D3CEA /* NSDate+FXSDateData.m in Sources */,
 				70D2FBFA1A9F57DC00CAB509 /* OnlyCloseOrdersCreateMode.m in Sources */,
+				70FCD5B91BA0812500500B40 /* SimulationStateResult.m in Sources */,
 				7041B7111B2EEDAD00DD64FE /* Account.m in Sources */,
 				70D2FB711A9F577200CAB509 /* SimpleCandle.m in Sources */,
 				707CA1B71B53A51700F099E9 /* Indicator.m in Sources */,
@@ -1030,7 +1005,6 @@
 				7041B7141B3278A700DD64FE /* FXSTimeRange.m in Sources */,
 				70D2FB691A9F576500CAB509 /* Market.m in Sources */,
 				70D2FB251A9F572B00CAB509 /* SubChartViewController.m in Sources */,
-				70D2FB4C1A9F574000CAB509 /* TradeDataViewData.m in Sources */,
 				7062E5BB1B60BB0100BDA666 /* CoreDataManager.m in Sources */,
 				70D2FC3D1A9F591600CAB509 /* PositionType.m in Sources */,
 				70D2FAF11A9F56AE00CAB509 /* FMDatabase.m in Sources */,
@@ -1038,7 +1012,6 @@
 				700C9E651B75BAF30084320E /* CandleSource+Additions.m in Sources */,
 				70D2FAD71A9F559200CAB509 /* OpenPositionHeaderView.m in Sources */,
 				700C9E0F1B65FBD00084320E /* CandleSource.m in Sources */,
-				70ED621E1AFCA11F0008F939 /* SetSpreadViewController.m in Sources */,
 				70CFEB411B19F92800837727 /* FXSTest.m in Sources */,
 				700C9E1B1B65FBD20084320E /* IndicatorSource.m in Sources */,
 				70D2FB5F1A9F575900CAB509 /* ExecutionHistoryTableViewController.m in Sources */,
@@ -1057,14 +1030,12 @@
 				70FCD5B01B9D46E300500B40 /* OrderManagerState.m in Sources */,
 				70D2FAF31A9F56AE00CAB509 /* FMDatabasePool.m in Sources */,
 				70EACE661B296F1100A2E532 /* SimulationState.m in Sources */,
-				70D2FC3F1A9F591600CAB509 /* RatePanelViewData.m in Sources */,
 				70D2FBAF1A9F57B000CAB509 /* Order.m in Sources */,
 				70D2FB9C1A9F57A000CAB509 /* ForexHistory.m in Sources */,
 				70D2FC471A9F591600CAB509 /* CurrencyConverter.m in Sources */,
 				70D2FAF41A9F56AE00CAB509 /* FMDatabaseQueue.m in Sources */,
 				70D2FC401A9F591600CAB509 /* Currency.m in Sources */,
 				70D2FC461A9F591600CAB509 /* Money.m in Sources */,
-				70ED62211AFCA1400008F939 /* SetAccountCurrencyViewController.m in Sources */,
 				70042C641B47ABBC00C1A22E /* SimpleMovingAverage.m in Sources */,
 				70D2FC4B1A9F591600CAB509 /* Common.m in Sources */,
 				70FCD5B31B9EB40300500B40 /* OpenPositionComponents.m in Sources */,
@@ -1072,7 +1043,6 @@
 				70D2FBFD1A9F57DC00CAB509 /* ExecutionOrder.m in Sources */,
 				70D2FA8A1A9F305700CAB509 /* main.m in Sources */,
 				70D2FAF51A9F56AE00CAB509 /* FMResultSet.m in Sources */,
-				70ED62241AFCA17E0008F939 /* SetStartBalanceViewController.m in Sources */,
 				70D2FC091A9F58EC00CAB509 /* ConfigViewController.m in Sources */,
 				70D2FBFC1A9F57DC00CAB509 /* CloseAndNewOrdersCreateMode.m in Sources */,
 				70BB8BEA1B60D07C00B0539D /* FXSimulator.xcdatamodeld in Sources */,
@@ -1082,7 +1052,6 @@
 				70D2FBA21A9F57A000CAB509 /* ForexHistoryUtils.m in Sources */,
 				7033C5D61B469F56005EF07B /* NSNumber+FXSNumberConverter.m in Sources */,
 				70D2FC4C1A9F591600CAB509 /* PositionSize.m in Sources */,
-				705C2E101ADE4C270089D510 /* Money+ConvertToAccountCurrency.m in Sources */,
 				70D2FBFB1A9F57DC00CAB509 /* OnlyNewOrdersCreateMode.m in Sources */,
 				70D2FC101A9F58F700CAB509 /* CurrencyPair.m in Sources */,
 				70D2FBA11A9F57A000CAB509 /* ForexHistoryDataArrayUtils.m in Sources */,
@@ -1091,7 +1060,6 @@
 				70B5AAF21ACE5BC0001F8823 /* SubChartDataViewController.m in Sources */,
 				70D2FC421A9F591600CAB509 /* Setting.m in Sources */,
 				7034F6C31B92D6AE0029A79C /* PositionBase.m in Sources */,
-				70ED622B1B01C0330008F939 /* SetPositionSizeOfLotViewController.m in Sources */,
 				70D2FC431A9F591600CAB509 /* TimeFrame.m in Sources */,
 				70E758FD1B4C09FE00A46E24 /* ForexDataChunkStore.m in Sources */,
 				70042C671B47FA1500C1A22E /* IndicatorUtils.m in Sources */,

@@ -42,6 +42,14 @@ static NSString* const FXSCurrencyPairKey = @"currencyPair";
     return self;
 }
 
+- (instancetype)initWithBaseCurrencyType:(CurrencyType)baseCurrencyType quoteCurrencyType:(CurrencyType)quoteCurrencyType
+{
+    Currency *baseCurrency = [[Currency alloc] initWithCurrencyType:baseCurrencyType];
+    Currency *quoteCurrency = [[Currency alloc] initWithCurrencyType:quoteCurrencyType];
+    
+    return [self initWithBaseCurrency:baseCurrency QuoteCurrency:quoteCurrency];
+}
+
 - (instancetype)initWithCurrencyPairString:(NSString *)currencyPairString
 {
     CurrencyPair *currencyPair = [[Setting currencyPairDictionaryList] objectForKey:currencyPairString];

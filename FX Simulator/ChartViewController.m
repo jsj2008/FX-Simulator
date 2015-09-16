@@ -141,12 +141,6 @@ static const NSUInteger kMinDisplayForexDataCount = 40;
     _displayedForexDataChunk = _chunk;
 }
 
--(void)updatedSaveData
-{
-    self.chartView.chart = nil;
-    [self.chartView setNeedsDisplay];
-}
-
 + (NSUInteger)requireForexDataCountForChart
 {
     return kMaxDisplayForexDataCount + [Indicator maxIndicatorPeriod] - 1;
