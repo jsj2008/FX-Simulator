@@ -27,6 +27,7 @@
 @class ForexDataChunk;
 @class ForexHistoryData;
 @class Time;
+@class TimeFrame;
 @class Rate;
 @class Rates;
 @class SaveData;
@@ -45,7 +46,11 @@
 @property (nonatomic, readonly) BOOL isStart;
 @property (nonatomic, readwrite) NSNumber *autoUpdateInterval;
 
-- (void)loadSaveData:(SaveData *)saveData;
+- (instancetype)initWithCurrencyPair:(CurrencyPair *)currencyPair timeFrame:(TimeFrame *)timeFrame lastLoadedTime:(Time *)time;
+
+- (void)add;
+
+//- (void)loadSaveData:(SaveData *)saveData;
 
 /**
  UIViewControllerに限定。
@@ -53,7 +58,7 @@
  Marketの更新に応じて、データを更新する時は、オブザーバ(UIViewController)に通知が伝わる前にする。
  オブザーバ(UIViewController)に通知が伝わる前に、データを更新したとき、そのデータは表示(UIViewController)には反映されない。
 */
-- (void)addObserver:(UIViewController *)observer;
+//- (void)addObserver:(UIViewController *)observer;
 
 /**
  最新のRatesを取得。
@@ -63,22 +68,22 @@
 /**
  Startした瞬間、時間が進み、Observerのメソッドが呼ばれ、それぞれのObserverに値がセットされる。
 */
-- (void)start;
+//- (void)start;
 
 /**
  ただの一時停止。セーブデータの自動更新設定は変更されない。
 */
-- (void)pause;
+//- (void)pause;
 
 /**
  セーブデータの自動更新設定(AutoUpdate)をそのまま反映するだけ。
 */
-- (void)resume;
+//- (void)resume;
 
 /** 
  時間を進める。
 */
-- (void)add;
+//- (void)add;
 
 - (BOOL)didLoadLastData;
 

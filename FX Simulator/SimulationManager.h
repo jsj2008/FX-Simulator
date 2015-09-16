@@ -7,12 +7,26 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "Market.h"
-#import "TradeDataViewController.h"
+#import "OrderManager.h"
+
+@class Market;
+@class SaveData;
+@class SimulationManager;
+@class SimulationStateResult;
 
 @protocol SimulationManagerDelegate <NSObject>
-/// 新しいシュミレーションが始まったことを伝える。
--(void)restartedSimulation;
+/**
+ loadSimulationManagerの後に呼ばれる。
+ その後、新しいセーブデータが開始される度に呼ばれる。
+*/
+- (void)loadSaveData:(SaveData *)saveData market:(Market *)market;
+@optional
+/**
+ アプリ起動後、最初に1回だけ呼ばれる。
+*/
+- (void)loadSimulationManager:(SimulationManager *)simulationManager;
+- (void)update;
+- (void)simulationStopped:(SimulationStateResult *)result;
 @end
 
 @class UIViewController;
@@ -20,6 +34,7 @@
 @class FXSAlert;
 @class Balance;
 @class Market;
+@class SaveData;
 @class TradeViewController;
 
 /**
@@ -27,50 +42,41 @@
  Marketオブジェクトを持ち、Marketの時間が進むと、それに応じて、オブザーバにMarketの変更を伝える。
 */
 
-@interface SimulationManager : NSObject <MarketDelegate, TradeDataViewControllerDelegate>
+@interface SimulationManager : NSObject <OrderManagerState>
 
-+ (SimulationManager *)sharedSimulationManager;
+@property (nonatomic, readonly) BOOL isStartTime;
+
+- (void)addDelegate:(id<SimulationManagerDelegate>)delegate;
+- (void)loadSaveData:(SaveData *)saveData;
+- (void)startSimulation;
 - (void)willNotifyObservers;
 - (void)didNotifyObservers;
 - (void)didOrder;
-- (void)autoUpdateSettingSwitchChanged:(BOOL)isSwitchOn;
-- (void)updatedSaveData;
-- (void)addObserver:(UIViewController *)observer;
 
 /**
  Startした瞬間、時間が進み、Observerのメソッドが呼ばれ、それぞれのObserverに値がセットされる。
 */
--(void)start;
+-(void)startTime;
 
 /**
  ただの一時停止。セーブデータの自動更新設定は変更されない。
  */
--(void)pause;
+-(void)pauseTime;
 
 /**
  セーブデータの自動更新設定(AutoUpdate)をそのまま反映するだけ。
 */
--(void)resume;
+-(void)resumeTime;
 
-/// 手動で時間を進める。
--(void)add;
-
-- (BOOL)isExecutableOrder;
-
--(BOOL)isStop;
-
-/**
- アラート(チャートが端まで読み込まれたとき、資産が０以下になったときなど)を表示するUIViewController
+/** 
+ 手動で時間を進める。
 */
-@property (nonatomic, weak) TradeViewController *alertTargetController;
+-(void)addTime;
 
-/**
- Onなら自動更新になり、セーブデータの自動更新設定もOnに変更される。
- Offでも同じ。
- */
-@property (nonatomic) BOOL isAutoUpdate;
+- (void)setAutoUpdateIntervalSeconds:(float)autoUpdateIntervalSeconds;
 
-@property (nonatomic, readonly) BOOL isStart;
-@property (nonatomic, readonly) Market *market;
+- (void)setIsAutoUpdate:(BOOL)isAutoUpdate;
+
+- (OrderResult *)isOrderable:(Order *)order;
 
 @end

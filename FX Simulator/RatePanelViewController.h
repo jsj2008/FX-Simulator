@@ -8,11 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
-@protocol RatePanelViewControllerDelegate <NSObject>
-- (void)didOrder;;
-@end
+@class Market;
+@class OrderManager;
+@class SaveData;
 
 @interface RatePanelViewController : UIViewController
-@property (nonatomic, weak) id<RatePanelViewControllerDelegate> delegate;
-- (void)updatedSaveData;
+- (void)loadSaveData:(SaveData *)saveData;
+- (void)loadMarket:(Market *)market;
+- (void)loadOrderManager:(OrderManager *)orderManager;
+- (void)update;
 @end

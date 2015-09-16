@@ -6,8 +6,9 @@
 //  
 //
 
-#import "NewStartViewController.h"
+#import <UIKit/UIKit.h>
+#import "SimulationManager.h"
 
-@interface OpenPositionTableViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, NewStartViewControllerDelegate>
--(void)updatedSaveData;
+@interface OpenPositionTableViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, SimulationManagerDelegate>
+
 @end

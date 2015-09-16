@@ -39,6 +39,16 @@ static NSString* const FXSCurrencyPairKey = @"currencyPair";
     return self;
 }
 
+- (instancetype)initWithNumber:(NSNumber *)number currencyPair:(CurrencyPair *)currencyPair
+{
+    return [self initWithPips:number.doubleValue currencyPair:currencyPair];
+}
+
+-(instancetype)initWithString:(NSString *)string currencyPair:(CurrencyPair *)currencyPair
+{
+    return [self initWithPips:string.doubleValue currencyPair:currencyPair];
+}
+
 - (NSNumber *)spreadValueObj
 {
     return [NSNumber numberWithDouble:self.spreadValue];

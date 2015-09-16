@@ -6,9 +6,13 @@
 //  
 //
 
-#import "SetNewStartDataViewController.h"
+#import <UIKit/UIKit.h>
 
+@class Time;
 
-@interface SetStartTimeViewController : SetNewStartDataViewController
+typedef void (^SetStartTimeBlock)(Time *startTime);
 
+@interface SetStartTimeViewController : UIViewController
+@property (nonatomic) Time *defaultStartTime;
+@property (nonatomic, copy) SetStartTimeBlock setStartTime;
 @end

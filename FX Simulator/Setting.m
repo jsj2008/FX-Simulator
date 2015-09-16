@@ -189,6 +189,19 @@ static NSDictionary *spreadRateDic;
     }
 }
 
++ (FXSTimeRange *)rangeForSimulation
+{
+    CurrencyPair *currencyPair = [[CurrencyPair alloc] initWithBaseCurrencyType:EUR quoteCurrencyType:USD];
+    TimeFrame *timeFrame = [[TimeFrame alloc] initWithMinute:15];
+    
+    ForexHistory *forexHistory = [ForexHistoryFactory createForexHistoryFromCurrencyPair:currencyPair timeScale:timeFrame];
+    
+    Time *rangeStart = [[forexHistory minOpenTime] addDay:50];
+    Time *rangeEnd = [[forexHistory maxOpenTime] addDay:-50];
+    
+    return [[FXSTimeRange alloc] initWithRangeStart:rangeStart end:rangeEnd];
+}
+
 +(FXSTimeRange*)rangeForCurrencyPair:(CurrencyPair *)currencyPair timeScale:(TimeFrame *)timeScale
 {
     ForexHistory *forexHistory = [ForexHistoryFactory createForexHistoryFromCurrencyPair:currencyPair timeScale:timeScale];

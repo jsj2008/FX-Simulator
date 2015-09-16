@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Currency.h"
 
 @class Currency;
 
@@ -22,6 +23,7 @@
 @property (nonatomic, readonly) Currency *quoteCurrency;
 
 - (instancetype)initWithBaseCurrency:(Currency *)baseCurrency QuoteCurrency:(Currency *)quoteCurrency;
+- (instancetype)initWithBaseCurrencyType:(CurrencyType)baseCurrencyType quoteCurrencyType:(CurrencyType)quoteCurrencyType;
 - (instancetype)initWithCurrencyPairString:(NSString *)currencyPairString;
 - (BOOL)isQuoteCurrencyEqualJPY;
 - (BOOL)isEqualCurrencyPair:(CurrencyPair *)currencyPair;

@@ -7,11 +7,9 @@
 //
 #import <UIKit/UIKit.h>
 #import "ChartViewController.h"
-#import "NewStartViewController.h"
+#import "SimulationManager.h"
+#import "TradeDataViewController.h"
 
+@interface TradeViewController : UIViewController <ChartViewControllerDelegate,SimulationManagerDelegate, TradeDataViewControllerDelegate>
 
-@class Market;
-
-@interface TradeViewController : UIViewController <ChartViewControllerDelegate, NewStartViewControllerDelegate>
-- (void)updatedSaveData;
 @end

@@ -6,56 +6,35 @@
 //  
 //
 
-#import "MarketTimeManager.h"
+#import "SimulationTimeManager.h"
 
 #import <QuartzCore/QuartzCore.h>
-#import "CurrencyPair.h"
-#import "ForexHistoryFactory.h"
-#import "ForexHistory.h"
-#import "ForexHistoryData.h"
-#import "Time.h"
-#import "Rate.h"
-#import "SaveData.h"
-#import "SaveLoader.h"
 
 static NSString * const kKeyPath = @"currentLoadedRowid";
 
-@interface MarketTimeManager ()
-
+@interface SimulationTimeManager ()
 @property (nonatomic, readwrite) int currentLoadedRowid;
-
 @end
 
-@implementation MarketTimeManager {
-    SaveData *saveData;
+@implementation SimulationTimeManager {
+    BOOL _isAutoUpdate;
     NSMutableArray *_observers;
-    ForexHistory *forexHistory;
+    float _autoUpdateIntervalSeconds;
     float startTime;
     float duration;
     CADisplayLink *_link;
 }
 
-- (instancetype)init
+- (instancetype)initWithAutoUpdateIntervalSeconds:(float)autoUpdateIntervalSeconds isAutoUpdate:(BOOL)isAutoUpdate
 {
     if (self = [super init]) {
-        [self setInitData];
+        _autoUpdateIntervalSeconds = autoUpdateIntervalSeconds;
+        _currentLoadedRowid = 0;
+        _isAutoUpdate = isAutoUpdate;
         _observers = [NSMutableArray array];
     }
     
     return self;
-}
-
-- (void)setInitData
-{
-    saveData = [SaveLoader load];
-    forexHistory = [[ForexHistory alloc] initWithCurrencyPair:saveData.currencyPair timeScale:saveData.timeFrame];
-    [self loadTime];
-    self.autoUpdateInterval = @(saveData.autoUpdateIntervalSeconds);
-}
-
-- (void)loadTime
-{
-    _currentLoadedRowid = 0;
 }
 
 - (void)addObserver:(NSObject *)observer
@@ -70,8 +49,19 @@ static NSString * const kKeyPath = @"currentLoadedRowid";
     [self removeObserver:observer forKeyPath:kKeyPath];
 }
 
+- (void)setAutoUpdateIntervalSeconds:(float)autoUpdateIntervalSeconds
+{
+    _autoUpdateIntervalSeconds = autoUpdateIntervalSeconds;
+}
+
+- (void)setIsAutoUpdate:(BOOL)isAutoUpdate
+{
+    _isAutoUpdate = isAutoUpdate;
+}
+
 - (void)start
 {
+    _isStart = YES;
     _link = [CADisplayLink displayLinkWithTarget:self selector:@selector(update:)];
     startTime = CACurrentMediaTime();
     [_link addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];
@@ -90,10 +80,14 @@ static NSString * const kKeyPath = @"currentLoadedRowid";
 
 - (void)update:(CADisplayLink *)link
 {
+    if (!_isAutoUpdate) {
+        return;
+    }
+    
     _link = link;
     duration = [link timestamp] - startTime;
     
-    if (duration > self.autoUpdateInterval.floatValue) {
+    if (duration > _autoUpdateIntervalSeconds) {
         startTime = [link timestamp];
         [self add];
     }
@@ -101,15 +95,16 @@ static NSString * const kKeyPath = @"currentLoadedRowid";
 
 - (void)pause
 {
-    [self setIsAutoUpdate:NO];
+    [_link setPaused:YES];
 }
 
 - (void)resume
 {
-    [self setIsAutoUpdate:YES];
+    startTime = CACurrentMediaTime();
+    [_link setPaused:NO];
 }
 
-- (void)setIsAutoUpdate:(BOOL)isAutoUpdate
+/*- (void)setIsAutoUpdate:(BOOL)isAutoUpdate
 {
     if (YES == isAutoUpdate) {
         startTime = CACurrentMediaTime();
@@ -117,16 +112,7 @@ static NSString * const kKeyPath = @"currentLoadedRowid";
     } else {
         [_link setPaused:YES];
     }
-    
-    /*if (_link.paused != isAutoUpdate) {
-        
-        if (_link.paused == YES) {
-            startTime = CACurrentMediaTime();
-        }
-        
-        [_link setPaused:isAutoUpdate];
-    }*/
-}
+}*/
 
 - (void)dealloc
 {

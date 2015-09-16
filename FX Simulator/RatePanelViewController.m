@@ -9,10 +9,13 @@
 #import "RatePanelViewController.h"
 
 #import "RatePanelButton.h"
+#import "Market.h"
 #import "Order.h"
 #import "OrderManager.h"
 #import "PositionType.h"
-#import "RatePanelViewData.h"
+#import "Rate.h"
+#import "Rates.h"
+#import "SaveData.h"
 #import "Market.h"
 
 @interface RatePanelViewController ()
@@ -22,11 +25,11 @@
 @end
 
 @implementation RatePanelViewController {
+    CurrencyPair *_currencyPair;
+    Market *_market;
     OrderManager *_orderManager;
-    RatePanelViewData *ratePanelViewData;
+    SaveData *_saveData;
 }
-
-@synthesize delegate = _delegate;
 
 /*- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -37,19 +40,20 @@
     return self;
 }*/
 
-- (instancetype)initWithCoder:(NSCoder *)aDecoder
+- (void)loadSaveData:(SaveData *)saveData
 {
-    if (self = [super initWithCoder:aDecoder]) {
-        _orderManager = [OrderManager new];
-        [self setInitData];
-    }
-    
-    return self;
+    _saveData = saveData;
+    _currencyPair = _saveData.currencyPair;
 }
 
-- (void)setInitData
+- (void)loadOrderManager:(OrderManager *)orderManager
 {
-    ratePanelViewData = [RatePanelViewData new];
+    _orderManager = orderManager;
+}
+
+- (void)loadMarket:(Market *)market
+{
+    _market = market;
 }
 
 - (void)viewDidLoad
@@ -58,26 +62,39 @@
     // Do any additional setup after loading the view.
 }
 
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+- (void)update
 {
-    if ([keyPath isEqualToString:@"currentTime"] && [object isKindOfClass:[Market class]]) {
-        
-        [ratePanelViewData updateCurrentMarket:(Market*)object];
-    
-        self.rateValueLabel.text = [ratePanelViewData getDisplayCurrentBidRate];
-    }
+    self.rateValueLabel.text = [self getDisplayCurrentBidRate];
 }
 
-/// Order執行
 - (void)order:(PositionType *)orderType
 {
-    Order *order = [[Order alloc] initWithCurrencyPair:ratePanelViewData.currencyPair positionType:orderType rate:[ratePanelViewData getCurrentRateForOrderType:orderType] positionSize:ratePanelViewData.currentPositionSize];
+    Order *order = [[Order alloc] initWithCurrencyPair:_currencyPair positionType:orderType rate:[self getCurrentRateForOrderType:orderType] positionSize:_saveData.tradePositionSize];
     
     [_orderManager order:order];
-    
-    if ([self.delegate respondsToSelector:@selector(didOrder)]) {
-        [self.delegate didOrder];
+}
+
+- (NSString *)getDisplayCurrentBidRate
+{
+    return [_market getCurrentRatesOfCurrencyPair:_currencyPair].bidRate.toDisplayString;
+}
+
+- (NSString *)getDisplayCurrentAskRate
+{
+    return [_market getCurrentRatesOfCurrencyPair:_currencyPair].askRate.toDisplayString;
+}
+
+- (Rate *)getCurrentRateForOrderType:(PositionType *)orderType
+{
+    if (orderType.isShort) {
+        // return Bid Rate
+        return [_market getCurrentRatesOfCurrencyPair:_currencyPair].bidRate;
+    } else if (orderType.isLong) {
+        // return Ask Rate
+        return [_market getCurrentRatesOfCurrencyPair:_currencyPair].askRate;
     }
+    
+    return nil;
 }
 
 - (IBAction)sellButtonTouched:(id)sender {
@@ -88,11 +105,6 @@
 - (IBAction)buyButtonTouched:(id)sender {
     PositionType *orderType = [[PositionType alloc] initWithLong];
     [self order:orderType];
-}
-
-- (void)updatedSaveData
-{
-    [self setInitData];
 }
 
 - (void)didReceiveMemoryWarning

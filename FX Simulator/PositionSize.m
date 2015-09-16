@@ -34,6 +34,18 @@ static NSString* const FXSPositionSizeKey = @"positionSize";
     return self;
 }
 
+- (instancetype)initWithNumber:(NSNumber *)number
+{
+    return [self initWithSizeValue:number.unsignedLongLongValue];
+}
+
+- (instancetype)initWithString:(NSString *)string
+{
+    NSNumberFormatter *formatter = [NSNumberFormatter new];
+    
+    return [self initWithSizeValue:[formatter numberFromString:string].unsignedLongLongValue];
+}
+
 - (BOOL)existsPosition
 {
     if (0 < self.sizeValue) {

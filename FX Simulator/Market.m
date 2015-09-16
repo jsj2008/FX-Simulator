@@ -15,7 +15,7 @@
 #import "ForexHistory.h"
 #import "ForexHistoryData.h"
 #import "Time.h"
-#import "MarketTimeManager.h"
+#import "SimulationTimeManager.h"
 #import "Rate.h"
 #import "Rates.h"
 #import "SaveData.h"
@@ -33,23 +33,40 @@ static NSString * const kKeyPath = @"currentTime";
 @end
 
 @implementation Market {
-    MarketTimeManager *_marketTimeManager;
     NSMutableArray *_observers;
     ForexDataChunkStore *_forexDataChunkStore;
     ForexHistory *_forexHistory;
     ForexHistoryData *_lastData;
 }
 
-- (instancetype)init
+- (instancetype)initWithCurrencyPair:(CurrencyPair *)currencyPair timeFrame:(TimeFrame *)timeFrame lastLoadedTime:(Time *)time
 {
     if (self = [super init]) {
         _observers = [NSMutableArray array];
+        _forexHistory = [ForexHistoryFactory createForexHistoryFromCurrencyPair:currencyPair timeScale:timeFrame];
+        _currentTime = time;
+        _currentForexData = [_forexHistory selectMaxCloseTime:_currentTime limit:1].firstObject;
+        _forexDataChunkStore = [[ForexDataChunkStore alloc] initWithCurrencyPair:currencyPair timeScale:timeFrame getMaxLimit:FXSMaxForexDataStore];
+        _lastData = [_forexHistory lastRecord];
     }
     
     return self;
 }
 
-- (void)loadSaveData:(SaveData *)saveData
+- (void)add
+{
+    ForexDataChunk *currentForexDataChunk = [_forexDataChunkStore getChunkFromNextDataOfTime:self.currentTime limit:1];
+    
+    ForexHistoryData *newCurrentData = currentForexDataChunk.current;
+    
+    if (newCurrentData == nil) {
+        return;
+    }
+    
+    [self updateMarketFromNewCurrentData:newCurrentData];
+}
+
+/*- (void)loadSaveData:(SaveData *)saveData
 {
     _isAutoUpdate = saveData.isAutoUpdate;
     
@@ -61,11 +78,11 @@ static NSString * const kKeyPath = @"currentTime";
     
     _lastData = [_forexHistory lastRecord];
     
-    _marketTimeManager = [MarketTimeManager new];
+    _marketTimeManager = [SimulationTimeManager new];
     [_marketTimeManager addObserver:self];
     
     _isStart = NO;
-}
+}*/
 
 - (void)addObserver:(UIViewController *)observer
 {
@@ -111,9 +128,9 @@ static NSString * const kKeyPath = @"currentTime";
 - (void)updateMarketFromNewCurrentData:(ForexHistoryData *)data
 {
     // Market更新前を通知。
-    if ([self.delegate respondsToSelector:@selector(willNotifyObservers)]) {
+    /*if ([self.delegate respondsToSelector:@selector(willNotifyObservers)]) {
         [self.delegate willNotifyObservers];
-    }
+    }*/
     
     self.currentForexData = data;
     self.currentRate = data.close;
@@ -128,12 +145,12 @@ static NSString * const kKeyPath = @"currentTime";
     // currentTimestampの変化で、MarketのObserverを更新
     
     // Market更新後を通知。
-    if ([self.delegate respondsToSelector:@selector(didNotifyObservers)]) {
+    /*if ([self.delegate respondsToSelector:@selector(didNotifyObservers)]) {
         [self.delegate didNotifyObservers];
-    }
+    }*/
 }
 
-- (void)start
+/*- (void)start
 {
     // 初期データでMarketを更新しておく。
     [self updateMarketFromNewCurrentData:self.currentForexData];
@@ -179,7 +196,7 @@ static NSString * const kKeyPath = @"currentTime";
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
-    if ([keyPath isEqualToString:@"currentLoadedRowid"] && [object isKindOfClass:[MarketTimeManager class]]) {
+    if ([keyPath isEqualToString:@"currentLoadedRowid"] && [object isKindOfClass:[SimulationTimeManager class]]) {
         
         ForexDataChunk *currentForexDataChunk = [_forexDataChunkStore getChunkFromNextDataOfTime:self.currentTime limit:1];
         
@@ -196,7 +213,7 @@ static NSString * const kKeyPath = @"currentTime";
 - (void)setAutoUpdateInterval:(NSNumber *)autoUpdateInterval
 {
     _marketTimeManager.autoUpdateInterval = autoUpdateInterval;
-}
+}*/
 
 - (BOOL)didLoadLastData
 {

@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "NewStartViewController.h"
+#import "SimulationManager.h"
 
-@interface ExecutionHistoryTableViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, NewStartViewControllerDelegate>
-- (void)updatedSaveData;
+@interface ExecutionHistoryTableViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, SimulationManagerDelegate>
+
 @end

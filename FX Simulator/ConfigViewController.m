@@ -8,58 +8,26 @@
 
 #import "ConfigViewController.h"
 
-#import "Market.h"
 #import "SaveData.h"
-#import "SaveLoader.h"
 #import "SetAutoUpdateIntervalViewController.h"
 #import "SimulationManager.h"
 
 @interface ConfigViewController ()
 @property (weak, nonatomic) IBOutlet UIButton *setAutoUpdateIntervalButton;
-
 @end
 
 @implementation ConfigViewController {
-    Market *_market;
-    SaveData *_saveData;
+    SimulationManager *_simulationManager;
 }
 
--(instancetype)initWithCoder:(NSCoder *)aDecoder
+- (void)loadSimulationManager:(SimulationManager *)simulationManager
 {
-    if (self = [super initWithCoder:aDecoder]) {
-        [self setInitData];
-    }
-    
-    return self;
+    _simulationManager = simulationManager;
 }
 
--(void)setInitData
+- (void)loadSaveData:(SaveData *)saveData market:(Market *)market
 {
-    _market = [SimulationManager sharedSimulationManager].market;
-    
-    _saveData = [SaveLoader load];
-    self.autoUpdateInterval = @(_saveData.autoUpdateIntervalSeconds);
-}
-
-/*-(void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    self.navigationController.navigationBarHidden = YES;
-}*/
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    
-    //_saveData = [SaveLoader load];
-    //self.autoUpdateInterval = _saveData.autoUpdateInterval;
-}
-
--(void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    
-    [self.setAutoUpdateIntervalButton setTitle:self.autoUpdateInterval.stringValue forState:self.setAutoUpdateIntervalButton.state];
+    _autoUpdateIntervalSeconds = saveData.autoUpdateIntervalSeconds;
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -70,17 +38,23 @@
     }
 }
 
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    // Do any additional setup after loading the view.
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [self.setAutoUpdateIntervalButton setTitle:@(self.autoUpdateIntervalSeconds).stringValue forState:self.setAutoUpdateIntervalButton.state];
+}
+
 -(void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
     
-    _saveData.autoUpdateIntervalSeconds = self.autoUpdateInterval.floatValue;
-    _market.autoUpdateInterval = @(_saveData.autoUpdateIntervalSeconds);
-}
-
--(void)updatedSaveData
-{
-    [self setInitData];
+    [_simulationManager setAutoUpdateIntervalSeconds:self.autoUpdateIntervalSeconds];
 }
 
 - (void)didReceiveMemoryWarning {

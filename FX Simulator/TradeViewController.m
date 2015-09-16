@@ -10,14 +10,18 @@
 
 #import <QuartzCore/QuartzCore.h>
 #import "SaveData.h"
-#import "SaveLoader.h"
 #import "ChartViewController.h"
 #import "Market.h"
 #import "ChartViewController.h"
+#import "OrderManager.h"
+#import "OrderResult.h"
 #import "Rate.h"
 #import "RatePanelViewController.h"
 #import "SimulationManager.h"
 #import "TradeDataViewController.h"
+
+typedef void (^SetSaveDataBlock)(SaveData *, Market *market);
+typedef void (^LoadSaveDataBlock)(SetSaveDataBlock);
 
 @interface TradeViewController ()
 
@@ -27,60 +31,34 @@
     ChartViewController *_chartViewController;
     RatePanelViewController *_ratePanelViewController;
     TradeDataViewController *_tradeDataViewController;
+    LoadSaveDataBlock _loadSaveDataBlock;
+    Market *_market;
+    OrderManager *_orderManager;
     SimulationManager *_simulationManager;
     UIView *_adView;
 }
 
-- (instancetype)initWithCoder:(NSCoder *)aDecoder
+- (void)loadSimulationManager:(SimulationManager *)simulationManager
 {
-    if (self = [super initWithCoder:aDecoder]) {
-        _simulationManager = [SimulationManager sharedSimulationManager];
-    }
-    
-    return self;
+    _simulationManager = simulationManager;
 }
 
-- (void)viewDidLoad
+/**
+ 1回目は、prepareForSegueの前に呼ばれる
+ */
+- (void)loadSaveData:(SaveData *)saveData market:(Market *)market
 {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    __block BOOL isSaveDataLoaded = NO;
     
-    SaveData *saveData = [SaveLoader load];
-    
-    [_chartViewController setChart:saveData.mainChart];
-    
-    _ratePanelViewController.delegate = _tradeDataViewController;
-    _tradeDataViewController.delegate = _simulationManager;
-    
-    _simulationManager.alertTargetController = self;
-    
-    [_simulationManager addObserver:self];
-    [_simulationManager addObserver:_ratePanelViewController];
-    [_simulationManager addObserver:_tradeDataViewController];
+    _loadSaveDataBlock = ^(SetSaveDataBlock setSaveDataBlock) {
+        if (!isSaveDataLoaded) {
+            if (saveData && setSaveDataBlock ) {
+                setSaveDataBlock(saveData, market);
+                isSaveDataLoaded = YES;
+            }
+        }
+    };
 }
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    
-    if (!_simulationManager.isStart) {
-        [_simulationManager start];
-    }
-    
-    [_simulationManager resume];
-}
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-    
-    [_simulationManager pause];
-}
-
-/*-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
-{
-    [tradeDataViewController tradeViewTouchesBegan];
-}*/
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
@@ -91,28 +69,71 @@
         _ratePanelViewController = segue.destinationViewController;
     } else if ([segue.identifier isEqualToString:@"TradeDataViewControllerSeg"]) {
         _tradeDataViewController = segue.destinationViewController;
+        _tradeDataViewController.delegate = self;
     }
 }
 
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+- (void)viewDidLoad
 {
-    if ([keyPath isEqualToString:@"currentTime"] && [object isKindOfClass:[Market class]]) {
-        [_chartViewController updateChartForTime:((Market*)object).currentTime];
+    [super viewDidLoad];
+    // Do any additional setup after loading the view.
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    SetSaveDataBlock setSaveDataBlock = ^(SaveData *saveData, Market *market) {
+        _market = market;
+        [_chartViewController setChart:saveData.mainChart];
+        _orderManager = [OrderManager createOrderManager];
+        [_ratePanelViewController loadSaveData:saveData];
+        [_ratePanelViewController loadMarket:market];
+        [_ratePanelViewController loadOrderManager:_orderManager];
+        [_tradeDataViewController loadSaveData:saveData];
+        [_tradeDataViewController loadMarket:market];
+        [_orderManager addDelegate:_tradeDataViewController];
+    };
+    
+    if (_loadSaveDataBlock) {
+        _loadSaveDataBlock(setSaveDataBlock);
     }
+    
+    if (!_simulationManager.isStartTime) {
+        [_simulationManager startTime];
+    } else {
+        [_simulationManager resumeTime];
+    }
+    
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    [_simulationManager pauseTime];
+}
+
+/*-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [tradeDataViewController tradeViewTouchesBegan];
+}*/
+
+- (void)autoUpdateSettingSwitchChanged:(BOOL)isSwitchOn
+{
+    [_simulationManager setIsAutoUpdate:isSwitchOn];
+}
+
+- (void)update
+{
+    [_chartViewController updateChartForTime:_market.currentTime];
+    [_ratePanelViewController update];
+    [_tradeDataViewController update];
 }
 
 - (void)chartViewTouched
 {
-    if (!_simulationManager.isAutoUpdate) {
-        [_simulationManager add];
-    }
-}
-
-- (void)updatedSaveData
-{
-    [_chartViewController updatedSaveData];
-    [_ratePanelViewController updatedSaveData];
-    [_tradeDataViewController updatedSaveData];
+    [_simulationManager addTime];
 }
 
 - (void)didReceiveMemoryWarning

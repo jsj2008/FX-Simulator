@@ -15,6 +15,9 @@
 #import "Money.h"
 #import "Money+ConvertToAccountCurrency.h"
 #import "OpenPosition.h"
+#import "PositionSize.h"
+#import "PositionType.h"
+#import "Rate.h"
 #import "SaveData.h"
 #import "SaveLoader.h"
 #import "SimulationManager.h"
@@ -36,13 +39,27 @@
     return self;
 }
 
-- (BOOL)isShortage
+- (BOOL)isShortageForMarket:(Market *)market
 {
-    if (self.equity.amount <= 0) {
+    Money *equity = [self equityForMarket:market];
+    
+    if (equity.amount <= 0) {
         return YES;
     } else {
         return NO;
     }
+}
+
+- (void)displayDataUsingBlock:(void (^)(NSString *equityStringValue, NSString *profitAndLossStringValue, NSString *orderTypeStringValue, NSString *averageRateStringValue, NSString *totalLotStringValue, UIColor *equityStringColor, UIColor *profitAndLossStringColor))block market:(Market *)market positionSizeOfLot:(PositionSize *)positionSize
+{
+    if (!block || !market) {
+        return;
+    }
+    
+    Money *equity = [self equityForMarket:market];
+    Money *profitAndLoss = [self profitAndLossForMarket:market];
+    
+    block(equity.toDisplayString, profitAndLoss.toDisplayString, [self orderType].toDisplayString, [self averageRate].toDisplayString, [[self totalPositionSize] toLotFromPositionSizeOfLot:positionSize].toDisplayString, equity.toDisplayColor, profitAndLoss.toDisplayColor);
 }
 
 - (Rate *)averageRate
@@ -57,9 +74,11 @@
     return [_startBalance addMoney:profitAndLoss];
 }
 
-- (Money *)equity
+- (Money *)equityForMarket:(Market *)market
 {
-    return [self.balance addMoney:self.profitAndLoss];
+    Money *profitAndLoss = [self profitAndLossForMarket:market];
+    
+    return [self.balance addMoney:profitAndLoss];
 }
 
 - (PositionType *)orderType
@@ -67,10 +86,8 @@
     return [OpenPosition positionTypeOfCurrencyPair:_currencyPair];
 }
 
-- (Money *)profitAndLoss
-{
-    Market *market = [SimulationManager sharedSimulationManager].market;
-    
+- (Money *)profitAndLossForMarket:(Market *)market
+{    
     return [OpenPosition profitAndLossOfCurrencyPair:_currencyPair ForMarket:market InCurrency:_accountCurrency];
 }
 

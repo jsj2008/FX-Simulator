@@ -12,7 +12,7 @@
 @class PositionSize;
 
 @interface InputTradeLotViewController : UIViewController
-@property (nonatomic, readwrite) Lot *defaultInputTradeLot;
-@property (nonatomic, readwrite) Lot *inputTradeLot;
+@property (nonatomic) PositionSize *tradePositionSize;
 @property (nonatomic) PositionSize *positionSizeOfLot;
+- (void)setDefaultTradePositionSize:(PositionSize *)positionSize;
 @end

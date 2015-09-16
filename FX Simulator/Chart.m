@@ -42,6 +42,7 @@ static const NSUInteger FXSMaxDisplayDataCount = 80;
     Chart *chart = [self createNewChart];
     
     [source addMainChartSourcesObject:chart.chartSource];
+    chart.chartSource.saveDataSourceForMain = source;
     
     return chart;
 }
@@ -51,6 +52,7 @@ static const NSUInteger FXSMaxDisplayDataCount = 80;
     Chart *chart = [self createNewChart];
     
     [source addSubChartSourcesObject:chart.chartSource];
+    chart.chartSource.saveDataSourceForSub = source;
     
     return chart;
 }

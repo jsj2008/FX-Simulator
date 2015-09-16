@@ -8,8 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-
-@class FMDatabase;
 @class SaveData;
 
 @interface TradeDatabase : NSObject

@@ -49,7 +49,7 @@
     
     SaveData *saveData = [self createNewSaveDataFromSlotNumber:slotNumber currencyPair:currencyPair timeFrame:timeFrame];
     
-    saveData.startTime = [Setting rangeForCurrencyPair:saveData.currencyPair timeScale:saveData.timeFrame].start;
+    saveData.startTime = [Setting rangeForSimulation].start;
     saveData.lastLoadedTime = saveData.startTime;
     saveData.spread = [[Spread alloc] initWithPips:1 currencyPair:saveData.currencyPair];
     saveData.accountCurrency = [[Currency alloc] initWithCurrencyType:JPY];
@@ -76,7 +76,7 @@
     saveData.currencyPair = currencyPair;
     saveData.timeFrame = timeFrame;
     
-    [saveData setDefaultCharts];
+    //[saveData setDefaultCharts];
     
     [saveData newSave];
     
@@ -150,11 +150,33 @@
     } execept:self.timeFrame];
 }
 
+- (void)delete
+{
+    NSManagedObjectContext *context = [[self class] coreDataManager].managedObjectContext;
+    
+    NSFetchRequest *fetchRequest = [NSFetchRequest new];
+    NSEntityDescription * entityDescription = [NSEntityDescription entityForName:NSStringFromClass([SaveDataSource class]) inManagedObjectContext:context];
+    [fetchRequest setEntity:entityDescription];
+    NSPredicate * predicate = [NSPredicate predicateWithFormat:@"(slotNumber = %d)", self.slotNumber];
+    [fetchRequest setPredicate:predicate];
+    
+    NSError * error2;
+    NSArray * objects = [context executeFetchRequest:fetchRequest error:&error2];
+    
+    for (SaveDataSource *obj in objects) {
+        //if (_saveDataSource.objectID != obj.objectID) {
+            [context deleteObject:obj];
+        //}
+    }
+}
+
 /**
  重複するslotNumberのセーブデータを全て削除する。
 */
 - (void)newSave
 {
+    [self setDefaultCharts];
+    
     NSManagedObjectContext *context = [[self class] coreDataManager].managedObjectContext;
     
     NSFetchRequest *fetchRequest = [NSFetchRequest new];

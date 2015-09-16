@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+@import UIKit;
+
 @class Balance;
 @class Currency;
 @class CurrencyPair;
@@ -26,27 +28,33 @@
 
 @interface Account : NSObject
 
--(instancetype)initWithAccountCurrency:(Currency *)currency currencyPair:(CurrencyPair *)currencyPair startBalance:(Money *)balance;
+- (instancetype)initWithAccountCurrency:(Currency *)currency currencyPair:(CurrencyPair *)currencyPair startBalance:(Money *)balance;
+
+- (void)displayDataUsingBlock:(void (^)(NSString *equityStringValue, NSString *profitAndLossStringValue, NSString *orderTypeStringValue, NSString *averageRateStringValue, NSString *totalLotStringValue, UIColor *equityStringColor, UIColor *profitAndLossStringColor))block market:(Market *)market positionSizeOfLot:(PositionSize *)positionSize;
 
 /**
  総資産が０以下かどうか。
 */
--(BOOL)isShortage;
+- (BOOL)isShortageForMarket:(Market *)market;
 
-@property (nonatomic, readonly) Rate *averageRate;
+//- (Money *)equityForMarket:(Market *)market;
+
+//- (Money *)profitAndLossForMarket:(Market *)market;
+
+//@property (nonatomic, readonly) Rate *averageRate;
 
 /**
  総資産
 */
-@property (nonatomic, readonly) Money *equity;
+//@property (nonatomic, readonly) Money *equity;
 
-@property (nonatomic, readonly) PositionType *orderType;
+//@property (nonatomic, readonly) PositionType *orderType;
 
 /**
  損益
 */
-@property (nonatomic, readonly) Money *profitAndLoss;
+//@property (nonatomic, readonly) Money *profitAndLoss;
 
-@property (nonatomic, readonly) PositionSize *totalPositionSize;
+//@property (nonatomic, readonly) PositionSize *totalPositionSize;
 
 @end

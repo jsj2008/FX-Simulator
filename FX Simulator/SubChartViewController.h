@@ -8,8 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "ChartViewController.h"
-#import "NewStartViewController.h"
+#import "SimulationManager.h"
 
-@interface SubChartViewController : UIViewController <ChartViewControllerDelegate, NewStartViewControllerDelegate>
-- (void)updatedSaveData;
+@interface SubChartViewController : UIViewController <ChartViewControllerDelegate, SimulationManagerDelegate>
+
 @end
