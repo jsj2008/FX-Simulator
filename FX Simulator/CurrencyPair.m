@@ -13,7 +13,6 @@
 
 static NSString* const FXSBaseCurrencyKey = @"baseCurrency";
 static NSString* const FXSQuoteCurrencyKey = @"quoteCurrency";
-//static NSString* const FXSCurrencyPairKey = @"currencyPair";
 
 @implementation CurrencyPair
 
@@ -29,7 +28,6 @@ static NSString* const FXSQuoteCurrencyKey = @"quoteCurrency";
 {
     [aCoder encodeObject:self.baseCurrency forKey:FXSBaseCurrencyKey];
     [aCoder encodeObject:self.quoteCurrency forKey:FXSQuoteCurrencyKey];
-    //[aCoder encodeObject:[self toCodeString] forKey:FXSCurrencyPairKey];
 }
 
 - (instancetype)initWithBaseCurrency:(Currency *)baseCurrency QuoteCurrency:(Currency *)quoteCurrency
