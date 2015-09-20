@@ -33,6 +33,15 @@
 
 @implementation SetSaveDataTableViewController
 
+- (instancetype)initWithCoder:(NSCoder *)aDecoder
+{
+    if (self = [super initWithCoder:aDecoder]) {
+        _slotNumber = 1;
+    }
+    
+    return self;
+}
+
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqualToString:@"SetCurrencyPairSegue"]) {
