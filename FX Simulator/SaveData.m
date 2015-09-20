@@ -62,9 +62,34 @@
     return saveData;
 }
 
++ (instancetype)createNewSaveDataFromMaterial:(id<NewSaveDataMaterial>)material
+{
+    if (![self validateMaterial:material]) {
+        return nil;
+    }
+    
+    SaveData *newSave = [SaveData createNewSaveDataFromSlotNumber:material.slotNumber currencyPair:material.currencyPair timeFrame:material.timeFrame];
+    newSave.startTime = material.startTime;
+    newSave.spread = [[Spread alloc] initWithPips:material.spread.spreadValue currencyPair:material.currencyPair];
+    newSave.accountCurrency = material.accountCurrency;
+    newSave.startBalance = [[Money alloc] initWithAmount:material.startBalance.amount currency:material.accountCurrency];
+    newSave.positionSizeOfLot = material.positionSizeOfLot;
+    
+    return newSave;
+}
+
++ (BOOL)validateMaterial:(id<NewSaveDataMaterial>)material
+{
+    if (material.currencyPair && material.timeFrame && material.startTime && material.spread && material.accountCurrency && material.startBalance && material.positionSizeOfLot) {
+        return YES;
+    } else {
+        return NO;
+    }
+}
+
 + (instancetype)createNewSaveDataFromSlotNumber:(NSUInteger)slotNumber currencyPair:(CurrencyPair *)currencyPair timeFrame:(TimeFrame *)timeFrame
 {
-    if (currencyPair == nil || timeFrame == nil) {
+    if (!currencyPair || !timeFrame) {
         return nil;
     }
     
@@ -154,20 +179,7 @@
 {
     NSManagedObjectContext *context = [[self class] coreDataManager].managedObjectContext;
     
-    NSFetchRequest *fetchRequest = [NSFetchRequest new];
-    NSEntityDescription * entityDescription = [NSEntityDescription entityForName:NSStringFromClass([SaveDataSource class]) inManagedObjectContext:context];
-    [fetchRequest setEntity:entityDescription];
-    NSPredicate * predicate = [NSPredicate predicateWithFormat:@"(slotNumber = %d)", self.slotNumber];
-    [fetchRequest setPredicate:predicate];
-    
-    NSError * error2;
-    NSArray * objects = [context executeFetchRequest:fetchRequest error:&error2];
-    
-    for (SaveDataSource *obj in objects) {
-        //if (_saveDataSource.objectID != obj.objectID) {
-            [context deleteObject:obj];
-        //}
-    }
+    [context deleteObject:_saveDataSource];
 }
 
 /**
@@ -193,6 +205,21 @@
             [context deleteObject:obj];
         }
     }    
+}
+
+- (void)saveWithCompletion:(void (^)())completion error:(void (^)())error
+{
+    NSError *saveError = nil;
+    
+    [[[self class] coreDataManager] saveContext:&saveError];
+ 
+    if (saveError) {
+        if (error) {
+            error();
+        }
+    } else if (completion) {
+        completion();
+    }
 }
 
 #pragma mark - getter,setter

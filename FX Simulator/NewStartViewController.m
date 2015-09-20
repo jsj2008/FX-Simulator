@@ -8,6 +8,7 @@
 
 #import "NewStartViewController.h"
 
+#import "CoreDataManager.h"
 #import "Currency.h"
 #import "CurrencyPair.h"
 #import "CheckmarkViewController.h"
@@ -69,7 +70,14 @@
 
 - (IBAction)unwindFromDoneButton:(UIStoryboardSegue *)segue
 {
-    
+    SetSaveDataTableViewController *controller = segue.sourceViewController;
+        
+    SaveData *newSave = [SaveData createNewSaveDataFromMaterial:controller];
+    [newSave saveWithCompletion:^{
+        ;
+    } error:^{
+        [newSave delete];
+    }];
 }
 
 

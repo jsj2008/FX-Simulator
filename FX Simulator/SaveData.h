@@ -20,6 +20,17 @@
 @class Spread;
 @class TimeFrame;
 
+@protocol NewSaveDataMaterial <NSObject>
+@property (nonatomic, readonly) NSUInteger slotNumber;
+@property (nonatomic, readonly) CurrencyPair *currencyPair;
+@property (nonatomic, readonly) Time *startTime;
+@property (nonatomic, readonly) TimeFrame *timeFrame;
+@property (nonatomic, readonly) Spread *spread;
+@property (nonatomic, readonly) Currency *accountCurrency;
+@property (nonatomic, readonly) Money *startBalance;
+@property (nonatomic, readonly) PositionSize *positionSizeOfLot;
+@end
+
 @interface SaveData : NSObject
 
 @property (nonatomic, readonly) NSUInteger slotNumber;
@@ -44,6 +55,8 @@
 */
 + (instancetype)createDefaultNewSaveDataFromSlotNumber:(NSUInteger)slotNumber;
 
++ (instancetype)createNewSaveDataFromMaterial:(id<NewSaveDataMaterial>)material;
+
 /**
  CoreDataに新しいセーブデータを登録。
  重複するslotNumberのセーブデータは削除される。
@@ -54,6 +67,8 @@
 
 - (void)delete;
 
-- (void)newSave;
+//- (void)newSave;
+
+- (void)saveWithCompletion:(void (^)())completion error:(void (^)())error;
 
 @end
