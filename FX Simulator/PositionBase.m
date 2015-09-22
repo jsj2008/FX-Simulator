@@ -10,9 +10,10 @@
 
 @implementation PositionBase
 
-- (instancetype)initWithCurrencyPair:(CurrencyPair *)currencyPair positionType:(PositionType *)positionType rate:(Rate *)rate positionSize:(PositionSize *)positionSize
+- (instancetype)initWithSaveSlot:(NSUInteger)slot CurrencyPair:(CurrencyPair *)currencyPair positionType:(PositionType *)positionType rate:(Rate *)rate positionSize:(PositionSize *)positionSize
 {
     if (self = [super init]) {
+        _saveSlot = slot;
         _currencyPair = currencyPair;
         _positionType = positionType;
         _rate = rate;

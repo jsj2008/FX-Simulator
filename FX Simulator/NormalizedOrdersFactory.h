@@ -8,8 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
+@class OpenPositionRelationChunk;
 @class Order;
 
 @interface NormalizedOrdersFactory : NSObject
-+ (NSArray *)createNormalizedOrdersFromOrder:(Order *)order;
+- (instancetype)initWithOpenPositions:(OpenPositionRelationChunk *)openPositions;
+- (NSArray *)createNormalizedOrdersFromOrder:(Order *)order;
 @end

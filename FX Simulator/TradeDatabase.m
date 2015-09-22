@@ -8,28 +8,22 @@
 
 #import "TradeDatabase.h"
 
-#import "TradeDatabase+Protected.h"
 #import "FMDatabase.h"
 #import "SaveData.h"
+#import "TradeDatabase+Protected.h"
 
 static FMDatabase *db;
-static NSUInteger FXSSaveSlot;
 static BOOL inTransaction;
 static NSString* const dbFileName = @"trade_db.sqlite3";
 static NSString* const testDbFileName = @"TradeTestDb.sqlite3";
 
 @implementation TradeDatabase
 
-+ (void)loadSaveData:(SaveData *)saveData
-{
-    FXSSaveSlot = saveData.slotNumber;
-}
-
 #pragma mark - execute
 
-+ (void)execute:(void (^)(FMDatabase *, NSUInteger))block
++ (void)execute:(void (^)(FMDatabase *))block
 {
-    if (FXSSaveSlot == 0 || block == nil) {
+    if (!block) {
         return;
     }
     
@@ -39,7 +33,7 @@ static NSString* const testDbFileName = @"TradeTestDb.sqlite3";
         [db open];
     }
     
-    block(db, FXSSaveSlot);
+    block(db);
     
     if (!inTransaction) {
         [db close];

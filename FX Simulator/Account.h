@@ -13,10 +13,12 @@
 @class Balance;
 @class Currency;
 @class CurrencyPair;
+@class ExecutionOrderRelationChunk;
 @class Lot;
 @class Market;
 @class Money;
 @class OpenPosition;
+@class OpenPositionRelationChunk;
 @class PositionSize;
 @class PositionType;
 @class Rate;
@@ -28,7 +30,7 @@
 
 @interface Account : NSObject
 
-- (instancetype)initWithAccountCurrency:(Currency *)currency currencyPair:(CurrencyPair *)currencyPair startBalance:(Money *)balance;
+- (instancetype)initWithAccountCurrency:(Currency *)currency currencyPair:(CurrencyPair *)currencyPair startBalance:(Money *)balance openPositions:(OpenPositionRelationChunk *)openPositions executionOrders:(ExecutionOrderRelationChunk *)executionOrders;
 
 - (void)displayDataUsingBlock:(void (^)(NSString *equityStringValue, NSString *profitAndLossStringValue, NSString *orderTypeStringValue, NSString *averageRateStringValue, NSString *totalLotStringValue, UIColor *equityStringColor, UIColor *profitAndLossStringColor))block market:(Market *)market positionSizeOfLot:(PositionSize *)positionSize;
 

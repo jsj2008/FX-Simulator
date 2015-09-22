@@ -13,9 +13,11 @@
 @class ChartChunk;
 @class Currency;
 @class CurrencyPair;
+@class ExecutionOrderRelationChunk;
 @class Time;
 @class Lot;
 @class Money;
+@class OpenPositionRelationChunk;
 @class PositionSize;
 @class Spread;
 @class TimeFrame;
@@ -48,6 +50,8 @@
 @property (nonatomic, readonly) Chart *mainChart;
 @property (nonatomic, readonly) ChartChunk *subChartChunk;
 @property (nonatomic, readonly) Account *account;
+@property (nonatomic, readonly) OpenPositionRelationChunk *openPositions;
+@property (nonatomic, readonly) ExecutionOrderRelationChunk *executionOrders;
 
 /**
  CoreDataに新しいデフォルトのセーブデータを登録。

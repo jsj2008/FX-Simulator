@@ -16,6 +16,7 @@
 */
 
 @interface OpenPositionRawRecord : NSObject
+@property (nonatomic, readonly) NSUInteger saveSlot;
 @property (nonatomic, readonly) NSUInteger recordId;
 @property (nonatomic, readonly) NSUInteger executionOrderId;
 @property (nonatomic, readonly) PositionSize *positionSize;

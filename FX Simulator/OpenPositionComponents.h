@@ -14,6 +14,7 @@
 @class PositionSize;
 
 @interface OpenPositionComponents : NSObject
+@property (nonatomic) NSUInteger saveSlot;
 @property (nonatomic) CurrencyPair *currencyPair;
 @property (nonatomic) PositionType *positionType;
 @property (nonatomic) Rate *rate;

@@ -8,6 +8,8 @@
 
 #import "OrdersCreateMode.h"
 
-@interface CloseAndNewOrdersCreateMode : OrdersCreateMode
+@class OpenPositionRelationChunk;
 
+@interface CloseAndNewOrdersCreateMode : OrdersCreateMode
+- (instancetype)initWithOpenPositions:(OpenPositionRelationChunk *)openPositions;
 @end

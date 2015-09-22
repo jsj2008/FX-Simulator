@@ -11,11 +11,31 @@
 #import "OrdersCreateMode.h"
 #import "OrdersCreateModeFactory.h"
 
-@implementation NormalizedOrdersFactory
+@implementation NormalizedOrdersFactory {
+    OrdersCreateModeFactory *_ordersCreateModeFactory;
+}
 
-+ (NSArray *)createNormalizedOrdersFromOrder:(Order *)order
+- (instancetype)init
 {
-    OrdersCreateMode *createMode = [OrdersCreateModeFactory createModeFromOrder:order];
+    return nil;
+}
+
+- (instancetype)initWithOpenPositions:(OpenPositionRelationChunk *)openPositions
+{
+    if (!openPositions) {
+        return nil;
+    }
+    
+    if (self = [super init]) {
+        _ordersCreateModeFactory = [[OrdersCreateModeFactory alloc] initWithOpenPositions:openPositions];
+    }
+    
+    return self;
+}
+
+- (NSArray *)createNormalizedOrdersFromOrder:(Order *)order
+{
+    OrdersCreateMode *createMode = [_ordersCreateModeFactory createModeFromOrder:order];
     
     return [createMode create:order];
 }

@@ -28,25 +28,25 @@
 /**
  新しいレコードからselectする
 */
-+ (NSArray *)selectNewestFirstLimit:(NSUInteger)limit currencyPair:(CurrencyPair *)currencyPair;
++ (NSArray *)selectNewestFirstLimit:(NSUInteger)limit currencyPair:(CurrencyPair *)currencyPair saveSlot:(NSUInteger)slot;
 
 /**
  古いポジションからselectする
 */
-+ (NSArray *)selectCloseTargetOpenPositionsLimitClosePositionSize:(PositionSize *)limitPositionSize currencyPair:(CurrencyPair *)currencyPair;
++ (NSArray *)selectCloseTargetOpenPositionsLimitClosePositionSize:(PositionSize *)limitPositionSize currencyPair:(CurrencyPair *)currencyPair saveSlot:(NSUInteger)slot;
 
-+ (PositionType *)positionTypeOfCurrencyPair:(CurrencyPair *)currencyPAir;
++ (PositionType *)positionTypeOfCurrencyPair:(CurrencyPair *)currencyPAir saveSlot:(NSUInteger)slot;
 
-+ (Money *)profitAndLossOfCurrencyPair:(CurrencyPair *)currencyPair ForMarket:(Market *)market InCurrency:(Currency *)currency;
++ (Money *)profitAndLossOfCurrencyPair:(CurrencyPair *)currencyPair ForMarket:(Market *)market InCurrency:(Currency *)currency saveSlot:(NSUInteger)slot;
 
-+ (PositionSize *)totalPositionSizeOfCurrencyPair:(CurrencyPair *)currencyPair;
++ (PositionSize *)totalPositionSizeOfCurrencyPair:(CurrencyPair *)currencyPair saveSlot:(NSUInteger)slot;
 
-+ (Rate *)averageRateOfCurrencyPair:(CurrencyPair *)currencyPair;
++ (Rate *)averageRateOfCurrencyPair:(CurrencyPair *)currencyPair saveSlot:(NSUInteger)slot;
 
 /**
  新規のポジションを追加できるかどうか
 */
-+ (BOOL)isExecutableNewPosition;
++ (BOOL)isExecutableNewPositionOfSaveSlot:(NSUInteger)slot;
 
 - (ExecutionOrder *)createCloseExecutionOrderFromOrderId:(NSUInteger)orderId;
 

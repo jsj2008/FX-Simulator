@@ -22,7 +22,7 @@
 + (void)setCoreDataManager:(CoreDataManager *)coreDataManager;
 
 + (CoreDataManager *)sharedManager;
-- (void)saveContext;
+- (void)saveContext:(NSError **)error;
 - (NSURL *)applicationDocumentsDirectory;
 
 @end

@@ -8,10 +8,12 @@
 
 #import "OrderManager.h"
 
+@class OpenPositionRelationChunk;
 @class Order;
 @class OrderResult;
 
 @interface OrderManagerState : NSObject <OrderManagerState>
+- (instancetype)initWithOpenPositions:(OpenPositionRelationChunk *)openPositions;
 - (void)addState:(id<OrderManagerState>)state;
 - (OrderResult *)isOrderable:(Order *)order;
 @end

@@ -12,6 +12,7 @@
 #import "Market.h"
 #import "Order.h"
 #import "OrderManager.h"
+#import "OrderResult.h"
 #import "PositionType.h"
 #import "Rate.h"
 #import "Rates.h"
@@ -25,6 +26,7 @@
 @end
 
 @implementation RatePanelViewController {
+    NSUInteger _saveSlot;
     CurrencyPair *_currencyPair;
     Market *_market;
     OrderManager *_orderManager;
@@ -43,12 +45,14 @@
 - (void)loadSaveData:(SaveData *)saveData
 {
     _saveData = saveData;
+    _saveSlot = saveData.slotNumber;
     _currencyPair = _saveData.currencyPair;
 }
 
 - (void)loadOrderManager:(OrderManager *)orderManager
 {
     _orderManager = orderManager;
+    [_orderManager addDelegate:self];
 }
 
 - (void)loadMarket:(Market *)market
@@ -62,6 +66,13 @@
     // Do any additional setup after loading the view.
 }
 
+- (void)didOrder:(OrderResult *)result
+{
+    [result completion:nil error:^{
+        [result showAlertToController:self];
+    }];
+}
+
 - (void)update
 {
     self.rateValueLabel.text = [self getDisplayCurrentBidRate];
@@ -69,7 +80,7 @@
 
 - (void)order:(PositionType *)orderType
 {
-    Order *order = [[Order alloc] initWithCurrencyPair:_currencyPair positionType:orderType rate:[self getCurrentRateForOrderType:orderType] positionSize:_saveData.tradePositionSize];
+    Order *order = [[Order alloc] initWithSaveSlot:_saveSlot CurrencyPair:_currencyPair positionType:orderType rate:[self getCurrentRateForOrderType:orderType] positionSize:_saveData.tradePositionSize];
     
     [_orderManager order:order];
 }

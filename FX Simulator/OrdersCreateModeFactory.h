@@ -8,9 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
+@class OpenPositionRelationChunk;
 @class Order;
 @class OrdersCreateMode;
 
 @interface OrdersCreateModeFactory : NSObject
-+ (OrdersCreateMode *)createModeFromOrder:(Order *)order;
+- (instancetype)initWithOpenPositions:(OpenPositionRelationChunk *)openPositions;
+- (OrdersCreateMode *)createModeFromOrder:(Order *)order;
 @end

@@ -8,11 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@class SaveData;
-
 @interface TradeDatabase : NSObject
-
-+ (void)loadSaveData:(SaveData *)saveData;
 
 + (void)transaction:(void (^)())block;
 
