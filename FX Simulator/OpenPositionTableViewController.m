@@ -14,6 +14,7 @@
 #import "ForexHistoryData.h"
 #import "Market.h"
 #import "OpenPosition.h"
+#import "OpenPositionRelationChunk.h"
 #import "OpenPositionTableViewCell.h"
 #import "SaveData.h"
 #import "SaveLoader.h"
@@ -31,6 +32,7 @@ static const unsigned int displayMaxOpenPositionDataRecords = 100;
     Market *_market;
     NSArray *_openPositionDataRecords;
     PositionSize *_positionSizeOfLot;
+    OpenPositionRelationChunk *_openPositions;
 }
 
 - (void)loadSaveData:(SaveData *)saveData market:(Market *)market
@@ -39,6 +41,7 @@ static const unsigned int displayMaxOpenPositionDataRecords = 100;
     _displayCurrency = saveData.accountCurrency;
     _positionSizeOfLot = saveData.positionSizeOfLot;
     _market = market;
+    _openPositions = saveData.openPositions;
 }
 
 /*- (void)setInitData
@@ -60,7 +63,7 @@ static const unsigned int displayMaxOpenPositionDataRecords = 100;
 {
     [super viewWillAppear:animated];
     
-    _openPositionDataRecords = [OpenPosition selectNewestFirstLimit:displayMaxOpenPositionDataRecords currencyPair:_currencyPair];
+    _openPositionDataRecords = [_openPositions selectNewestFirstLimit:displayMaxOpenPositionDataRecords currencyPair:_currencyPair];
     
     [self.tableView reloadData];
     

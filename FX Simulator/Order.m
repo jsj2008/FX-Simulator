@@ -28,6 +28,7 @@
 static NSString* const FXSOrdersTableName = @"orders";
 
 @interface Order ()
+@property (nonatomic, readonly) NSUInteger saveSlot;
 @property (nonatomic, readonly) Rate *rate;
 @property (nonatomic) NSUInteger orderId;
 @property (nonatomic) BOOL isNew;
@@ -37,10 +38,11 @@ static NSString* const FXSOrdersTableName = @"orders";
 @implementation Order
 
 - (instancetype)initWithFMResultSet:(FMResultSet *)resultSet
-{    
+{
+    _saveSlot = [resultSet intForColumn:@"save_slot"];
     _orderId = [resultSet intForColumn:@"id"];
     
-    if (_orderId < 1) {
+    if (!_saveSlot || _orderId < 1) {
         return nil;
     }
     
@@ -53,7 +55,7 @@ static NSString* const FXSOrdersTableName = @"orders";
 
 - (instancetype)copyOrderForNewPositionSize:(PositionSize *)positionSize
 {
-    Order *order = [[[self class] alloc] initWithCurrencyPair:self.currencyPair positionType:self.positionType rate:self.rate positionSize:positionSize];
+    Order *order = [[[self class] alloc] initWithSaveSlot:self.saveSlot CurrencyPair:self.currencyPair positionType:self.positionType rate:self.rate positionSize:positionSize];
     order.orderId = self.orderId;
     
     return order;
@@ -90,6 +92,7 @@ static NSString* const FXSOrdersTableName = @"orders";
     }
     
     return [ExecutionOrder orderWithBlock:^(ExecutionOrderComponents *components) {
+        components.saveSlot = self.saveSlot;
         components.currencyPair = self.currencyPair;
         components.positionType = self.positionType;
         components.rate = self.rate;
@@ -110,7 +113,7 @@ static NSString* const FXSOrdersTableName = @"orders";
         return nil;
     }
     
-    NSArray *openPositions = [OpenPosition selectCloseTargetOpenPositionsLimitClosePositionSize:self.positionSize currencyPair:self.currencyPair];
+    NSArray *openPositions = [OpenPosition selectCloseTargetOpenPositionsLimitClosePositionSize:self.positionSize currencyPair:self.currencyPair saveSlot:self.saveSlot];
     
     NSMutableArray *executionOrders = [NSMutableArray array];
     
@@ -126,7 +129,7 @@ static NSString* const FXSOrdersTableName = @"orders";
 
 - (BOOL)includeCloseOrder
 {
-    PositionType *positionType = [OpenPosition positionTypeOfCurrencyPair:self.currencyPair];
+    PositionType *positionType = [OpenPosition positionTypeOfCurrencyPair:self.currencyPair saveSlot:self.saveSlot];
     
     if (positionType == nil) {
         return NO;
@@ -152,11 +155,11 @@ static NSString* const FXSOrdersTableName = @"orders";
 {
     __block BOOL isSuccess;
     
-    [[self class] execute:^(FMDatabase *db, NSUInteger saveSlot) {
+    [[self class] execute:^(FMDatabase *db) {
         
         NSString *sql = [NSString stringWithFormat:@"INSERT INTO %@ ( save_slot, code, is_short, is_long, rate, timestamp, position_size, is_new, is_close ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", FXSOrdersTableName];
         
-        if([db executeUpdate:sql, @(saveSlot), self.currencyPair.toCodeString, @(self.positionType.isShort), @(self.positionType.isLong), self.rate.rateValueObj, self.rate.timestamp.timestampValueObj, self.positionSize.sizeValueObj, @(self.isNew), @(self.isClose)]) {
+        if([db executeUpdate:sql, @(self.saveSlot), self.currencyPair.toCodeString, @(self.positionType.isShort), @(self.positionType.isLong), self.rate.rateValueObj, self.rate.timestamp.timestampValueObj, self.positionSize.sizeValueObj, @(self.isNew), @(self.isClose)]) {
             
             NSString *sql = [NSString stringWithFormat:@"select MAX(id) as MAX_ID from %@;", FXSOrdersTableName];
             
@@ -196,6 +199,11 @@ static NSString* const FXSOrdersTableName = @"orders";
 }
 
 #pragma mark - super
+
+- (NSUInteger)saveSlot
+{
+    return _saveSlot;
+}
 
 - (CurrencyPair *)currencyPair
 {

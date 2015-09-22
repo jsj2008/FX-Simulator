@@ -12,6 +12,6 @@
 
 @interface TradeDatabase ()
 
-+ (void)execute:(void (^)(FMDatabase *db, NSUInteger saveSlot))block;
++ (void)execute:(void (^)(FMDatabase *db))block;
 
 @end

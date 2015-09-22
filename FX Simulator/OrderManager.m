@@ -18,18 +18,20 @@
 @implementation OrderManager {
     NSHashTable *_delegates;
     OrderManagerState *_state;
+    NormalizedOrdersFactory *_normalizedOrdersFactory;
 }
 
-+ (instancetype)createOrderManager
++ (instancetype)createOrderManagerFromOpenPositions:(OpenPositionRelationChunk *)openPositions
 {
-    return [[[self class] alloc] initWithOrderManagerState:[OrderManagerState new]];
+    return [[[self class] alloc] initWithOrderManagerState:[[OrderManagerState alloc] initWithOpenPositions:openPositions] openPositions:openPositions];
 }
 
-- (instancetype)initWithOrderManagerState:(OrderManagerState *)state
+- (instancetype)initWithOrderManagerState:(OrderManagerState *)state openPositions:(OpenPositionRelationChunk *)openPositions
 {
     if (self = [super init]) {
         _delegates = [NSHashTable weakObjectsHashTable];
         _state = state;
+        _normalizedOrdersFactory = [[NormalizedOrdersFactory alloc] initWithOpenPositions:openPositions];
     }
     
     return self;
@@ -58,15 +60,14 @@
 {
     OrderResult *result = [_state isOrderable:order];
     
-    if (!result.isSuccess) {
+    [result completion:^{
+        NSArray *normalizedOrders = [_normalizedOrdersFactory createNormalizedOrdersFromOrder:order];
+        
+        [normalizedOrders enumerateObjectsUsingBlock:^(Order *normalizedOrder, NSUInteger idx, BOOL *stop) {
+            [self execute:normalizedOrder];
+        }];
+    } error:^{
         [self notifyDidOrder:result];
-        return;
-    }
-    
-    NSArray *normalizedOrders = [NormalizedOrdersFactory createNormalizedOrdersFromOrder:order];
-    
-    [normalizedOrders enumerateObjectsUsingBlock:^(Order *normalizedOrder, NSUInteger idx, BOOL *stop) {
-        [self execute:normalizedOrder];
     }];
 }
 

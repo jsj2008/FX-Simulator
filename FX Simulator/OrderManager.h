@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+@class OpenPositionRelationChunk;
 @class Order;
 @class OrderResult;
 
@@ -20,7 +21,7 @@
 @end
 
 @interface OrderManager : NSObject
-+ (instancetype)createOrderManager;
++ (instancetype)createOrderManagerFromOpenPositions:(OpenPositionRelationChunk *)openPositions;
 - (void)addDelegate:(id<OrderManagerDelegate>)delegate;
 - (void)addState:(id<OrderManagerState>)state;
 - (void)order:(Order *)order;

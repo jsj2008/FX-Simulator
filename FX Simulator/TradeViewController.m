@@ -86,7 +86,8 @@ typedef void (^LoadSaveDataBlock)(SetSaveDataBlock);
     SetSaveDataBlock setSaveDataBlock = ^(SaveData *saveData, Market *market) {
         _market = market;
         [_chartViewController setChart:saveData.mainChart];
-        _orderManager = [OrderManager createOrderManager];
+        _orderManager = [OrderManager createOrderManagerFromOpenPositions:saveData.openPositions];
+        [_orderManager addState:_simulationManager];
         [_ratePanelViewController loadSaveData:saveData];
         [_ratePanelViewController loadMarket:market];
         [_ratePanelViewController loadOrderManager:_orderManager];

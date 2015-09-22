@@ -51,9 +51,6 @@ static SimulationManager *sharedSimulationManager = nil;
 - (void)loadSaveData:(SaveData *)saveData
 {
     _saveData = saveData;
-    [Order loadSaveData:_saveData];
-    [OpenPosition loadSaveData:_saveData];
-    [ExecutionOrder loadSaveData:_saveData];
     _market = [[Market alloc] initWithCurrencyPair:saveData.currencyPair timeFrame:saveData.timeFrame lastLoadedTime:saveData.lastLoadedTime];
     _simulationState = [[SimulationState alloc] initWithAccount:saveData.account Market:_market];
     _simulationTimeManager = [[SimulationTimeManager alloc] initWithAutoUpdateIntervalSeconds:saveData.autoUpdateIntervalSeconds isAutoUpdate:saveData.isAutoUpdate];

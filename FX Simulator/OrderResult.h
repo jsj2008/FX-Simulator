@@ -8,9 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
+@import UIKit;
+
 @interface OrderResult : NSObject
-@property (nonatomic, readonly) BOOL isSuccess;
-@property (nonatomic, readonly) NSString *title;
-@property (nonatomic, readonly) NSString *message;
 - (instancetype)initWithIsSuccess:(BOOL)isSuccess title:(NSString *)title message:(NSString *)message;
+- (void)completion:(void (^)())completion error:(void (^)())error;
+- (void)showAlertToController:(UIViewController *)controller;
 @end

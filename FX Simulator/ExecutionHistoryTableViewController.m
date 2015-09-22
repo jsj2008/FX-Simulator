@@ -10,6 +10,7 @@
 
 #import "ExecutionHistoryTableViewCell.h"
 #import "ExecutionOrder.h"
+#import "ExecutionOrderRelationChunk.h"
 #import "Lot.h"
 #import "Time.h"
 #import "Money.h"
@@ -29,12 +30,14 @@ static const unsigned int displayMaxExecutionHistoryRecords = 100;
     Currency *_displayCurrency;
     NSArray *_executionHistoryRecords;
     PositionSize *_positionSizeOfLot;
+    ExecutionOrderRelationChunk *_executionOrders;
 }
 
 - (void)loadSaveData:(SaveData *)saveData market:(Market *)market
 {
     _displayCurrency = saveData.accountCurrency;
     _positionSizeOfLot = saveData.positionSizeOfLot;
+    _executionOrders = saveData.executionOrders;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -66,7 +69,7 @@ static const unsigned int displayMaxExecutionHistoryRecords = 100;
 {
     [super viewWillAppear:animated];
     
-    _executionHistoryRecords = [ExecutionOrder selectNewestFirstLimit:displayMaxExecutionHistoryRecords];
+    _executionHistoryRecords = [_executionOrders selectNewestFirstLimit:displayMaxExecutionHistoryRecords];
     
     [self.tableView reloadData];
 }

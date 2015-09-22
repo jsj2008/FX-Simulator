@@ -13,31 +13,45 @@
 #import "OnlyCloseOrdersCreateMode.h"
 #import "OnlyNewOrdersCreateMode.h"
 #import "OpenPosition.h"
+#import "OpenPositionRelationChunk.h"
 #import "Order.h"
 #import "PositionSize.h"
 #import "PositionType.h"
 
-@implementation OrdersCreateModeFactory
+@implementation OrdersCreateModeFactory {
+    OpenPositionRelationChunk *_openPositions;
+    OnlyCloseOrdersCreateMode *_onlyClose;
+    OnlyNewOrdersCreateMode *_onlyNew;
+    CloseAndNewOrdersCreateMode *_closeAndNew;
+}
+
+- (instancetype)initWithOpenPositions:(OpenPositionRelationChunk *)openPositions
+{
+    if (self = [super init]) {
+        _openPositions = openPositions;
+        _onlyClose = [OnlyCloseOrdersCreateMode new];
+        _onlyNew = [OnlyNewOrdersCreateMode new];
+        _closeAndNew = [[CloseAndNewOrdersCreateMode alloc] initWithOpenPositions:_openPositions];
+    }
+    
+    return self;
+}
 
 #warning positionsize
-+ (OrdersCreateMode *)createModeFromOrder:(Order *)order
+- (OrdersCreateMode *)createModeFromOrder:(Order *)order
 {
-    OrdersCreateMode *onlyClose = [OnlyCloseOrdersCreateMode new];
-    OrdersCreateMode *onlyNew = [OnlyNewOrdersCreateMode new];
-    OrdersCreateMode *closeAndNew = [CloseAndNewOrdersCreateMode new];
-    
-    PositionType *positionType = [OpenPosition positionTypeOfCurrencyPair:order.currencyPair];
-    position_size_t totalPositionSize = [OpenPosition totalPositionSizeOfCurrencyPair:order.currencyPair].sizeValue;
+    PositionType *positionType = [_openPositions positionTypeOfCurrencyPair:order.currencyPair];
+    position_size_t totalPositionSize = [_openPositions totalPositionSizeOfCurrencyPair:order.currencyPair].sizeValue;
     
     if (totalPositionSize == 0) {
-        return onlyNew;
+        return _onlyNew;
     } else if ([positionType isEqualOrderType:order.positionType]) {
-        return onlyNew;
+        return _onlyNew;
     } else {
         if (order.positionSize.sizeValue <= totalPositionSize) {
-            return onlyClose;
+            return _onlyClose;
         } else if (totalPositionSize < order.positionSize.sizeValue) {
-            return closeAndNew;
+            return _closeAndNew;
         }
     }
     

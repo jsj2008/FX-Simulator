@@ -16,10 +16,12 @@
 #import "CoreDataManager.h"
 #import "Currency.h"
 #import "CurrencyPair.h"
+#import "ExecutionOrderRelationChunk.h"
 #import "FXSTimeRange.h"
 #import "FXSTest.h"
 #import "Lot.h"
 #import "Money.h"
+#import "OpenPositionRelationChunk.h"
 #import "PositionSize.h"
 #import "Setting.h"
 #import "Spread.h"
@@ -36,6 +38,8 @@
 }
 
 @synthesize account = _account;
+@synthesize openPositions = _openPositions;
+@synthesize executionOrders = _executionOrders;
 
 + (CoreDataManager *)coreDataManager
 {
@@ -217,8 +221,10 @@
         if (error) {
             error();
         }
-    } else if (completion) {
-        completion();
+    } else {
+        if (completion) {
+            completion();
+        }
     }
 }
 
@@ -371,11 +377,29 @@
 
 - (Account *)account
 {
-    if (_account != nil) {
-        return _account;
+    if (!_account) {
+        _account = [[Account alloc] initWithAccountCurrency:self.accountCurrency currencyPair:self.currencyPair startBalance:self.startBalance openPositions:self.openPositions executionOrders:self.executionOrders];
     }
     
-    return [[Account alloc] initWithAccountCurrency:self.accountCurrency currencyPair:self.currencyPair startBalance:self.startBalance];
+    return _account;
+}
+
+- (OpenPositionRelationChunk *)openPositions
+{
+    if (!_openPositions) {
+        _openPositions = [[OpenPositionRelationChunk alloc] initWithSaveSlot:self.slotNumber];
+    }
+    
+    return _openPositions;
+}
+
+- (ExecutionOrderRelationChunk *)executionOrders
+{
+    if (!_executionOrders) {
+        _executionOrders = [[ExecutionOrderRelationChunk alloc] initWithSaveSlot:self.slotNumber];
+    }
+    
+    return _executionOrders;
 }
 
 @end

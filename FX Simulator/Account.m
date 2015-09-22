@@ -9,12 +9,14 @@
 #import "Account.h"
 
 #import "ExecutionOrder.h"
+#import "ExecutionOrderRelationChunk.h"
 #import "ForexHistoryData.h"
 #import "Lot.h"
 #import "Market.h"
 #import "Money.h"
 #import "Money+ConvertToAccountCurrency.h"
 #import "OpenPosition.h"
+#import "OpenPositionRelationChunk.h"
 #import "PositionSize.h"
 #import "PositionType.h"
 #import "Rate.h"
@@ -26,14 +28,18 @@
     Currency *_accountCurrency;
     CurrencyPair *_currencyPair;
     Money *_startBalance;
+    OpenPositionRelationChunk *_openPositions;
+    ExecutionOrderRelationChunk *_executionOrders;
 }
 
--(instancetype)initWithAccountCurrency:(Currency *)currency currencyPair:(CurrencyPair *)currencyPair startBalance:(Money *)balance
+-(instancetype)initWithAccountCurrency:(Currency *)currency currencyPair:(CurrencyPair *)currencyPair startBalance:(Money *)balance openPositions:(OpenPositionRelationChunk *)openPositions executionOrders:(ExecutionOrderRelationChunk *)executionOrders
 {
     if (self = [super init]) {
         _accountCurrency = currency;
         _currencyPair = currencyPair;
         _startBalance = balance;
+        _openPositions = openPositions;
+        _executionOrders = executionOrders;
     }
     
     return self;
@@ -64,12 +70,12 @@
 
 - (Rate *)averageRate
 {
-    return [OpenPosition averageRateOfCurrencyPair:_currencyPair];
+    return [_openPositions averageRateOfCurrencyPair:_currencyPair];
 }
 
 - (Money *)balance
 {
-    Money *profitAndLoss = [[ExecutionOrder profitAndLossOfCurrencyPair:_currencyPair] convertToCurrency:_accountCurrency];
+    Money *profitAndLoss = [[_executionOrders profitAndLossOfCurrencyPair:_currencyPair] convertToCurrency:_accountCurrency];
     
     return [_startBalance addMoney:profitAndLoss];
 }
@@ -83,17 +89,17 @@
 
 - (PositionType *)orderType
 {
-    return [OpenPosition positionTypeOfCurrencyPair:_currencyPair];
+    return [_openPositions positionTypeOfCurrencyPair:_currencyPair];
 }
 
 - (Money *)profitAndLossForMarket:(Market *)market
 {    
-    return [OpenPosition profitAndLossOfCurrencyPair:_currencyPair ForMarket:market InCurrency:_accountCurrency];
+    return [_openPositions profitAndLossOfCurrencyPair:_currencyPair ForMarket:market InCurrency:_accountCurrency];
 }
 
 - (PositionSize *)totalPositionSize
 {
-    return [OpenPosition totalPositionSizeOfCurrencyPair:_currencyPair];
+    return [_openPositions totalPositionSizeOfCurrencyPair:_currencyPair];
 }
 
 @end

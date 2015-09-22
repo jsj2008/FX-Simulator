@@ -92,9 +92,9 @@
 
 - (void)didOrder:(OrderResult *)result
 {
-    if (result.isSuccess) {
+    [result completion:^{
         [self setTradeDataView];
-    }
+    } error:nil];
 }
 
 - (void)update

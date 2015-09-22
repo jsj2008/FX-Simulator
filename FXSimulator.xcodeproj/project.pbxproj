@@ -61,6 +61,8 @@
 		70BB8BEA1B60D07C00B0539D /* FXSimulator.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 70BB8BE81B60D07C00B0539D /* FXSimulator.xcdatamodeld */; };
 		70BF3C161BA9B88200779617 /* trade_db.sqlite3 in Resources */ = {isa = PBXBuildFile; fileRef = 70BF3C151BA9B88200779617 /* trade_db.sqlite3 */; };
 		70BF3C1C1BA9B96400779617 /* SaveDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 70BF3C1B1BA9B96400779617 /* SaveDataSource.m */; };
+		70BF3C221BAEF88500779617 /* OpenPositionRelationChunk.m in Sources */ = {isa = PBXBuildFile; fileRef = 70BF3C211BAEF88500779617 /* OpenPositionRelationChunk.m */; };
+		70BF3C251BAEF8D600779617 /* ExecutionOrderRelationChunk.m in Sources */ = {isa = PBXBuildFile; fileRef = 70BF3C241BAEF8D600779617 /* ExecutionOrderRelationChunk.m */; };
 		70CFEB3E1B16EA6800837727 /* TradeTestDb.sqlite3 in Resources */ = {isa = PBXBuildFile; fileRef = 70CFEB3D1B16EA6800837727 /* TradeTestDb.sqlite3 */; };
 		70CFEB411B19F92800837727 /* FXSTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 70CFEB401B19F92800837727 /* FXSTest.m */; };
 		70D2FA8A1A9F305700CAB509 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FA891A9F305700CAB509 /* main.m */; };
@@ -239,6 +241,10 @@
 		70BF3C151BA9B88200779617 /* trade_db.sqlite3 */ = {isa = PBXFileReference; lastKnownFileType = file; path = trade_db.sqlite3; sourceTree = "<group>"; };
 		70BF3C1A1BA9B96400779617 /* SaveDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SaveDataSource.h; sourceTree = "<group>"; };
 		70BF3C1B1BA9B96400779617 /* SaveDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SaveDataSource.m; sourceTree = "<group>"; };
+		70BF3C201BAEF88500779617 /* OpenPositionRelationChunk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenPositionRelationChunk.h; sourceTree = "<group>"; };
+		70BF3C211BAEF88500779617 /* OpenPositionRelationChunk.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenPositionRelationChunk.m; sourceTree = "<group>"; };
+		70BF3C231BAEF8D600779617 /* ExecutionOrderRelationChunk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExecutionOrderRelationChunk.h; sourceTree = "<group>"; };
+		70BF3C241BAEF8D600779617 /* ExecutionOrderRelationChunk.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExecutionOrderRelationChunk.m; sourceTree = "<group>"; };
 		70CFEB3A1B16CFF600837727 /* FX_Simulator-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FX_Simulator-Prefix.pch"; sourceTree = "<group>"; };
 		70CFEB3D1B16EA6800837727 /* TradeTestDb.sqlite3 */ = {isa = PBXFileReference; lastKnownFileType = file; path = TradeTestDb.sqlite3; sourceTree = "<group>"; };
 		70CFEB3F1B19F92800837727 /* FXSTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FXSTest.h; sourceTree = "<group>"; };
@@ -587,6 +593,10 @@
 				70FCD5F01BA6FAF900500B40 /* SetSaveDataTableViewController.m */,
 				70634FE51BA91EF9009ACCEE /* InputNumberValueViewController.h */,
 				70634FE61BA91EF9009ACCEE /* InputNumberValueViewController.m */,
+				70BF3C201BAEF88500779617 /* OpenPositionRelationChunk.h */,
+				70BF3C211BAEF88500779617 /* OpenPositionRelationChunk.m */,
+				70BF3C231BAEF8D600779617 /* ExecutionOrderRelationChunk.h */,
+				70BF3C241BAEF8D600779617 /* ExecutionOrderRelationChunk.m */,
 			);
 			path = "FX Simulator";
 			sourceTree = "<group>";
@@ -999,6 +1009,7 @@
 				707CA1B71B53A51700F099E9 /* Indicator.m in Sources */,
 				70D2FBD61A9F57CB00CAB509 /* SaveData.m in Sources */,
 				70D2FAD61A9F559200CAB509 /* OpenPositionTableViewController.m in Sources */,
+				70BF3C221BAEF88500779617 /* OpenPositionRelationChunk.m in Sources */,
 				70D2FBA31A9F57A000CAB509 /* ForexHistoryFactory.m in Sources */,
 				70D2FBF91A9F57DC00CAB509 /* OrdersCreateMode.m in Sources */,
 				7034F6C61B92DB140029A79C /* OrderBase.m in Sources */,
@@ -1023,6 +1034,7 @@
 				7076F5AB1AECCEB3004CC6BA /* MainViewController.m in Sources */,
 				70D2FC491A9F591600CAB509 /* ProfitAndLossCalculator.m in Sources */,
 				70D2FB4A1A9F574000CAB509 /* RatePanelViewController.m in Sources */,
+				70BF3C251BAEF8D600779617 /* ExecutionOrderRelationChunk.m in Sources */,
 				70FCD5B61B9EB49400500B40 /* ExecutionOrderComponents.m in Sources */,
 				70EACE621B1ED17700A2E532 /* SimulationManager.m in Sources */,
 				70D2FBC21A9F57BD00CAB509 /* OpenPosition.m in Sources */,

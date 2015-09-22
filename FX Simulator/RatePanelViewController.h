@@ -7,12 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "OrderManager.h"
 
 @class Market;
 @class OrderManager;
 @class SaveData;
 
-@interface RatePanelViewController : UIViewController
+@interface RatePanelViewController : UIViewController <OrderManagerDelegate>
 - (void)loadSaveData:(SaveData *)saveData;
 - (void)loadMarket:(Market *)market;
 - (void)loadOrderManager:(OrderManager *)orderManager;

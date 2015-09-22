@@ -15,6 +15,7 @@
 @class Rate;
 
 @interface PositionBase : TradeDatabase {
+    NSUInteger _saveSlot;
     CurrencyPair *_currencyPair;
     PositionType *_positionType;
     Rate *_rate;
@@ -26,6 +27,6 @@
 @property (nonatomic, readonly) Rate *rate;
 @property (nonatomic, readonly) PositionSize *positionSize;*/
 
-- (instancetype)initWithCurrencyPair:(CurrencyPair *)currencyPair positionType:(PositionType *)positionType rate:(Rate *)rate positionSize:(PositionSize *)positionSize;
+- (instancetype)initWithSaveSlot:(NSUInteger)slot CurrencyPair:(CurrencyPair *)currencyPair positionType:(PositionType *)positionType rate:(Rate *)rate positionSize:(PositionSize *)positionSize;
 
 @end
