@@ -71,7 +71,8 @@
     saveData.isAutoUpdate = YES;
     saveData.autoUpdateIntervalSeconds = 1.0;
     
-    [_coreDataManagerInMemory saveContext];
+    NSError *error = nil;
+    [_coreDataManagerInMemory saveContext:&error];
     
     SaveData *newSaveData = [SaveData loadFromSlotNumber:slotNumber];
     

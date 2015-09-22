@@ -17,6 +17,7 @@
  左側の通貨。
  */
 @property (nonatomic, readonly) Currency *baseCurrency;
+
 /**
  右側の通貨。
  */

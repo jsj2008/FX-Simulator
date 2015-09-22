@@ -29,6 +29,9 @@
 #import "TimeFrame.h"
 #import "TimeFrameChunk.h"
 
+static BOOL FXSDefaultIsAutoUpdate = YES;
+static float FXSDefaultAutoUpdateIntervalSeconds = 1.0;
+
 @interface SaveData ()
 @property (nonatomic) NSUInteger slotNumber;
 @end
@@ -46,6 +49,25 @@
     return [CoreDataManager sharedManager];
 }
 
++ (instancetype)createNewSaveDataFromSlotNumber:(NSUInteger)slotNumber currencyPair:(CurrencyPair *)currencyPair timeFrame:(TimeFrame *)timeFrame
+{
+    if (!currencyPair || !timeFrame) {
+        return nil;
+    }
+    
+    SaveDataSource *source = [NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass([SaveDataSource class]) inManagedObjectContext:[self coreDataManager].managedObjectContext];
+    
+    SaveData *saveData = [[SaveData alloc] initWithSaveDataSource:source];
+    
+    saveData.slotNumber = slotNumber;
+    saveData.currencyPair = currencyPair;
+    saveData.timeFrame = timeFrame;
+    
+    [saveData setDefaultCharts];
+    
+    return saveData;
+}
+
 + (instancetype)createDefaultNewSaveDataFromSlotNumber:(NSUInteger)slotNumber
 {
     CurrencyPair *currencyPair = [[CurrencyPair alloc] initWithBaseCurrency:[[Currency alloc] initWithCurrencyType:USD] QuoteCurrency:[[Currency alloc] initWithCurrencyType:JPY]];
@@ -59,9 +81,10 @@
     saveData.accountCurrency = [[Currency alloc] initWithCurrencyType:JPY];
     saveData.startBalance = [[Money alloc] initWithAmount:1000000 currency:saveData.accountCurrency];
     saveData.positionSizeOfLot = [[PositionSize alloc] initWithSizeValue:10000];
+    
     saveData.tradePositionSize = [[PositionSize alloc] initWithSizeValue:10000];
-    saveData.isAutoUpdate = YES;
-    saveData.autoUpdateIntervalSeconds = 1.0;
+    saveData.isAutoUpdate = FXSDefaultIsAutoUpdate;
+    saveData.autoUpdateIntervalSeconds = FXSDefaultAutoUpdateIntervalSeconds;
     
     return saveData;
 }
@@ -79,6 +102,11 @@
     newSave.startBalance = [[Money alloc] initWithAmount:material.startBalance.amount currency:material.accountCurrency];
     newSave.positionSizeOfLot = material.positionSizeOfLot;
     
+    newSave.lastLoadedTime = newSave.startTime;
+    newSave.tradePositionSize = material.positionSizeOfLot;
+    newSave.isAutoUpdate = FXSDefaultIsAutoUpdate;
+    newSave.autoUpdateIntervalSeconds = FXSDefaultAutoUpdateIntervalSeconds;
+    
     return newSave;
 }
 
@@ -89,27 +117,6 @@
     } else {
         return NO;
     }
-}
-
-+ (instancetype)createNewSaveDataFromSlotNumber:(NSUInteger)slotNumber currencyPair:(CurrencyPair *)currencyPair timeFrame:(TimeFrame *)timeFrame
-{
-    if (!currencyPair || !timeFrame) {
-        return nil;
-    }
-    
-    SaveDataSource *source = [NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass([SaveDataSource class]) inManagedObjectContext:[self coreDataManager].managedObjectContext];
-    
-    SaveData *saveData = [[SaveData alloc] initWithSaveDataSource:source];
-    
-    saveData.slotNumber = slotNumber;
-    saveData.currencyPair = currencyPair;
-    saveData.timeFrame = timeFrame;
-    
-    //[saveData setDefaultCharts];
-    
-    [saveData newSave];
-    
-    return saveData;
 }
 
 + (instancetype)loadFromSlotNumber:(NSUInteger)slotNumber
@@ -184,31 +191,9 @@
     NSManagedObjectContext *context = [[self class] coreDataManager].managedObjectContext;
     
     [context deleteObject:_saveDataSource];
-}
-
-/**
- 重複するslotNumberのセーブデータを全て削除する。
-*/
-- (void)newSave
-{
-    [self setDefaultCharts];
     
-    NSManagedObjectContext *context = [[self class] coreDataManager].managedObjectContext;
-    
-    NSFetchRequest *fetchRequest = [NSFetchRequest new];
-    NSEntityDescription * entityDescription = [NSEntityDescription entityForName:NSStringFromClass([SaveDataSource class]) inManagedObjectContext:context];
-    [fetchRequest setEntity:entityDescription];
-    NSPredicate * predicate = [NSPredicate predicateWithFormat:@"(slotNumber = %d)", self.slotNumber];
-     [fetchRequest setPredicate:predicate];
-    
-    NSError * error2;
-    NSArray * objects = [context executeFetchRequest:fetchRequest error:&error2];
-    
-    for (SaveDataSource *obj in objects) {
-        if (_saveDataSource.objectID != obj.objectID) {
-            [context deleteObject:obj];
-        }
-    }    
+    [self.openPositions delete];
+    [self.executionOrders delete];
 }
 
 - (void)saveWithCompletion:(void (^)())completion error:(void (^)())error
@@ -264,6 +249,10 @@
 
 - (void)setCurrencyPair:(CurrencyPair *)currencyPair
 {
+    if (!currencyPair) {
+        return;
+    }
+    
     NSArray *currencyPairs = @[currencyPair];
     
     _saveDataSource.currencyPairs = currencyPairs;
@@ -276,6 +265,10 @@
 
 - (void)setTimeFrame:(TimeFrame *)timeFrame
 {
+    if (!timeFrame) {
+        return;
+    }
+    
     _saveDataSource.timeFrame = (int)timeFrame.minute;
 }
 
@@ -288,6 +281,10 @@
 
 - (void)setStartTime:(Time *)startTime
 {
+    if (!startTime) {
+        return;
+    }
+    
     _saveDataSource.startTime = startTime.date.timeIntervalSince1970;
 }
 
@@ -298,6 +295,10 @@
 
 - (void)setSpread:(Spread *)spread
 {
+    if (!spread) {
+        return;
+    }
+    
     NSArray *spreads = @[spread];
     
     _saveDataSource.spreads = spreads;
@@ -312,6 +313,10 @@
 
 - (void)setLastLoadedTime:(Time *)lastLoadedTime
 {
+    if (!lastLoadedTime) {
+        return;
+    }
+    
     _saveDataSource.lastLoadedTime = lastLoadedTime.date.timeIntervalSince1970;
 }
 
@@ -322,6 +327,10 @@
 
 - (void)setAccountCurrency:(Currency *)accountCurrency
 {
+    if (!accountCurrency) {
+        return;
+    }
+    
     _saveDataSource.accountCurrency = accountCurrency;
 }
 
@@ -332,6 +341,10 @@
 
 - (void)setPositionSizeOfLot:(PositionSize *)positionSizeOfLot
 {
+    if (!positionSizeOfLot) {
+        return;
+    }
+    
     _saveDataSource.positionSizeOfLot = (int)positionSizeOfLot.sizeValue;
 }
 
@@ -342,6 +355,10 @@
 
 - (void)setTradePositionSize:(PositionSize *)tradePositionSize
 {
+    if (!tradePositionSize) {
+        return;
+    }
+    
     _saveDataSource.tradePositionSize = tradePositionSize.sizeValue;
 }
 
@@ -352,6 +369,10 @@
 
 - (void)setStartBalance:(Money *)startBalance
 {
+    if (!startBalance) {
+        return;
+    }
+    
     _saveDataSource.startBalance = startBalance;
 }
 

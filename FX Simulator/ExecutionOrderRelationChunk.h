@@ -23,4 +23,6 @@
 
 - (NSArray *)selectNewestFirstLimit:(NSUInteger)limit;
 
+- (void)delete;
+
 @end

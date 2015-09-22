@@ -282,6 +282,15 @@ static const int maxRecords = 50;
     return count;
 }
 
++ (void)deleteSaveSlot:(NSUInteger)slot
+{
+    NSString *sql = [NSString stringWithFormat:@"DELETE FROM %@ WHERE save_slot = ?;", FXSOpenPositionsTableName];
+    
+    [self execute:^(FMDatabase *db) {
+        [db executeUpdate:sql, @(slot)];
+    }];
+}
+
 - (instancetype)initWithComponents:(OpenPositionComponents *)components
 {
     if (self = [self initWithSaveSlot:components.saveSlot CurrencyPair:components.currencyPair positionType:components.positionType rate:components.rate positionSize:components.positionSize]) {

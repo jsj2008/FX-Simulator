@@ -43,6 +43,8 @@
 
 + (Rate *)averageRateOfCurrencyPair:(CurrencyPair *)currencyPair saveSlot:(NSUInteger)slot;
 
++ (void)deleteSaveSlot:(NSUInteger)slot;
+
 /**
  新規のポジションを追加できるかどうか
 */

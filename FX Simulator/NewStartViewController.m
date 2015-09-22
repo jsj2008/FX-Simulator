@@ -74,7 +74,8 @@
         
     SaveData *newSave = [SaveData createNewSaveDataFromMaterial:controller];
     [newSave saveWithCompletion:^{
-        ;
+        [_saveData delete];
+        [_simulationManager loadSaveData:newSave];
     } error:^{
         [newSave delete];
     }];

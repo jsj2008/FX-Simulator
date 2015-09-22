@@ -58,4 +58,9 @@
     return [OpenPosition isExecutableNewPositionOfSaveSlot:_saveSlot];
 }
 
+- (void)delete
+{
+    [OpenPosition deleteSaveSlot:_saveSlot];
+}
+
 @end

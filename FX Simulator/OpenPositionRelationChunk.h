@@ -43,4 +43,6 @@
  */
 - (BOOL)isExecutableNewPosition;
 
+- (void)delete;
+
 @end
