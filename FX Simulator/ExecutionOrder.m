@@ -140,6 +140,15 @@ static NSString* const FXSExecutionOrdersTableName = @"execution_orders";
     return array;
 }
 
++ (void)deleteSaveSlot:(NSUInteger)slot
+{
+    NSString *sql = [NSString stringWithFormat:@"DELETE FROM %@ WHERE save_slot = ?;", FXSExecutionOrdersTableName];
+    
+    [self execute:^(FMDatabase *db) {
+        [db executeUpdate:sql, @(slot)];
+    }];
+}
+
 - (instancetype)initWithComponents:(ExecutionOrderComponents *)components
 {
     if (self = [self initWithSaveSlot:components.saveSlot CurrencyPair:components.currencyPair positionType:components.positionType rate:components.rate positionSize:components.positionSize]) {

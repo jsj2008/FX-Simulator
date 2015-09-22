@@ -44,4 +44,9 @@
     return [ExecutionOrder selectNewestFirstLimit:limit saveSlot:_saveSlot];
 }
 
+- (void)delete
+{
+    [ExecutionOrder deleteSaveSlot:_saveSlot];
+}
+
 @end

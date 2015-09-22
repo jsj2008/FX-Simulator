@@ -32,6 +32,8 @@
 
 + (NSArray *)selectNewestFirstLimit:(NSUInteger)limit saveSlot:(NSUInteger)slot;
 
++ (void)deleteSaveSlot:(NSUInteger)slot;
+
 - (void)displayDataUsingBlock:(void (^)(NSString *currencyPair, NSString *positionType, NSString *rate, NSString *lot, NSString *orderId, NSString *closeTargetOrderId, NSString *profitAndLoss, NSString *ymdTime, NSString *hmsTime, UIColor *profitAndLossColor))block sizeOfLot:(PositionSize *)size displayCurrency:(Currency *)displayCurrency;
 
 - (void)execute;

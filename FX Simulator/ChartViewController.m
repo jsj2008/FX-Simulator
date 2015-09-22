@@ -44,7 +44,7 @@ static const NSUInteger kMinDisplayForexDataCount = 40;
     }
 }
 
-- (IBAction)handlePanGesture:(UIPanGestureRecognizer *)sender
+/*- (IBAction)handlePanGesture:(UIPanGestureRecognizer *)sender
 {
     if (_chunk == nil || _store == nil) {
         return;
@@ -64,9 +64,9 @@ static const NSUInteger kMinDisplayForexDataCount = 40;
         
     }
 
-}
+}*/
 
-- (BOOL)updateChartForMoveDistance:(float)distance
+/*- (BOOL)updateChartForMoveDistance:(float)distance
 {
     if (distance < 0) {
         [self nextChart];
@@ -79,23 +79,23 @@ static const NSUInteger kMinDisplayForexDataCount = 40;
     }
     
     return NO;
-}
+}*/
 
-- (void)previousChart
+/*- (void)previousChart
 {
-    /*ForexHistoryData *newCurrentData = [_displayedForexDataChunk getForexDataFromCurrent:1];
+    ForexHistoryData *newCurrentData = [_displayedForexDataChunk getForexDataFromCurrent:1];
     if (newCurrentData == nil) {
         return;
     }
     _displayedForexDataChunk = [_store getChunkFromBaseData:newCurrentData limit:[ChartViewController requireForexDataCountForChart]];
-    [self updateChartFor:_displayedForexDataChunk];*/
-}
+    [self updateChartFor:_displayedForexDataChunk];
+}*/
 
-- (void)nextChart
+/*- (void)nextChart
 {
-    /*_displayedForexDataChunk = [_store getChunkFromNextDataOf:_displayedForexDataChunk.current limit:[ChartViewController requireForexDataCountForChart]];
-    [self updateChartFor:_displayedForexDataChunk];*/
-}
+    _displayedForexDataChunk = [_store getChunkFromNextDataOf:_displayedForexDataChunk.current limit:[ChartViewController requireForexDataCountForChart]];
+    [self updateChartFor:_displayedForexDataChunk];
+}*/
 
 
 - (IBAction)handleLongPressGesture:(UILongPressGestureRecognizer *) sender

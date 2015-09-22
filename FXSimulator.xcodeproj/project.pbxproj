@@ -21,7 +21,6 @@
 		700C9E811B786C800084320E /* TimeFrameChunk.m in Sources */ = {isa = PBXBuildFile; fileRef = 700C9E801B786C800084320E /* TimeFrameChunk.m */; };
 		7033C5D61B469F56005EF07B /* NSNumber+FXSNumberConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 7033C5D51B469F56005EF07B /* NSNumber+FXSNumberConverter.m */; };
 		7034F6C31B92D6AE0029A79C /* PositionBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 7034F6C21B92D6AE0029A79C /* PositionBase.m */; };
-		7034F6C61B92DB140029A79C /* OrderBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 7034F6C51B92DB140029A79C /* OrderBase.m */; };
 		7041B7111B2EEDAD00DD64FE /* Account.m in Sources */ = {isa = PBXBuildFile; fileRef = 7041B7101B2EEDAD00DD64FE /* Account.m */; };
 		7041B7141B3278A700DD64FE /* FXSTimeRange.m in Sources */ = {isa = PBXBuildFile; fileRef = 7041B7131B3278A700DD64FE /* FXSTimeRange.m */; };
 		70467D2E1B8316A300B75BD3 /* CoreDataInMemoryManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 70467D2D1B8316A300B75BD3 /* CoreDataInMemoryManager.m */; };
@@ -181,8 +180,6 @@
 		7034F6BE1B92D2780029A79C /* TradeDatabase+Protected.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TradeDatabase+Protected.h"; sourceTree = "<group>"; };
 		7034F6C11B92D6AE0029A79C /* PositionBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PositionBase.h; sourceTree = "<group>"; };
 		7034F6C21B92D6AE0029A79C /* PositionBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PositionBase.m; sourceTree = "<group>"; };
-		7034F6C41B92DB140029A79C /* OrderBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderBase.h; sourceTree = "<group>"; };
-		7034F6C51B92DB140029A79C /* OrderBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderBase.m; sourceTree = "<group>"; };
 		7041B70F1B2EEDAD00DD64FE /* Account.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Account.h; sourceTree = "<group>"; };
 		7041B7101B2EEDAD00DD64FE /* Account.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Account.m; sourceTree = "<group>"; };
 		7041B7121B3278A700DD64FE /* FXSTimeRange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FXSTimeRange.h; sourceTree = "<group>"; };
@@ -573,8 +570,6 @@
 				7034F6BE1B92D2780029A79C /* TradeDatabase+Protected.h */,
 				7034F6C11B92D6AE0029A79C /* PositionBase.h */,
 				7034F6C21B92D6AE0029A79C /* PositionBase.m */,
-				7034F6C41B92DB140029A79C /* OrderBase.h */,
-				7034F6C51B92DB140029A79C /* OrderBase.m */,
 				70FCD5A21B9B187900500B40 /* NormalizedOrdersFactory.h */,
 				70FCD5A31B9B187900500B40 /* NormalizedOrdersFactory.m */,
 				70FCD5A51B9B1B2400500B40 /* OrderManager.h */,
@@ -1012,7 +1007,6 @@
 				70BF3C221BAEF88500779617 /* OpenPositionRelationChunk.m in Sources */,
 				70D2FBA31A9F57A000CAB509 /* ForexHistoryFactory.m in Sources */,
 				70D2FBF91A9F57DC00CAB509 /* OrdersCreateMode.m in Sources */,
-				7034F6C61B92DB140029A79C /* OrderBase.m in Sources */,
 				7041B7141B3278A700DD64FE /* FXSTimeRange.m in Sources */,
 				70D2FB691A9F576500CAB509 /* Market.m in Sources */,
 				70D2FB251A9F572B00CAB509 /* SubChartViewController.m in Sources */,
