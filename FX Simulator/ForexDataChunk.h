@@ -64,6 +64,10 @@
 
 - (ForexHistoryData *)getForexDataFromTouchPoint:(CGPoint)point displayCount:(NSUInteger)count viewSize:(CGSize)size;
 
+- (ForexDataChunk *)chunkLimit:(NSUInteger)limit;
+
+- (BOOL)existForexData:(ForexHistoryData *)forexData;
+
 @property (nonatomic, readonly) NSUInteger count;
 @property (nonatomic, readonly) ForexHistoryData *current;
 @property (nonatomic, readonly) ForexHistoryData *oldest;

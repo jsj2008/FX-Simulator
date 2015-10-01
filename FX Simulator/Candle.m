@@ -13,9 +13,11 @@
 #import "CandleSource.h"
 #import "CandlesFactory.h"
 #import "ForexDataChunk.h"
+#import "ForexHistoryData.h"
 
 @implementation Candle {
     CandleSource *_source;
+    NSArray *_candles;
 }
 
 + (instancetype)createTemporaryDefaultCandle
@@ -58,11 +60,41 @@
         return;
     }
     
-    NSArray *candles = [CandlesFactory createCandlesFromForexHistoryDataChunk:chunk displayForexDataCount:count chartViewWidth:size.width chartViewHeight:size.height];
+    _candles = [CandlesFactory createCandlesFromForexHistoryDataChunk:chunk displayForexDataCount:count chartViewWidth:size.width chartViewHeight:size.height];
     
-    for (SimpleCandle *candle in candles) {
+    for (SimpleCandle *candle in _candles) {
         [candle stroke];
     }
+}
+
+- (ForexDataChunk *)chunkRangeStartX:(float)startX endX:(float)endX
+{
+    NSMutableArray *rangeForexDataArray = [NSMutableArray array];
+    
+    for (SimpleCandle *candle in _candles) {
+        float x = candle.rect.origin.x;
+        if (startX <= (x + candle.rect.size.width) && x <= endX) {
+            [rangeForexDataArray addObject:candle.forexHistoryData];
+        }
+    }
+    
+    return [[ForexDataChunk alloc] initWithForexDataArray:rangeForexDataArray];
+}
+
+- (ForexHistoryData *)leftEndForexData
+{
+    return ((SimpleCandle *)_candles.lastObject).forexHistoryData;
+}
+
+- (float)zoneStartXOfForexData:(ForexHistoryData *)forexData
+{
+    for (SimpleCandle *candle in _candles) {
+        if ([forexData isEqualToForexData:candle.forexHistoryData]) {
+            return candle.rect.origin.x;
+        }
+    }
+    
+    return -1;
 }
 
 #pragma mark - getter,setter

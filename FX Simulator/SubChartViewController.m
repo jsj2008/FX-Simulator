@@ -140,8 +140,7 @@
 {
     Chart *displayChart = _subChartChunk.displayChart;
     [_chartViewController setChart:displayChart];
-    
-    [_chartViewController updateChartForTime:_market.currentTime];
+    [_chartViewController update:_market];
 }
 
 /*-(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event

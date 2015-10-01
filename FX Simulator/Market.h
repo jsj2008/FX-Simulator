@@ -65,6 +65,12 @@
  */
 - (Rates *)getCurrentRatesOfCurrencyPair:(CurrencyPair *)currencyPair;
 
+- (ForexDataChunk *)chunkForCurrencyPair:(CurrencyPair *)currencyPair timeFrame:(TimeFrame *)timeFrame Limit:(NSUInteger)limit;
+
+- (ForexDataChunk *)chunkForCurrencyPair:(CurrencyPair *)currencyPair timeFrame:(TimeFrame *)timeFrame baseTime:(Time *)baseTime frontLimit:(NSUInteger)frontLimit backLimit:(NSUInteger)backLimit;
+
+- (ForexDataChunk *)chunkForCurrencyPair:(CurrencyPair *)currencyPair timeFrame:(TimeFrame *)timeFrame centerForexData:(ForexHistoryData *)forexData frontLimit:(NSUInteger)frontLimit backLimit:(NSUInteger)backLimit;
+
 /**
  Startした瞬間、時間が進み、Observerのメソッドが呼ばれ、それぞれのObserverに値がセットされる。
 */

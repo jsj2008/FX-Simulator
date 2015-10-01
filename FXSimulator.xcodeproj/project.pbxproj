@@ -85,7 +85,6 @@
 		70D2FB491A9F574000CAB509 /* ChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FB2D1A9F574000CAB509 /* ChartViewController.m */; };
 		70D2FB4A1A9F574000CAB509 /* RatePanelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FB2F1A9F574000CAB509 /* RatePanelViewController.m */; };
 		70D2FB4B1A9F574000CAB509 /* TradeDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FB311A9F574000CAB509 /* TradeDataViewController.m */; };
-		70D2FB501A9F574000CAB509 /* ChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FB3B1A9F574000CAB509 /* ChartView.m */; };
 		70D2FB5F1A9F575900CAB509 /* ExecutionHistoryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FB581A9F575900CAB509 /* ExecutionHistoryTableViewController.m */; };
 		70D2FB601A9F575900CAB509 /* ExecutionHistoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FB5A1A9F575900CAB509 /* ExecutionHistoryTableViewCell.m */; };
 		70D2FB691A9F576500CAB509 /* Market.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FB641A9F576500CAB509 /* Market.m */; };
@@ -286,8 +285,6 @@
 		70D2FB2F1A9F574000CAB509 /* RatePanelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RatePanelViewController.m; sourceTree = "<group>"; };
 		70D2FB301A9F574000CAB509 /* TradeDataViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TradeDataViewController.h; sourceTree = "<group>"; };
 		70D2FB311A9F574000CAB509 /* TradeDataViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TradeDataViewController.m; sourceTree = "<group>"; };
-		70D2FB3A1A9F574000CAB509 /* ChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChartView.h; sourceTree = "<group>"; };
-		70D2FB3B1A9F574000CAB509 /* ChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChartView.m; sourceTree = "<group>"; };
 		70D2FB571A9F575900CAB509 /* ExecutionHistoryTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExecutionHistoryTableViewController.h; sourceTree = "<group>"; };
 		70D2FB581A9F575900CAB509 /* ExecutionHistoryTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExecutionHistoryTableViewController.m; sourceTree = "<group>"; };
 		70D2FB591A9F575900CAB509 /* ExecutionHistoryTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExecutionHistoryTableViewCell.h; sourceTree = "<group>"; };
@@ -783,8 +780,6 @@
 				70D2FB2F1A9F574000CAB509 /* RatePanelViewController.m */,
 				70D2FB301A9F574000CAB509 /* TradeDataViewController.h */,
 				70D2FB311A9F574000CAB509 /* TradeDataViewController.m */,
-				70D2FB3A1A9F574000CAB509 /* ChartView.h */,
-				70D2FB3B1A9F574000CAB509 /* ChartView.m */,
 				70AD14741AADD0AA0099F0BA /* RatePanelButton.h */,
 				70AD14751AADD0AA0099F0BA /* RatePanelButton.m */,
 			);
@@ -995,7 +990,6 @@
 				70D2FC511A9F591600CAB509 /* Time.m in Sources */,
 				70BF3C1C1BA9B96400779617 /* SaveDataSource.m in Sources */,
 				705DCE4C1AE7CE9800BCF710 /* RatePanelButton.m in Sources */,
-				70D2FB501A9F574000CAB509 /* ChartView.m in Sources */,
 				7079FEEB1AF9E688004D3CEA /* NSDate+FXSDateData.m in Sources */,
 				70D2FBFA1A9F57DC00CAB509 /* OnlyCloseOrdersCreateMode.m in Sources */,
 				70FCD5B91BA0812500500B40 /* SimulationStateResult.m in Sources */,

@@ -21,9 +21,11 @@
 {
     NSMutableArray *array = [NSMutableArray array];
     
-    float spaceBetweenCandles = 2.0;
+    float candleZoneWidth = width / count;
+    float spaceBetweenCandles = candleZoneWidth * 0.3;
     NSUInteger numberOfCandle = count;
-    float candleWidth = (width-spaceBetweenCandles*numberOfCandle-spaceBetweenCandles)/numberOfCandle;
+    float candleWidth = candleZoneWidth - spaceBetweenCandles;
+    //float candleWidth = (width-spaceBetweenCandles*numberOfCandle-spaceBetweenCandles)/numberOfCandle;
     double maxRate = [chunk getMaxRateLimit:count].rateValue;
     double minRate = [chunk getMinRateLimit:count].rateValue;
     float pipDispSize = height/(maxRate - minRate);

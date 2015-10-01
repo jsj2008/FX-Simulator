@@ -127,7 +127,7 @@ typedef void (^LoadSaveDataBlock)(SetSaveDataBlock);
 
 - (void)update
 {
-    [_chartViewController updateChartForTime:_market.currentTime];
+    [_chartViewController update:_market];
     [_ratePanelViewController update];
     [_tradeDataViewController update];
 }

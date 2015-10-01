@@ -122,6 +122,33 @@ static NSString * const kKeyPath = @"currentTime";
     return [[[Rates alloc] initWithBidRtae:currentBidRate] askRate];
 }
 
+- (ForexDataChunk *)chunkForCurrencyPair:(CurrencyPair *)currencyPair timeFrame:(TimeFrame *)timeFrame Limit:(NSUInteger)limit
+{
+    ForexHistory *forexDb = [[ForexHistory alloc] initWithCurrencyPair:currencyPair timeScale:timeFrame];
+    
+    return [forexDb selectBaseTime:self.currentTime frontLimit:0 backLimit:limit];
+}
+
+- (ForexDataChunk *)chunkForCurrencyPair:(CurrencyPair *)currencyPair timeFrame:(TimeFrame *)timeFrame baseTime:(Time *)baseTime frontLimit:(NSUInteger)frontLimit backLimit:(NSUInteger)backLimit
+{
+    ForexHistory *forexDb = [[ForexHistory alloc] initWithCurrencyPair:currencyPair timeScale:timeFrame];
+    
+    return [forexDb selectBaseTime:self.currentTime frontLimit:frontLimit backLimit:backLimit];
+}
+
+- (ForexDataChunk *)chunkForCurrencyPair:(CurrencyPair *)currencyPair timeFrame:(TimeFrame *)timeFrame centerForexData:(ForexHistoryData *)forexData frontLimit:(NSUInteger)frontLimit backLimit:(NSUInteger)backLimit
+{
+    ForexHistory *forexDb = [[ForexHistory alloc] initWithCurrencyPair:currencyPair timeScale:timeFrame];
+    
+    ForexDataChunk *chunk = [forexDb selectBaseTime:forexData.close.timestamp frontLimit:frontLimit backLimit:backLimit];
+    
+    if ([chunk existForexData:forexData]) {
+        return chunk;
+    } else {
+        return nil;
+    }
+}
+
 /**
  ObserverにMarketの更新前、更新、更新後を通知。
 */

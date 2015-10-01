@@ -96,6 +96,11 @@ static const NSUInteger buffer = 200;
     return [self getChunkFromBaseTime:time relativePosition:1 limit:limit];
 }
 
+- (ForexDataChunk *)chunkForBaseTime:(Time *)time frontLimit:(NSUInteger)frontLimit backLimit:(NSUInteger)backLimit
+{
+    return [_forexHistory selectBaseTime:time frontLimit:frontLimit backLimit:backLimit];
+}
+
 /**
  currentTimeとoldTimeの間の時間足データを作成する。
  例えば1時間足のチャートを、15分足にしてみると、1時間で割り切れる時間以外は、15分足の端数がでる。その端数を1時間足に変換して、オリジナルの1時間足を作成する。
