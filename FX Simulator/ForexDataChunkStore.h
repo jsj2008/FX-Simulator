@@ -31,4 +31,6 @@
 */
 - (ForexDataChunk *)getChunkFromNextDataOfTime:(Time *)time limit:(NSUInteger)limit;
 
+- (ForexDataChunk *)chunkForBaseTime:(Time *)time frontLimit:(NSUInteger)frontLimit backLimit:(NSUInteger)backLimit;
+
 @end

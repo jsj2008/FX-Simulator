@@ -331,6 +331,30 @@
     return _forexDataArray[back];
 }
 
+- (ForexDataChunk *)chunkLimit:(NSUInteger)limit
+{
+    NSMutableArray *forexDataArray = [NSMutableArray array];
+    
+    [self enumerateForexDataUsingBlock:^(ForexHistoryData *obj, NSUInteger idx) {
+        [forexDataArray addObject:obj];
+    } limit:limit];
+    
+    return [[[self class] alloc] initWithForexDataArray:forexDataArray];
+}
+
+- (BOOL)existForexData:(ForexHistoryData *)forexData
+{
+    __block BOOL exist;
+    
+    [_forexDataArray enumerateObjectsUsingBlock:^(ForexHistoryData *obj, NSUInteger idx, BOOL *stop) {
+        if ([forexData isEqualToForexData:obj]) {
+            exist = YES;
+        }
+    }];
+    
+    return exist;
+}
+
 - (ForexHistoryData *)getForexDataFromTouchPoint:(CGPoint)point displayCount:(NSUInteger)count viewSize:(CGSize)size
 {
     float displayForexDataWidth = size.width / count;

@@ -1408,7 +1408,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="300"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K2M-dE-C6r" customClass="ChartView">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K2M-dE-C6r">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="300"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <gestureRecognizers/>
@@ -1419,6 +1419,7 @@
                                     <outletCollection property="gestureRecognizers" destination="ssi-qe-W0B" appends="YES" id="nr1-Yp-SYA"/>
                                     <outletCollection property="gestureRecognizers" destination="7tT-OX-CTh" appends="YES" id="Xk9-ew-VWL"/>
                                     <outletCollection property="gestureRecognizers" destination="hbm-3l-yjf" appends="YES" id="O8e-Bf-q1f"/>
+                                    <outletCollection property="gestureRecognizers" destination="kVh-pK-nM4" appends="YES" id="7g5-g7-rHE"/>
                                 </connections>
                             </view>
                         </subviews>
@@ -1432,16 +1433,16 @@
                     </view>
                     <toolbarItems/>
                     <connections>
-                        <outlet property="chartView" destination="K2M-dE-C6r" id="8E5-f9-zwq"/>
+                        <outlet property="visibleChartView" destination="K2M-dE-C6r" id="IUO-Fl-pfs"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Nq-GQ-raB" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer id="ssi-qe-W0B">
                     <connections>
-                        <action selector="panGesture:" destination="8uj-a3-MsS" id="DYh-8v-tuF"/>
+                        <action selector="handleTapGesture:" destination="8uj-a3-MsS" id="bki-20-YDS"/>
                     </connections>
                 </tapGestureRecognizer>
-                <panGestureRecognizer minimumNumberOfTouches="1" id="7tT-OX-CTh">
+                <panGestureRecognizer delaysTouchesEnded="NO" minimumNumberOfTouches="1" id="7tT-OX-CTh">
                     <connections>
                         <action selector="handlePanGesture:" destination="8uj-a3-MsS" id="lYm-wW-AST"/>
                     </connections>
@@ -1451,6 +1452,11 @@
                         <action selector="handleLongPressGesture:" destination="8uj-a3-MsS" id="jMp-Az-FA6"/>
                     </connections>
                 </pongPressGestureRecognizer>
+                <pinchGestureRecognizer id="kVh-pK-nM4">
+                    <connections>
+                        <action selector="handlePinchGesture:" destination="8uj-a3-MsS" id="7oB-lC-Ugz"/>
+                    </connections>
+                </pinchGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="997" y="496"/>
         </scene>

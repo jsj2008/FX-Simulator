@@ -10,6 +10,9 @@
 #import "Indicator.h"
 
 @class CandleSource;
+@class ForexDataChunk;
+@class ForexHistoryData;
+@class VisibleChart;
 
 @interface Candle : Indicator
 
@@ -22,5 +25,13 @@
  DBには保存されない。
 */
 + (instancetype)createTemporaryDefaultCandle;
+
+- (ForexDataChunk *)chunkRangeStartX:(float)startX endX:(float)endX;
+
+- (ForexHistoryData *)leftEndForexData;
+
+- (float)zoneStartXOfForexData:(ForexHistoryData *)forexData;
+
+- (float)zoneEndXOfForexData:(ForexHistoryData *)forexData;
 
 @end

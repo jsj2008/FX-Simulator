@@ -9,104 +9,59 @@
 #import "ChartViewController.h"
 
 #import "Chart.h"
-#import "ChartView.h"
-#import "ForexDataChunk.h"
-#import "ForexDataChunkStore.h"
-#import "Indicator.h"
 #import "Market.h"
 
 @interface ChartViewController ()
-@property (weak, nonatomic) IBOutlet ChartView *chartView;
+@property (weak, nonatomic) IBOutlet UIView *visibleChartView;
 @end
-
-static const NSUInteger kMaxDisplayForexDataCount = 100;
-static const NSUInteger kMinDisplayForexDataCount = 40;
 
 @implementation ChartViewController {
     Chart *_chart;
-    ForexDataChunk *_chunk;
-    ForexDataChunk *_displayedForexDataChunk;
-    ForexDataChunkStore *_store;
-    NSUInteger _displayForexDataCount;
-    float _updateDistance;
-    float _previousX;
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    self.visibleChartView.layer.masksToBounds = YES;
 }
 
-- (IBAction)panGesture:(id)sender {
+- (IBAction)handleTapGesture:(UITapGestureRecognizer *)sender {
     if ([self.delegate respondsToSelector:@selector(chartViewTouched)]) {
         [self.delegate chartViewTouched];
     }
 }
 
-/*- (IBAction)handlePanGesture:(UIPanGestureRecognizer *)sender
-{
-    if (_chunk == nil || _store == nil) {
-        return;
-    }
-    
-    CGPoint location = [sender translationInView:self.chartView];
-    CGPoint velocity = [sender velocityInView:self.chartView];
-    
+- (IBAction)handlePinchGesture:(UIPinchGestureRecognizer *)sender {
     if (sender.state == UIGestureRecognizerStateBegan) {
-        _previousX = location.x;
+        [_chart scaleStart];
+        [_chart scaleX:[sender scale]];
     } else if (sender.state == UIGestureRecognizerStateChanged) {
-        float distanceX = location.x - _previousX;
-        
-        if ([self updateChartForMoveDistance:distanceX]) {
-            _previousX = location.x;
-        }
-        
+        [_chart scaleX:[sender scale]];
+    } else {
+        [_chart scaleEnd];
     }
+}
 
-}*/
-
-/*- (BOOL)updateChartForMoveDistance:(float)distance
+- (IBAction)handlePanGesture:(UIPanGestureRecognizer *)sender
 {
-    if (distance < 0) {
-        [self nextChart];
-            
-        return YES;
-    } else if (0 < distance) {
-        [self previousChart];
-            
-        return YES;
-    }
+    CGPoint location = [sender translationInView:self.visibleChartView];
     
-    return NO;
-}*/
-
-/*- (void)previousChart
-{
-    ForexHistoryData *newCurrentData = [_displayedForexDataChunk getForexDataFromCurrent:1];
-    if (newCurrentData == nil) {
-        return;
-    }
-    _displayedForexDataChunk = [_store getChunkFromBaseData:newCurrentData limit:[ChartViewController requireForexDataCountForChart]];
-    [self updateChartFor:_displayedForexDataChunk];
-}*/
-
-/*- (void)nextChart
-{
-    _displayedForexDataChunk = [_store getChunkFromNextDataOf:_displayedForexDataChunk.current limit:[ChartViewController requireForexDataCountForChart]];
-    [self updateChartFor:_displayedForexDataChunk];
-}*/
-
+    [_chart translate:location.x];
+    
+    [sender setTranslation:CGPointZero inView:self.visibleChartView];
+}
 
 - (IBAction)handleLongPressGesture:(UILongPressGestureRecognizer *) sender
 {
-    if (sender.state != UIGestureRecognizerStateEnded) {
+    /*if (sender.state != UIGestureRecognizerStateEnded) {
         
-        CGPoint pt = [sender locationInView:self.chartView];
+        CGPoint pt = [sender locationInView:self.visibleChartView];
         
         _displayForexDataCount = 40;
         
-        ForexHistoryData *data = [self.chartView.chart getForexDataFromTouchPoint:pt displayCount:_displayForexDataCount viewSize:self.chartView.frame.size];
+        ForexHistoryData *data = [self.visibleChartView.chart getForexDataFromTouchPoint:pt displayCount:_displayForexDataCount viewSize:self.visibleChartView.frame.size];
         
         if (data == nil) {
             return;
@@ -122,28 +77,22 @@ static const NSUInteger kMinDisplayForexDataCount = 40;
             [self.delegate longPressedEnd];
         }
         
-    }
+    }*/
 }
 
 - (void)setChart:(Chart *)chart
 {
+    for (UIView *subView in [self.visibleChartView subviews]) {
+        [subView removeFromSuperview];
+    }
+    
     _chart = chart;
-    self.chartView.chart = _chart;
-    [_chart setChartView:self.chartView];
-    _store = [[ForexDataChunkStore alloc] initWithCurrencyPair:_chart.currencyPair timeScale:_chart.timeFrame getMaxLimit:[[self class] requireForexDataCountForChart]];
+    [_chart setVisibleChartView:self.visibleChartView];
 }
 
-- (void)updateChartForTime:(Time *)time
+- (void)update:(Market *)market
 {
-    ForexDataChunk *chunk = [_store getChunkFromBaseTime:time limit:[[self class] requireForexDataCountForChart]];
-    [_chart setForexDataChunk:chunk];
-    [self.chartView setNeedsDisplay];
-    _displayedForexDataChunk = _chunk;
-}
-
-+ (NSUInteger)requireForexDataCountForChart
-{
-    return kMaxDisplayForexDataCount + [Indicator maxIndicatorPeriod] - 1;
+    [_chart strokeCurrentChart:market];
 }
 
 - (void)didReceiveMemoryWarning
