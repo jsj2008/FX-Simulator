@@ -71,7 +71,9 @@ static const NSUInteger buffer = 200;
 {
     ForexDataChunk *chunk = [self getChunkFromBaseTime:time relativePosition:0 limit:limit];
     
-    if (chunk == nil) {
+    return chunk;
+    
+    /*if (chunk == nil) {
         return nil;
     }
     
@@ -87,7 +89,7 @@ static const NSUInteger buffer = 200;
         return chunk;
     } else {
         return nil;
-    }
+    }*/
     
 }
 

@@ -15,6 +15,7 @@
 #import "ForexHistory.h"
 #import "ForexHistoryData.h"
 #import "Time.h"
+#import "TimeFrameChunk.h"
 #import "SimulationTimeManager.h"
 #import "Rate.h"
 #import "Rates.h"
@@ -37,6 +38,7 @@ static NSString * const kKeyPath = @"currentTime";
     ForexDataChunkStore *_forexDataChunkStore;
     ForexHistory *_forexHistory;
     ForexHistoryData *_lastData;
+    TimeFrame *_completionTimeFrame;
 }
 
 - (instancetype)initWithCurrencyPair:(CurrencyPair *)currencyPair timeFrame:(TimeFrame *)timeFrame lastLoadedTime:(Time *)time
@@ -48,6 +50,7 @@ static NSString * const kKeyPath = @"currentTime";
         _currentForexData = [_forexHistory selectMaxCloseTime:_currentTime limit:1].firstObject;
         _forexDataChunkStore = [[ForexDataChunkStore alloc] initWithCurrencyPair:currencyPair timeScale:timeFrame getMaxLimit:FXSMaxForexDataStore];
         _lastData = [_forexHistory lastRecord];
+        _completionTimeFrame = [Setting timeFrameList].minTimeFrame;
     }
     
     return self;
@@ -55,9 +58,8 @@ static NSString * const kKeyPath = @"currentTime";
 
 - (void)add
 {
-    ForexDataChunk *currentForexDataChunk = [_forexDataChunkStore getChunkFromNextDataOfTime:self.currentTime limit:1];
-    
-    ForexHistoryData *newCurrentData = currentForexDataChunk.current;
+    ForexHistoryData *newCurrentData = [_forexDataChunkStore getChunkFromNextDataOfTime:self.currentTime limit:1].current;
+    //ForexHistoryData *newCurrentData = [_forexHistory nextDataOfTime:self.currentTime];
     
     if (newCurrentData == nil) {
         return;
@@ -124,23 +126,32 @@ static NSString * const kKeyPath = @"currentTime";
 
 - (ForexDataChunk *)chunkForCurrencyPair:(CurrencyPair *)currencyPair timeFrame:(TimeFrame *)timeFrame Limit:(NSUInteger)limit
 {
-    ForexHistory *forexDb = [[ForexHistory alloc] initWithCurrencyPair:currencyPair timeScale:timeFrame];
+    /*ForexHistory *forexDb = [[ForexHistory alloc] initWithCurrencyPair:currencyPair timeScale:timeFrame];
     
-    return [forexDb selectBaseTime:self.currentTime frontLimit:0 backLimit:limit];
+    return [forexDb selectBaseTime:self.currentTime frontLimit:0 backLimit:limit];*/
+    
+    ForexDataChunk *chunk = [_forexDataChunkStore getChunkFromBaseTime:self.currentTime limit:limit];
+    
+    [chunk complementedByTimeFrame:_completionTimeFrame currentTime:self.currentTime];
+    
+    return chunk;
 }
 
-- (ForexDataChunk *)chunkForCurrencyPair:(CurrencyPair *)currencyPair timeFrame:(TimeFrame *)timeFrame baseTime:(Time *)baseTime frontLimit:(NSUInteger)frontLimit backLimit:(NSUInteger)backLimit
+/*- (ForexDataChunk *)chunkForCurrencyPair:(CurrencyPair *)currencyPair timeFrame:(TimeFrame *)timeFrame baseTime:(Time *)baseTime frontLimit:(NSUInteger)frontLimit backLimit:(NSUInteger)backLimit
 {
     ForexHistory *forexDb = [[ForexHistory alloc] initWithCurrencyPair:currencyPair timeScale:timeFrame];
     
     return [forexDb selectBaseTime:self.currentTime frontLimit:frontLimit backLimit:backLimit];
-}
+}*/
 
-- (ForexDataChunk *)chunkForCurrencyPair:(CurrencyPair *)currencyPair timeFrame:(TimeFrame *)timeFrame centerForexData:(ForexHistoryData *)forexData frontLimit:(NSUInteger)frontLimit backLimit:(NSUInteger)backLimit
+- (ForexDataChunk *)chunkForCenterForexData:(ForexHistoryData *)forexData frontLimit:(NSUInteger)frontLimit backLimit:(NSUInteger)backLimit
 {
-    ForexHistory *forexDb = [[ForexHistory alloc] initWithCurrencyPair:currencyPair timeScale:timeFrame];
+    ForexHistory *forexDb = [[ForexHistory alloc] initWithCurrencyPair:forexData.currencyPair timeScale:forexData.timeScale];
     
     ForexDataChunk *chunk = [forexDb selectBaseTime:forexData.close.timestamp frontLimit:frontLimit backLimit:backLimit];
+    
+    [chunk maxTime:self.currentTime];
+    [chunk complementedByTimeFrame:_completionTimeFrame currentTime:self.currentTime];
     
     if ([chunk existForexData:forexData]) {
         return chunk;
@@ -148,6 +159,21 @@ static NSString * const kKeyPath = @"currentTime";
         return nil;
     }
 }
+
+/**
+ currentTimeとoldTimeの間の時間足データを作成する。
+ 例えば1時間足のチャートを、15分足にしてみると、1時間で割り切れる時間以外は、15分足の端数がでる。その端数を1時間足に変換して、オリジナルの1時間足を作成する。
+ */
+/*- (ForexDataChunk *)complementForexDataChunk:(ForexDataChunk *)forexDataChunk
+{
+    TimeFrame *minTimeFrame = [[Setting timeFrameList] minTimeFrame];
+    
+    ForexHistory *forexHistory = [ForexHistoryFactory createForexHistoryFromCurrencyPair:_currencyPair timeScale:minTimeFrame];
+    
+    ForexDataChunk *chunk = [forexHistory selectMaxCloseTime:currentTime newerThan:oldTime];
+    
+    return [[ForexHistoryData alloc] initWithForexDataChunk:chunk timeScale:_timeScale];
+}*/
 
 /**
  ObserverにMarketの更新前、更新、更新後を通知。

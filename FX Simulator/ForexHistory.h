@@ -18,6 +18,8 @@
 
 -(id)initWithCurrencyPair:(CurrencyPair*)currencyPair timeScale:(TimeFrame*)timeScale;
 
+- (ForexHistoryData *)nextDataOfTime:(Time *)time;
+
 /**
  基準となる時間(Close Time)を中心に、前後のLimitに基づきデータを取得する。
  @param time 基準となる時間

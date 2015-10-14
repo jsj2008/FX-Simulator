@@ -119,4 +119,14 @@
     return self.close.timestamp.toDisplayTimeString;
 }
 
+- (Time *)latestTime
+{
+    return self.close.timestamp;
+}
+
+- (Time *)oldestTime
+{
+    return self.open.timestamp;
+}
+
 @end

@@ -30,8 +30,14 @@
 
 - (ForexHistoryData *)leftEndForexData;
 
+- (ForexHistoryData *)rightEndForexData;
+
 - (float)zoneStartXOfForexData:(ForexHistoryData *)forexData;
 
 - (float)zoneEndXOfForexData:(ForexHistoryData *)forexData;
+
+- (float)zoneStartXOfForexDataFromLeftEnd:(NSUInteger)index;
+
+- (ForexHistoryData *)forexDataFromLeftEnd:(NSUInteger)index;
 
 @end

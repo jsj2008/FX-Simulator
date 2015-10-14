@@ -53,36 +53,60 @@
     return self;
 }
 
+- (ForexHistoryData *)nextDataOfTime:(Time *)time
+{
+    NSString *sql = [NSString stringWithFormat:@"SELECT rowid,* FROM %@ WHERE ? < close_minute_close_timestamp ORDER BY close_minute_close_timestamp ASC LIMIT 1", _forexHistoryTableName];
+    
+    ForexHistoryData *nextData;
+    
+    [forexDatabase open];
+
+    FMResultSet *results = [forexDatabase executeQuery:sql, time.timestampValueObj];
+        
+    while ([results next]) {
+        nextData = [[ForexHistoryData alloc] initWithFMResultSet:results currencyPair:_currencyPair timeScale:_timeScale];
+    }
+    
+    [forexDatabase close];
+    
+    return nextData;
+}
+
 - (ForexDataChunk *)selectBaseTime:(Time *)time frontLimit:(NSUInteger)frontLimit backLimit:(NSUInteger)backLimit
 {
     NSString *getFrontDataSql = [NSString stringWithFormat:@"SELECT rowid,* FROM (SELECT rowid,* FROM %@ WHERE ? <= close_minute_close_timestamp ORDER BY close_minute_close_timestamp ASC LIMIT ?) ORDER BY close_minute_close_timestamp DESC", _forexHistoryTableName];
     NSString *getBackDataSql = [NSString stringWithFormat:@"SELECT rowid,* FROM %@ WHERE close_minute_close_timestamp < ? ORDER BY close_minute_close_timestamp DESC LIMIT ?", _forexHistoryTableName];
     
-    
+    NSMutableArray *frontArray = [NSMutableArray array];
+    NSMutableArray *backArray = [NSMutableArray array];
     
     [forexDatabase open];
     
     /* get front array */
     
-    FMResultSet *results = [forexDatabase executeQuery:getFrontDataSql, time.timestampValueObj, @(frontLimit+1)]; // +1 基準となる時間(time)のデータ自身を含む。
+    //if (0 < frontLimit) {
     
-    NSMutableArray *frontArray = [NSMutableArray array];
+        FMResultSet *results = [forexDatabase executeQuery:getFrontDataSql, time.timestampValueObj, @(frontLimit+1)]; // +1 基準となる時間(time)のデータ自身を含む。
     
-    while ([results next]) {
-        ForexHistoryData *data = [[ForexHistoryData alloc] initWithFMResultSet:results currencyPair:_currencyPair timeScale:_timeScale];
-        [frontArray addObject:data];
-    }
+        while ([results next]) {
+            ForexHistoryData *data = [[ForexHistoryData alloc] initWithFMResultSet:results currencyPair:_currencyPair timeScale:_timeScale];
+            [frontArray addObject:data];
+        }
+        
+    //}
     
     /* get back array */
     
-    FMResultSet *results2 = [forexDatabase executeQuery:getBackDataSql, time.timestampValueObj, @(backLimit)];
+    //if (0 < backLimit) {
     
-    NSMutableArray *backArray = [NSMutableArray array];
+        FMResultSet *results2 = [forexDatabase executeQuery:getBackDataSql, time.timestampValueObj, @(backLimit)];
     
-    while ([results2 next]) {
-        ForexHistoryData *data = [[ForexHistoryData alloc] initWithFMResultSet:results2 currencyPair:_currencyPair timeScale:_timeScale];
-        [backArray addObject:data];
-    }
+        while ([results2 next]) {
+            ForexHistoryData *data = [[ForexHistoryData alloc] initWithFMResultSet:results2 currencyPair:_currencyPair timeScale:_timeScale];
+            [backArray addObject:data];
+        }
+        
+    //}
     
     [forexDatabase close];
     
@@ -90,7 +114,7 @@
     
     NSArray *array = [[frontArray arrayByAddingObjectsFromArray:backArray] copy];
     
-    return [[ForexDataChunk alloc] initWithForexDataArray:array];
+    return [[ForexDataChunk alloc] initWithSortedForexDataArray:array];
 }
 
 - (NSArray *)selectMaxCloseTime:(Time *)closeTime limit:(NSUInteger)limit
