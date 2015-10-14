@@ -11,6 +11,7 @@
 #import "CoreDataManager.h"
 #import "ChartSource.h"
 #import "Candle.h"
+#import "EntityChart.h"
 #import "ForexDataChunk.h"
 #import "ForexHistoryData.h"
 #import "Market.h"
@@ -19,23 +20,20 @@
 #import "SaveDataSource.h"
 
 // 偶数
-static const NSUInteger FXSDefaultDisplayDataCount = 200;
+static const NSUInteger FXSDefaultDisplayDataCount = 300;
 static const NSUInteger FXSMinDisplayDataCount = 30;
 static const NSUInteger FXSMaxDisplayDataCount = 200;
+static const float FXSEntityChartViewPrepareTotalRangeRatio = 0.5;
 
 @interface Chart ()
 @property (nonatomic) float visibleWidthRatio;
+@property (nonatomic) EntityChart *currentEntityChart;
 @end
 
 @implementation Chart {
     UIImageView *_entityChartView;
     __weak UIView *_visibleChartView;
-    ForexDataChunk *_forexDataChunk;
-    ForexDataChunk *_forexDataChunkOfEntityChart;
-    double _forexDataChunkOfEntityChartMaxRate;
-    double _forexDataChunkOfEntityChartMinRate;
     Market *_market;
-    Candle *_candle;
     __block BOOL _inAnimation;
     float _startScaleX;
 }
@@ -78,8 +76,6 @@ static const NSUInteger FXSMaxDisplayDataCount = 200;
 {
     if (self = [super init]) {
         _chartSource = source;
-        //_entityChartView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 1000, 1000)];
-        //_visibleWidthRatio = 0.5;
         _entityChartView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 2000, 1000)];
         _visibleWidthRatio = 0.25;
     }
@@ -102,9 +98,12 @@ static const NSUInteger FXSMaxDisplayDataCount = 200;
 {
     _market = market;
     
-    _forexDataChunk = [_market chunkForCurrencyPair:self.currencyPair timeFrame:self.timeFrame Limit:500];
+    _entityChartView.transform = CGAffineTransformIdentity;
     
-    [self strokeEntityChart];
+    EntityChart *newCurrentEntityChart = [[EntityChart alloc] initWithCurrencyPair:self.currencyPair timeFrame:self.timeFrame indicatorChunk:self.indicatorChunk viewSize:_entityChartView.frame.size];
+    [newCurrentEntityChart strokeForMarket:market];
+    
+    self.currentEntityChart = newCurrentEntityChart;
     
     float startX = _entityChartView.frame.size.width - (_entityChartView.frame.size.width * self.visibleWidthRatio);
     float endX = startX + (_entityChartView.frame.size.width * self.visibleWidthRatio);
@@ -113,39 +112,11 @@ static const NSUInteger FXSMaxDisplayDataCount = 200;
     [self setVisibleViewForStartX:startX endX:endX setNormalizedEntityChartFrameBlock:^(float x, float y, float width, float height) {
         entityChartView.frame = CGRectMake(x, y, width, height);
     }];
-    //[self setVisibleViewForStartX:_entityChartView.frame.size.width - (_entityChartView.frame.size.width * self.visibleWidthRatio)];
-}
 
-- (void)strokeEntityChart
-{
-    //@autoreleasepool {
-    
-    _forexDataChunkOfEntityChart = [_forexDataChunk chunkLimit:self.displayDataCount];
-    _forexDataChunkOfEntityChartMaxRate = [_forexDataChunkOfEntityChart getMaxRate].rateValue;
-    _forexDataChunkOfEntityChartMinRate = [_forexDataChunkOfEntityChart getMinRate].rateValue;
-    
-    _entityChartView.transform = CGAffineTransformIdentity;
-    
-    UIGraphicsBeginImageContextWithOptions(_entityChartView.frame.size, NO, 0.0);
-    
-    CGSize viewSize = _entityChartView.frame.size;
-    
-    if (![self.indicatorChunk existsBaseIndicator]) {
-        _candle = [Candle createTemporaryDefaultCandle];
-        [_candle strokeIndicatorFromForexDataChunk:_forexDataChunk displayDataCount:self.displayDataCount displaySize:viewSize];
-    }
-    
-    [self.indicatorChunk strokeIndicatorFromForexDataChunk:_forexDataChunk displayDataCount:self.displayDataCount displaySize:viewSize];
-    
-    _entityChartView.image = UIGraphicsGetImageFromCurrentImageContext();
-    
-    UIGraphicsEndImageContext();
-        
-    //}
 }
 
 /**
- EntityChartのstartXからendXまでを、表示するようにする。
+ EntityChart(scale前)のstartXからendXまでを、表示するようにする。
 */
 - (void)setVisibleViewForStartX:(float)startX endX:(float)endX setNormalizedEntityChartFrameBlock:(void (^)(float x, float y, float width, float height))setNormalizedEntityChartFrameBlock
 {
@@ -155,7 +126,7 @@ static const NSUInteger FXSMaxDisplayDataCount = 200;
     
     _entityChartView.transform = CGAffineTransformIdentity;
     
-    ForexDataChunk *visibleForexDataChunk = [_candle chunkRangeStartX:startX endX:endX];
+    ForexDataChunk *visibleForexDataChunk = [self.currentEntityChart chunkForRangeStartX:startX endX:endX];
     
     if (!visibleForexDataChunk) {
         return;
@@ -163,7 +134,7 @@ static const NSUInteger FXSMaxDisplayDataCount = 200;
     
     float scaleX = _visibleChartView.frame.size.width / (endX - startX);
     
-    double differenceEntityChartMaxMinRate = _forexDataChunkOfEntityChartMaxRate - _forexDataChunkOfEntityChartMinRate;
+    double differenceEntityChartMaxMinRate = self.currentEntityChart.maxRate.rateValue - self.currentEntityChart.minRate.rateValue;
     double visibleChartMaxRate = [visibleForexDataChunk getMaxRate].rateValue;
     double visibleChartMinRate = [visibleForexDataChunk getMinRate].rateValue;
     double differenceVisibleChartMaxMinRate = visibleChartMaxRate - visibleChartMinRate;
@@ -176,16 +147,14 @@ static const NSUInteger FXSMaxDisplayDataCount = 200;
     
     float entityChartViewX = _visibleChartView.frame.origin.x - (startX * _entityChartView.transform.a);
     
-    double entityChartMaxRate = _forexDataChunkOfEntityChartMaxRate;
+    double entityChartMaxRate = self.currentEntityChart.maxRate.rateValue;
     // scale後のEntityChartでの1pipあたりの画面サイズ(Y)
     float onePipEntityChartViewDisplaySize = _entityChartView.frame.size.height / differenceEntityChartMaxMinRate;
     // 表示されているチャートの中で最大のレートが、EntityChartでどの位置(Y)にあるのか
     float visibleChartMaxRateYOfEntityChart = (entityChartMaxRate - visibleChartMaxRate) * onePipEntityChartViewDisplaySize;
-    //float visibleChartMaxRateYOfEntityChart = _chartView.frame.size.height - (_chartView.frame.size.height * (visibleChartMaxRate / entityChartMaxRate));
     float entityChartViewY = _visibleChartView.frame.origin.y - visibleChartMaxRateYOfEntityChart;
     
     setNormalizedEntityChartFrameBlock(entityChartViewX, entityChartViewY, _entityChartView.frame.size.width, _entityChartView.frame.size.height);
-    //_entityChartView.frame = CGRectMake(entityChartViewX, entityChartViewY, _entityChartView.frame.size.width, _entityChartView.frame.size.height);
 }
 
 - (void)scaleStart
@@ -211,7 +180,7 @@ static const NSUInteger FXSMaxDisplayDataCount = 200;
     // EntityChart(scale前)で現在表示されている範囲の中間(x)
     float centerLineX = (startVisibleViewOfEntityChart + endVisibleViewOfEntityChart) / 2;
     
-    _entityChartView.transform = CGAffineTransformMakeScale(_startScaleX * scaleX, 1);
+    _entityChartView.transform = CGAffineTransformMakeScale(_startScaleX * scaleX, _entityChartView.transform.d);
     
     float newVisibleViewWidth = _visibleChartView.frame.size.width / _entityChartView.transform.a;
     
@@ -224,7 +193,8 @@ static const NSUInteger FXSMaxDisplayDataCount = 200;
     }];
     
     self.visibleWidthRatio = (normalizedEndX - normalizedStartX) / (_entityChartView.frame.size.width / _entityChartView.transform.a);
-    //self.visibleWidthRatio = _visibleChartView.frame.size.width / (endVisibleViewOfEntityChart - startVisibleViewOfEntityChart);
+    
+    [self didChangeEntityChartViewPositionX];
 }
 
 - (void)translate:(float)tx
@@ -233,9 +203,28 @@ static const NSUInteger FXSMaxDisplayDataCount = 200;
         return;
     }
     
+    float newEntityChartViewX = _entityChartView.frame.origin.x + tx;
+    float newEntityChartViewEndX = newEntityChartViewX + _entityChartView.frame.size.width;
+    
+    float visibleChartViewX = _visibleChartView.frame.origin.x;
+    float visibleChartViewEndX = visibleChartViewX + _visibleChartView.frame.size.width;
+    
+    if (visibleChartViewX < newEntityChartViewX) {
+        if (!self.currentEntityChart.previousEntityChart && 0 < tx) {
+            return;
+        }
+    } else if (newEntityChartViewEndX < visibleChartViewEndX) {
+        if (!self.currentEntityChart.nextEntityChart && tx < 0) {
+            return;
+        }
+    }
+    
     CGPoint movedPoint = CGPointMake(_entityChartView.center.x + tx, _entityChartView.center.y);
     _entityChartView.center = movedPoint;
+    
     [self didChangeEntityChartViewPositionX];
+    
+    [self normalizeEntityChartView];
 }
 
 - (void)animateTranslation:(float)tx duration:(float)duration
@@ -275,65 +264,216 @@ static const NSUInteger FXSMaxDisplayDataCount = 200;
     _inAnimation = NO;
 }
 
-- (void)didChangeEntityChartViewPositionX
+- (void)prepareChart
 {
-    CALayer *entityChartViewLayer = _entityChartView.layer.presentationLayer;
+    if ([self isInPreparePreviousChartRange]) {
+        [_currentEntityChart preparePreviousEntityChartForMarket:_market];
+    }
     
-    if (0 < entityChartViewLayer.frame.origin.x) {
-        ForexHistoryData *leftEndForexData = [_candle leftEndForexData];
-        NSUInteger limit = self.displayDataCount / 2;
-        ForexDataChunk *newForexDataChunkOfEntityChart = [_market chunkForCurrencyPair:self.currencyPair timeFrame:self.timeFrame centerForexData:leftEndForexData frontLimit:limit - 1 backLimit:limit];
-        _forexDataChunk = newForexDataChunkOfEntityChart;
-        [self strokeEntityChart];
-        float visibleViewStartX = [_candle zoneStartXOfForexData:leftEndForexData];
-        float visibleViewEndX = visibleViewStartX + (_entityChartView.frame.size.width * self.visibleWidthRatio);
-        //float visibleViewEndX = visibleViewStartX + (_visibleChartView.frame.size.width * self.visibleWidthRatio);
-        __block UIView *entityChartView = _entityChartView;
-        [self setVisibleViewForStartX:visibleViewStartX endX:visibleViewEndX setNormalizedEntityChartFrameBlock:^(float x, float y, float width, float height) {
-            entityChartView.frame = CGRectMake(x, y, width, height);
-        }];
+    if ([self isInPrepareNextChartRange]) {
+        [_currentEntityChart prepareNextEntityChartForMarket:_market];
+    }
+}
+
+- (void)checkEntityChartViewOverVisibleChartView
+{
+    float visibleViewStartX;
+    float visibleViewEndX;
+    
+    if ([self isOverEntityChartViewLeftEnd]) {
+    
+        EntityChart *newCurrentEntityChart = _currentEntityChart.previousEntityChart;
+        
+        if (!newCurrentEntityChart) {
+            return;
+        }
+        
+        self.currentEntityChart = newCurrentEntityChart;
+        
+        _entityChartView.transform = CGAffineTransformIdentity;
+        
+        visibleViewStartX = self.currentEntityChart.visibleViewDefaultStartX;
+        
+        if (visibleViewStartX < 0) {
+            return;
+        }
+        
+        visibleViewEndX = visibleViewStartX + (_entityChartView.frame.size.width * self.visibleWidthRatio);
+        
+    } else if ([self isOverEntityChartViewRightEnd]) {
+        
+        EntityChart *newCurrentEntityChart = _currentEntityChart.nextEntityChart;
+        
+        if (!newCurrentEntityChart) {
+            if ([self isOverEntityChartViewMoveRangeRightEnd]) {
+                [self setEntityChartViewMoveRangeRightEnd];
+            }
+            return;
+        }
+        
+        self.currentEntityChart = newCurrentEntityChart;
+        
+        _entityChartView.transform = CGAffineTransformIdentity;
+        
+        visibleViewEndX = self.currentEntityChart.visibleViewDefaultEndX;
+        
+        if (visibleViewEndX < 0) {
+            return;
+        }
+        
+        visibleViewStartX = visibleViewEndX - (_entityChartView.frame.size.width * self.visibleWidthRatio);
+        
+    } else {
         return;
     }
     
+    __block UIView *entityChartView = _entityChartView;
+    [self setVisibleViewForStartX:visibleViewStartX endX:visibleViewEndX setNormalizedEntityChartFrameBlock:^(float x, float y, float width, float height) {
+        entityChartView.frame = CGRectMake(x, y, width, height);
+    }];
+}
+
+- (void)didChangeEntityChartViewPositionX
+{
+    [self prepareChart];
+    [self checkEntityChartViewOverVisibleChartView];
+}
+
+- (void)normalizeEntityChartView
+{
+    CALayer *entityChartViewLayer = _entityChartView.layer.presentationLayer;
+    
     float startVisibleViewOfEntityChart = (_visibleChartView.frame.origin.x - entityChartViewLayer.frame.origin.x) / _entityChartView.transform.a;
     float endVisibleViewOfEntityChart = startVisibleViewOfEntityChart + (_visibleChartView.frame.size.width / _entityChartView.transform.a);
-
+    
     float entityChartViewX = _entityChartView.frame.origin.x;
     __block UIView *entityChartView = _entityChartView;
     [self setVisibleViewForStartX:startVisibleViewOfEntityChart endX:endVisibleViewOfEntityChart setNormalizedEntityChartFrameBlock:^(float x, float y, float width, float height) {
         entityChartView.frame = CGRectMake(entityChartViewX, y, width, height);
     }];
-    //_entityChartView.frame = CGRectMake(x, _entityChartView.frame.origin.y, _entityChartView.frame.size.width, _entityChartView.frame.size.height);
-    /*float endVisibleViewOfEntityChart = startVisibleViewOfEntityChart + (_visibleChartView.frame.size.width / _entityChartView.transform.a);
+}
+
+- (void)setCurrentEntityChart:(EntityChart *)currentEntityChart
+{
+    _currentEntityChart = currentEntityChart;
+    _entityChartView.image = _currentEntityChart.image;
+}
+
+- (BOOL)isOverEntityChartViewLeftEnd
+{
+    CALayer *entityChartViewLayer = _entityChartView.layer.presentationLayer;
     
-    //float tx = _entityChartView.transform.tx;
-    _entityChartView.transform = CGAffineTransformIdentity;
-    //_entityChartView.transform = CGAffineTransformMakeTranslation(tx, 0);
-    
-    ForexDataChunk *visibleForexDataChunkOfEntityChart = [_forexDataChunk chunkLimit:self.displayDataCount];
-    ForexDataChunk *visibleForexDataChunkOfVisibleChart = [_candle chunkRangeStartX:startVisibleViewOfEntityChart endX:endVisibleViewOfEntityChart];
-    
-    if (!visibleForexDataChunkOfVisibleChart) {
-        return;
+    if (0 < entityChartViewLayer.frame.origin.x) {
+        return YES;
+    } else {
+        return NO;
     }
+}
+
+- (BOOL)isOverEntityChartViewRightEnd
+{
+    CALayer *entityChartViewLayer = _entityChartView.layer.presentationLayer;
     
-    float scaleX = _visibleChartView.frame.size.width / (_entityChartView.frame.size.width * self.visibleWidthRatio);
+    if ((entityChartViewLayer.frame.origin.x + entityChartViewLayer.frame.size.width) < (_visibleChartView.frame.origin.x + _visibleChartView.frame.size.width)) {
+        return YES;
+    } else {
+        return NO;
+    }
+}
+
+- (BOOL)isOverEntityChartViewMoveRangeLeftEnd
+{
+    float entityChartViewX = _entityChartView.frame.origin.x;
     
-    double differenceEntityChartMaxMinRate = [visibleForexDataChunkOfEntityChart getMaxRate].rateValue - [visibleForexDataChunkOfEntityChart getMinRate].rateValue;
-    double differenceVisibleChartMaxMinRate = [visibleForexDataChunkOfVisibleChart getMaxRate].rateValue - [visibleForexDataChunkOfVisibleChart getMinRate].rateValue;
-    float scaledEntityChartViewHeight = _visibleChartView.frame.size.height / (differenceVisibleChartMaxMinRate / differenceEntityChartMaxMinRate);
-    float scaleY = scaledEntityChartViewHeight / _entityChartView.frame.size.height;
+    if ([self entityChartViewMoveRangeLeftEndX] < entityChartViewX) {
+        return YES;
+    } else {
+        return NO;
+    }
+}
+
+- (BOOL)isOverEntityChartViewMoveRangeRightEnd
+{
+    float entityChartViewEndX = _entityChartView.frame.origin.x + _entityChartView.frame.size.width;
     
-    _entityChartView.transform = CGAffineTransformMakeScale(scaleX, scaleY);
+    if (entityChartViewEndX < [self entityChartViewMoveRangeRightEndX]) {
+        return YES;
+    } else {
+        return NO;
+    }
+}
+
+- (void)setEntityChartViewMoveRangeLeftEnd
+{
+    float newEntityChartViewX = [self entityChartViewMoveRangeLeftEndX];
     
-    double entityChartMaxRate = [visibleForexDataChunkOfEntityChart getMaxRate].rateValue;
-    double visibleChartMaxRate = [visibleForexDataChunkOfVisibleChart getMaxRate].rateValue;
-    float onePipEntityChartViewDisplaySize = _entityChartView.frame.size.height / differenceEntityChartMaxMinRate;
-    float visibleChartMaxRateYOfEntityChart = (entityChartMaxRate - visibleChartMaxRate) * onePipEntityChartViewDisplaySize;
-    float entityChartViewY = _visibleChartView.frame.origin.y - visibleChartMaxRateYOfEntityChart;
+    _entityChartView.frame = CGRectMake(newEntityChartViewX, _entityChartView.frame.origin.y, _entityChartView.frame.size.width, _entityChartView.frame.size.height);
+}
+
+
+- (void)setEntityChartViewMoveRangeRightEnd
+{
+    float newEntityChartViewX = [self entityChartViewMoveRangeRightEndX] - _entityChartView.frame.size.width;
     
-    //_entityChartView.frame = CGRectMake(entityChartViewLayer.frame.origin.x, entityChartViewY, _entityChartView.frame.size.width, _entityChartView.frame.size.height);
-    _entityChartView.frame = CGRectMake(_entityChartView.frame.origin.x, entityChartViewY, _entityChartView.frame.size.width, _entityChartView.frame.size.height);*/
+    _entityChartView.frame = CGRectMake(newEntityChartViewX, _entityChartView.frame.origin.y, _entityChartView.frame.size.width, _entityChartView.frame.size.height);
+}
+
+- (float)entityChartViewMoveRangeRightEndX
+{
+    float visibleChartViewEndX = _visibleChartView.frame.origin.x + _visibleChartView.frame.size.width;
+    
+    return visibleChartViewEndX - [self maxMarginOfVisibleChartViewAndEntityChartView];
+}
+
+- (float)entityChartViewMoveRangeLeftEndX
+{
+    return _visibleChartView.frame.origin.x + [self maxMarginOfVisibleChartViewAndEntityChartView];
+}
+
+- (float)maxMarginOfVisibleChartViewAndEntityChartView
+{
+    return _visibleChartView.frame.size.width / 4;
+}
+
+- (BOOL)isInPreparePreviousChartRange
+{
+    if (_visibleChartView.frame.origin.x <= [self entityChartViewPreparePreviousChartRangeStartX]) {
+        return YES;
+    } else {
+        return NO;
+    }
+}
+
+- (BOOL)isInPrepareNextChartRange
+{
+    float visibleChartViewEndX = _visibleChartView.frame.origin.x + _visibleChartView.frame.size.width;
+    
+    if ([self entityChartViewPrepareNextChartRangeStartX] <= visibleChartViewEndX) {
+        return YES;
+    } else {
+        return NO;
+    }
+}
+
+- (float)entityChartViewPreparePreviousChartRangeStartX
+{
+    CALayer *entityChartViewLayer = _entityChartView.layer.presentationLayer;
+    
+    return entityChartViewLayer.frame.origin.x + [self entityChartViewPrepareRangeWidth];
+}
+
+- (float)entityChartViewPrepareNextChartRangeStartX
+{
+    CALayer *entityChartViewLayer = _entityChartView.layer.presentationLayer;
+    
+    float entityChartViewRightEndX = entityChartViewLayer.frame.origin.x + entityChartViewLayer.frame.size.width;
+    
+    return entityChartViewRightEndX - [self entityChartViewPrepareRangeWidth];
+}
+
+- (float)entityChartViewPrepareRangeWidth
+{
+    return _entityChartView.frame.size.width * FXSEntityChartViewPrepareTotalRangeRatio / 2;
 }
 
 - (void)setVisibleChartView:(UIView *)visibleView

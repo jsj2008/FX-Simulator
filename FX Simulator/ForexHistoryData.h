@@ -12,6 +12,7 @@
 @class CurrencyPair;
 @class Rate;
 @class ForexDataChunk;
+@class Time;
 @class TimeFrame;
 
 typedef NS_ENUM(NSUInteger, RateType) {
@@ -34,6 +35,8 @@ typedef NS_ENUM(NSUInteger, RateType) {
 @property (nonatomic, readonly) Rate *high;
 @property (nonatomic, readonly) Rate *low;
 @property (nonatomic, readonly) Rate *close;
+@property (nonatomic, readonly) Time *latestTime;
+@property (nonatomic, readonly) Time *oldestTime;
 @property (nonatomic, readonly) NSString *displayOpenTimestamp;
 @property (nonatomic, readonly) NSString *displayCloseTimestamp;
 

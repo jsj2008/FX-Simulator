@@ -13,11 +13,20 @@
 @class ForexHistoryData;
 @class Rate;
 @class Time;
+@class TimeFrame;
 
 /**
  連続するForexDataの集合を管理する。
 */
 @interface ForexDataChunk : NSObject
+
+@property (nonatomic, readonly) NSUInteger count;
+@property (nonatomic, readonly) ForexHistoryData *current;
+@property (nonatomic, readonly) ForexHistoryData *oldest;
+@property (nonatomic, readonly) Time *latestTime;
+@property (nonatomic, readonly) Time *oldestTime;
+
+- (instancetype)initWithSortedForexDataArray:(NSArray *)array;
 - (instancetype)initWithForexDataArray:(NSArray *)array;
 
 /**
@@ -57,19 +66,14 @@
  */
 - (ForexDataChunk *)getChunkFromBaseTime:(Time *)time relativePosition:(NSInteger)pos limit:(NSUInteger)limit;
 
-/**
- 最新のデータを先頭に追加する。
-*/
-- (void)addCurrentData:(ForexHistoryData *)data;
-
 - (ForexHistoryData *)getForexDataFromTouchPoint:(CGPoint)point displayCount:(NSUInteger)count viewSize:(CGSize)size;
 
 - (ForexDataChunk *)chunkLimit:(NSUInteger)limit;
 
 - (BOOL)existForexData:(ForexHistoryData *)forexData;
 
-@property (nonatomic, readonly) NSUInteger count;
-@property (nonatomic, readonly) ForexHistoryData *current;
-@property (nonatomic, readonly) ForexHistoryData *oldest;
+- (void)complementedByTimeFrame:(TimeFrame *)timeFrame currentTime:(Time *)currentTime;
+
+- (void)maxTime:(Time *)time;
 
 @end

@@ -9,25 +9,35 @@
 #import "ForexDataChunk.h"
 
 #import "ForexHistoryData.h"
+#import "ForexHistory.h"
+#import "ForexHistoryFactory.h"
 #import "Time.h"
+#import "TimeFrame.h"
 #import "Rate.h"
 
 @implementation ForexDataChunk {
-    NSArray *_forexDataArray;
+    NSArray *_sortedForexDataArray;
 }
 
-- (instancetype)initWithForexDataArray:(NSArray *)array
+- (instancetype)initWithSortedForexDataArray:(NSArray *)array
 {
     if (array.count == 0) {
         return nil;
     }
     
     if (self = [super init]) {
-        // closeが新しい順に並び変える。
-        _forexDataArray = [[[array sortedArrayUsingSelector:@selector(compareTime:)] reverseObjectEnumerator] allObjects];
+        _sortedForexDataArray = array;
     }
-
+    
     return self;
+}
+
+- (instancetype)initWithForexDataArray:(NSArray *)array
+{
+    // closeが新しい順に並び変える。
+    NSArray *sortedArray = [[[array sortedArrayUsingSelector:@selector(compareTime:)] reverseObjectEnumerator] allObjects];
+
+    return [self initWithSortedForexDataArray:sortedArray];
 }
 
 - (void)enumerateForexDataUsingBlock:(void (^)(ForexHistoryData *, NSUInteger))block limit:(NSUInteger)limit
@@ -38,8 +48,8 @@
     
     NSRange range = NSMakeRange(0, limit);
     
-    if ([self isOverRange:range forArray:_forexDataArray]) {
-        range = NSMakeRange(0, _forexDataArray.count);
+    if ([self isOverRange:range forArray:_sortedForexDataArray]) {
+        range = NSMakeRange(0, _sortedForexDataArray.count);
     }
     
     [self enumerateForexDataUsingBlock:^(ForexHistoryData *obj, NSUInteger idx) {
@@ -52,11 +62,11 @@
 */
 - (void)enumerateForexDataUsingBlock:(void (^)(ForexHistoryData *, NSUInteger))block range:(NSRange)range resultReverse:(BOOL)reverse
 {
-    if ([self isOverRange:range forArray:_forexDataArray]) {
+    if ([self isOverRange:range forArray:_sortedForexDataArray]) {
         return;
     }
     
-    NSArray *rangeArray = [_forexDataArray subarrayWithRange:range];
+    NSArray *rangeArray = [_sortedForexDataArray subarrayWithRange:range];
     
     NSEnumerationOptions option = 0;
     
@@ -111,7 +121,7 @@
     
     NSMutableArray *array = [NSMutableArray array];
     
-    [_forexDataArray enumerateObjectsUsingBlock:^(ForexHistoryData *obj, NSUInteger idx, BOOL *stop) {
+    [_sortedForexDataArray enumerateObjectsUsingBlock:^(ForexHistoryData *obj, NSUInteger idx, BOOL *stop) {
         
         if (limit < (idx + 1)) {
             *stop = YES;
@@ -119,7 +129,7 @@
         
         NSRange range = NSMakeRange(idx, term);
         
-        if ([self isOverRange:range forArray:_forexDataArray]) {
+        if ([self isOverRange:range forArray:_sortedForexDataArray]) {
             *stop = YES;
         }
         
@@ -212,7 +222,7 @@
         return nil;
     }
     
-    return [[ForexDataChunk alloc] initWithForexDataArray:[_forexDataArray subarrayWithRange:range]];
+    return [[ForexDataChunk alloc] initWithForexDataArray:[_sortedForexDataArray subarrayWithRange:range]];
 }
 
 - (Rate *)getMinRate
@@ -257,8 +267,8 @@
 
 - (ForexDataChunk *)getChunkFromBaseTime:(Time *)time relativePosition:(NSInteger)pos limit:(NSUInteger)limit
 {
-    Time *newestDataTime = ((ForexHistoryData *)_forexDataArray.firstObject).close.timestamp;
-    Time *oldestDataTime = ((ForexHistoryData *)_forexDataArray.lastObject).close.timestamp;
+    Time *newestDataTime = ((ForexHistoryData *)_sortedForexDataArray.firstObject).close.timestamp;
+    Time *oldestDataTime = ((ForexHistoryData *)_sortedForexDataArray.lastObject).close.timestamp;
     
     NSComparisonResult result1 = [time compare:newestDataTime];
     NSComparisonResult result2 = [time compare:oldestDataTime];
@@ -269,7 +279,7 @@
     
     __block NSUInteger baseIndex = NSNotFound;
     
-    [_forexDataArray enumerateObjectsUsingBlock:^(ForexHistoryData *obj, NSUInteger idx, BOOL *stop) {
+    [_sortedForexDataArray enumerateObjectsUsingBlock:^(ForexHistoryData *obj, NSUInteger idx, BOOL *stop) {
         NSComparisonResult result = [time compare:obj.close.timestamp];
         if (result == NSOrderedSame) {
             baseIndex = idx;
@@ -315,11 +325,11 @@
         return;
     }
     
-    NSMutableArray *array = [_forexDataArray mutableCopy];
+    NSMutableArray *array = [_sortedForexDataArray mutableCopy];
     
     [array insertObject:data atIndex:0];
     
-    _forexDataArray = [array copy];
+    _sortedForexDataArray = [array copy];
 }
 
 - (ForexHistoryData *)getForexDataFromCurrent:(NSUInteger)back
@@ -328,7 +338,7 @@
         return nil;
     }
     
-    return _forexDataArray[back];
+    return _sortedForexDataArray[back];
 }
 
 - (ForexDataChunk *)chunkLimit:(NSUInteger)limit
@@ -346,7 +356,7 @@
 {
     __block BOOL exist;
     
-    [_forexDataArray enumerateObjectsUsingBlock:^(ForexHistoryData *obj, NSUInteger idx, BOOL *stop) {
+    [_sortedForexDataArray enumerateObjectsUsingBlock:^(ForexHistoryData *obj, NSUInteger idx, BOOL *stop) {
         if ([forexData isEqualToForexData:obj]) {
             exist = YES;
         }
@@ -365,12 +375,84 @@
         return nil;
     }
     
-    return _forexDataArray[touchIndex];
+    return _sortedForexDataArray[touchIndex];
+}
+
+- (void)complementedByTimeFrame:(TimeFrame *)timeFrame currentTime:(Time *)currentTime
+{
+    CurrencyPair *chunkCurrencyPair = [self current].currencyPair;
+    TimeFrame *chunkTimeFrame = [self current].timeScale;
+    
+    NSComparisonResult resultTimeFrame = [timeFrame compare:chunkTimeFrame];
+    
+    if (resultTimeFrame != NSOrderedAscending) {
+        return;
+    }
+    
+    TimeFrame *minTimeFrame = timeFrame;
+    Time *oldTime = [self currentTime];
+    
+    NSComparisonResult result = [currentTime compare:oldTime];
+    
+    if (!(result == NSOrderedDescending)) {
+        return;
+    }
+    
+    ForexHistory *forexHistory = [ForexHistoryFactory createForexHistoryFromCurrencyPair:chunkCurrencyPair timeScale:minTimeFrame];
+    
+    ForexDataChunk *chunk = [forexHistory selectMaxCloseTime:currentTime newerThan:oldTime];
+    
+    ForexHistoryData *newCurrentData = [[ForexHistoryData alloc] initWithForexDataChunk:chunk timeScale:chunkTimeFrame];
+    
+    [self unshift:newCurrentData];
+    [self pop];
+}
+
+- (void)unshift:(ForexHistoryData *)forexData
+{
+    if (forexData == nil) {
+        return;
+    }
+    
+    NSMutableArray *array = [_sortedForexDataArray mutableCopy];
+    
+    [array insertObject:forexData atIndex:0];
+    
+    _sortedForexDataArray = [array copy];
+}
+
+- (void)pop
+{
+    NSUInteger lastIndex = _sortedForexDataArray.count - 1;
+    
+    NSMutableArray *array = [_sortedForexDataArray mutableCopy];
+    
+    [array removeObjectAtIndex:lastIndex];
+    
+    _sortedForexDataArray = [array copy];
+}
+
+- (void)maxTime:(Time *)time
+{
+    NSMutableIndexSet *indexes = [NSMutableIndexSet new];
+    
+    [_sortedForexDataArray enumerateObjectsUsingBlock:^(ForexHistoryData *obj, NSUInteger idx, BOOL *stop) {
+        NSComparisonResult result = [time compare:obj.close.timestamp];
+        if (result == NSOrderedAscending) {
+            [indexes addIndex:idx];
+        }
+    }];
+    
+    NSMutableArray *array = [_sortedForexDataArray mutableCopy];
+    
+    [array removeObjectsAtIndexes:indexes];
+    
+    _sortedForexDataArray = array;
 }
 
 - (NSUInteger)count
 {
-    return _forexDataArray.count;
+    return _sortedForexDataArray.count;
 }
 
 - (NSUInteger)lastIndex
@@ -380,12 +462,27 @@
 
 - (ForexHistoryData *)current
 {
-    return _forexDataArray.firstObject;
+    return _sortedForexDataArray.firstObject;
+}
+
+- (Time *)currentTime
+{
+    return ((ForexHistoryData *)_sortedForexDataArray.firstObject).close.timestamp;
 }
 
 - ( ForexHistoryData *)oldest
 {
-    return _forexDataArray.lastObject;
+    return _sortedForexDataArray.lastObject;
+}
+
+- (Time *)latestTime
+{
+    return self.current.latestTime;
+}
+
+- (Time *)oldestTime
+{
+    return self.oldest.oldestTime;
 }
 
 @end

@@ -86,15 +86,56 @@
     return ((SimpleCandle *)_candles.lastObject).forexHistoryData;
 }
 
-- (float)zoneStartXOfForexData:(ForexHistoryData *)forexData
+- (ForexHistoryData *)rightEndForexData
+{
+    return ((SimpleCandle *)_candles.firstObject).forexHistoryData;
+}
+
+- (SimpleCandle *)candleOfForexData:(ForexHistoryData *)forexData
 {
     for (SimpleCandle *candle in _candles) {
         if ([forexData isEqualToForexData:candle.forexHistoryData]) {
-            return candle.rect.origin.x;
+            return candle;
         }
     }
+
+    return nil;
+}
+
+- (float)zoneStartXOfForexData:(ForexHistoryData *)forexData
+{
+    SimpleCandle *candle = [self candleOfForexData:forexData];
     
-    return -1;
+    if (candle) {
+        return candle.rect.origin.x;
+    } else {
+        return -1;
+    }
+}
+
+- (float)zoneEndXOfForexData:(ForexHistoryData *)forexData
+{
+    SimpleCandle *candle = [self candleOfForexData:forexData];
+
+    if (candle) {
+        return candle.rect.origin.x + candle.rect.size.width;
+    } else {
+        return -1;
+    }
+}
+
+- (float)zoneStartXOfForexDataFromLeftEnd:(NSUInteger)index
+{
+    SimpleCandle *candle = _candles[_candles.count - index];
+    
+    return candle.rect.origin.x;
+}
+
+- (ForexHistoryData *)forexDataFromLeftEnd:(NSUInteger)index
+{
+    SimpleCandle *candle = _candles[_candles.count - index];
+    
+    return candle.forexHistoryData;
 }
 
 #pragma mark - getter,setter
