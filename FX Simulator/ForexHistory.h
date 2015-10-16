@@ -16,7 +16,7 @@
 
 @interface ForexHistory : NSObject
 
--(id)initWithCurrencyPair:(CurrencyPair*)currencyPair timeScale:(TimeFrame*)timeScale;
+- (instancetype)initWithCurrencyPair:(CurrencyPair *)currencyPair timeScale:(TimeFrame *)timeScale;
 
 - (ForexHistoryData *)nextDataOfTime:(Time *)time;
 
@@ -29,7 +29,7 @@
 /**
  closeTime以下の時間をlimit個、最新のデータから取得する。
 */
--(NSArray*)selectMaxCloseTime:(Time *)closeTime limit:(NSUInteger)limit;
+- (NSArray *)selectMaxCloseTime:(Time *)closeTime limit:(NSUInteger)limit;
 
 /**
  closeTime以下の時間で、oldCloseTime時間より新しいデータを、新しい順に取得する。
@@ -39,13 +39,13 @@
 /**
  その通貨と時間軸のテーブルの始値の最初の時間。
  */
--(Time*)minOpenTime;
+- (Time *)minOpenTime;
 
 /**
  その通貨と時間軸のテーブルの始値の最終の時間。
  */
--(Time*)maxOpenTime;
+- (Time *)maxOpenTime;
 
--(ForexHistoryData*)lastRecord;
+- (ForexHistoryData *)lastRecord;
 
 @end

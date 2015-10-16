@@ -9,7 +9,9 @@
 #import <Foundation/Foundation.h>
 
 @class FMDatabase;
+@class FMDatabaseQueue;
 
 @interface ForexDatabase : NSObject
-+(FMDatabase*)dbConnect;
++ (FMDatabase *)dbConnect;
++ (FMDatabaseQueue *)dbQueueConnect;
 @end
