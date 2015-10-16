@@ -156,15 +156,15 @@
 
 - (Time *)minOpenTime
 {
-    return [self firstRecord].open.timestamp;
+    return [self oldestData].open.timestamp;
 }
 
 - (Time *)maxOpenTime
 {
-    return [self lastRecord].close.timestamp;
+    return [self newestData].close.timestamp;
 }
 
-- (ForexHistoryData *)firstRecord
+- (ForexHistoryData *)oldestData
 {
     NSString *sql = [NSString stringWithFormat:@"select rowid,* from %@ limit 1;", _forexHistoryTableName];
     
@@ -183,7 +183,7 @@
     return data;
 }
 
-- (ForexHistoryData *)lastRecord
+- (ForexHistoryData *)newestData
 {
     NSString *sql = [NSString stringWithFormat:@"select rowid,* from %@ order by rowid desc limit 1;", _forexHistoryTableName];
     
