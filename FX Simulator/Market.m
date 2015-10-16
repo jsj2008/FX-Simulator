@@ -49,7 +49,7 @@ static NSString * const kKeyPath = @"currentTime";
         _currentTime = time;
         _currentForexData = [_forexHistory selectMaxCloseTime:_currentTime limit:1].firstObject;
         _forexDataChunkStore = [[ForexDataChunkStore alloc] initWithCurrencyPair:currencyPair timeScale:timeFrame getMaxLimit:FXSMaxForexDataStore];
-        _lastData = [_forexHistory lastRecord];
+        _lastData = [_forexHistory newestData];
         _completionTimeFrame = [Setting timeFrameList].minTimeFrame;
     }
     

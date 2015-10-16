@@ -15,15 +15,6 @@ static NSString* const dbFileName = @"forex_time_scale.sqlite";
 
 @implementation ForexDatabase
 
-/*-(id)init
-{
-    if (self = [super init]) {
-        dbPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:dbFileName];
-    }
-    
-    return self;
-}*/
-
 + (FMDatabase *)dbConnect
 {
     return [FMDatabase databaseWithPath:[self dbPath]];
@@ -38,7 +29,5 @@ static NSString* const dbFileName = @"forex_time_scale.sqlite";
 {
     return [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:dbFileName];
 }
-
-
 
 @end

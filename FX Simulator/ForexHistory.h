@@ -46,6 +46,6 @@
  */
 - (Time *)maxOpenTime;
 
-- (ForexHistoryData *)lastRecord;
+- (ForexHistoryData *)newestData;
 
 @end
