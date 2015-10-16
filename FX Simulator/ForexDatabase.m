@@ -7,7 +7,9 @@
 //
 
 #import "ForexDatabase.h"
+
 #import "FMDatabase.h"
+#import "FMDatabaseQueue.h"
 
 static NSString* const dbFileName = @"forex_time_scale.sqlite";
 
@@ -22,11 +24,19 @@ static NSString* const dbFileName = @"forex_time_scale.sqlite";
     return self;
 }*/
 
-+(FMDatabase*)dbConnect
++ (FMDatabase *)dbConnect
 {
-    NSString *dbPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:dbFileName];
-    
-    return [FMDatabase databaseWithPath:dbPath];
+    return [FMDatabase databaseWithPath:[self dbPath]];
+}
+
++ (FMDatabaseQueue *)dbQueueConnect
+{
+    return [FMDatabaseQueue databaseQueueWithPath:[self dbPath]];
+}
+
++ (NSString *)dbPath
+{
+    return [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:dbFileName];
 }
 
 
