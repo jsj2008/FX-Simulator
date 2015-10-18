@@ -138,6 +138,7 @@
 		70FCD5B91BA0812500500B40 /* SimulationStateResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 70FCD5B81BA0812500500B40 /* SimulationStateResult.m */; };
 		70FCD5F11BA6FAF900500B40 /* SetSaveDataTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70FCD5F01BA6FAF900500B40 /* SetSaveDataTableViewController.m */; };
 		70FE818A1BC5769800F2D894 /* EntityChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 70FE81891BC5769800F2D894 /* EntityChart.m */; };
+		70FE82001BD33FF200F2D894 /* VisibleChartArea.m in Sources */ = {isa = PBXBuildFile; fileRef = 70FE81FF1BD33FF200F2D894 /* VisibleChartArea.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -392,6 +393,8 @@
 		70FCD5F01BA6FAF900500B40 /* SetSaveDataTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetSaveDataTableViewController.m; sourceTree = "<group>"; };
 		70FE81881BC5769800F2D894 /* EntityChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityChart.h; sourceTree = "<group>"; };
 		70FE81891BC5769800F2D894 /* EntityChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityChart.m; sourceTree = "<group>"; };
+		70FE81FE1BD33FF200F2D894 /* VisibleChartArea.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VisibleChartArea.h; sourceTree = "<group>"; };
+		70FE81FF1BD33FF200F2D894 /* VisibleChartArea.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VisibleChartArea.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -594,6 +597,8 @@
 				70BF3C241BAEF8D600779617 /* ExecutionOrderRelationChunk.m */,
 				70FE81881BC5769800F2D894 /* EntityChart.h */,
 				70FE81891BC5769800F2D894 /* EntityChart.m */,
+				70FE81FE1BD33FF200F2D894 /* VisibleChartArea.h */,
+				70FE81FF1BD33FF200F2D894 /* VisibleChartArea.m */,
 			);
 			path = "FX Simulator";
 			sourceTree = "<group>";
@@ -1020,6 +1025,7 @@
 				700C9E1B1B65FBD20084320E /* IndicatorSource.m in Sources */,
 				70D2FB5F1A9F575900CAB509 /* ExecutionHistoryTableViewController.m in Sources */,
 				704D3E771B5A7AFB00A8B9AB /* Chart.m in Sources */,
+				70FE82001BD33FF200F2D894 /* VisibleChartArea.m in Sources */,
 				70D2FC0F1A9F58F700CAB509 /* TradeDatabase.m in Sources */,
 				70D2FBD81A9F57CB00CAB509 /* SaveLoader.m in Sources */,
 				70D2FAF21A9F56AE00CAB509 /* FMDatabaseAdditions.m in Sources */,

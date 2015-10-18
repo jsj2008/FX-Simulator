@@ -38,7 +38,7 @@
 - (ForexHistoryData *)getForexDataFromTouchPoint:(CGPoint)point displayCount:(NSUInteger)count viewSize:(CGSize)size;
 - (void)setVisibleChartView:(UIView *)visibleView;
 - (void)strokeCurrentChart:(Market *)market;
-- (void)didChangeEntityChartViewPositionX;
+- (void)didAnimate;
 - (void)scaleStart;
 - (void)scaleX:(float)scaleX;
 - (void)scaleEnd;
