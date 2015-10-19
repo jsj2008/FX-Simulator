@@ -229,6 +229,13 @@ static NSUInteger FXSEntityChartForexDataCount = 300;
     }
 }
 
+- (EntityChart *)nextEntityChart
+{
+    @synchronized (_syncNextEntityChart) {
+        return _nextEntityChart;
+    }
+}
+
 - (float)visibleViewDefaultStartX
 {
     if (!self.visibleViewDefaultStartForexData) {
