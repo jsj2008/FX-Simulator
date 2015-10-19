@@ -19,8 +19,7 @@
 @class TimeFrame;
 
 @interface EntityChart : NSObject
-
-@property (nonatomic, readonly) UIImage *image;
+@property (nonatomic, readonly) UIImageView *entityChartView;
 @property (nonatomic, readonly) Rate *maxRate;
 @property (nonatomic, readonly) Rate *minRate;
 @property (nonatomic, readonly) EntityChart *previousEntityChart;
@@ -28,7 +27,9 @@
 @property (nonatomic, readonly) float visibleViewDefaultStartX;
 @property (nonatomic, readonly) float visibleViewDefaultEndX;
 
-- (instancetype)initWithCurrencyPair:(CurrencyPair *)currencyPair timeFrame:(TimeFrame *)timeFrame indicatorChunk:(IndicatorChunk *)indicatorChunk viewSize:(CGSize)viewSize;
++ (NSUInteger)forexDataCount;
+
+- (instancetype)initWithCurrencyPair:(CurrencyPair *)currencyPair timeFrame:(TimeFrame *)timeFrame indicatorChunk:(IndicatorChunk *)indicatorChunk;
 
 - (void)strokeForMarket:(Market *)market;
 
