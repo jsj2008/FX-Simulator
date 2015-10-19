@@ -99,9 +99,7 @@ static const NSUInteger FXSMaxDisplayDataCount = 200;
 {
     _market = market;
     
-    _entityChartView.transform = CGAffineTransformIdentity;
-    
-    EntityChart *newCurrentEntityChart = [[EntityChart alloc] initWithCurrencyPair:self.currencyPair timeFrame:self.timeFrame indicatorChunk:self.indicatorChunk viewSize:_entityChartView.frame.size];
+    EntityChart *newCurrentEntityChart = [[EntityChart alloc] initWithCurrencyPair:self.currencyPair timeFrame:self.timeFrame indicatorChunk:self.indicatorChunk];
     [newCurrentEntityChart strokeForMarket:market];
     
     self.currentEntityChart = newCurrentEntityChart;
@@ -238,8 +236,6 @@ static const NSUInteger FXSMaxDisplayDataCount = 200;
         
         self.currentEntityChart = newCurrentEntityChart;
         
-        _entityChartView.transform = CGAffineTransformIdentity;
-        
         visibleViewStartX = self.currentEntityChart.visibleViewDefaultStartX;
         
         if (visibleViewStartX < 0) {
@@ -260,8 +256,6 @@ static const NSUInteger FXSMaxDisplayDataCount = 200;
         }
         
         self.currentEntityChart = newCurrentEntityChart;
-        
-        _entityChartView.transform = CGAffineTransformIdentity;
         
         visibleViewEndX = self.currentEntityChart.visibleViewDefaultEndX;
         
@@ -319,14 +313,19 @@ static const NSUInteger FXSMaxDisplayDataCount = 200;
 - (void)setCurrentEntityChart:(EntityChart *)currentEntityChart
 {
     _currentEntityChart = currentEntityChart;
-    _entityChartView.image = _currentEntityChart.image;
+    _entityChartView = _currentEntityChart.entityChartView;
+    
+    for (UIView *view in _visibleChartView.subviews) {
+        [view removeFromSuperview];
+    }
+    
+    [_visibleChartView addSubview:_entityChartView];
+    _visibleChartArea = [[VisibleChartArea alloc] initWithVisibleChartView:_visibleChartView entityChartView:_entityChartView];
 }
 
 - (void)setVisibleChartView:(UIView *)visibleView
 {
     _visibleChartView = visibleView;
-    [_visibleChartView addSubview:_entityChartView];
-    _visibleChartArea = [[VisibleChartArea alloc] initWithVisibleChartView:_visibleChartView entityChartView:_entityChartView];
 }
 
 #pragma mark - getter,setter
