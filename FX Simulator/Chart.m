@@ -21,9 +21,9 @@
 #import "VisibleChartArea.h"
 
 // 偶数
-static const NSUInteger FXSDefaultDisplayDataCount = 300;
-static const NSUInteger FXSMinDisplayDataCount = 30;
-static const NSUInteger FXSMaxDisplayDataCount = 200;
+static const NSUInteger FXSDefaultDisplayDataCount = 60;
+static const NSUInteger FXSMinDisplayDataCount = 60;
+static const NSUInteger FXSMaxDisplayDataCount = 100;
 
 @interface Chart ()
 @property (nonatomic) float visibleWidthRatio;
@@ -37,6 +37,8 @@ static const NSUInteger FXSMaxDisplayDataCount = 200;
     Market *_market;
     __block BOOL _inAnimation;
     float _startScaleX;
+    float _scaleX;
+    float _previousScaleX;
 }
 
 + (instancetype)createNewChart
@@ -77,8 +79,7 @@ static const NSUInteger FXSMaxDisplayDataCount = 200;
 {
     if (self = [super init]) {
         _chartSource = source;
-        _entityChartView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 2000, 1000)];
-        _visibleWidthRatio = 0.25;
+        _visibleWidthRatio = (float)self.displayDataCount / (float)[EntityChart forexDataCount];
     }
     
     return self;
@@ -113,6 +114,8 @@ static const NSUInteger FXSMaxDisplayDataCount = 200;
 - (void)scaleStart
 {
     _startScaleX = _entityChartView.transform.a;
+    _scaleX = _startScaleX;
+    _previousScaleX = 1;
 }
 
 - (void)scaleEnd
@@ -126,6 +129,15 @@ static const NSUInteger FXSMaxDisplayDataCount = 200;
         return;
     }
     
+    if (![self canScaleForCurrentScale:scaleX previousScale:_previousScaleX]) {
+        _previousScaleX = scaleX;
+        return;
+    }
+    
+    _scaleX = _scaleX * (1 - (_previousScaleX - scaleX));
+    
+    _previousScaleX = scaleX;
+    
     CALayer *entityChartViewLayer = _entityChartView.layer.presentationLayer;
     
     float startVisibleViewOfEntityChart = (_visibleChartView.frame.origin.x - entityChartViewLayer.frame.origin.x) / _entityChartView.transform.a;
@@ -133,7 +145,7 @@ static const NSUInteger FXSMaxDisplayDataCount = 200;
     // EntityChart(scale前)で現在表示されている範囲の中間(x)
     float centerLineX = (startVisibleViewOfEntityChart + endVisibleViewOfEntityChart) / 2;
     
-    _entityChartView.transform = CGAffineTransformMakeScale(_startScaleX * scaleX, _entityChartView.transform.d);
+    _entityChartView.transform = CGAffineTransformMakeScale(_scaleX, _entityChartView.transform.d);
     
     float newVisibleViewWidth = _visibleChartView.frame.size.width / _entityChartView.transform.a;
     
@@ -145,6 +157,35 @@ static const NSUInteger FXSMaxDisplayDataCount = 200;
     self.visibleWidthRatio = (normalizedEndX - normalizedStartX) / (_entityChartView.frame.size.width / _entityChartView.transform.a);
     
     [self didChangeEntityChartViewPositionX];
+}
+
+- (BOOL)canScaleForCurrentScale:(float)currentScale previousScale:(float)previousScale
+{
+    if (currentScale < previousScale) {
+        return [self canScaleDown];
+    } else if (previousScale < currentScale) {
+        return [self canScaleUp];
+    } else {
+        return NO;
+    }
+}
+
+- (BOOL)canScaleDown
+{
+    if (FXSMaxDisplayDataCount <= self.displayDataCount) {
+        return NO;
+    }
+    
+    return YES;
+}
+
+- (BOOL)canScaleUp
+{
+    if (self.displayDataCount <= FXSMinDisplayDataCount) {
+        return NO;
+    }
+    
+    return YES;
 }
 
 - (void)translate:(float)tx
@@ -326,6 +367,13 @@ static const NSUInteger FXSMaxDisplayDataCount = 200;
 - (void)setVisibleChartView:(UIView *)visibleView
 {
     _visibleChartView = visibleView;
+}
+
+- (void)setVisibleWidthRatio:(float)visibleWidthRatio
+{
+    _visibleWidthRatio = visibleWidthRatio;
+    
+    self.displayDataCount = [EntityChart forexDataCount] * _visibleWidthRatio;
 }
 
 #pragma mark - getter,setter
