@@ -20,6 +20,8 @@
 - (BOOL)isOverRightEnd;
 - (BOOL)isOverMoveRangeLeftEnd;
 - (BOOL)isOverMoveRangeRightEnd;
+- (void)setLeftEnd;
+- (void)setRightEnd;
 - (void)setMoveRangeLeftEnd;
 - (void)setMoveRangeRightEnd;
 - (void)visibleForStartXOfEntityChart:(float)startX endXOfEntityChart:(float)endX entityChart:(EntityChart *)entityChart inAnimation:(BOOL)inAnimation;

@@ -15,8 +15,9 @@
 #import "Market.h"
 #import "Time.h"
 
-static NSUInteger FXSRequireForexDataCount = 500;
-static NSUInteger FXSEntityChartForexDataCount = 300;
+static CGSize FXSEntityChartViewSize;
+static const NSUInteger FXSRequireForexDataCount = 500;
+static const NSUInteger FXSEntityChartForexDataCount = 300;
 
 @interface EntityChart ()
 @property (nonatomic) UIImage *chartImage;
@@ -32,7 +33,6 @@ static NSUInteger FXSEntityChartForexDataCount = 300;
     ForexDataChunk *_forexDataChunk;
     ForexDataChunk *_forexDataChunkOfEntityChart;
     NSUInteger _entityChartForexDataCount;
-    CGSize _viewSize;
     Candle *_candle;
     IndicatorChunk *_indicatorChunk;
     NSObject *_syncPreviousEntityChart;
@@ -41,9 +41,18 @@ static NSUInteger FXSEntityChartForexDataCount = 300;
     BOOL _isStartedPrepareNextEntityChart;
 }
 
-@synthesize entityChartView = _entityChartView;
 @synthesize maxRate = _maxRate;
 @synthesize minRate = _minRate;
+
++ (void)initialize
+{
+    FXSEntityChartViewSize = CGSizeMake(2000, 1000);
+}
+
++ (UIImageView *)entityChartView
+{
+    return [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, FXSEntityChartViewSize.width, FXSEntityChartViewSize.height)];
+}
 
 + (NSUInteger)forexDataCount
 {
@@ -56,7 +65,6 @@ static NSUInteger FXSEntityChartForexDataCount = 300;
         _currencyPair = currencyPair;
         _timeFrame = timeFrame;
         _indicatorChunk = indicatorChunk;
-        _viewSize = self.entityChartView.frame.size;
         
         _syncPreviousEntityChart = [NSObject new];
         _syncNextEntityChart = [NSObject new];
@@ -80,22 +88,18 @@ static NSUInteger FXSEntityChartForexDataCount = 300;
 
 - (void)setEntityChartImage
 {
-    UIGraphicsBeginImageContextWithOptions(_viewSize, NO, 0.0);
+    UIGraphicsBeginImageContextWithOptions(FXSEntityChartViewSize, NO, 0.0);
     
     if (![_indicatorChunk existsBaseIndicator]) {
         _candle = [Candle createTemporaryDefaultCandle];
-        [_candle strokeIndicatorFromForexDataChunk:_forexDataChunk displayDataCount:FXSEntityChartForexDataCount displaySize:_viewSize];
+        [_candle strokeIndicatorFromForexDataChunk:_forexDataChunk displayDataCount:FXSEntityChartForexDataCount displaySize:FXSEntityChartViewSize];
     }
     
-    [_indicatorChunk strokeIndicatorFromForexDataChunk:_forexDataChunk displayDataCount:FXSEntityChartForexDataCount displaySize:_viewSize];
+    [_indicatorChunk strokeIndicatorFromForexDataChunk:_forexDataChunk displayDataCount:FXSEntityChartForexDataCount displaySize:FXSEntityChartViewSize];
     
-    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    self.chartImage = UIGraphicsGetImageFromCurrentImageContext();
     
     UIGraphicsEndImageContext();
-    
-    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-        self.entityChartView.image = image;
-    }];
 }
 
 - (ForexDataChunk *)chunkForRangeStartX:(float)startX endX:(float)endX
@@ -188,15 +192,6 @@ static NSUInteger FXSEntityChartForexDataCount = 300;
             self.nextEntityChart.visibleViewDefaultEndForexData = rightEndForexData;
         }
     }];
-}
-
-- (UIImageView *)entityChartView
-{
-    if (!_entityChartView) {
-        _entityChartView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 2000, 1000)];
-    }
-    
-    return _entityChartView;
 }
 
 - (Rate *)maxRate
