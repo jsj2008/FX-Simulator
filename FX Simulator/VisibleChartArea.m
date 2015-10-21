@@ -93,6 +93,19 @@ static const float FXSEntityChartViewPrepareTotalRangeRatio = 0.5;
     }
 }
 
+- (void)setLeftEnd
+{
+    _entityChartView.frame = CGRectMake(_visibleChartView.frame.origin.x, _entityChartView.frame.origin.y, _entityChartView.frame.size.width, _entityChartView.frame.size.height);
+}
+
+- (void)setRightEnd
+{
+    float visibleChartViewEndX = _visibleChartView.frame.origin.x + _visibleChartView.frame.size.width;
+    float newEntityChartViewX = visibleChartViewEndX - _entityChartView.frame.size.width;
+    
+    _entityChartView.frame = CGRectMake(newEntityChartViewX, _entityChartView.frame.origin.y, _entityChartView.frame.size.width, _entityChartView.frame.size.height);
+}
+
 - (void)setMoveRangeLeftEnd
 {
     float newEntityChartViewX = [self moveRangeLeftEndX];

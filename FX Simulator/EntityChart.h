@@ -19,13 +19,15 @@
 @class TimeFrame;
 
 @interface EntityChart : NSObject
-@property (nonatomic, readonly) UIImageView *entityChartView;
+@property (nonatomic, readonly) UIImage *chartImage;
 @property (nonatomic, readonly) Rate *maxRate;
 @property (nonatomic, readonly) Rate *minRate;
 @property (nonatomic, readonly) EntityChart *previousEntityChart;
 @property (nonatomic, readonly) EntityChart *nextEntityChart;
 @property (nonatomic, readonly) float visibleViewDefaultStartX;
 @property (nonatomic, readonly) float visibleViewDefaultEndX;
+
++ (UIImageView *)entityChartView;
 
 + (NSUInteger)forexDataCount;
 
