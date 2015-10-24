@@ -9,6 +9,8 @@
 #import "Candle.h"
 
 #import "CoreDataManager.h"
+#import "Coordinate.h"
+#import "CoordinateRange.h"
 #import "SimpleCandle.h"
 #import "CandleSource.h"
 #import "CandlesFactory.h"
@@ -102,25 +104,14 @@
     return nil;
 }
 
-- (float)zoneStartXOfForexData:(ForexHistoryData *)forexData
+- (CoordinateRange *)chartAreaOfForexData:(ForexHistoryData *)forexData
 {
     SimpleCandle *candle = [self candleOfForexData:forexData];
     
     if (candle) {
-        return candle.rect.origin.x;
+        return [[CoordinateRange alloc] initWithBegin:[[Coordinate alloc] initWithCoordinateValue:candle.rect.origin.x] end:[[Coordinate alloc] initWithCoordinateValue:candle.rect.origin.x + candle.rect.size.width]];
     } else {
-        return -1;
-    }
-}
-
-- (float)zoneEndXOfForexData:(ForexHistoryData *)forexData
-{
-    SimpleCandle *candle = [self candleOfForexData:forexData];
-
-    if (candle) {
-        return candle.rect.origin.x + candle.rect.size.width;
-    } else {
-        return -1;
+        return nil;
     }
 }
 

@@ -10,6 +10,7 @@
 
 @import UIKit;
 
+@class Coordinate;
 @class CurrencyPair;
 @class ForexHistoryData;
 @class ForexDataChunk;
@@ -24,8 +25,8 @@
 @property (nonatomic, readonly) Rate *minRate;
 @property (nonatomic, readonly) EntityChart *previousEntityChart;
 @property (nonatomic, readonly) EntityChart *nextEntityChart;
-@property (nonatomic, readonly) float visibleViewDefaultStartX;
-@property (nonatomic, readonly) float visibleViewDefaultEndX;
+@property (nonatomic, readonly) Coordinate *visibleViewDefaultStartX;
+@property (nonatomic, readonly) Coordinate *visibleViewDefaultEndX;
 
 + (UIImageView *)entityChartView;
 
@@ -38,14 +39,6 @@
 - (ForexDataChunk *)chunkForRangeStartX:(float)startX endX:(float)endX;
 
 - (ForexHistoryData *)leftEndForexData;
-
-- (float)zoneStartXOfForexData:(ForexHistoryData *)forexData;
-
-- (float)zoneEndXOfForexData:(ForexHistoryData *)forexData;
-
-- (float)zoneStartXOfForexDataFromLeftEnd:(NSUInteger)index;
-
-- (ForexHistoryData *)forexDataFromLeftEnd:(NSUInteger)index;
 
 - (void)preparePreviousEntityChartForMarket:(Market *)market;
 
