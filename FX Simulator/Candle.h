@@ -10,6 +10,7 @@
 #import "Indicator.h"
 
 @class CandleSource;
+@class CoordinateRange;
 @class ForexDataChunk;
 @class ForexHistoryData;
 @class VisibleChart;
@@ -32,11 +33,7 @@
 
 - (ForexHistoryData *)rightEndForexData;
 
-- (float)zoneStartXOfForexData:(ForexHistoryData *)forexData;
-
-- (float)zoneEndXOfForexData:(ForexHistoryData *)forexData;
-
-- (float)zoneStartXOfForexDataFromLeftEnd:(NSUInteger)index;
+- (CoordinateRange *)chartAreaOfForexData:(ForexHistoryData *)forexData;
 
 - (ForexHistoryData *)forexDataFromLeftEnd:(NSUInteger)index;
 

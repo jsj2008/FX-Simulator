@@ -9,6 +9,7 @@
 #import "Chart.h"
 
 #import "CoreDataManager.h"
+#import "Coordinate.h"
 #import "ChartSource.h"
 #import "Candle.h"
 #import "EntityChart.h"
@@ -313,11 +314,13 @@ static const NSUInteger FXSMaxDisplayDataCount = 100;
         
         self.currentEntityChart = newCurrentEntityChart;
         
-        visibleViewStartX = self.currentEntityChart.visibleViewDefaultStartX;
+        Coordinate *visibleViewStartXObj = self.currentEntityChart.visibleViewDefaultStartX;
         
-        if (visibleViewStartX < 0) {
+        if (!visibleViewStartXObj) {
             return;
         }
+        
+        visibleViewStartX = visibleViewStartXObj.value;
         
         visibleViewEndX = visibleViewStartX + (_entityChartView.frame.size.width * self.visibleWidthRatio);
         
@@ -331,11 +334,13 @@ static const NSUInteger FXSMaxDisplayDataCount = 100;
         
         self.currentEntityChart = newCurrentEntityChart;
         
-        visibleViewEndX = self.currentEntityChart.visibleViewDefaultEndX;
+        Coordinate *visibleViewEndXObj = self.currentEntityChart.visibleViewDefaultEndX;
         
-        if (visibleViewEndX < 0) {
+        if (!visibleViewEndXObj) {
             return;
         }
+        
+        visibleViewEndX = visibleViewEndXObj.value;
         
         visibleViewStartX = visibleViewEndX - (_entityChartView.frame.size.width * self.visibleWidthRatio);
         

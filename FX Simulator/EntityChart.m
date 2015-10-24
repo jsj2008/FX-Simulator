@@ -9,6 +9,7 @@
 #import "EntityChart.h"
 
 #import "Candle.h"
+#import "CoordinateRange.h"
 #import "ForexHistoryData.h"
 #import "ForexDataChunk.h"
 #import "IndicatorChunk.h"
@@ -110,21 +111,6 @@ static const NSUInteger FXSEntityChartForexDataCount = 300;
 - (ForexHistoryData *)leftEndForexData
 {
     return [_candle leftEndForexData];
-}
-
-- (float)zoneStartXOfForexData:(ForexHistoryData *)forexData
-{
-    return [_candle zoneStartXOfForexData:forexData];
-}
-
-- (float)zoneEndXOfForexData:(ForexHistoryData *)forexData
-{
-    return [_candle zoneEndXOfForexData:forexData];
-}
-
-- (float)zoneStartXOfForexDataFromLeftEnd:(NSUInteger)index
-{
-    return [_candle zoneStartXOfForexDataFromLeftEnd:index];
 }
 
 - (ForexHistoryData *)forexDataFromLeftEnd:(NSUInteger)index
@@ -231,22 +217,34 @@ static const NSUInteger FXSEntityChartForexDataCount = 300;
     }
 }
 
-- (float)visibleViewDefaultStartX
+- (Coordinate *)visibleViewDefaultStartX
 {
     if (!self.visibleViewDefaultStartForexData) {
-        return 0;
+        return nil;
     }
     
-    return [self zoneStartXOfForexData:self.visibleViewDefaultStartForexData];
+    CoordinateRange *area = [_candle chartAreaOfForexData:self.visibleViewDefaultStartForexData];
+    
+    if (area) {
+        return area.begin;
+    } else {
+        return nil;
+    }
 }
 
-- (float)visibleViewDefaultEndX
+- (Coordinate *)visibleViewDefaultEndX
 {
     if (!self.visibleViewDefaultEndForexData) {
         return 0;
     }
     
-    return [self zoneEndXOfForexData:self.visibleViewDefaultEndForexData];
+    CoordinateRange *area = [_candle chartAreaOfForexData:self.visibleViewDefaultEndForexData];
+    
+    if (area) {
+        return area.end;
+    } else {
+        return nil;
+    }
 }
 
 @end
