@@ -10,6 +10,7 @@
 #import "Indicator.h"
 
 @class CandleSource;
+@class Coordinate;
 @class CoordinateRange;
 @class ForexDataChunk;
 @class ForexHistoryData;
@@ -21,6 +22,8 @@
 @property (nonatomic) UIColor *downLineColor;
 @property (nonatomic) UIColor *upColor;
 @property (nonatomic) UIColor *upLineColor;
+@property (nonatomic, readonly) Coordinate *leftEndForexDataX;
+@property (nonatomic, readonly) Coordinate *rightEndForexDataX;
 
 /**
  DBには保存されない。

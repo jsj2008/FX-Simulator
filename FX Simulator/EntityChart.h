@@ -25,6 +25,8 @@
 @property (nonatomic, readonly) Rate *minRate;
 @property (nonatomic, readonly) EntityChart *previousEntityChart;
 @property (nonatomic, readonly) EntityChart *nextEntityChart;
+@property (nonatomic, readonly) Coordinate *leftEndForexDataX;
+@property (nonatomic, readonly) Coordinate *rightEndForexDataX;
 @property (nonatomic, readonly) Coordinate *visibleViewDefaultStartX;
 @property (nonatomic, readonly) Coordinate *visibleViewDefaultEndX;
 

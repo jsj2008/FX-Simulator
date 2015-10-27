@@ -222,6 +222,16 @@ static const NSUInteger FXSEntityChartForexDataCount = 300;
     }
 }
 
+- (Coordinate *)leftEndForexDataX
+{
+    return _candle.leftEndForexDataX;
+}
+
+- (Coordinate *)rightEndForexDataX
+{
+    return _candle.rightEndForexDataX;
+}
+
 - (Coordinate *)visibleViewDefaultStartX
 {
     if (!self.visibleViewDefaultStartForexData) {

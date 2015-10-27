@@ -13,6 +13,7 @@
 @class EntityChart;
 
 @interface VisibleChartArea : NSObject
+@property (nonatomic) EntityChart *currentEntityChart;
 - (instancetype)initWithVisibleChartView:(UIView *)visibleChartView entityChartView:(UIImageView *)entityChartView;
 - (BOOL)isInPreparePreviousChartRange;
 - (BOOL)isInPrepareNextChartRange;
@@ -24,5 +25,5 @@
 - (void)setRightEnd;
 - (void)setMoveRangeLeftEnd;
 - (void)setMoveRangeRightEnd;
-- (void)visibleForStartXOfEntityChart:(float)startX endXOfEntityChart:(float)endX entityChart:(EntityChart *)entityChart inAnimation:(BOOL)inAnimation;
+- (void)visibleForStartXOfEntityChart:(float)startX endXOfEntityChart:(float)endX inAnimation:(BOOL)inAnimation;
 @end

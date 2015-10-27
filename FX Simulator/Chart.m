@@ -110,7 +110,7 @@ static const NSUInteger FXSMaxDisplayDataCount = 100;
     float startX = _entityChartView.frame.size.width - (_entityChartView.frame.size.width * self.visibleWidthRatio);
     float endX = startX + (_entityChartView.frame.size.width * self.visibleWidthRatio);
     
-    [_visibleChartArea visibleForStartXOfEntityChart:startX endXOfEntityChart:endX entityChart:self.currentEntityChart inAnimation:NO];
+    [_visibleChartArea visibleForStartXOfEntityChart:startX endXOfEntityChart:endX inAnimation:NO];
 }
 
 - (ForexHistoryData *)forexDataOfVisibleChartViewPoint:(CGPoint)point
@@ -162,7 +162,7 @@ static const NSUInteger FXSMaxDisplayDataCount = 100;
     float normalizedStartX = centerLineX - (newVisibleViewWidth / 2);
     float normalizedEndX = centerLineX + (newVisibleViewWidth / 2);
     
-    [_visibleChartArea visibleForStartXOfEntityChart:normalizedStartX endXOfEntityChart:normalizedEndX entityChart:self.currentEntityChart inAnimation:NO];
+    [_visibleChartArea visibleForStartXOfEntityChart:normalizedStartX endXOfEntityChart:normalizedEndX inAnimation:NO];
     
     self.visibleWidthRatio = (normalizedEndX - normalizedStartX) / (_entityChartView.frame.size.width / _entityChartView.transform.a);
     
@@ -313,7 +313,7 @@ static const NSUInteger FXSMaxDisplayDataCount = 100;
     }
     
     if ([_visibleChartArea isOverLeftEnd]) {
-    
+        
         EntityChart *newCurrentEntityChart = self.currentEntityChart.previousEntityChart;
         
         if (!newCurrentEntityChart) {
@@ -356,7 +356,7 @@ static const NSUInteger FXSMaxDisplayDataCount = 100;
         return;
     }
     
-    [_visibleChartArea visibleForStartXOfEntityChart:visibleViewStartX endXOfEntityChart:visibleViewEndX entityChart:self.currentEntityChart inAnimation:NO];
+    [_visibleChartArea visibleForStartXOfEntityChart:visibleViewStartX endXOfEntityChart:visibleViewEndX inAnimation:NO];
     
     if (_inAnimation) {
         _entityChartView.frame = CGRectMake(_entityChartView.frame.origin.x + animateTx, _entityChartView.frame.origin.y, _entityChartView.frame.size.width, _entityChartView.frame.size.height);
@@ -399,7 +399,7 @@ static const NSUInteger FXSMaxDisplayDataCount = 100;
     float startVisibleViewOfEntityChart = (_visibleChartView.frame.origin.x - _entityChartView.frame.origin.x) / _entityChartView.transform.a;
     float endVisibleViewOfEntityChart = startVisibleViewOfEntityChart + (_visibleChartView.frame.size.width / _entityChartView.transform.a);
     
-    [_visibleChartArea visibleForStartXOfEntityChart:startVisibleViewOfEntityChart endXOfEntityChart:endVisibleViewOfEntityChart entityChart:self.currentEntityChart inAnimation:NO];
+    [_visibleChartArea visibleForStartXOfEntityChart:startVisibleViewOfEntityChart endXOfEntityChart:endVisibleViewOfEntityChart inAnimation:NO];
 }
 
 - (void)normalizeEntityChartViewInAnimation
@@ -409,7 +409,7 @@ static const NSUInteger FXSMaxDisplayDataCount = 100;
     float startVisibleViewOfEntityChart = (_visibleChartView.frame.origin.x - entityChartViewLayer.frame.origin.x) / _entityChartView.transform.a;
     float endVisibleViewOfEntityChart = startVisibleViewOfEntityChart + (_visibleChartView.frame.size.width / _entityChartView.transform.a);
     
-    [_visibleChartArea visibleForStartXOfEntityChart:startVisibleViewOfEntityChart endXOfEntityChart:endVisibleViewOfEntityChart entityChart:self.currentEntityChart inAnimation:YES];
+    [_visibleChartArea visibleForStartXOfEntityChart:startVisibleViewOfEntityChart endXOfEntityChart:endVisibleViewOfEntityChart inAnimation:YES];
 }
 
 - (void)setCurrentEntityChart:(EntityChart *)currentEntityChart
@@ -417,6 +417,7 @@ static const NSUInteger FXSMaxDisplayDataCount = 100;
     _currentEntityChart = currentEntityChart;
     _entityChartView.transform = CGAffineTransformIdentity;
     _entityChartView.image = _currentEntityChart.chartImage;
+    _visibleChartArea.currentEntityChart = _currentEntityChart;
 }
 
 - (void)setVisibleChartView:(UIView *)visibleView
