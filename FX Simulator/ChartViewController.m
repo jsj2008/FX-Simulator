@@ -55,20 +55,19 @@
 
 - (IBAction)handleLongPressGesture:(UILongPressGestureRecognizer *) sender
 {
-    /*if (sender.state != UIGestureRecognizerStateEnded) {
+    if (sender.state != UIGestureRecognizerStateEnded) {
         
         CGPoint pt = [sender locationInView:self.visibleChartView];
         
-        _displayForexDataCount = 40;
         
-        ForexHistoryData *data = [self.visibleChartView.chart getForexDataFromTouchPoint:pt displayCount:_displayForexDataCount viewSize:self.visibleChartView.frame.size];
+        ForexHistoryData *forexData = [_chart forexDataOfVisibleChartViewPoint:pt];
         
-        if (data == nil) {
+        if (!forexData) {
             return;
         }
         
         if ([self.delegate respondsToSelector:@selector(longPressedForexData:)]) {
-            [self.delegate longPressedForexData:data];
+            [self.delegate longPressedForexData:forexData];
         }
         
     } else {
@@ -77,7 +76,7 @@
             [self.delegate longPressedEnd];
         }
         
-    }*/
+    }
 }
 
 - (void)setChart:(Chart *)chart

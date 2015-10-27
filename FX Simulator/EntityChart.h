@@ -38,6 +38,8 @@
 
 - (ForexDataChunk *)chunkForRangeStartX:(float)startX endX:(float)endX;
 
+- (ForexHistoryData *)forexDataOfEntityChartPoint:(CGPoint)point;
+
 - (ForexHistoryData *)leftEndForexData;
 
 - (void)preparePreviousEntityChartForMarket:(Market *)market;

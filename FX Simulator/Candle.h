@@ -29,6 +29,8 @@
 
 - (ForexDataChunk *)chunkRangeStartX:(float)startX endX:(float)endX;
 
+- (ForexHistoryData *)forexDataOfPoint:(CGPoint)point;
+
 - (ForexHistoryData *)leftEndForexData;
 
 - (ForexHistoryData *)rightEndForexData;

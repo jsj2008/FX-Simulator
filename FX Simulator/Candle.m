@@ -83,6 +83,20 @@
     return [[ForexDataChunk alloc] initWithForexDataArray:rangeForexDataArray];
 }
 
+- (ForexHistoryData *)forexDataOfPoint:(CGPoint)point
+{
+    for (SimpleCandle *candle in _candles) {
+        float x = candle.rect.origin.x;
+        float endX = candle.rect.origin.x + candle.rect.size.width;
+        
+        if (x <= point.x && point.x <= endX) {
+            return candle.forexHistoryData;
+        }
+    }
+    
+    return nil;
+}
+
 - (ForexHistoryData *)leftEndForexData
 {
     return ((SimpleCandle *)_candles.lastObject).forexHistoryData;
