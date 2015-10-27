@@ -12,6 +12,7 @@
 @class ForexHistoryData;
 
 @interface SimpleCandle : NSObject
+@property (nonatomic) CGRect areaRect;
 @property (nonatomic) CGRect rect;
 @property (nonatomic) CGPoint highLineTop;
 @property (nonatomic) CGPoint highLineBottom;

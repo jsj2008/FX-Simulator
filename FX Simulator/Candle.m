@@ -74,8 +74,8 @@
     NSMutableArray *rangeForexDataArray = [NSMutableArray array];
     
     for (SimpleCandle *candle in _candles) {
-        float x = candle.rect.origin.x;
-        if (startX <= (x + candle.rect.size.width) && x <= endX) {
+        float x = candle.areaRect.origin.x;
+        if (startX <= (x + candle.areaRect.size.width) && x <= endX) {
             [rangeForexDataArray addObject:candle.forexHistoryData];
         }
     }
@@ -86,8 +86,8 @@
 - (ForexHistoryData *)forexDataOfPoint:(CGPoint)point
 {
     for (SimpleCandle *candle in _candles) {
-        float x = candle.rect.origin.x;
-        float endX = candle.rect.origin.x + candle.rect.size.width;
+        float x = candle.areaRect.origin.x;
+        float endX = candle.areaRect.origin.x + candle.areaRect.size.width;
         
         if (x <= point.x && point.x <= endX) {
             return candle.forexHistoryData;
@@ -123,24 +123,36 @@
     SimpleCandle *candle = [self candleOfForexData:forexData];
     
     if (candle) {
-        return [[CoordinateRange alloc] initWithBegin:[[Coordinate alloc] initWithCoordinateValue:candle.rect.origin.x] end:[[Coordinate alloc] initWithCoordinateValue:candle.rect.origin.x + candle.rect.size.width]];
+        return [[CoordinateRange alloc] initWithBegin:[[Coordinate alloc] initWithCoordinateValue:candle.areaRect.origin.x] end:[[Coordinate alloc] initWithCoordinateValue:candle.areaRect.origin.x + candle.areaRect.size.width]];
     } else {
         return nil;
     }
 }
 
-- (float)zoneStartXOfForexDataFromLeftEnd:(NSUInteger)index
+/*- (float)zoneStartXOfForexDataFromLeftEnd:(NSUInteger)index
 {
     SimpleCandle *candle = _candles[_candles.count - index];
     
     return candle.rect.origin.x;
-}
+}*/
 
 - (ForexHistoryData *)forexDataFromLeftEnd:(NSUInteger)index
 {
     SimpleCandle *candle = _candles[_candles.count - index];
     
     return candle.forexHistoryData;
+}
+
+- (Coordinate *)leftEndForexDataX
+{
+    return [[Coordinate alloc] initWithCoordinateValue:((SimpleCandle *)_candles.lastObject).areaRect.origin.x];
+}
+
+- (Coordinate *)rightEndForexDataX
+{
+    SimpleCandle *rightEndCandle = _candles.firstObject;
+    
+    return [[Coordinate alloc] initWithCoordinateValue:rightEndCandle.areaRect.origin.x + rightEndCandle.areaRect.size.width];
 }
 
 #pragma mark - getter,setter

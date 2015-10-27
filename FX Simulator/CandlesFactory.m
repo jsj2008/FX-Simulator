@@ -80,6 +80,7 @@
         lowLineBottom = CGPointMake(candlePositionX+candleWidth/2.0, (maxRate - low)*pipDispSize);
         
         SimpleCandle *candle = [SimpleCandle new];
+        candle.areaRect = CGRectMake(width - (idx + 1) * candleZoneWidth, 0, candleZoneWidth, height);
         candle.rect = CGRectMake(candlePositionX, candlePositionY, candleWidth, candleHeight);
         candle.highLineTop = highLineTop;
         candle.highLineBottom = highLineBottom;
