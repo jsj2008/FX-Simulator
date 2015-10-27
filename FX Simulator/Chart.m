@@ -113,6 +113,14 @@ static const NSUInteger FXSMaxDisplayDataCount = 100;
     [_visibleChartArea visibleForStartXOfEntityChart:startX endXOfEntityChart:endX entityChart:self.currentEntityChart inAnimation:NO];
 }
 
+- (ForexHistoryData *)forexDataOfVisibleChartViewPoint:(CGPoint)point
+{
+    float entityChartViewX = (point.x - _entityChartView.frame.origin.x) / _entityChartView.transform.a;
+    float entityChartViewY = (point.y - _entityChartView.frame.origin.y) / _entityChartView.transform.d;
+    
+    return [self.currentEntityChart forexDataOfEntityChartPoint:CGPointMake(entityChartViewX, entityChartViewY)];
+}
+
 - (void)scaleStart
 {
     _inScale = YES;

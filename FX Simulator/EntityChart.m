@@ -108,6 +108,11 @@ static const NSUInteger FXSEntityChartForexDataCount = 300;
     return [_candle chunkRangeStartX:startX endX:endX];
 }
 
+- (ForexHistoryData *)forexDataOfEntityChartPoint:(CGPoint)point
+{
+    return [_candle forexDataOfPoint:point];
+}
+
 - (ForexHistoryData *)leftEndForexData
 {
     return [_candle leftEndForexData];
