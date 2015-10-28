@@ -289,7 +289,7 @@ static const NSUInteger FXSMaxDisplayDataCount = 100;
     }
 }
 
-- (void)updateEntityChartView
+- (BOOL)updateEntityChartView
 {
     float visibleViewStartX;
     float visibleViewEndX;
@@ -306,7 +306,7 @@ static const NSUInteger FXSMaxDisplayDataCount = 100;
         EntityChart *newCurrentEntityChart = self.currentEntityChart.previousEntityChart;
         
         if (!newCurrentEntityChart) {
-            return;
+            return NO;
         }
         
         self.currentEntityChart = newCurrentEntityChart;
@@ -314,7 +314,7 @@ static const NSUInteger FXSMaxDisplayDataCount = 100;
         Coordinate *visibleViewStartXObj = self.currentEntityChart.visibleViewDefaultStartX;
         
         if (!visibleViewStartXObj) {
-            return;
+            return NO;
         }
         
         visibleViewStartX = visibleViewStartXObj.value;
@@ -326,7 +326,7 @@ static const NSUInteger FXSMaxDisplayDataCount = 100;
         EntityChart *newCurrentEntityChart = self.currentEntityChart.nextEntityChart;
         
         if (!newCurrentEntityChart) {
-            return;
+            return NO;
         }
         
         self.currentEntityChart = newCurrentEntityChart;
@@ -334,7 +334,7 @@ static const NSUInteger FXSMaxDisplayDataCount = 100;
         Coordinate *visibleViewEndXObj = self.currentEntityChart.visibleViewDefaultEndX;
         
         if (!visibleViewEndXObj) {
-            return;
+            return NO;
         }
         
         visibleViewEndX = visibleViewEndXObj.value;
@@ -342,7 +342,7 @@ static const NSUInteger FXSMaxDisplayDataCount = 100;
         visibleViewStartX = visibleViewEndX - (_entityChartView.frame.size.width * self.visibleWidthRatio);
         
     } else {
-        return;
+        return NO;
     }
     
     [_visibleChartArea visibleForStartXOfEntityChart:visibleViewStartX endXOfEntityChart:visibleViewEndX inAnimation:NO];
@@ -350,6 +350,8 @@ static const NSUInteger FXSMaxDisplayDataCount = 100;
     if (_inAnimation) {
         _entityChartView.frame = CGRectMake(_entityChartView.frame.origin.x + animateTx, _entityChartView.frame.origin.y, _entityChartView.frame.size.width, _entityChartView.frame.size.height);
     }
+    
+    return YES;
 }
 
 - (void)didAnimate
@@ -372,9 +374,9 @@ static const NSUInteger FXSMaxDisplayDataCount = 100;
         }
     }
     
-    [self updateEntityChartView];
-    
-    [self normalizeEntityChartViewInAnimation];
+    if (![self updateEntityChartView]) {
+        [self normalizeEntityChartViewInAnimation];
+    }
 }
 
 - (void)didChangeEntityChartViewPositionX
