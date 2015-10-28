@@ -250,6 +250,16 @@ static const NSUInteger FXSMaxDisplayDataCount = 100;
 
 - (void)animateTranslation:(float)tx duration:(float)duration
 {
+    if ([_visibleChartArea isOverLeftEnd] && 0 < tx) {
+        if (!self.currentEntityChart.previousEntityChart) {
+            return;
+        }
+    } else if ([_visibleChartArea isOverRightEnd] && tx < 0) {
+        if (!self.currentEntityChart.nextEntityChart) {
+            return;
+        }
+    }
+    
     if (!_inAnimation) {
         
         NSOperationQueue *queue = [NSOperationQueue new];
