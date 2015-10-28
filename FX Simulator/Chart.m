@@ -101,6 +101,8 @@ static const NSUInteger FXSMaxDisplayDataCount = 100;
 
 - (void)strokeCurrentChart:(Market *)market
 {
+    [self endAnimation];
+    
     _market = market;
     
     EntityChart *newCurrentEntityChart = [[EntityChart alloc] initWithCurrencyPair:self.currencyPair timeFrame:self.timeFrame indicatorChunk:self.indicatorChunk];
@@ -116,6 +118,8 @@ static const NSUInteger FXSMaxDisplayDataCount = 100;
 
 - (ForexHistoryData *)forexDataOfVisibleChartViewPoint:(CGPoint)point
 {
+    [self endAnimation];
+    
     float entityChartViewX = (point.x - _entityChartView.frame.origin.x) / _entityChartView.transform.a;
     float entityChartViewY = (point.y - _entityChartView.frame.origin.y) / _entityChartView.transform.d;
     
@@ -124,6 +128,8 @@ static const NSUInteger FXSMaxDisplayDataCount = 100;
 
 - (void)scaleStart
 {
+    [self endAnimation];
+    
     _inScale = YES;
     _scaleX = _entityChartView.transform.a;
     _previousScaleX = 1;
@@ -197,6 +203,8 @@ static const NSUInteger FXSMaxDisplayDataCount = 100;
 
 - (void)translate:(float)tx
 {
+    [self endAnimation];
+    
     if (fabs(tx) == 0) {
         return;
     }
@@ -248,6 +256,8 @@ static const NSUInteger FXSMaxDisplayDataCount = 100;
 
 - (void)animateTranslation:(float)tx duration:(float)duration
 {
+    [self endAnimation];
+    
     if ([_visibleChartArea isOverLeftEnd] && 0 < tx) {
         if (!self.currentEntityChart.previousEntityChart) {
             return;
@@ -280,7 +290,7 @@ static const NSUInteger FXSMaxDisplayDataCount = 100;
     }
 }
 
-- (void)removeAnimation
+- (void)endAnimation
 {
     [_entityChartView.layer removeAllAnimations];
     _inAnimation = NO;
@@ -375,12 +385,12 @@ static const NSUInteger FXSMaxDisplayDataCount = 100;
     
     if ([_visibleChartArea isOverLeftEnd] && 0 < animationTx) {
         if (!self.currentEntityChart.previousEntityChart) {
-            [self removeAnimation];
+            [self endAnimation];
             [_visibleChartArea setLeftEnd];
         }
     } else if ([_visibleChartArea isOverRightEnd] && animationTx < 0) {
         if (!self.currentEntityChart.nextEntityChart) {
-            [self removeAnimation];
+            [self endAnimation];
             [_visibleChartArea setRightEnd];
         }
     }
