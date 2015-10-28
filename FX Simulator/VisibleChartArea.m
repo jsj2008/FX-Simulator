@@ -171,7 +171,7 @@ static const float FXSEntityChartViewPrepareTotalRangeRatio = 0.5;
     
     ForexDataChunk *visibleForexDataChunk = [self.currentEntityChart chunkForRangeStartX:startX endX:endX];
     
-    if (!visibleForexDataChunk) {
+    if (!visibleForexDataChunk || !self.currentEntityChart.maxRate || !self.currentEntityChart.minRate) {
         return;
     }
     

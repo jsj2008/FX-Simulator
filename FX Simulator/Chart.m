@@ -154,9 +154,7 @@ static const NSUInteger FXSMaxDisplayDataCount = 100;
     
     _previousScaleX = scaleX;
     
-    _entityChartView.transform = CGAffineTransformMakeScale(_scaleX, _entityChartView.transform.d);
-    
-    float newVisibleViewWidth = _visibleChartView.frame.size.width / _entityChartView.transform.a;
+    float newVisibleViewWidth = _visibleChartView.frame.size.width / _scaleX;
     
     float normalizedStartX = _centerLineXOfEntityChart - (newVisibleViewWidth / 2);
     float normalizedEndX = _centerLineXOfEntityChart + (newVisibleViewWidth / 2);
