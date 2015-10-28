@@ -362,12 +362,15 @@ static const NSUInteger FXSMaxDisplayDataCount = 100;
     
     [self prepareChart];
     
-    if ([_visibleChartArea isOverLeftEnd]) {
+    CALayer *entityChartViewLayer = _entityChartView.layer.presentationLayer;
+    float animationTx = _entityChartView.frame.origin.x - entityChartViewLayer.frame.origin.x;
+    
+    if ([_visibleChartArea isOverLeftEnd] && 0 < animationTx) {
         if (!self.currentEntityChart.previousEntityChart) {
             [self removeAnimation];
             [_visibleChartArea setLeftEnd];
         }
-    } else if ([_visibleChartArea isOverRightEnd]) {
+    } else if ([_visibleChartArea isOverRightEnd] && animationTx < 0) {
         if (!self.currentEntityChart.nextEntityChart) {
             [self removeAnimation];
             [_visibleChartArea setRightEnd];
