@@ -38,7 +38,6 @@ static const NSUInteger FXSMaxDisplayDataCount = 100;
     Market *_market;
     __block BOOL _inAnimation;
     BOOL _inScale;
-    float _centerLineXOfEntityChart;
     float _scaleX;
     float _previousScaleX;
 }
@@ -133,11 +132,6 @@ static const NSUInteger FXSMaxDisplayDataCount = 100;
     _inScale = YES;
     _scaleX = _entityChartView.transform.a;
     _previousScaleX = 1;
-    
-    float startVisibleViewOfEntityChart = (_visibleChartView.frame.origin.x - _entityChartView.frame.origin.x) / _entityChartView.transform.a;
-    float endVisibleViewOfEntityChart = startVisibleViewOfEntityChart + (_visibleChartView.frame.size.width / _entityChartView.transform.a);
-    // EntityChart(scale前)で現在表示されている範囲の中間(x)
-    _centerLineXOfEntityChart = (startVisibleViewOfEntityChart + endVisibleViewOfEntityChart) / 2;
 }
 
 - (void)scaleEnd
@@ -162,8 +156,13 @@ static const NSUInteger FXSMaxDisplayDataCount = 100;
     
     float newVisibleViewWidth = _visibleChartView.frame.size.width / _scaleX;
     
-    float normalizedStartX = _centerLineXOfEntityChart - (newVisibleViewWidth / 2);
-    float normalizedEndX = _centerLineXOfEntityChart + (newVisibleViewWidth / 2);
+    float startVisibleViewOfEntityChart = (_visibleChartView.frame.origin.x - _entityChartView.frame.origin.x) / _entityChartView.transform.a;
+    float endVisibleViewOfEntityChart = startVisibleViewOfEntityChart + (_visibleChartView.frame.size.width / _entityChartView.transform.a);
+    // EntityChart(scale前)で現在表示されている範囲の中間(x)
+    float centerLineXOfEntityChart = (startVisibleViewOfEntityChart + endVisibleViewOfEntityChart) / 2;
+    
+    float normalizedStartX = centerLineXOfEntityChart - (newVisibleViewWidth / 2);
+    float normalizedEndX = centerLineXOfEntityChart + (newVisibleViewWidth / 2);
     
     [_visibleChartArea visibleForStartXOfEntityChart:normalizedStartX endXOfEntityChart:normalizedEndX inAnimation:NO];
     
