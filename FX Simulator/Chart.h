@@ -35,10 +35,8 @@
 + (instancetype)createNewSubChartFromSaveDataSource:(SaveDataSource *)source;
 + (instancetype)createChartFromChartSource:(ChartSource *)source;
 - (NSComparisonResult)compareDisplayOrder:(Chart *)chart;
-- (ForexHistoryData *)getForexDataFromTouchPoint:(CGPoint)point displayCount:(NSUInteger)count viewSize:(CGSize)size;
 - (void)setVisibleChartView:(UIView *)visibleView;
 - (void)strokeCurrentChart:(Market *)market;
-- (void)didAnimate;
 - (ForexHistoryData *)forexDataOfVisibleChartViewPoint:(CGPoint)point;
 - (void)scaleStart;
 - (void)scaleX:(float)scaleX;
@@ -50,6 +48,5 @@
 - (void)translate:(float)tx;
 
 - (void)animateTranslation:(float)tx duration:(float)duration;
-- (void)removeAnimation;
 
 @end
