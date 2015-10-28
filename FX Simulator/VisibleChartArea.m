@@ -65,7 +65,7 @@ static const float FXSEntityChartViewPrepareTotalRangeRatio = 0.5;
 }
 
 - (BOOL)isOverLeftEnd
-{    
+{
     if (_visibleChartView.frame.origin.x < [self entityChartViewLeftEnd]) {
         return YES;
     } else {
@@ -167,10 +167,6 @@ static const float FXSEntityChartViewPrepareTotalRangeRatio = 0.5;
 
 - (void)visibleForStartXOfEntityChart:(float)startX endXOfEntityChart:(float)endX inAnimation:(BOOL)inAnimation
 {
-    if (startX < 0) {
-        return;
-    }
-    
     _entityChartView.transform = CGAffineTransformIdentity;
     
     ForexDataChunk *visibleForexDataChunk = [self.currentEntityChart chunkForRangeStartX:startX endX:endX];
