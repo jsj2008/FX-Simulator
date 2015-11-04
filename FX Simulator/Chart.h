@@ -35,18 +35,12 @@
 + (instancetype)createNewSubChartFromSaveDataSource:(SaveDataSource *)source;
 + (instancetype)createChartFromChartSource:(ChartSource *)source;
 - (NSComparisonResult)compareDisplayOrder:(Chart *)chart;
-- (void)setVisibleChartView:(UIView *)visibleView;
+- (void)setChartScrollView:(UIScrollView *)chartScrollView;
 - (void)strokeCurrentChart:(Market *)market;
+- (void)chartScrollViewDidScroll;
 - (ForexHistoryData *)forexDataOfVisibleChartViewPoint:(CGPoint)point;
 - (void)scaleStart;
 - (void)scaleX:(float)scaleX;
 - (void)scaleEnd;
-
-/**
- 短時間に何度も呼ばれるので、軽くしておく。
-*/
-- (void)translate:(float)tx;
-
-- (void)animateTranslation:(float)tx duration:(float)duration;
 
 @end

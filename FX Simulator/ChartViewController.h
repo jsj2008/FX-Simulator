@@ -20,7 +20,7 @@
 @class Chart;
 @class Market;
 
-@interface ChartViewController : UIViewController
+@interface ChartViewController : UIViewController <UIScrollViewDelegate>
 @property (nonatomic, weak) id<ChartViewControllerDelegate> delegate;
 - (void)setChart:(Chart *)chart;
 - (void)update:(Market *)market;

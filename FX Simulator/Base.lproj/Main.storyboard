@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="49e-Tb-3d3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="49e-Tb-3d3">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
@@ -1410,8 +1410,22 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K2M-dE-C6r">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="300"/>
+                                <subviews>
+                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k11-2K-c6s">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="300"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="8uj-a3-MsS" id="IYE-WC-k6N"/>
+                                        </connections>
+                                    </scrollView>
+                                </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <gestureRecognizers/>
+                                <constraints>
+                                    <constraint firstItem="k11-2K-c6s" firstAttribute="leading" secondItem="K2M-dE-C6r" secondAttribute="leading" id="1A2-ge-dPT"/>
+                                    <constraint firstItem="k11-2K-c6s" firstAttribute="top" secondItem="K2M-dE-C6r" secondAttribute="top" id="3iU-Gc-C1d"/>
+                                    <constraint firstAttribute="trailing" secondItem="k11-2K-c6s" secondAttribute="trailing" id="EAv-gI-jUh"/>
+                                    <constraint firstAttribute="bottom" secondItem="k11-2K-c6s" secondAttribute="bottom" id="qNX-hR-vTt"/>
+                                </constraints>
                                 <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
                                     <rect key="frame" x="0.0" y="0.0" width="400" height="318"/>
                                 </variation>
@@ -1433,6 +1447,7 @@
                     </view>
                     <toolbarItems/>
                     <connections>
+                        <outlet property="chartScrollView" destination="k11-2K-c6s" id="3Xm-SM-AT8"/>
                         <outlet property="visibleChartView" destination="K2M-dE-C6r" id="IUO-Fl-pfs"/>
                     </connections>
                 </viewController>
@@ -1455,6 +1470,7 @@
                 <pinchGestureRecognizer id="kVh-pK-nM4">
                     <connections>
                         <action selector="handlePinchGesture:" destination="8uj-a3-MsS" id="7oB-lC-Ugz"/>
+                        <outlet property="delegate" destination="8uj-a3-MsS" id="Ooi-pp-a00"/>
                     </connections>
                 </pinchGestureRecognizer>
             </objects>

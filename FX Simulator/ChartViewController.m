@@ -13,6 +13,8 @@
 
 @interface ChartViewController ()
 @property (weak, nonatomic) IBOutlet UIView *visibleChartView;
+@property (weak, nonatomic) IBOutlet UIScrollView *chartScrollView;
+
 @end
 
 @implementation ChartViewController {
@@ -23,8 +25,16 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
-    self.visibleChartView.layer.masksToBounds = YES;
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    [_chart chartScrollViewDidScroll];
+}
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
+{
+    return YES;
 }
 
 - (IBAction)handleTapGesture:(UITapGestureRecognizer *)sender {
@@ -46,11 +56,7 @@
 
 - (IBAction)handlePanGesture:(UIPanGestureRecognizer *)sender
 {
-    CGPoint location = [sender translationInView:self.visibleChartView];
     
-    [_chart translate:location.x];
-    
-    [sender setTranslation:CGPointZero inView:self.visibleChartView];
 }
 
 - (IBAction)handleLongPressGesture:(UILongPressGestureRecognizer *) sender
@@ -58,7 +64,6 @@
     if (sender.state != UIGestureRecognizerStateEnded) {
         
         CGPoint pt = [sender locationInView:self.visibleChartView];
-        
         
         ForexHistoryData *forexData = [_chart forexDataOfVisibleChartViewPoint:pt];
         
@@ -81,12 +86,8 @@
 
 - (void)setChart:(Chart *)chart
 {
-    for (UIView *subView in [self.visibleChartView subviews]) {
-        [subView removeFromSuperview];
-    }
-    
     _chart = chart;
-    [_chart setVisibleChartView:self.visibleChartView];
+    [_chart setChartScrollView:self.chartScrollView];
 }
 
 - (void)update:(Market *)market
