@@ -11,19 +11,23 @@
 @import UIKit;
 
 @class EntityChart;
+@class ForexHistoryData;
 
 @interface VisibleChartArea : NSObject
 @property (nonatomic) EntityChart *currentEntityChart;
-- (instancetype)initWithVisibleChartView:(UIView *)visibleChartView entityChartView:(UIImageView *)entityChartView;
+@property (nonatomic, readonly) NSUInteger displayDataCount;
+- (instancetype)initWithVisibleChartView:(UIScrollView *)visibleChartView entityChartView:(UIImageView *)entityChartView displayDataCount:(NSUInteger)displayDataCount;
+- (void)chartScrollViewDidScroll;
+- (void)scaleStart;
+- (void)scaleX:(float)scaleX;
+- (void)scaleEnd;
 - (BOOL)isInPreparePreviousChartRange;
 - (BOOL)isInPrepareNextChartRange;
 - (BOOL)isOverLeftEnd;
 - (BOOL)isOverRightEnd;
-- (BOOL)isOverMoveRangeLeftEnd;
-- (BOOL)isOverMoveRangeRightEnd;
-- (void)setLeftEnd;
-- (void)setRightEnd;
-- (void)setMoveRangeLeftEnd;
-- (void)setMoveRangeRightEnd;
-- (void)visibleForStartXOfEntityChart:(float)startX endXOfEntityChart:(float)endX inAnimation:(BOOL)inAnimation;
+- (ForexHistoryData *)forexDataOfVisibleChartViewPoint:(CGPoint)point;
+- (void)visibleForRightEndOfEntityChart;
+- (void)visibleForStartXOfEntityChart:(float)startX;
+- (void)visibleForEndXOfEntityChart:(float)endX;
+- (void)visibleForStartXOfEntityChart:(float)startX endXOfEntityChart:(float)endX;
 @end

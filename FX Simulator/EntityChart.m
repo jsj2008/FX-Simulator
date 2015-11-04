@@ -128,7 +128,7 @@ static const NSUInteger FXSEntityChartForexDataCount = 300;
     if (_isStartedPreparePreviousEntityChart) {
         return;
     }
-        
+            
     _isStartedPreparePreviousEntityChart = YES;
     
     NSOperationQueue *queue = [NSOperationQueue new];
@@ -209,7 +209,7 @@ static const NSUInteger FXSEntityChartForexDataCount = 300;
     /*if (_isStartedPreparePreviousEntityChart) {
         [NSThread sleepForTimeInterval:0.01];
     }*/
-    
+
     @synchronized (_syncPreviousEntityChart) {
         return _previousEntityChart;
     }
@@ -217,6 +217,10 @@ static const NSUInteger FXSEntityChartForexDataCount = 300;
 
 - (EntityChart *)nextEntityChart
 {
+    /*if (_isStartedPrepareNextEntityChart) {
+        [NSThread sleepForTimeInterval:0.01];
+    }*/
+    
     @synchronized (_syncNextEntityChart) {
         return _nextEntityChart;
     }
