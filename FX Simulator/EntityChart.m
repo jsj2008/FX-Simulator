@@ -93,6 +93,8 @@ static const NSUInteger FXSBackLimitForPrepare = FXSRequireForexDataCount - FXSM
 
 - (void)setEntityChartImage
 {
+    @autoreleasepool {
+    
     UIGraphicsBeginImageContextWithOptions(FXSEntityChartViewSize, NO, 0.0);
     
     if (![_indicatorChunk existsBaseIndicator]) {
@@ -105,6 +107,8 @@ static const NSUInteger FXSBackLimitForPrepare = FXSRequireForexDataCount - FXSM
     self.chartImage = UIGraphicsGetImageFromCurrentImageContext();
     
     UIGraphicsEndImageContext();
+        
+    }
 }
 
 - (ForexDataChunk *)chunkForRangeStartX:(float)startX endX:(float)endX
