@@ -17,8 +17,12 @@
 #import "Time.h"
 
 static CGSize FXSEntityChartViewSize;
-static const NSUInteger FXSRequireForexDataCount = 500;
-static const NSUInteger FXSEntityChartForexDataCount = 300;
+static const NSUInteger FXSEntityChartForexDataCount = 500;
+static const NSUInteger FXSMaxIndicatorPeriod = 200;
+static const NSUInteger FXSRequireForexDataCount = FXSEntityChartForexDataCount + FXSMaxIndicatorPeriod - 1;
+static const NSUInteger FXSFrontLimitForPrepare = FXSEntityChartForexDataCount / 2 - 1;
+static const NSUInteger FXSMinFrontLimit = 1;
+static const NSUInteger FXSBackLimitForPrepare = FXSRequireForexDataCount - FXSMinFrontLimit - 1;
 
 @interface EntityChart ()
 @property (nonatomic) UIImage *chartImage;
@@ -47,7 +51,7 @@ static const NSUInteger FXSEntityChartForexDataCount = 300;
 
 + (void)initialize
 {
-    FXSEntityChartViewSize = CGSizeMake(2000, 1000);
+    FXSEntityChartViewSize = CGSizeMake(3000, 1000);
 }
 
 + (UIImageView *)entityChartView
@@ -136,10 +140,7 @@ static const NSUInteger FXSEntityChartForexDataCount = 300;
     [queue addOperationWithBlock:^{
         @synchronized (_syncPreviousEntityChart) {
             ForexHistoryData *leftEndForexData = [_candle leftEndForexData];
-            NSUInteger limit = FXSEntityChartForexDataCount / 2;
-            NSUInteger frontLimit = limit - 1;
-            NSUInteger backLimit = FXSRequireForexDataCount - (frontLimit + 1);
-            ForexDataChunk *newForexDataChunk = [market chunkForCenterForexData:leftEndForexData frontLimit:frontLimit backLimit:backLimit];
+            ForexDataChunk *newForexDataChunk = [market chunkForCenterForexData:leftEndForexData frontLimit:FXSFrontLimitForPrepare backLimit:FXSBackLimitForPrepare];
             
             NSComparisonResult result = [leftEndForexData.oldestTime compare:newForexDataChunk.oldestTime];
             
@@ -167,10 +168,7 @@ static const NSUInteger FXSEntityChartForexDataCount = 300;
     [queue addOperationWithBlock:^{
         @synchronized (_syncNextEntityChart) {
             ForexHistoryData *rightEndForexData = [_candle rightEndForexData];
-            NSUInteger limit = FXSEntityChartForexDataCount / 2;
-            NSUInteger frontLimit = limit - 1;
-            NSUInteger backLimit = FXSRequireForexDataCount - (frontLimit + 1);
-            ForexDataChunk *newForexDataChunk = [market chunkForCenterForexData:rightEndForexData frontLimit:frontLimit backLimit:backLimit];
+            ForexDataChunk *newForexDataChunk = [market chunkForCenterForexData:rightEndForexData frontLimit:FXSFrontLimitForPrepare backLimit:FXSBackLimitForPrepare];
             
             NSComparisonResult result = [rightEndForexData.latestTime compare:newForexDataChunk.latestTime];
             
@@ -217,10 +215,6 @@ static const NSUInteger FXSEntityChartForexDataCount = 300;
 
 - (EntityChart *)nextEntityChart
 {
-    /*if (_isStartedPrepareNextEntityChart) {
-        [NSThread sleepForTimeInterval:0.01];
-    }*/
-    
     @synchronized (_syncNextEntityChart) {
         return _nextEntityChart;
     }
