@@ -24,6 +24,7 @@
 #import "TradeDatabase.h"
 #import "TradeViewController.h"
 
+static const float FXSMinAddTimeDuration = 0.5;
 static SimulationManager *sharedSimulationManager = nil;
 
 @implementation SimulationManager {
@@ -32,6 +33,7 @@ static SimulationManager *sharedSimulationManager = nil;
     SaveData *_saveData;
     SimulationState *_simulationState;
     SimulationTimeManager *_simulationTimeManager;
+    NSDate *_previousAddTimeDate;
 }
 
 - (instancetype)init
@@ -143,7 +145,12 @@ static SimulationManager *sharedSimulationManager = nil;
 
 - (void)addTime
 {
-    [_simulationTimeManager add];
+    NSDate *now = [NSDate date];
+    
+    if (!_previousAddTimeDate || FXSMinAddTimeDuration < [now timeIntervalSinceDate:_previousAddTimeDate]) {
+        _previousAddTimeDate = now;
+        [_simulationTimeManager add];
+    }
 }
 
 - (void)setAutoUpdateIntervalSeconds:(float)autoUpdateIntervalSeconds
