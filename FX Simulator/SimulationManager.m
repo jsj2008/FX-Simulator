@@ -14,6 +14,7 @@
 #import "Market.h"
 #import "OpenPosition.h"
 #import "Order.h"
+#import "OrderManager.h"
 #import "OrderResult.h"
 #import "SaveData.h"
 #import "SaveLoader.h"
@@ -30,6 +31,7 @@ static SimulationManager *sharedSimulationManager = nil;
 @implementation SimulationManager {
     Market *_market;
     NSHashTable *_delegates;
+    OrderManager *_orderManager;
     SaveData *_saveData;
     SimulationState *_simulationState;
     SimulationTimeManager *_simulationTimeManager;
@@ -54,13 +56,28 @@ static SimulationManager *sharedSimulationManager = nil;
 {
     _saveData = saveData;
     _market = [[Market alloc] initWithCurrencyPair:saveData.currencyPair timeFrame:saveData.timeFrame lastLoadedTime:saveData.lastLoadedTime];
+    _orderManager = [OrderManager createOrderManagerFromOpenPositions:saveData.openPositions];
+    [_orderManager addDelegate:_saveData.account];
+    [_orderManager addState:self];
     _simulationState = [[SimulationState alloc] initWithAccount:saveData.account Market:_market];
     _simulationTimeManager = [[SimulationTimeManager alloc] initWithAutoUpdateIntervalSeconds:saveData.autoUpdateIntervalSeconds isAutoUpdate:saveData.isAutoUpdate];
     [_simulationTimeManager addObserver:self];
     
     for (id<SimulationManagerDelegate> delegate in _delegates) {
-        if ([delegate respondsToSelector:@selector(loadSaveData:market:)]) {
-            [delegate loadSaveData:_saveData market:_market];
+        if ([delegate respondsToSelector:@selector(loadSaveData:)]) {
+            [delegate loadSaveData:_saveData];
+        }
+        if ([delegate respondsToSelector:@selector(loadMarket:)]) {
+            [delegate loadMarket:_market];
+        }
+        if ([delegate respondsToSelector:@selector(loadOrderManager:)]) {
+            [delegate loadOrderManager:_orderManager];
+        }
+    }
+    
+    for (id<SimulationManagerDelegate> delegate in _delegates) {
+        if ([delegate respondsToSelector:@selector(saveDataDidLoad)]) {
+            [delegate saveDataDidLoad];
         }
     }
 }

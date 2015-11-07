@@ -17,12 +17,22 @@
 #import "Money+ConvertToAccountCurrency.h"
 #import "OpenPosition.h"
 #import "OpenPositionRelationChunk.h"
+#import "OrderResult.h"
 #import "PositionSize.h"
 #import "PositionType.h"
+#import "ProfitAndLossCalculator.h"
 #import "Rate.h"
+#import "Rates.h"
 #import "SaveData.h"
 #import "SaveLoader.h"
 #import "SimulationManager.h"
+
+@interface Account ()
+@property (nonatomic) Rate *averageRate;
+@property (nonatomic) Money *balance;
+@property (nonatomic) PositionSize *totalPositionSize;
+@property (nonatomic) PositionType *positionType;
+@end
 
 @implementation Account {
     Currency *_accountCurrency;
@@ -45,6 +55,21 @@
     return self;
 }
 
+- (void)didOrder:(OrderResult *)result
+{
+    [result completion:^{
+        [self update];
+    } error:nil];
+}
+
+- (void)update
+{
+    self.averageRate = nil;
+    self.balance = nil;
+    self.totalPositionSize = nil;
+    self.positionType = nil;
+}
+
 - (BOOL)isShortageForMarket:(Market *)market
 {
     Money *equity = [self equityForMarket:market];
@@ -65,19 +90,26 @@
     Money *equity = [self equityForMarket:market];
     Money *profitAndLoss = [self profitAndLossForMarket:market];
     
-    block(equity.toDisplayString, profitAndLoss.toDisplayString, [self orderType].toDisplayString, [self averageRate].toDisplayString, [[self totalPositionSize] toLotFromPositionSizeOfLot:positionSize].toDisplayString, equity.toDisplayColor, profitAndLoss.toDisplayColor);
+    block(equity.toDisplayString, profitAndLoss.toDisplayString, [self positionType].toDisplayString, [self averageRate].toDisplayString, [[self totalPositionSize] toLotFromPositionSizeOfLot:positionSize].toDisplayString, equity.toDisplayColor, profitAndLoss.toDisplayColor);
 }
 
 - (Rate *)averageRate
 {
-    return [_openPositions averageRateOfCurrencyPair:_currencyPair];
+    if (!_averageRate) {
+        _averageRate = [_openPositions averageRateOfCurrencyPair:_currencyPair];
+    }
+    
+    return _averageRate;
 }
 
 - (Money *)balance
 {
-    Money *profitAndLoss = [[_executionOrders profitAndLossOfCurrencyPair:_currencyPair] convertToCurrency:_accountCurrency];
+    if (!_balance) {
+        Money *profitAndLoss = [[_executionOrders profitAndLossOfCurrencyPair:_currencyPair] convertToCurrency:_accountCurrency];
+        _balance = [_startBalance addMoney:profitAndLoss];
+    }
     
-    return [_startBalance addMoney:profitAndLoss];
+    return _balance;
 }
 
 - (Money *)equityForMarket:(Market *)market
@@ -87,19 +119,46 @@
     return [self.balance addMoney:profitAndLoss];
 }
 
-- (PositionType *)orderType
+- (PositionType *)positionType
 {
-    return [_openPositions positionTypeOfCurrencyPair:_currencyPair];
+    if (!_positionType) {
+        _positionType = [_openPositions positionTypeOfCurrencyPair:_currencyPair];
+    }
+    
+    return _positionType;
 }
 
 - (Money *)profitAndLossForMarket:(Market *)market
-{    
-    return [_openPositions profitAndLossOfCurrencyPair:_currencyPair ForMarket:market InCurrency:_accountCurrency];
+{
+    PositionType *positionType = [self positionType];
+    
+    Rates *valuationRates = [market getCurrentRatesOfCurrencyPair:_currencyPair];
+    
+    Rate *valuationRate;
+    
+    if ([positionType isShort]) {
+        valuationRate = valuationRates.askRate;
+    } else if ([positionType isLong]) {
+        valuationRate = valuationRates.bidRate;
+    } else {
+        return [[Money alloc] initWithAmount:0 currency:_accountCurrency];
+    }
+    
+    PositionSize *totalPositionSize = [self totalPositionSize];
+    Rate *averageRate = [self averageRate];
+    
+    Money *profitAndLoss = [ProfitAndLossCalculator calculateByTargetRate:averageRate valuationRate:valuationRate positionSize:totalPositionSize orderType:positionType];
+    
+    return [profitAndLoss convertToCurrency:_accountCurrency];
 }
 
 - (PositionSize *)totalPositionSize
 {
-    return [_openPositions totalPositionSizeOfCurrencyPair:_currencyPair];
+    if (!_totalPositionSize) {
+        _totalPositionSize = [_openPositions totalPositionSizeOfCurrencyPair:_currencyPair];
+    }
+    
+    return _totalPositionSize;
 }
 
 @end

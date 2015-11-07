@@ -35,9 +35,13 @@
     NSArray *_charts;
 }
 
-- (void)loadSaveData:(SaveData *)saveData market:(Market *)market
+- (void)loadSaveData:(SaveData *)saveData
 {
     _subChartChunk = saveData.subChartChunk;
+}
+
+- (void)loadMarket:(Market *)market
+{
     _market = market;
 }
 

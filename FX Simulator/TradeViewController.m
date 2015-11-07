@@ -20,9 +20,6 @@
 #import "SimulationManager.h"
 #import "TradeDataViewController.h"
 
-typedef void (^SetSaveDataBlock)(SaveData *, Market *market);
-typedef void (^LoadSaveDataBlock)(SetSaveDataBlock);
-
 @interface TradeViewController ()
 
 @end
@@ -31,9 +28,9 @@ typedef void (^LoadSaveDataBlock)(SetSaveDataBlock);
     ChartViewController *_chartViewController;
     RatePanelViewController *_ratePanelViewController;
     TradeDataViewController *_tradeDataViewController;
-    LoadSaveDataBlock _loadSaveDataBlock;
     Market *_market;
     OrderManager *_orderManager;
+    SaveData *_saveData;
     SimulationManager *_simulationManager;
     UIView *_adView;
 }
@@ -46,18 +43,34 @@ typedef void (^LoadSaveDataBlock)(SetSaveDataBlock);
 /**
  1回目は、prepareForSegueの前に呼ばれる
  */
-- (void)loadSaveData:(SaveData *)saveData market:(Market *)market
+- (void)loadSaveData:(SaveData *)saveData
 {
-    __block BOOL isSaveDataLoaded = NO;
+    _saveData = saveData;
+}
+
+- (void)loadMarket:(Market *)market
+{
+    _market = market;
+}
+
+- (void)loadOrderManager:(OrderManager *)orderManager
+{
+    _orderManager = orderManager;
+}
+
+- (void)saveDataDidLoad
+{
+    if (!_chartViewController || !_ratePanelViewController || !_tradeDataViewController) {
+        return;
+    }
     
-    _loadSaveDataBlock = ^(SetSaveDataBlock setSaveDataBlock) {
-        if (!isSaveDataLoaded) {
-            if (saveData && setSaveDataBlock ) {
-                setSaveDataBlock(saveData, market);
-                isSaveDataLoaded = YES;
-            }
-        }
-    };
+    [_chartViewController setChart:_saveData.mainChart];
+    [_ratePanelViewController loadSaveData:_saveData];
+    [_ratePanelViewController loadMarket:_market];
+    [_ratePanelViewController loadOrderManager:_orderManager];
+    [_tradeDataViewController loadSaveData:_saveData];
+    [_tradeDataViewController loadMarket:_market];
+    [_orderManager addDelegate:_tradeDataViewController];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -71,6 +84,8 @@ typedef void (^LoadSaveDataBlock)(SetSaveDataBlock);
         _tradeDataViewController = segue.destinationViewController;
         _tradeDataViewController.delegate = self;
     }
+    
+    [self saveDataDidLoad];
 }
 
 - (void)viewDidLoad
@@ -82,23 +97,6 @@ typedef void (^LoadSaveDataBlock)(SetSaveDataBlock);
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
-    SetSaveDataBlock setSaveDataBlock = ^(SaveData *saveData, Market *market) {
-        _market = market;
-        [_chartViewController setChart:saveData.mainChart];
-        _orderManager = [OrderManager createOrderManagerFromOpenPositions:saveData.openPositions];
-        [_orderManager addState:_simulationManager];
-        [_ratePanelViewController loadSaveData:saveData];
-        [_ratePanelViewController loadMarket:market];
-        [_ratePanelViewController loadOrderManager:_orderManager];
-        [_tradeDataViewController loadSaveData:saveData];
-        [_tradeDataViewController loadMarket:market];
-        [_orderManager addDelegate:_tradeDataViewController];
-    };
-    
-    if (_loadSaveDataBlock) {
-        _loadSaveDataBlock(setSaveDataBlock);
-    }
     
     if (!_simulationManager.isStartTime) {
         [_simulationManager startTime];

@@ -33,7 +33,7 @@
     _simulationManager = simulationManager;
 }
 
-- (void)loadSaveData:(SaveData *)saveData market:(Market *)market
+- (void)loadSaveData:(SaveData *)saveData
 {
     _saveData = saveData;
 }
