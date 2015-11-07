@@ -12,28 +12,27 @@
 
 - (void)stroke
 {
-    [[UIColor colorWithRed:self.colorR green:self.colorG blue:self.colorB alpha:1.0] setStroke];
-    [[UIColor colorWithRed:self.colorR green:self.colorG blue:self.colorB alpha:1.0] setFill];
+    UIColor *color = [UIColor colorWithRed:self.colorR green:self.colorG blue:self.colorB alpha:1.0];
     
-    UIBezierPath *rectangle =
-    [UIBezierPath bezierPathWithRect:CGRectMake(self.rect.origin.x, self.rect.origin.y, self.rect.size.width, self.rect.size.height)];
-    rectangle.lineWidth = 0;
-    [rectangle fill];
-    [rectangle stroke];
+    CGContextRef context = UIGraphicsGetCurrentContext();
     
-    UIBezierPath *highLine = [UIBezierPath bezierPath];
-    highLine.lineWidth = 2;
-    [highLine moveToPoint:self.highLineBottom];
-    [highLine addLineToPoint:self.highLineTop];
-    [highLine fill];
-    [highLine stroke];
     
-    UIBezierPath *lowLine = [UIBezierPath bezierPath];
-    lowLine.lineWidth = 2;
-    [lowLine moveToPoint:self.lowLineTop];
-    [lowLine addLineToPoint:self.lowLineBottom];
-    [lowLine fill];
-    [lowLine stroke];
+    
+    CGContextSetFillColorWithColor(context, color.CGColor);
+    CGContextFillRect(context, CGRectMake(self.rect.origin.x, self.rect.origin.y, self.rect.size.width, self.rect.size.height));
+    
+    
+    
+    CGContextSetLineWidth(context, 2);
+    CGContextSetStrokeColorWithColor(context, color.CGColor);
+    
+    CGContextMoveToPoint(context, self.highLineBottom.x, self.highLineBottom.y);
+    CGContextAddLineToPoint(context, self.highLineTop.x, self.highLineTop.y);
+    
+    CGContextMoveToPoint(context, self.lowLineTop.x, self.lowLineTop.y);
+    CGContextAddLineToPoint(context, self.lowLineBottom.x, self.lowLineBottom.y);
+    
+    CGContextStrokePath(context);
 }
 
 @end
