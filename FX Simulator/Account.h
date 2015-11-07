@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "OrderManager.h"
 
 @import UIKit;
 
@@ -28,7 +29,7 @@
  総資産の金額、保有しているポジション、損益など。
 */
 
-@interface Account : NSObject
+@interface Account : NSObject <OrderManagerDelegate>
 
 - (instancetype)initWithAccountCurrency:(Currency *)currency currencyPair:(CurrencyPair *)currencyPair startBalance:(Money *)balance openPositions:(OpenPositionRelationChunk *)openPositions executionOrders:(ExecutionOrderRelationChunk *)executionOrders;
 

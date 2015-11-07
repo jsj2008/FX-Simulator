@@ -33,7 +33,7 @@ static const unsigned int displayMaxExecutionHistoryRecords = 100;
     ExecutionOrderRelationChunk *_executionOrders;
 }
 
-- (void)loadSaveData:(SaveData *)saveData market:(Market *)market
+- (void)loadSaveData:(SaveData *)saveData
 {
     _displayCurrency = saveData.accountCurrency;
     _positionSizeOfLot = saveData.positionSizeOfLot;

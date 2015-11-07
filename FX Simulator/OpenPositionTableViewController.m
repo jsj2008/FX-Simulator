@@ -35,13 +35,17 @@ static const unsigned int displayMaxOpenPositionDataRecords = 100;
     OpenPositionRelationChunk *_openPositions;
 }
 
-- (void)loadSaveData:(SaveData *)saveData market:(Market *)market
+- (void)loadSaveData:(SaveData *)saveData
 {
     _currencyPair = saveData.currencyPair;
     _displayCurrency = saveData.accountCurrency;
     _positionSizeOfLot = saveData.positionSizeOfLot;
-    _market = market;
     _openPositions = saveData.openPositions;
+}
+
+- (void)loadMarket:(Market *)market
+{
+    _market = market;
 }
 
 /*- (void)setInitData

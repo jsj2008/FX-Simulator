@@ -10,6 +10,7 @@
 #import "OrderManager.h"
 
 @class Market;
+@class OrderManager;
 @class SaveData;
 @class SimulationManager;
 @class SimulationStateResult;
@@ -19,8 +20,11 @@
  loadSimulationManagerの後に呼ばれる。
  その後、新しいセーブデータが開始される度に呼ばれる。
 */
-- (void)loadSaveData:(SaveData *)saveData market:(Market *)market;
+- (void)loadSaveData:(SaveData *)saveData;
 @optional
+- (void)loadMarket:(Market *)market;
+- (void)loadOrderManager:(OrderManager *)orderManager;
+- (void)saveDataDidLoad;
 /**
  アプリ起動後、最初に1回だけ呼ばれる。
 */
