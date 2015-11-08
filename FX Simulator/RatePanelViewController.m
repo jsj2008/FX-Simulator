@@ -21,8 +21,6 @@
 
 @interface RatePanelViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *rateValueLabel;
-@property (weak, nonatomic) IBOutlet RatePanelButton *BidRatePanelButton;
-@property (weak, nonatomic) IBOutlet RatePanelButton *AskRatePanelButton;
 @end
 
 @implementation RatePanelViewController {
