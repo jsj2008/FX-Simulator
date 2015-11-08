@@ -303,7 +303,7 @@ static const int maxRecords = 50;
     return self;
 }
 
-- (ExecutionOrder *)createCloseExecutionOrderFromOrderId:(NSUInteger)orderId
+- (ExecutionOrder *)createCloseExecutionOrderFromOrderId:(NSUInteger)orderId rate:(Rate *)rate
 {
     if (!self.isExecutableClose) {
         return nil;
@@ -313,7 +313,7 @@ static const int maxRecords = 50;
         components.saveSlot = self.saveSlot;
         components.currencyPair = self.currencyPair;
         components.positionType = [self.positionType reverseType];
-        components.rate = self.rate;
+        components.rate = rate;
         components.positionSize = self.positionSize;
         components.orderId = orderId;
         components.isClose = YES;

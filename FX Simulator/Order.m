@@ -118,7 +118,7 @@ static NSString* const FXSOrdersTableName = @"orders";
     NSMutableArray *executionOrders = [NSMutableArray array];
     
     for (OpenPosition *openPosition in openPositions) {
-        ExecutionOrder *executionOrder = [openPosition createCloseExecutionOrderFromOrderId:self.orderId];
+        ExecutionOrder *executionOrder = [openPosition createCloseExecutionOrderFromOrderId:self.orderId rate:self.rate];
         if (executionOrder) {
             [executionOrders addObject:executionOrder];
         }
