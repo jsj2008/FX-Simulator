@@ -113,7 +113,7 @@ static NSString* const FXSOrdersTableName = @"orders";
         return nil;
     }
     
-    NSArray *openPositions = [OpenPosition selectCloseTargetOpenPositionsLimitClosePositionSize:self.positionSize currencyPair:self.currencyPair saveSlot:self.saveSlot];
+    NSArray *openPositions = [OpenPosition selectCloseTargetOpenPositionsLimitClosePositionSize:self.positionSize closeTargetPositionType:[self.positionType reverseType] currencyPair:self.currencyPair saveSlot:self.saveSlot];
     
     NSMutableArray *executionOrders = [NSMutableArray array];
     

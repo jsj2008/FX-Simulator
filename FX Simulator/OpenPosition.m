@@ -100,15 +100,23 @@ static const int maxRecords = 50;
 /**
  ポジションが古い順
 */
-+ (NSArray *)selectCloseTargetOpenPositionsLimitClosePositionSize:(PositionSize *)limitPositionSize currencyPair:(CurrencyPair *)currencyPair saveSlot:(NSUInteger)slot
++ (NSArray *)selectCloseTargetOpenPositionsLimitClosePositionSize:(PositionSize *)limitPositionSize closeTargetPositionType:(PositionType *)positionType currencyPair:(CurrencyPair *)currencyPair saveSlot:(NSUInteger)slot
 {
     NSMutableArray *resultArray = [NSMutableArray array];
     
     NSArray *allPositions = [self allOpenPositionRecordsOfCurrencyPair:currencyPair saveSlot:slot];
     
-    position_size_t readTotalPositionSize = 0;
+    NSMutableArray *closeTargetPositions = [NSMutableArray array];
     
     for (OpenPosition *openPosition in allPositions) {
+        if ([positionType isEqualOrderType:openPosition.positionType]) {
+            [closeTargetPositions addObject:openPosition];
+        }
+    }
+    
+    position_size_t readTotalPositionSize = 0;
+    
+    for (OpenPosition *openPosition in closeTargetPositions) {
         readTotalPositionSize += openPosition.positionSize.sizeValue;
         
         // selectサイズ以上のオープンポジションを読み込んだとき
