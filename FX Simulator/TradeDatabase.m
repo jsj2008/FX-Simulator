@@ -104,13 +104,7 @@ static NSString* const testDbFileName = @"TradeTestDb.sqlite3";
     
     if(!ret){
         NSString *bundleDbPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:fileName];
-        BOOL result = [fm copyItemAtPath:bundleDbPath toPath:dbPath error:&error];
-        
-        if (result) {
-            DLog(@"ファイルのコピーに成功：%@ → %@", bundleDbPath, dbPath);
-        } else {
-            DLog(@"ファイルのコピーに失敗：%@", error.description);
-        }
+        [fm copyItemAtPath:bundleDbPath toPath:dbPath error:&error];
     }
     
     return [FMDatabase databaseWithPath:dbPath];

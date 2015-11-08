@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="49e-Tb-3d3">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
-        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
@@ -2041,67 +2040,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="69"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KW3-iK-CKx" userLabel="Bid Rate View">
-                                <rect key="frame" x="0.0" y="0.0" width="300" height="69"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EWu-6x-AGz" userLabel="Bid Rate Button" customClass="RatePanelButton">
-                                        <rect key="frame" x="10" y="15" width="285" height="39"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                        <state key="normal" title="Bid">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <variation key="widthClass=compact">
-                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                        </variation>
-                                        <connections>
-                                            <action selector="bidRateButtonTouched:" destination="LSo-ND-AM0" eventType="touchUpInside" id="9cE-CV-M0Y"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="EWu-6x-AGz" secondAttribute="width" multiplier="1.2" id="IsT-fh-oTv"/>
-                                    <constraint firstAttribute="trailing" secondItem="EWu-6x-AGz" secondAttribute="trailing" constant="5" id="Wxe-xm-LLj"/>
-                                    <constraint firstItem="EWu-6x-AGz" firstAttribute="leading" secondItem="KW3-iK-CKx" secondAttribute="leading" constant="10" id="aCV-RU-dV6"/>
-                                    <constraint firstAttribute="centerY" secondItem="EWu-6x-AGz" secondAttribute="centerY" id="lRu-q5-j0f"/>
-                                    <constraint firstAttribute="height" secondItem="EWu-6x-AGz" secondAttribute="height" multiplier="1.8" id="noM-Bb-wM3"/>
-                                </constraints>
-                                <variation key="default">
-                                    <mask key="subviews">
-                                        <exclude reference="EWu-6x-AGz"/>
-                                    </mask>
-                                    <mask key="constraints">
-                                        <exclude reference="IsT-fh-oTv"/>
-                                    </mask>
-                                </variation>
-                            </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MxS-Nt-PDj" userLabel="Ask Rate View">
-                                <rect key="frame" x="300" y="0.0" width="300" height="69"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5PS-WM-YyW" userLabel="Ask Rate Button" customClass="RatePanelButton">
-                                        <rect key="frame" x="5" y="16" width="285" height="38"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                        <state key="normal" title="Ask">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <variation key="widthClass=compact">
-                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                        </variation>
-                                        <connections>
-                                            <action selector="askRateButtonTouched:" destination="LSo-ND-AM0" eventType="touchUpInside" id="HR0-Ko-MrR"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstItem="5PS-WM-YyW" firstAttribute="leading" secondItem="MxS-Nt-PDj" secondAttribute="leading" constant="5" id="NmX-AW-FcG"/>
-                                </constraints>
-                                <variation key="default">
-                                    <mask key="subviews">
-                                        <exclude reference="5PS-WM-YyW"/>
-                                    </mask>
-                                </variation>
-                            </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="smw-6F-nuu" userLabel="Rate Value Label">
                                 <rect key="frame" x="200" y="0.0" width="200" height="69"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="19"/>
@@ -2197,59 +2135,23 @@
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="KW3-iK-CKx" firstAttribute="centerY" secondItem="EWu-6x-AGz" secondAttribute="centerY" id="29r-Aa-rHY"/>
-                            <constraint firstItem="KW3-iK-CKx" firstAttribute="leading" secondItem="Q4V-7m-b36" secondAttribute="leadingMargin" constant="-16" id="6vm-8y-6eW"/>
                             <constraint firstItem="hko-Ja-jR5" firstAttribute="top" secondItem="DFM-Ij-52m" secondAttribute="bottom" id="7Mx-Hf-BNt"/>
                             <constraint firstItem="smw-6F-nuu" firstAttribute="top" secondItem="DFM-Ij-52m" secondAttribute="bottom" id="7go-C5-Xpd"/>
                             <constraint firstItem="49e-l0-Qzt" firstAttribute="top" secondItem="hko-Ja-jR5" secondAttribute="bottom" id="AWg-vT-1aa"/>
                             <constraint firstItem="hko-Ja-jR5" firstAttribute="height" secondItem="m4R-s0-tX2" secondAttribute="height" id="Be3-lH-PfD"/>
-                            <constraint firstAttribute="centerY" secondItem="KW3-iK-CKx" secondAttribute="centerY" id="DrB-x0-pcc"/>
                             <constraint firstItem="mx5-5I-gzI" firstAttribute="height" secondItem="UYT-Du-Ssw" secondAttribute="height" id="F96-1W-U66"/>
-                            <constraint firstItem="KW3-iK-CKx" firstAttribute="leading" secondItem="Q4V-7m-b36" secondAttribute="leading" id="FoR-OT-fts"/>
-                            <constraint firstItem="KW3-iK-CKx" firstAttribute="width" secondItem="Q4V-7m-b36" secondAttribute="width" multiplier="0.5" id="FvO-zw-xvt"/>
-                            <constraint firstItem="49e-l0-Qzt" firstAttribute="top" secondItem="MxS-Nt-PDj" secondAttribute="bottom" id="Irn-cs-4Hl"/>
-                            <constraint firstItem="MxS-Nt-PDj" firstAttribute="height" secondItem="KW3-iK-CKx" secondAttribute="height" id="OI7-FS-B2b"/>
                             <constraint firstItem="hko-Ja-jR5" firstAttribute="width" secondItem="m4R-s0-tX2" secondAttribute="width" id="POI-gj-ZoZ"/>
-                            <constraint firstItem="MxS-Nt-PDj" firstAttribute="width" secondItem="KW3-iK-CKx" secondAttribute="width" id="PlV-Qc-ddG"/>
                             <constraint firstItem="49e-l0-Qzt" firstAttribute="top" secondItem="smw-6F-nuu" secondAttribute="bottom" id="Z6s-sz-JWy"/>
-                            <constraint firstItem="MxS-Nt-PDj" firstAttribute="centerY" secondItem="5PS-WM-YyW" secondAttribute="centerY" id="Z8j-So-Rrr"/>
-                            <constraint firstItem="KW3-iK-CKx" firstAttribute="leading" secondItem="Q4V-7m-b36" secondAttribute="leadingMargin" constant="-16" id="ZX0-b7-Vji"/>
-                            <constraint firstItem="MxS-Nt-PDj" firstAttribute="width" secondItem="KW3-iK-CKx" secondAttribute="width" id="c06-Vm-LB3"/>
-                            <constraint firstItem="MxS-Nt-PDj" firstAttribute="height" secondItem="Q4V-7m-b36" secondAttribute="height" id="f6b-5r-HUv"/>
                             <constraint firstAttribute="trailing" secondItem="m4R-s0-tX2" secondAttribute="trailing" id="fHP-ZG-xVh"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="MxS-Nt-PDj" secondAttribute="trailing" constant="-16" id="gcw-eP-GxT"/>
                             <constraint firstItem="m4R-s0-tX2" firstAttribute="leading" secondItem="smw-6F-nuu" secondAttribute="trailing" id="giW-tR-zVP"/>
-                            <constraint firstAttribute="trailing" secondItem="MxS-Nt-PDj" secondAttribute="trailing" id="lCq-Xb-qoy"/>
-                            <constraint firstItem="49e-l0-Qzt" firstAttribute="top" secondItem="KW3-iK-CKx" secondAttribute="bottom" id="mLH-2N-0EX"/>
-                            <constraint firstItem="MxS-Nt-PDj" firstAttribute="top" secondItem="DFM-Ij-52m" secondAttribute="bottom" id="mf4-Jr-yQJ"/>
-                            <constraint firstItem="KW3-iK-CKx" firstAttribute="top" secondItem="DFM-Ij-52m" secondAttribute="bottom" id="mf5-tV-w6G"/>
                             <constraint firstItem="m4R-s0-tX2" firstAttribute="top" secondItem="DFM-Ij-52m" secondAttribute="bottom" id="nGg-fm-1Nk"/>
                             <constraint firstItem="smw-6F-nuu" firstAttribute="leading" secondItem="hko-Ja-jR5" secondAttribute="trailing" id="nvX-ta-mmG"/>
                             <constraint firstAttribute="width" secondItem="hko-Ja-jR5" secondAttribute="width" multiplier="3" id="pRR-Pl-Qs8"/>
-                            <constraint firstItem="EWu-6x-AGz" firstAttribute="width" secondItem="5PS-WM-YyW" secondAttribute="width" id="qSC-GT-sPh"/>
-                            <constraint firstItem="EWu-6x-AGz" firstAttribute="height" secondItem="5PS-WM-YyW" secondAttribute="height" id="sIe-zE-usE"/>
                             <constraint firstItem="hko-Ja-jR5" firstAttribute="leading" secondItem="Q4V-7m-b36" secondAttribute="leading" id="smg-Uq-fsK"/>
-                            <constraint firstItem="KW3-iK-CKx" firstAttribute="height" secondItem="Q4V-7m-b36" secondAttribute="height" id="yC0-Mt-aN0"/>
-                            <constraint firstAttribute="centerY" secondItem="MxS-Nt-PDj" secondAttribute="centerY" id="yIx-lj-HWZ"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="subviews">
-                                <exclude reference="KW3-iK-CKx"/>
-                                <exclude reference="MxS-Nt-PDj"/>
-                            </mask>
-                            <mask key="constraints">
-                                <exclude reference="ZX0-b7-Vji"/>
-                                <exclude reference="6vm-8y-6eW"/>
-                                <exclude reference="OI7-FS-B2b"/>
-                                <exclude reference="PlV-Qc-ddG"/>
-                                <exclude reference="gcw-eP-GxT"/>
-                            </mask>
-                        </variation>
                     </view>
                     <toolbarItems/>
                     <connections>
-                        <outlet property="AskRatePanelButton" destination="5PS-WM-YyW" id="j5g-kM-3aI"/>
-                        <outlet property="BidRatePanelButton" destination="EWu-6x-AGz" id="Sql-Bd-LQ4"/>
                         <outlet property="rateValueLabel" destination="smw-6F-nuu" id="nQp-FT-wRG"/>
                     </connections>
                 </viewController>
