@@ -109,7 +109,7 @@ static const int maxRecords = 50;
     NSMutableArray *closeTargetPositions = [NSMutableArray array];
     
     for (OpenPosition *openPosition in allPositions) {
-        if ([positionType isEqualOrderType:openPosition.positionType]) {
+        if ([positionType isEqualPositionType:openPosition.positionType]) {
             [closeTargetPositions addObject:openPosition];
         }
     }

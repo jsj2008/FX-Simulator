@@ -45,7 +45,7 @@
     
     if (totalPositionSize == 0) {
         return _onlyNew;
-    } else if ([positionType isEqualOrderType:order.positionType]) {
+    } else if ([positionType isEqualPositionType:order.positionType]) {
         return _onlyNew;
     } else {
         if (order.positionSize.sizeValue <= totalPositionSize) {
