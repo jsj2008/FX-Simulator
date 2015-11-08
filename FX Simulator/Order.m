@@ -135,7 +135,7 @@ static NSString* const FXSOrdersTableName = @"orders";
         return NO;
     }
     
-    if (![self.positionType isEqualOrderType:positionType]) {
+    if (![self.positionType isEqualPositionType:positionType]) {
         return YES;
     } else {
         return NO;

@@ -17,7 +17,7 @@
 - (instancetype)initWithShort;
 - (instancetype)initWithLong;
 - (instancetype)initWithString:(NSString*)typeString;
-- (BOOL)isEqualOrderType:(PositionType*)orderType;
+- (BOOL)isEqualPositionType:(PositionType*)positionType;
 - (instancetype)reverseType;
 - (NSString *)toDisplayString;
 

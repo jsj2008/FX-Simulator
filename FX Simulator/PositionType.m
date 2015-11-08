@@ -73,9 +73,9 @@ static NSString* const displaySell = @"Sell";
     return nil;
 }
 
-- (BOOL)isEqualOrderType:(PositionType *)orderType
+- (BOOL)isEqualPositionType:(PositionType *)positionType
 {
-    if ((self.isLong && orderType.isLong) || (self.isShort && orderType.isShort)) {
+    if ((self.isLong && positionType.isLong) || (self.isShort && positionType.isShort)) {
         return YES;
     } else {
         return NO;
