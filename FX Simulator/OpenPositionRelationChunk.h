@@ -28,7 +28,7 @@
 /**
  古いポジションからselectする
  */
-- (NSArray *)selectCloseTargetOpenPositionsLimitClosePositionSize:(PositionSize *)limitPositionSize currencyPair:(CurrencyPair *)currencyPair;
+- (NSArray *)selectCloseTargetOpenPositionsLimitClosePositionSize:(PositionSize *)limitPositionSize closeTargetPositionType:(PositionType *)positionType currencyPair:(CurrencyPair *)currencyPair;
 
 - (PositionType *)positionTypeOfCurrencyPair:(CurrencyPair *)currencyPAir;
 

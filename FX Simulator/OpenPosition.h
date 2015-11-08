@@ -33,7 +33,7 @@
 /**
  古いポジションからselectする
 */
-+ (NSArray *)selectCloseTargetOpenPositionsLimitClosePositionSize:(PositionSize *)limitPositionSize currencyPair:(CurrencyPair *)currencyPair saveSlot:(NSUInteger)slot;
++ (NSArray *)selectCloseTargetOpenPositionsLimitClosePositionSize:(PositionSize *)limitPositionSize closeTargetPositionType:(PositionType *)positionType currencyPair:(CurrencyPair *)currencyPair saveSlot:(NSUInteger)slot;
 
 + (PositionType *)positionTypeOfCurrencyPair:(CurrencyPair *)currencyPAir saveSlot:(NSUInteger)slot;
 

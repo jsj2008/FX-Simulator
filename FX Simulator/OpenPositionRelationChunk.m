@@ -28,9 +28,9 @@
     return [OpenPosition selectNewestFirstLimit:limit currencyPair:currencyPair saveSlot:_saveSlot];
 }
 
-- (NSArray *)selectCloseTargetOpenPositionsLimitClosePositionSize:(PositionSize *)limitPositionSize currencyPair:(CurrencyPair *)currencyPair
+- (NSArray *)selectCloseTargetOpenPositionsLimitClosePositionSize:(PositionSize *)limitPositionSize closeTargetPositionType:(PositionType *)positionType currencyPair:(CurrencyPair *)currencyPair
 {
-    return [OpenPosition selectCloseTargetOpenPositionsLimitClosePositionSize:limitPositionSize currencyPair:currencyPair saveSlot:_saveSlot];
+    return [OpenPosition selectCloseTargetOpenPositionsLimitClosePositionSize:limitPositionSize closeTargetPositionType:positionType currencyPair:currencyPair saveSlot:_saveSlot];
 }
 
 - (PositionType *)positionTypeOfCurrencyPair:(CurrencyPair *)currencyPAir
