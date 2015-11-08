@@ -50,7 +50,7 @@
 */
 + (BOOL)isExecutableNewPositionOfSaveSlot:(NSUInteger)slot;
 
-- (ExecutionOrder *)createCloseExecutionOrderFromOrderId:(NSUInteger)orderId;
+- (ExecutionOrder *)createCloseExecutionOrderFromOrderId:(NSUInteger)orderId rate:(Rate *)rate;
 
 - (BOOL)isNewPosition;
 
