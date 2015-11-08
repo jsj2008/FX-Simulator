@@ -8,14 +8,10 @@
 
 #import "PositionType.h"
 
-static NSString* const buy = @"BUY";
-static NSString* const sell = @"SELL";
 static NSString* const displayBuy = @"Buy";
 static NSString* const displaySell = @"Sell";
 
-@implementation PositionType {
-    NSString *type;
-}
+@implementation PositionType
 
 - (instancetype)init
 {
@@ -47,21 +43,6 @@ static NSString* const displaySell = @"Sell";
     return self;
 }
 
-- (instancetype)initWithString:(NSString *)typeString
-{
-    if (self = [self init]) {
-        if ([sell isEqualToString:typeString]) {
-            _isShort = YES;
-        } else if ([buy isEqualToString:typeString]) {
-            _isLong = YES;
-        } else {
-            return nil;
-        }
-    }
-    
-    return self;
-}
-
 - (instancetype)reverseType
 {
     if (self.isShort) {
@@ -88,28 +69,6 @@ static NSString* const displaySell = @"Sell";
         return displaySell;
     } else if (self.isLong == YES) {
         return displayBuy;
-    }
-    
-    return nil;
-}
-
-- (NSString *)toTypeString
-{
-    if (self.isShort == YES) {
-        return sell;
-    } else if (self.isLong == YES) {
-        return buy;
-    }
-    
-    return nil;
-}
-
-- (UIColor *)toColor
-{
-    if (self.isShort) {
-        return [UIColor redColor];
-    } else if (self.isLong) {
-        return [UIColor blueColor];
     }
     
     return nil;
