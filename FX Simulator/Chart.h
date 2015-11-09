@@ -34,6 +34,7 @@
 + (instancetype)createNewMainChartFromSaveDataSource:(SaveDataSource *)source;
 + (instancetype)createNewSubChartFromSaveDataSource:(SaveDataSource *)source;
 + (instancetype)createChartFromChartSource:(ChartSource *)source;
+- (void)chartScrollViewDidLoad;
 - (NSComparisonResult)compareDisplayOrder:(Chart *)chart;
 - (void)setChartScrollView:(UIScrollView *)chartScrollView;
 - (void)strokeCurrentChart:(Market *)market;

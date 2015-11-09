@@ -75,6 +75,11 @@
     return self;
 }
 
+- (void)chartScrollViewDidLoad
+{
+    [_visibleChartArea chartScrollViewDidLoad];
+}
+
 - (NSComparisonResult)compareDisplayOrder:(Chart *)chart
 {
     if (self.chartIndex < chart.chartIndex) {

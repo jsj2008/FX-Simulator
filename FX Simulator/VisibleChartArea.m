@@ -37,13 +37,17 @@ static const float FXSEntityChartViewPrepareTotalRangeRatio = 0.5;
 {
     if (self = [super init]) {
         _visibleChartView = visibleChartView;
-        _visibleChartView.contentInset = UIEdgeInsetsMake(0, [self entityChartViewMargin], 0, [self entityChartViewMargin]);
         _entityChartView = entityChartView;
         _displayDataCount = displayDataCount;
         _visibleWidthRatio = (float)self.displayDataCount / (float)[EntityChart forexDataCount];
     }
     
     return self;
+}
+
+- (void)chartScrollViewDidLoad
+{
+    _visibleChartView.contentInset = UIEdgeInsetsMake(0, [self entityChartViewMargin], 0, [self entityChartViewMargin]);
 }
 
 - (void)chartScrollViewDidScroll
