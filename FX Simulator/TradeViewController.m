@@ -113,11 +113,6 @@
     [_simulationManager pauseTime];
 }
 
-/*-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
-{
-    [tradeDataViewController tradeViewTouchesBegan];
-}*/
-
 - (void)autoUpdateSettingSwitchChanged:(BOOL)isSwitchOn
 {
     [_simulationManager setIsAutoUpdate:isSwitchOn];
