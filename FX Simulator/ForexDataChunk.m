@@ -383,7 +383,7 @@
     CurrencyPair *chunkCurrencyPair = [self current].currencyPair;
     TimeFrame *chunkTimeFrame = [self current].timeScale;
     
-    NSComparisonResult resultTimeFrame = [timeFrame compare:chunkTimeFrame];
+    NSComparisonResult resultTimeFrame = [timeFrame compareTimeFrame:chunkTimeFrame];
     
     if (resultTimeFrame != NSOrderedAscending) {
         return;

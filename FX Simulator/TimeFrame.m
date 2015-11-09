@@ -56,7 +56,7 @@ static NSString* const FXSTimeFrameKey = @"timeFrame";
     return NO;
 }
 
-- (NSComparisonResult)compare:(TimeFrame *)timeFrame
+- (NSComparisonResult)compareTimeFrame:(TimeFrame *)timeFrame
 {
     return [self.minuteValueObj compare:timeFrame.minuteValueObj];
 }

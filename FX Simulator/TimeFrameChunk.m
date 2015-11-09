@@ -70,7 +70,7 @@
 
 - (TimeFrame *)minTimeFrame
 {
-    NSArray *array = [_timeFrames sortedArrayUsingSelector:@selector(compare:)];
+    NSArray *array = [_timeFrames sortedArrayUsingSelector:@selector(compareTimeFrame:)];
     
     return array.firstObject;
 }
