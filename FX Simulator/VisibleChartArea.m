@@ -260,7 +260,8 @@ static const float FXSEntityChartViewPrepareTotalRangeRatio = 0.5;
     _entityChartView.frame = CGRectMake(-entityChartViewLeftEnd, 0, _entityChartView.frame.size.width, _entityChartView.frame.size.height);
     _normalizedChartScrollViewOffset = CGPointMake((startX - self.currentEntityChart.leftEndForexDataX.value) * _entityChartView.transform.a, visibleChartMaxRateYOfEntityChart);
     _visibleChartView.contentOffset = _normalizedChartScrollViewOffset;
-    _visibleChartView.contentSize = CGSizeMake(_entityChartView.frame.size.width, _entityChartView.frame.size.height);
+    float entityChartViewRightEnd = self.currentEntityChart.rightEndForexDataX.value * _entityChartView.transform.a;
+    _visibleChartView.contentSize = CGSizeMake(entityChartViewRightEnd - entityChartViewLeftEnd, _entityChartView.frame.size.height);
             self.visibleWidthRatio = _visibleChartView.frame.size.width / _entityChartView.frame.size.width;
 }
 
