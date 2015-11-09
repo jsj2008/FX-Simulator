@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "OrderManager.h"
 
 @protocol TradeDataViewControllerDelegate <NSObject>
 /// 自動更新を設定するボタンが変更されたとき。
@@ -18,7 +17,7 @@
 @class OrderResult;
 @class SaveData;
 
-@interface TradeDataViewController : UIViewController < UITextFieldDelegate, OrderManagerDelegate>
+@interface TradeDataViewController : UIViewController < UITextFieldDelegate>
 @property (nonatomic, weak) id<TradeDataViewControllerDelegate> delegate;
 - (void)didOrder:(OrderResult *)result;
 - (void)loadMarket:(Market *)market;

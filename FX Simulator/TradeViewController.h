@@ -7,9 +7,10 @@
 //
 #import <UIKit/UIKit.h>
 #import "ChartViewController.h"
+#import "OrderManager.h"
 #import "SimulationManager.h"
 #import "TradeDataViewController.h"
 
-@interface TradeViewController : UIViewController <ChartViewControllerDelegate, SimulationManagerDelegate, TradeDataViewControllerDelegate>
+@interface TradeViewController : UIViewController <ChartViewControllerDelegate, OrderManagerDelegate, SimulationManagerDelegate, TradeDataViewControllerDelegate>
 
 @end
