@@ -199,6 +199,10 @@
 
 - (void)setChartScrollView:(UIScrollView *)chartScrollView
 {
+    for (UIView *view in chartScrollView.subviews) {
+        [view removeFromSuperview];
+    }
+    
     [chartScrollView addSubview:_entityChartView];
     
     _visibleChartArea = [[VisibleChartArea alloc] initWithVisibleChartView:chartScrollView entityChartView:_entityChartView displayDataCount:self.displayDataCount];
