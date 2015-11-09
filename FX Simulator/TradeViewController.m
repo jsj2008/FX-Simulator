@@ -70,7 +70,7 @@
     [_ratePanelViewController loadOrderManager:_orderManager];
     [_tradeDataViewController loadSaveData:_saveData];
     [_tradeDataViewController loadMarket:_market];
-    [_orderManager addDelegate:_tradeDataViewController];
+    [_orderManager addDelegate:self];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -133,6 +133,15 @@
 - (void)chartViewTouched
 {
     [_simulationManager addTime];
+}
+
+- (void)didOrder:(OrderResult *)result
+{
+    [result completion:nil error:^{
+        [result showAlertToController:self];
+    }];
+    
+    [_tradeDataViewController didOrder:result];
 }
 
 - (void)didReceiveMemoryWarning

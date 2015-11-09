@@ -55,7 +55,6 @@
 - (void)startSimulation;
 - (void)willNotifyObservers;
 - (void)didNotifyObservers;
-- (void)didOrder;
 
 /**
  Startした瞬間、時間が進み、Observerのメソッドが呼ばれ、それぞれのObserverに値がセットされる。

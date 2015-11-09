@@ -50,7 +50,6 @@
 - (void)loadOrderManager:(OrderManager *)orderManager
 {
     _orderManager = orderManager;
-    [_orderManager addDelegate:self];
 }
 
 - (void)loadMarket:(Market *)market
@@ -62,13 +61,6 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-}
-
-- (void)didOrder:(OrderResult *)result
-{
-    [result completion:nil error:^{
-        [result showAlertToController:self];
-    }];
 }
 
 - (void)update
