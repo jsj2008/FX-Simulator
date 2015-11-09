@@ -18,7 +18,7 @@
         return nil;
     }
     
-    if ([start compare:end] == NSOrderedDescending) {
+    if ([start compareTime:end] == NSOrderedDescending) {
         return nil;
     }
     

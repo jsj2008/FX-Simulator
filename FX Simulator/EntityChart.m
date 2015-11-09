@@ -146,7 +146,7 @@ static const NSUInteger FXSBackLimitForPrepare = FXSRequireForexDataCount - FXSM
             ForexHistoryData *leftEndForexData = [_candle leftEndForexData];
             ForexDataChunk *newForexDataChunk = [market chunkForCenterForexData:leftEndForexData frontLimit:FXSFrontLimitForPrepare backLimit:FXSBackLimitForPrepare];
             
-            NSComparisonResult result = [leftEndForexData.oldestTime compare:newForexDataChunk.oldestTime];
+            NSComparisonResult result = [leftEndForexData.oldestTime compareTime:newForexDataChunk.oldestTime];
             
             if (result != NSOrderedDescending) {
                 return;
@@ -174,7 +174,7 @@ static const NSUInteger FXSBackLimitForPrepare = FXSRequireForexDataCount - FXSM
             ForexHistoryData *rightEndForexData = [_candle rightEndForexData];
             ForexDataChunk *newForexDataChunk = [market chunkForCenterForexData:rightEndForexData frontLimit:FXSFrontLimitForPrepare backLimit:FXSBackLimitForPrepare];
             
-            NSComparisonResult result = [rightEndForexData.latestTime compare:newForexDataChunk.latestTime];
+            NSComparisonResult result = [rightEndForexData.latestTime compareTime:newForexDataChunk.latestTime];
             
             if (result != NSOrderedAscending) {
                 return;

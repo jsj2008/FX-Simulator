@@ -81,7 +81,7 @@
 
 - (NSComparisonResult)compareTime:(ForexHistoryData *)data
 {
-    return [self.close.timestamp compare:data.close.timestamp];
+    return [self.close.timestamp compareTime:data.close.timestamp];
 }
 
 - (Rate *)getRateForType:(RateType)type

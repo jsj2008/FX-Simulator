@@ -15,7 +15,7 @@
 - (instancetype)initWithDate:(NSDate*)date;
 - (instancetype)initWithTimestamp:(timestamp_t)timestamp;
 - (Time *)addDay:(int)day;
-- (NSComparisonResult)compare:(Time*)time;
+- (NSComparisonResult)compareTime:(Time*)time;
 - (BOOL)isEqualTime:(Time *)time;
 - (NSString *)toDisplayTimeString;
 - (NSString *)toDisplayYMDString;

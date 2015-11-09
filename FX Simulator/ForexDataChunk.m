@@ -270,8 +270,8 @@
     Time *newestDataTime = ((ForexHistoryData *)_sortedForexDataArray.firstObject).close.timestamp;
     Time *oldestDataTime = ((ForexHistoryData *)_sortedForexDataArray.lastObject).close.timestamp;
     
-    NSComparisonResult result1 = [time compare:newestDataTime];
-    NSComparisonResult result2 = [time compare:oldestDataTime];
+    NSComparisonResult result1 = [time compareTime:newestDataTime];
+    NSComparisonResult result2 = [time compareTime:oldestDataTime];
     
     if (result1 == NSOrderedDescending || result2 == NSOrderedAscending) {
         return nil;
@@ -280,7 +280,7 @@
     __block NSUInteger baseIndex = NSNotFound;
     
     [_sortedForexDataArray enumerateObjectsUsingBlock:^(ForexHistoryData *obj, NSUInteger idx, BOOL *stop) {
-        NSComparisonResult result = [time compare:obj.close.timestamp];
+        NSComparisonResult result = [time compareTime:obj.close.timestamp];
         if (result == NSOrderedSame) {
             baseIndex = idx;
             *stop = YES;
@@ -392,7 +392,7 @@
     TimeFrame *minTimeFrame = timeFrame;
     Time *oldTime = [self currentTime];
     
-    NSComparisonResult result = [currentTime compare:oldTime];
+    NSComparisonResult result = [currentTime compareTime:oldTime];
     
     if (!(result == NSOrderedDescending)) {
         return;
@@ -437,7 +437,7 @@
     NSMutableIndexSet *indexes = [NSMutableIndexSet new];
     
     [_sortedForexDataArray enumerateObjectsUsingBlock:^(ForexHistoryData *obj, NSUInteger idx, BOOL *stop) {
-        NSComparisonResult result = [time compare:obj.close.timestamp];
+        NSComparisonResult result = [time compareTime:obj.close.timestamp];
         if (result == NSOrderedAscending) {
             [indexes addIndex:idx];
         }
