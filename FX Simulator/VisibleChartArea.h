@@ -17,6 +17,7 @@
 @property (nonatomic) EntityChart *currentEntityChart;
 @property (nonatomic, readonly) NSUInteger displayDataCount;
 - (instancetype)initWithVisibleChartView:(UIScrollView *)visibleChartView entityChartView:(UIImageView *)entityChartView displayDataCount:(NSUInteger)displayDataCount;
+- (void)chartScrollViewDidLoad;
 - (void)chartScrollViewDidScroll;
 - (void)scaleStart;
 - (void)scaleX:(float)scaleX;

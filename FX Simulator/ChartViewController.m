@@ -27,6 +27,13 @@
     // Do any additional setup after loading the view.
 }
 
+- (void)viewDidLayoutSubviews
+{
+    [super viewDidLayoutSubviews];
+    
+    [_chart chartScrollViewDidLoad];
+}
+
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     [_chart chartScrollViewDidScroll];
