@@ -133,15 +133,6 @@ static SimulationManager *sharedSimulationManager = nil;
     }
 }
 
-- (void)autoUpdateSettingSwitchChanged:(BOOL)isSwitchOn
-{
-    _saveData.isAutoUpdate = isSwitchOn;
-    
-    if (![_simulationState isStop]) {
-        //self.market.isAutoUpdate = _saveData.isAutoUpdate;
-    }
-}
-
 - (void)startTime
 {
     if (!self.isStartTime) {

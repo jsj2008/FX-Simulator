@@ -21,4 +21,5 @@
 - (NSUInteger)indexOfTimeFrame:(TimeFrame *)timeFrame;
 - (TimeFrame *)timeFrameAtIndex:(NSUInteger)index;
 - (NSUInteger)count;
+
 @end
