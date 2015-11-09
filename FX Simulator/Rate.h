@@ -35,7 +35,8 @@
 - (Rate *)addSpread:(Spread *)spread;
 - (Rate *)divide:(NSUInteger)num;
 - (Rate *)subRate:(Rate *)rate;
-- (NSComparisonResult)compare:(Rate *)rate;
+- (NSComparisonResult)compareRate:(Rate *)rate;
 - (Money *)multiplyPositionSize:(PositionSize *)positionSize;
 - (NSString *)toDisplayString;
+
 @end

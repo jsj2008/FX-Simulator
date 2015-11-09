@@ -74,7 +74,7 @@
     return [self addRate:addRate];
 }
 
-- (NSComparisonResult)compare:(Rate *)rate
+- (NSComparisonResult)compareRate:(Rate *)rate
 {
     return [self.rateValueObj compare:rate.rateValueObj];
 }
