@@ -49,14 +49,14 @@ static NSString* const FXSTimeKey = @"time";
     return [[Time alloc] initWithDate:result];
 }
 
-- (NSComparisonResult)compare:(Time *)time
+- (NSComparisonResult)compareTime:(Time *)time
 {
     return [self.date compare:time.date];
 }
 
 - (BOOL)isEqualTime:(Time *)time
 {
-    NSComparisonResult result = [self compare:time];
+    NSComparisonResult result = [self compareTime:time];
     
     if (result == NSOrderedSame) {
         return YES;
