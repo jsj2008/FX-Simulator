@@ -148,13 +148,16 @@ static NSString * const kKeyPath = @"currentTime";
     ForexDataChunk *chunk = [forexDb selectBaseTime:forexData.close.timestamp frontLimit:frontLimit backLimit:backLimit];
     
     [chunk maxTime:self.currentTime];
-    [chunk complementedByTimeFrame:_completionTimeFrame currentTime:self.currentTime];
     
-    if ([chunk existForexData:forexData]) {
-        return chunk;
-    } else {
+    if (![chunk existForexData:forexData]) {
         return nil;
     }
+
+    if ([chunk forexDataCountFromBeginOldestForexData:forexData] < frontLimit + 1) {
+        [chunk complementedByTimeFrame:_completionTimeFrame currentTime:self.currentTime];
+    }
+    
+    return chunk;
 }
 
 /**

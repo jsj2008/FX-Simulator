@@ -16,6 +16,7 @@
 #import "Rate.h"
 
 @implementation ForexDataChunk {
+    // closeが新しい順
     NSArray *_sortedForexDataArray;
 }
 
@@ -363,6 +364,17 @@
     }];
     
     return exist;
+}
+
+- (NSUInteger)forexDataCountFromBeginOldestForexData:(ForexHistoryData *)forexData
+{
+    NSUInteger forexDataIndex = [_sortedForexDataArray indexOfObject:forexData];
+    
+    if (forexDataIndex == NSNotFound) {
+        return 0;
+    }
+    
+    return forexDataIndex + 1;
 }
 
 - (ForexHistoryData *)getForexDataFromTouchPoint:(CGPoint)point displayCount:(NSUInteger)count viewSize:(CGSize)size
