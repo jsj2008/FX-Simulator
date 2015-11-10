@@ -213,7 +213,7 @@ static const int maxRecords = 50;
 {
     PositionType *positionType = [self positionTypeOfCurrencyPair:currencyPair saveSlot:slot];
     
-    Rates *valuationRates = [market getCurrentRatesOfCurrencyPair:currencyPair];
+    Rates *valuationRates = [market currentRatesOfCurrencyPair:currencyPair];
     
     Rate *valuationRate;
     
@@ -382,7 +382,7 @@ static const int maxRecords = 50;
 
 - (Money *)profitAndLossFromMarket:(Market *)market
 {
-    Rates *valuationRates = [market getCurrentRatesOfCurrencyPair:self.currencyPair];
+    Rates *valuationRates = [market currentRatesOfCurrencyPair:self.currencyPair];
     
     Rate *valuationRate;
     

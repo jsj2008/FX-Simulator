@@ -132,7 +132,7 @@
 {
     PositionType *positionType = [self positionType];
     
-    Rates *valuationRates = [market getCurrentRatesOfCurrencyPair:_currencyPair];
+    Rates *valuationRates = [market currentRatesOfCurrencyPair:_currencyPair];
     
     Rate *valuationRate;
     

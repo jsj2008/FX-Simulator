@@ -77,22 +77,22 @@
 
 - (NSString *)getDisplayCurrentBidRate
 {
-    return [_market getCurrentRatesOfCurrencyPair:_currencyPair].bidRate.toDisplayString;
+    return [_market currentRatesOfCurrencyPair:_currencyPair].bidRate.toDisplayString;
 }
 
 - (NSString *)getDisplayCurrentAskRate
 {
-    return [_market getCurrentRatesOfCurrencyPair:_currencyPair].askRate.toDisplayString;
+    return [_market currentRatesOfCurrencyPair:_currencyPair].askRate.toDisplayString;
 }
 
 - (Rate *)getCurrentRateForOrderType:(PositionType *)orderType
 {
     if (orderType.isShort) {
         // return Bid Rate
-        return [_market getCurrentRatesOfCurrencyPair:_currencyPair].bidRate;
+        return [_market currentRatesOfCurrencyPair:_currencyPair].bidRate;
     } else if (orderType.isLong) {
         // return Ask Rate
-        return [_market getCurrentRatesOfCurrencyPair:_currencyPair].askRate;
+        return [_market currentRatesOfCurrencyPair:_currencyPair].askRate;
     }
     
     return nil;
