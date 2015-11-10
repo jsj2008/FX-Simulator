@@ -114,7 +114,7 @@
     return [[ForexDataChunk alloc] initWithSortedForexDataArray:array];
 }
 
-- (NSArray *)selectMaxCloseTime:(Time *)closeTime limit:(NSUInteger)limit
+- (ForexDataChunk *)selectMaxCloseTime:(Time *)closeTime limit:(NSUInteger)limit
 {
     NSString *sql = [NSString stringWithFormat:@"SELECT rowid,* FROM %@ WHERE close_minute_close_timestamp <= ? ORDER BY close_minute_close_timestamp DESC LIMIT ?", _forexHistoryTableName];
     
@@ -131,7 +131,7 @@
         
     }];
     
-    return [array copy];
+    return [[ForexDataChunk alloc] initWithSortedForexDataArray:array];
 }
 
 - (ForexDataChunk *)selectMaxCloseTime:(Time *)closeTime newerThan:(Time *)oldCloseTime
