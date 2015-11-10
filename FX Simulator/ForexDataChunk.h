@@ -72,6 +72,8 @@
 
 - (BOOL)existForexData:(ForexHistoryData *)forexData;
 
+- (NSUInteger)forexDataCountFromBeginOldestForexData:(ForexHistoryData *)forexData;
+
 - (void)complementedByTimeFrame:(TimeFrame *)timeFrame currentTime:(Time *)currentTime;
 
 - (void)maxTime:(Time *)time;
