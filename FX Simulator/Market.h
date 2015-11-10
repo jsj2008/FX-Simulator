@@ -26,7 +26,7 @@
 /**
  最新のRatesを取得。
  */
-- (Rates *)getCurrentRatesOfCurrencyPair:(CurrencyPair *)currencyPair;
+- (Rates *)currentRatesOfCurrencyPair:(CurrencyPair *)currencyPair;
 
 - (ForexDataChunk *)chunkForCurrencyPair:(CurrencyPair *)currencyPair timeFrame:(TimeFrame *)timeFrame Limit:(NSUInteger)limit;
 

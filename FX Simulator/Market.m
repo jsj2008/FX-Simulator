@@ -61,7 +61,7 @@ static NSInteger FXSMaxForexDataStore = 500;
     [self updateMarketFromNewCurrentData:newCurrentData];
 }
 
-- (Rates *)getCurrentRatesOfCurrencyPair:(CurrencyPair *)currencyPair
+- (Rates *)currentRatesOfCurrencyPair:(CurrencyPair *)currencyPair
 {
     Rate *currentBidRate = [self getCurrentBidRateOfCurrencyPair:currencyPair];
     
