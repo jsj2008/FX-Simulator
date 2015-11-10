@@ -127,7 +127,7 @@ static NSString * const kKeyPath = @"currentTime";
 - (ForexDataChunk *)chunkForCurrencyPair:(CurrencyPair *)currencyPair timeFrame:(TimeFrame *)timeFrame Limit:(NSUInteger)limit
 {
     ForexHistory *forexDatabase = [[ForexHistory alloc] initWithCurrencyPair:currencyPair timeScale:timeFrame];
-    ForexDataChunk *chunk = [forexDatabase selectBaseTime:self.currentTime frontLimit:0 backLimit:limit];
+    ForexDataChunk *chunk = [forexDatabase selectMaxCloseTime:self.currentTime limit:limit];
     
     [chunk complementedByTimeFrame:_completionTimeFrame currentTime:self.currentTime];
     

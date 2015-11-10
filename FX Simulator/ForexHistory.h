@@ -22,6 +22,7 @@
 
 /**
  基準となる時間(Close Time)を中心に、前後のLimitに基づきデータを取得する。
+ baseTimeが存在しない時は、そのbaseTimeの次のtimeのデータをbaseDataとする。
  @param time 基準となる時間
 */
 - (ForexDataChunk *)selectBaseTime:(Time *)time frontLimit:(NSUInteger)frontLimit backLimit:(NSUInteger)backLimit;
