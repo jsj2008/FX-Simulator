@@ -29,7 +29,7 @@
 /**
  closeTime以下の時間をlimit個、最新のデータから取得する。
 */
-- (NSArray *)selectMaxCloseTime:(Time *)closeTime limit:(NSUInteger)limit;
+- (ForexDataChunk *)selectMaxCloseTime:(Time *)closeTime limit:(NSUInteger)limit;
 
 /**
  closeTime以下の時間で、oldCloseTime時間より新しいデータを、新しい順に取得する。
