@@ -46,6 +46,11 @@ static NSString* const FXSPositionSizeKey = @"positionSize";
     return [self initWithSizeValue:[formatter numberFromString:string].unsignedLongLongValue];
 }
 
+- (NSComparisonResult)comparePositionSize:(PositionSize *)positionSize
+{
+    return [self.sizeValueObj compare:positionSize.sizeValueObj];
+}
+
 - (BOOL)existsPosition
 {
     if (0 < self.sizeValue) {
