@@ -10,6 +10,7 @@
 
 @class CurrencyPair;
 @class FXSTimeRange;
+@class PositionSize;
 @class Rate;
 @class Time;
 @class TimeFrame;
@@ -47,6 +48,10 @@
  Localeによって並び順が違う。
 */
 + (NSArray *)accountCurrencyList;
+
++ (NSArray *)positionSizeOfLotList;
+
++ (PositionSize *)defaultPositionSizeOfLot;
 
 /**
  1pipが何レートか。例 USD/JPY 1pip = 0.01円
