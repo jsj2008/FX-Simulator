@@ -127,6 +127,12 @@ static NSDictionary *spreadRateDic;
     return [[PositionSize alloc] initWithSizeValue:10000];
 }
 
++ (PositionSize *)maxTradePositionSize
+{
+    // positionSizeOfLotListのどのpositionSizeでも割り切れるようにする。
+    return [[PositionSize alloc] initWithSizeValue:10000000000];
+}
+
 + (Rate *)onePipValueOfCurrencyPair:(CurrencyPair *)currencyPair
 {
     /*Rate *eurusd = [[Rate alloc] initWithRateValue:0.0001 currencyPair:[[CurrencyPair alloc] initWithCurrencyPairString:@"EURUSD"] timestamp:nil];

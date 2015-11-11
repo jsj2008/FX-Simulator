@@ -17,6 +17,7 @@
 - (instancetype)initWithSizeValue:(position_size_t)size;
 - (instancetype)initWithNumber:(NSNumber *)number;
 - (instancetype)initWithString:(NSString *)string;
+- (NSComparisonResult)comparePositionSize:(PositionSize *)positionSize;
 - (BOOL)existsPosition;
 - (NSString *)toDisplayString;
 - (Lot *)toLotFromPositionSizeOfLot:(PositionSize *)sizeOfLot;

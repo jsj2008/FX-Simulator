@@ -359,6 +359,20 @@ static float FXSDefaultAutoUpdateIntervalSeconds = 1.0;
         return;
     }
     
+    PositionSize *maxTradePositionSize = [Setting maxTradePositionSize];
+    NSComparisonResult resultMax = [maxTradePositionSize comparePositionSize:tradePositionSize];
+    
+    if (resultMax == NSOrderedAscending) {
+        tradePositionSize = maxTradePositionSize;
+    }
+    
+    PositionSize *minTradePositionSize = self.positionSizeOfLot;
+    NSComparisonResult resultMin = [minTradePositionSize comparePositionSize:tradePositionSize];
+    
+    if (resultMin == NSOrderedDescending) {
+        tradePositionSize = minTradePositionSize;
+    }
+    
     _saveDataSource.tradePositionSize = tradePositionSize.sizeValue;
 }
 

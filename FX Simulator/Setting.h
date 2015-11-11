@@ -53,6 +53,8 @@
 
 + (PositionSize *)defaultPositionSizeOfLot;
 
++ (PositionSize *)maxTradePositionSize;
+
 /**
  1pipが何レートか。例 USD/JPY 1pip = 0.01円
 */
