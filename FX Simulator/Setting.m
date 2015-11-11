@@ -13,6 +13,7 @@
 #import "ForexHistory.h"
 #import "ForexHistoryFactory.h"
 #import "FXSTimeRange.h"
+#import "PositionSize.h"
 #import "Rate.h"
 #import "Time.h"
 #import "TimeFrame.h"
@@ -22,7 +23,7 @@ static NSDictionary *spreadRateDic;
 
 @implementation Setting
 
-+(void)initialize
++ (void)initialize
 {
     Rate *eurusd = [[Rate alloc] initWithRateValue:0.0001 currencyPair:[[CurrencyPair alloc] initWithCurrencyPairString:@"EURUSD"] timestamp:nil];
     Rate *usdjpy = [[Rate alloc] initWithRateValue:0.01 currencyPair:[[CurrencyPair alloc] initWithCurrencyPairString:@"USDJPY"] timestamp:nil];
@@ -42,7 +43,7 @@ static NSDictionary *spreadRateDic;
           };
 }
 
-+(BOOL)isLocaleJapanese
++ (BOOL)isLocaleJapanese
 {
     NSArray *languages = [NSLocale preferredLanguages];
     NSString *languageID = [languages objectAtIndex:0];
@@ -54,7 +55,7 @@ static NSDictionary *spreadRateDic;
     return NO;
 }
 
-+(NSArray*)currencyPairList
++ (NSArray *)currencyPairList
 {
     Currency *usd = [[Currency alloc] initWithCurrencyType:USD];
     Currency *jpy = [[Currency alloc] initWithCurrencyType:JPY];
@@ -77,7 +78,7 @@ static NSDictionary *spreadRateDic;
     }
 }
 
-+(NSDictionary*)currencyPairDictionaryList
++ (NSDictionary *)currencyPairDictionaryList
 {
 #warning CurrencyPairList(static変数)から生成
     Currency *usd = [[Currency alloc] initWithCurrencyType:USD];
@@ -99,7 +100,7 @@ static NSDictionary *spreadRateDic;
     return dic;
 }
 
-+(TimeFrameChunk *)timeFrameList
++ (TimeFrameChunk *)timeFrameList
 {
     
     NSArray *timeFrameList = @[[[TimeFrame alloc] initWithMinute:15], [[TimeFrame alloc] initWithMinute:60], [[TimeFrame alloc] initWithMinute:240], [[TimeFrame alloc] initWithMinute:1440]];
@@ -107,7 +108,7 @@ static NSDictionary *spreadRateDic;
     return [[TimeFrameChunk alloc] initWithTimeFrameArray:timeFrameList];
 }
 
-+(NSArray*)accountCurrencyList
++ (NSArray *)accountCurrencyList
 {
     if ([Setting isLocaleJapanese]) {
         return @[[[Currency alloc] initWithCurrencyType:JPY], [[Currency alloc] initWithCurrencyType:USD]];
@@ -116,7 +117,17 @@ static NSDictionary *spreadRateDic;
     }
 }
 
-+(Rate*)onePipValueOfCurrencyPair:(CurrencyPair*)currencyPair
++ (NSArray *)positionSizeOfLotList
+{
+    return @[[[PositionSize alloc] initWithSizeValue:1], [[PositionSize alloc] initWithSizeValue:10], [[PositionSize alloc] initWithSizeValue:100], [[PositionSize alloc] initWithSizeValue:1000], [[PositionSize alloc] initWithSizeValue:10000], [[PositionSize alloc] initWithSizeValue:100000]];
+}
+
++ (PositionSize *)defaultPositionSizeOfLot
+{
+    return [[PositionSize alloc] initWithSizeValue:10000];
+}
+
++ (Rate *)onePipValueOfCurrencyPair:(CurrencyPair *)currencyPair
 {
     /*Rate *eurusd = [[Rate alloc] initWithRateValue:0.0001 currencyPair:[[CurrencyPair alloc] initWithCurrencyPairString:@"EURUSD"] timestamp:nil];
     Rate *usdjpy = [[Rate alloc] initWithRateValue:0.01 currencyPair:[[CurrencyPair alloc] initWithCurrencyPairString:@"USDJPY"] timestamp:nil];
@@ -146,7 +157,7 @@ static NSDictionary *spreadRateDic;
     return [spreadRateDic objectForKey:currencyPair.toCodeString];
 }
 
-+(NSString*)toStringFromRate:(Rate *)rate
++ (NSString *)toStringFromRate:(Rate *)rate
 {
     if ([rate.currencyPair isQuoteCurrencyEqualJPY]) {
         NSNumberFormatter* formatter = [NSNumberFormatter new];
@@ -163,7 +174,7 @@ static NSDictionary *spreadRateDic;
     }
 }
 
-+(Rate*)baseRateOfCurrencyPair:(CurrencyPair*)currencyPair
++ (Rate *)baseRateOfCurrencyPair:(CurrencyPair *)currencyPair
 {
     NSDictionary *dic = @{@"EURUSD":[NSNumber numberWithDouble:1.3],
                           @"USDJPY":[NSNumber numberWithDouble:100],
@@ -202,7 +213,7 @@ static NSDictionary *spreadRateDic;
     return [[FXSTimeRange alloc] initWithRangeStart:rangeStart end:rangeEnd];
 }
 
-+(FXSTimeRange*)rangeForCurrencyPair:(CurrencyPair *)currencyPair timeScale:(TimeFrame *)timeScale
++ (FXSTimeRange *)rangeForCurrencyPair:(CurrencyPair *)currencyPair timeScale:(TimeFrame *)timeScale
 {
     ForexHistory *forexHistory = [ForexHistoryFactory createForexHistoryFromCurrencyPair:currencyPair timeScale:timeScale];
     

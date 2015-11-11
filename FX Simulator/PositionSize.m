@@ -65,6 +65,18 @@ static NSString* const FXSPositionSizeKey = @"positionSize";
     return [[Lot alloc] initWithPositionSize:self positionSizeOfLot:sizeOfLot];
 }
 
+- (BOOL)isEqual:(id)other {
+    if (other == self) {
+        return YES;
+    } else if ([other isKindOfClass:[self class]]) {
+        if ([self isEqualPositionSize:other]) {
+            return YES;
+        }
+    }
+    
+    return NO;
+}
+
 - (BOOL)isEqualPositionSize:(PositionSize *)positionsize
 {
     if (self.sizeValue == positionsize.sizeValue) {

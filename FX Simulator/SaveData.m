@@ -80,9 +80,9 @@ static float FXSDefaultAutoUpdateIntervalSeconds = 1.0;
     saveData.spread = [[Spread alloc] initWithPips:1 currencyPair:saveData.currencyPair];
     saveData.accountCurrency = [[Currency alloc] initWithCurrencyType:JPY];
     saveData.startBalance = [[Money alloc] initWithAmount:1000000 currency:saveData.accountCurrency];
-    saveData.positionSizeOfLot = [[PositionSize alloc] initWithSizeValue:10000];
+    saveData.positionSizeOfLot = [Setting defaultPositionSizeOfLot];
     
-    saveData.tradePositionSize = [[PositionSize alloc] initWithSizeValue:10000];
+    saveData.tradePositionSize = [Setting defaultPositionSizeOfLot];
     saveData.isAutoUpdate = FXSDefaultIsAutoUpdate;
     saveData.autoUpdateIntervalSeconds = FXSDefaultAutoUpdateIntervalSeconds;
     

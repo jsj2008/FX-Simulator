@@ -115,13 +115,20 @@
                 self.startBalance = [[Money alloc] initWithNumber:inputNumberValue currency:nil];
         };
     } else if ([segue.identifier isEqualToString:@"SetPositionSizeOfLotSegue"]) {
-        InputNumberValueViewController *controller = segue.destinationViewController;
+        CheckmarkViewController *controller = segue.destinationViewController;
+        NSArray *positionSizeOfLotList = [Setting positionSizeOfLotList];
+        NSMutableArray *PositionSizeOfLotStringValueList = [NSMutableArray array];
+        [positionSizeOfLotList enumerateObjectsUsingBlock:^(PositionSize *obj, NSUInteger idx, BOOL *stop) {
+            [PositionSizeOfLotStringValueList addObject:obj.toDisplayString];
+        }];
         controller.title = @"Position Size Of Lot";
-        controller.defaultNumberValue = self.positionSizeOfLot.sizeValueObj;
-        controller.minNumberValue = @1;
-        controller.maxNumberValue = @1000000;
-        controller.setInputNumberValue = ^(NSNumber *inputNumberValue){
-            self.positionSizeOfLot = [[PositionSize alloc] initWithNumber:inputNumberValue];
+        controller.dataList = positionSizeOfLotList;
+        controller.dataStringValueList = PositionSizeOfLotStringValueList;
+        controller.defaultData = self.positionSizeOfLot;
+        controller.setData = ^(id selectData){
+            if ([selectData isMemberOfClass:[PositionSize class]]) {
+                self.positionSizeOfLot = selectData;
+            }
         };
     } else if ([segue.identifier isEqualToString:@"SetStartTimeSegue"]) {
         SetStartTimeViewController *controller = segue.destinationViewController;
