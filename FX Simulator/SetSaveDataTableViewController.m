@@ -24,13 +24,13 @@
 #import "TimeFrameChunk.h"
 
 @interface SetSaveDataTableViewController ()
-@property (weak, nonatomic) IBOutlet UIButton *setCurrencyPairButton;
-@property (weak, nonatomic) IBOutlet UIButton *setTimeScaleButton;
-@property (weak, nonatomic) IBOutlet UIButton *setStartTimeButton;
-@property (weak, nonatomic) IBOutlet UIButton *setSpreadButton;
-@property (weak, nonatomic) IBOutlet UIButton *setAccountCurrencyButton;
-@property (weak, nonatomic) IBOutlet UIButton *setStartBalanceButton;
-@property (weak, nonatomic) IBOutlet UIButton *setPositionSizeOfLotButton;
+@property (weak, nonatomic) IBOutlet UILabel *currencyPairLabel;
+@property (weak, nonatomic) IBOutlet UILabel *timeFrameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *startTimeLabel;
+@property (weak, nonatomic) IBOutlet UILabel *spreadLabel;
+@property (weak, nonatomic) IBOutlet UILabel *accountCurrencyLabel;
+@property (weak, nonatomic) IBOutlet UILabel *startBalanceLabel;
+@property (weak, nonatomic) IBOutlet UILabel *positionSizeOfLotLabel;
 @end
 
 @implementation SetSaveDataTableViewController
@@ -152,13 +152,13 @@
 {
     [super viewWillAppear:animated];
     
-    [self.setCurrencyPairButton setTitle:[self.saveDataForm.currencyPair toDisplayString] forState:self.setCurrencyPairButton.state];
-    [self.setTimeScaleButton setTitle:[self.saveDataForm.timeFrame toDisplayString] forState:self.setTimeScaleButton.state];
-    [self.setStartTimeButton setTitle:[self.saveDataForm.startTime toDisplayYMDString] forState:self.setStartTimeButton.state];
-    [self.setSpreadButton setTitle:[self.saveDataForm.spread toDisplayString] forState:self.setSpreadButton.state];
-    [self.setAccountCurrencyButton setTitle:[self.saveDataForm.accountCurrency toDisplayString] forState:self.setAccountCurrencyButton.state];
-    [self.setStartBalanceButton setTitle:[self.saveDataForm.startBalance toDisplayString] forState:self.setStartBalanceButton.state];
-    [self.setPositionSizeOfLotButton setTitle:[self.saveDataForm.positionSizeOfLot toDisplayString] forState:self.setPositionSizeOfLotButton.state];
+    self.currencyPairLabel.text = [self.saveDataForm.currencyPair toDisplayString];
+    self.timeFrameLabel.text = [self.saveDataForm.timeFrame toDisplayString];
+    self.startTimeLabel.text = [self.saveDataForm.startTime toDisplayYMDString];
+    self.spreadLabel.text = [self.saveDataForm.spread toDisplayString];
+    self.accountCurrencyLabel.text = [self.saveDataForm.accountCurrency toDisplayString];
+    self.startBalanceLabel.text = [self.saveDataForm.startBalance toDisplayString];
+    self.positionSizeOfLotLabel.text = [self.saveDataForm.positionSizeOfLot toDisplayString];
 }
 
 - (void)didReceiveMemoryWarning {
