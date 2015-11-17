@@ -13,8 +13,10 @@
 #import "ForexHistory.h"
 #import "ForexHistoryFactory.h"
 #import "FXSTimeRange.h"
+#import "Money.h"
 #import "PositionSize.h"
 #import "Rate.h"
+#import "Spread.h"
 #import "Time.h"
 #import "TimeFrame.h"
 #import "TimeFrameChunk.h"
@@ -131,6 +133,26 @@ static NSDictionary *spreadRateDic;
 {
     // positionSizeOfLotListのどのpositionSizeでも割り切れるようにする。
     return [[PositionSize alloc] initWithSizeValue:10000000000];
+}
+
++ (Spread *)maxSpread
+{
+    return [[Spread alloc] initWithPips:999 currencyPair:[CurrencyPair allCurrencyPair]];
+}
+
++ (Spread *)minSpread
+{
+    return [[Spread alloc] initWithPips:0 currencyPair:[CurrencyPair allCurrencyPair]];
+}
+
++ (Money *)maxStartBalance
+{
+    return [[Money alloc] initWithAmount:10000000000 currency:[Currency allCurrency]];
+}
+
++ (Money *)minStartBalance
+{
+    return [[Money alloc] initWithAmount:1 currency:[Currency allCurrency]];
 }
 
 + (Rate *)onePipValueOfCurrencyPair:(CurrencyPair *)currencyPair
