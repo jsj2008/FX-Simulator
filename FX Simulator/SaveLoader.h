@@ -11,6 +11,6 @@
 @class SaveData;
 
 @interface SaveLoader : NSObject
-+ (SaveData *)load;
-+ (void)reloadSaveData;
++ (SaveData *)loadDefaultSaveData;
++ (void)setLastLoadedSaveDataSlotNumber:(NSUInteger)slotNumber;
 @end

@@ -56,23 +56,28 @@
 
 - (void)testCreateNewSaveData
 {
-    NSUInteger slotNumber = 1;
     CurrencyPair *currencyPair = [[CurrencyPair alloc] initWithCurrencyPairString:@"EURUSD"];
     TimeFrame *timeFrame = [[TimeFrame alloc] initWithMinute:15];
+    Currency *accountCurrency = [[Currency alloc] initWithCurrencyType:JPY];
     
-    SaveData *saveData = [SaveData createNewSaveDataFromSlotNumber:slotNumber currencyPair:currencyPair timeFrame:timeFrame];
+    SaveData *saveData = [SaveData createNewSaveData];
+    saveData.currencyPair = currencyPair;
+    saveData.timeFrame = timeFrame;
     saveData.startTime = [Setting rangeForSimulation].start;
     saveData.lastLoadedTime = saveData.startTime;
     saveData.spread = [[Spread alloc] initWithPips:1 currencyPair:saveData.currencyPair];
-    saveData.accountCurrency = [[Currency alloc] initWithCurrencyType:JPY];
+    saveData.accountCurrency = accountCurrency;
     saveData.startBalance = [[Money alloc] initWithAmount:1000000 currency:saveData.accountCurrency];
     saveData.positionSizeOfLot = [[PositionSize alloc] initWithSizeValue:10000];
     saveData.tradePositionSize = [[PositionSize alloc] initWithSizeValue:10000];
     saveData.isAutoUpdate = YES;
     saveData.autoUpdateIntervalSeconds = 1.0;
     
-    NSError *error = nil;
-    [_coreDataManagerInMemory saveContext:&error];
+    [saveData saveWithCompletion:nil error:^{
+        XCTFail(@"Save error");
+    }];
+    
+    NSUInteger slotNumber = 1;
     
     SaveData *newSaveData = [SaveData loadFromSlotNumber:slotNumber];
     
@@ -80,6 +85,9 @@
     XCTAssertEqual(slotNumber, newSaveData.slotNumber, @"Equal slotNumber");
     XCTAssertEqualObjects(currencyPair, newSaveData.currencyPair, @"Equal CurrencyPair");
     XCTAssertEqualObjects(timeFrame, newSaveData.timeFrame, @"Equal TimeFrame");
+    
+    XCTAssertEqualObjects(currencyPair, newSaveData.spread.currencyPair, @"Equal Spread CurrencyPair");
+    XCTAssertEqualObjects(accountCurrency, newSaveData.startBalance.currency, @"Equal StartBalance Currency");
     
     XCTAssertNotNil(newSaveData.mainChart, @"MainChart not nil");
     XCTAssertEqualObjects(currencyPair, newSaveData.mainChart.currencyPair, @"Equal CurrencyPair");
