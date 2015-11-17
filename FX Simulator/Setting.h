@@ -11,7 +11,9 @@
 @class CurrencyPair;
 @class FXSTimeRange;
 @class PositionSize;
+@class Money;
 @class Rate;
+@class Spread;
 @class Time;
 @class TimeFrame;
 @class TimeFrameChunk;
@@ -54,6 +56,14 @@
 + (PositionSize *)defaultPositionSizeOfLot;
 
 + (PositionSize *)maxTradePositionSize;
+
++ (Spread *)maxSpread;
+
++ (Spread *)minSpread;
+
++ (Money *)maxStartBalance;
+
++ (Money *)minStartBalance;
 
 /**
  1pipが何レートか。例 USD/JPY 1pip = 0.01円
