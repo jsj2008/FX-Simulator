@@ -415,7 +415,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DTy-GM-QKq" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="1sv-oO-b0B" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="-2535" y="-798"/>
+            <point key="canvasLocation" x="-2652" y="-780"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="fJg-Li-D4O">
@@ -2423,8 +2423,8 @@
         <image name="portfolio.png" width="26" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="RE3-KE-3V3"/>
-        <segue reference="YaG-8t-d78"/>
         <segue reference="DFi-Ei-HMv"/>
+        <segue reference="KCm-Pj-Kat"/>
+        <segue reference="YaG-8t-d78"/>
     </inferredMetricsTieBreakers>
 </document>

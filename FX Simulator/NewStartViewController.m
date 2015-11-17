@@ -20,6 +20,7 @@
 #import "Spread.h"
 #import "TimeFrame.h"
 #import "SaveData.h"
+#import "SaveDataForm.h"
 #import "SimulationManager.h"
 
 @implementation NewStartViewController {
@@ -48,13 +49,14 @@
     if ([segue.identifier isEqualToString:@"SetSaveDataTableViewControllerSegue"]) {
         NSArray *viewControllers = ((UINavigationController *)segue.destinationViewController).viewControllers;
         SetSaveDataTableViewController *rootViewController = viewControllers.firstObject;
-        rootViewController.currencyPair = _saveData.currencyPair;
-        rootViewController.timeFrame = _saveData.timeFrame;
-        rootViewController.startTime = _saveData.startTime;
-        rootViewController.accountCurrency = _saveData.accountCurrency;
-        rootViewController.spread = _saveData.spread;
-        rootViewController.startBalance = _saveData.startBalance;
-        rootViewController.positionSizeOfLot = _saveData.positionSizeOfLot;
+        SaveDataForm *saveDataForm = rootViewController.saveDataForm;
+        saveDataForm.currencyPair = _saveData.currencyPair;
+        saveDataForm.timeFrame = _saveData.timeFrame;
+        saveDataForm.startTime = _saveData.startTime;
+        saveDataForm.accountCurrency = _saveData.accountCurrency;
+        saveDataForm.spread = _saveData.spread;
+        saveDataForm.startBalance = _saveData.startBalance;
+        saveDataForm.positionSizeOfLot = _saveData.positionSizeOfLot;
     }
 }
 
@@ -70,14 +72,16 @@
 
 - (IBAction)unwindFromDoneButton:(UIStoryboardSegue *)segue
 {
+    [_saveData delete];
+    
     SetSaveDataTableViewController *controller = segue.sourceViewController;
-        
-    SaveData *newSave = [SaveData createNewSaveDataFromMaterial:controller];
-    [newSave saveWithCompletion:^{
-        [_saveData delete];
-        [_simulationManager loadSaveData:newSave];
+    
+    SaveData *newSaveData = [controller.saveDataForm createSaveData];
+    
+    [newSaveData saveWithCompletion:^{
+        [_simulationManager startSimulationForSaveData:newSaveData];
     } error:^{
-        [newSave delete];
+        [newSaveData delete];
     }];
 }
 

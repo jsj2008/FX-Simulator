@@ -34,6 +34,7 @@ static float FXSDefaultAutoUpdateIntervalSeconds = 1.0;
 
 @interface SaveData ()
 @property (nonatomic) NSUInteger slotNumber;
+@property (nonatomic) BOOL isNew;
 @end
 
 @implementation SaveData {
@@ -49,31 +50,67 @@ static float FXSDefaultAutoUpdateIntervalSeconds = 1.0;
     return [CoreDataManager sharedManager];
 }
 
-+ (instancetype)createNewSaveDataFromSlotNumber:(NSUInteger)slotNumber currencyPair:(CurrencyPair *)currencyPair timeFrame:(TimeFrame *)timeFrame
+// CoreDataのinsertNewObjectの前に取得する。
++ (NSUInteger)newSlotNumber
+{
+    NSManagedObjectContext *context = [self coreDataManager].managedObjectContext;
+    
+    NSFetchRequest *fetchRequest = [NSFetchRequest new];
+    NSEntityDescription *entityDescription = [NSEntityDescription entityForName:NSStringFromClass([SaveDataSource class]) inManagedObjectContext:context];
+    [fetchRequest setEntity:entityDescription];
+    
+    NSError *error2;
+    NSArray *objects = [context executeFetchRequest:fetchRequest error:&error2];
+    
+    NSUInteger newSlotNumber;
+    
+    if (objects.count == 0) {
+        newSlotNumber = 1;
+    } else {
+        newSlotNumber = [[objects valueForKeyPath:@"@max.slotNumber"] unsignedIntegerValue] + 1;
+    }
+    
+    return newSlotNumber;
+}
+
++ (instancetype)createNewSaveDataFromCurrencyPair:(CurrencyPair *)currencyPair timeFrame:(TimeFrame *)timeFrame
 {
     if (!currencyPair || !timeFrame) {
         return nil;
     }
     
+    NSUInteger slotNumber = [[self class] newSlotNumber];
+    
     SaveDataSource *source = [NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass([SaveDataSource class]) inManagedObjectContext:[self coreDataManager].managedObjectContext];
     
-    SaveData *saveData = [[SaveData alloc] initWithSaveDataSource:source];
+    SaveData *saveData = [[SaveData alloc] initWithSaveDataSource:source isNew:YES];
     
     saveData.slotNumber = slotNumber;
     saveData.currencyPair = currencyPair;
     saveData.timeFrame = timeFrame;
     
-    [saveData setDefaultCharts];
-    
     return saveData;
 }
 
-+ (instancetype)createDefaultNewSaveDataFromSlotNumber:(NSUInteger)slotNumber
++ (instancetype)createNewSaveData
+{
+    NSUInteger slotNumber = [[self class] newSlotNumber];
+    
+    SaveDataSource *source = [NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass([SaveDataSource class]) inManagedObjectContext:[self coreDataManager].managedObjectContext];
+    
+    SaveData *saveData = [[SaveData alloc] initWithSaveDataSource:source isNew:YES];
+    
+    saveData.slotNumber = slotNumber;
+   
+    return saveData;
+}
+
++ (instancetype)createDefaultNewSaveData
 {
     CurrencyPair *currencyPair = [[CurrencyPair alloc] initWithBaseCurrency:[[Currency alloc] initWithCurrencyType:USD] QuoteCurrency:[[Currency alloc] initWithCurrencyType:JPY]];
     TimeFrame *timeFrame = [[TimeFrame alloc] initWithMinute:15];
     
-    SaveData *saveData = [self createNewSaveDataFromSlotNumber:slotNumber currencyPair:currencyPair timeFrame:timeFrame];
+    SaveData *saveData = [self createNewSaveDataFromCurrencyPair:currencyPair timeFrame:timeFrame];
     
     saveData.startTime = [Setting rangeForSimulation].start;
     saveData.lastLoadedTime = saveData.startTime;
@@ -95,7 +132,8 @@ static float FXSDefaultAutoUpdateIntervalSeconds = 1.0;
         return nil;
     }
     
-    SaveData *newSave = [SaveData createNewSaveDataFromSlotNumber:material.slotNumber currencyPair:material.currencyPair timeFrame:material.timeFrame];
+    SaveData *newSave = [SaveData createNewSaveDataFromCurrencyPair:material.currencyPair timeFrame:material.timeFrame];
+    
     newSave.startTime = material.startTime;
     newSave.spread = [[Spread alloc] initWithPips:material.spread.spreadValue currencyPair:material.currencyPair];
     newSave.accountCurrency = material.accountCurrency;
@@ -132,13 +170,9 @@ static float FXSDefaultAutoUpdateIntervalSeconds = 1.0;
     NSError *error2;
     NSArray *objects = [context executeFetchRequest:fetchRequest error:&error2];
     
-    SaveDataSource *source = nil;
+    SaveDataSource *source = objects.firstObject;
     
-    for (SaveDataSource *obj in objects) {
-        source = obj;
-    }
-    
-    return [[self alloc] initWithSaveDataSource:source];
+    return [[self alloc] initWithSaveDataSource:source isNew:NO];
 }
 
 - (instancetype)init
@@ -146,14 +180,15 @@ static float FXSDefaultAutoUpdateIntervalSeconds = 1.0;
     return nil;
 }
 
-- (instancetype)initWithSaveDataSource:(SaveDataSource *)source
+- (instancetype)initWithSaveDataSource:(SaveDataSource *)source isNew:(BOOL)isNew;
 {
-    if (source == nil) {
+    if (!source) {
         return nil;
     }
     
     if (self = [super init]) {
         _saveDataSource = source;
+        _isNew = isNew;
     }
     
     return self;
@@ -161,7 +196,7 @@ static float FXSDefaultAutoUpdateIntervalSeconds = 1.0;
 
 - (void)setDefaultCharts
 {
-    if (self.currencyPair == nil || self.timeFrame == nil) {
+    if (!self.currencyPair || !self.timeFrame) {
         return;
     }
     
@@ -196,8 +231,28 @@ static float FXSDefaultAutoUpdateIntervalSeconds = 1.0;
     [self.executionOrders delete];
 }
 
+- (BOOL)validate
+{
+    if (self.slotNumber != 0 && self.currencyPair && self.timeFrame && self.startTime && self.spread && self.accountCurrency && self.startBalance && self.positionSizeOfLot && !self.spread.currencyPair.isAllCurrencyPair && !self.startBalance.currency.isAllCurrency) {
+        return YES;
+    } else {
+        return NO;
+    }
+}
+
 - (void)saveWithCompletion:(void (^)())completion error:(void (^)())error
 {
+    if (![self validate]) {
+        if (error) {
+            error();
+        }
+        return;
+    }
+    
+    if (self.isNew && !self.mainChart && !self.subChartChunk.existsChart) {
+        [self setDefaultCharts];
+    }
+    
     NSError *saveError = nil;
     
     [[[self class] coreDataManager] saveContext:&saveError];
@@ -207,6 +262,7 @@ static float FXSDefaultAutoUpdateIntervalSeconds = 1.0;
             error();
         }
     } else {
+        self.isNew = NO;
         if (completion) {
             completion();
         }
@@ -249,11 +305,11 @@ static float FXSDefaultAutoUpdateIntervalSeconds = 1.0;
 
 - (void)setCurrencyPair:(CurrencyPair *)currencyPair
 {
-    if (!currencyPair) {
-        return;
-    }
+    super.currencyPair = self.currencyPair;
     
-    NSArray *currencyPairs = @[currencyPair];
+    super.currencyPair = currencyPair;
+    
+    NSArray *currencyPairs = @[super.currencyPair];
     
     _saveDataSource.currencyPairs = currencyPairs;
 }
@@ -265,11 +321,11 @@ static float FXSDefaultAutoUpdateIntervalSeconds = 1.0;
 
 - (void)setTimeFrame:(TimeFrame *)timeFrame
 {
-    if (!timeFrame) {
-        return;
-    }
+    super.timeFrame = self.timeFrame;
     
-    _saveDataSource.timeFrame = (int)timeFrame.minute;
+    super.timeFrame = timeFrame;
+    
+    _saveDataSource.timeFrame = (int)super.timeFrame.minute;
 }
 
 - (Time *)startTime
@@ -281,11 +337,11 @@ static float FXSDefaultAutoUpdateIntervalSeconds = 1.0;
 
 - (void)setStartTime:(Time *)startTime
 {
-    if (!startTime) {
-        return;
-    }
+    super.startTime = self.startTime;
     
-    _saveDataSource.startTime = startTime.date.timeIntervalSince1970;
+    super.startTime = startTime;
+    
+    _saveDataSource.startTime = super.startTime.date.timeIntervalSince1970;
 }
 
 - (Spread *)spread
@@ -295,11 +351,11 @@ static float FXSDefaultAutoUpdateIntervalSeconds = 1.0;
 
 - (void)setSpread:(Spread *)spread
 {
-    if (!spread) {
-        return;
-    }
+    super.spread = self.spread;
     
-    NSArray *spreads = @[spread];
+    super.spread = spread;
+    
+    NSArray *spreads = @[super.spread];
     
     _saveDataSource.spreads = spreads;
 }
@@ -327,11 +383,11 @@ static float FXSDefaultAutoUpdateIntervalSeconds = 1.0;
 
 - (void)setAccountCurrency:(Currency *)accountCurrency
 {
-    if (!accountCurrency) {
-        return;
-    }
+    super.accountCurrency = self.accountCurrency;
     
-    _saveDataSource.accountCurrency = accountCurrency;
+    super.accountCurrency = accountCurrency;
+    
+    _saveDataSource.accountCurrency = super.accountCurrency;
 }
 
 - (PositionSize *)positionSizeOfLot
@@ -341,11 +397,11 @@ static float FXSDefaultAutoUpdateIntervalSeconds = 1.0;
 
 - (void)setPositionSizeOfLot:(PositionSize *)positionSizeOfLot
 {
-    if (!positionSizeOfLot) {
-        return;
-    }
+    super.positionSizeOfLot = self.positionSizeOfLot;
     
-    _saveDataSource.positionSizeOfLot = (int)positionSizeOfLot.sizeValue;
+    super.positionSizeOfLot = positionSizeOfLot;
+    
+    _saveDataSource.positionSizeOfLot = (int)super.positionSizeOfLot.sizeValue;
 }
 
 - (PositionSize *)tradePositionSize
@@ -383,11 +439,11 @@ static float FXSDefaultAutoUpdateIntervalSeconds = 1.0;
 
 - (void)setStartBalance:(Money *)startBalance
 {
-    if (!startBalance) {
-        return;
-    }
+    super.startBalance = self.startBalance;
     
-    _saveDataSource.startBalance = startBalance;
+    super.startBalance = startBalance;
+    
+    _saveDataSource.startBalance = super.startBalance;
 }
 
 - (BOOL)isAutoUpdate

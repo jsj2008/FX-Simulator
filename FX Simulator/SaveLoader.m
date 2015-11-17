@@ -10,34 +10,33 @@
 
 #import "SaveData.h"
 
+static NSString* const FXSLastLoadedSaveDataSlotNumberKey = @"LastLoadedSaveDataSlotNumber";
+
 @implementation SaveLoader
 
-static SaveData *sharedSaveData;
-static NSUInteger FXSDefaultSlotNumber = 1;
-
-+ (SaveData *)load
++ (SaveData *)loadDefaultSaveData
 {
-    @synchronized(self) {
-        if (sharedSaveData == nil) {
-            
-            sharedSaveData = [SaveData loadFromSlotNumber:FXSDefaultSlotNumber];
-            
-            if (sharedSaveData == nil) {
-                sharedSaveData = [SaveData createDefaultNewSaveDataFromSlotNumber:FXSDefaultSlotNumber];
-            }
-        }
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    
+    NSUInteger saveSlot = [userDefaults integerForKey:FXSLastLoadedSaveDataSlotNumberKey];
+    
+    SaveData *saveData;
+    
+    if (saveSlot == 0) {
+        saveData = [SaveData createDefaultNewSaveData];
+        [saveData saveWithCompletion:nil error:nil];
+    } else {
+        saveData = [SaveData loadFromSlotNumber:saveSlot];
     }
     
-    return sharedSaveData;
+    return saveData;
 }
 
-+ (void)reloadSaveData
++ (void)setLastLoadedSaveDataSlotNumber:(NSUInteger)slotNumber
 {
-    @synchronized(self) {
-        if (sharedSaveData != nil) {
-            sharedSaveData = nil;
-        }
-    }
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    
+    [userDefaults setInteger:slotNumber forKey:FXSLastLoadedSaveDataSlotNumberKey];
 }
 
 @end

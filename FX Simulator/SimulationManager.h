@@ -51,8 +51,8 @@
 @property (nonatomic, readonly) BOOL isStartTime;
 
 - (void)addDelegate:(id<SimulationManagerDelegate>)delegate;
-- (void)loadSaveData:(SaveData *)saveData;
 - (void)startSimulation;
+- (void)startSimulationForSaveData:(SaveData *)saveData;
 
 /**
  Startした瞬間、時間が進み、Observerのメソッドが呼ばれ、それぞれのObserverに値がセットされる。

@@ -7,23 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "SaveData.h"
 
-@class Currency;
-@class CurrencyPair;
-@class Money;
-@class PositionSize;
-@class Spread;
-@class Time;
-@class TimeFrame;
+@class SaveDataForm;
 
-@interface SetSaveDataTableViewController : UITableViewController <NewSaveDataMaterial>
-@property (nonatomic, readonly) NSUInteger slotNumber;
-@property (nonatomic) CurrencyPair *currencyPair;
-@property (nonatomic) Time *startTime;
-@property (nonatomic) TimeFrame *timeFrame;
-@property (nonatomic) Spread *spread;
-@property (nonatomic) Currency *accountCurrency;
-@property (nonatomic) Money *startBalance;
-@property (nonatomic) PositionSize *positionSizeOfLot;
+@interface SetSaveDataTableViewController : UITableViewController
+@property (nonatomic) SaveDataForm *saveDataForm;
 @end

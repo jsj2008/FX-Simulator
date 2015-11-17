@@ -54,8 +54,12 @@ static SimulationManager *sharedSimulationManager = nil;
 
 - (void)loadSaveData:(SaveData *)saveData
 {
+    if (!saveData) {
+        return;
+    }
+    
     _saveData = saveData;
-    _market = [[Market alloc] initWithCurrencyPair:saveData.currencyPair timeFrame:saveData.timeFrame lastLoadedTime:saveData.lastLoadedTime];
+    _market = [[Market alloc] initWithCurrencyPair:saveData.currencyPair timeFrame:saveData.timeFrame lastLoadedTime:saveData.lastLoadedTime spread:saveData.spread];
     _orderManager = [OrderManager createOrderManagerFromOpenPositions:saveData.openPositions];
     [_orderManager addDelegate:_saveData.account];
     [_orderManager addState:self];
@@ -80,6 +84,8 @@ static SimulationManager *sharedSimulationManager = nil;
             [delegate saveDataDidLoad];
         }
     }
+    
+    [SaveLoader setLastLoadedSaveDataSlotNumber:saveData.slotNumber];
 }
 
 - (void)startSimulation
@@ -89,7 +95,13 @@ static SimulationManager *sharedSimulationManager = nil;
             [delegate loadSimulationManager:self];
         }
     }
-    [self loadSaveData:[SaveLoader load]];
+        
+    [self loadSaveData:[SaveLoader loadDefaultSaveData]];
+}
+
+- (void)startSimulationForSaveData:(SaveData *)saveData
+{
+    [self loadSaveData:saveData];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
@@ -178,7 +190,7 @@ static SimulationManager *sharedSimulationManager = nil;
     SimulationStateResult *result = [_simulationState isStop];
     
     if (result.isStop) {
-        return [[OrderResult alloc] initWithIsSuccess:NO title:@"Simulation Stop" message:nil];
+        return [[OrderResult alloc] initWithIsSuccess:NO title:result.title message:nil];
     } else {
         return [[OrderResult alloc] initWithIsSuccess:YES title:nil message:nil];
     }

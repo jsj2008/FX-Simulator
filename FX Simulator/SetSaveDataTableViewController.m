@@ -14,6 +14,8 @@
 #import "InputNumberValueViewController.h"
 #import "Money.h"
 #import "PositionSize.h"
+#import "SaveData.h"
+#import "SaveDataForm.h"
 #import "SetStartTimeViewController.h"
 #import "Setting.h"
 #import "Spread.h"
@@ -36,7 +38,7 @@
 - (instancetype)initWithCoder:(NSCoder *)aDecoder
 {
     if (self = [super initWithCoder:aDecoder]) {
-        _slotNumber = 1;
+        _saveDataForm = [SaveDataForm new];
     }
     
     return self;
@@ -54,10 +56,10 @@
         controller.title = @"Currency Pair";
         controller.dataList = currencyPairList;
         controller.dataStringValueList = currencyPairStringValueList;
-        controller.defaultData = self.currencyPair;
+        controller.defaultData = self.saveDataForm.currencyPair;
         controller.setData = ^(id selectData){
             if ([selectData isMemberOfClass:[CurrencyPair class]]) {
-                self.currencyPair = selectData;
+                self.saveDataForm.currencyPair = selectData;
             }
         };
     } else if ([segue.identifier isEqualToString:@"SetTimeFrameSegue"]) {
@@ -74,10 +76,10 @@
         controller.title = @"Time Frame";
         controller.dataList = timeFrameList;
         controller.dataStringValueList = timeFrameStringValueList;
-        controller.defaultData = self.timeFrame;
+        controller.defaultData = self.saveDataForm.timeFrame;
         controller.setData = ^(id selectData){
             if ([selectData isMemberOfClass:[TimeFrame class]]) {
-                self.timeFrame = selectData;
+                self.saveDataForm.timeFrame = selectData;
             }
         };
     } else if ([segue.identifier isEqualToString:@"SetAccountCurrencySegue"]) {
@@ -90,29 +92,25 @@
         controller.title = @"Account Currency";
         controller.dataList = accountCurrencyList;
         controller.dataStringValueList = accountCurrencyStringValueList;
-        controller.defaultData = self.accountCurrency;
+        controller.defaultData = self.saveDataForm.accountCurrency;
         controller.setData = ^(id selectData){
             if ([selectData isMemberOfClass:[Currency class]]) {
-                self.accountCurrency = selectData;
+                self.saveDataForm.accountCurrency = selectData;
             }
         };
     } else if ([segue.identifier isEqualToString:@"SetSpreadSegue"]) {
         InputNumberValueViewController *controller = segue.destinationViewController;
         controller.title = @"Spread";
-        controller.defaultNumberValue = self.spread.spreadValueObj;
-        controller.minNumberValue = @0.1;
-        controller.maxNumberValue = @999;
+        controller.defaultNumberValue = self.saveDataForm.spread.spreadValueObj;
         controller.setInputNumberValue = ^(NSNumber *inputNumberValue){
-            self.spread = [[Spread alloc] initWithNumber:inputNumberValue currencyPair:nil];
+            self.saveDataForm.spread = [[Spread alloc] initWithNumber:inputNumberValue currencyPair:[CurrencyPair allCurrencyPair]];
         };
     } else if ([segue.identifier isEqualToString:@"SetStartBalanceSegue"]) {
         InputNumberValueViewController *controller = segue.destinationViewController;
         controller.title = @"Start Balance";
-        controller.defaultNumberValue = self.startBalance.toMoneyValueObj;
-        controller.minNumberValue = @1;
-        controller.maxNumberValue = @999999999999;
+        controller.defaultNumberValue = self.saveDataForm.startBalance.toMoneyValueObj;
         controller.setInputNumberValue = ^(NSNumber *inputNumberValue){
-                self.startBalance = [[Money alloc] initWithNumber:inputNumberValue currency:nil];
+                self.saveDataForm.startBalance = [[Money alloc] initWithNumber:inputNumberValue currency:[Currency allCurrency]];
         };
     } else if ([segue.identifier isEqualToString:@"SetPositionSizeOfLotSegue"]) {
         CheckmarkViewController *controller = segue.destinationViewController;
@@ -124,18 +122,18 @@
         controller.title = @"Position Size Of Lot";
         controller.dataList = positionSizeOfLotList;
         controller.dataStringValueList = PositionSizeOfLotStringValueList;
-        controller.defaultData = self.positionSizeOfLot;
+        controller.defaultData = self.saveDataForm.positionSizeOfLot;
         controller.setData = ^(id selectData){
             if ([selectData isMemberOfClass:[PositionSize class]]) {
-                self.positionSizeOfLot = selectData;
+                self.saveDataForm.positionSizeOfLot = selectData;
             }
         };
     } else if ([segue.identifier isEqualToString:@"SetStartTimeSegue"]) {
         SetStartTimeViewController *controller = segue.destinationViewController;
         controller.title = @"Start Time";
-        controller.defaultStartTime = self.startTime;
+        controller.defaultStartTime = self.saveDataForm.startTime;
         controller.setStartTime = ^(Time *startTime){
-            self.startTime = startTime;
+            self.saveDataForm.startTime = startTime;
         };
     }
 }
@@ -154,13 +152,13 @@
 {
     [super viewWillAppear:animated];
     
-    [self.setCurrencyPairButton setTitle:[self.currencyPair toDisplayString] forState:self.setCurrencyPairButton.state];
-    [self.setTimeScaleButton setTitle:[self.timeFrame toDisplayString] forState:self.setTimeScaleButton.state];
-    [self.setStartTimeButton setTitle:[self.startTime toDisplayYMDString] forState:self.setStartTimeButton.state];
-    [self.setSpreadButton setTitle:[self.spread toDisplayString] forState:self.setSpreadButton.state];
-    [self.setAccountCurrencyButton setTitle:[self.accountCurrency toDisplayString] forState:self.setAccountCurrencyButton.state];
-    [self.setStartBalanceButton setTitle:[self.startBalance toDisplayString] forState:self.setStartBalanceButton.state];
-    [self.setPositionSizeOfLotButton setTitle:[self.positionSizeOfLot toDisplayString] forState:self.setPositionSizeOfLotButton.state];
+    [self.setCurrencyPairButton setTitle:[self.saveDataForm.currencyPair toDisplayString] forState:self.setCurrencyPairButton.state];
+    [self.setTimeScaleButton setTitle:[self.saveDataForm.timeFrame toDisplayString] forState:self.setTimeScaleButton.state];
+    [self.setStartTimeButton setTitle:[self.saveDataForm.startTime toDisplayYMDString] forState:self.setStartTimeButton.state];
+    [self.setSpreadButton setTitle:[self.saveDataForm.spread toDisplayString] forState:self.setSpreadButton.state];
+    [self.setAccountCurrencyButton setTitle:[self.saveDataForm.accountCurrency toDisplayString] forState:self.setAccountCurrencyButton.state];
+    [self.setStartBalanceButton setTitle:[self.saveDataForm.startBalance toDisplayString] forState:self.setStartBalanceButton.state];
+    [self.setPositionSizeOfLotButton setTitle:[self.saveDataForm.positionSizeOfLot toDisplayString] forState:self.setPositionSizeOfLotButton.state];
 }
 
 - (void)didReceiveMemoryWarning {
