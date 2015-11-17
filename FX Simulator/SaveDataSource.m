@@ -2,7 +2,7 @@
 //  SaveDataSource.m
 //  FXSimulator
 //
-//  Created by yuu on 2015/09/16.
+//  Created by yuu on 2015/11/17.
 //
 //
 
@@ -17,6 +17,7 @@
 @dynamic currencyPairs;
 @dynamic isAutoUpdate;
 @dynamic lastLoadedTime;
+@dynamic maxLeverage;
 @dynamic positionSizeOfLot;
 @dynamic slotNumber;
 @dynamic spreads;
@@ -25,7 +26,7 @@
 @dynamic stopOutLevel;
 @dynamic timeFrame;
 @dynamic tradePositionSize;
-@dynamic maxLeverage;
+@dynamic createdAt;
 @dynamic mainChartSources;
 @dynamic subChartSources;
 
