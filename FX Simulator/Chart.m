@@ -67,6 +67,10 @@
 
 - (instancetype)initWithChartSource:(ChartSource *)source
 {
+    if (!source) {
+        return nil;
+    }
+    
     if (self = [super init]) {
         _chartSource = source;
         _entityChartView = [EntityChart entityChartView];
