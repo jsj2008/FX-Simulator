@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7549" systemVersion="14D136" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7549" systemVersion="14F1021" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="CandleSource" representedClassName="CandleSource" parentEntity="IndicatorSource" syncable="YES">
         <attribute name="downColor" attributeType="Transformable" syncable="YES"/>
         <attribute name="downLineColor" attributeType="Transformable" syncable="YES"/>
@@ -24,6 +24,7 @@
     <entity name="SaveDataSource" representedClassName="SaveDataSource" syncable="YES">
         <attribute name="accountCurrency" attributeType="Transformable" syncable="YES"/>
         <attribute name="autoUpdateIntervalSeconds" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="createdAt" attributeType="Date" syncable="YES"/>
         <attribute name="currencyPairs" attributeType="Transformable" syncable="YES"/>
         <attribute name="isAutoUpdate" attributeType="Boolean" syncable="YES"/>
         <attribute name="lastLoadedTime" attributeType="Date" syncable="YES"/>
@@ -48,7 +49,7 @@
         <element name="CandleSource" positionX="0" positionY="0" width="128" height="120"/>
         <element name="ChartSource" positionX="0" positionY="0" width="128" height="180"/>
         <element name="IndicatorSource" positionX="0" positionY="0" width="128" height="60"/>
-        <element name="SaveDataSource" positionX="0" positionY="0" width="128" height="285"/>
+        <element name="SaveDataSource" positionX="0" positionY="0" width="128" height="300"/>
         <element name="SimpleMovingAverageSource" positionX="0" positionY="0" width="128" height="90"/>
     </elements>
 </model>
