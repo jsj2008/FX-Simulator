@@ -9,6 +9,7 @@
 #import "Spread.h"
 
 #import "CurrencyPair.h"
+#import "FXSComparisonResult.h"
 #import "Rate.h"
 #import "Setting.h"
 
@@ -47,6 +48,15 @@ static NSString* const FXSCurrencyPairKey = @"currencyPair";
 -(instancetype)initWithString:(NSString *)string currencyPair:(CurrencyPair *)currencyPair
 {
     return [self initWithPips:string.doubleValue currencyPair:currencyPair];
+}
+
+- (FXSComparisonResult *)compareSpread:(Spread *)spread
+{
+    if (![self.currencyPair isEqualCurrencyPair:spread.currencyPair]) {
+        return nil;
+    }
+    
+    return [[FXSComparisonResult alloc] initWithComparisonResult:[self.spreadValueObj compare:spread.spreadValueObj]];
 }
 
 - (NSNumber *)spreadValueObj

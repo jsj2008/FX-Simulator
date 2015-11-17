@@ -32,6 +32,9 @@
 		705DCE4C1AE7CE9800BCF710 /* RatePanelButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 70AD14751AADD0AA0099F0BA /* RatePanelButton.m */; };
 		7062E5BB1B60BB0100BDA666 /* CoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7062E5BA1B60BB0100BDA666 /* CoreDataManager.m */; };
 		70634FE71BA91EF9009ACCEE /* InputNumberValueViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70634FE61BA91EF9009ACCEE /* InputNumberValueViewController.m */; };
+		706D09BE1BF7141300B3BBF7 /* SaveDataBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 706D09BD1BF7141300B3BBF7 /* SaveDataBase.m */; };
+		706D09C71BF714BC00B3BBF7 /* SaveDataForm.m in Sources */ = {isa = PBXBuildFile; fileRef = 706D09C61BF714BC00B3BBF7 /* SaveDataForm.m */; };
+		706D09CA1BF75BB200B3BBF7 /* FXSComparisonResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 706D09C91BF75BB200B3BBF7 /* FXSComparisonResult.m */; };
 		7076F5A71AECCBBB004CC6BA /* NewStartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7076F5A61AECCBBB004CC6BA /* NewStartViewController.m */; };
 		7076F5AA1AECCDB7004CC6BA /* CheckmarkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7076F5A91AECCDB7004CC6BA /* CheckmarkViewController.m */; };
 		7076F5AB1AECCEB3004CC6BA /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FC031A9F58D100CAB509 /* MainViewController.m */; };
@@ -204,6 +207,12 @@
 		7062E5BA1B60BB0100BDA666 /* CoreDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataManager.m; sourceTree = "<group>"; };
 		70634FE51BA91EF9009ACCEE /* InputNumberValueViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputNumberValueViewController.h; sourceTree = "<group>"; };
 		70634FE61BA91EF9009ACCEE /* InputNumberValueViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InputNumberValueViewController.m; sourceTree = "<group>"; };
+		706D09BC1BF7141300B3BBF7 /* SaveDataBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SaveDataBase.h; sourceTree = "<group>"; };
+		706D09BD1BF7141300B3BBF7 /* SaveDataBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SaveDataBase.m; sourceTree = "<group>"; };
+		706D09C51BF714BC00B3BBF7 /* SaveDataForm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SaveDataForm.h; sourceTree = "<group>"; };
+		706D09C61BF714BC00B3BBF7 /* SaveDataForm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SaveDataForm.m; sourceTree = "<group>"; };
+		706D09C81BF75BB200B3BBF7 /* FXSComparisonResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FXSComparisonResult.h; sourceTree = "<group>"; };
+		706D09C91BF75BB200B3BBF7 /* FXSComparisonResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FXSComparisonResult.m; sourceTree = "<group>"; };
 		7076F5A51AECCBBB004CC6BA /* NewStartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewStartViewController.h; sourceTree = "<group>"; };
 		7076F5A61AECCBBB004CC6BA /* NewStartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewStartViewController.m; sourceTree = "<group>"; };
 		7076F5A81AECCDB7004CC6BA /* CheckmarkViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckmarkViewController.h; sourceTree = "<group>"; };
@@ -609,6 +618,12 @@
 				702A84F21BDB5A4F00CA6102 /* CoordinateRange.m */,
 				702A84F41BDB5F7B00CA6102 /* Coordinate.h */,
 				702A84F51BDB5F7B00CA6102 /* Coordinate.m */,
+				706D09BC1BF7141300B3BBF7 /* SaveDataBase.h */,
+				706D09BD1BF7141300B3BBF7 /* SaveDataBase.m */,
+				706D09C51BF714BC00B3BBF7 /* SaveDataForm.h */,
+				706D09C61BF714BC00B3BBF7 /* SaveDataForm.m */,
+				706D09C81BF75BB200B3BBF7 /* FXSComparisonResult.h */,
+				706D09C91BF75BB200B3BBF7 /* FXSComparisonResult.m */,
 			);
 			path = "FX Simulator";
 			sourceTree = "<group>";
@@ -983,6 +998,7 @@
 			files = (
 				7002F4A21B48D77000AF9DA7 /* Candle.m in Sources */,
 				70D2FB9D1A9F57A000CAB509 /* ForexDatabase.m in Sources */,
+				706D09C71BF714BC00B3BBF7 /* SaveDataForm.m in Sources */,
 				70D2FBC71A9F57BD00CAB509 /* OpenPositionRawRecord.m in Sources */,
 				70D2FB491A9F574000CAB509 /* ChartViewController.m in Sources */,
 				70634FE71BA91EF9009ACCEE /* InputNumberValueViewController.m in Sources */,
@@ -1051,6 +1067,7 @@
 				70D2FC451A9F591600CAB509 /* Rate.m in Sources */,
 				70FCD5B01B9D46E300500B40 /* OrderManagerState.m in Sources */,
 				70D2FAF31A9F56AE00CAB509 /* FMDatabasePool.m in Sources */,
+				706D09BE1BF7141300B3BBF7 /* SaveDataBase.m in Sources */,
 				70EACE661B296F1100A2E532 /* SimulationState.m in Sources */,
 				70D2FBAF1A9F57B000CAB509 /* Order.m in Sources */,
 				70D2FB9C1A9F57A000CAB509 /* ForexHistory.m in Sources */,
@@ -1061,6 +1078,7 @@
 				70042C641B47ABBC00C1A22E /* SimpleMovingAverage.m in Sources */,
 				70D2FC4B1A9F591600CAB509 /* Common.m in Sources */,
 				70FCD5B31B9EB40300500B40 /* OpenPositionComponents.m in Sources */,
+				706D09CA1BF75BB200B3BBF7 /* FXSComparisonResult.m in Sources */,
 				702A84F31BDB5A4F00CA6102 /* CoordinateRange.m in Sources */,
 				70FCD5AA1B9B1B9900500B40 /* OrderResult.m in Sources */,
 				70D2FBFD1A9F57DC00CAB509 /* ExecutionOrder.m in Sources */,

@@ -11,6 +11,7 @@
 #import "Currency.h"
 #import "CurrencyConverter.h"
 #import "CurrencyPair.h"
+#import "FXSComparisonResult.h"
 #import "NSNumber+FXSNumberConverter.h"
 #import "Rate.h"
 #import "Setting.h"
@@ -36,9 +37,12 @@ static NSString* const FXSCurrencyKey = @"currency";
     return nil;
 }
 
-// NewStartの新しいSaveData作成のところでは、currencyにnil入れている。
 - (instancetype )initWithAmount:(amount_t)amount currency:(Currency *)currency
 {
+    if (!currency) {
+        return nil;
+    }
+    
     if (self = [super init]){
         _amount = amount;
         _currency = currency;
@@ -70,6 +74,15 @@ static NSString* const FXSCurrencyKey = @"currency";
         DLog(@"different currency");
         return self;
     }
+}
+
+- (FXSComparisonResult *)compareMoney:(Money *)money
+{
+    if (![self.currency isEqualCurrency:money.currency]) {
+        return nil;
+    }
+    
+    return [[FXSComparisonResult alloc] initWithComparisonResult:[self.toMoneyValueObj compare:money.toMoneyValueObj]];
 }
 
 - (Money *)convertToCurrency:(Currency *)currency
