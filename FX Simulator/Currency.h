@@ -13,13 +13,16 @@ typedef NS_ENUM(NSInteger, CurrencyType) {
     JPY,
     EUR,
     GBP,
-    AUD
+    AUD,
+    ALL
 };
 
 @interface Currency : NSObject <NSCoding>
 @property (nonatomic, readonly) CurrencyType type;
++ (instancetype)allCurrency;
 - (instancetype)initWithCurrencyType:(CurrencyType)currencyType;
 - (instancetype)initWithString:(NSString *)currencyString;
+- (BOOL)isAllCurrency;
 - (BOOL)isEqualCurrency:(Currency *)currency;
 - (NSString *)toCodeString;
 - (NSString *)toDisplayString;
