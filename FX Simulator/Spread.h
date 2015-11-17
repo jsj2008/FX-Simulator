@@ -10,6 +10,7 @@
 #import "Common.h"
 
 @class CurrencyPair;
+@class FXSComparisonResult;
 @class Rate;
 
 @interface Spread : NSObject <NSCoding>
@@ -23,6 +24,9 @@
 - (instancetype)initWithNumber:(NSNumber *)number currencyPair:(CurrencyPair *)currencyPair;
 
 - (instancetype)initWithString:(NSString *)string currencyPair:(CurrencyPair *)currencyPair;
+
+- (FXSComparisonResult *)compareSpread:(Spread *)spread;
+
 /**
  スプレッド(Pips)をレートに変換する。例 ドル円 1pip => 0.01円
 */
