@@ -16,6 +16,11 @@ static NSString* const FXSQuoteCurrencyKey = @"quoteCurrency";
 
 @implementation CurrencyPair
 
++ (instancetype)allCurrencyPair
+{
+    return [[CurrencyPair alloc] initWithBaseCurrencyType:ALL quoteCurrencyType:ALL];
+}
+
 - (instancetype)initWithCoder:(NSCoder *)aDecoder
 {
     Currency *baseCurrency = [aDecoder decodeObjectForKey:FXSBaseCurrencyKey];
@@ -59,6 +64,15 @@ static NSString* const FXSQuoteCurrencyKey = @"quoteCurrency";
     return currencyPair;
 }
 
+- (BOOL)isAllCurrencyPair
+{
+    if ([self.baseCurrency isAllCurrency] && [self.quoteCurrency isAllCurrency]) {
+        return YES;
+    } else {
+        return NO;
+    }
+}
+
 - (BOOL)isEqual:(id)other {
     if (other == self) {
         return YES;
@@ -82,7 +96,7 @@ static NSString* const FXSQuoteCurrencyKey = @"quoteCurrency";
 
 - (BOOL)isEqualCurrencyPair:(CurrencyPair *)currencyPair
 {
-    if (self.baseCurrency.type == currencyPair.baseCurrency.type && self.quoteCurrency.type == currencyPair.quoteCurrency.type) {
+    if ([self.baseCurrency isEqualCurrency:currencyPair.baseCurrency] && [self.quoteCurrency isEqualCurrency:currencyPair.quoteCurrency]) {
         return YES;
     } else {
         return NO;

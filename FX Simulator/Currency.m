@@ -14,6 +14,11 @@ static NSString* const FXSCurrencyKey = @"currency";
     CurrencyType _currencyType;
 }
 
++ (instancetype)allCurrency
+{
+    return [[Currency alloc] initWithCurrencyType:ALL];
+}
+
 - (instancetype)initWithCoder:(NSCoder *)aDecoder
 {
     return [self initWithString:[aDecoder decodeObjectForKey:FXSCurrencyKey]];
@@ -56,8 +61,21 @@ static NSString* const FXSCurrencyKey = @"currency";
     return NO;
 }
 
+- (BOOL)isAllCurrency
+{
+    if (self.type == ALL) {
+        return YES;
+    } else {
+        return NO;
+    }
+}
+
 - (BOOL)isEqualCurrency:(Currency *)currency
 {
+    if (self.type == ALL || currency.type == ALL) {
+        return YES;
+    }
+    
     if (self.type == currency.type) {
         return YES;
     } else {
@@ -108,6 +126,9 @@ static NSString* const FXSCurrencyKey = @"currency";
             
         case AUD:
             result = @"AUD";
+            break;
+            
+        case ALL:
             break;
     }
     

@@ -23,9 +23,11 @@
  */
 @property (nonatomic, readonly) Currency *quoteCurrency;
 
++ (instancetype)allCurrencyPair;
 - (instancetype)initWithBaseCurrency:(Currency *)baseCurrency QuoteCurrency:(Currency *)quoteCurrency;
 - (instancetype)initWithBaseCurrencyType:(CurrencyType)baseCurrencyType quoteCurrencyType:(CurrencyType)quoteCurrencyType;
 - (instancetype)initWithCurrencyPairString:(NSString *)currencyPairString;
+- (BOOL)isAllCurrencyPair;
 - (BOOL)isQuoteCurrencyEqualJPY;
 - (BOOL)isEqualCurrencyPair:(CurrencyPair *)currencyPair;
 
