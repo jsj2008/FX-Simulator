@@ -9,21 +9,18 @@
 #import "Rates.h"
 
 #import "Rate.h"
-#import "SaveData.h"
-#import "SaveLoader.h"
 
 @implementation Rates
 
--(instancetype)initWithBidRtae:(Rate*)bidRate
+-(instancetype)initWithBidRtae:(Rate *)bidRate spread:(Spread *)spread
 {
-    if (bidRate == nil) {
+    if (!bidRate || !spread) {
         return nil;
     }
     
     if (self = [super init]) {
         _bidRate = bidRate;
-        SaveData *saveData = [SaveLoader load];
-        _askRate = [_bidRate addSpread:saveData.spread];
+        _askRate = [_bidRate addSpread:spread];
     }
     
     return self;

@@ -14,5 +14,5 @@
 @interface Rates : NSObject
 @property (nonatomic, readonly) Rate *bidRate;
 @property (nonatomic, readonly) Rate *askRate;
--(instancetype)initWithBidRtae:(Rate*)bidRate;
+-(instancetype)initWithBidRtae:(Rate *)bidRate spread:(Spread *)spread;
 @end

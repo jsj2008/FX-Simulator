@@ -33,10 +33,11 @@ static NSInteger FXSMaxForexDataStore = 500;
     ForexDataChunkStore *_forexDataChunkStore;
     ForexHistory *_forexHistory;
     ForexHistoryData *_lastData;
+    Spread *_spread;
     TimeFrame *_completionTimeFrame;
 }
 
-- (instancetype)initWithCurrencyPair:(CurrencyPair *)currencyPair timeFrame:(TimeFrame *)timeFrame lastLoadedTime:(Time *)time
+- (instancetype)initWithCurrencyPair:(CurrencyPair *)currencyPair timeFrame:(TimeFrame *)timeFrame lastLoadedTime:(Time *)time spread:(Spread *)spread
 {
     if (self = [super init]) {
         _forexHistory = [ForexHistoryFactory createForexHistoryFromCurrencyPair:currencyPair timeScale:timeFrame];
@@ -44,6 +45,7 @@ static NSInteger FXSMaxForexDataStore = 500;
         _currentForexData = [_forexHistory selectMaxCloseTime:_currentTime limit:1].current;
         _forexDataChunkStore = [[ForexDataChunkStore alloc] initWithCurrencyPair:currencyPair timeScale:timeFrame getMaxLimit:FXSMaxForexDataStore];
         _lastData = [_forexHistory newestData];
+        _spread = spread;
         _completionTimeFrame = [Setting timeFrameList].minTimeFrame;
     }
     
@@ -69,7 +71,7 @@ static NSInteger FXSMaxForexDataStore = 500;
         return nil;
     }
     
-    return [[Rates alloc] initWithBidRtae:currentBidRate];
+    return [[Rates alloc] initWithBidRtae:currentBidRate spread:_spread];
 }
 
 - (Rate *)getCurrentBidRateOfCurrencyPair:(CurrencyPair *)currencyPair
@@ -89,7 +91,7 @@ static NSInteger FXSMaxForexDataStore = 500;
         return nil;
     }
     
-    return [[[Rates alloc] initWithBidRtae:currentBidRate] askRate];
+    return [[[Rates alloc] initWithBidRtae:currentBidRate spread:_spread] askRate];
 }
 
 - (ForexDataChunk *)chunkForCurrencyPair:(CurrencyPair *)currencyPair timeFrame:(TimeFrame *)timeFrame Limit:(NSUInteger)limit

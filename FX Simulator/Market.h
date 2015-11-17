@@ -11,13 +11,14 @@
 @class CurrencyPair;
 @class ForexDataChunk;
 @class ForexHistoryData;
+@class Spread;
 @class Time;
 @class TimeFrame;
 @class Rates;
 
 @interface Market : NSObject
 
-- (instancetype)initWithCurrencyPair:(CurrencyPair *)currencyPair timeFrame:(TimeFrame *)timeFrame lastLoadedTime:(Time *)time;
+- (instancetype)initWithCurrencyPair:(CurrencyPair *)currencyPair timeFrame:(TimeFrame *)timeFrame lastLoadedTime:(Time *)time spread:(Spread *)spread;
 
 - (void)add;
 
