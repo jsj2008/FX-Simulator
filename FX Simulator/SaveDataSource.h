@@ -2,7 +2,7 @@
 //  SaveDataSource.h
 //  FXSimulator
 //
-//  Created by yuu on 2015/11/17.
+//  Created by yuu on 2015/11/18.
 //
 //
 
@@ -15,6 +15,7 @@
 
 @property (nonatomic, retain) id accountCurrency;
 @property (nonatomic) float autoUpdateIntervalSeconds;
+@property (nonatomic) NSTimeInterval createdAt;
 @property (nonatomic, retain) id currencyPairs;
 @property (nonatomic) BOOL isAutoUpdate;
 @property (nonatomic) NSTimeInterval lastLoadedTime;
@@ -27,7 +28,6 @@
 @property (nonatomic) float stopOutLevel;
 @property (nonatomic) int32_t timeFrame;
 @property (nonatomic) int64_t tradePositionSize;
-@property (nonatomic) NSTimeInterval createdAt;
 @property (nonatomic, retain) NSSet *mainChartSources;
 @property (nonatomic, retain) NSSet *subChartSources;
 @end

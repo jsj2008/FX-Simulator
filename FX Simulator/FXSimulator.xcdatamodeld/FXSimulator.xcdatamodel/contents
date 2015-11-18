@@ -1,10 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7549" systemVersion="14F1021" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
-    <entity name="CandleSource" representedClassName="CandleSource" parentEntity="IndicatorSource" syncable="YES">
-        <attribute name="downColor" attributeType="Transformable" syncable="YES"/>
-        <attribute name="downLineColor" attributeType="Transformable" syncable="YES"/>
-        <attribute name="upColor" attributeType="Transformable" syncable="YES"/>
-        <attribute name="upLineColor" attributeType="Transformable" syncable="YES"/>
+    <entity name="BollingerBandsSource" representedClassName="BollingerBandsSource" parentEntity="IndicatorSource" syncable="YES">
+        <attribute name="deviationMultiplier" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="lowerLineColor" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="upperLineColor" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <relationship name="chartSource" maxCount="1" deletionRule="Nullify" destinationEntity="ChartSource" inverseName="bollingerBandsSources" inverseEntity="ChartSource" syncable="YES"/>
+        <relationship name="movingAverageSource" maxCount="1" deletionRule="Cascade" destinationEntity="MovingAverageSource" inverseName="bollingerBandsSource" inverseEntity="MovingAverageSource" syncable="YES"/>
+    </entity>
+    <entity name="CandleBaseSource" representedClassName="CandleBaseSource" isAbstract="YES" parentEntity="IndicatorSource" syncable="YES">
+        <attribute name="downColor" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="downLineColor" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="upColor" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="upLineColor" optional="YES" attributeType="Transformable" syncable="YES"/>
+    </entity>
+    <entity name="CandleSource" representedClassName="CandleSource" parentEntity="CandleBaseSource" syncable="YES">
         <relationship name="chartSource" maxCount="1" deletionRule="Nullify" destinationEntity="ChartSource" inverseName="candleSource" inverseEntity="ChartSource" syncable="YES"/>
     </entity>
     <entity name="ChartSource" representedClassName="ChartSource" syncable="YES">
@@ -13,13 +22,27 @@
         <attribute name="displayDataCount" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="isDisplay" attributeType="Boolean" syncable="YES"/>
         <attribute name="timeFrame" attributeType="Transformable" syncable="YES"/>
+        <relationship name="bollingerBandsSources" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="BollingerBandsSource" inverseName="chartSource" inverseEntity="BollingerBandsSource" syncable="YES"/>
         <relationship name="candleSource" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="CandleSource" inverseName="chartSource" inverseEntity="CandleSource" syncable="YES"/>
+        <relationship name="heikinAshiSources" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="HeikinAshiSource" inverseName="chartSource" inverseEntity="HeikinAshiSource" syncable="YES"/>
+        <relationship name="movingAverageSources" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="MovingAverageSource" inverseName="chartSource" inverseEntity="MovingAverageSource" syncable="YES"/>
         <relationship name="saveDataSourceForMain" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SaveDataSource" inverseName="mainChartSources" inverseEntity="SaveDataSource" syncable="YES"/>
         <relationship name="saveDataSourceForSub" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SaveDataSource" inverseName="subChartSources" inverseEntity="SaveDataSource" syncable="YES"/>
-        <relationship name="simpleMovingAverageSources" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="SimpleMovingAverageSource" inverseName="chartSource" inverseEntity="SimpleMovingAverageSource" syncable="YES"/>
+    </entity>
+    <entity name="HeikinAshiSource" representedClassName="HeikinAshiSource" parentEntity="CandleBaseSource" syncable="YES">
+        <relationship name="chartSource" maxCount="1" deletionRule="Nullify" destinationEntity="ChartSource" inverseName="heikinAshiSources" inverseEntity="ChartSource" syncable="YES"/>
+        <relationship name="movingAverageSource" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="MovingAverageSource" inverseName="heikinAshiSource" inverseEntity="MovingAverageSource" syncable="YES"/>
     </entity>
     <entity name="IndicatorSource" representedClassName="IndicatorSource" isAbstract="YES" syncable="YES">
         <attribute name="displayOrder" attributeType="Integer 32" defaultValueString="-1" syncable="YES"/>
+    </entity>
+    <entity name="MovingAverageSource" representedClassName="MovingAverageSource" parentEntity="IndicatorSource" syncable="YES">
+        <attribute name="lineColor" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="period" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="type" attributeType="Transformable" syncable="YES"/>
+        <relationship name="bollingerBandsSource" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="BollingerBandsSource" inverseName="movingAverageSource" inverseEntity="BollingerBandsSource" syncable="YES"/>
+        <relationship name="chartSource" maxCount="1" deletionRule="Nullify" destinationEntity="ChartSource" inverseName="movingAverageSources" inverseEntity="ChartSource" syncable="YES"/>
+        <relationship name="heikinAshiSource" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="HeikinAshiSource" inverseName="movingAverageSource" inverseEntity="HeikinAshiSource" syncable="YES"/>
     </entity>
     <entity name="SaveDataSource" representedClassName="SaveDataSource" syncable="YES">
         <attribute name="accountCurrency" attributeType="Transformable" syncable="YES"/>
@@ -40,16 +63,14 @@
         <relationship name="mainChartSources" toMany="YES" deletionRule="Cascade" destinationEntity="ChartSource" inverseName="saveDataSourceForMain" inverseEntity="ChartSource" syncable="YES"/>
         <relationship name="subChartSources" toMany="YES" deletionRule="Cascade" destinationEntity="ChartSource" inverseName="saveDataSourceForSub" inverseEntity="ChartSource" syncable="YES"/>
     </entity>
-    <entity name="SimpleMovingAverageSource" representedClassName="SimpleMovingAverageSource" parentEntity="IndicatorSource" syncable="YES">
-        <attribute name="lineColor" attributeType="Transformable" syncable="YES"/>
-        <attribute name="period" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
-        <relationship name="chartSource" maxCount="1" deletionRule="Nullify" destinationEntity="ChartSource" inverseName="simpleMovingAverageSources" inverseEntity="ChartSource" syncable="YES"/>
-    </entity>
     <elements>
-        <element name="CandleSource" positionX="0" positionY="0" width="128" height="120"/>
-        <element name="ChartSource" positionX="0" positionY="0" width="128" height="180"/>
+        <element name="CandleSource" positionX="0" positionY="0" width="128" height="60"/>
+        <element name="ChartSource" positionX="0" positionY="0" width="128" height="210"/>
         <element name="IndicatorSource" positionX="0" positionY="0" width="128" height="60"/>
         <element name="SaveDataSource" positionX="0" positionY="0" width="128" height="300"/>
-        <element name="SimpleMovingAverageSource" positionX="0" positionY="0" width="128" height="90"/>
+        <element name="MovingAverageSource" positionX="0" positionY="0" width="128" height="135"/>
+        <element name="BollingerBandsSource" positionX="9" positionY="135" width="128" height="120"/>
+        <element name="HeikinAshiSource" positionX="18" positionY="144" width="128" height="75"/>
+        <element name="CandleBaseSource" positionX="27" positionY="153" width="128" height="105"/>
     </elements>
 </model>

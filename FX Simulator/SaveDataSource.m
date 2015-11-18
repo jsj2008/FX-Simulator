@@ -2,7 +2,7 @@
 //  SaveDataSource.m
 //  FXSimulator
 //
-//  Created by yuu on 2015/11/17.
+//  Created by yuu on 2015/11/18.
 //
 //
 
@@ -14,6 +14,7 @@
 
 @dynamic accountCurrency;
 @dynamic autoUpdateIntervalSeconds;
+@dynamic createdAt;
 @dynamic currencyPairs;
 @dynamic isAutoUpdate;
 @dynamic lastLoadedTime;
@@ -26,7 +27,6 @@
 @dynamic stopOutLevel;
 @dynamic timeFrame;
 @dynamic tradePositionSize;
-@dynamic createdAt;
 @dynamic mainChartSources;
 @dynamic subChartSources;
 
