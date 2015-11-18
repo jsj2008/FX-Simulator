@@ -1,5 +1,5 @@
 //
-//  CandleSource.h
+//  HeikinAshiSource.h
 //  FXSimulator
 //
 //  Created by yuu on 2015/11/18.
@@ -10,10 +10,11 @@
 #import <CoreData/CoreData.h>
 #import "CandleBaseSource.h"
 
-@class ChartSource;
+@class ChartSource, MovingAverageSource;
 
-@interface CandleSource : CandleBaseSource
+@interface HeikinAshiSource : CandleBaseSource
 
+@property (nonatomic, retain) MovingAverageSource *movingAverageSource;
 @property (nonatomic, retain) ChartSource *chartSource;
 
 @end

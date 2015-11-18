@@ -1,15 +1,15 @@
 //
 //  ChartSource.h
-//  
+//  FXSimulator
 //
-//  Created by yuu on 2015/08/25.
+//  Created by yuu on 2015/11/18.
 //
 //
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class CandleSource, SaveDataSource, SimpleMovingAverageSource;
+@class BollingerBandsSource, CandleSource, HeikinAshiSource, MovingAverageSource, SaveDataSource;
 
 @interface ChartSource : NSManagedObject
 
@@ -21,14 +21,26 @@
 @property (nonatomic, retain) CandleSource *candleSource;
 @property (nonatomic, retain) SaveDataSource *saveDataSourceForMain;
 @property (nonatomic, retain) SaveDataSource *saveDataSourceForSub;
-@property (nonatomic, retain) NSSet *simpleMovingAverageSources;
+@property (nonatomic, retain) NSSet *movingAverageSources;
+@property (nonatomic, retain) NSSet *bollingerBandsSources;
+@property (nonatomic, retain) NSSet *heikinAshiSources;
 @end
 
 @interface ChartSource (CoreDataGeneratedAccessors)
 
-- (void)addSimpleMovingAverageSourcesObject:(SimpleMovingAverageSource *)value;
-- (void)removeSimpleMovingAverageSourcesObject:(SimpleMovingAverageSource *)value;
-- (void)addSimpleMovingAverageSources:(NSSet *)values;
-- (void)removeSimpleMovingAverageSources:(NSSet *)values;
+- (void)addMovingAverageSourcesObject:(MovingAverageSource *)value;
+- (void)removeMovingAverageSourcesObject:(MovingAverageSource *)value;
+- (void)addMovingAverageSources:(NSSet *)values;
+- (void)removeMovingAverageSources:(NSSet *)values;
+
+- (void)addBollingerBandsSourcesObject:(BollingerBandsSource *)value;
+- (void)removeBollingerBandsSourcesObject:(BollingerBandsSource *)value;
+- (void)addBollingerBandsSources:(NSSet *)values;
+- (void)removeBollingerBandsSources:(NSSet *)values;
+
+- (void)addHeikinAshiSourcesObject:(HeikinAshiSource *)value;
+- (void)removeHeikinAshiSourcesObject:(HeikinAshiSource *)value;
+- (void)addHeikinAshiSources:(NSSet *)values;
+- (void)removeHeikinAshiSources:(NSSet *)values;
 
 @end

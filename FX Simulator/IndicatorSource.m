@@ -2,7 +2,7 @@
 //  IndicatorSource.m
 //  FXSimulator
 //
-//  Created by yuu on 2015/07/27.
+//  Created by yuu on 2015/11/18.
 //
 //
 

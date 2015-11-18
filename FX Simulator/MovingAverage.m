@@ -6,15 +6,15 @@
 //
 //
 
-#import "SimpleMovingAverage.h"
+#import "MovingAverage.h"
 
-#import "SimpleMovingAverageSource.h"
+#import "MovingAverageSource.h"
 #import "ForexDataChunk.h"
 #import "IndicatorUtils.h"
 #import "Rate.h"
 
-@implementation SimpleMovingAverage {
-    SimpleMovingAverageSource *_source;
+@implementation MovingAverage {
+    MovingAverageSource *_source;
 }
 
 -(instancetype)init
@@ -22,7 +22,7 @@
     return nil;
 }
 
-- (instancetype)initWithSimpleMovingAverageSource:(SimpleMovingAverageSource *)source
+- (instancetype)initWithMovingAverageSource:(MovingAverageSource *)source
 {
     if (self = [super initWithIndicatorSource:source]) {
         _source = source;
