@@ -23,16 +23,6 @@
 @class Spread;
 @class TimeFrame;
 
-@protocol NewSaveDataMaterial <NSObject>
-@property (nonatomic, readonly) CurrencyPair *currencyPair;
-@property (nonatomic, readonly) Time *startTime;
-@property (nonatomic, readonly) TimeFrame *timeFrame;
-@property (nonatomic, readonly) Spread *spread;
-@property (nonatomic, readonly) Currency *accountCurrency;
-@property (nonatomic, readonly) Money *startBalance;
-@property (nonatomic, readonly) PositionSize *positionSizeOfLot;
-@end
-
 @interface SaveData : SaveDataBase
 
 @property (nonatomic, readonly) NSUInteger slotNumber;

@@ -25,8 +25,7 @@
 #import "TradeDatabase.h"
 #import "TradeViewController.h"
 
-static const float FXSMinAddTimeDuration = 0.5;
-static SimulationManager *sharedSimulationManager = nil;
+static const float FXSMinAddTimeDuration = 0.3;
 
 @implementation SimulationManager {
     Market *_market;
