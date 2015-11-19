@@ -228,19 +228,30 @@ static float FXSDefaultAutoUpdateIntervalSeconds = 1.0;
 
 - (Chart *)mainChart
 {
-    return [Chart createChartFromChartSource:[_saveDataSource.mainChartSources allObjects].firstObject];
+    Chart *mainChart;
+    
+    for (ChartSource *chartSource in _saveDataSource.chartSources.allObjects) {
+        Chart *chart = [Chart createChartFromChartSource:chartSource];
+        if ([chart isMainChart]) {
+            mainChart = chart;
+        }
+    }
+    
+    return mainChart;
 }
 
 - (ChartChunk *)subChartChunk
 {
-    NSMutableArray *subChartArray = [NSMutableArray array];
+    NSMutableArray *subCharts = [NSMutableArray array];
     
-    [_saveDataSource.subChartSources enumerateObjectsUsingBlock:^(ChartSource *obj, BOOL *stop) {
-        Chart *chart = [Chart createChartFromChartSource:obj];
-        [subChartArray addObject:chart];
-    }];
+    for (ChartSource *chartSource in _saveDataSource.chartSources.allObjects) {
+        Chart *chart = [Chart createChartFromChartSource:chartSource];
+        if ([chart isSubChart]) {
+            [subCharts addObject:chart];
+        }
+    }
     
-    return [[ChartChunk alloc] initWithChartArray:subChartArray];
+    return [[ChartChunk alloc] initWithChartArray:subCharts];
 }
 
 - (NSUInteger)slotNumber

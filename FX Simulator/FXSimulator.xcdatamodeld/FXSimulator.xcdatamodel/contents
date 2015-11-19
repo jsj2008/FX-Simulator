@@ -22,12 +22,12 @@
         <attribute name="displayDataCount" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="isDisplay" attributeType="Boolean" syncable="YES"/>
         <attribute name="timeFrame" attributeType="Transformable" syncable="YES"/>
+        <attribute name="type" attributeType="Transformable" syncable="YES"/>
         <relationship name="bollingerBandsSources" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="BollingerBandsSource" inverseName="chartSource" inverseEntity="BollingerBandsSource" syncable="YES"/>
         <relationship name="candleSource" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="CandleSource" inverseName="chartSource" inverseEntity="CandleSource" syncable="YES"/>
         <relationship name="heikinAshiSources" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="HeikinAshiSource" inverseName="chartSource" inverseEntity="HeikinAshiSource" syncable="YES"/>
         <relationship name="movingAverageSources" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="MovingAverageSource" inverseName="chartSource" inverseEntity="MovingAverageSource" syncable="YES"/>
-        <relationship name="saveDataSourceForMain" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SaveDataSource" inverseName="mainChartSources" inverseEntity="SaveDataSource" syncable="YES"/>
-        <relationship name="saveDataSourceForSub" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SaveDataSource" inverseName="subChartSources" inverseEntity="SaveDataSource" syncable="YES"/>
+        <relationship name="saveDataSource" maxCount="1" deletionRule="Nullify" destinationEntity="SaveDataSource" inverseName="chartSources" inverseEntity="SaveDataSource" syncable="YES"/>
     </entity>
     <entity name="HeikinAshiSource" representedClassName="HeikinAshiSource" parentEntity="CandleBaseSource" syncable="YES">
         <relationship name="chartSource" maxCount="1" deletionRule="Nullify" destinationEntity="ChartSource" inverseName="heikinAshiSources" inverseEntity="ChartSource" syncable="YES"/>
@@ -60,17 +60,16 @@
         <attribute name="stopOutLevel" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
         <attribute name="timeFrame" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="tradePositionSize" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
-        <relationship name="mainChartSources" toMany="YES" deletionRule="Cascade" destinationEntity="ChartSource" inverseName="saveDataSourceForMain" inverseEntity="ChartSource" syncable="YES"/>
-        <relationship name="subChartSources" toMany="YES" deletionRule="Cascade" destinationEntity="ChartSource" inverseName="saveDataSourceForSub" inverseEntity="ChartSource" syncable="YES"/>
+        <relationship name="chartSources" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="ChartSource" inverseName="saveDataSource" inverseEntity="ChartSource" syncable="YES"/>
     </entity>
     <elements>
+        <element name="BollingerBandsSource" positionX="9" positionY="135" width="128" height="120"/>
+        <element name="CandleBaseSource" positionX="27" positionY="153" width="128" height="105"/>
         <element name="CandleSource" positionX="0" positionY="0" width="128" height="60"/>
         <element name="ChartSource" positionX="0" positionY="0" width="128" height="210"/>
-        <element name="IndicatorSource" positionX="0" positionY="0" width="128" height="60"/>
-        <element name="SaveDataSource" positionX="0" positionY="0" width="128" height="300"/>
-        <element name="MovingAverageSource" positionX="0" positionY="0" width="128" height="135"/>
-        <element name="BollingerBandsSource" positionX="9" positionY="135" width="128" height="120"/>
         <element name="HeikinAshiSource" positionX="18" positionY="144" width="128" height="75"/>
-        <element name="CandleBaseSource" positionX="27" positionY="153" width="128" height="105"/>
+        <element name="IndicatorSource" positionX="0" positionY="0" width="128" height="60"/>
+        <element name="MovingAverageSource" positionX="0" positionY="0" width="128" height="135"/>
+        <element name="SaveDataSource" positionX="0" positionY="0" width="128" height="285"/>
     </elements>
 </model>

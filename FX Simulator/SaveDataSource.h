@@ -2,7 +2,7 @@
 //  SaveDataSource.h
 //  FXSimulator
 //
-//  Created by yuu on 2015/11/18.
+//  Created by yuu on 2015/11/19.
 //
 //
 
@@ -28,20 +28,14 @@
 @property (nonatomic) float stopOutLevel;
 @property (nonatomic) int32_t timeFrame;
 @property (nonatomic) int64_t tradePositionSize;
-@property (nonatomic, retain) NSSet *mainChartSources;
-@property (nonatomic, retain) NSSet *subChartSources;
+@property (nonatomic, retain) NSSet *chartSources;
 @end
 
 @interface SaveDataSource (CoreDataGeneratedAccessors)
 
-- (void)addMainChartSourcesObject:(ChartSource *)value;
-- (void)removeMainChartSourcesObject:(ChartSource *)value;
-- (void)addMainChartSources:(NSSet *)values;
-- (void)removeMainChartSources:(NSSet *)values;
-
-- (void)addSubChartSourcesObject:(ChartSource *)value;
-- (void)removeSubChartSourcesObject:(ChartSource *)value;
-- (void)addSubChartSources:(NSSet *)values;
-- (void)removeSubChartSources:(NSSet *)values;
+- (void)addChartSourcesObject:(ChartSource *)value;
+- (void)removeChartSourcesObject:(ChartSource *)value;
+- (void)addChartSources:(NSSet *)values;
+- (void)removeChartSources:(NSSet *)values;
 
 @end

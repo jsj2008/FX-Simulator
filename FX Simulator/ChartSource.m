@@ -2,7 +2,7 @@
 //  ChartSource.m
 //  FXSimulator
 //
-//  Created by yuu on 2015/11/18.
+//  Created by yuu on 2015/11/19.
 //
 //
 
@@ -21,11 +21,11 @@
 @dynamic displayDataCount;
 @dynamic isDisplay;
 @dynamic timeFrame;
-@dynamic candleSource;
-@dynamic saveDataSourceForMain;
-@dynamic saveDataSourceForSub;
-@dynamic movingAverageSources;
+@dynamic type;
 @dynamic bollingerBandsSources;
+@dynamic candleSource;
 @dynamic heikinAshiSources;
+@dynamic movingAverageSources;
+@dynamic saveDataSource;
 
 @end
