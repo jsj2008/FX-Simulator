@@ -37,13 +37,13 @@ static NSString* const FXSQuoteCurrencyKey = @"quoteCurrency";
 
 - (instancetype)initWithBaseCurrency:(Currency *)baseCurrency QuoteCurrency:(Currency *)quoteCurrency
 {
+    if (!baseCurrency || !quoteCurrency) {
+        return nil;
+    }
+    
     if (self = [super init]) {
         _baseCurrency = baseCurrency;
         _quoteCurrency = quoteCurrency;
-        
-        if (_baseCurrency == nil || _quoteCurrency == nil) {
-            return nil;
-        }
     }
     
     return self;
@@ -87,7 +87,7 @@ static NSString* const FXSQuoteCurrencyKey = @"quoteCurrency";
 
 - (BOOL)isQuoteCurrencyEqualJPY
 {
-    if (JPY == _quoteCurrency.type) {
+    if (_quoteCurrency.type == JPY) {
         return YES;
     } else {
         return NO;
