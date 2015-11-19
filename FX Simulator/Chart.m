@@ -11,6 +11,7 @@
 #import "CoreDataManager.h"
 #import "Coordinate.h"
 #import "ChartSource.h"
+#import "ChartType.h"
 #import "Candle.h"
 #import "EntityChart.h"
 #import "ForexDataChunk.h"
@@ -22,6 +23,8 @@
 #import "VisibleChartArea.h"
 
 @interface Chart ()
+@property (nonatomic, readonly) ChartSource *chartSource;
+@property (nonatomic, readonly) ChartType *type;
 @property (nonatomic) EntityChart *currentEntityChart;
 @end
 
@@ -43,9 +46,10 @@
 + (instancetype)createNewMainChartFromSaveDataSource:(SaveDataSource *)source
 {
     Chart *chart = [self createNewChart];
+    chart.type = [ChartType mainChart];
     
-    [source addMainChartSourcesObject:chart.chartSource];
-    chart.chartSource.saveDataSourceForMain = source;
+    [source addChartSourcesObject:chart.chartSource];
+    chart.chartSource.saveDataSource = source;
     
     return chart;
 }
@@ -53,9 +57,10 @@
 + (instancetype)createNewSubChartFromSaveDataSource:(SaveDataSource *)source
 {
     Chart *chart = [self createNewChart];
+    chart.type = [ChartType subChart];
     
-    [source addSubChartSourcesObject:chart.chartSource];
-    chart.chartSource.saveDataSourceForSub = source;
+    [source addChartSourcesObject:chart.chartSource];
+    chart.chartSource.saveDataSource = source;
     
     return chart;
 }
@@ -217,6 +222,16 @@
     _visibleChartArea = [[VisibleChartArea alloc] initWithVisibleChartView:chartScrollView entityChartView:_entityChartView displayDataCount:self.displayDataCount];
 }
 
+- (BOOL)isMainChart
+{
+    return self.type.isMainChart;
+}
+
+- (BOOL)isSubChart
+{
+    return self.type.isSubChart;
+}
+
 #pragma mark - getter,setter
 
 - (NSUInteger)chartIndex
@@ -267,6 +282,16 @@
 - (void)setDisplayDataCount:(NSUInteger)displayDataCount
 {
     _chartSource.displayDataCount = (int)displayDataCount;
+}
+
+- (ChartType *)type
+{
+    return _chartSource.type;
+}
+
+- (void)setType:(ChartType *)type
+{
+    _chartSource.type = type;
 }
 
 @end

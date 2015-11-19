@@ -34,6 +34,7 @@
 		705FCFB51BFB7BA9006197DA /* IndicatorSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 705FCFB41BFB7BA9006197DA /* IndicatorSource.m */; };
 		705FCFB81BFB7BA9006197DA /* SaveDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 705FCFB71BFB7BA9006197DA /* SaveDataSource.m */; };
 		705FCFBB1BFB7BAA006197DA /* MovingAverageSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 705FCFBA1BFB7BAA006197DA /* MovingAverageSource.m */; };
+		705FCFBE1BFC609B006197DA /* ChartType.m in Sources */ = {isa = PBXBuildFile; fileRef = 705FCFBD1BFC609B006197DA /* ChartType.m */; };
 		7062E5BB1B60BB0100BDA666 /* CoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7062E5BA1B60BB0100BDA666 /* CoreDataManager.m */; };
 		70634FE71BA91EF9009ACCEE /* InputNumberValueViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70634FE61BA91EF9009ACCEE /* InputNumberValueViewController.m */; };
 		706D09BE1BF7141300B3BBF7 /* SaveDataBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 706D09BD1BF7141300B3BBF7 /* SaveDataBase.m */; };
@@ -214,6 +215,8 @@
 		705FCFB71BFB7BA9006197DA /* SaveDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SaveDataSource.m; sourceTree = "<group>"; };
 		705FCFB91BFB7BAA006197DA /* MovingAverageSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovingAverageSource.h; sourceTree = "<group>"; };
 		705FCFBA1BFB7BAA006197DA /* MovingAverageSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovingAverageSource.m; sourceTree = "<group>"; };
+		705FCFBC1BFC609B006197DA /* ChartType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChartType.h; sourceTree = "<group>"; };
+		705FCFBD1BFC609B006197DA /* ChartType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChartType.m; sourceTree = "<group>"; };
 		7062E5B91B60BB0100BDA666 /* CoreDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataManager.h; sourceTree = "<group>"; };
 		7062E5BA1B60BB0100BDA666 /* CoreDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataManager.m; sourceTree = "<group>"; };
 		70634FE51BA91EF9009ACCEE /* InputNumberValueViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputNumberValueViewController.h; sourceTree = "<group>"; };
@@ -647,6 +650,8 @@
 				706D09C61BF714BC00B3BBF7 /* SaveDataForm.m */,
 				706D09C81BF75BB200B3BBF7 /* FXSComparisonResult.h */,
 				706D09C91BF75BB200B3BBF7 /* FXSComparisonResult.m */,
+				705FCFBC1BFC609B006197DA /* ChartType.h */,
+				705FCFBD1BFC609B006197DA /* ChartType.m */,
 			);
 			path = "FX Simulator";
 			sourceTree = "<group>";
@@ -1104,6 +1109,7 @@
 				702A84F31BDB5A4F00CA6102 /* CoordinateRange.m in Sources */,
 				70FCD5AA1B9B1B9900500B40 /* OrderResult.m in Sources */,
 				70D2FBFD1A9F57DC00CAB509 /* ExecutionOrder.m in Sources */,
+				705FCFBE1BFC609B006197DA /* ChartType.m in Sources */,
 				70D2FA8A1A9F305700CAB509 /* main.m in Sources */,
 				705FCFB21BFB7BA9006197DA /* HeikinAshiSource.m in Sources */,
 				70D2FAF51A9F56AE00CAB509 /* FMResultSet.m in Sources */,

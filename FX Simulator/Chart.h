@@ -23,7 +23,6 @@
 
 @interface Chart : NSObject
 
-@property (nonatomic, readonly) ChartSource *chartSource;
 @property (nonatomic) NSUInteger chartIndex;
 @property (nonatomic) CurrencyPair *currencyPair;
 @property (nonatomic) BOOL isDisplay;
@@ -43,5 +42,7 @@
 - (void)scaleStart;
 - (void)scaleX:(float)scaleX;
 - (void)scaleEnd;
+- (BOOL)isMainChart;
+- (BOOL)isSubChart;
 
 @end

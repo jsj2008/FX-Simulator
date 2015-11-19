@@ -2,7 +2,7 @@
 //  SaveDataSource.m
 //  FXSimulator
 //
-//  Created by yuu on 2015/11/18.
+//  Created by yuu on 2015/11/19.
 //
 //
 
@@ -27,7 +27,6 @@
 @dynamic stopOutLevel;
 @dynamic timeFrame;
 @dynamic tradePositionSize;
-@dynamic mainChartSources;
-@dynamic subChartSources;
+@dynamic chartSources;
 
 @end
