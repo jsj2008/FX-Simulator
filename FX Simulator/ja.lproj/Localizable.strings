@@ -1,0 +1,27 @@
+/* %d Hour */
+"%dH" = "%d時間足";
+
+/* %d Minute */
+"%dM" = "%d分足";
+
+/* 1 Day */
+"1D" = "日足";
+
+/* No comment provided by engineer. */
+"Account Currency" = "口座通貨";
+
+/* No comment provided by engineer. */
+"Currency Pair" = "通貨ペア";
+
+/* No comment provided by engineer. */
+"Spread" = "スプレッド";
+
+/* No comment provided by engineer. */
+"Start Balance" = "開始資産";
+
+/* No comment provided by engineer. */
+"Start Time" = "開始時間";
+
+/* No comment provided by engineer. */
+"Time Frame" = "時間軸";
+

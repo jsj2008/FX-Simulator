@@ -68,14 +68,12 @@ static NSString* const FXSTimeFrameKey = @"timeFrame";
     
     if (dayTimeScaleMinute <= self.minute) {
         if (dayTimeScaleMinute == self.minute) {
-            return @"日足";
-        } else {
-            return [NSString stringWithFormat:@"%lu足", self.minute / dayTimeScaleMinute];
+            return NSLocalizedString(@"1D", @"1 Day");
         }
     } else if (hourTimeScaleMinute <= self.minute) {
-        return [NSString stringWithFormat:@"%lu時間足", self.minute / hourTimeScaleMinute];
+        return [NSString stringWithFormat:NSLocalizedString(@"%dH", @"%d Hour"), self.minute / hourTimeScaleMinute];
     } else if (0 < self.minute) {
-        return [NSString stringWithFormat:@"%lu分足", self.minute];
+        return [NSString stringWithFormat:NSLocalizedString(@"%dM", @"%d Minute"), self.minute];
     }
     
     return nil;
