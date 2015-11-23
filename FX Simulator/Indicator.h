@@ -23,7 +23,7 @@
 /**
  @param count 画面に表示するForexDataの個数。
 */
-- (void)strokeIndicatorFromForexDataChunk:(ForexDataChunk *)chunk displayDataCount:(NSInteger)count displaySize:(CGSize)size;
+- (void)strokeIndicatorFromForexDataChunk:(ForexDataChunk *)chunk displayDataCount:(NSInteger)count imageSize:(CGSize)imageSize displaySize:(CGSize)displaySize;
 
 - (NSComparisonResult)compareDisplayOrder:(Indicator *)indicator;
 @property (nonatomic) NSUInteger displayOrder;
