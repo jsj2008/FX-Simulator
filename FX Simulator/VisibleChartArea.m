@@ -16,6 +16,7 @@
 // 偶数
 static const NSUInteger FXSDefaultDisplayDataCount = 60;
 static const NSUInteger FXSMinDisplayDataCount = 60;
+// EntityChartのFXSMiniEntityChartForexDataCountより小さい
 static const NSUInteger FXSMaxDisplayDataCount = 100;
 static const float FXSEntityChartViewPrepareTotalRangeRatio = 0.5;
 
@@ -39,7 +40,6 @@ static const float FXSEntityChartViewPrepareTotalRangeRatio = 0.5;
         _visibleChartView = visibleChartView;
         _entityChartView = entityChartView;
         _displayDataCount = displayDataCount;
-        _visibleWidthRatio = (float)self.displayDataCount / (float)[EntityChart forexDataCount];
     }
     
     return self;
@@ -274,13 +274,17 @@ static const float FXSEntityChartViewPrepareTotalRangeRatio = 0.5;
     _currentEntityChart = currentEntityChart;
     _entityChartView.transform = CGAffineTransformIdentity;
     _entityChartView.image = _currentEntityChart.chartImage;
+    _visibleWidthRatio = (float)self.displayDataCount / (float)self.currentEntityChart.displayDataCount;
+    if (_inScale) {
+        [self scaleStart];
+    }
 }
 
 - (void)setVisibleWidthRatio:(float)visibleWidthRatio
 {
     _visibleWidthRatio = visibleWidthRatio;
     
-    self.displayDataCount = [EntityChart forexDataCount] * self.visibleWidthRatio;
+    self.displayDataCount = self.currentEntityChart.displayDataCount * self.visibleWidthRatio;
 }
 
 - (NSUInteger)displayDataCount

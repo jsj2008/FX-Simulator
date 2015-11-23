@@ -20,6 +20,8 @@
 @implementation Candle {
     CandleSource *_source;
     NSArray *_candles;
+    CGSize _imageSize;
+    CGSize _displaySize;
 }
 
 + (instancetype)createTemporaryDefaultCandle
@@ -56,13 +58,16 @@
     return self;
 }
 
-- (void)strokeIndicatorFromForexDataChunk:(ForexDataChunk *)chunk displayDataCount:(NSInteger)count displaySize:(CGSize)size
+- (void)strokeIndicatorFromForexDataChunk:(ForexDataChunk *)chunk displayDataCount:(NSInteger)count imageSize:(CGSize)imageSize displaySize:(CGSize)displaySize
 {
-    if (chunk == nil) {
+    if (!chunk) {
         return;
     }
     
-    _candles = [CandlesFactory createCandlesFromForexHistoryDataChunk:chunk displayForexDataCount:count chartViewWidth:size.width chartViewHeight:size.height];
+    _imageSize = imageSize;
+    _displaySize = displaySize;
+    
+    _candles = [CandlesFactory createCandlesFromForexHistoryDataChunk:chunk displayForexDataCount:count chartViewWidth:imageSize.width chartViewHeight:imageSize.height];
     
     for (SimpleCandle *candle in _candles) {
         [candle stroke];
@@ -71,6 +76,9 @@
 
 - (ForexDataChunk *)chunkRangeStartX:(float)startX endX:(float)endX
 {
+    startX = [self imageSizeXFromDisplaySizeX:startX];
+    endX = [self imageSizeXFromDisplaySizeX:endX];
+    
     NSMutableArray *rangeForexDataArray = [NSMutableArray array];
     
     for (SimpleCandle *candle in _candles) {
@@ -85,11 +93,13 @@
 
 - (ForexHistoryData *)forexDataOfPoint:(CGPoint)point
 {
+    float pointXOfImage = [self imageSizeXFromDisplaySizeX:point.x];
+    
     for (SimpleCandle *candle in _candles) {
         float x = candle.areaRect.origin.x;
         float endX = candle.areaRect.origin.x + candle.areaRect.size.width;
         
-        if (x <= point.x && point.x <= endX) {
+        if (x <= pointXOfImage && pointXOfImage <= endX) {
             return candle.forexHistoryData;
         }
     }
@@ -123,7 +133,13 @@
     SimpleCandle *candle = [self candleOfForexData:forexData];
     
     if (candle) {
-        return [[CoordinateRange alloc] initWithBegin:[[Coordinate alloc] initWithCoordinateValue:candle.areaRect.origin.x] end:[[Coordinate alloc] initWithCoordinateValue:candle.areaRect.origin.x + candle.areaRect.size.width]];
+        float begin = candle.areaRect.origin.x;
+        float end = candle.areaRect.origin.x + candle.areaRect.size.width;
+        
+        begin = [self displaySizeXFromImageSizeX:begin];
+        end = [self displaySizeXFromImageSizeX:end];
+        
+        return [[CoordinateRange alloc] initWithBegin:[[Coordinate alloc] initWithCoordinateValue:begin] end:[[Coordinate alloc] initWithCoordinateValue:end]];
     } else {
         return nil;
     }
@@ -145,14 +161,44 @@
 
 - (Coordinate *)leftEndForexDataX
 {
-    return [[Coordinate alloc] initWithCoordinateValue:((SimpleCandle *)_candles.lastObject).areaRect.origin.x];
+    float x = ((SimpleCandle *)_candles.lastObject).areaRect.origin.x;
+    
+    x = [self displaySizeXFromImageSizeX:x];
+    
+    return [[Coordinate alloc] initWithCoordinateValue:x];
 }
 
 - (Coordinate *)rightEndForexDataX
 {
     SimpleCandle *rightEndCandle = _candles.firstObject;
     
-    return [[Coordinate alloc] initWithCoordinateValue:rightEndCandle.areaRect.origin.x + rightEndCandle.areaRect.size.width];
+    float x = rightEndCandle.areaRect.origin.x + rightEndCandle.areaRect.size.width;
+    
+    x = [self displaySizeXFromImageSizeX:x];
+    
+    return [[Coordinate alloc] initWithCoordinateValue:x];
+}
+
+- (float)displaySizeXFromImageSizeX:(float)imageSizeX
+{
+    float scaleX = 1;
+    
+    if (!CGSizeEqualToSize(_imageSize, _displaySize)) {
+        scaleX = _displaySize.width / _imageSize.width;
+    }
+    
+    return imageSizeX * scaleX;
+}
+
+- (float)imageSizeXFromDisplaySizeX:(float)displaySizeX
+{
+    float scaleX = 1;
+    
+    if (!CGSizeEqualToSize(_imageSize, _displaySize)) {
+        scaleX = _imageSize.width / _displaySize.width;
+    }
+    
+    return displaySizeX * scaleX;
 }
 
 #pragma mark - getter,setter

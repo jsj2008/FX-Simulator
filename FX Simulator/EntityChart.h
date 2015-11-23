@@ -20,6 +20,7 @@
 @class TimeFrame;
 
 @interface EntityChart : NSObject
+
 @property (nonatomic, readonly) UIImage *chartImage;
 @property (nonatomic, readonly) Rate *maxRate;
 @property (nonatomic, readonly) Rate *minRate;
@@ -29,10 +30,9 @@
 @property (nonatomic, readonly) Coordinate *rightEndForexDataX;
 @property (nonatomic, readonly) Coordinate *visibleViewDefaultStartX;
 @property (nonatomic, readonly) Coordinate *visibleViewDefaultEndX;
+@property (nonatomic, readonly) NSUInteger displayDataCount;
 
 + (UIImageView *)entityChartView;
-
-+ (NSUInteger)forexDataCount;
 
 - (instancetype)initWithCurrencyPair:(CurrencyPair *)currencyPair timeFrame:(TimeFrame *)timeFrame indicatorChunk:(IndicatorChunk *)indicatorChunk;
 

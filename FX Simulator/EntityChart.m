@@ -17,7 +17,10 @@
 #import "Time.h"
 
 static CGSize FXSEntityChartViewSize;
+static CGSize FXSEntityChartImageSize;
+static CGSize FXSMiniEntityChartImageSize;
 static const NSUInteger FXSEntityChartForexDataCount = 500;
+static const NSUInteger FXSMiniEntityChartForexDataCount = 150;
 static const NSUInteger FXSMaxIndicatorPeriod = 200;
 static const NSUInteger FXSRequireForexDataCount = FXSEntityChartForexDataCount + FXSMaxIndicatorPeriod - 1;
 static const NSUInteger FXSFrontLimitForPrepare = FXSEntityChartForexDataCount / 2 - 1;
@@ -30,6 +33,7 @@ static const NSUInteger FXSBackLimitForPrepare = FXSRequireForexDataCount - FXSM
 @property (nonatomic) EntityChart *nextEntityChart;
 @property (nonatomic) ForexHistoryData *visibleViewDefaultStartForexData;
 @property (nonatomic) ForexHistoryData *visibleViewDefaultEndForexData;
+@property (nonatomic, readonly) CGSize imageSize;
 @end
 
 @implementation EntityChart {
@@ -44,6 +48,7 @@ static const NSUInteger FXSBackLimitForPrepare = FXSRequireForexDataCount - FXSM
     NSObject *_syncNextEntityChart;
     BOOL _isStartedPreparePreviousEntityChart;
     BOOL _isStartedPrepareNextEntityChart;
+    BOOL _isMiniChart;
 }
 
 @synthesize maxRate = _maxRate;
@@ -52,6 +57,8 @@ static const NSUInteger FXSBackLimitForPrepare = FXSRequireForexDataCount - FXSM
 + (void)initialize
 {
     FXSEntityChartViewSize = CGSizeMake(3000, 1000);
+    FXSEntityChartImageSize = FXSEntityChartViewSize;
+    FXSMiniEntityChartImageSize = CGSizeMake(1000, 1000);
 }
 
 + (UIImageView *)entityChartView
@@ -73,6 +80,8 @@ static const NSUInteger FXSBackLimitForPrepare = FXSRequireForexDataCount - FXSM
         
         _syncPreviousEntityChart = [NSObject new];
         _syncNextEntityChart = [NSObject new];
+        
+        _isMiniChart = NO;
     }
     
     return self;
@@ -81,13 +90,16 @@ static const NSUInteger FXSBackLimitForPrepare = FXSRequireForexDataCount - FXSM
 - (void)strokeForMarket:(Market *)market
 {
     ForexDataChunk *forexDataChunk = [market chunkForCurrencyPair:_currencyPair timeFrame:_timeFrame Limit:FXSRequireForexDataCount];
+    _isMiniChart = YES;
     [self strokeForForexDataChunk:forexDataChunk];
 }
 
 - (void)strokeForForexDataChunk:(ForexDataChunk *)forexDataChunk
 {
     _forexDataChunk = forexDataChunk;
-    _forexDataChunkOfEntityChart = [_forexDataChunk chunkLimit:FXSEntityChartForexDataCount];
+    
+    _forexDataChunkOfEntityChart = [_forexDataChunk chunkLimit:self.displayDataCount];
+    
     [self setEntityChartImage];
 }
 
@@ -95,14 +107,14 @@ static const NSUInteger FXSBackLimitForPrepare = FXSRequireForexDataCount - FXSM
 {
     @autoreleasepool {
     
-    UIGraphicsBeginImageContextWithOptions(FXSEntityChartViewSize, NO, 0.0);
+    UIGraphicsBeginImageContextWithOptions(self.imageSize, NO, 0.0);
     
     if (![_indicatorChunk existsBaseIndicator]) {
         _candle = [Candle createTemporaryDefaultCandle];
-        [_candle strokeIndicatorFromForexDataChunk:_forexDataChunk displayDataCount:FXSEntityChartForexDataCount displaySize:FXSEntityChartViewSize];
+        [_candle strokeIndicatorFromForexDataChunk:_forexDataChunk displayDataCount:self.displayDataCount imageSize:self.imageSize displaySize:FXSEntityChartViewSize];
     }
     
-    [_indicatorChunk strokeIndicatorFromForexDataChunk:_forexDataChunk displayDataCount:FXSEntityChartForexDataCount displaySize:FXSEntityChartViewSize];
+    [_indicatorChunk strokeIndicatorFromForexDataChunk:_forexDataChunk displayDataCount:self.displayDataCount displaySize:FXSEntityChartViewSize];
     
     self.chartImage = UIGraphicsGetImageFromCurrentImageContext();
     
@@ -261,6 +273,25 @@ static const NSUInteger FXSBackLimitForPrepare = FXSRequireForexDataCount - FXSM
         return area.end;
     } else {
         return nil;
+    }
+}
+
+- (CGSize)imageSize
+{
+    if (_isMiniChart) {
+        return FXSMiniEntityChartImageSize;
+    } else {
+        return FXSEntityChartImageSize;
+    }
+        
+}
+
+- (NSUInteger)displayDataCount
+{
+    if (_isMiniChart) {
+        return FXSMiniEntityChartForexDataCount;
+    } else {
+        return FXSEntityChartForexDataCount;
     }
 }
 
