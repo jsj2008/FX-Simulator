@@ -53,7 +53,7 @@
         [currencyPairList enumerateObjectsUsingBlock:^(CurrencyPair *obj, NSUInteger idx, BOOL *stop) {
             [currencyPairStringValueList addObject:obj.toDisplayString];
         }];
-        controller.title = @"Currency Pair";
+        controller.title = NSLocalizedString(@"Currency Pair", nil);
         controller.dataList = currencyPairList;
         controller.dataStringValueList = currencyPairStringValueList;
         controller.defaultData = self.saveDataForm.currencyPair;
@@ -73,7 +73,7 @@
         [timeFrameChunk enumerateTimeFrames:^(TimeFrame *timeFrame) {
             [timeFrameStringValueList addObject:timeFrame.toDisplayString];
         }];
-        controller.title = @"Time Frame";
+        controller.title = NSLocalizedString(@"Time Frame", nil);
         controller.dataList = timeFrameList;
         controller.dataStringValueList = timeFrameStringValueList;
         controller.defaultData = self.saveDataForm.timeFrame;
@@ -89,7 +89,7 @@
         [accountCurrencyList enumerateObjectsUsingBlock:^(Currency *currency, NSUInteger idx, BOOL *stop) {
             [accountCurrencyStringValueList addObject:currency.toDisplayString];
         }];
-        controller.title = @"Account Currency";
+        controller.title = NSLocalizedString(@"Account Currency", nil);
         controller.dataList = accountCurrencyList;
         controller.dataStringValueList = accountCurrencyStringValueList;
         controller.defaultData = self.saveDataForm.accountCurrency;
@@ -100,14 +100,14 @@
         };
     } else if ([segue.identifier isEqualToString:@"SetSpreadSegue"]) {
         InputNumberValueViewController *controller = segue.destinationViewController;
-        controller.title = @"Spread";
+        controller.title = NSLocalizedString(@"Spread", nil);
         controller.defaultNumberValue = self.saveDataForm.spread.spreadValueObj;
         controller.setInputNumberValue = ^(NSNumber *inputNumberValue){
             self.saveDataForm.spread = [[Spread alloc] initWithNumber:inputNumberValue currencyPair:[CurrencyPair allCurrencyPair]];
         };
     } else if ([segue.identifier isEqualToString:@"SetStartBalanceSegue"]) {
         InputNumberValueViewController *controller = segue.destinationViewController;
-        controller.title = @"Start Balance";
+        controller.title = NSLocalizedString(@"Start Balance", nil);
         controller.defaultNumberValue = self.saveDataForm.startBalance.toMoneyValueObj;
         controller.setInputNumberValue = ^(NSNumber *inputNumberValue){
                 self.saveDataForm.startBalance = [[Money alloc] initWithNumber:inputNumberValue currency:[Currency allCurrency]];
@@ -119,7 +119,7 @@
         [positionSizeOfLotList enumerateObjectsUsingBlock:^(PositionSize *obj, NSUInteger idx, BOOL *stop) {
             [PositionSizeOfLotStringValueList addObject:obj.toDisplayString];
         }];
-        controller.title = @"Position Size Of Lot";
+        controller.title = @"1 Lot =";
         controller.dataList = positionSizeOfLotList;
         controller.dataStringValueList = PositionSizeOfLotStringValueList;
         controller.defaultData = self.saveDataForm.positionSizeOfLot;
@@ -130,7 +130,7 @@
         };
     } else if ([segue.identifier isEqualToString:@"SetStartTimeSegue"]) {
         SetStartTimeViewController *controller = segue.destinationViewController;
-        controller.title = @"Start Time";
+        controller.title = NSLocalizedString(@"Start Time", nil);
         controller.defaultStartTime = self.saveDataForm.startTime;
         controller.setStartTime = ^(Time *startTime){
             self.saveDataForm.startTime = startTime;
