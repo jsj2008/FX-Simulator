@@ -12,7 +12,8 @@
 
 - (void)stroke
 {
-    UIColor *color = [UIColor colorWithRed:self.colorR green:self.colorG blue:self.colorB alpha:1.0];
+    UIColor *color = self.color;
+    UIColor *lineColor = self.lineColor;
     
     CGContextRef context = UIGraphicsGetCurrentContext();
     
@@ -24,7 +25,7 @@
     
     
     CGContextSetLineWidth(context, 2);
-    CGContextSetStrokeColorWithColor(context, color.CGColor);
+    CGContextSetStrokeColorWithColor(context, lineColor.CGColor);
     
     CGContextMoveToPoint(context, self.highLineBottom.x, self.highLineBottom.y);
     CGContextAddLineToPoint(context, self.highLineTop.x, self.highLineTop.y);

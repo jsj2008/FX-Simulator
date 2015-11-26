@@ -8,8 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
+@import UIKit;
+
 @class ForexDataChunk;
 
 @interface CandlesFactory : NSObject
-+ (NSArray *)createCandlesFromForexHistoryDataChunk:(ForexDataChunk *)chunk displayForexDataCount:(NSInteger)count chartViewWidth:(float)width chartViewHeight:(float)height;
++ (NSArray *)createCandlesFromForexHistoryDataChunk:(ForexDataChunk *)chunk displayForexDataCount:(NSInteger)count chartSize:(CGSize)chartSize upColor:(UIColor *)upColor upLineColor:(UIColor *)upLineColor downColor:(UIColor *)downColor downLineColor:(UIColor *)downLineColor;
 @end
