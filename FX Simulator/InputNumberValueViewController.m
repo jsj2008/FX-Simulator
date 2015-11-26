@@ -23,6 +23,10 @@
 {
     [super viewWillAppear:animated];
     
+    if (self.isDecimal) {
+        self.textField.keyboardType = UIKeyboardTypeDecimalPad;
+    }
+    
     self.textField.text = self.defaultNumberValue.stringValue;
 }
 
