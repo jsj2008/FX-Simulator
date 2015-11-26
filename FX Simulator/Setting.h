@@ -55,6 +55,10 @@
 
 + (PositionSize *)defaultPositionSizeOfLot;
 
++ (float)maxAutoUpdateIntervalSeconds;
+
++ (float)minAutoUpdateIntervalSeconds;
+
 + (PositionSize *)maxTradePositionSize;
 
 + (Spread *)maxSpread;

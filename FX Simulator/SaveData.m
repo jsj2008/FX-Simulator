@@ -429,6 +429,18 @@ static float FXSDefaultAutoUpdateIntervalSeconds = 1.0;
 
 - (void)setAutoUpdateIntervalSeconds:(float)autoUpdateInterval
 {
+    float maxInterval = [Setting maxAutoUpdateIntervalSeconds];
+    
+    if (maxInterval < autoUpdateInterval) {
+        autoUpdateInterval = maxInterval;
+    }
+    
+    float minInterval = [Setting minAutoUpdateIntervalSeconds];
+    
+    if (minInterval > autoUpdateInterval) {
+        autoUpdateInterval = minInterval;
+    }
+    
     _saveDataSource.autoUpdateIntervalSeconds = autoUpdateInterval;
 }
 

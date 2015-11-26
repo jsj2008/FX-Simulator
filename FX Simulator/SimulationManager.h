@@ -48,6 +48,7 @@
 
 @interface SimulationManager : NSObject <OrderManagerState>
 
+@property (nonatomic) float autoUpdateIntervalSeconds;
 @property (nonatomic, readonly) BOOL isStartTime;
 
 - (void)addDelegate:(id<SimulationManagerDelegate>)delegate;
@@ -73,8 +74,6 @@
  手動で時間を進める。
 */
 -(void)addTime;
-
-- (void)setAutoUpdateIntervalSeconds:(float)autoUpdateIntervalSeconds;
 
 - (void)setIsAutoUpdate:(BOOL)isAutoUpdate;
 

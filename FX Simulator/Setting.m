@@ -129,6 +129,16 @@ static NSDictionary *spreadRateDic;
     return [[PositionSize alloc] initWithSizeValue:10000];
 }
 
++ (float)maxAutoUpdateIntervalSeconds
+{
+    return 10;
+}
+
++ (float)minAutoUpdateIntervalSeconds
+{
+    return 0.2;
+}
+
 + (PositionSize *)maxTradePositionSize
 {
     // positionSizeOfLotListのどのpositionSizeでも割り切れるようにする。
