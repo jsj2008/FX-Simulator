@@ -114,7 +114,7 @@ static const NSUInteger FXSBackLimitForPrepare = FXSRequireForexDataCount - FXSM
         [_candle strokeIndicatorFromForexDataChunk:_forexDataChunk displayDataCount:self.displayDataCount imageSize:self.imageSize displaySize:FXSEntityChartViewSize];
     }
     
-    [_indicatorChunk strokeIndicatorFromForexDataChunk:_forexDataChunk displayDataCount:self.displayDataCount displaySize:FXSEntityChartViewSize];
+    [_indicatorChunk strokeIndicatorFromForexDataChunk:_forexDataChunk displayDataCount:self.displayDataCount imageSize:self.imageSize displaySize:FXSEntityChartViewSize];
     
     self.chartImage = UIGraphicsGetImageFromCurrentImageContext();
     
