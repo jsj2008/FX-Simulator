@@ -14,5 +14,6 @@ typedef void (^SetInputNumberValueBlock)(NSNumber *inputNumberValue);
 @property (nonatomic) NSNumber *defaultNumberValue;
 @property (nonatomic) NSNumber *minNumberValue;
 @property (nonatomic) NSNumber *maxNumberValue;
+@property (nonatomic) BOOL isDecimal;
 @property (nonatomic, copy) SetInputNumberValueBlock setInputNumberValue;
 @end

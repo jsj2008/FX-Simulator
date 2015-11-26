@@ -100,6 +100,7 @@
         };
     } else if ([segue.identifier isEqualToString:@"SetSpreadSegue"]) {
         InputNumberValueViewController *controller = segue.destinationViewController;
+        controller.isDecimal = YES;
         controller.title = NSLocalizedString(@"Spread", nil);
         controller.defaultNumberValue = self.saveDataForm.spread.spreadValueObj;
         controller.setInputNumberValue = ^(NSNumber *inputNumberValue){
