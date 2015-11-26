@@ -412,7 +412,7 @@
         <!--New Start View Controller-->
         <scene sceneID="LEZ-C4-eVl">
             <objects>
-                <tableViewController title="New Start" id="lkl-JJ-fvd" userLabel="New Start View Controller" customClass="NewStartViewController" sceneMemberID="viewController">
+                <tableViewController title="New" id="lkl-JJ-fvd" userLabel="New Start View Controller" customClass="NewStartViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="KZf-gT-sMz">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1061,7 +1061,7 @@
         <!--Config View Controller-->
         <scene sceneID="gJf-ja-iug">
             <objects>
-                <tableViewController id="1gO-mh-rMi" userLabel="Config View Controller" customClass="ConfigViewController" sceneMemberID="viewController">
+                <tableViewController title="Settings" id="1gO-mh-rMi" userLabel="Config View Controller" customClass="ConfigViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="epS-T7-cYa">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1121,7 +1121,7 @@
                             <outlet property="delegate" destination="1gO-mh-rMi" id="Pay-2X-y7S"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="Config" image="config.png" id="sfS-Hp-alh"/>
+                    <tabBarItem key="tabBarItem" title="Settings" image="config.png" id="sfS-Hp-alh"/>
                     <connections>
                         <outlet property="autoUpdateIntervalLabel" destination="wlH-IF-IzA" id="lFN-Ei-7qD"/>
                     </connections>
@@ -1133,7 +1133,7 @@
         <!--Set Auto Update Interval View Controller-->
         <scene sceneID="wn7-tZ-fkL">
             <objects>
-                <viewController id="bFb-bK-YOr" userLabel="Set Auto Update Interval View Controller" customClass="SetAutoUpdateIntervalViewController" sceneMemberID="viewController">
+                <viewController title="Auto Update Interval" id="bFb-bK-YOr" userLabel="Set Auto Update Interval View Controller" customClass="SetAutoUpdateIntervalViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ryV-DF-NZe"/>
                         <viewControllerLayoutGuide type="bottom" id="3O9-ww-53w"/>

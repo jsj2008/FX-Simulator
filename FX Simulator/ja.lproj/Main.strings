@@ -1,25 +1,29 @@
+
 /* Class = "UIViewController"; title = "Execution History View Controller"; ObjectID = "0Zi-Ab-Rvg"; */
 "0Zi-Ab-Rvg.title" = "Execution History View Controller";
 
-/* Class = "UITabBarItem"; title = "Trade"; ObjectID = "2sO-7Q-TFh"; */
+/* Class = "UITableViewController"; title = "Settings"; ObjectID = "1gO-mh-rMi"; */
+"1gO-mh-rMi.title" = "設定";
+
+/* Class = "UITabBarItem"; title = "トレード"; ObjectID = "2sO-7Q-TFh"; */
 "2sO-7Q-TFh.title" = "トレード";
 
 /* Class = "UILabel"; text = "Close"; ObjectID = "2ta-Z0-O7k"; */
 "2ta-Z0-O7k.text" = "Close";
 
-/* Class = "UILabel"; text = "Rate"; ObjectID = "3BF-Hn-DbC"; */
+/* Class = "UILabel"; text = "レート"; ObjectID = "3BF-Hn-DbC"; */
 "3BF-Hn-DbC.text" = "レート";
 
 /* Class = "UILabel"; text = "No"; ObjectID = "3Ot-Vr-ioR"; */
 "3Ot-Vr-ioR.text" = "No";
 
-/* Class = "UILabel"; text = "Close"; ObjectID = "3x8-uE-zAa"; */
+/* Class = "UILabel"; text = "決済"; ObjectID = "3x8-uE-zAa"; */
 "3x8-uE-zAa.text" = "決済";
 
-/* Class = "UILabel"; text = "Type"; ObjectID = "5Hp-QF-bIB"; */
+/* Class = "UILabel"; text = "注文"; ObjectID = "5Hp-QF-bIB"; */
 "5Hp-QF-bIB.text" = "注文";
 
-/* Class = "UILabel"; text = "Currency Pair"; ObjectID = "5Lg-aC-ep4"; */
+/* Class = "UILabel"; text = "通貨ペア"; ObjectID = "5Lg-aC-ep4"; */
 "5Lg-aC-ep4.text" = "通貨ペア";
 
 /* Class = "UIBarButtonItem"; title = "Cancel"; ObjectID = "6AG-Af-tHz"; */
@@ -34,19 +38,19 @@
 /* Class = "UITabBarItem"; title = "New"; ObjectID = "DkZ-vZ-ZuN"; */
 "DkZ-vZ-ZuN.title" = "New";
 
-/* Class = "UILabel"; text = "Spread"; ObjectID = "Dz0-ag-a2M"; */
+/* Class = "UILabel"; text = "スプレッド"; ObjectID = "Dz0-ag-a2M"; */
 "Dz0-ag-a2M.text" = "スプレッド";
 
 /* Class = "UIViewController"; title = "Trade"; ObjectID = "FsJ-ty-zYD"; */
 "FsJ-ty-zYD.title" = "Trade";
 
-/* Class = "UILabel"; text = "Auto"; ObjectID = "Hn2-06-nvS"; */
+/* Class = "UILabel"; text = "自動更新"; ObjectID = "Hn2-06-nvS"; */
 "Hn2-06-nvS.text" = "自動更新";
 
-/* Class = "UILabel"; text = "Start Time"; ObjectID = "ICe-yl-q61"; */
+/* Class = "UILabel"; text = "開始時間"; ObjectID = "ICe-yl-q61"; */
 "ICe-yl-q61.text" = "開始時間";
 
-/* Class = "UILabel"; text = "Time"; ObjectID = "J3N-uN-5hU"; */
+/* Class = "UILabel"; text = "時間"; ObjectID = "J3N-uN-5hU"; */
 "J3N-uN-5hU.text" = "時間";
 
 /* Class = "UILabel"; text = "Start"; ObjectID = "KXh-VN-D5M"; */
@@ -58,7 +62,7 @@
 /* Class = "UIButton"; normalTitle = "www.forexite.com"; ObjectID = "OVl-jc-a9P"; */
 "OVl-jc-a9P.normalTitle" = "www.forexite.com";
 
-/* Class = "UILabel"; text = "Time Frame"; ObjectID = "Oxc-qD-LRL"; */
+/* Class = "UILabel"; text = "時間軸"; ObjectID = "Oxc-qD-LRL"; */
 "Oxc-qD-LRL.text" = "時間軸";
 
 /* Class = "UILabel"; text = "Lot"; ObjectID = "QGw-h7-mEX"; */
@@ -88,31 +92,34 @@
 /* Class = "UILabel"; text = "1 Lot ="; ObjectID = "ZCo-cL-4kA"; */
 "ZCo-cL-4kA.text" = "1 Lot =";
 
-/* Class = "UILabel"; text = "Rate"; ObjectID = "ZrM-GX-HpU"; */
+/* Class = "UILabel"; text = "レート"; ObjectID = "ZrM-GX-HpU"; */
 "ZrM-GX-HpU.text" = "レート";
 
-/* Class = "UILabel"; text = "Account Currency"; ObjectID = "bJG-Yn-gGz"; */
+/* Class = "UIViewController"; title = "Auto Update Interval"; ObjectID = "bFb-bK-YOr"; */
+"bFb-bK-YOr.title" = "自動更新の間隔";
+
+/* Class = "UILabel"; text = "口座通貨"; ObjectID = "bJG-Yn-gGz"; */
 "bJG-Yn-gGz.text" = "口座通貨";
 
-/* Class = "UILabel"; text = "Avg"; ObjectID = "bRm-ni-yfA"; */
+/* Class = "UILabel"; text = "平均"; ObjectID = "bRm-ni-yfA"; */
 "bRm-ni-yfA.text" = "平均";
 
 /* Class = "UILabel"; text = "Data"; ObjectID = "biy-3j-hq1"; */
 "biy-3j-hq1.text" = "Data";
 
-/* Class = "UITabBarItem"; title = "Activity"; ObjectID = "bjo-7n-9JV"; */
+/* Class = "UITabBarItem"; title = "取引履歴"; ObjectID = "bjo-7n-9JV"; */
 "bjo-7n-9JV.title" = "取引履歴";
 
-/* Class = "UILabel"; text = "P/L"; ObjectID = "cC0-F9-AMG"; */
+/* Class = "UILabel"; text = "損益"; ObjectID = "cC0-F9-AMG"; */
 "cC0-F9-AMG.text" = "損益";
 
-/* Class = "UILabel"; text = "Auto Update Interval"; ObjectID = "dY4-Rr-1Ig"; */
+/* Class = "UILabel"; text = "自動更新の間隔"; ObjectID = "dY4-Rr-1Ig"; */
 "dY4-Rr-1Ig.text" = "自動更新の間隔";
 
-/* Class = "UILabel"; text = "P/L"; ObjectID = "fmg-fx-cmz"; */
+/* Class = "UILabel"; text = "損益"; ObjectID = "fmg-fx-cmz"; */
 "fmg-fx-cmz.text" = "損益";
 
-/* Class = "UILabel"; text = "Type"; ObjectID = "gr7-51-Kz6"; */
+/* Class = "UILabel"; text = "注文"; ObjectID = "gr7-51-Kz6"; */
 "gr7-51-Kz6.text" = "注文";
 
 /* Class = "UILabel"; text = "No"; ObjectID = "hgU-DS-pWC"; */
@@ -121,19 +128,19 @@
 /* Class = "UITableViewController"; title = "New Data"; ObjectID = "htm-So-PyV"; */
 "htm-So-PyV.title" = "New Data";
 
-/* Class = "UILabel"; text = "P/L"; ObjectID = "iNj-rI-h4a"; */
+/* Class = "UILabel"; text = "損益"; ObjectID = "iNj-rI-h4a"; */
 "iNj-rI-h4a.text" = "損益";
 
-/* Class = "UITabBarItem"; title = "Chart"; ObjectID = "k4d-FC-6oG"; */
+/* Class = "UITabBarItem"; title = "チャート"; ObjectID = "k4d-FC-6oG"; */
 "k4d-FC-6oG.title" = "チャート";
 
 /* Class = "UIViewController"; title = "Sub Chart"; ObjectID = "le4-VF-0hB"; */
 "le4-VF-0hB.title" = "Sub Chart";
 
 /* Class = "UITableViewController"; title = "New Start"; ObjectID = "lkl-JJ-fvd"; */
-"lkl-JJ-fvd.title" = "New Start";
+"lkl-JJ-fvd.title" = "New";
 
-/* Class = "UILabel"; text = "Lots"; ObjectID = "mHC-hx-BET"; */
+/* Class = "UILabel"; text = "保有"; ObjectID = "mHC-hx-BET"; */
 "mHC-hx-BET.text" = "保有";
 
 /* Class = "UIViewController"; title = "Set Start Time"; ObjectID = "mLC-cn-vSh"; */
@@ -145,33 +152,32 @@
 /* Class = "UINavigationItem"; title = "Title"; ObjectID = "oFM-fM-i1v"; */
 "oFM-fM-i1v.title" = "Title";
 
-/* Class = "UILabel"; text = "New"; ObjectID = "oag-uX-ICa"; */
+/* Class = "UILabel"; text = "新しく始める"; ObjectID = "oag-uX-ICa"; */
 "oag-uX-ICa.text" = "新しく始める";
 
 /* Class = "UILabel"; text = "End"; ObjectID = "pNA-xT-wsS"; */
 "pNA-xT-wsS.text" = "End";
 
-/* Class = "UILabel"; text = "Equity"; ObjectID = "qTf-MA-qs2"; */
+/* Class = "UILabel"; text = "資産"; ObjectID = "qTf-MA-qs2"; */
 "qTf-MA-qs2.text" = "資産";
 
 /* Class = "UILabel"; text = "High"; ObjectID = "qia-tU-eBM"; */
 "qia-tU-eBM.text" = "High";
 
-/* Class = "UINavigationItem"; title = "New Data"; ObjectID = "rDk-Iu-ZYr"; */
+/* Class = "UINavigationItem"; title = "新しく始める"; ObjectID = "rDk-Iu-ZYr"; */
 "rDk-Iu-ZYr.title" = "新しく始める";
 
-/* Class = "UILabel"; text = "Time"; ObjectID = "rS7-Fd-95n"; */
+/* Class = "UILabel"; text = "時間"; ObjectID = "rS7-Fd-95n"; */
 "rS7-Fd-95n.text" = "時間";
 
-/* Class = "UITabBarItem"; title = "Positions"; ObjectID = "sOe-gz-UoF"; */
+/* Class = "UITabBarItem"; title = "ポジション"; ObjectID = "sOe-gz-UoF"; */
 "sOe-gz-UoF.title" = "ポジション";
 
-/* Class = "UITabBarItem"; title = "Config"; ObjectID = "sfS-Hp-alh"; */
+/* Class = "UITabBarItem"; title = "設定"; ObjectID = "sfS-Hp-alh"; */
 "sfS-Hp-alh.title" = "設定";
 
-/* Class = "UILabel"; text = "Type"; ObjectID = "w06-x0-m79"; */
+/* Class = "UILabel"; text = "注文"; ObjectID = "w06-x0-m79"; */
 "w06-x0-m79.text" = "注文";
 
-/* Class = "UILabel"; text = "Start Balance"; ObjectID = "xNd-0x-ObN"; */
+/* Class = "UILabel"; text = "開始資産"; ObjectID = "xNd-0x-ObN"; */
 "xNd-0x-ObN.text" = "開始資産";
-

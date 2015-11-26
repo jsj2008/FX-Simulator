@@ -397,11 +397,11 @@
 		70D2FC301A9F591600CAB509 /* PositionSize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PositionSize.m; sourceTree = "<group>"; };
 		70D2FC391A9F591600CAB509 /* Time.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Time.h; sourceTree = "<group>"; };
 		70D2FC3A1A9F591600CAB509 /* Time.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Time.m; sourceTree = "<group>"; };
-		70E6795C1C0331A4007A31E8 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Main.strings; sourceTree = "<group>"; };
 		70E6795D1C0331A4007A31E8 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		70E679611C034F01007A31E8 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		70E679661C034F02007A31E8 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		70E6796B1C034F02007A31E8 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
+		70E6796E1C06DC91007A31E8 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Main.strings; sourceTree = "<group>"; };
 		70E758FB1B4C09FE00A46E24 /* ForexDataChunkStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForexDataChunkStore.h; sourceTree = "<group>"; };
 		70E758FC1B4C09FE00A46E24 /* ForexDataChunkStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForexDataChunkStore.m; sourceTree = "<group>"; };
 		70EACE601B1ED17700A2E532 /* SimulationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimulationManager.h; sourceTree = "<group>"; };
@@ -1178,7 +1178,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				70D2FA951A9F305700CAB509 /* Base */,
-				70E6795C1C0331A4007A31E8 /* ja */,
+				70E6796E1C06DC91007A31E8 /* ja */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
