@@ -31,6 +31,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    self.customizableViewControllers = nil;
+    
     for (UIViewController *controller in self.viewControllers) {
         if ([controller conformsToProtocol:@protocol(SimulationManagerDelegate)]) {
             [_simulationManager addDelegate:(id<SimulationManagerDelegate>)controller];
