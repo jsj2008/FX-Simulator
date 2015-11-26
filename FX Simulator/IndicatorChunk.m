@@ -71,10 +71,10 @@
     }
 }
 
-- (void)strokeIndicatorFromForexDataChunk:(ForexDataChunk *)chunk displayDataCount:(NSInteger)count displaySize:(CGSize)size
+- (void)strokeIndicatorFromForexDataChunk:(ForexDataChunk *)chunk displayDataCount:(NSInteger)count imageSize:(CGSize)imageSize displaySize:(CGSize)displaySize
 {
     [self enumerateIndicatorsUsingBlock:^(Indicator *indicator) {
-        [indicator strokeIndicatorFromForexDataChunk:chunk displayDataCount:count displaySize:size];
+        [indicator strokeIndicatorFromForexDataChunk:chunk displayDataCount:count imageSize:imageSize displaySize:displaySize];
     }];
 }
 
