@@ -149,8 +149,8 @@
 /* Class = "UIButton"; normalTitle = "Buy"; ObjectID = "mx5-5I-gzI"; */
 "mx5-5I-gzI.normalTitle" = "Buy";
 
-/* Class = "UINavigationItem"; title = "Title"; ObjectID = "oFM-fM-i1v"; */
-"oFM-fM-i1v.title" = "Title";
+/* Class = "UINavigationItem"; title = "Lot"; ObjectID = "oFM-fM-i1v"; */
+"oFM-fM-i1v.title" = "Lot";
 
 /* Class = "UILabel"; text = "新しく始める"; ObjectID = "oag-uX-ICa"; */
 "oag-uX-ICa.text" = "新しく始める";
