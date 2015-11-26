@@ -18,9 +18,8 @@
 @property (nonatomic) CGPoint highLineBottom;
 @property (nonatomic) CGPoint lowLineTop;
 @property (nonatomic) CGPoint lowLineBottom;
-@property (nonatomic) float colorR;
-@property (nonatomic) float colorG;
-@property (nonatomic) float colorB;
+@property (nonatomic) UIColor *color;
+@property (nonatomic) UIColor *lineColor;
 @property (nonatomic) ForexHistoryData *forexHistoryData;
 - (void)stroke;
 @end

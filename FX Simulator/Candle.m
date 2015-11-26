@@ -26,8 +26,8 @@
 
 + (instancetype)createTemporaryDefaultCandle
 {
-    UIColor *upColor = [UIColor colorWithRed:35.0/255.0 green:172.0/255.0 blue:14.0/255.0 alpha:1.0];
-    UIColor *downColor = [UIColor colorWithRed:199.0/250.0 green:36.0/255.0 blue:58.0/255.0 alpha:1.0];
+    UIColor *upColor = [UIColor colorWithRed:35.0/255.0 green:170.0/255.0 blue:15.0/255.0 alpha:1.0];
+    UIColor *downColor = [UIColor colorWithRed:200.0/255.0 green:35.0/255.0 blue:60.0/255.0 alpha:1.0];
     
     NSManagedObjectContext *context = [CoreDataManager sharedManager].managedObjectContext;
     
@@ -67,7 +67,7 @@
     _imageSize = imageSize;
     _displaySize = displaySize;
     
-    _candles = [CandlesFactory createCandlesFromForexHistoryDataChunk:chunk displayForexDataCount:count chartViewWidth:imageSize.width chartViewHeight:imageSize.height];
+    _candles = [CandlesFactory createCandlesFromForexHistoryDataChunk:chunk displayForexDataCount:count chartSize:_imageSize upColor:self.upColor upLineColor:self.upLineColor downColor:self.downColor downLineColor:self.downLineColor];
     
     for (SimpleCandle *candle in _candles) {
         [candle stroke];
