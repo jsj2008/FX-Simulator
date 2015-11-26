@@ -14,8 +14,6 @@
 @property (weak, nonatomic) IBOutlet UITextField *textField;
 @end
 
-static float kDefaultAutoUpdateInterval = 1.0;
-
 @implementation SetAutoUpdateIntervalViewController
 
 - (void)viewDidLoad {
@@ -23,14 +21,14 @@ static float kDefaultAutoUpdateInterval = 1.0;
     // Do any additional setup after loading the view.
 }
 
--(void)viewWillAppear:(BOOL)animated
+- (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     
     self.textField.text = @(self.delegate.autoUpdateIntervalSeconds).stringValue;
 }
 
--(void)viewWillDisappear:(BOOL)animated
+- (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
     
@@ -38,14 +36,10 @@ static float kDefaultAutoUpdateInterval = 1.0;
     
     float inputInterval = [self.textField.text floatValue];
     
-    if (0 < inputInterval) {
-        self.delegate.autoUpdateIntervalSeconds = inputInterval;
-    } else {
-        self.delegate.autoUpdateIntervalSeconds = kDefaultAutoUpdateInterval;
-    }
+    self.delegate.autoUpdateIntervalSeconds = inputInterval;
 }
 
--(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     [self.textField resignFirstResponder];
 }

@@ -1070,7 +1070,7 @@
                         <sections>
                             <tableViewSection id="ePU-Yi-0X0">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="IN1-G0-eyx">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="IN1-G0-eyx">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="IN1-G0-eyx" id="R94-bm-uGI">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -1084,31 +1084,34 @@
                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pb6-sg-D7j" userLabel="Set Aut Update Interval Button">
-                                                    <rect key="frame" x="562" y="7" width="30" height="30"/>
-                                                    <state key="normal">
-                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                    </state>
-                                                    <connections>
-                                                        <segue destination="bFb-bK-YOr" kind="show" identifier="SetAutoUpdateIntervalViewControllerSegue" id="yga-Dc-sh3"/>
-                                                    </connections>
-                                                </button>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wlH-IF-IzA" userLabel="Auto Update Interval Label">
+                                                    <rect key="frame" x="208" y="11" width="351" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                             <constraints>
-                                                <constraint firstAttribute="trailingMargin" secondItem="Pb6-sg-D7j" secondAttribute="trailing" id="ar8-y2-mjb"/>
                                                 <constraint firstAttribute="centerY" secondItem="dY4-Rr-1Ig" secondAttribute="centerY" id="dNO-Cw-Bgo"/>
-                                                <constraint firstAttribute="centerY" secondItem="Pb6-sg-D7j" secondAttribute="centerY" id="g2q-Ho-Ndy"/>
                                                 <constraint firstAttribute="centerX" secondItem="dY4-Rr-1Ig" secondAttribute="centerX" constant="266" id="h2v-qA-o6D"/>
+                                                <constraint firstItem="wlH-IF-IzA" firstAttribute="leading" secondItem="dY4-Rr-1Ig" secondAttribute="trailing" id="hHz-7L-44C"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="wlH-IF-IzA" secondAttribute="trailing" id="hxh-Te-nja"/>
+                                                <constraint firstAttribute="centerX" secondItem="wlH-IF-IzA" secondAttribute="centerX" constant="-237.5" id="iVR-57-ONe"/>
+                                                <constraint firstAttribute="centerY" secondItem="wlH-IF-IzA" secondAttribute="centerY" id="j5M-5L-sZ8"/>
                                                 <constraint firstItem="dY4-Rr-1Ig" firstAttribute="leading" secondItem="R94-bm-uGI" secondAttribute="leadingMargin" id="ko8-9d-kdi"/>
                                             </constraints>
                                             <variation key="default">
                                                 <mask key="constraints">
                                                     <exclude reference="h2v-qA-o6D"/>
+                                                    <exclude reference="iVR-57-ONe"/>
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        <connections>
+                                            <segue destination="bFb-bK-YOr" kind="show" identifier="SetAutoUpdateIntervalViewControllerSegue" id="XwA-mg-nkb"/>
+                                        </connections>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -1120,7 +1123,7 @@
                     </tableView>
                     <tabBarItem key="tabBarItem" title="Config" image="config.png" id="sfS-Hp-alh"/>
                     <connections>
-                        <outlet property="setAutoUpdateIntervalButton" destination="Pb6-sg-D7j" id="9qM-cc-cVP"/>
+                        <outlet property="autoUpdateIntervalLabel" destination="wlH-IF-IzA" id="lFN-Ei-7qD"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zs1-I0-1ap" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1145,7 +1148,7 @@
                                     <constraint firstAttribute="width" constant="150" id="B1z-vc-dfs"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                             </textField>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>

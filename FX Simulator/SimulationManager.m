@@ -18,14 +18,13 @@
 #import "OrderResult.h"
 #import "SaveData.h"
 #import "SaveLoader.h"
+#import "Setting.h"
 #import "SimulationState.h"
 #import "SimulationStateResult.h"
 #import "SimulationTimeManager.h"
 #import "TimeFrame.h"
 #import "TradeDatabase.h"
 #import "TradeViewController.h"
-
-static const float FXSMinAddTimeDuration = 0.3;
 
 @implementation SimulationManager {
     Market *_market;
@@ -166,10 +165,15 @@ static const float FXSMinAddTimeDuration = 0.3;
 {
     NSDate *now = [NSDate date];
     
-    if (!_previousAddTimeDate || FXSMinAddTimeDuration < [now timeIntervalSinceDate:_previousAddTimeDate]) {
+    if (!_previousAddTimeDate || [Setting minAutoUpdateIntervalSeconds] < [now timeIntervalSinceDate:_previousAddTimeDate]) {
         _previousAddTimeDate = now;
         [_simulationTimeManager add];
     }
+}
+
+- (float)autoUpdateIntervalSeconds
+{
+    return _saveData.autoUpdateIntervalSeconds;
 }
 
 - (void)setAutoUpdateIntervalSeconds:(float)autoUpdateIntervalSeconds
