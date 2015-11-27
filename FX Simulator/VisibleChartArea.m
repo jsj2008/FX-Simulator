@@ -202,7 +202,7 @@ static const float FXSEntityChartViewPrepareTotalRangeRatio = 0.5;
 
 - (ForexHistoryData *)forexDataOfVisibleChartViewPoint:(CGPoint)point
 {
-    float entityChartViewX = (_visibleChartView.contentOffset.x + point.x) / _entityChartView.transform.a;
+    float entityChartViewX = (-_entityChartView.frame.origin.x + _visibleChartView.contentOffset.x + point.x) / _entityChartView.transform.a;
     float entityChartViewY = (_visibleChartView.contentOffset.y + point.y) / _entityChartView.transform.d;
     
     return [self.currentEntityChart forexDataOfEntityChartPoint:CGPointMake(entityChartViewX, entityChartViewY)];
