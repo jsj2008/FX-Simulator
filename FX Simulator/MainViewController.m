@@ -31,6 +31,10 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
+    [notificationCenter addObserver:self selector:@selector(didBecomeActive) name:UIApplicationDidBecomeActiveNotification object:nil];
+    [notificationCenter addObserver:self selector:@selector(didEnterBackground) name:UIApplicationDidEnterBackgroundNotification object:nil];
+    
     self.customizableViewControllers = nil;
     
     for (UIViewController *controller in self.viewControllers) {
@@ -47,17 +51,9 @@
     [super viewWillAppear:animated];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 -(void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
-    
-    //self.navigationController.navigationBar.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
-    //self.navigationController.navigationBar.translucent = NO;
     
     // more navigation controller layout
     self.moreNavigationController.navigationBar.translucent = NO;
@@ -72,6 +68,27 @@
             cell.textLabel.textColor = [UIColor whiteColor];
         }
     }
+}
+
+- (void)didBecomeActive
+{
+    [_simulationManager resumeTime];
+}
+
+- (void)didEnterBackground
+{
+    [_simulationManager pauseTime];
+}
+
+- (void)dealloc
+{
+    NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
+    [notificationCenter removeObserver:self];
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
 }
 
 /*
