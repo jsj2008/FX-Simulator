@@ -18,6 +18,8 @@
 
 @interface Market : NSObject
 
+@property (nonatomic, readonly) Time *currentTime;
+
 - (instancetype)initWithCurrencyPair:(CurrencyPair *)currencyPair timeFrame:(TimeFrame *)timeFrame lastLoadedTime:(Time *)time spread:(Spread *)spread;
 
 - (void)add;
