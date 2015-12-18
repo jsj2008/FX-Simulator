@@ -54,6 +54,7 @@
 - (void)addDelegate:(id<SimulationManagerDelegate>)delegate;
 - (void)startSimulation;
 - (void)startSimulationForSaveData:(SaveData *)saveData;
+- (void)save;
 
 /**
  Startした瞬間、時間が進み、Observerのメソッドが呼ばれ、それぞれのObserverに値がセットされる。

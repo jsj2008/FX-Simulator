@@ -102,6 +102,12 @@
     [self loadSaveData:saveData];
 }
 
+- (void)save
+{
+    _saveData.lastLoadedTime = _market.currentTime;
+    [_saveData saveWithCompletion:nil error:nil];
+}
+
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
     if ([keyPath isEqualToString:@"currentLoadedRowid"] && [object isKindOfClass:[SimulationTimeManager class]]) {

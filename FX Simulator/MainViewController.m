@@ -33,7 +33,7 @@
     
     NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
     [notificationCenter addObserver:self selector:@selector(didBecomeActive) name:UIApplicationDidBecomeActiveNotification object:nil];
-    [notificationCenter addObserver:self selector:@selector(didEnterBackground) name:UIApplicationDidEnterBackgroundNotification object:nil];
+    [notificationCenter addObserver:self selector:@selector(willEnterBackground) name:UIApplicationWillResignActiveNotification object:nil];
     
     self.customizableViewControllers = nil;
     
@@ -75,9 +75,10 @@
     [_simulationManager resumeTime];
 }
 
-- (void)didEnterBackground
+- (void)willEnterBackground
 {
     [_simulationManager pauseTime];
+    [_simulationManager save];
 }
 
 - (void)dealloc
