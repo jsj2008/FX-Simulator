@@ -32,4 +32,7 @@ DerivedData
 
 # FX Simulator
 *.sqlite*
+!trade_db.sqlite3
 *.png
+*.pdf
+settings/
