@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		7002F4A21B48D77000AF9DA7 /* Candle.m in Sources */ = {isa = PBXBuildFile; fileRef = 7002F4A11B48D77000AF9DA7 /* Candle.m */; };
-		700360151AA8C0CE00A57959 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 700360141AA8C0CE00A57959 /* iAd.framework */; };
 		70042C641B47ABBC00C1A22E /* MovingAverage.m in Sources */ = {isa = PBXBuildFile; fileRef = 70042C631B47ABBC00C1A22E /* MovingAverage.m */; };
 		70042C671B47FA1500C1A22E /* IndicatorUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 70042C661B47FA1500C1A22E /* IndicatorUtils.m */; };
 		70042C6D1B480D6800C1A22E /* ForexDataChunk.m in Sources */ = {isa = PBXBuildFile; fileRef = 70042C6C1B480D6800C1A22E /* ForexDataChunk.m */; };
@@ -22,10 +21,24 @@
 		7041B7111B2EEDAD00DD64FE /* Account.m in Sources */ = {isa = PBXBuildFile; fileRef = 7041B7101B2EEDAD00DD64FE /* Account.m */; };
 		7041B7141B3278A700DD64FE /* FXSTimeRange.m in Sources */ = {isa = PBXBuildFile; fileRef = 7041B7131B3278A700DD64FE /* FXSTimeRange.m */; };
 		70467D2E1B8316A300B75BD3 /* CoreDataInMemoryManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 70467D2D1B8316A300B75BD3 /* CoreDataInMemoryManager.m */; };
+		704AF5191C2E980F0055C78E /* GoogleMobileAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 704AF5181C2E980F0055C78E /* GoogleMobileAds.framework */; };
+		704AF51B1C3A85590055C78E /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 704AF51A1C3A85590055C78E /* AdSupport.framework */; };
+		704AF51D1C3A856D0055C78E /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 704AF51C1C3A856D0055C78E /* AudioToolbox.framework */; };
+		704AF51F1C3A857F0055C78E /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 704AF51E1C3A857F0055C78E /* AVFoundation.framework */; };
+		704AF5211C3A85950055C78E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 704AF5201C3A85950055C78E /* CoreGraphics.framework */; };
+		704AF5231C3A85A20055C78E /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 704AF5221C3A85A20055C78E /* CoreTelephony.framework */; };
+		704AF5251C3A85FA0055C78E /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 704AF5241C3A85FA0055C78E /* EventKit.framework */; };
+		704AF5271C3A86050055C78E /* EventKitUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 704AF5261C3A86050055C78E /* EventKitUI.framework */; };
+		704AF5291C3A86250055C78E /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 704AF5281C3A86250055C78E /* MessageUI.framework */; };
+		704AF52B1C3A86310055C78E /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 704AF52A1C3A86310055C78E /* StoreKit.framework */; };
+		704AF52D1C3A863D0055C78E /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 704AF52C1C3A863D0055C78E /* SystemConfiguration.framework */; };
+		704AF52F1C3A882D0055C78E /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 704AF52E1C3A882D0055C78E /* libsqlite3.tbd */; };
 		704D3E771B5A7AFB00A8B9AB /* Chart.m in Sources */ = {isa = PBXBuildFile; fileRef = 704D3E761B5A7AFB00A8B9AB /* Chart.m */; };
 		704D3E7A1B5A7B0C00A8B9AB /* ChartChunk.m in Sources */ = {isa = PBXBuildFile; fileRef = 704D3E791B5A7B0C00A8B9AB /* ChartChunk.m */; };
 		705DCE4B1AE7C84300BCF710 /* Rates.m in Sources */ = {isa = PBXBuildFile; fileRef = 70B5AAEE1AC7FF44001F8823 /* Rates.m */; };
 		705DCE4C1AE7CE9800BCF710 /* RatePanelButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 70AD14751AADD0AA0099F0BA /* RatePanelButton.m */; };
+		705E78B11C26D06100A966EF /* AdManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 705E78B01C26D06100A966EF /* AdManager.m */; };
+		705E78B31C26D1EC00A966EF /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 705E78B21C26D1EC00A966EF /* iAd.framework */; };
 		705FCFA61BFB7BA8006197DA /* ChartSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 705FCFA51BFB7BA8006197DA /* ChartSource.m */; };
 		705FCFA91BFB7BA9006197DA /* CandleSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 705FCFA81BFB7BA9006197DA /* CandleSource.m */; };
 		705FCFAC1BFB7BA9006197DA /* CandleBaseSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 705FCFAB1BFB7BA9006197DA /* CandleBaseSource.m */; };
@@ -65,8 +78,13 @@
 		707CA1A21B52394300F099E9 /* portfolio@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 707CA1901B52394300F099E9 /* portfolio@2x.png */; };
 		707CA1A51B5387CF00F099E9 /* IndicatorChunk.m in Sources */ = {isa = PBXBuildFile; fileRef = 707CA1A41B5387CF00F099E9 /* IndicatorChunk.m */; };
 		707CA1B71B53A51700F099E9 /* Indicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 707CA1B61B53A51700F099E9 /* Indicator.m */; };
+		70838AA21C2938DD0044B1CC /* AdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70838AA11C2938DD0044B1CC /* AdViewController.m */; };
+		70838AA51C2939630044B1CC /* AdProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 70838AA41C2939630044B1CC /* AdProvider.m */; };
+		70838AA91C293CDE0044B1CC /* AdNetworkIAd.m in Sources */ = {isa = PBXBuildFile; fileRef = 70838AA81C293CDE0044B1CC /* AdNetworkIAd.m */; };
+		70838AAC1C293D060044B1CC /* AdNetworkAdmob.m in Sources */ = {isa = PBXBuildFile; fileRef = 70838AAB1C293D060044B1CC /* AdNetworkAdmob.m */; };
 		709BC75E1B0700320059C940 /* SetAutoUpdateIntervalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 709BC75D1B0700320059C940 /* SetAutoUpdateIntervalViewController.m */; };
 		70B5AAF21ACE5BC0001F8823 /* SubChartDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70B5AAF11ACE5BC0001F8823 /* SubChartDataViewController.m */; };
+		70BB5B811C2DAFB800F2DE65 /* AdNetworkSettingsId.m in Sources */ = {isa = PBXBuildFile; fileRef = 70BB5B801C2DAFB800F2DE65 /* AdNetworkSettingsId.m */; };
 		70BB8BEA1B60D07C00B0539D /* FXSimulator.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 70BB8BE81B60D07C00B0539D /* FXSimulator.xcdatamodeld */; };
 		70BF3C161BA9B88200779617 /* trade_db.sqlite3 in Resources */ = {isa = PBXBuildFile; fileRef = 70BF3C151BA9B88200779617 /* trade_db.sqlite3 */; };
 		70BF3C221BAEF88500779617 /* OpenPositionRelationChunk.m in Sources */ = {isa = PBXBuildFile; fileRef = 70BF3C211BAEF88500779617 /* OpenPositionRelationChunk.m */; };
@@ -79,7 +97,6 @@
 		70D2FA981A9F305700CAB509 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 70D2FA971A9F305700CAB509 /* Images.xcassets */; };
 		70D2FA9B1A9F305700CAB509 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 70D2FA991A9F305700CAB509 /* LaunchScreen.xib */; };
 		70D2FAA71A9F305800CAB509 /* FX_SimulatorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FAA61A9F305800CAB509 /* FX_SimulatorTests.m */; };
-		70D2FAB41A9F531800CAB509 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 70D2FAB31A9F531800CAB509 /* libsqlite3.0.dylib */; };
 		70D2FACF1A9F558100CAB509 /* forex_time_scale.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 70D2FACE1A9F558100CAB509 /* forex_time_scale.sqlite */; };
 		70D2FAD61A9F559200CAB509 /* OpenPositionTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FAD11A9F559200CAB509 /* OpenPositionTableViewController.m */; };
 		70D2FAD71A9F559200CAB509 /* OpenPositionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FAD31A9F559200CAB509 /* OpenPositionHeaderView.m */; };
@@ -167,7 +184,6 @@
 		7002F4A01B48D77000AF9DA7 /* Candle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Candle.h; sourceTree = "<group>"; };
 		7002F4A11B48D77000AF9DA7 /* Candle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Candle.m; sourceTree = "<group>"; };
 		7002F4A31B48D7A200AF9DA7 /* Indicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Indicator.h; sourceTree = "<group>"; };
-		700360141AA8C0CE00A57959 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 		70042C621B47ABBC00C1A22E /* MovingAverage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovingAverage.h; sourceTree = "<group>"; };
 		70042C631B47ABBC00C1A22E /* MovingAverage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovingAverage.m; sourceTree = "<group>"; };
 		70042C651B47FA1500C1A22E /* IndicatorUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IndicatorUtils.h; sourceTree = "<group>"; };
@@ -196,12 +212,27 @@
 		70467D2C1B8316A300B75BD3 /* CoreDataInMemoryManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataInMemoryManager.h; sourceTree = "<group>"; };
 		70467D2D1B8316A300B75BD3 /* CoreDataInMemoryManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataInMemoryManager.m; sourceTree = "<group>"; };
 		70467D6F1B87030900B75BD3 /* SaveDataTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SaveDataTests.m; sourceTree = "<group>"; };
+		704AF5181C2E980F0055C78E /* GoogleMobileAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleMobileAds.framework; path = Frameworks/GoogleMobileAds.framework; sourceTree = "<group>"; };
+		704AF51A1C3A85590055C78E /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		704AF51C1C3A856D0055C78E /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		704AF51E1C3A857F0055C78E /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		704AF5201C3A85950055C78E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		704AF5221C3A85A20055C78E /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		704AF5241C3A85FA0055C78E /* EventKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKit.framework; path = System/Library/Frameworks/EventKit.framework; sourceTree = SDKROOT; };
+		704AF5261C3A86050055C78E /* EventKitUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKitUI.framework; path = System/Library/Frameworks/EventKitUI.framework; sourceTree = SDKROOT; };
+		704AF5281C3A86250055C78E /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		704AF52A1C3A86310055C78E /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		704AF52C1C3A863D0055C78E /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		704AF52E1C3A882D0055C78E /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		704D3E751B5A7AFB00A8B9AB /* Chart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chart.h; sourceTree = "<group>"; };
 		704D3E761B5A7AFB00A8B9AB /* Chart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Chart.m; sourceTree = "<group>"; };
 		704D3E781B5A7B0C00A8B9AB /* ChartChunk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChartChunk.h; sourceTree = "<group>"; };
 		704D3E791B5A7B0C00A8B9AB /* ChartChunk.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChartChunk.m; sourceTree = "<group>"; };
 		705C2E0E1ADE4C270089D510 /* Money+ConvertToAccountCurrency.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Money+ConvertToAccountCurrency.h"; sourceTree = "<group>"; };
 		705C2E0F1ADE4C270089D510 /* Money+ConvertToAccountCurrency.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Money+ConvertToAccountCurrency.m"; sourceTree = "<group>"; };
+		705E78AF1C26D06100A966EF /* AdManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdManager.h; sourceTree = "<group>"; };
+		705E78B01C26D06100A966EF /* AdManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdManager.m; sourceTree = "<group>"; };
+		705E78B21C26D1EC00A966EF /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 		705FCFA41BFB7BA8006197DA /* ChartSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChartSource.h; sourceTree = "<group>"; };
 		705FCFA51BFB7BA8006197DA /* ChartSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChartSource.m; sourceTree = "<group>"; };
 		705FCFA71BFB7BA9006197DA /* CandleSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CandleSource.h; sourceTree = "<group>"; };
@@ -259,6 +290,15 @@
 		707CA1A31B5387CF00F099E9 /* IndicatorChunk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IndicatorChunk.h; sourceTree = "<group>"; };
 		707CA1A41B5387CF00F099E9 /* IndicatorChunk.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IndicatorChunk.m; sourceTree = "<group>"; };
 		707CA1B61B53A51700F099E9 /* Indicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Indicator.m; sourceTree = "<group>"; };
+		70838AA01C2938DC0044B1CC /* AdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdViewController.h; sourceTree = "<group>"; };
+		70838AA11C2938DD0044B1CC /* AdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdViewController.m; sourceTree = "<group>"; };
+		70838AA31C2939630044B1CC /* AdProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdProvider.h; sourceTree = "<group>"; };
+		70838AA41C2939630044B1CC /* AdProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdProvider.m; sourceTree = "<group>"; };
+		70838AA61C293A6C0044B1CC /* AdNetwork.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdNetwork.h; sourceTree = "<group>"; };
+		70838AA71C293CDE0044B1CC /* AdNetworkIAd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdNetworkIAd.h; sourceTree = "<group>"; };
+		70838AA81C293CDE0044B1CC /* AdNetworkIAd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdNetworkIAd.m; sourceTree = "<group>"; };
+		70838AAA1C293D060044B1CC /* AdNetworkAdmob.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdNetworkAdmob.h; sourceTree = "<group>"; };
+		70838AAB1C293D060044B1CC /* AdNetworkAdmob.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdNetworkAdmob.m; sourceTree = "<group>"; };
 		709BC75C1B0700320059C940 /* SetAutoUpdateIntervalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetAutoUpdateIntervalViewController.h; sourceTree = "<group>"; };
 		709BC75D1B0700320059C940 /* SetAutoUpdateIntervalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetAutoUpdateIntervalViewController.m; sourceTree = "<group>"; };
 		70AD14741AADD0AA0099F0BA /* RatePanelButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RatePanelButton.h; sourceTree = "<group>"; };
@@ -267,6 +307,8 @@
 		70B5AAEE1AC7FF44001F8823 /* Rates.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Rates.m; sourceTree = "<group>"; };
 		70B5AAF01ACE5BC0001F8823 /* SubChartDataViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubChartDataViewController.h; sourceTree = "<group>"; };
 		70B5AAF11ACE5BC0001F8823 /* SubChartDataViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubChartDataViewController.m; sourceTree = "<group>"; };
+		70BB5B7F1C2DAFB800F2DE65 /* AdNetworkSettingsId.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AdNetworkSettingsId.h; path = settings/AdNetworkSettingsId.h; sourceTree = "<group>"; };
+		70BB5B801C2DAFB800F2DE65 /* AdNetworkSettingsId.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AdNetworkSettingsId.m; path = settings/AdNetworkSettingsId.m; sourceTree = "<group>"; };
 		70BB8BE91B60D07C00B0539D /* FXSimulator.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FXSimulator.xcdatamodel; sourceTree = "<group>"; };
 		70BF3C151BA9B88200779617 /* trade_db.sqlite3 */ = {isa = PBXFileReference; lastKnownFileType = file; path = trade_db.sqlite3; sourceTree = "<group>"; };
 		70BF3C201BAEF88500779617 /* OpenPositionRelationChunk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenPositionRelationChunk.h; sourceTree = "<group>"; };
@@ -288,7 +330,6 @@
 		70D2FAA01A9F305800CAB509 /* FXSimulatorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FXSimulatorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		70D2FAA51A9F305800CAB509 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		70D2FAA61A9F305800CAB509 /* FX_SimulatorTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FX_SimulatorTests.m; sourceTree = "<group>"; };
-		70D2FAB31A9F531800CAB509 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 		70D2FACE1A9F558100CAB509 /* forex_time_scale.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = forex_time_scale.sqlite; sourceTree = "<group>"; };
 		70D2FAD01A9F559200CAB509 /* OpenPositionTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenPositionTableViewController.h; sourceTree = "<group>"; };
 		70D2FAD11A9F559200CAB509 /* OpenPositionTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenPositionTableViewController.m; sourceTree = "<group>"; };
@@ -437,8 +478,19 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				700360151AA8C0CE00A57959 /* iAd.framework in Frameworks */,
-				70D2FAB41A9F531800CAB509 /* libsqlite3.0.dylib in Frameworks */,
+				704AF52F1C3A882D0055C78E /* libsqlite3.tbd in Frameworks */,
+				704AF52D1C3A863D0055C78E /* SystemConfiguration.framework in Frameworks */,
+				704AF52B1C3A86310055C78E /* StoreKit.framework in Frameworks */,
+				704AF5291C3A86250055C78E /* MessageUI.framework in Frameworks */,
+				704AF5271C3A86050055C78E /* EventKitUI.framework in Frameworks */,
+				704AF5251C3A85FA0055C78E /* EventKit.framework in Frameworks */,
+				704AF5231C3A85A20055C78E /* CoreTelephony.framework in Frameworks */,
+				704AF5211C3A85950055C78E /* CoreGraphics.framework in Frameworks */,
+				704AF51F1C3A857F0055C78E /* AVFoundation.framework in Frameworks */,
+				704AF51D1C3A856D0055C78E /* AudioToolbox.framework in Frameworks */,
+				704AF51B1C3A85590055C78E /* AdSupport.framework in Frameworks */,
+				704AF5191C2E980F0055C78E /* GoogleMobileAds.framework in Frameworks */,
+				705E78B31C26D1EC00A966EF /* iAd.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -493,8 +545,19 @@
 		70D2FA7B1A9F305700CAB509 = {
 			isa = PBXGroup;
 			children = (
-				700360141AA8C0CE00A57959 /* iAd.framework */,
-				70D2FAB31A9F531800CAB509 /* libsqlite3.0.dylib */,
+				704AF52E1C3A882D0055C78E /* libsqlite3.tbd */,
+				704AF52C1C3A863D0055C78E /* SystemConfiguration.framework */,
+				704AF52A1C3A86310055C78E /* StoreKit.framework */,
+				704AF5281C3A86250055C78E /* MessageUI.framework */,
+				704AF5261C3A86050055C78E /* EventKitUI.framework */,
+				704AF5241C3A85FA0055C78E /* EventKit.framework */,
+				704AF5221C3A85A20055C78E /* CoreTelephony.framework */,
+				704AF5201C3A85950055C78E /* CoreGraphics.framework */,
+				704AF51E1C3A857F0055C78E /* AVFoundation.framework */,
+				704AF51C1C3A856D0055C78E /* AudioToolbox.framework */,
+				704AF51A1C3A85590055C78E /* AdSupport.framework */,
+				704AF5181C2E980F0055C78E /* GoogleMobileAds.framework */,
+				705E78B21C26D1EC00A966EF /* iAd.framework */,
 				70D2FA861A9F305700CAB509 /* FX Simulator */,
 				70D2FAA31A9F305800CAB509 /* FX SimulatorTests */,
 				70D2FA851A9F305700CAB509 /* Products */,
@@ -660,6 +723,19 @@
 				706D09C91BF75BB200B3BBF7 /* FXSComparisonResult.m */,
 				705FCFBC1BFC609B006197DA /* ChartType.h */,
 				705FCFBD1BFC609B006197DA /* ChartType.m */,
+				705E78AF1C26D06100A966EF /* AdManager.h */,
+				705E78B01C26D06100A966EF /* AdManager.m */,
+				70838AA01C2938DC0044B1CC /* AdViewController.h */,
+				70838AA11C2938DD0044B1CC /* AdViewController.m */,
+				70838AA31C2939630044B1CC /* AdProvider.h */,
+				70838AA41C2939630044B1CC /* AdProvider.m */,
+				70838AA61C293A6C0044B1CC /* AdNetwork.h */,
+				70838AA71C293CDE0044B1CC /* AdNetworkIAd.h */,
+				70838AA81C293CDE0044B1CC /* AdNetworkIAd.m */,
+				70838AAA1C293D060044B1CC /* AdNetworkAdmob.h */,
+				70838AAB1C293D060044B1CC /* AdNetworkAdmob.m */,
+				70BB5B7F1C2DAFB800F2DE65 /* AdNetworkSettingsId.h */,
+				70BB5B801C2DAFB800F2DE65 /* AdNetworkSettingsId.m */,
 			);
 			path = "FX Simulator";
 			sourceTree = "<group>";
@@ -963,6 +1039,7 @@
 				TargetAttributes = {
 					70D2FA831A9F305700CAB509 = {
 						CreatedOnToolsVersion = 6.1.1;
+						DevelopmentTeam = PZG3S64TSR;
 					};
 					70D2FA9F1A9F305800CAB509 = {
 						CreatedOnToolsVersion = 6.1.1;
@@ -1046,7 +1123,9 @@
 				70634FE71BA91EF9009ACCEE /* InputNumberValueViewController.m in Sources */,
 				70D2FB601A9F575900CAB509 /* ExecutionHistoryTableViewCell.m in Sources */,
 				70EACE691B2AACBE00A2E532 /* FXSAlert.m in Sources */,
+				705E78B11C26D06100A966EF /* AdManager.m in Sources */,
 				702A84F61BDB5F7B00CA6102 /* Coordinate.m in Sources */,
+				70838AA91C293CDE0044B1CC /* AdNetworkIAd.m in Sources */,
 				70D2FB6B1A9F576500CAB509 /* SimulationTimeManager.m in Sources */,
 				70D2FBF81A9F57DC00CAB509 /* OrdersCreateModeFactory.m in Sources */,
 				70D2FB481A9F574000CAB509 /* TradeViewController.m in Sources */,
@@ -1063,6 +1142,8 @@
 				70FCD5A41B9B187900500B40 /* NormalizedOrdersFactory.m in Sources */,
 				705FCFA91BFB7BA9006197DA /* CandleSource.m in Sources */,
 				7076F5AA1AECCDB7004CC6BA /* CheckmarkViewController.m in Sources */,
+				70838AAC1C293D060044B1CC /* AdNetworkAdmob.m in Sources */,
+				70BB5B811C2DAFB800F2DE65 /* AdNetworkSettingsId.m in Sources */,
 				709BC75E1B0700320059C940 /* SetAutoUpdateIntervalViewController.m in Sources */,
 				7076F5A71AECCBBB004CC6BA /* NewStartViewController.m in Sources */,
 				70FCD5A71B9B1B2400500B40 /* OrderManager.m in Sources */,
@@ -1090,6 +1171,7 @@
 				700C9E651B75BAF30084320E /* CandleSource+Additions.m in Sources */,
 				70D2FAD71A9F559200CAB509 /* OpenPositionHeaderView.m in Sources */,
 				70CFEB411B19F92800837727 /* FXSTest.m in Sources */,
+				70838AA21C2938DD0044B1CC /* AdViewController.m in Sources */,
 				70D2FB5F1A9F575900CAB509 /* ExecutionHistoryTableViewController.m in Sources */,
 				704D3E771B5A7AFB00A8B9AB /* Chart.m in Sources */,
 				70FE82001BD33FF200F2D894 /* VisibleChartArea.m in Sources */,
@@ -1123,6 +1205,7 @@
 				702A84F31BDB5A4F00CA6102 /* CoordinateRange.m in Sources */,
 				70FCD5AA1B9B1B9900500B40 /* OrderResult.m in Sources */,
 				70D2FBFD1A9F57DC00CAB509 /* ExecutionOrder.m in Sources */,
+				70838AA51C2939630044B1CC /* AdProvider.m in Sources */,
 				705FCFBE1BFC609B006197DA /* ChartType.m in Sources */,
 				70D2FA8A1A9F305700CAB509 /* main.m in Sources */,
 				705FCFB21BFB7BA9006197DA /* HeikinAshiSource.m in Sources */,
@@ -1301,10 +1384,20 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Frameworks",
+				);
 				GCC_PREFIX_HEADER = "FX Simulator/FX_Simulator-Prefix.pch";
 				INFOPLIST_FILE = "FX Simulator/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = .FXSimulator;
 				PRODUCT_NAME = FXSimulator;
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -1312,10 +1405,20 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Frameworks",
+				);
 				GCC_PREFIX_HEADER = "FX Simulator/FX_Simulator-Prefix.pch";
 				INFOPLIST_FILE = "FX Simulator/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = .FXSimulator;
 				PRODUCT_NAME = FXSimulator;
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
