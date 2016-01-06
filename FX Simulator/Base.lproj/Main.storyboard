@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="49e-Tb-3d3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="8vX-6T-8kp">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
@@ -1150,37 +1150,36 @@
                             <constraint firstAttribute="centerX" secondItem="4CQ-ca-LRi" secondAttribute="centerX" id="p6P-ss-Uqf"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="textField" destination="4CQ-ca-LRi" id="Gre-MY-XNp"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pe4-0e-IJm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2026" y="-1544"/>
         </scene>
         <!--Main View Controller-->
-        <scene sceneID="yl2-sM-qoP">
+        <scene sceneID="OuU-T1-itr">
             <objects>
-                <tabBarController id="49e-Tb-3d3" customClass="MainViewController" sceneMemberID="viewController">
-                    <keyCommands>
-                        <keyCommand/>
-                    </keyCommands>
-                    <nil key="simulatedBottomBarMetrics"/>
-                    <tabBar key="tabBar" contentMode="scaleToFill" id="W28-zg-YXA">
-                        <rect key="frame" x="0.0" y="975" width="768" height="49"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                <tabBarController id="8vX-6T-8kp" customClass="MainViewController" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="kO3-hA-nbc">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <color key="barTintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <segue destination="FsJ-ty-zYD" kind="relationship" relationship="viewControllers" id="xdP-OO-aci"/>
-                        <segue destination="le4-VF-0hB" kind="relationship" relationship="viewControllers" id="nSG-wE-OA7"/>
-                        <segue destination="UZy-Pp-b1L" kind="relationship" relationship="viewControllers" id="OGt-qE-cEj"/>
-                        <segue destination="0Zi-Ab-Rvg" kind="relationship" relationship="viewControllers" id="TVz-Pr-w6i"/>
-                        <segue destination="1gO-mh-rMi" kind="relationship" relationship="viewControllers" id="o8j-vK-bzT"/>
-                        <segue destination="lkl-JJ-fvd" kind="relationship" relationship="viewControllers" id="7C4-wL-7Vu"/>
+                        <segue destination="FsJ-ty-zYD" kind="relationship" relationship="viewControllers" id="C63-1l-WLp"/>
+                        <segue destination="le4-VF-0hB" kind="relationship" relationship="viewControllers" id="Em0-yD-Lvt"/>
+                        <segue destination="UZy-Pp-b1L" kind="relationship" relationship="viewControllers" id="ag5-CQ-VUA"/>
+                        <segue destination="0Zi-Ab-Rvg" kind="relationship" relationship="viewControllers" id="y9C-fz-IMi"/>
+                        <segue destination="1gO-mh-rMi" kind="relationship" relationship="viewControllers" id="hVo-li-EJR"/>
+                        <segue destination="lkl-JJ-fvd" kind="relationship" relationship="viewControllers" id="1XY-am-i2A"/>
                     </connections>
                 </tabBarController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="HuB-VB-40B" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5MD-WF-PpN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-39" y="128"/>
+            <point key="canvasLocation" x="-864" y="641"/>
         </scene>
         <!--Trade View Controller-->
         <scene sceneID="tdy-gL-0Zy">
@@ -2372,8 +2371,8 @@
         <image name="portfolio.png" width="26" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="DFi-Ei-HMv"/>
         <segue reference="TMq-66-BLM"/>
         <segue reference="Mxd-EV-XXe"/>
+        <segue reference="DFi-Ei-HMv"/>
     </inferredMetricsTieBreakers>
 </document>
