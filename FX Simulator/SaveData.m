@@ -476,7 +476,7 @@ static NSUInteger FXSDefaultLeverage = 1;
 - (Account *)account
 {
     if (!_account) {
-        _account = [[Account alloc] initWithAccountCurrency:self.accountCurrency currencyPair:self.currencyPair startBalance:self.startBalance openPositions:self.openPositions executionOrders:self.executionOrders];
+        _account = [[Account alloc] initWithAccountCurrency:self.accountCurrency currencyPair:self.currencyPair startBalance:self.startBalance leverage:self.leverage openPositions:self.openPositions executionOrders:self.executionOrders market:self.market];
     }
     
     return _account;
