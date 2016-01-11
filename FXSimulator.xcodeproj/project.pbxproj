@@ -17,7 +17,6 @@
 		70248B9C1C3E9F2E0073D5B7 /* Leverage.m in Sources */ = {isa = PBXBuildFile; fileRef = 70248B9B1C3E9F2E0073D5B7 /* Leverage.m */; };
 		70248BAA1C3F76420073D5B7 /* SaveDataSource+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 70248BA71C3F76420073D5B7 /* SaveDataSource+CoreDataProperties.m */; };
 		70248BAB1C3F76420073D5B7 /* SaveDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 70248BA91C3F76420073D5B7 /* SaveDataSource.m */; };
-		70248BAE1C40F4F70073D5B7 /* MovingAverageType.m in Sources */ = {isa = PBXBuildFile; fileRef = 70248BAD1C40F4F70073D5B7 /* MovingAverageType.m */; };
 		702A84F31BDB5A4F00CA6102 /* CoordinateRange.m in Sources */ = {isa = PBXBuildFile; fileRef = 702A84F21BDB5A4F00CA6102 /* CoordinateRange.m */; };
 		702A84F61BDB5F7B00CA6102 /* Coordinate.m in Sources */ = {isa = PBXBuildFile; fileRef = 702A84F51BDB5F7B00CA6102 /* Coordinate.m */; };
 		7033C5D61B469F56005EF07B /* NSNumber+FXSNumberConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 7033C5D51B469F56005EF07B /* NSNumber+FXSNumberConverter.m */; };
@@ -205,8 +204,6 @@
 		70248BA71C3F76420073D5B7 /* SaveDataSource+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SaveDataSource+CoreDataProperties.m"; sourceTree = "<group>"; };
 		70248BA81C3F76420073D5B7 /* SaveDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SaveDataSource.h; sourceTree = "<group>"; };
 		70248BA91C3F76420073D5B7 /* SaveDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SaveDataSource.m; sourceTree = "<group>"; };
-		70248BAC1C40F4F70073D5B7 /* MovingAverageType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovingAverageType.h; sourceTree = "<group>"; };
-		70248BAD1C40F4F70073D5B7 /* MovingAverageType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovingAverageType.m; sourceTree = "<group>"; };
 		70248BB41C41675B0073D5B7 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Main.strings; sourceTree = "<group>"; };
 		702A84F11BDB5A4F00CA6102 /* CoordinateRange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoordinateRange.h; sourceTree = "<group>"; };
 		702A84F21BDB5A4F00CA6102 /* CoordinateRange.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoordinateRange.m; sourceTree = "<group>"; };
@@ -749,8 +746,6 @@
 				70BB5B801C2DAFB800F2DE65 /* AdNetworkSettingsId.m */,
 				70248B9A1C3E9F2D0073D5B7 /* Leverage.h */,
 				70248B9B1C3E9F2E0073D5B7 /* Leverage.m */,
-				70248BAC1C40F4F70073D5B7 /* MovingAverageType.h */,
-				70248BAD1C40F4F70073D5B7 /* MovingAverageType.m */,
 			);
 			path = "FX Simulator";
 			sourceTree = "<group>";
@@ -1249,7 +1244,6 @@
 				7034F6C31B92D6AE0029A79C /* PositionBase.m in Sources */,
 				70FE818A1BC5769800F2D894 /* EntityChart.m in Sources */,
 				70D2FC431A9F591600CAB509 /* TimeFrame.m in Sources */,
-				70248BAE1C40F4F70073D5B7 /* MovingAverageType.m in Sources */,
 				70E758FD1B4C09FE00A46E24 /* ForexDataChunkStore.m in Sources */,
 				70042C671B47FA1500C1A22E /* IndicatorUtils.m in Sources */,
 			);
