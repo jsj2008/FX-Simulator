@@ -12,6 +12,7 @@
 #import "Currency.h"
 #import "CurrencyPair.h"
 #import "InputNumberValueViewController.h"
+#import "Leverage.h"
 #import "Money.h"
 #import "PositionSize.h"
 #import "SaveData.h"
@@ -31,6 +32,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *accountCurrencyLabel;
 @property (weak, nonatomic) IBOutlet UILabel *startBalanceLabel;
 @property (weak, nonatomic) IBOutlet UILabel *positionSizeOfLotLabel;
+@property (weak, nonatomic) IBOutlet UILabel *leverageLabel;
+
 @end
 
 @implementation SetSaveDataTableViewController
@@ -136,6 +139,13 @@
         controller.setStartTime = ^(Time *startTime){
             self.saveDataForm.startTime = startTime;
         };
+    } else if ([segue.identifier isEqualToString:@"SetLeverageSegue"]) {
+        InputNumberValueViewController *controller = segue.destinationViewController;
+        controller.title = NSLocalizedString(@"Leverage", nil);
+        controller.defaultNumberValue = self.saveDataForm.leverage.leverageNumber;
+        controller.setInputNumberValue = ^(NSNumber *inputNumberValue){
+            self.saveDataForm.leverage = [[Leverage alloc] initWithLeverageNumber:inputNumberValue];
+        };
     }
 }
 
@@ -160,6 +170,7 @@
     self.accountCurrencyLabel.text = [self.saveDataForm.accountCurrency toDisplayString];
     self.startBalanceLabel.text = [self.saveDataForm.startBalance toDisplayString];
     self.positionSizeOfLotLabel.text = [self.saveDataForm.positionSizeOfLot toDisplayString];
+    self.leverageLabel.text = self.saveDataForm.leverage.stringValue;
 }
 
 - (void)didReceiveMemoryWarning {
