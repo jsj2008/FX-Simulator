@@ -14,6 +14,7 @@
 #import "CurrencyPair.h"
 #import "ExecutionOrder.h"
 #import "ExecutionOrderComponents.h"
+#import "Money.h"
 #import "OrdersCreateMode.h"
 #import "OrdersCreateModeFactory.h"
 #import "FXSAlert.h"
@@ -196,6 +197,17 @@ static NSString* const FXSOrdersTableName = @"orders";
     }
     
     self.isClose = YES;
+}
+
+- (Money *)newPositionValue
+{
+    PositionSize *reverseTypePositionSize = [OpenPosition totalPositionSizeOfCurrencyPair:self.currencyPair positionType:[self.positionType reverseType] saveSlot:self.saveSlot];
+    
+    if (self.positionSize.sizeValue <= reverseTypePositionSize.sizeValue) {
+        return [[Money alloc] initWithAmount:0 currency:self.rate.currencyPair.quoteCurrency];
+    }
+    
+    return [[Money alloc] initWithAmount:(self.positionSize.sizeValue - reverseTypePositionSize.sizeValue) * self.rate.rateValue currency:self.rate.currencyPair.quoteCurrency];
 }
 
 #pragma mark - super

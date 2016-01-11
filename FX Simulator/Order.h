@@ -11,6 +11,7 @@
 @import UIKit;
 
 @class FMResultSet;
+@class Money;
 @class OpenPosition;
 
 @interface Order : PositionBase
@@ -28,5 +29,10 @@
 - (void)setNewOrder;
 
 - (void)setCloseOrder;
+
+/**
+ Orderに含まれている新規ポジション注文のポジション金額
+*/
+- (Money *)newPositionValue;
 
 @end
