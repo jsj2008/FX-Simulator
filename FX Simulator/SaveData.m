@@ -19,6 +19,7 @@
 #import "ExecutionOrderRelationChunk.h"
 #import "FXSTimeRange.h"
 #import "FXSTest.h"
+#import "Leverage.h"
 #import "Lot.h"
 #import "Money.h"
 #import "OpenPositionRelationChunk.h"
@@ -31,6 +32,7 @@
 
 static BOOL FXSDefaultIsAutoUpdate = YES;
 static float FXSDefaultAutoUpdateIntervalSeconds = 1.0;
+static NSUInteger FXSDefaultLeverage = 1;
 
 @interface SaveData ()
 @property (nonatomic) NSUInteger slotNumber;
@@ -108,6 +110,7 @@ static float FXSDefaultAutoUpdateIntervalSeconds = 1.0;
     saveData.tradePositionSize = [Setting defaultPositionSizeOfLot];
     saveData.isAutoUpdate = FXSDefaultIsAutoUpdate;
     saveData.autoUpdateIntervalSeconds = FXSDefaultAutoUpdateIntervalSeconds;
+    saveData.leverage = [[Leverage alloc] initWithLeverage:FXSDefaultLeverage];
     
     return saveData;
 }
@@ -410,6 +413,20 @@ static float FXSDefaultAutoUpdateIntervalSeconds = 1.0;
     super.startBalance = startBalance;
     
     _saveDataSource.startBalance = super.startBalance;
+}
+
+- (Leverage *)leverage
+{
+    return [[Leverage alloc] initWithLeverage:_saveDataSource.leverage];
+}
+
+- (void)setLeverage:(Leverage *)leverage
+{
+    super.leverage = self.leverage;
+    
+    super.leverage = leverage;
+    
+    _saveDataSource.leverage = super.leverage.leverage;
 }
 
 - (BOOL)isAutoUpdate

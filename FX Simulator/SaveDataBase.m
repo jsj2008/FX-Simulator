@@ -9,6 +9,7 @@
 #import "SaveDataBase.h"
 
 #import "FXSComparisonResult.h"
+#import "Leverage.h"
 #import "Money.h"
 #import "PositionSize.h"
 #import "Setting.h"
@@ -132,6 +133,24 @@
     }
     
     _startBalance = startBalance;
+}
+
+- (void)setleverage:(Leverage *)leverage
+{
+    if (!leverage) {
+        return;
+    }
+    
+    Leverage *maxLeverage = [Setting maxLeverage];
+    Leverage *minLeverage = [Setting minLeverage];
+    
+    if (maxLeverage.leverage < leverage.leverage) {
+        _leverage = maxLeverage;
+    } else if (minLeverage.leverage > leverage.leverage) {
+        _leverage = minLeverage;
+    } else {
+        _leverage = leverage;
+    }
 }
 
 @end
