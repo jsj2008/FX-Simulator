@@ -57,6 +57,7 @@
         saveDataForm.spread = _saveData.spread;
         saveDataForm.startBalance = _saveData.startBalance;
         saveDataForm.positionSizeOfLot = _saveData.positionSizeOfLot;
+        saveDataForm.leverage = _saveData.leverage;
     }
 }
 
