@@ -41,6 +41,8 @@
 
 + (PositionSize *)totalPositionSizeOfCurrencyPair:(CurrencyPair *)currencyPair saveSlot:(NSUInteger)slot;
 
++ (PositionSize *)totalPositionSizeOfCurrencyPair:(CurrencyPair *)currencyPair positionType:(PositionType *)positionType saveSlot:(NSUInteger)slot;
+
 + (Rate *)averageRateOfCurrencyPair:(CurrencyPair *)currencyPair saveSlot:(NSUInteger)slot;
 
 + (void)deleteSaveSlot:(NSUInteger)slot;

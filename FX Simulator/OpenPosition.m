@@ -246,6 +246,21 @@ static const int maxRecords = 50;
     return [[PositionSize alloc] initWithSizeValue:positionSize];
 }
 
++ (PositionSize *)totalPositionSizeOfCurrencyPair:(CurrencyPair *)currencyPair positionType:(PositionType *)positionType saveSlot:(NSUInteger)slot
+{
+    NSArray *allOpenPositions = [self allOpenPositionRecordsOfCurrencyPair:currencyPair saveSlot:slot];
+    
+    position_size_t positionSize = 0;
+    
+    for (OpenPosition *openPosition in allOpenPositions) {
+        if ([positionType isEqualPositionType:openPosition.positionType]) {
+            positionSize += openPosition.positionSize.sizeValue;
+        }
+    }
+    
+    return [[PositionSize alloc] initWithSizeValue:positionSize];
+}
+
 + (Rate *)averageRateOfCurrencyPair:(CurrencyPair *)currencyPair saveSlot:(NSUInteger)slot
 {
     NSArray *allPositions = [self allOpenPositionRecordsOfCurrencyPair:currencyPair saveSlot:slot];
