@@ -132,7 +132,7 @@ static NSDictionary *spreadRateDic;
 
 + (float)maxAutoUpdateIntervalSeconds
 {
-    return 10;
+    return 100;
 }
 
 + (float)minAutoUpdateIntervalSeconds
