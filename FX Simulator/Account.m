@@ -8,15 +8,19 @@
 
 #import "Account.h"
 
+#import "CurrencyPair.h"
 #import "ExecutionOrder.h"
 #import "ExecutionOrderRelationChunk.h"
 #import "ForexHistoryData.h"
+#import "FXSComparisonResult.h"
+#import "Leverage.h"
 #import "Lot.h"
 #import "Market.h"
 #import "Money.h"
 #import "Money+ConvertToAccountCurrency.h"
 #import "OpenPosition.h"
 #import "OpenPositionRelationChunk.h"
+#import "Order.h"
 #import "OrderResult.h"
 #import "PositionSize.h"
 #import "PositionType.h"
@@ -37,29 +41,26 @@
 @implementation Account {
     Currency *_accountCurrency;
     CurrencyPair *_currencyPair;
+    Leverage *_leverage;
+    Market *_market;
     Money *_startBalance;
     OpenPositionRelationChunk *_openPositions;
     ExecutionOrderRelationChunk *_executionOrders;
 }
 
--(instancetype)initWithAccountCurrency:(Currency *)currency currencyPair:(CurrencyPair *)currencyPair startBalance:(Money *)balance openPositions:(OpenPositionRelationChunk *)openPositions executionOrders:(ExecutionOrderRelationChunk *)executionOrders
+-(instancetype)initWithAccountCurrency:(Currency *)currency currencyPair:(CurrencyPair *)currencyPair startBalance:(Money *)balance leverage:(Leverage *)leverage openPositions:(OpenPositionRelationChunk *)openPositions executionOrders:(ExecutionOrderRelationChunk *)executionOrders market:(Market *)market
 {
     if (self = [super init]) {
         _accountCurrency = currency;
         _currencyPair = currencyPair;
+        _leverage = leverage;
+        _market = market;
         _startBalance = balance;
         _openPositions = openPositions;
         _executionOrders = executionOrders;
     }
     
     return self;
-}
-
-- (void)didOrder:(OrderResult *)result
-{
-    [result completion:^{
-        [self update];
-    } error:nil];
 }
 
 - (void)update
@@ -70,9 +71,9 @@
     self.positionType = nil;
 }
 
-- (BOOL)isShortageForMarket:(Market *)market
+- (BOOL)isShortage
 {
-    Money *equity = [self equityForMarket:market];
+    Money *equity = [self equity];
     
     if (equity.amount <= 0) {
         return YES;
@@ -81,14 +82,14 @@
     }
 }
 
-- (void)displayDataUsingBlock:(void (^)(NSString *equityStringValue, NSString *profitAndLossStringValue, NSString *orderTypeStringValue, NSString *averageRateStringValue, NSString *totalLotStringValue, UIColor *equityStringColor, UIColor *profitAndLossStringColor))block market:(Market *)market positionSizeOfLot:(PositionSize *)positionSize
+- (void)displayDataUsingBlock:(void (^)(NSString *equityStringValue, NSString *profitAndLossStringValue, NSString *orderTypeStringValue, NSString *averageRateStringValue, NSString *totalLotStringValue, UIColor *equityStringColor, UIColor *profitAndLossStringColor))block  positionSizeOfLot:(PositionSize *)positionSize
 {
-    if (!block || !market) {
+    if (!block) {
         return;
     }
     
-    Money *equity = [self equityForMarket:market];
-    Money *profitAndLoss = [self profitAndLossForMarket:market];
+    Money *equity = [self equity];
+    Money *profitAndLoss = [self profitAndLoss];
     
     block(equity.toDisplayString, profitAndLoss.toDisplayString, [self positionType].toDisplayString, [self averageRate].toDisplayString, [[self totalPositionSize] toLotFromPositionSizeOfLot:positionSize].toDisplayString, equity.toDisplayColor, profitAndLoss.toDisplayColor);
 }
@@ -112,9 +113,9 @@
     return _balance;
 }
 
-- (Money *)equityForMarket:(Market *)market
+- (Money *)equity
 {
-    Money *profitAndLoss = [self profitAndLossForMarket:market];
+    Money *profitAndLoss = [self profitAndLoss];
     
     return [self.balance addMoney:profitAndLoss];
 }
@@ -128,11 +129,11 @@
     return _positionType;
 }
 
-- (Money *)profitAndLossForMarket:(Market *)market
+- (Money *)profitAndLoss
 {
     PositionType *positionType = [self positionType];
     
-    Rates *valuationRates = [market currentRatesOfCurrencyPair:_currencyPair];
+    Rates *valuationRates = [_market currentRatesOfCurrencyPair:_currencyPair];
     
     Rate *valuationRate;
     

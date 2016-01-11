@@ -15,6 +15,7 @@
 @class Currency;
 @class CurrencyPair;
 @class ExecutionOrderRelationChunk;
+@class Leverage;
 @class Lot;
 @class Market;
 @class Money;
@@ -29,16 +30,16 @@
  総資産の金額、保有しているポジション、損益など。
 */
 
-@interface Account : NSObject <OrderManagerDelegate>
+@interface Account : NSObject <OrderManagerDelegate, OrderManagerState>
 
-- (instancetype)initWithAccountCurrency:(Currency *)currency currencyPair:(CurrencyPair *)currencyPair startBalance:(Money *)balance openPositions:(OpenPositionRelationChunk *)openPositions executionOrders:(ExecutionOrderRelationChunk *)executionOrders;
+- (instancetype)initWithAccountCurrency:(Currency *)currency currencyPair:(CurrencyPair *)currencyPair startBalance:(Money *)balance leverage:(Leverage *)leverage openPositions:(OpenPositionRelationChunk *)openPositions executionOrders:(ExecutionOrderRelationChunk *)executionOrders market:(Market *)market;
 
-- (void)displayDataUsingBlock:(void (^)(NSString *equityStringValue, NSString *profitAndLossStringValue, NSString *orderTypeStringValue, NSString *averageRateStringValue, NSString *totalLotStringValue, UIColor *equityStringColor, UIColor *profitAndLossStringColor))block market:(Market *)market positionSizeOfLot:(PositionSize *)positionSize;
+- (void)displayDataUsingBlock:(void (^)(NSString *equityStringValue, NSString *profitAndLossStringValue, NSString *orderTypeStringValue, NSString *averageRateStringValue, NSString *totalLotStringValue, UIColor *equityStringColor, UIColor *profitAndLossStringColor))block positionSizeOfLot:(PositionSize *)positionSize;
 
 /**
  総資産が０以下かどうか。
 */
-- (BOOL)isShortageForMarket:(Market *)market;
+- (BOOL)isShortage;
 
 //- (Money *)equityForMarket:(Market *)market;
 
