@@ -11,6 +11,7 @@
 @class CurrencyPair;
 @class FXSTimeRange;
 @class PositionSize;
+@class Leverage;
 @class Money;
 @class Rate;
 @class Spread;
@@ -68,6 +69,10 @@
 + (Money *)maxStartBalance;
 
 + (Money *)minStartBalance;
+
++ (Leverage *)maxLeverage;
+
++ (Leverage *)minLeverage;
 
 /**
  1pipが何レートか。例 USD/JPY 1pip = 0.01円

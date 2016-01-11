@@ -13,6 +13,7 @@
 #import "ForexHistory.h"
 #import "ForexHistoryFactory.h"
 #import "FXSTimeRange.h"
+#import "Leverage.h"
 #import "Money.h"
 #import "PositionSize.h"
 #import "Rate.h"
@@ -163,6 +164,16 @@ static NSDictionary *spreadRateDic;
 + (Money *)minStartBalance
 {
     return [[Money alloc] initWithAmount:1 currency:[Currency allCurrency]];
+}
+
++ (Leverage *)maxLeverage
+{
+    return [[Leverage alloc] initWithLeverage:10000];
+}
+
++ (Leverage *)minLeverage
+{
+    return [[Leverage alloc] initWithLeverage:1];
 }
 
 + (Rate *)onePipValueOfCurrencyPair:(CurrencyPair *)currencyPair
