@@ -104,7 +104,7 @@
         self.equityLabel.textColor = equityColor;
         self.profitAndLossLabel.text = profitAndLossStringValue;
         self.profitAndLossLabel.textColor = profitAndLossColor;
-    } market:_market positionSizeOfLot:_positionSizeOfLot];
+    } positionSizeOfLot:_positionSizeOfLot];
 }
 
 - (IBAction)tradeDataViewReturnActionForSegue:(UIStoryboardSegue *)segue
@@ -140,7 +140,7 @@
         self.averageRateLabel.text = averageRateStringValue;
         self.equityLabel.text = equityStringValue;
         self.equityLabel.textColor = equityStringColor;
-    } market:_market positionSizeOfLot:_positionSizeOfLot];
+    } positionSizeOfLot:_positionSizeOfLot];
 }
 
 - (void)setTradeLotView

@@ -34,7 +34,7 @@ static NSString* const chartEndAlertTitle = @"チャートが端まで読み込�
 
 - (SimulationStateResult *)isStop
 {
-    if ([_account isShortageForMarket:_market]) {
+    if ([_account isShortage]) {
         return [[SimulationStateResult alloc] initWithIsStop:YES title:shortageAlertTitle message:nil];
     } else if ([_market didLoadLastData]) {
         return [[SimulationStateResult alloc] initWithIsStop:YES title:chartEndAlertTitle message:nil];
