@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @protocol TradeDataViewControllerDelegate <NSObject>
+@property (nonatomic, readonly) BOOL isAutoUpdate;
 /// 自動更新を設定するボタンが変更されたとき。
 - (void)autoUpdateSettingSwitchChanged:(BOOL)isSwitchOn;
 @end

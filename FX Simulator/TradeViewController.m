@@ -118,6 +118,11 @@
     [_simulationManager setIsAutoUpdate:isSwitchOn];
 }
 
+- (BOOL)isAutoUpdate
+{
+    return _simulationManager.isAutoUpdate;
+}
+
 - (void)update
 {
     [_chartViewController update:_market];
