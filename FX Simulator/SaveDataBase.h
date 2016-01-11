@@ -11,6 +11,7 @@
 @class Currency;
 @class CurrencyPair;
 @class Time;
+@class Leverage;
 @class Lot;
 @class Money;
 @class PositionSize;
@@ -18,13 +19,14 @@
 @class TimeFrame;
 
 @interface SaveDataBase : NSObject
-@property (nonatomic) CurrencyPair* currencyPair;
+@property (nonatomic) CurrencyPair *currencyPair;
 @property (nonatomic) TimeFrame *timeFrame;
 @property (nonatomic) Time *startTime;
 @property (nonatomic) Spread *spread;
 @property (nonatomic) Time *lastLoadedTime;
-@property (nonatomic) Currency* accountCurrency;
+@property (nonatomic) Currency *accountCurrency;
 @property (nonatomic) PositionSize *positionSizeOfLot;
 @property (nonatomic) PositionSize *tradePositionSize;
 @property (nonatomic) Money *startBalance;
+@property (nonatomic) Leverage *leverage;
 @end
