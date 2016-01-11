@@ -61,6 +61,7 @@
     _orderManager = [OrderManager createOrderManagerFromOpenPositions:saveData.openPositions];
     [_orderManager addDelegate:_saveData.account];
     [_orderManager addState:self];
+    [_orderManager addState:_saveData.account];
     _simulationState = [[SimulationState alloc] initWithAccount:saveData.account Market:_market];
     _simulationTimeManager = [[SimulationTimeManager alloc] initWithAutoUpdateIntervalSeconds:saveData.autoUpdateIntervalSeconds isAutoUpdate:saveData.isAutoUpdate];
     [_simulationTimeManager addObserver:self];
