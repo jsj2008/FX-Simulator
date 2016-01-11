@@ -189,6 +189,11 @@
     [_simulationTimeManager setAutoUpdateIntervalSeconds:_saveData.autoUpdateIntervalSeconds];
 }
 
+- (BOOL)isAutoUpdate
+{
+    return _saveData.isAutoUpdate;
+}
+
 - (void)setIsAutoUpdate:(BOOL)isAutoUpdate
 {
     _saveData.isAutoUpdate = isAutoUpdate;

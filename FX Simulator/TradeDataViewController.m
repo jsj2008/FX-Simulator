@@ -76,7 +76,6 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -88,6 +87,10 @@
     self.currentSettingLabel.text = [NSString stringWithFormat:@"%@ %@", [_currencyPair toDisplayString], [_timeFrame toDisplayString]];
     
     [self setTradeDataView];
+    
+    if ([self.delegate respondsToSelector:@selector(isAutoUpdate)]) {
+        self.autoUpdateSettingSwitch.on = self.delegate.isAutoUpdate;
+    }
 }
 
 - (void)didOrder:(OrderResult *)result
