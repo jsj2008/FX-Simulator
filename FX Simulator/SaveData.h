@@ -17,6 +17,7 @@
 @class ExecutionOrderRelationChunk;
 @class Time;
 @class Lot;
+@class Market;
 @class Money;
 @class OpenPositionRelationChunk;
 @class PositionSize;
@@ -33,6 +34,7 @@
 @property (nonatomic, readonly) Account *account;
 @property (nonatomic, readonly) OpenPositionRelationChunk *openPositions;
 @property (nonatomic, readonly) ExecutionOrderRelationChunk *executionOrders;
+@property (nonatomic, readonly) Market *market;
 
 + (instancetype)createNewSaveData;
 

@@ -57,7 +57,7 @@
     }
     
     _saveData = saveData;
-    _market = [[Market alloc] initWithCurrencyPair:saveData.currencyPair timeFrame:saveData.timeFrame lastLoadedTime:saveData.lastLoadedTime spread:saveData.spread];
+    _market = _saveData.market;
     _orderManager = [OrderManager createOrderManagerFromOpenPositions:saveData.openPositions];
     [_orderManager addDelegate:_saveData.account];
     [_orderManager addState:self];

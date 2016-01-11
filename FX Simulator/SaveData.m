@@ -21,6 +21,7 @@
 #import "FXSTest.h"
 #import "Leverage.h"
 #import "Lot.h"
+#import "Market.h"
 #import "Money.h"
 #import "OpenPositionRelationChunk.h"
 #import "PositionSize.h"
@@ -47,6 +48,7 @@ static NSUInteger FXSDefaultLeverage = 1;
 @synthesize account = _account;
 @synthesize openPositions = _openPositions;
 @synthesize executionOrders = _executionOrders;
+@synthesize market = _market;
 
 + (CoreDataManager *)coreDataManager
 {
@@ -496,6 +498,15 @@ static NSUInteger FXSDefaultLeverage = 1;
     }
     
     return _executionOrders;
+}
+
+- (Market *)market
+{
+    if (!_market) {
+        _market = [[Market alloc] initWithCurrencyPair:self.currencyPair timeFrame:self.timeFrame lastLoadedTime:self.lastLoadedTime spread:self.spread];
+    }
+    
+    return _market;
 }
 
 @end
