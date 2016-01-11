@@ -25,3 +25,12 @@
 /* No comment provided by engineer. */
 "Time Frame" = "時間軸";
 
+/* No comment provided by engineer. */
+"Leverage" = "レバレッジ";
+
+/* No comment provided by engineer. */
+"Order Failed" = "注文に失敗しました";
+
+/* No comment provided by engineer. */
+"Short Of Margin" = "証拠金が足りません";
+
