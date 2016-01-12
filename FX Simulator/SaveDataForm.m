@@ -25,6 +25,7 @@
     saveData.spread = [[Spread alloc] initWithPips:self.spread.spreadValue currencyPair:self.currencyPair];
     saveData.startBalance = [[Money alloc] initWithAmount:self.startBalance.amount currency:self.accountCurrency];
     saveData.positionSizeOfLot = self.positionSizeOfLot;
+    saveData.leverage = self.leverage;
     
     return saveData;
 }
