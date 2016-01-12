@@ -119,13 +119,13 @@
     } else if ([segue.identifier isEqualToString:@"SetPositionSizeOfLotSegue"]) {
         CheckmarkViewController *controller = segue.destinationViewController;
         NSArray *positionSizeOfLotList = [Setting positionSizeOfLotList];
-        NSMutableArray *PositionSizeOfLotStringValueList = [NSMutableArray array];
+        NSMutableArray *positionSizeOfLotStringValueList = [NSMutableArray array];
         [positionSizeOfLotList enumerateObjectsUsingBlock:^(PositionSize *obj, NSUInteger idx, BOOL *stop) {
-            [PositionSizeOfLotStringValueList addObject:obj.toDisplayString];
+            [positionSizeOfLotStringValueList addObject:obj.toDisplayString];
         }];
         controller.title = @"1 Lot =";
         controller.dataList = positionSizeOfLotList;
-        controller.dataStringValueList = PositionSizeOfLotStringValueList;
+        controller.dataStringValueList = positionSizeOfLotStringValueList;
         controller.defaultData = self.saveDataForm.positionSizeOfLot;
         controller.setData = ^(id selectData){
             if ([selectData isMemberOfClass:[PositionSize class]]) {
