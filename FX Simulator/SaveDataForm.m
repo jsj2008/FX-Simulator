@@ -27,6 +27,8 @@
     saveData.positionSizeOfLot = self.positionSizeOfLot;
     saveData.leverage = self.leverage;
     
+    saveData.tradePositionSize = saveData.positionSizeOfLot;
+    
     return saveData;
 }
 

@@ -109,7 +109,7 @@ static NSUInteger FXSDefaultLeverage = 1;
     saveData.startBalance = [[Money alloc] initWithAmount:1000000 currency:saveData.accountCurrency];
     saveData.positionSizeOfLot = [Setting defaultPositionSizeOfLot];
     
-    saveData.tradePositionSize = [Setting defaultPositionSizeOfLot];
+    saveData.tradePositionSize = saveData.positionSizeOfLot;
     saveData.isAutoUpdate = FXSDefaultIsAutoUpdate;
     saveData.autoUpdateIntervalSeconds = FXSDefaultAutoUpdateIntervalSeconds;
     saveData.leverage = [[Leverage alloc] initWithLeverage:FXSDefaultLeverage];
