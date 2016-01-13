@@ -11,6 +11,6 @@
 #import "SimulationManager.h"
 #import "TradeDataViewController.h"
 
-@interface TradeViewController : UIViewController <ChartViewControllerDelegate, OrderManagerDelegate, SimulationManagerDelegate, TradeDataViewControllerDelegate>
+@interface TradeViewController : UIViewController <ChartViewControllerDelegate, SimulationManagerDelegate, TradeDataViewControllerDelegate>
 
 @end

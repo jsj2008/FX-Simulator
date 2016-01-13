@@ -30,11 +30,13 @@
  総資産の金額、保有しているポジション、損益など。
 */
 
-@interface Account : NSObject <OrderManagerDelegate, OrderManagerState>
+@interface Account : NSObject <OrderManagerState>
 
 - (instancetype)initWithAccountCurrency:(Currency *)currency currencyPair:(CurrencyPair *)currencyPair startBalance:(Money *)balance leverage:(Leverage *)leverage openPositions:(OpenPositionRelationChunk *)openPositions executionOrders:(ExecutionOrderRelationChunk *)executionOrders market:(Market *)market;
 
 - (void)displayDataUsingBlock:(void (^)(NSString *equityStringValue, NSString *profitAndLossStringValue, NSString *orderTypeStringValue, NSString *averageRateStringValue, NSString *totalLotStringValue, UIColor *equityStringColor, UIColor *profitAndLossStringColor))block positionSizeOfLot:(PositionSize *)positionSize;
+
+- (void)didOrder:(OrderResult *)result;
 
 /**
  総資産が０以下かどうか。

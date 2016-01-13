@@ -31,6 +31,7 @@
 - (void)loadSimulationManager:(SimulationManager *)simulationManager;
 - (void)update;
 - (void)simulationStopped:(SimulationStateResult *)result;
+- (void)didOrder:(OrderResult *)result;
 @end
 
 @class UIViewController;
@@ -46,7 +47,7 @@
  Marketオブジェクトを持ち、Marketの時間が進むと、それに応じて、オブザーバにMarketの変更を伝える。
 */
 
-@interface SimulationManager : NSObject <OrderManagerState>
+@interface SimulationManager : NSObject <OrderManagerState, OrderManagerDelegate>
 @property (nonatomic) float autoUpdateIntervalSeconds;
 @property (nonatomic) BOOL isAutoUpdate;
 @property (nonatomic, readonly) BOOL isStartTime;
