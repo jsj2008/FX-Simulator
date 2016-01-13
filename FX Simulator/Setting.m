@@ -51,7 +51,7 @@ static NSDictionary *spreadRateDic;
     NSArray *languages = [NSLocale preferredLanguages];
     NSString *languageID = [languages objectAtIndex:0];
     
-    if ([languageID isEqualToString:@"ja"]) {
+    if ([languageID isEqualToString:@"ja"] || [languageID hasPrefix:@"ja-"]) {
         return YES;
     }
     
