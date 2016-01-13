@@ -125,11 +125,6 @@ static NSDictionary *spreadRateDic;
     return @[[[PositionSize alloc] initWithSizeValue:1], [[PositionSize alloc] initWithSizeValue:10], [[PositionSize alloc] initWithSizeValue:100], [[PositionSize alloc] initWithSizeValue:1000], [[PositionSize alloc] initWithSizeValue:10000], [[PositionSize alloc] initWithSizeValue:100000]];
 }
 
-+ (PositionSize *)defaultPositionSizeOfLot
-{
-    return [[PositionSize alloc] initWithSizeValue:10000];
-}
-
 + (float)maxAutoUpdateIntervalSeconds
 {
     return 100;

@@ -54,8 +54,6 @@
 
 + (NSArray *)positionSizeOfLotList;
 
-+ (PositionSize *)defaultPositionSizeOfLot;
-
 + (float)maxAutoUpdateIntervalSeconds;
 
 + (float)minAutoUpdateIntervalSeconds;
