@@ -33,7 +33,7 @@
 
 static BOOL FXSDefaultIsAutoUpdate = YES;
 static float FXSDefaultAutoUpdateIntervalSeconds = 1.0;
-static NSUInteger FXSDefaultLeverage = 1;
+static NSUInteger FXSDefaultLeverage = 100;
 
 @interface SaveData ()
 @property (nonatomic) NSUInteger slotNumber;
