@@ -15,5 +15,5 @@
 
 @interface ProfitAndLossCalculator : NSObject
 // TargetRate = 元のレート, ValuationRate = 現在の評価レート
-+(Money*)calculateByTargetRate:(Rate*)targetRate valuationRate:(Rate*)valuationRate positionSize:(PositionSize*)positionSize orderType:(PositionType*)orderType;
++ (Money *)calculateByTargetRate:(Rate *)targetRate valuationRate:(Rate *)valuationRate positionSize:(PositionSize *)positionSize orderType:(PositionType *)orderType;
 @end
