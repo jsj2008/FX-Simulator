@@ -95,19 +95,17 @@ static NSUInteger FXSDefaultLeverage = 1;
 
 + (instancetype)createDefaultNewSaveData
 {
-    CurrencyPair *currencyPair = [[CurrencyPair alloc] initWithBaseCurrency:[[Currency alloc] initWithCurrencyType:USD] QuoteCurrency:[[Currency alloc] initWithCurrencyType:JPY]];
-    TimeFrame *timeFrame = [[TimeFrame alloc] initWithMinute:15];
-    
     SaveData *saveData = [self createNewSaveData];
     
-    saveData.currencyPair = currencyPair;
-    saveData.timeFrame = timeFrame;
+    saveData.currencyPair = [self defaultCurrencyPair];
+    saveData.timeFrame = [[TimeFrame alloc] initWithMinute:15];
     saveData.startTime = [Setting rangeForSimulation].start;
     saveData.lastLoadedTime = saveData.startTime;
     saveData.spread = [[Spread alloc] initWithPips:1 currencyPair:saveData.currencyPair];
-    saveData.accountCurrency = [[Currency alloc] initWithCurrencyType:JPY];
+    saveData.accountCurrency = [self defaultAccountCurrency];
     saveData.startBalance = [[Money alloc] initWithAmount:1000000 currency:saveData.accountCurrency];
-    saveData.positionSizeOfLot = [Setting defaultPositionSizeOfLot];
+    // SettingのpositionSizeOfLotListにある値
+    saveData.positionSizeOfLot = [[PositionSize alloc] initWithSizeValue:10000];;
     
     saveData.tradePositionSize = saveData.positionSizeOfLot;
     saveData.isAutoUpdate = FXSDefaultIsAutoUpdate;
@@ -115,6 +113,24 @@ static NSUInteger FXSDefaultLeverage = 1;
     saveData.leverage = [[Leverage alloc] initWithLeverage:FXSDefaultLeverage];
     
     return saveData;
+}
+
++ (Currency *)defaultAccountCurrency
+{
+    if ([Setting isLocaleJapanese]) {
+        return [[Currency alloc] initWithCurrencyType:JPY];
+    } else {
+        return [[Currency alloc] initWithCurrencyType:USD];
+    }
+}
+
++ (CurrencyPair *)defaultCurrencyPair
+{
+    if ([Setting isLocaleJapanese]) {
+        return [[CurrencyPair alloc] initWithBaseCurrencyType:USD quoteCurrencyType:JPY];
+    } else {
+        return [[CurrencyPair alloc] initWithBaseCurrencyType:EUR quoteCurrencyType:USD];
+    }
 }
 
 + (instancetype)loadFromSlotNumber:(NSUInteger)slotNumber
