@@ -27,6 +27,7 @@
 #import "TradeViewController.h"
 
 @implementation SimulationManager {
+    Account *_account;
     Market *_market;
     NSHashTable *_delegates;
     OrderManager *_orderManager;
@@ -57,12 +58,13 @@
     }
     
     _saveData = saveData;
+    _account = saveData.account;
     _market = _saveData.market;
     _orderManager = [OrderManager createOrderManagerFromOpenPositions:saveData.openPositions];
-    [_orderManager addDelegate:_saveData.account];
+    [_orderManager addDelegate:self];
     [_orderManager addState:self];
-    [_orderManager addState:_saveData.account];
-    _simulationState = [[SimulationState alloc] initWithAccount:saveData.account Market:_market];
+    [_orderManager addState:_account];
+    _simulationState = [[SimulationState alloc] initWithAccount:_account Market:_market];
     _simulationTimeManager = [[SimulationTimeManager alloc] initWithAutoUpdateIntervalSeconds:saveData.autoUpdateIntervalSeconds isAutoUpdate:saveData.isAutoUpdate];
     [_simulationTimeManager addObserver:self];
     
@@ -209,6 +211,21 @@
     } else {
         return [[OrderResult alloc] initWithIsSuccess:YES title:nil message:nil];
     }
+}
+
+- (void)didOrder:(OrderResult *)result
+{
+    [result completion:^{
+        
+        [_account didOrder:result];
+        
+        for (id<SimulationManagerDelegate> delegate in _delegates) {
+            if ([delegate respondsToSelector:@selector(didOrder:)]) {
+                [delegate didOrder:result];
+            }
+        }
+        
+    } error:nil];
 }
 
 - (BOOL)isStartTime

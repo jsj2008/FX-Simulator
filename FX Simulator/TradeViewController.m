@@ -70,7 +70,6 @@
     [_ratePanelViewController loadOrderManager:_orderManager];
     [_tradeDataViewController loadSaveData:_saveData];
     [_tradeDataViewController loadMarket:_market];
-    [_orderManager addDelegate:self];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
