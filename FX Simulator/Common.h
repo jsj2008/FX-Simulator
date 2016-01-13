@@ -10,7 +10,7 @@
 
 typedef double rate_t;
 
-typedef long long amount_t;
+typedef double amount_t;
 
 typedef unsigned long long lot_t;
 

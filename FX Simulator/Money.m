@@ -23,12 +23,12 @@ static NSString* const FXSCurrencyKey = @"currency";
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder
 {
-    return [self initWithAmount:[aDecoder decodeInt64ForKey:FXSMoneyValueKey] currency:[aDecoder decodeObjectForKey:FXSCurrencyKey]];
+    return [self initWithAmount:[aDecoder decodeDoubleForKey:FXSMoneyValueKey] currency:[aDecoder decodeObjectForKey:FXSCurrencyKey]];
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder
 {
-    [aCoder encodeInt64:self.amount forKey:FXSMoneyValueKey];
+    [aCoder encodeDouble:self.amount forKey:FXSMoneyValueKey];
     [aCoder encodeObject:self.currency forKey:FXSCurrencyKey];
 }
 
@@ -53,17 +53,17 @@ static NSString* const FXSCurrencyKey = @"currency";
 
 - (instancetype)initWithNumber:(NSNumber *)number currency:(Currency*)currency
 {
-    return [self initWithAmount:number.longLongValue currency:currency];
+    return [self initWithAmount:number.doubleValue currency:currency];
 }
 
 - (instancetype)initWithString:(NSString *)string currency:(Currency*)currency
 {
-    return [self initWithAmount:string.longLongValue currency:currency];
+    return [self initWithAmount:string.doubleValue currency:currency];
 }
 
 - (Money *)addMoney:(Money *)money
 {
-    if (money == nil) {
+    if (!money) {
         DLog(@"money is nil");
         return self;
     }
@@ -92,7 +92,7 @@ static NSString* const FXSCurrencyKey = @"currency";
 
 - (NSNumber *)toMoneyValueObj
 {
-    return [NSNumber numberWithLongLong:_amount];
+    return [NSNumber numberWithDouble:_amount];
 }
 
 - (NSString *)toDisplayString

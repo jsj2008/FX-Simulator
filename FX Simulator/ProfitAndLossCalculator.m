@@ -16,13 +16,13 @@
 
 @implementation ProfitAndLossCalculator
 
-+(Money*)calculateByTargetRate:(Rate*)targetRate valuationRate:(Rate *)valuationRate positionSize:(PositionSize *)positionSize orderType:(PositionType *)orderType
++ (Money *)calculateByTargetRate:(Rate *)targetRate valuationRate:(Rate *)valuationRate positionSize:(PositionSize *)positionSize orderType:(PositionType *)orderType
 {
     if (![targetRate isEqualCurrencyPair:valuationRate]) {
         return nil;
     }
     
-    long long profitAndLoss = 0;
+    amount_t profitAndLoss = 0;
     
     if ([orderType isShort]) {
         profitAndLoss = ([targetRate rateValue] - [valuationRate rateValue]) * positionSize.sizeValue;
