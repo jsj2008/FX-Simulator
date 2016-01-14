@@ -22,6 +22,8 @@
 @property (nonatomic, readonly) BOOL isNew;
 @property (nonatomic, readonly) BOOL isClose;
 
++ (void)deleteSaveSlot:(NSUInteger)slot;
+
 - (instancetype)copyOrderForNewPositionSize:(PositionSize *)positionSize;
 
 - (NSArray *)createExecutionOrders;

@@ -38,6 +38,15 @@ static NSString* const FXSOrdersTableName = @"orders";
 
 @implementation Order
 
++ (void)deleteSaveSlot:(NSUInteger)slot
+{
+    NSString *sql = [NSString stringWithFormat:@"DELETE FROM %@ WHERE save_slot = ?;", FXSOrdersTableName];
+    
+    [self execute:^(FMDatabase *db) {
+        [db executeUpdate:sql, @(slot)];
+    }];
+}
+
 - (instancetype)initWithFMResultSet:(FMResultSet *)resultSet
 {
     _saveSlot = [resultSet intForColumn:@"save_slot"];

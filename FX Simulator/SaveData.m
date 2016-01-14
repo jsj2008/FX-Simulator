@@ -24,6 +24,7 @@
 #import "Market.h"
 #import "Money.h"
 #import "OpenPositionRelationChunk.h"
+#import "OrderRelationChunk.h"
 #import "PositionSize.h"
 #import "Setting.h"
 #import "Spread.h"
@@ -39,6 +40,7 @@ static NSUInteger FXSDefaultLeverage = 100;
 @property (nonatomic) NSUInteger slotNumber;
 @property (nonatomic) NSDate *createdAt;
 @property (nonatomic) BOOL isNew;
+@property (nonatomic, readonly) OrderRelationChunk *orders;
 @end
 
 @implementation SaveData {
@@ -46,6 +48,7 @@ static NSUInteger FXSDefaultLeverage = 100;
 }
 
 @synthesize account = _account;
+@synthesize orders = _orders;
 @synthesize openPositions = _openPositions;
 @synthesize executionOrders = _executionOrders;
 @synthesize market = _market;
@@ -203,6 +206,7 @@ static NSUInteger FXSDefaultLeverage = 100;
     
     [context deleteObject:_saveDataSource];
     
+    [self.orders delete];
     [self.openPositions delete];
     [self.executionOrders delete];
 }
@@ -496,6 +500,15 @@ static NSUInteger FXSDefaultLeverage = 100;
     }
     
     return _account;
+}
+
+- (OrderRelationChunk *)orders
+{
+    if (!_orders) {
+        _orders = [[OrderRelationChunk alloc] initWithSaveSlot:self.slotNumber];
+    }
+    
+    return _orders;
 }
 
 - (OpenPositionRelationChunk *)openPositions
