@@ -10,6 +10,7 @@
 #import "OrderManager.h"
 
 @class Market;
+@class OrderFactory;
 @class OrderManager;
 @class SaveData;
 @class SimulationManager;
@@ -23,6 +24,7 @@
 - (void)loadSaveData:(SaveData *)saveData;
 @optional
 - (void)loadMarket:(Market *)market;
+- (void)loadOrderFactory:(OrderFactory *)orderFactory;
 - (void)loadOrderManager:(OrderManager *)orderManager;
 - (void)saveDataDidLoad;
 /**

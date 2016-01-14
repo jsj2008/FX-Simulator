@@ -29,6 +29,7 @@
     RatePanelViewController *_ratePanelViewController;
     TradeDataViewController *_tradeDataViewController;
     Market *_market;
+    OrderFactory *_orderFactory;
     OrderManager *_orderManager;
     SaveData *_saveData;
     SimulationManager *_simulationManager;
@@ -53,6 +54,11 @@
     _market = market;
 }
 
+- (void)loadOrderFactory:(OrderFactory *)orderFactory
+{
+    _orderFactory = orderFactory;
+}
+
 - (void)loadOrderManager:(OrderManager *)orderManager
 {
     _orderManager = orderManager;
@@ -67,6 +73,7 @@
     [_chartViewController setChart:_saveData.mainChart];
     [_ratePanelViewController loadSaveData:_saveData];
     [_ratePanelViewController loadMarket:_market];
+    [_ratePanelViewController loadOrderFactory:_orderFactory];
     [_ratePanelViewController loadOrderManager:_orderManager];
     [_tradeDataViewController loadSaveData:_saveData];
     [_tradeDataViewController loadMarket:_market];

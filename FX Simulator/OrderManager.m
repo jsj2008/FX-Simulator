@@ -61,20 +61,14 @@
     OrderResult *result = [_state isOrderable:order];
     
     [result completion:^{
-        NSArray *normalizedOrders = [_normalizedOrdersFactory createNormalizedOrdersFromOrder:order];
-        
-        [normalizedOrders enumerateObjectsUsingBlock:^(Order *normalizedOrder, NSUInteger idx, BOOL *stop) {
-            [self execute:normalizedOrder];
-        }];
+        [self execute:[order createExecutionOrders]];
     } error:^{
         [self notifyDidOrder:result];
     }];
 }
 
-- (void)execute:(Order *)order
-{
-    NSArray *executionOrders = [order createExecutionOrders];
-    
+- (void)execute:(NSArray<ExecutionOrder *> *)executionOrders
+{    
     OrderResult *result;
     
     @try {

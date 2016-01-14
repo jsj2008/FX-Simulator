@@ -81,6 +81,7 @@
 		707CA1A51B5387CF00F099E9 /* IndicatorChunk.m in Sources */ = {isa = PBXBuildFile; fileRef = 707CA1A41B5387CF00F099E9 /* IndicatorChunk.m */; };
 		707CA1B71B53A51700F099E9 /* Indicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 707CA1B61B53A51700F099E9 /* Indicator.m */; };
 		708383481C47740F002027AF /* OrderRelationChunk.m in Sources */ = {isa = PBXBuildFile; fileRef = 708383471C47740F002027AF /* OrderRelationChunk.m */; };
+		708383541C478B7E002027AF /* OrderFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 708383531C478B7E002027AF /* OrderFactory.m */; };
 		70838AA21C2938DD0044B1CC /* AdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70838AA11C2938DD0044B1CC /* AdViewController.m */; };
 		70838AA51C2939630044B1CC /* AdProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 70838AA41C2939630044B1CC /* AdProvider.m */; };
 		70838AA91C293CDE0044B1CC /* AdNetworkIAd.m in Sources */ = {isa = PBXBuildFile; fileRef = 70838AA81C293CDE0044B1CC /* AdNetworkIAd.m */; };
@@ -300,6 +301,8 @@
 		707CA1B61B53A51700F099E9 /* Indicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Indicator.m; sourceTree = "<group>"; };
 		708383461C47740F002027AF /* OrderRelationChunk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderRelationChunk.h; sourceTree = "<group>"; };
 		708383471C47740F002027AF /* OrderRelationChunk.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderRelationChunk.m; sourceTree = "<group>"; };
+		708383521C478B7E002027AF /* OrderFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderFactory.h; sourceTree = "<group>"; };
+		708383531C478B7E002027AF /* OrderFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderFactory.m; sourceTree = "<group>"; };
 		70838AA01C2938DC0044B1CC /* AdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdViewController.h; sourceTree = "<group>"; };
 		70838AA11C2938DD0044B1CC /* AdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdViewController.m; sourceTree = "<group>"; };
 		70838AA31C2939630044B1CC /* AdProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdProvider.h; sourceTree = "<group>"; };
@@ -751,6 +754,8 @@
 				70248B9B1C3E9F2E0073D5B7 /* Leverage.m */,
 				708383461C47740F002027AF /* OrderRelationChunk.h */,
 				708383471C47740F002027AF /* OrderRelationChunk.m */,
+				708383521C478B7E002027AF /* OrderFactory.h */,
+				708383531C478B7E002027AF /* OrderFactory.m */,
 			);
 			path = "FX Simulator";
 			sourceTree = "<group>";
@@ -1173,6 +1178,7 @@
 				7041B7111B2EEDAD00DD64FE /* Account.m in Sources */,
 				70D2FB711A9F577200CAB509 /* SimpleCandle.m in Sources */,
 				707CA1B71B53A51700F099E9 /* Indicator.m in Sources */,
+				708383541C478B7E002027AF /* OrderFactory.m in Sources */,
 				70D2FBD61A9F57CB00CAB509 /* SaveData.m in Sources */,
 				70D2FAD61A9F559200CAB509 /* OpenPositionTableViewController.m in Sources */,
 				70BF3C221BAEF88500779617 /* OpenPositionRelationChunk.m in Sources */,

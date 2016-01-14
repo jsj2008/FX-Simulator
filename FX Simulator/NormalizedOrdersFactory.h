@@ -13,5 +13,5 @@
 
 @interface NormalizedOrdersFactory : NSObject
 - (instancetype)initWithOpenPositions:(OpenPositionRelationChunk *)openPositions;
-- (NSArray *)createNormalizedOrdersFromOrder:(Order *)order;
+- (NSArray<Order *> *)createNormalizedOrdersFromOrder:(Order *)order;
 @end

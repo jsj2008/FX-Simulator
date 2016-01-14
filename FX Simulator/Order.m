@@ -15,6 +15,7 @@
 #import "ExecutionOrder.h"
 #import "ExecutionOrderComponents.h"
 #import "Money.h"
+#import "NormalizedOrdersFactory.h"
 #import "OrdersCreateMode.h"
 #import "OrdersCreateModeFactory.h"
 #import "FXSAlert.h"
@@ -36,7 +37,9 @@ static NSString* const FXSOrdersTableName = @"orders";
 @property (nonatomic) BOOL isClose;
 @end
 
-@implementation Order
+@implementation Order {
+    NormalizedOrdersFactory *_normalizedOrdersFactory;
+}
 
 + (void)deleteSaveSlot:(NSUInteger)slot
 {
@@ -45,6 +48,19 @@ static NSString* const FXSOrdersTableName = @"orders";
     [self execute:^(FMDatabase *db) {
         [db executeUpdate:sql, @(slot)];
     }];
+}
+
+- (instancetype)initWithSaveSlot:(NSUInteger)slot CurrencyPair:(CurrencyPair *)currencyPair positionType:(PositionType *)positionType rate:(Rate *)rate positionSize:(PositionSize *)positionSize normalizedOrdersFactory:(NormalizedOrdersFactory *)normalizedOrdersFactory
+{
+    if (!normalizedOrdersFactory) {
+        return nil;
+    }
+    
+    if (self = [super initWithSaveSlot:slot CurrencyPair:currencyPair positionType:positionType rate:rate positionSize:positionSize]) {
+        _normalizedOrdersFactory = normalizedOrdersFactory;
+    }
+    
+    return self;
 }
 
 - (instancetype)initWithFMResultSet:(FMResultSet *)resultSet
@@ -63,32 +79,64 @@ static NSString* const FXSOrdersTableName = @"orders";
     return self;
 }
 
-- (instancetype)copyOrderForNewPositionSize:(PositionSize *)positionSize
+- (instancetype)copyOrder
 {
-    Order *order = [[[self class] alloc] initWithSaveSlot:self.saveSlot CurrencyPair:self.currencyPair positionType:self.positionType rate:self.rate positionSize:positionSize];
+    Order *order = [[[self class] alloc] initWithSaveSlot:self.saveSlot CurrencyPair:self.currencyPair positionType:self.positionType rate:self.rate positionSize:self.positionSize normalizedOrdersFactory:_normalizedOrdersFactory];
     order.orderId = self.orderId;
     
     return order;
 }
 
-- (NSArray *)createExecutionOrders
+- (instancetype)copyOrderForNewOrder
+{
+    Order *order = [self copyOrder];
+    order.isNew = YES;
+    
+    return order;
+}
+
+- (instancetype)copyOrderForCloseOrder
+{
+    Order *order = [self copyOrder];
+    order.isClose = YES;
+    
+    return order;
+}
+
+- (instancetype)copyOrderForNewPositionSize:(PositionSize *)positionSize
+{
+    Order *order = [[[self class] alloc] initWithSaveSlot:self.saveSlot CurrencyPair:self.currencyPair positionType:self.positionType rate:self.rate positionSize:positionSize normalizedOrdersFactory:_normalizedOrdersFactory];
+    order.orderId = self.orderId;
+    
+    return order;
+}
+
+- (NSArray<ExecutionOrder *> *)createExecutionOrders
 {
     if (![self isExecutable]) {
         return nil;
     }
     
-    NSMutableArray *orders = [NSMutableArray array];
+    NSArray<Order *> *normalizedOrders = [_normalizedOrdersFactory createNormalizedOrdersFromOrder:self];
     
-    if (self.isNew) {
-        ExecutionOrder *newOrder = [self createNewExecutionOrder];
-        if (newOrder) {
-            [orders addObject:newOrder];
+    NSMutableArray<ExecutionOrder *> *executionOrders = [NSMutableArray array];
+    
+    for (Order *order in normalizedOrders) {
+        if (order.isNew) {
+            ExecutionOrder *newOrder = [order createNewExecutionOrder];
+            if (newOrder) {
+                [executionOrders addObject:newOrder];
+            }
+        } else if (order.isClose) {
+            NSMutableArray<ExecutionOrder *> *closeExecutionOrders = [NSMutableArray array];
+            closeExecutionOrders = [[order createCloseExecutionOrders] copy];
+            if (0 < closeExecutionOrders.count) {
+                [executionOrders addObjectsFromArray:closeExecutionOrders];
+            }
         }
-    } else if (self.isClose) {
-        orders = [[self createCloseExecutionOrders] copy];
     }
     
-    return [orders copy];
+    return [executionOrders copy];
 }
 
 - (ExecutionOrder *)createNewExecutionOrder
@@ -113,7 +161,7 @@ static NSString* const FXSOrdersTableName = @"orders";
     }];
 }
 
-- (NSArray *)createCloseExecutionOrders
+- (NSArray<ExecutionOrder *> *)createCloseExecutionOrders
 {
     if (!self.isClose) {
         return nil;
@@ -154,7 +202,7 @@ static NSString* const FXSOrdersTableName = @"orders";
 
 - (BOOL)isExecutable
 {
-    if ((self.isNew && !self.isClose) || (!self.isNew && self.isClose)) {
+    if ((!self.isNew && !self.isClose) || _normalizedOrdersFactory) {
         return YES;
     } else {
         return NO;
