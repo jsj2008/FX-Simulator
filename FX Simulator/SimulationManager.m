@@ -221,17 +221,13 @@
 
 - (void)didOrder:(OrderResult *)result
 {
-    [result completion:^{
+    [_account didOrder:result];
         
-        [_account didOrder:result];
-        
-        for (id<SimulationManagerDelegate> delegate in _delegates) {
-            if ([delegate respondsToSelector:@selector(didOrder:)]) {
-                [delegate didOrder:result];
-            }
+    for (id<SimulationManagerDelegate> delegate in _delegates) {
+        if ([delegate respondsToSelector:@selector(didOrder:)]) {
+            [delegate didOrder:result];
         }
-        
-    } error:nil];
+    }
 }
 
 - (BOOL)isStartTime
