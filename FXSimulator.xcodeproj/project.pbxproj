@@ -80,6 +80,7 @@
 		707CA1A21B52394300F099E9 /* portfolio@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 707CA1901B52394300F099E9 /* portfolio@2x.png */; };
 		707CA1A51B5387CF00F099E9 /* IndicatorChunk.m in Sources */ = {isa = PBXBuildFile; fileRef = 707CA1A41B5387CF00F099E9 /* IndicatorChunk.m */; };
 		707CA1B71B53A51700F099E9 /* Indicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 707CA1B61B53A51700F099E9 /* Indicator.m */; };
+		708383481C47740F002027AF /* OrderRelationChunk.m in Sources */ = {isa = PBXBuildFile; fileRef = 708383471C47740F002027AF /* OrderRelationChunk.m */; };
 		70838AA21C2938DD0044B1CC /* AdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70838AA11C2938DD0044B1CC /* AdViewController.m */; };
 		70838AA51C2939630044B1CC /* AdProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 70838AA41C2939630044B1CC /* AdProvider.m */; };
 		70838AA91C293CDE0044B1CC /* AdNetworkIAd.m in Sources */ = {isa = PBXBuildFile; fileRef = 70838AA81C293CDE0044B1CC /* AdNetworkIAd.m */; };
@@ -297,6 +298,8 @@
 		707CA1A31B5387CF00F099E9 /* IndicatorChunk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IndicatorChunk.h; sourceTree = "<group>"; };
 		707CA1A41B5387CF00F099E9 /* IndicatorChunk.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IndicatorChunk.m; sourceTree = "<group>"; };
 		707CA1B61B53A51700F099E9 /* Indicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Indicator.m; sourceTree = "<group>"; };
+		708383461C47740F002027AF /* OrderRelationChunk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderRelationChunk.h; sourceTree = "<group>"; };
+		708383471C47740F002027AF /* OrderRelationChunk.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderRelationChunk.m; sourceTree = "<group>"; };
 		70838AA01C2938DC0044B1CC /* AdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdViewController.h; sourceTree = "<group>"; };
 		70838AA11C2938DD0044B1CC /* AdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdViewController.m; sourceTree = "<group>"; };
 		70838AA31C2939630044B1CC /* AdProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdProvider.h; sourceTree = "<group>"; };
@@ -746,6 +749,8 @@
 				70BB5B801C2DAFB800F2DE65 /* AdNetworkSettingsId.m */,
 				70248B9A1C3E9F2D0073D5B7 /* Leverage.h */,
 				70248B9B1C3E9F2E0073D5B7 /* Leverage.m */,
+				708383461C47740F002027AF /* OrderRelationChunk.h */,
+				708383471C47740F002027AF /* OrderRelationChunk.m */,
 			);
 			path = "FX Simulator";
 			sourceTree = "<group>";
@@ -1153,6 +1158,7 @@
 				70FCD5A41B9B187900500B40 /* NormalizedOrdersFactory.m in Sources */,
 				705FCFA91BFB7BA9006197DA /* CandleSource.m in Sources */,
 				7076F5AA1AECCDB7004CC6BA /* CheckmarkViewController.m in Sources */,
+				708383481C47740F002027AF /* OrderRelationChunk.m in Sources */,
 				70838AAC1C293D060044B1CC /* AdNetworkAdmob.m in Sources */,
 				70BB5B811C2DAFB800F2DE65 /* AdNetworkSettingsId.m in Sources */,
 				709BC75E1B0700320059C940 /* SetAutoUpdateIntervalViewController.m in Sources */,
