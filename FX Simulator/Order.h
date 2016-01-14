@@ -11,7 +11,9 @@
 @import UIKit;
 
 @class FMResultSet;
+@class ExecutionOrder;
 @class Money;
+@class NormalizedOrdersFactory;
 @class OpenPosition;
 
 @interface Order : PositionBase
@@ -24,13 +26,15 @@
 
 + (void)deleteSaveSlot:(NSUInteger)slot;
 
+- (instancetype)initWithSaveSlot:(NSUInteger)slot CurrencyPair:(CurrencyPair *)currencyPair positionType:(PositionType *)positionType rate:(Rate *)rate positionSize:(PositionSize *)positionSize normalizedOrdersFactory:(NormalizedOrdersFactory *)normalizedOrdersFactory;
+
+- (instancetype)copyOrderForNewOrder;
+
+- (instancetype)copyOrderForCloseOrder;
+
 - (instancetype)copyOrderForNewPositionSize:(PositionSize *)positionSize;
 
-- (NSArray *)createExecutionOrders;
-
-- (void)setNewOrder;
-
-- (void)setCloseOrder;
+- (NSArray<ExecutionOrder *> *)createExecutionOrders;
 
 /**
  Orderに含まれている新規ポジション注文のポジション金額

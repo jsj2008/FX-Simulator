@@ -33,7 +33,7 @@
     return self;
 }
 
-- (NSArray *)createNormalizedOrdersFromOrder:(Order *)order
+- (NSArray<Order *> *)createNormalizedOrdersFromOrder:(Order *)order
 {
     OrdersCreateMode *createMode = [_ordersCreateModeFactory createModeFromOrder:order];
     

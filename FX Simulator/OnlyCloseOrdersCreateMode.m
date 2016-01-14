@@ -16,16 +16,11 @@
 
 - (NSArray *)create:(Order *)order
 {
-    if (order.isNew) {
+    if (order.isNew || order.isClose) {
         return nil;
     }
     
-    if (order.isClose) {
-        return @[order];
-    } else {
-        [order setCloseOrder];
-        return @[order];
-    }
+    return @[[order copyOrderForCloseOrder]];
 }
 
 @end

@@ -14,6 +14,7 @@
 #import "Market.h"
 #import "OpenPosition.h"
 #import "Order.h"
+#import "OrderFactory.h"
 #import "OrderManager.h"
 #import "OrderResult.h"
 #import "SaveData.h"
@@ -30,6 +31,7 @@
     Account *_account;
     Market *_market;
     NSHashTable *_delegates;
+    OrderFactory *_orderFactory;
     OrderManager *_orderManager;
     SaveData *_saveData;
     SimulationState *_simulationState;
@@ -60,6 +62,7 @@
     _saveData = saveData;
     _account = saveData.account;
     _market = _saveData.market;
+    _orderFactory = [[OrderFactory alloc] initWithSaveSlot:saveData.slotNumber openPositions:saveData.openPositions];
     _orderManager = [OrderManager createOrderManagerFromOpenPositions:saveData.openPositions];
     [_orderManager addDelegate:self];
     [_orderManager addState:self];
@@ -74,6 +77,9 @@
         }
         if ([delegate respondsToSelector:@selector(loadMarket:)]) {
             [delegate loadMarket:_market];
+        }
+        if ([delegate respondsToSelector:@selector(loadOrderFactory:)]) {
+            [delegate loadOrderFactory:_orderFactory];
         }
         if ([delegate respondsToSelector:@selector(loadOrderManager:)]) {
             [delegate loadOrderManager:_orderManager];
