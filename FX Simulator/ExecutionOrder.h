@@ -28,6 +28,8 @@
 
 + (void)executionOrderDetail:(void (^)(CurrencyPair *currencyPair, PositionType *positionType, Rate *rate, NSUInteger orderId))block fromExecutionOrderId:(NSUInteger)executionOrderId saveSlot:(NSUInteger)slot;
 
++ (void)enumerateExecutionOrderDetail:(void (^)(CurrencyPair *currencyPair, PositionType *positionType, Rate *rate, NSUInteger executionOrderId, NSUInteger orderId))block fromExecutionOrderIds:(NSArray<NSNumber *> *)executionOrderIds saveSlot:(NSUInteger)slot;
+
 + (Money *)profitAndLossOfCurrencyPair:(CurrencyPair *)currencyPair saveSlot:(NSUInteger)slot;
 
 + (NSArray *)selectNewestFirstLimit:(NSUInteger)limit saveSlot:(NSUInteger)slot;

@@ -86,15 +86,28 @@ static NSString* const FXSExecutionOrdersTableName = @"execution_orders";
     }
 }
 
++ (void)enumerateExecutionOrderDetail:(void (^)(CurrencyPair *currencyPair, PositionType *positionType, Rate *rate, NSUInteger executionOrderId, NSUInteger orderId))block fromExecutionOrderIds:(NSArray<NSNumber *> *)executionOrderIds saveSlot:(NSUInteger)slot
+{
+    if (!block || executionOrderIds.count == 0) {
+        return;
+    }
+    
+    NSArray<ExecutionOrder *> *orders = [self ordersAtIds:executionOrderIds saveSlot:slot];
+    
+    [orders enumerateObjectsUsingBlock:^(ExecutionOrder * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        block(obj.currencyPair, obj.positionType, obj.rate, obj.recordId, obj.orderId);
+    }];
+}
+
 + (ExecutionOrder *)orderAtId:(NSUInteger)recordId saveSlot:(NSUInteger)slot
 {
-    NSString *sql = [NSString stringWithFormat:@"SELECT * FROM %@ WHERE save_slot = ? AND id = ?", FXSExecutionOrdersTableName];
+    NSString *sql = [NSString stringWithFormat:@"SELECT * FROM %@ WHERE id = ? AND save_slot = ?", FXSExecutionOrdersTableName];
     
     __block ExecutionOrder *order;
     
     [self execute:^(FMDatabase *db) {
         
-        FMResultSet *result = [db executeQuery:sql, @(slot), @(recordId)];
+        FMResultSet *result = [db executeQuery:sql, @(recordId), @(slot)];
         
         while ([result next]) {
             order = [[ExecutionOrder alloc] initWithFMResultSet:result];
@@ -105,6 +118,66 @@ static NSString* const FXSExecutionOrdersTableName = @"execution_orders";
     }];
     
     return order;
+}
+
++ (NSArray<ExecutionOrder *> *)ordersAtIds:(NSArray<NSNumber *> *)ids saveSlot:(NSUInteger)slot
+{
+    if (ids.count == 0) {
+        return nil;
+    }
+    
+    
+    /* create sql */
+    
+    __block NSString *idsSql = @"";
+    
+    [ids enumerateObjectsUsingBlock:^(NSNumber * _Nonnull orderId, NSUInteger idx, BOOL * _Nonnull stop) {
+        NSString *idSql = [NSString stringWithFormat:@"id = :%@", orderId.stringValue];
+        if ((ids.count - 1) != idx) {
+            idSql = [idSql stringByAppendingString:@" OR "];
+        }
+        idsSql = [idsSql stringByAppendingString:idSql];
+    }];
+    
+    idsSql = [NSString stringWithFormat:@" ( %@ ) ", idsSql];
+    
+    
+    
+    NSString *saveSlotKey = @"save_slot";
+    NSString *sql = [NSString stringWithFormat:@"SELECT * FROM %@ WHERE %@ AND save_slot = :%@", FXSExecutionOrdersTableName, idsSql, saveSlotKey];
+    
+    
+    /* create parameter dictionary */
+    
+    NSMutableDictionary<NSString *, NSNumber *> *dic = [NSMutableDictionary dictionary];
+    
+    for (NSNumber *orderId in ids) {
+        dic[orderId.stringValue] = orderId;
+    }
+    
+    dic[saveSlotKey] = @(slot);
+    
+    
+    /* db */
+    
+    __block NSMutableArray<ExecutionOrder *> *orders = [NSMutableArray array];
+    
+    [self execute:^(FMDatabase *db) {
+        
+        FMResultSet *result = [db executeQuery:sql withParameterDictionary:dic];
+        
+        while ([result next]) {
+            ExecutionOrder *order = [[ExecutionOrder alloc] initWithFMResultSet:result];
+            if (order) {
+                [orders addObject:order];
+            }
+        }
+        
+        [result close];
+        
+    }];
+    
+    return [orders copy];
 }
 
 + (Money *)profitAndLossOfCurrencyPair:(CurrencyPair *)currencyPair saveSlot:(NSUInteger)slot
