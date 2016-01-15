@@ -77,6 +77,62 @@ static const int maxRecords = 50;
     return openPosition;
 }
 
++ (NSArray<OpenPosition *> *)createOpenPositionsFromRawRecords:(NSArray<OpenPositionRawRecord *> *)rawRecords
+{
+    if (rawRecords.count == 0) {
+        return nil;
+    }
+    
+    
+    /* create executionOrderIds  */
+    
+    NSMutableArray<NSNumber *> *executionOrderIds = [NSMutableArray array];
+    [rawRecords enumerateObjectsUsingBlock:^(OpenPositionRawRecord * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        [executionOrderIds addObject:@(obj.executionOrderId)];
+    }];
+    
+    
+    /* create openPositions */
+    
+    NSUInteger saveSlot = rawRecords.firstObject.saveSlot;
+    
+    NSMutableArray<OpenPosition *> *openPositions = [NSMutableArray array];
+    
+    [ExecutionOrder enumerateExecutionOrderDetail:^(CurrencyPair *currencyPair, PositionType *positionType, Rate *rate, NSUInteger executionOrderId, NSUInteger orderId) {
+        
+        // executionOrderIdに対応するOpenPositionRawRecord
+        __block OpenPositionRawRecord *targetRawRecord;
+        
+        [rawRecords enumerateObjectsUsingBlock:^(OpenPositionRawRecord * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            if (executionOrderId == obj.executionOrderId) {
+                targetRawRecord = obj;
+                *stop = YES;
+            }
+        }];
+        
+        if (!targetRawRecord) {
+            return;
+        }
+        
+        
+        OpenPosition *openPosition = [self openPositionWithBlock:^(OpenPositionComponents *components) {
+            components.saveSlot = targetRawRecord.saveSlot;
+            components.currencyPair = currencyPair;
+            components.positionType = positionType;
+            components.rate = rate;
+            components.positionSize = targetRawRecord.positionSize;
+            components.recordId = targetRawRecord.recordId;
+            components.executionOrderId = targetRawRecord.executionOrderId;
+            components.orderId = orderId;
+        }];
+        
+        [openPositions addObject:openPosition];
+        
+    } fromExecutionOrderIds:executionOrderIds saveSlot:saveSlot];
+    
+    return [openPositions copy];
+}
+
 /**
  ポジションが新しい順
 */
@@ -171,16 +227,16 @@ static const int maxRecords = 50;
 
     }];
     
+    
+    if (openPositionRawRecords.count == 0) {
+        return nil;
+    }
+    
     NSMutableArray *openPositions = [NSMutableArray array];
     
-    [openPositionRawRecords enumerateObjectsUsingBlock:^(OpenPositionRawRecord *obj, NSUInteger idx, BOOL *stop) {
-        OpenPosition *openPosition = [self createOpenPositionFromRawRecord:obj];
-        if (openPosition) {
-            [openPositions addObject:openPosition];
-        }
-    }];
+    openPositions = [[self createOpenPositionsFromRawRecords:openPositionRawRecords] mutableCopy];
     
-    return openPositions;
+    return [openPositions copy];
 }
 
 /**
