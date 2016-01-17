@@ -204,7 +204,7 @@ static const int maxRecords = 50;
 */
 + (NSArray *)selectAllOfSaveSlot:(NSUInteger)slot
 {
-    NSString *sql = [NSString stringWithFormat:@"select * from %@ WHERE save_slot = ?", FXSOpenPositionsTableName];
+    NSString *sql = [NSString stringWithFormat:@"select * from %@ WHERE 0 < position_size AND save_slot = ?", FXSOpenPositionsTableName];
     
     NSMutableArray *openPositionRawRecords = [NSMutableArray array];
     
@@ -217,8 +217,7 @@ static const int maxRecords = 50;
         while ([rs next]) {
             OpenPositionRawRecord *openPositionRawRecord = [[OpenPositionRawRecord alloc] initWithFMResultSet:rs];
             
-            // ポジションサイズが０以上のものだけOpenPositionにする
-            if (0 < openPositionRawRecord.positionSize.sizeValue) {
+            if (openPositionRawRecord) {
                 [openPositionRawRecords addObject:openPositionRawRecord];
             }
         }
