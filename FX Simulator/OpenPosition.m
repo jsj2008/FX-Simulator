@@ -399,6 +399,7 @@ static const int maxRecords = 50;
         components.willExecuteOrder = YES;
         components.closeTargetExecutionOrderId = self.executionOrderId;
         components.closeTargetOrderId = self.orderId;
+        components.closeTargetRate = self.rate;
         components.willExecuteCloseTargetOpenPosition = self;
     }];
 }

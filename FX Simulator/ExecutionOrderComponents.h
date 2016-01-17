@@ -27,5 +27,6 @@
 @property (nonatomic) BOOL willExecuteOrder;
 @property (nonatomic) NSUInteger closeTargetExecutionOrderId;
 @property (nonatomic) NSUInteger closeTargetOrderId;
+@property (nonatomic) Rate *closeTargetRate;
 @property (nonatomic) OpenPosition *willExecuteCloseTargetOpenPosition;
 @end
