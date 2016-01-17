@@ -39,6 +39,7 @@ static NSString* const FXSExecutionOrdersTableName = @"execution_orders";
 @property (nonatomic, readonly) BOOL isClose;
 @property (nonatomic, readonly) NSUInteger closeTargetExecutionOrderId;
 @property (nonatomic, readonly) NSUInteger closeTargetOrderId;
+@property (nonatomic, readonly) Rate *closeTargetRate;
 @property (nonatomic, readonly) BOOL willExecuteOrder;
 @property (nonatomic, readonly) OpenPosition *willExecuteCloseTargetOpenPosition;
 @end
@@ -231,6 +232,7 @@ static NSString* const FXSExecutionOrdersTableName = @"execution_orders";
         _isClose = components.isClose;
         _closeTargetExecutionOrderId = components.closeTargetExecutionOrderId;
         _closeTargetOrderId = components.closeTargetOrderId;
+        _closeTargetRate = components.closeTargetRate;
         _willExecuteOrder = components.willExecuteOrder;
         _willExecuteCloseTargetOpenPosition = components.willExecuteCloseTargetOpenPosition;
     }
@@ -245,6 +247,7 @@ static NSString* const FXSExecutionOrdersTableName = @"execution_orders";
     Time *rateTime = [[Time alloc] initWithTimestamp:[result intForColumn:@"timestamp"]];
     Rate *rate = [[Rate alloc] initWithRateValue:[result doubleForColumn:@"rate"] currencyPair:currencyPair timestamp:rateTime];
     PositionType *positionType;
+    Rate *closeTargetRate = [[Rate alloc] initWithRateValue:[result doubleForColumn:@"close_target_rate"] currencyPair:currencyPair timestamp:nil];
     
     if ([result boolForColumn:@"is_long"]) {
         positionType = [[PositionType alloc] initWithLong];
@@ -266,6 +269,7 @@ static NSString* const FXSExecutionOrdersTableName = @"execution_orders";
         components.isClose = [result boolForColumn:@"is_close"];
         components.closeTargetExecutionOrderId = [result intForColumn:@"close_target_execution_order_id"];
         components.closeTargetOrderId = [result intForColumn:@"close_target_order_id"];
+        components.closeTargetRate = closeTargetRate;
         components.willExecuteOrder = NO;
     }];
     
@@ -298,11 +302,11 @@ static NSString* const FXSExecutionOrdersTableName = @"execution_orders";
         [NSException raise:@"ExecutionOrderException" format:@"Validate Error"];
     }
     
-    NSString *sql = [NSString stringWithFormat:@"INSERT INTO %@ ( save_slot, order_id, code, is_short, is_long, rate, timestamp, position_size, is_close, close_target_execution_order_id, close_target_order_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);", FXSExecutionOrdersTableName];
+    NSString *sql = [NSString stringWithFormat:@"INSERT INTO %@ ( save_slot, order_id, code, is_short, is_long, rate, timestamp, position_size, is_close, close_target_execution_order_id, close_target_order_id, close_target_rate) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);", FXSExecutionOrdersTableName];
     
     [[self  class] execute:^(FMDatabase *db) {
 
-        if([db executeUpdate:sql, @(self.saveSlot), @(self.orderId), self.currencyPair.toCodeString, @(self.positionType.isShort), @(self.positionType.isLong), self.rate.rateValueObj, self.rate.timestamp.timestampValueObj, self.positionSize.sizeValueObj, @(self.isClose), @(self.closeTargetExecutionOrderId), @(self.closeTargetOrderId)]) {
+        if([db executeUpdate:sql, @(self.saveSlot), @(self.orderId), self.currencyPair.toCodeString, @(self.positionType.isShort), @(self.positionType.isLong), self.rate.rateValueObj, self.rate.timestamp.timestampValueObj, self.positionSize.sizeValueObj, @(self.isClose), @(self.closeTargetExecutionOrderId), @(self.closeTargetOrderId), self.closeTargetRate.rateValueObj]) {
             
             NSString *sql = [NSString stringWithFormat:@"select MAX(id) as MAX_ID from %@ WHERE save_slot = ?;", FXSExecutionOrdersTableName];
             
@@ -345,13 +349,7 @@ static NSString* const FXSExecutionOrdersTableName = @"execution_orders";
         return nil;
     }
     
-    ExecutionOrder *closeTargetOrder = [[self class] orderAtId:self.closeTargetExecutionOrderId saveSlot:self.saveSlot];
-    
-    if (!closeTargetOrder) {
-        return nil;
-    }
-    
-    return [ProfitAndLossCalculator calculateByTargetRate:self.rate valuationRate:closeTargetOrder.rate positionSize:self.positionSize orderType:self.positionType];
+    return [ProfitAndLossCalculator calculateByTargetRate:self.rate valuationRate:self.closeTargetRate positionSize:self.positionSize orderType:self.positionType];
 }
 
 #pragma mark - display
