@@ -281,7 +281,7 @@ static NSString* const FXSExecutionOrdersTableName = @"execution_orders";
     if (self.isClose) {
         [self.willExecuteCloseTargetOpenPosition close];
         [self save];
-    } else {
+    } else if (self.isNew) {
         [self save];
         OpenPosition *newOpenPosition = [OpenPosition openPositionWithBlock:^(OpenPositionComponents *components) {
             components.saveSlot = self.saveSlot;
