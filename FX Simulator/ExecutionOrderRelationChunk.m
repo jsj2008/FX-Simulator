@@ -34,9 +34,19 @@
     } fromExecutionOrderId:executionOrderId saveSlot:_saveSlot];
 }
 
+- (ExecutionOrder *)newestCloseOrderOfCurrencyPair:(CurrencyPair *)currencyPair
+{
+    return [ExecutionOrder newestCloseOrderOfSaveSlot:_saveSlot currencyPair:currencyPair];
+}
+
 - (Money *)profitAndLossOfCurrencyPair:(CurrencyPair *)currencyPair
 {
-    return [ExecutionOrder profitAndLossOfCurrencyPair:currencyPair saveSlot:_saveSlot];
+    return [ExecutionOrder profitAndLossOfSaveSlot:_saveSlot currencyPair:currencyPair];
+}
+
+- (Money *)profitAndLossOfCurrencyPair:(CurrencyPair *)currencyPair newerThan:(ExecutionOrder *)oldOrder
+{
+    return [ExecutionOrder profitAndLossOfSaveSlot:_saveSlot currencyPair:currencyPair newerThan:oldOrder];
 }
 
 - (NSArray *)selectNewestFirstLimit:(NSUInteger)limit

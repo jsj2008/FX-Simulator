@@ -22,6 +22,9 @@
 
 @interface RatePanelViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *rateValueLabel;
+@property (weak, nonatomic) IBOutlet RatePanelButton *longButton;
+@property (weak, nonatomic) IBOutlet RatePanelButton *shortButton;
+
 @end
 
 @implementation RatePanelViewController {
@@ -75,9 +78,19 @@
 
 - (void)order:(PositionType *)orderType
 {
+    [self setOrderButtonEnabled:NO];
+    
     Order *order = [_orderFactory orderWithCurrencyPair:_currencyPair positionType:orderType rate:[self getCurrentRateForOrderType:orderType] positionSize:_saveData.tradePositionSize];
     
     [_orderManager order:order];
+    
+    [self setOrderButtonEnabled:YES];
+}
+
+- (void)setOrderButtonEnabled:(BOOL)enabled
+{
+    self.shortButton.enabled = enabled;
+    self.longButton.enabled = enabled;
 }
 
 - (NSString *)getDisplayCurrentBidRate

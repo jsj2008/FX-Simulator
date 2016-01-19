@@ -13,6 +13,7 @@
 #import "FMResultSet.h"
 #import "CurrencyPair.h"
 #import "ExecutionOrderComponents.h"
+#import "FXSComparisonResult.h"
 #import "Lot.h"
 #import "Money.h"
 #import "OpenPosition.h"
@@ -181,17 +182,80 @@ static NSString* const FXSExecutionOrdersTableName = @"execution_orders";
     return [orders copy];
 }
 
-+ (Money *)profitAndLossOfCurrencyPair:(CurrencyPair *)currencyPair saveSlot:(NSUInteger)slot
++ (ExecutionOrder *)newestCloseOrderOfSaveSlot:(NSUInteger)slot currencyPair:(CurrencyPair *)currencyPair
 {
-    NSArray *allOrders = [self allClosedOrdersOfCurrencyPair:currencyPair saveSlot:slot];
+    NSString *sql = [NSString stringWithFormat:@"SELECT * FROM %@ WHERE save_slot = :save_slot AND code = :code AND is_close = :is_close ORDER BY id DESC LIMIT 1", FXSExecutionOrdersTableName];
     
-    Money *profitAndLoss = [[Money alloc] initWithAmount:0 currency:currencyPair.quoteCurrency];
+    __block ExecutionOrder *executionOrder;
     
-    for (ExecutionOrder *order in allOrders) {
-        profitAndLoss = [profitAndLoss addMoney:[order profitAndLoss]];
+    [self execute:^(FMDatabase *db) {
+        FMResultSet *result = [db executeQuery:sql withParameterDictionary:@{@"save_slot":@(slot), @"code":currencyPair.toCodeString, @"is_close":@(YES)}];
+        
+        while ([result next]) {
+            executionOrder = [[ExecutionOrder alloc] initWithFMResultSet:result];
+        }
+        
+        [result close];
+    }];
+    
+    return executionOrder;
+}
+
++ (Money *)profitAndLossOfExecutionOrders:(NSArray<ExecutionOrder *> *)orders currency:(Currency *)currency
+{
+    Money *profitAndLoss = [[Money alloc] initWithAmount:0 currency:currency];
+    
+    for (ExecutionOrder *order in orders) {
+        if (order.isClose) {
+            profitAndLoss = [profitAndLoss addMoney:[order profitAndLoss]];
+        }
     }
     
     return profitAndLoss;
+}
+
++ (Money *)profitAndLossOfSaveSlot:(NSUInteger)slot currencyPair:(CurrencyPair *)currencyPair
+{
+    NSString *sql = [NSString stringWithFormat:@"SELECT * FROM %@ WHERE save_slot = :save_slot AND code = :code AND is_close = :is_close", FXSExecutionOrdersTableName];
+    
+    NSMutableArray<ExecutionOrder *> *orders = [NSMutableArray array];
+    
+    [self execute:^(FMDatabase *db) {
+        FMResultSet *result = [db executeQuery:sql withParameterDictionary:@{@"save_slot":@(slot), @"code":currencyPair.toCodeString, @"is_close":@(YES)}];
+        
+        while ([result next]) {
+            ExecutionOrder *order = [[ExecutionOrder alloc] initWithFMResultSet:result];
+            if (order) {
+                [orders addObject:order];
+            }
+        }
+        
+        [result close];
+    }];
+    
+    return [self profitAndLossOfExecutionOrders:orders currency:currencyPair.quoteCurrency];
+}
+
++ (Money *)profitAndLossOfSaveSlot:(NSUInteger)slot currencyPair:(CurrencyPair *)currencyPair newerThan:(ExecutionOrder *)oldOrder
+{
+    NSString *sql = [NSString stringWithFormat:@"SELECT * FROM %@ WHERE save_slot = :save_slot AND code = :code AND is_close = :is_close AND id > :id", FXSExecutionOrdersTableName];
+    
+    NSMutableArray<ExecutionOrder *> *orders = [NSMutableArray array];
+    
+    [self execute:^(FMDatabase *db) {
+        FMResultSet *result = [db executeQuery:sql withParameterDictionary:@{@"save_slot":@(slot), @"code":currencyPair.toCodeString, @"is_close":@(YES), @"id":@(oldOrder.recordId)}];
+        
+        while ([result next]) {
+            ExecutionOrder *order = [[ExecutionOrder alloc] initWithFMResultSet:result];
+            if (order) {
+                [orders addObject:order];
+            }
+        }
+        
+        [result close];
+    }];
+    
+    return [self profitAndLossOfExecutionOrders:orders currency:currencyPair.quoteCurrency];
 }
 
 + (NSArray *)selectNewestFirstLimit:(NSUInteger)limit saveSlot:(NSUInteger)slot
@@ -274,6 +338,15 @@ static NSString* const FXSExecutionOrdersTableName = @"execution_orders";
     }];
     
     return self;
+}
+
+- (FXSComparisonResult *)compareExecutedOrder:(ExecutionOrder *)order
+{
+    if (self.willExecuteOrder) {
+        return nil;
+    }
+    
+    return [[FXSComparisonResult alloc] initWithComparisonResult:[@(self.recordId) compare:@(order.recordId)]];
 }
 
 - (void)execute
