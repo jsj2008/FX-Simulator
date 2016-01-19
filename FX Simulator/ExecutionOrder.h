@@ -14,6 +14,7 @@
 @class Currency;
 @class CurrencyPair;
 @class ExecutionOrderComponents;
+@class FXSComparisonResult;
 @class Money;
 @class OpenPosition;
 @class Order;
@@ -30,11 +31,17 @@
 
 + (void)enumerateExecutionOrderDetail:(void (^)(CurrencyPair *currencyPair, PositionType *positionType, Rate *rate, NSUInteger executionOrderId, NSUInteger orderId))block fromExecutionOrderIds:(NSArray<NSNumber *> *)executionOrderIds saveSlot:(NSUInteger)slot;
 
-+ (Money *)profitAndLossOfCurrencyPair:(CurrencyPair *)currencyPair saveSlot:(NSUInteger)slot;
++ (ExecutionOrder *)newestCloseOrderOfSaveSlot:(NSUInteger)slot currencyPair:(CurrencyPair *)currencyPair;
+
++ (Money *)profitAndLossOfSaveSlot:(NSUInteger)slot currencyPair:(CurrencyPair *)currencyPair;
+
++ (Money *)profitAndLossOfSaveSlot:(NSUInteger)slot currencyPair:(CurrencyPair *)currencyPair newerThan:(ExecutionOrder *)oldOrder;
 
 + (NSArray *)selectNewestFirstLimit:(NSUInteger)limit saveSlot:(NSUInteger)slot;
 
 + (void)deleteSaveSlot:(NSUInteger)slot;
+
+- (FXSComparisonResult *)compareExecutedOrder:(ExecutionOrder *)order;
 
 - (void)displayDataUsingBlock:(void (^)(NSString *currencyPair, NSString *positionType, NSString *rate, NSString *lot, NSString *orderId, NSString *closeTargetOrderId, NSString *profitAndLoss, NSString *ymdTime, NSString *hmsTime, UIColor *profitAndLossColor))block sizeOfLot:(PositionSize *)size displayCurrency:(Currency *)displayCurrency;
 

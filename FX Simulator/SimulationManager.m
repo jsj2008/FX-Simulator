@@ -71,6 +71,8 @@
     _simulationTimeManager = [[SimulationTimeManager alloc] initWithAutoUpdateIntervalSeconds:saveData.autoUpdateIntervalSeconds isAutoUpdate:saveData.isAutoUpdate];
     [_simulationTimeManager addObserver:self];
     
+    [_account update];
+    
     for (id<SimulationManagerDelegate> delegate in _delegates) {
         if ([delegate respondsToSelector:@selector(loadSaveData:)]) {
             [delegate loadSaveData:_saveData];

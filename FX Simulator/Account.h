@@ -43,6 +43,8 @@
 */
 - (BOOL)isShortage;
 
+- (void)update;
+
 //- (Money *)equityForMarket:(Market *)market;
 
 //- (Money *)profitAndLossForMarket:(Market *)market;

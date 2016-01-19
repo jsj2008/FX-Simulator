@@ -44,6 +44,8 @@
     Leverage *_leverage;
     Market *_market;
     Money *_startBalance;
+    Money *_realizedProfitAndLoss;
+    ExecutionOrder *_currentExecutedCloseOrder;
     OpenPositionRelationChunk *_openPositions;
     ExecutionOrderRelationChunk *_executionOrders;
 }
@@ -69,6 +71,11 @@
     self.balance = nil;
     self.totalPositionSize = nil;
     self.positionType = nil;
+    [self averageRate];
+    [self setRealizedProfitAndLoss];
+    [self balance];
+    [self totalPositionSize];
+    [self positionType];
 }
 
 - (BOOL)isShortage
@@ -94,6 +101,32 @@
     block(equity.toDisplayString, profitAndLoss.toDisplayString, [self positionType].toDisplayString, [self averageRate].toDisplayString, [[self totalPositionSize] toLotFromPositionSizeOfLot:positionSize].toDisplayString, equity.toDisplayColor, profitAndLoss.toDisplayColor);
 }
 
+- (void)setRealizedProfitAndLoss
+{
+    if (!_realizedProfitAndLoss || !_currentExecutedCloseOrder) {
+        _realizedProfitAndLoss = [_executionOrders profitAndLossOfCurrencyPair:_currencyPair];
+        _currentExecutedCloseOrder = [_executionOrders newestCloseOrderOfCurrencyPair:_currencyPair];
+    } else {
+        ExecutionOrder *newestCloseOrder = [_executionOrders newestCloseOrderOfCurrencyPair:_currencyPair];
+        
+        if (!newestCloseOrder) {
+            return;
+        }
+        
+        FXSComparisonResult *result = [_currentExecutedCloseOrder compareExecutedOrder:newestCloseOrder];
+        
+        if (!result) {
+            return;
+        }
+        
+        if (result.result == NSOrderedAscending) {
+            Money *newProfitAndLoss = [_executionOrders profitAndLossOfCurrencyPair:_currencyPair newerThan:_currentExecutedCloseOrder];
+            _realizedProfitAndLoss = [_realizedProfitAndLoss addMoney:newProfitAndLoss];
+            _currentExecutedCloseOrder = [_executionOrders newestCloseOrderOfCurrencyPair:_currencyPair];
+        }
+    }
+}
+
 - (Rate *)averageRate
 {
     if (!_averageRate) {
@@ -106,8 +139,7 @@
 - (Money *)balance
 {
     if (!_balance) {
-        Money *profitAndLoss = [[_executionOrders profitAndLossOfCurrencyPair:_currencyPair] convertToCurrency:_accountCurrency];
-        _balance = [_startBalance addMoney:profitAndLoss];
+        _balance = [_startBalance addMoney:_realizedProfitAndLoss];
     }
     
     return _balance;

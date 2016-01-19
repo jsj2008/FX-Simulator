@@ -2051,7 +2051,9 @@
                     </view>
                     <toolbarItems/>
                     <connections>
+                        <outlet property="longButton" destination="mx5-5I-gzI" id="81X-LD-sCN"/>
                         <outlet property="rateValueLabel" destination="smw-6F-nuu" id="nQp-FT-wRG"/>
+                        <outlet property="shortButton" destination="UYT-Du-Ssw" id="vcX-0O-mQi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fTN-6E-hwO" userLabel="First Responder" sceneMemberID="firstResponder"/>
