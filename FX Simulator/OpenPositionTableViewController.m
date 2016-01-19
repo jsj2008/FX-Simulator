@@ -82,7 +82,6 @@ static const unsigned int displayMaxOpenPositionDataRecords = 100;
     OpenPosition *openPosition = [_openPositionDataRecords objectAtIndex:indexPath.row];
     
     [openPosition displayDataUsingBlock:^(NSString *currencyPair, NSString *positionType, NSString *rate, NSString *lot, NSString *orderId, NSString *profitAndLoss, NSString *ymdTime, NSString *hmsTime, UIColor *profitAndLossColor) {
-        cell.displayOrderNumberValueLabel.text = orderId;
         cell.displayOrderTypeValueLabel.text = positionType;
         cell.displayOrderRateValueLabel.text = rate;
         cell.displayOrderLotValueLabel.text = lot;

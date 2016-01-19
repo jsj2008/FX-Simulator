@@ -13,7 +13,6 @@
 @class Market;
 
 @interface OpenPositionTableViewCell : UITableViewCell
-@property (weak, nonatomic) IBOutlet UILabel *displayOrderNumberValueLabel;
 @property (weak, nonatomic) IBOutlet UILabel *displayOrderTypeValueLabel;
 @property (weak, nonatomic) IBOutlet UILabel *displayOrderRateValueLabel;
 @property (weak, nonatomic) IBOutlet UILabel *displayOrderLotValueLabel;
