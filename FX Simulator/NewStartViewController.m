@@ -80,9 +80,17 @@
     SaveData *newSaveData = [controller.saveDataForm createSaveData];
     
     [newSaveData saveWithCompletion:^{
+        
         [_simulationManager startSimulationForSaveData:newSaveData];
+        
+        if ([self.delegate respondsToSelector:@selector(didStartSimulationWithNewData)]) {
+            [self.delegate didStartSimulationWithNewData];
+        }
+        
     } error:^{
+        
         [newSaveData delete];
+        
     }];
 }
 

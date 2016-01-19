@@ -8,14 +8,17 @@
 
 #import "MainViewController.h"
 
+#import "NewStartViewController.h"
 #import "SimulationManager.h"
+#import "TradeViewController.h"
 
-@interface MainViewController ()
+@interface MainViewController () <NewStartViewControllerDelegate>
 
 @end
 
 @implementation MainViewController {
     SimulationManager *_simulationManager;
+    TradeViewController *_tradeViewController;
 }
 
 -  (instancetype)initWithCoder:(NSCoder *)aDecoder
@@ -40,6 +43,11 @@
     for (UIViewController *controller in self.viewControllers) {
         if ([controller conformsToProtocol:@protocol(SimulationManagerDelegate)]) {
             [_simulationManager addDelegate:(id<SimulationManagerDelegate>)controller];
+        }
+        if ([controller isMemberOfClass:[TradeViewController class]]) {
+            _tradeViewController = (TradeViewController *)controller;
+        } else if ([controller isMemberOfClass:[NewStartViewController class]]) {
+            ((NewStartViewController *)controller).delegate = self;
         }
     }
     
@@ -79,6 +87,11 @@
 {
     [_simulationManager pauseTime];
     [_simulationManager save];
+}
+
+- (void)didStartSimulationWithNewData
+{
+    self.selectedViewController = _tradeViewController;
 }
 
 - (void)dealloc

@@ -9,6 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "SimulationManager.h"
 
-@interface NewStartViewController : UITableViewController <SimulationManagerDelegate>
+@protocol NewStartViewControllerDelegate <NSObject>
+- (void)didStartSimulationWithNewData;
+@end
 
+@interface NewStartViewController : UITableViewController <SimulationManagerDelegate>
+@property (nonatomic, weak) id<NewStartViewControllerDelegate> delegate;
 @end
