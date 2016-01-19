@@ -49,11 +49,9 @@ static const unsigned int displayMaxExecutionHistoryRecords = 100;
     ExecutionOrder *order = [_executionHistoryRecords objectAtIndex:indexPath.row];
     
     [order displayDataUsingBlock:^(NSString *currencyPair, NSString *positionType, NSString *rate, NSString *lot, NSString *orderId, NSString *closeTargetOrderId, NSString *profitAndLoss, NSString *ymdTime, NSString *hmsTime, UIColor *profitAndLossColor) {
-        cell.displayUsersOrderNumberValueLabel.text = orderId;
         cell.displayOrderTypeValueLabel.text = positionType;
         cell.displayOrderRateValueLabel.text = rate;
         cell.displayOrderLotValueLabel.text = lot;
-        cell.displayCloseUsersOrderNumberValueLabel.text = closeTargetOrderId;
         cell.displayProfitAndLossValueLabel.text = profitAndLoss;
         cell.displayProfitAndLossValueLabel.textColor = profitAndLossColor;
         cell.displayOrderYMDTimeValueLabel.text = ymdTime;
