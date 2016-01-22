@@ -72,7 +72,6 @@
     self.totalPositionSize = nil;
     self.positionType = nil;
     [self averageRate];
-    [self setRealizedProfitAndLoss];
     [self balance];
     [self totalPositionSize];
     [self positionType];
@@ -139,6 +138,7 @@
 - (Money *)balance
 {
     if (!_balance) {
+        [self setRealizedProfitAndLoss];
         _balance = [_startBalance addMoney:_realizedProfitAndLoss];
     }
     
