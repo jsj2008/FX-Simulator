@@ -11,6 +11,7 @@
 #import "OpenPositionRelationChunk.h"
 #import "Order.h"
 #import "OrderResult.h"
+#import "PositionType.h"
 
 @implementation OrderManagerState {
     NSHashTable *_states;
@@ -54,7 +55,7 @@
         }
     }
     
-    if (![_openPositions isExecutableNewPosition] && order.isNew) {
+    if (![_openPositions isExecutableNewPosition] && [[_openPositions positionTypeOfCurrencyPair:order.currencyPair] isEqualPositionType:order.positionType]) {
         return [[OrderResult alloc] initWithIsSuccess:NO title:@"Max Open Position" message:nil];
     }
     
