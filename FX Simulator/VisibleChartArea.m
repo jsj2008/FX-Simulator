@@ -26,7 +26,7 @@ static const float FXSEntityChartViewPrepareTotalRangeRatio = 0.5;
 @end
 
 @implementation VisibleChartArea {
-    __weak UIScrollView *_visibleChartView;
+    __weak UIScrollView *_chartScrollView;
     __weak UIImageView *_entityChartView;
     CGPoint _normalizedChartScrollViewOffset;
     BOOL _inScale;
@@ -34,10 +34,10 @@ static const float FXSEntityChartViewPrepareTotalRangeRatio = 0.5;
     float _previousScaleX;
 }
 
-- (instancetype)initWithVisibleChartView:(UIScrollView *)visibleChartView entityChartView:(UIImageView *)entityChartView displayDataCount:(NSUInteger)displayDataCount
+- (instancetype)initWithChartScrollView:(UIScrollView *)chartScrollView entityChartView:(UIImageView *)entityChartView displayDataCount:(NSUInteger)displayDataCount
 {
     if (self = [super init]) {
-        _visibleChartView = visibleChartView;
+        _chartScrollView = chartScrollView;
         _entityChartView = entityChartView;
         _displayDataCount = displayDataCount;
     }
@@ -47,7 +47,7 @@ static const float FXSEntityChartViewPrepareTotalRangeRatio = 0.5;
 
 - (void)chartScrollViewDidLoad
 {
-    _visibleChartView.contentInset = UIEdgeInsetsMake(0, [self entityChartViewMargin], 0, [self entityChartViewMargin]);
+    _chartScrollView.contentInset = UIEdgeInsetsMake(0, [self entityChartViewMargin], 0, [self entityChartViewMargin]);
 }
 
 - (void)chartScrollViewDidScroll
@@ -72,15 +72,16 @@ static const float FXSEntityChartViewPrepareTotalRangeRatio = 0.5;
         _previousScaleX = scaleX;
         return;
     }
-    
+        
     _scaleX = _scaleX * (1 - (_previousScaleX - scaleX));
     
     _previousScaleX = scaleX;
     
-    float newVisibleViewWidth = _visibleChartView.frame.size.width / _scaleX;
+    float newVisibleViewWidth = _chartScrollView.frame.size.width / _scaleX;
     
-    float startVisibleViewOfEntityChart = (_visibleChartView.contentOffset.x - _entityChartView.frame.origin.x) / _entityChartView.transform.a;
-    float endVisibleViewOfEntityChart = startVisibleViewOfEntityChart + (_visibleChartView.frame.size.width / _entityChartView.transform.a);;
+    float startVisibleViewOfEntityChart = (_chartScrollView.contentOffset.x - _entityChartView.frame.origin.x) / _entityChartView.transform.a;
+    float endVisibleViewOfEntityChart = startVisibleViewOfEntityChart + (_chartScrollView.frame.size.width / _entityChartView.transform.a);
+    
     // EntityChart(scale前)で現在表示されている範囲の中間(x)
     float centerLineXOfEntityChart = (startVisibleViewOfEntityChart + endVisibleViewOfEntityChart) / 2;
     
@@ -128,7 +129,7 @@ static const float FXSEntityChartViewPrepareTotalRangeRatio = 0.5;
 
 - (BOOL)isInPreparePreviousChartRange
 {
-    if (_visibleChartView.contentOffset.x <= [self preparePreviousChartRangeStartX]) {
+    if (_chartScrollView.contentOffset.x <= [self preparePreviousChartRangeStartX]) {
         return YES;
     } else {
         return NO;
@@ -137,7 +138,7 @@ static const float FXSEntityChartViewPrepareTotalRangeRatio = 0.5;
 
 - (BOOL)isInPrepareNextChartRange
 {
-    if ([self prepareNextChartRangeStartX] <= (_visibleChartView.contentOffset.x + _visibleChartView.frame.size.width)) {
+    if ([self prepareNextChartRangeStartX] <= (_chartScrollView.contentOffset.x + _chartScrollView.frame.size.width)) {
         return YES;
     } else {
         return NO;
@@ -156,7 +157,7 @@ static const float FXSEntityChartViewPrepareTotalRangeRatio = 0.5;
 
 - (BOOL)isOverLeftEnd
 {
-    if (_visibleChartView.contentOffset.x < [self entityChartViewLeftEndOfVisibleChartCoordinate]) {
+    if (_chartScrollView.contentOffset.x < [self entityChartViewLeftEndOfVisibleChartCoordinate]) {
         return YES;
     } else {
         return NO;
@@ -165,7 +166,7 @@ static const float FXSEntityChartViewPrepareTotalRangeRatio = 0.5;
 
 - (BOOL)isOverRightEnd
 {
-    if ([self entityChartViewRightEndOfVisibleChartCoordinate] < (_visibleChartView.contentOffset.x + _visibleChartView.frame.size.width)) {
+    if ([self entityChartViewRightEndOfVisibleChartCoordinate] < (_chartScrollView.contentOffset.x + _chartScrollView.frame.size.width)) {
         return YES;
     } else {
         return NO;
@@ -174,12 +175,12 @@ static const float FXSEntityChartViewPrepareTotalRangeRatio = 0.5;
 
 - (float)preparePreviousChartRangeStartX
 {
-    return _visibleChartView.frame.origin.x + _entityChartView.frame.origin.x + [self prepareRangeWidth];
+    return _chartScrollView.frame.origin.x + _entityChartView.frame.origin.x + [self prepareRangeWidth];
 }
 
 - (float)prepareNextChartRangeStartX
 {
-    return _visibleChartView.frame.origin.x + _entityChartView.frame.origin.x + _entityChartView.frame.size.width - [self prepareRangeWidth];
+    return _chartScrollView.frame.origin.x + _entityChartView.frame.origin.x + _entityChartView.frame.size.width - [self prepareRangeWidth];
 }
 
 - (float)prepareRangeWidth
@@ -189,21 +190,21 @@ static const float FXSEntityChartViewPrepareTotalRangeRatio = 0.5;
 
 - (float)entityChartViewMargin
 {
-    return _visibleChartView.frame.size.width * 0.25;
+    return _chartScrollView.frame.size.width * 0.25;
 }
 
 - (void)normalize
 {
-    float startVisibleViewOfEntityChart = (_visibleChartView.contentOffset.x - _entityChartView.frame.origin.x) / _entityChartView.transform.a;
-    float endVisibleViewOfEntityChart = startVisibleViewOfEntityChart + (_visibleChartView.frame.size.width / _entityChartView.transform.a);
+    float startVisibleViewOfEntityChart = (_chartScrollView.contentOffset.x - _entityChartView.frame.origin.x) / _entityChartView.transform.a;
+    float endVisibleViewOfEntityChart = startVisibleViewOfEntityChart + (_chartScrollView.frame.size.width / _entityChartView.transform.a);
     
     [self visibleForStartXOfEntityChart:startVisibleViewOfEntityChart endXOfEntityChart:endVisibleViewOfEntityChart];
 }
 
 - (ForexHistoryData *)forexDataOfVisibleChartViewPoint:(CGPoint)point
 {
-    float entityChartViewX = (-_entityChartView.frame.origin.x + _visibleChartView.contentOffset.x + point.x) / _entityChartView.transform.a;
-    float entityChartViewY = (_visibleChartView.contentOffset.y + point.y) / _entityChartView.transform.d;
+    float entityChartViewX = (-_entityChartView.frame.origin.x + _chartScrollView.contentOffset.x + point.x) / _entityChartView.transform.a;
+    float entityChartViewY = (_chartScrollView.contentOffset.y + point.y) / _entityChartView.transform.d;
     
     return [self.currentEntityChart forexDataOfEntityChartPoint:CGPointMake(entityChartViewX, entityChartViewY)];
 }
@@ -240,14 +241,14 @@ static const float FXSEntityChartViewPrepareTotalRangeRatio = 0.5;
         return;
     }
     
-    float scaleX = _visibleChartView.frame.size.width / (endX - startX);
+    float scaleX = _chartScrollView.frame.size.width / (endX - startX);
     
     double differenceEntityChartMaxMinRate = self.currentEntityChart.maxRate.rateValue - self.currentEntityChart.minRate.rateValue;
     double visibleChartMaxRate = [visibleForexDataChunk getMaxRate].rateValue;
     double visibleChartMinRate = [visibleForexDataChunk getMinRate].rateValue;
     double differenceVisibleChartMaxMinRate = visibleChartMaxRate - visibleChartMinRate;
     // scale後のEntityChartの高さ。
-    float scaledEntityChartViewHeight = _visibleChartView.frame.size.height / (differenceVisibleChartMaxMinRate / differenceEntityChartMaxMinRate);
+    float scaledEntityChartViewHeight = _chartScrollView.frame.size.height / (differenceVisibleChartMaxMinRate / differenceEntityChartMaxMinRate);
     // 元のEntityChartからどれだけscaleするのか。
     float scaleY = scaledEntityChartViewHeight / _entityChartView.frame.size.height;
     
@@ -263,10 +264,10 @@ static const float FXSEntityChartViewPrepareTotalRangeRatio = 0.5;
     
     _entityChartView.frame = CGRectMake(-entityChartViewLeftEnd, 0, _entityChartView.frame.size.width, _entityChartView.frame.size.height);
     _normalizedChartScrollViewOffset = CGPointMake((startX - self.currentEntityChart.leftEndForexDataX.value) * _entityChartView.transform.a, visibleChartMaxRateYOfEntityChart);
-    _visibleChartView.contentOffset = _normalizedChartScrollViewOffset;
+    _chartScrollView.contentOffset = _normalizedChartScrollViewOffset;
     float entityChartViewRightEnd = self.currentEntityChart.rightEndForexDataX.value * _entityChartView.transform.a;
-    _visibleChartView.contentSize = CGSizeMake(entityChartViewRightEnd - entityChartViewLeftEnd, _entityChartView.frame.size.height);
-            self.visibleWidthRatio = _visibleChartView.frame.size.width / _entityChartView.frame.size.width;
+    _chartScrollView.contentSize = CGSizeMake(entityChartViewRightEnd - entityChartViewLeftEnd, _entityChartView.frame.size.height);
+    self.visibleWidthRatio = _chartScrollView.frame.size.width / _entityChartView.frame.size.width;
 }
 
 - (void)setCurrentEntityChart:(EntityChart *)currentEntityChart
