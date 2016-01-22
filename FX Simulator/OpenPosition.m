@@ -344,7 +344,7 @@ static const int maxRecords = 50;
 */
 + (NSUInteger)countAllPositionsOfSaveSlot:(NSUInteger)slot
 {
-    NSString *sql = [NSString stringWithFormat:@"select count(*) as count from %@ WHERE save_slot = ?;", FXSOpenPositionsTableName];
+    NSString *sql = [NSString stringWithFormat:@"select count(*) as count from %@ WHERE 0 < position_size AND save_slot = ?;", FXSOpenPositionsTableName];
     
     __block NSUInteger count;
     
