@@ -16,7 +16,7 @@
 @interface VisibleChartArea : NSObject
 @property (nonatomic) EntityChart *currentEntityChart;
 @property (nonatomic, readonly) NSUInteger displayDataCount;
-- (instancetype)initWithVisibleChartView:(UIScrollView *)visibleChartView entityChartView:(UIImageView *)entityChartView displayDataCount:(NSUInteger)displayDataCount;
+- (instancetype)initWithChartScrollView:(UIScrollView *)chartScrollView entityChartView:(UIImageView *)entityChartView displayDataCount:(NSUInteger)displayDataCount;
 - (void)chartScrollViewDidLoad;
 - (void)chartScrollViewDidScroll;
 - (void)scaleStart;

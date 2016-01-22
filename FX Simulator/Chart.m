@@ -219,7 +219,7 @@
     
     [chartScrollView addSubview:_entityChartView];
     
-    _visibleChartArea = [[VisibleChartArea alloc] initWithVisibleChartView:chartScrollView entityChartView:_entityChartView displayDataCount:self.displayDataCount];
+    _visibleChartArea = [[VisibleChartArea alloc] initWithChartScrollView:chartScrollView entityChartView:_entityChartView displayDataCount:self.displayDataCount];
 }
 
 - (BOOL)isMainChart
