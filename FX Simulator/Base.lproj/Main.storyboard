@@ -429,7 +429,7 @@
                             <outlet property="delegate" destination="lkl-JJ-fvd" id="5N0-F7-OXf"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="New" image="note.png" id="DkZ-vZ-ZuN" userLabel="New"/>
+                    <tabBarItem key="tabBarItem" title="New" image="note" id="DkZ-vZ-ZuN" userLabel="New"/>
                     <keyCommands>
                         <keyCommand/>
                     </keyCommands>
@@ -790,7 +790,7 @@
                             </mask>
                         </variation>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Positions" image="portfolio.png" id="sOe-gz-UoF" userLabel="Positions"/>
+                    <tabBarItem key="tabBarItem" title="Positions" image="portfolio" id="sOe-gz-UoF" userLabel="Positions"/>
                     <connections>
                         <outlet property="tableView" destination="HhE-R7-S8K" id="vHV-7F-AxC"/>
                     </connections>
@@ -1150,7 +1150,7 @@
                             <constraint firstItem="xaa-Vd-xzO" firstAttribute="top" secondItem="V4g-NV-6FL" secondAttribute="bottom" id="yjf-b7-37Y"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Activity" image="clock.png" id="bjo-7n-9JV" userLabel="Activity"/>
+                    <tabBarItem key="tabBarItem" title="Activity" image="clock" id="bjo-7n-9JV" userLabel="Activity"/>
                     <connections>
                         <outlet property="tableView" destination="V4g-NV-6FL" id="RZv-vH-CHk"/>
                     </connections>
@@ -1208,7 +1208,7 @@
                             <outlet property="delegate" destination="1gO-mh-rMi" id="Pay-2X-y7S"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="Settings" image="config.png" id="sfS-Hp-alh"/>
+                    <tabBarItem key="tabBarItem" title="Settings" image="config" id="sfS-Hp-alh"/>
                     <connections>
                         <outlet property="autoUpdateIntervalLabel" destination="ul5-eq-89D" id="mtw-W0-SIM"/>
                     </connections>
@@ -1383,7 +1383,7 @@
                             </mask>
                         </variation>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Trade" image="graph.png" id="2sO-7Q-TFh"/>
+                    <tabBarItem key="tabBarItem" title="Trade" image="graph" id="2sO-7Q-TFh"/>
                     <keyCommands/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FbO-JK-MAb" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1461,7 +1461,7 @@
                             </mask>
                         </variation>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Chart" image="display.png" id="k4d-FC-6oG" userLabel="Sub Chart"/>
+                    <tabBarItem key="tabBarItem" title="Chart" image="display" id="k4d-FC-6oG" userLabel="Sub Chart"/>
                     <connections>
                         <outlet property="segment" destination="miO-VU-QuK" id="o9U-Lg-frV"/>
                     </connections>
@@ -2459,12 +2459,12 @@
         </scene>
     </scenes>
     <resources>
-        <image name="clock.png" width="26" height="27"/>
-        <image name="config.png" width="27" height="27"/>
-        <image name="display.png" width="27" height="25"/>
-        <image name="graph.png" width="26" height="26"/>
-        <image name="note.png" width="26" height="27"/>
-        <image name="portfolio.png" width="26" height="24"/>
+        <image name="clock" width="23" height="23"/>
+        <image name="config" width="23" height="23"/>
+        <image name="display" width="23" height="21"/>
+        <image name="graph" width="23" height="23"/>
+        <image name="note" width="23" height="23"/>
+        <image name="portfolio" width="23" height="21"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="TCZ-qq-JGR"/>
