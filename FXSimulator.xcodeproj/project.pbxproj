@@ -24,7 +24,6 @@
 		7041B7111B2EEDAD00DD64FE /* Account.m in Sources */ = {isa = PBXBuildFile; fileRef = 7041B7101B2EEDAD00DD64FE /* Account.m */; };
 		7041B7141B3278A700DD64FE /* FXSTimeRange.m in Sources */ = {isa = PBXBuildFile; fileRef = 7041B7131B3278A700DD64FE /* FXSTimeRange.m */; };
 		70467D2E1B8316A300B75BD3 /* CoreDataInMemoryManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 70467D2D1B8316A300B75BD3 /* CoreDataInMemoryManager.m */; };
-		704AF5191C2E980F0055C78E /* GoogleMobileAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 704AF5181C2E980F0055C78E /* GoogleMobileAds.framework */; };
 		704AF51B1C3A85590055C78E /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 704AF51A1C3A85590055C78E /* AdSupport.framework */; };
 		704AF51D1C3A856D0055C78E /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 704AF51C1C3A856D0055C78E /* AudioToolbox.framework */; };
 		704AF51F1C3A857F0055C78E /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 704AF51E1C3A857F0055C78E /* AVFoundation.framework */; };
@@ -87,6 +86,7 @@
 		70838AA91C293CDE0044B1CC /* AdNetworkIAd.m in Sources */ = {isa = PBXBuildFile; fileRef = 70838AA81C293CDE0044B1CC /* AdNetworkIAd.m */; };
 		70838AAC1C293D060044B1CC /* AdNetworkAdmob.m in Sources */ = {isa = PBXBuildFile; fileRef = 70838AAB1C293D060044B1CC /* AdNetworkAdmob.m */; };
 		709BC75E1B0700320059C940 /* SetAutoUpdateIntervalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 709BC75D1B0700320059C940 /* SetAutoUpdateIntervalViewController.m */; };
+		70A6BF231C564F6E00BA7407 /* GoogleMobileAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70A6BF221C564F6E00BA7407 /* GoogleMobileAds.framework */; };
 		70B5AAF21ACE5BC0001F8823 /* SubChartDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70B5AAF11ACE5BC0001F8823 /* SubChartDataViewController.m */; };
 		70BB5B811C2DAFB800F2DE65 /* AdNetworkSettingsId.m in Sources */ = {isa = PBXBuildFile; fileRef = 70BB5B801C2DAFB800F2DE65 /* AdNetworkSettingsId.m */; };
 		70BB8BEA1B60D07C00B0539D /* FXSimulator.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 70BB8BE81B60D07C00B0539D /* FXSimulator.xcdatamodeld */; };
@@ -223,7 +223,6 @@
 		70467D2C1B8316A300B75BD3 /* CoreDataInMemoryManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataInMemoryManager.h; sourceTree = "<group>"; };
 		70467D2D1B8316A300B75BD3 /* CoreDataInMemoryManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataInMemoryManager.m; sourceTree = "<group>"; };
 		70467D6F1B87030900B75BD3 /* SaveDataTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SaveDataTests.m; sourceTree = "<group>"; };
-		704AF5181C2E980F0055C78E /* GoogleMobileAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleMobileAds.framework; path = Frameworks/GoogleMobileAds.framework; sourceTree = "<group>"; };
 		704AF51A1C3A85590055C78E /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		704AF51C1C3A856D0055C78E /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		704AF51E1C3A857F0055C78E /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -314,6 +313,7 @@
 		70838AAB1C293D060044B1CC /* AdNetworkAdmob.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdNetworkAdmob.m; sourceTree = "<group>"; };
 		709BC75C1B0700320059C940 /* SetAutoUpdateIntervalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetAutoUpdateIntervalViewController.h; sourceTree = "<group>"; };
 		709BC75D1B0700320059C940 /* SetAutoUpdateIntervalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetAutoUpdateIntervalViewController.m; sourceTree = "<group>"; };
+		70A6BF221C564F6E00BA7407 /* GoogleMobileAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleMobileAds.framework; path = vendor/GoogleMobileAds.framework; sourceTree = "<group>"; };
 		70AD14741AADD0AA0099F0BA /* RatePanelButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RatePanelButton.h; sourceTree = "<group>"; };
 		70AD14751AADD0AA0099F0BA /* RatePanelButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RatePanelButton.m; sourceTree = "<group>"; };
 		70B5AAED1AC7FF44001F8823 /* Rates.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Rates.h; sourceTree = "<group>"; };
@@ -350,17 +350,17 @@
 		70D2FAD31A9F559200CAB509 /* OpenPositionHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenPositionHeaderView.m; sourceTree = "<group>"; };
 		70D2FAD41A9F559200CAB509 /* OpenPositionTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenPositionTableViewCell.h; sourceTree = "<group>"; };
 		70D2FAD51A9F559200CAB509 /* OpenPositionTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenPositionTableViewCell.m; sourceTree = "<group>"; };
-		70D2FAE61A9F56AE00CAB509 /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabase.h; sourceTree = "<group>"; };
-		70D2FAE71A9F56AE00CAB509 /* FMDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabase.m; sourceTree = "<group>"; };
-		70D2FAE81A9F56AE00CAB509 /* FMDatabaseAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseAdditions.h; sourceTree = "<group>"; };
-		70D2FAE91A9F56AE00CAB509 /* FMDatabaseAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseAdditions.m; sourceTree = "<group>"; };
-		70D2FAEA1A9F56AE00CAB509 /* FMDatabasePool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabasePool.h; sourceTree = "<group>"; };
-		70D2FAEB1A9F56AE00CAB509 /* FMDatabasePool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabasePool.m; sourceTree = "<group>"; };
-		70D2FAEC1A9F56AE00CAB509 /* FMDatabaseQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseQueue.h; sourceTree = "<group>"; };
-		70D2FAED1A9F56AE00CAB509 /* FMDatabaseQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseQueue.m; sourceTree = "<group>"; };
-		70D2FAEE1A9F56AE00CAB509 /* FMDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDB.h; sourceTree = "<group>"; };
-		70D2FAEF1A9F56AE00CAB509 /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
-		70D2FAF01A9F56AE00CAB509 /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
+		70D2FAE61A9F56AE00CAB509 /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMDatabase.h; path = ../vendor/FMDB/FMDatabase.h; sourceTree = "<group>"; };
+		70D2FAE71A9F56AE00CAB509 /* FMDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FMDatabase.m; path = ../vendor/FMDB/FMDatabase.m; sourceTree = "<group>"; };
+		70D2FAE81A9F56AE00CAB509 /* FMDatabaseAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMDatabaseAdditions.h; path = ../vendor/FMDB/FMDatabaseAdditions.h; sourceTree = "<group>"; };
+		70D2FAE91A9F56AE00CAB509 /* FMDatabaseAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FMDatabaseAdditions.m; path = ../vendor/FMDB/FMDatabaseAdditions.m; sourceTree = "<group>"; };
+		70D2FAEA1A9F56AE00CAB509 /* FMDatabasePool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMDatabasePool.h; path = ../vendor/FMDB/FMDatabasePool.h; sourceTree = "<group>"; };
+		70D2FAEB1A9F56AE00CAB509 /* FMDatabasePool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FMDatabasePool.m; path = ../vendor/FMDB/FMDatabasePool.m; sourceTree = "<group>"; };
+		70D2FAEC1A9F56AE00CAB509 /* FMDatabaseQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMDatabaseQueue.h; path = ../vendor/FMDB/FMDatabaseQueue.h; sourceTree = "<group>"; };
+		70D2FAED1A9F56AE00CAB509 /* FMDatabaseQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FMDatabaseQueue.m; path = ../vendor/FMDB/FMDatabaseQueue.m; sourceTree = "<group>"; };
+		70D2FAEE1A9F56AE00CAB509 /* FMDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMDB.h; path = ../vendor/FMDB/FMDB.h; sourceTree = "<group>"; };
+		70D2FAEF1A9F56AE00CAB509 /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMResultSet.h; path = ../vendor/FMDB/FMResultSet.h; sourceTree = "<group>"; };
+		70D2FAF01A9F56AE00CAB509 /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FMResultSet.m; path = ../vendor/FMDB/FMResultSet.m; sourceTree = "<group>"; };
 		70D2FB1B1A9F572B00CAB509 /* SubChartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubChartViewController.h; sourceTree = "<group>"; };
 		70D2FB1C1A9F572B00CAB509 /* SubChartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubChartViewController.m; sourceTree = "<group>"; };
 		70D2FB2A1A9F574000CAB509 /* TradeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TradeViewController.h; sourceTree = "<group>"; };
@@ -492,6 +492,7 @@
 			files = (
 				704AF52F1C3A882D0055C78E /* libsqlite3.tbd in Frameworks */,
 				704AF52D1C3A863D0055C78E /* SystemConfiguration.framework in Frameworks */,
+				70A6BF231C564F6E00BA7407 /* GoogleMobileAds.framework in Frameworks */,
 				704AF52B1C3A86310055C78E /* StoreKit.framework in Frameworks */,
 				704AF5291C3A86250055C78E /* MessageUI.framework in Frameworks */,
 				704AF5271C3A86050055C78E /* EventKitUI.framework in Frameworks */,
@@ -501,7 +502,6 @@
 				704AF51F1C3A857F0055C78E /* AVFoundation.framework in Frameworks */,
 				704AF51D1C3A856D0055C78E /* AudioToolbox.framework in Frameworks */,
 				704AF51B1C3A85590055C78E /* AdSupport.framework in Frameworks */,
-				704AF5191C2E980F0055C78E /* GoogleMobileAds.framework in Frameworks */,
 				705E78B31C26D1EC00A966EF /* iAd.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -569,8 +569,8 @@
 				704AF5201C3A85950055C78E /* CoreGraphics.framework */,
 				704AF51E1C3A857F0055C78E /* AVFoundation.framework */,
 				704AF51C1C3A856D0055C78E /* AudioToolbox.framework */,
+				70A6BF221C564F6E00BA7407 /* GoogleMobileAds.framework */,
 				704AF51A1C3A85590055C78E /* AdSupport.framework */,
-				704AF5181C2E980F0055C78E /* GoogleMobileAds.framework */,
 				705E78B21C26D1EC00A966EF /* iAd.framework */,
 				70D2FA861A9F305700CAB509 /* FX Simulator */,
 				70D2FAA31A9F305800CAB509 /* FX SimulatorTests */,
@@ -1414,7 +1414,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
-					"$(PROJECT_DIR)/Frameworks",
+					"$(PROJECT_DIR)/vendor",
 				);
 				GCC_PREFIX_HEADER = "FX Simulator/FX_Simulator-Prefix.pch";
 				INFOPLIST_FILE = "FX Simulator/Info.plist";
@@ -1435,7 +1435,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
-					"$(PROJECT_DIR)/Frameworks",
+					"$(PROJECT_DIR)/vendor",
 				);
 				GCC_PREFIX_HEADER = "FX Simulator/FX_Simulator-Prefix.pch";
 				INFOPLIST_FILE = "FX Simulator/Info.plist";
