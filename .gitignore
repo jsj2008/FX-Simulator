@@ -36,3 +36,4 @@ DerivedData
 *.png
 *.pdf
 settings/
+/vendor/
