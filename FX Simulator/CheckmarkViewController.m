@@ -44,6 +44,8 @@
     
     cell.textLabel.text = self.dataStringValueList[indexPath.row];
     
+    cell.backgroundColor = [Setting baseColor];
+    
     return cell;
 }
 

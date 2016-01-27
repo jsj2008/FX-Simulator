@@ -46,6 +46,11 @@ static NSDictionary *spreadRateDic;
           };
 }
 
++ (UIColor *)baseColor
+{
+    return [UIColor blackColor];
+}
+
 + (BOOL)isLocaleJapanese
 {
     NSArray *languages = [NSLocale preferredLanguages];

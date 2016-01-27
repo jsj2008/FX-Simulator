@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+@import UIKit;
+
 @class CurrencyPair;
 @class FXSTimeRange;
 @class PositionSize;
@@ -25,6 +27,8 @@
 **/
 
 @interface Setting : NSObject
+
++ (UIColor *)baseColor;
 
 + (BOOL)isLocaleJapanese;
 

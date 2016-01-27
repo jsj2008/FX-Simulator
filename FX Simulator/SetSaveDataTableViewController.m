@@ -33,6 +33,14 @@
 @property (weak, nonatomic) IBOutlet UILabel *startBalanceLabel;
 @property (weak, nonatomic) IBOutlet UILabel *positionSizeOfLotLabel;
 @property (weak, nonatomic) IBOutlet UILabel *leverageLabel;
+@property (weak, nonatomic) IBOutlet UITableViewCell *currencyPairViewCell;
+@property (weak, nonatomic) IBOutlet UITableViewCell *timeFrameViewCell;
+@property (weak, nonatomic) IBOutlet UITableViewCell *startTimeViewCell;
+@property (weak, nonatomic) IBOutlet UITableViewCell *spreadViewCell;
+@property (weak, nonatomic) IBOutlet UITableViewCell *accountCurrencyViewCell;
+@property (weak, nonatomic) IBOutlet UITableViewCell *startBalanceViewCell;
+@property (weak, nonatomic) IBOutlet UITableViewCell *positionSizeOfLotViewCell;
+@property (weak, nonatomic) IBOutlet UITableViewCell *leverageViewCell;
 
 @end
 
@@ -171,6 +179,20 @@
     self.startBalanceLabel.text = [self.saveDataForm.startBalance toDisplayString];
     self.positionSizeOfLotLabel.text = [self.saveDataForm.positionSizeOfLot toDisplayString];
     self.leverageLabel.text = self.saveDataForm.leverage.stringValue;
+}
+
+- (void)viewDidLayoutSubviews
+{
+    [super viewDidLayoutSubviews];
+    
+    self.currencyPairViewCell.backgroundColor = [Setting baseColor];
+    self.timeFrameViewCell.backgroundColor = [Setting baseColor];
+    self.startTimeViewCell.backgroundColor = [Setting baseColor];
+    self.spreadViewCell.backgroundColor = [Setting baseColor];
+    self.accountCurrencyViewCell.backgroundColor = [Setting baseColor];
+    self.startBalanceViewCell.backgroundColor = [Setting baseColor];
+    self.positionSizeOfLotViewCell.backgroundColor = [Setting baseColor];
+    self.leverageViewCell.backgroundColor = [Setting baseColor];
 }
 
 - (void)didReceiveMemoryWarning {

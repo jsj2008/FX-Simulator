@@ -50,6 +50,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="sectionIndexBackgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" textLabel="WOy-cy-EWo" style="IBUITableViewCellStyleDefault" id="j6A-Ki-tk9">
                                 <rect key="frame" x="0.0" y="86" width="600" height="44"/>
@@ -66,6 +67,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </tableViewCell>
@@ -320,6 +322,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         <connections>
@@ -351,13 +354,21 @@
                     </keyCommands>
                     <connections>
                         <outlet property="accountCurrencyLabel" destination="IDO-PF-ehr" id="StU-a1-i9z"/>
+                        <outlet property="accountCurrencyViewCell" destination="AO2-4K-gGK" id="VUz-uo-g3s"/>
                         <outlet property="currencyPairLabel" destination="Hzp-CZ-8DR" id="UUl-Ac-4d1"/>
+                        <outlet property="currencyPairViewCell" destination="0h7-uB-RE0" id="LLE-tw-0pZ"/>
                         <outlet property="leverageLabel" destination="Nek-rA-oUp" id="F6w-Vy-m1O"/>
+                        <outlet property="leverageViewCell" destination="O1I-Dp-m4J" id="OPB-RG-bdN"/>
                         <outlet property="positionSizeOfLotLabel" destination="9Ub-cB-LU6" id="XBM-0m-ddh"/>
+                        <outlet property="positionSizeOfLotViewCell" destination="gz3-te-eie" id="0fj-Bz-l8b"/>
                         <outlet property="spreadLabel" destination="K3e-46-W3z" id="xMw-Gf-Tp0"/>
+                        <outlet property="spreadViewCell" destination="MJs-if-0Oc" id="5L0-Nl-QwX"/>
                         <outlet property="startBalanceLabel" destination="OGa-Ha-Wci" id="cqx-D9-XVm"/>
+                        <outlet property="startBalanceViewCell" destination="JSd-hB-dvt" id="geW-nh-zpA"/>
                         <outlet property="startTimeLabel" destination="QP3-9k-3c8" id="1eK-gW-n49"/>
+                        <outlet property="startTimeViewCell" destination="9aY-nc-pba" id="oo8-qG-k1k"/>
                         <outlet property="timeFrameLabel" destination="nJi-G3-vf7" id="lN9-rZ-5Qx"/>
+                        <outlet property="timeFrameViewCell" destination="nhR-ag-Jbi" id="eJ5-nQ-fFZ"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DTy-GM-QKq" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1211,6 +1222,7 @@
                     <tabBarItem key="tabBarItem" title="Settings" image="config" id="sfS-Hp-alh"/>
                     <connections>
                         <outlet property="autoUpdateIntervalLabel" destination="ul5-eq-89D" id="mtw-W0-SIM"/>
+                        <outlet property="autoUpdateIntervalViewCell" destination="IN1-G0-eyx" id="3zZ-OR-OAy"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zs1-I0-1ap" userLabel="First Responder" sceneMemberID="firstResponder"/>
