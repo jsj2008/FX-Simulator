@@ -10,10 +10,12 @@
 
 #import "SaveData.h"
 #import "SetAutoUpdateIntervalViewController.h"
+#import "Setting.h"
 #import "SimulationManager.h"
 
 @interface ConfigViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *autoUpdateIntervalLabel;
+@property (weak, nonatomic) IBOutlet UITableViewCell *autoUpdateIntervalViewCell;
 
 @end
 
@@ -44,6 +46,13 @@
     [super viewWillAppear:animated];
     
     self.autoUpdateIntervalLabel.text = @(_simulationManager.autoUpdateIntervalSeconds).stringValue;
+}
+
+- (void)viewDidLayoutSubviews
+{
+    [super viewDidLayoutSubviews];
+    
+    self.autoUpdateIntervalViewCell.backgroundColor = [Setting baseColor];
 }
 
 - (float)autoUpdateIntervalSeconds
