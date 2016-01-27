@@ -40,7 +40,14 @@
     
     self.customizableViewControllers = nil;
     
-    for (UIViewController *controller in self.viewControllers) {
+    for (UIViewController *viewController in self.viewControllers) {
+        
+        UIViewController *controller = viewController;
+        
+        if ([controller isMemberOfClass:[UINavigationController class]]) {
+            controller = ((UINavigationController *)controller).topViewController;
+        }
+        
         if ([controller conformsToProtocol:@protocol(SimulationManagerDelegate)]) {
             [_simulationManager addDelegate:(id<SimulationManagerDelegate>)controller];
         }
@@ -64,7 +71,6 @@
     [super viewDidLayoutSubviews];
     
     // more navigation controller layout
-    self.moreNavigationController.navigationBar.translucent = NO;
     self.moreNavigationController.navigationBar.backgroundColor = [UIColor blackColor];
     self.moreNavigationController.navigationBar.barTintColor = [UIColor blackColor];
     self.moreNavigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName: [UIColor whiteColor]};
