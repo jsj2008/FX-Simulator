@@ -88,7 +88,7 @@
     }
     @catch (NSException *exception) {
         
-        result = [[OrderResult alloc] initWithIsSuccess:NO title:exception.name message:exception.reason];
+        result = [[OrderResult alloc] initWithIsSuccess:NO title:NSLocalizedString(@"Order Failed", nil) message:NSLocalizedString(@"Execute Failed", nil)];
         
     }
     @finally {
