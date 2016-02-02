@@ -87,12 +87,14 @@
 		70838AAC1C293D060044B1CC /* AdNetworkAdmob.m in Sources */ = {isa = PBXBuildFile; fileRef = 70838AAB1C293D060044B1CC /* AdNetworkAdmob.m */; };
 		709BC75E1B0700320059C940 /* SetAutoUpdateIntervalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 709BC75D1B0700320059C940 /* SetAutoUpdateIntervalViewController.m */; };
 		70A6BF231C564F6E00BA7407 /* GoogleMobileAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70A6BF221C564F6E00BA7407 /* GoogleMobileAds.framework */; };
+		70A6BF6B1C57B21800BA7407 /* AboutTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70A6BF6A1C57B21800BA7407 /* AboutTableViewController.m */; };
 		70B5AAF21ACE5BC0001F8823 /* SubChartDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70B5AAF11ACE5BC0001F8823 /* SubChartDataViewController.m */; };
 		70BB5B811C2DAFB800F2DE65 /* AdNetworkSettingsId.m in Sources */ = {isa = PBXBuildFile; fileRef = 70BB5B801C2DAFB800F2DE65 /* AdNetworkSettingsId.m */; };
 		70BB8BEA1B60D07C00B0539D /* FXSimulator.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 70BB8BE81B60D07C00B0539D /* FXSimulator.xcdatamodeld */; };
 		70BF3C161BA9B88200779617 /* trade_db.sqlite3 in Resources */ = {isa = PBXBuildFile; fileRef = 70BF3C151BA9B88200779617 /* trade_db.sqlite3 */; };
 		70BF3C221BAEF88500779617 /* OpenPositionRelationChunk.m in Sources */ = {isa = PBXBuildFile; fileRef = 70BF3C211BAEF88500779617 /* OpenPositionRelationChunk.m */; };
 		70BF3C251BAEF8D600779617 /* ExecutionOrderRelationChunk.m in Sources */ = {isa = PBXBuildFile; fileRef = 70BF3C241BAEF8D600779617 /* ExecutionOrderRelationChunk.m */; };
+		70C90FE41C58E9EC001E3777 /* LinkButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 70C90FE31C58E9EC001E3777 /* LinkButton.m */; };
 		70CFEB3E1B16EA6800837727 /* TradeTestDb.sqlite3 in Resources */ = {isa = PBXBuildFile; fileRef = 70CFEB3D1B16EA6800837727 /* TradeTestDb.sqlite3 */; };
 		70CFEB411B19F92800837727 /* FXSTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 70CFEB401B19F92800837727 /* FXSTest.m */; };
 		70D2FA8A1A9F305700CAB509 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FA891A9F305700CAB509 /* main.m */; };
@@ -314,6 +316,8 @@
 		709BC75C1B0700320059C940 /* SetAutoUpdateIntervalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetAutoUpdateIntervalViewController.h; sourceTree = "<group>"; };
 		709BC75D1B0700320059C940 /* SetAutoUpdateIntervalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetAutoUpdateIntervalViewController.m; sourceTree = "<group>"; };
 		70A6BF221C564F6E00BA7407 /* GoogleMobileAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleMobileAds.framework; path = vendor/GoogleMobileAds.framework; sourceTree = "<group>"; };
+		70A6BF691C57B21800BA7407 /* AboutTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutTableViewController.h; sourceTree = "<group>"; };
+		70A6BF6A1C57B21800BA7407 /* AboutTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutTableViewController.m; sourceTree = "<group>"; };
 		70AD14741AADD0AA0099F0BA /* RatePanelButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RatePanelButton.h; sourceTree = "<group>"; };
 		70AD14751AADD0AA0099F0BA /* RatePanelButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RatePanelButton.m; sourceTree = "<group>"; };
 		70B5AAED1AC7FF44001F8823 /* Rates.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Rates.h; sourceTree = "<group>"; };
@@ -328,6 +332,8 @@
 		70BF3C211BAEF88500779617 /* OpenPositionRelationChunk.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenPositionRelationChunk.m; sourceTree = "<group>"; };
 		70BF3C231BAEF8D600779617 /* ExecutionOrderRelationChunk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExecutionOrderRelationChunk.h; sourceTree = "<group>"; };
 		70BF3C241BAEF8D600779617 /* ExecutionOrderRelationChunk.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExecutionOrderRelationChunk.m; sourceTree = "<group>"; };
+		70C90FE21C58E9EC001E3777 /* LinkButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LinkButton.h; sourceTree = "<group>"; };
+		70C90FE31C58E9EC001E3777 /* LinkButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LinkButton.m; sourceTree = "<group>"; };
 		70CFEB3A1B16CFF600837727 /* FX_Simulator-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FX_Simulator-Prefix.pch"; sourceTree = "<group>"; };
 		70CFEB3D1B16EA6800837727 /* TradeTestDb.sqlite3 */ = {isa = PBXFileReference; lastKnownFileType = file; path = TradeTestDb.sqlite3; sourceTree = "<group>"; };
 		70CFEB3F1B19F92800837727 /* FXSTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FXSTest.h; sourceTree = "<group>"; };
@@ -756,6 +762,10 @@
 				708383471C47740F002027AF /* OrderRelationChunk.m */,
 				708383521C478B7E002027AF /* OrderFactory.h */,
 				708383531C478B7E002027AF /* OrderFactory.m */,
+				70A6BF691C57B21800BA7407 /* AboutTableViewController.h */,
+				70A6BF6A1C57B21800BA7407 /* AboutTableViewController.m */,
+				70C90FE21C58E9EC001E3777 /* LinkButton.h */,
+				70C90FE31C58E9EC001E3777 /* LinkButton.m */,
 			);
 			path = "FX Simulator";
 			sourceTree = "<group>";
@@ -1158,6 +1168,7 @@
 				70042C6D1B480D6800C1A22E /* ForexDataChunk.m in Sources */,
 				70FCD5F11BA6FAF900500B40 /* SetSaveDataTableViewController.m in Sources */,
 				70D2FB9F1A9F57A000CAB509 /* ForexHistoryData.m in Sources */,
+				70A6BF6B1C57B21800BA7407 /* AboutTableViewController.m in Sources */,
 				700C9E811B786C800084320E /* TimeFrameChunk.m in Sources */,
 				70248B9C1C3E9F2E0073D5B7 /* Leverage.m in Sources */,
 				70FCD5A41B9B187900500B40 /* NormalizedOrdersFactory.m in Sources */,
@@ -1214,6 +1225,7 @@
 				70D2FAF31A9F56AE00CAB509 /* FMDatabasePool.m in Sources */,
 				706D09BE1BF7141300B3BBF7 /* SaveDataBase.m in Sources */,
 				70EACE661B296F1100A2E532 /* SimulationState.m in Sources */,
+				70C90FE41C58E9EC001E3777 /* LinkButton.m in Sources */,
 				70D2FBAF1A9F57B000CAB509 /* Order.m in Sources */,
 				70D2FB9C1A9F57A000CAB509 /* ForexHistory.m in Sources */,
 				70D2FC471A9F591600CAB509 /* CurrencyConverter.m in Sources */,
