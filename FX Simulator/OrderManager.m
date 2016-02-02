@@ -68,34 +68,29 @@
 }
 
 - (void)execute:(NSArray<ExecutionOrder *> *)executionOrders
-{    
-    OrderResult *result;
+{
+    OrderResult *failedOrder = [[OrderResult alloc] initWithIsSuccess:NO title:NSLocalizedString(@"Order Failed", nil) message:NSLocalizedString(@"Execute Failed", nil)];
     
-    @try {
+    if (!executionOrders.count) {
+        [self notifyDidOrder:failedOrder];
+        return;
+    }
+    
+    __block OrderResult *result;
         
-        if (!executionOrders.count) {
-            [NSException raise:@"OrderException" format:@"create Execution Orders failed"];
-        }
-        
-        [TradeDatabase transaction:^{
-            for (ExecutionOrder *order in executionOrders) {
+    [TradeDatabase transaction:^{
+        for (ExecutionOrder *order in executionOrders) {
                 [order execute];
-            }
-        }];
+        }
+    } completion:^(BOOL isRollbacked) {
+        if (isRollbacked) {
+            result = failedOrder;
+        } else {
+            result = [[OrderResult alloc] initWithIsSuccess:YES title:nil message:nil];
+        }
+    }];
         
-        result = [[OrderResult alloc] initWithIsSuccess:YES title:nil message:nil];
-        
-    }
-    @catch (NSException *exception) {
-        
-        result = [[OrderResult alloc] initWithIsSuccess:NO title:NSLocalizedString(@"Order Failed", nil) message:NSLocalizedString(@"Execute Failed", nil)];
-        
-    }
-    @finally {
-        
-        [self notifyDidOrder:result];
-        
-    }
+    [self notifyDidOrder:result];
 }
 
 @end
