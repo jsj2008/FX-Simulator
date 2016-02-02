@@ -176,6 +176,8 @@
         
         [_visibleChartArea visibleForStartXOfEntityChart:visibleViewStartX];
         
+        [_visibleChartArea scaleRestartInScale];
+        
     } else if ([_visibleChartArea isOverRightEnd]) {
         
         EntityChart *newCurrentEntityChart = self.currentEntityChart.nextEntityChart;
@@ -195,6 +197,8 @@
         float visibleViewEndX = visibleViewEndXObj.value;
         
         [_visibleChartArea visibleForEndXOfEntityChart:visibleViewEndX];
+        
+        [_visibleChartArea scaleRestartInScale];
     }
 
 }

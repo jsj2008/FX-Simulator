@@ -20,6 +20,7 @@
 - (void)chartScrollViewDidLoad;
 - (void)chartScrollViewDidScroll;
 - (void)scaleStart;
+- (void)scaleRestartInScale;
 - (void)scaleX:(float)scaleX;
 - (void)scaleEnd;
 - (BOOL)isInPreparePreviousChartRange;

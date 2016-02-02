@@ -62,18 +62,26 @@ static const float FXSEntityChartViewPrepareTotalRangeRatio = 0.5;
     _previousScaleX = 1;
 }
 
+- (void)scaleRestartInScale
+{
+    if (_inScale) {
+        _scaleX = _entityChartView.transform.a;
+    }
+}
+
 - (void)scaleX:(float)scaleX
 {
     if (!_inScale) {
         return;
     }
-    
-    if (![self canScaleForCurrentScale:scaleX previousScale:_previousScaleX]) {
-        _previousScaleX = scaleX;
-        return;
-    }
         
     _scaleX = _scaleX * (1 - (_previousScaleX - scaleX));
+    
+    if ([self minScaleX] > _scaleX) {
+        _scaleX = [self minScaleX];
+    } else if ([self maxScaleX] < _scaleX) {
+        _scaleX = [self maxScaleX];
+    }
     
     _previousScaleX = scaleX;
     
@@ -98,33 +106,19 @@ static const float FXSEntityChartViewPrepareTotalRangeRatio = 0.5;
     _inScale = NO;
 }
 
-- (BOOL)canScaleForCurrentScale:(float)currentScale previousScale:(float)previousScale
+- (float)minScaleX
 {
-    if (currentScale < previousScale) {
-        return [self canScaleDown];
-    } else if (previousScale < currentScale) {
-        return [self canScaleUp];
-    } else {
-        return NO;
-    }
+    // chartScrollViewにデータを最大数表示した時の、EntityChartのそれに対応する部分のscale前の値
+    float visibleEntityChartWidth = (_entityChartView.frame.size.width / _entityChartView.transform.a) * (float)FXSMaxDisplayDataCount / (float)self.currentEntityChart.displayDataCount;
+    
+    return _chartScrollView.frame.size.width / visibleEntityChartWidth;
 }
 
-- (BOOL)canScaleDown
+- (float)maxScaleX
 {
-    if (FXSMaxDisplayDataCount <= self.displayDataCount) {
-        return NO;
-    }
+    float visibleEntityChartWidth = (_entityChartView.frame.size.width / _entityChartView.transform.a) * (float)FXSMinDisplayDataCount / (float)self.currentEntityChart.displayDataCount;
     
-    return YES;
-}
-
-- (BOOL)canScaleUp
-{
-    if (self.displayDataCount <= FXSMinDisplayDataCount) {
-        return NO;
-    }
-    
-    return YES;
+    return _chartScrollView.frame.size.width / visibleEntityChartWidth;
 }
 
 - (BOOL)isInPreparePreviousChartRange
@@ -215,6 +209,8 @@ static const float FXSEntityChartViewPrepareTotalRangeRatio = 0.5;
     float endX = startX + (_entityChartView.frame.size.width * self.visibleWidthRatio);
     
     [self visibleForStartXOfEntityChart:startX endXOfEntityChart:endX];
+    
+    [self scaleRestartInScale];
 }
 
 - (void)visibleForStartXOfEntityChart:(float)startX
@@ -276,9 +272,6 @@ static const float FXSEntityChartViewPrepareTotalRangeRatio = 0.5;
     _entityChartView.transform = CGAffineTransformIdentity;
     _entityChartView.image = _currentEntityChart.chartImage;
     _visibleWidthRatio = (float)self.displayDataCount / (float)self.currentEntityChart.displayDataCount;
-    if (_inScale) {
-        [self scaleStart];
-    }
 }
 
 - (void)setVisibleWidthRatio:(float)visibleWidthRatio
