@@ -40,13 +40,15 @@ static NSString* const testDbFileName = @"TradeTestDb.sqlite3";
     }
 }
 
-+ (void)transaction:(void (^)())block
++ (void)transaction:(void (^)())block completion:(void (^)(BOOL))completion
 {
     if (!block) {
         return;
     }
     
     inTransaction = YES;
+    
+    BOOL isRollbacked = NO;
     
     FMDatabase *db = [self db];
     
@@ -59,11 +61,17 @@ static NSString* const testDbFileName = @"TradeTestDb.sqlite3";
     }
     @catch (NSException *exception) {
         [db rollback];
-        @throw exception;
+        isRollbacked = YES;
     }
     @finally {
+        
         [db close];
         inTransaction = NO;
+        
+        if (completion) {
+            completion(isRollbacked);
+        }
+        
     }
     
 }

@@ -10,6 +10,6 @@
 
 @interface TradeDatabase : NSObject
 
-+ (void)transaction:(void (^)())block;
++ (void)transaction:(void (^)())block completion:(void (^)(BOOL isRollbacked))completion;
 
 @end
