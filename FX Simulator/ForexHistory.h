@@ -18,6 +18,8 @@
 
 - (instancetype)initWithCurrencyPair:(CurrencyPair *)currencyPair timeScale:(TimeFrame *)timeScale;
 
+- (BOOL)existsDataSource;
+
 - (ForexHistoryData *)nextDataOfTime:(Time *)time;
 
 /**
