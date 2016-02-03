@@ -44,9 +44,9 @@
         if ([state respondsToSelector:@selector(isOrderable:)]) {
             Result *result = [state isOrderable:order];
             __block BOOL isSuccess;
-            [result completion:^{
+            [result success:^{
                 isSuccess = YES;
-            } error:^{
+            } failure:^{
                 isSuccess = NO;
             }];
             if (!isSuccess) {

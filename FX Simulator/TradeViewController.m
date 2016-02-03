@@ -143,7 +143,7 @@
 
 - (void)didOrder:(Result *)result
 {
-    [result completion:nil error:^{
+    [result success:nil failure:^{
         [result showAlertToController:self];
     }];
     

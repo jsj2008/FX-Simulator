@@ -29,7 +29,7 @@
     return self;
 }
 
-- (void)completion:(void (^)())completion error:(void (^)())error
+- (void)success:(void (^)())completion failure:(void (^)())error
 {
     if (self.isSuccess) {
         if (completion) {
