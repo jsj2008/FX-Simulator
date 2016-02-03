@@ -9,21 +9,21 @@
 #import "Result.h"
 
 #import "FXSAlert.h"
+#import "Message.h"
 
 @interface Result ()
 @property (nonatomic, readonly) BOOL isSuccess;
-@property (nonatomic, readonly) NSString *title;
-@property (nonatomic, readonly) NSString *message;
 @end
 
-@implementation Result
+@implementation Result {
+    Message *_message;
+}
 
 - (instancetype)initWithIsSuccess:(BOOL)isSuccess title:(NSString *)title message:(NSString *)message
 {
     if (self = [super init]) {
         _isSuccess = isSuccess;
-        _title = title;
-        _message = message;
+        _message = [[Message alloc] initWithTitle:title message:message];
     }
     
     return self;
@@ -45,7 +45,7 @@
 - (void)showAlertToController:(UIViewController *)controller
 {
     if (!self.isSuccess) {
-        [FXSAlert showAlertTitle:self.title message:self.message controller:controller];
+        [_message showAlertToController:controller];
     }
 }
 
