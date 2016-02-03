@@ -1432,7 +1432,7 @@
 				INFOPLIST_FILE = "FX Simulator/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = .FXSimulator;
+				PRODUCT_BUNDLE_IDENTIFIER = net.yuuxeno.FXSimulator;
 				PRODUCT_NAME = FXSimulator;
 				PROVISIONING_PROFILE = "";
 			};
@@ -1454,7 +1454,7 @@
 				INFOPLIST_FILE = "FX Simulator/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = .FXSimulator;
+				PRODUCT_BUNDLE_IDENTIFIER = net.yuuxeno.FXSimulator;
 				PRODUCT_NAME = FXSimulator;
 				PROVISIONING_PROFILE = "";
 			};
