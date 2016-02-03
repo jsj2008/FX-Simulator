@@ -12,6 +12,6 @@
 
 @interface Result : NSObject
 - (instancetype)initWithIsSuccess:(BOOL)isSuccess title:(NSString *)title message:(NSString *)message;
-- (void)completion:(void (^)())completion error:(void (^)())error;
+- (void)success:(void (^)())success failure:(void (^)())failure;
 - (void)showAlertToController:(UIViewController *)controller;
 @end

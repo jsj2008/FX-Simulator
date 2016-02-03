@@ -95,9 +95,9 @@
 
 - (void)didOrder:(Result *)result
 {
-    [result completion:^{
+    [result success:^{
         [self setTradeDataView];
-    } error:nil];
+    } failure:nil];
 }
 
 - (void)update

@@ -60,9 +60,9 @@
 {
     Result *result = [_state isOrderable:order];
     
-    [result completion:^{
+    [result success:^{
         [self execute:[order createExecutionOrders]];
-    } error:^{
+    } failure:^{
         [self notifyDidOrder:result];
     }];
 }

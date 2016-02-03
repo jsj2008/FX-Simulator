@@ -211,9 +211,9 @@
 
 - (void)didOrder:(Result *)result
 {
-    [result completion:^{
+    [result success:^{
         [self update];
-    } error:nil];
+    } failure:nil];
 }
 
 - (Result *)isOrderable:(Order *)order
