@@ -6,17 +6,17 @@
 //
 //
 
-#import "OrderResult.h"
+#import "Result.h"
 
 #import "FXSAlert.h"
 
-@interface OrderResult ()
+@interface Result ()
 @property (nonatomic, readonly) BOOL isSuccess;
 @property (nonatomic, readonly) NSString *title;
 @property (nonatomic, readonly) NSString *message;
 @end
 
-@implementation OrderResult
+@implementation Result
 
 - (instancetype)initWithIsSuccess:(BOOL)isSuccess title:(NSString *)title message:(NSString *)message
 {

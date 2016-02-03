@@ -36,7 +36,7 @@
 
 - (void)displayDataUsingBlock:(void (^)(NSString *equityStringValue, NSString *profitAndLossStringValue, NSString *orderTypeStringValue, NSString *averageRateStringValue, NSString *totalLotStringValue, UIColor *equityStringColor, UIColor *profitAndLossStringColor))block positionSizeOfLot:(PositionSize *)positionSize;
 
-- (void)didOrder:(OrderResult *)result;
+- (void)didOrder:(Result *)result;
 
 /**
  総資産が０以下かどうか。

@@ -13,7 +13,7 @@
 #import "Order.h"
 #import "OrderFactory.h"
 #import "OrderManager.h"
-#import "OrderResult.h"
+#import "Result.h"
 #import "PositionType.h"
 #import "Rate.h"
 #import "Rates.h"

@@ -21,7 +21,7 @@
 #import "OpenPosition.h"
 #import "OpenPositionRelationChunk.h"
 #import "Order.h"
-#import "OrderResult.h"
+#import "Result.h"
 #import "PositionSize.h"
 #import "PositionType.h"
 #import "ProfitAndLossCalculator.h"
@@ -209,14 +209,14 @@
     return availableMargin;
 }
 
-- (void)didOrder:(OrderResult *)result
+- (void)didOrder:(Result *)result
 {
     [result completion:^{
         [self update];
     } error:nil];
 }
 
-- (OrderResult *)isOrderable:(Order *)order
+- (Result *)isOrderable:(Order *)order
 {
     Money *availableMargin = [self availableMargin];
     
@@ -225,10 +225,10 @@
     Money *convertedNewPositionValue = [[order newPositionValue] convertToCurrency:_accountCurrency];
     
     if (orderablePositionValue < convertedNewPositionValue.amount) {
-        return [[OrderResult alloc] initWithIsSuccess:NO title:NSLocalizedString(@"Order Failed", nil) message:NSLocalizedString(@"Short Of Margin", nil)];
+        return [[Result alloc] initWithIsSuccess:NO title:NSLocalizedString(@"Order Failed", nil) message:NSLocalizedString(@"Short Of Margin", nil)];
     }
     
-    return [[OrderResult alloc] initWithIsSuccess:YES title:nil message:nil];
+    return [[Result alloc] initWithIsSuccess:YES title:nil message:nil];
 }
 
 @end

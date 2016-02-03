@@ -10,14 +10,14 @@
 
 @class OpenPositionRelationChunk;
 @class Order;
-@class OrderResult;
+@class Result;
 
 @protocol OrderManagerState <NSObject>
-- (OrderResult *)isOrderable:(Order *)order;
+- (Result *)isOrderable:(Order *)order;
 @end
 
 @protocol OrderManagerDelegate <NSObject>
-- (void)didOrder:(OrderResult *)result;
+- (void)didOrder:(Result *)result;
 @end
 
 @interface OrderManager : NSObject

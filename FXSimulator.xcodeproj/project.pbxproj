@@ -166,7 +166,7 @@
 		70FC8ADE1B87895F009B121C /* SaveDataTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 70467D6F1B87030900B75BD3 /* SaveDataTests.m */; };
 		70FCD5A41B9B187900500B40 /* NormalizedOrdersFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 70FCD5A31B9B187900500B40 /* NormalizedOrdersFactory.m */; };
 		70FCD5A71B9B1B2400500B40 /* OrderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 70FCD5A61B9B1B2400500B40 /* OrderManager.m */; };
-		70FCD5AA1B9B1B9900500B40 /* OrderResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 70FCD5A91B9B1B9900500B40 /* OrderResult.m */; };
+		70FCD5AA1B9B1B9900500B40 /* Result.m in Sources */ = {isa = PBXBuildFile; fileRef = 70FCD5A91B9B1B9900500B40 /* Result.m */; };
 		70FCD5B01B9D46E300500B40 /* OrderManagerState.m in Sources */ = {isa = PBXBuildFile; fileRef = 70FCD5AF1B9D46E200500B40 /* OrderManagerState.m */; };
 		70FCD5B31B9EB40300500B40 /* OpenPositionComponents.m in Sources */ = {isa = PBXBuildFile; fileRef = 70FCD5B21B9EB40300500B40 /* OpenPositionComponents.m */; };
 		70FCD5B61B9EB49400500B40 /* ExecutionOrderComponents.m in Sources */ = {isa = PBXBuildFile; fileRef = 70FCD5B51B9EB49400500B40 /* ExecutionOrderComponents.m */; };
@@ -473,8 +473,8 @@
 		70FCD5A31B9B187900500B40 /* NormalizedOrdersFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NormalizedOrdersFactory.m; sourceTree = "<group>"; };
 		70FCD5A51B9B1B2400500B40 /* OrderManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderManager.h; sourceTree = "<group>"; };
 		70FCD5A61B9B1B2400500B40 /* OrderManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderManager.m; sourceTree = "<group>"; };
-		70FCD5A81B9B1B9900500B40 /* OrderResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderResult.h; sourceTree = "<group>"; };
-		70FCD5A91B9B1B9900500B40 /* OrderResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderResult.m; sourceTree = "<group>"; };
+		70FCD5A81B9B1B9900500B40 /* Result.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Result.h; sourceTree = "<group>"; };
+		70FCD5A91B9B1B9900500B40 /* Result.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Result.m; sourceTree = "<group>"; };
 		70FCD5AE1B9D46E200500B40 /* OrderManagerState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderManagerState.h; sourceTree = "<group>"; };
 		70FCD5AF1B9D46E200500B40 /* OrderManagerState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderManagerState.m; sourceTree = "<group>"; };
 		70FCD5B11B9EB40200500B40 /* OpenPositionComponents.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenPositionComponents.h; sourceTree = "<group>"; };
@@ -709,8 +709,8 @@
 				70FCD5A31B9B187900500B40 /* NormalizedOrdersFactory.m */,
 				70FCD5A51B9B1B2400500B40 /* OrderManager.h */,
 				70FCD5A61B9B1B2400500B40 /* OrderManager.m */,
-				70FCD5A81B9B1B9900500B40 /* OrderResult.h */,
-				70FCD5A91B9B1B9900500B40 /* OrderResult.m */,
+				70FCD5A81B9B1B9900500B40 /* Result.h */,
+				70FCD5A91B9B1B9900500B40 /* Result.m */,
 				70FCD5AE1B9D46E200500B40 /* OrderManagerState.h */,
 				70FCD5AF1B9D46E200500B40 /* OrderManagerState.m */,
 				70FCD5B11B9EB40200500B40 /* OpenPositionComponents.h */,
@@ -1238,7 +1238,7 @@
 				70FCD5B31B9EB40300500B40 /* OpenPositionComponents.m in Sources */,
 				706D09CA1BF75BB200B3BBF7 /* FXSComparisonResult.m in Sources */,
 				702A84F31BDB5A4F00CA6102 /* CoordinateRange.m in Sources */,
-				70FCD5AA1B9B1B9900500B40 /* OrderResult.m in Sources */,
+				70FCD5AA1B9B1B9900500B40 /* Result.m in Sources */,
 				70D2FBFD1A9F57DC00CAB509 /* ExecutionOrder.m in Sources */,
 				70838AA51C2939630044B1CC /* AdProvider.m in Sources */,
 				705FCFBE1BFC609B006197DA /* ChartType.m in Sources */,

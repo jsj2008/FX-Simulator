@@ -15,12 +15,12 @@
 @end
 
 @class Market;
-@class OrderResult;
+@class Result;
 @class SaveData;
 
 @interface TradeDataViewController : UIViewController < UITextFieldDelegate>
 @property (nonatomic, weak) id<TradeDataViewControllerDelegate> delegate;
-- (void)didOrder:(OrderResult *)result;
+- (void)didOrder:(Result *)result;
 - (void)loadMarket:(Market *)market;
 - (void)loadSaveData:(SaveData *)saveData;
 - (void)update;
