@@ -54,6 +54,23 @@
     return self;
 }
 
+- (BOOL)existsDataSource
+{
+    NSString *sql = [NSString stringWithFormat:@"SELECT COUNT(*) as count FROM sqlite_master WHERE type='table' AND name='%@'", _forexHistoryTableName];
+    
+    __block NSUInteger count = 0;
+    
+    [_dbQueue inDatabase:^(FMDatabase *db) {
+        FMResultSet *result = [db executeQuery:sql];
+        
+        while ([result next]) {
+            count = [result intForColumn:@"count"];
+        }
+    }];
+    
+    return count;
+}
+
 - (ForexHistoryData *)nextDataOfTime:(Time *)time
 {
     NSString *sql = [NSString stringWithFormat:@"SELECT rowid,* FROM %@ WHERE ? < close_minute_close_timestamp ORDER BY close_minute_close_timestamp ASC LIMIT 1", _forexHistoryTableName];
