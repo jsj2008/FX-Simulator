@@ -120,6 +120,10 @@ static NSString* const FXSCurrencyKey = @"currency";
             result = @"EUR";
             break;
             
+        case CHF:
+            result = @"CHF";
+            break;
+            
         case GBP:
             result = @"GBP";
             break;
@@ -145,6 +149,8 @@ static NSString* const FXSCurrencyKey = @"currency";
         result = JPY;
     } else if ([@"EUR" isEqualToString:currencyString]) {
         result = EUR;
+    } else if ([@"CHF" isEqualToString:currencyString]) {
+        result = CHF;
     } else if ([@"GBP" isEqualToString:currencyString]) {
         result = GBP;
     } else if ([@"AUD" isEqualToString:currencyString]) {
