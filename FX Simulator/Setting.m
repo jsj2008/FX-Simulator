@@ -30,6 +30,7 @@ static NSDictionary *spreadRateDic;
 {
     Rate *eurusd = [[Rate alloc] initWithRateValue:0.0001 currencyPair:[[CurrencyPair alloc] initWithCurrencyPairString:@"EURUSD"] timestamp:nil];
     Rate *usdjpy = [[Rate alloc] initWithRateValue:0.01 currencyPair:[[CurrencyPair alloc] initWithCurrencyPairString:@"USDJPY"] timestamp:nil];
+    Rate *usdchf = [[Rate alloc] initWithRateValue:0.0001 currencyPair:[[CurrencyPair alloc] initWithCurrencyPairString:@"USDCHF"] timestamp:nil];;
     Rate *gbpusd = [[Rate alloc] initWithRateValue:0.0001 currencyPair:[[CurrencyPair alloc] initWithCurrencyPairString:@"GBPUSD"] timestamp:nil];
     Rate *audusd = [[Rate alloc] initWithRateValue:0.0001 currencyPair:[[CurrencyPair alloc] initWithCurrencyPairString:@"AUDUSD"] timestamp:nil];
     Rate *eurjpy = [[Rate alloc] initWithRateValue:0.01 currencyPair:[[CurrencyPair alloc] initWithCurrencyPairString:@"EURJPY"] timestamp:nil];
@@ -38,6 +39,7 @@ static NSDictionary *spreadRateDic;
     
     spreadRateDic = @{@"EURUSD":eurusd,
             @"USDJPY":usdjpy,
+            @"USDCHF":usdchf,
             @"GBPUSD":gbpusd,
             @"AUDUSD":audusd,
             @"EURJPY":eurjpy,
@@ -68,11 +70,13 @@ static NSDictionary *spreadRateDic;
     Currency *usd = [[Currency alloc] initWithCurrencyType:USD];
     Currency *jpy = [[Currency alloc] initWithCurrencyType:JPY];
     Currency *eur = [[Currency alloc] initWithCurrencyType:EUR];
+    Currency *chf = [[Currency alloc] initWithCurrencyType:CHF];
     Currency *gbp = [[Currency alloc] initWithCurrencyType:GBP];
     Currency *aud = [[Currency alloc] initWithCurrencyType:AUD];
     
     CurrencyPair *EURUSD = [[CurrencyPair alloc] initWithBaseCurrency:eur QuoteCurrency:usd];
     CurrencyPair *USDJPY = [[CurrencyPair alloc] initWithBaseCurrency:usd QuoteCurrency:jpy];
+    CurrencyPair *USDCHF = [[CurrencyPair alloc] initWithBaseCurrency:usd QuoteCurrency:chf];
     CurrencyPair *EURJPY = [[CurrencyPair alloc] initWithBaseCurrency:eur QuoteCurrency:jpy];
     CurrencyPair *GBPJPY = [[CurrencyPair alloc] initWithBaseCurrency:gbp QuoteCurrency:jpy];
     CurrencyPair *AUDJPY = [[CurrencyPair alloc] initWithBaseCurrency:aud QuoteCurrency:jpy];
@@ -80,9 +84,9 @@ static NSDictionary *spreadRateDic;
     CurrencyPair *AUDUSD = [[CurrencyPair alloc] initWithBaseCurrency:aud QuoteCurrency:usd];
     
     if ([Setting isLocaleJapanese]) {
-        return @[USDJPY, EURUSD, EURJPY, GBPJPY, AUDJPY, GBPUSD, AUDUSD];
+        return @[USDJPY, EURUSD, USDCHF, EURJPY, GBPJPY, AUDJPY, GBPUSD, AUDUSD];
     } else {
-        return @[EURUSD, USDJPY, GBPUSD, AUDUSD, EURJPY, GBPJPY, AUDJPY];
+        return @[EURUSD, USDJPY, USDCHF, GBPUSD, AUDUSD, EURJPY, GBPJPY, AUDJPY];
     }
 }
 
@@ -92,18 +96,20 @@ static NSDictionary *spreadRateDic;
     Currency *usd = [[Currency alloc] initWithCurrencyType:USD];
     Currency *jpy = [[Currency alloc] initWithCurrencyType:JPY];
     Currency *eur = [[Currency alloc] initWithCurrencyType:EUR];
+    Currency *chf = [[Currency alloc] initWithCurrencyType:CHF];
     Currency *gbp = [[Currency alloc] initWithCurrencyType:GBP];
     Currency *aud = [[Currency alloc] initWithCurrencyType:AUD];
     
     CurrencyPair *EURUSD = [[CurrencyPair alloc] initWithBaseCurrency:eur QuoteCurrency:usd];
     CurrencyPair *USDJPY = [[CurrencyPair alloc] initWithBaseCurrency:usd QuoteCurrency:jpy];
+    CurrencyPair *USDCHF = [[CurrencyPair alloc] initWithBaseCurrency:usd QuoteCurrency:chf];
     CurrencyPair *EURJPY = [[CurrencyPair alloc] initWithBaseCurrency:eur QuoteCurrency:jpy];
     CurrencyPair *GBPJPY = [[CurrencyPair alloc] initWithBaseCurrency:gbp QuoteCurrency:jpy];
     CurrencyPair *AUDJPY = [[CurrencyPair alloc] initWithBaseCurrency:aud QuoteCurrency:jpy];
     CurrencyPair *GBPUSD = [[CurrencyPair alloc] initWithBaseCurrency:gbp QuoteCurrency:usd];
     CurrencyPair *AUDUSD = [[CurrencyPair alloc] initWithBaseCurrency:aud QuoteCurrency:usd];
     
-    NSDictionary *dic = @{@"EURUSD":EURUSD, @"USDJPY":USDJPY, @"EURJPY":EURJPY, @"GBPJPY":GBPJPY, @"AUDJPY":AUDJPY, @"GBPUSD":GBPUSD, @"AUDUSD":AUDUSD};
+    NSDictionary *dic = @{@"EURUSD":EURUSD, @"USDJPY":USDJPY, @"USDCHF":USDCHF, @"EURJPY":EURJPY, @"GBPJPY":GBPJPY, @"AUDJPY":AUDJPY, @"GBPUSD":GBPUSD, @"AUDUSD":AUDUSD};
     
     return dic;
 }
@@ -227,6 +233,8 @@ static NSDictionary *spreadRateDic;
 {
     NSDictionary *dic = @{@"EURUSD":[NSNumber numberWithDouble:1.3],
                           @"USDJPY":[NSNumber numberWithDouble:100],
+                          @"USDCHF":[NSNumber numberWithDouble:1],
+                          @"CHFJPY":[NSNumber numberWithDouble:100],
                           @"GBPUSD":[NSNumber numberWithDouble:1.6],
                           @"AUDUSD":[NSNumber numberWithDouble:0.9],
                           @"EURJPY":[NSNumber numberWithDouble:130],

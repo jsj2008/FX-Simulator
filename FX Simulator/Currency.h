@@ -12,6 +12,7 @@ typedef NS_ENUM(NSInteger, CurrencyType) {
     USD = 1,
     JPY,
     EUR,
+    CHF,
     GBP,
     AUD,
     ALL
