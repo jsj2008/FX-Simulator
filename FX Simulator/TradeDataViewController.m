@@ -14,7 +14,7 @@
 #import "Money.h"
 #import "InputTradeLotViewController.h"
 #import "Market.h"
-#import "OrderResult.h"
+#import "Result.h"
 #import "PositionSize.h"
 #import "SaveData.h"
 #import "TimeFrame.h"
@@ -93,7 +93,7 @@
     }
 }
 
-- (void)didOrder:(OrderResult *)result
+- (void)didOrder:(Result *)result
 {
     [result completion:^{
         [self setTradeDataView];

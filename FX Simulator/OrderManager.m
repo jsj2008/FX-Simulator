@@ -12,7 +12,7 @@
 #import "NormalizedOrdersFactory.h"
 #import "Order.h"
 #import "OrderManagerState.h"
-#import "OrderResult.h"
+#import "Result.h"
 #import "TradeDatabase.h"
 
 @implementation OrderManager {
@@ -47,7 +47,7 @@
     [_state addState:state];
 }
 
-- (void)notifyDidOrder:(OrderResult *)result
+- (void)notifyDidOrder:(Result *)result
 {
     for (id<OrderManagerDelegate> delegate in _delegates) {
         if ([delegate respondsToSelector:@selector(didOrder:)]) {
@@ -58,7 +58,7 @@
 
 - (void)order:(Order *)order
 {
-    OrderResult *result = [_state isOrderable:order];
+    Result *result = [_state isOrderable:order];
     
     [result completion:^{
         [self execute:[order createExecutionOrders]];
@@ -69,14 +69,14 @@
 
 - (void)execute:(NSArray<ExecutionOrder *> *)executionOrders
 {
-    OrderResult *failedOrder = [[OrderResult alloc] initWithIsSuccess:NO title:NSLocalizedString(@"Order Failed", nil) message:NSLocalizedString(@"Execute Failed", nil)];
+    Result *failedOrder = [[Result alloc] initWithIsSuccess:NO title:NSLocalizedString(@"Order Failed", nil) message:NSLocalizedString(@"Execute Failed", nil)];
     
     if (!executionOrders.count) {
         [self notifyDidOrder:failedOrder];
         return;
     }
     
-    __block OrderResult *result;
+    __block Result *result;
         
     [TradeDatabase transaction:^{
         for (ExecutionOrder *order in executionOrders) {
@@ -86,7 +86,7 @@
         if (isRollbacked) {
             result = failedOrder;
         } else {
-            result = [[OrderResult alloc] initWithIsSuccess:YES title:nil message:nil];
+            result = [[Result alloc] initWithIsSuccess:YES title:nil message:nil];
         }
     }];
         

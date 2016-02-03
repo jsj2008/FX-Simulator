@@ -14,7 +14,7 @@
 #import "Market.h"
 #import "ChartViewController.h"
 #import "OrderManager.h"
-#import "OrderResult.h"
+#import "Result.h"
 #import "Rate.h"
 #import "RatePanelViewController.h"
 #import "SimulationManager.h"
@@ -141,7 +141,7 @@
     [_simulationManager addTime];
 }
 
-- (void)didOrder:(OrderResult *)result
+- (void)didOrder:(Result *)result
 {
     [result completion:nil error:^{
         [result showAlertToController:self];

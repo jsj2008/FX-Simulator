@@ -10,7 +10,7 @@
 
 @import UIKit;
 
-@interface OrderResult : NSObject
+@interface Result : NSObject
 - (instancetype)initWithIsSuccess:(BOOL)isSuccess title:(NSString *)title message:(NSString *)message;
 - (void)completion:(void (^)())completion error:(void (^)())error;
 - (void)showAlertToController:(UIViewController *)controller;

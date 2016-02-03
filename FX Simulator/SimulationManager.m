@@ -16,7 +16,7 @@
 #import "Order.h"
 #import "OrderFactory.h"
 #import "OrderManager.h"
-#import "OrderResult.h"
+#import "Result.h"
 #import "SaveData.h"
 #import "SaveLoader.h"
 #import "Setting.h"
@@ -210,18 +210,18 @@
     [_simulationTimeManager setIsAutoUpdate:_saveData.isAutoUpdate];
 }
 
-- (OrderResult *)isOrderable:(Order *)order;
+- (Result *)isOrderable:(Order *)order;
 {
     SimulationStateResult *result = [_simulationState isStop];
     
     if (result.isStop) {
-        return [[OrderResult alloc] initWithIsSuccess:NO title:result.title message:nil];
+        return [[Result alloc] initWithIsSuccess:NO title:result.title message:nil];
     } else {
-        return [[OrderResult alloc] initWithIsSuccess:YES title:nil message:nil];
+        return [[Result alloc] initWithIsSuccess:YES title:nil message:nil];
     }
 }
 
-- (void)didOrder:(OrderResult *)result
+- (void)didOrder:(Result *)result
 {
     [_account didOrder:result];
         

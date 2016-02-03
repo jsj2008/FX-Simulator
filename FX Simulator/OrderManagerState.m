@@ -10,7 +10,7 @@
 
 #import "OpenPositionRelationChunk.h"
 #import "Order.h"
-#import "OrderResult.h"
+#import "Result.h"
 #import "PositionType.h"
 
 @implementation OrderManagerState {
@@ -38,11 +38,11 @@
     [_states addObject:state];
 }
 
-- (OrderResult *)isOrderable:(Order *)order
+- (Result *)isOrderable:(Order *)order
 {
     for (id<OrderManagerState> state in _states) {
         if ([state respondsToSelector:@selector(isOrderable:)]) {
-            OrderResult *result = [state isOrderable:order];
+            Result *result = [state isOrderable:order];
             __block BOOL isSuccess;
             [result completion:^{
                 isSuccess = YES;
@@ -56,10 +56,10 @@
     }
     
     if (![_openPositions isExecutableNewPosition] && [[_openPositions positionTypeOfCurrencyPair:order.currencyPair] isEqualPositionType:order.positionType]) {
-        return [[OrderResult alloc] initWithIsSuccess:NO title:@"Max Open Position" message:nil];
+        return [[Result alloc] initWithIsSuccess:NO title:@"Max Open Position" message:nil];
     }
     
-    return [[OrderResult alloc] initWithIsSuccess:YES title:nil message:nil];
+    return [[Result alloc] initWithIsSuccess:YES title:nil message:nil];
 }
 
 @end

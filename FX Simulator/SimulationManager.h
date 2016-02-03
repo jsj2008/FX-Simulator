@@ -33,7 +33,7 @@
 - (void)loadSimulationManager:(SimulationManager *)simulationManager;
 - (void)update;
 - (void)simulationStopped:(SimulationStateResult *)result;
-- (void)didOrder:(OrderResult *)result;
+- (void)didOrder:(Result *)result;
 @end
 
 @class UIViewController;
@@ -79,6 +79,6 @@
 */
 -(void)addTime;
 
-- (OrderResult *)isOrderable:(Order *)order;
+- (Result *)isOrderable:(Order *)order;
 
 @end
