@@ -1430,6 +1430,7 @@
 				);
 				GCC_PREFIX_HEADER = "FX Simulator/FX_Simulator-Prefix.pch";
 				INFOPLIST_FILE = "FX Simulator/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = net.xenoapp.FXSimulator;
 				PRODUCT_NAME = FXSimulator;
@@ -1451,6 +1452,7 @@
 				);
 				GCC_PREFIX_HEADER = "FX Simulator/FX_Simulator-Prefix.pch";
 				INFOPLIST_FILE = "FX Simulator/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = net.xenoapp.FXSimulator;
 				PRODUCT_NAME = FXSimulator;
