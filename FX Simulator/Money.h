@@ -22,6 +22,7 @@
 - (instancetype)initWithNumber:(NSNumber *)number currency:(Currency*)currency;
 - (instancetype)initWithString:(NSString *)string currency:(Currency*)currency;
 - (Money *)addMoney:(Money *)money;
+- (Money *)copyMoney;
 - (FXSComparisonResult *)compareMoney:(Money *)money;
 - (Money *)convertToCurrency:(Currency *)currency;
 @end

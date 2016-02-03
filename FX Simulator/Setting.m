@@ -236,11 +236,11 @@ static NSDictionary *spreadRateDic;
     
     NSNumber *rate = ((NSNumber*)[dic objectForKey:currencyPair.toCodeString]);
     
-    if (rate != nil) {
+    if (rate) {
         return [[Rate alloc] initWithRateValue:[rate doubleValue] currencyPair:currencyPair timestamp:nil];
     } else {
         rate = ((NSNumber*)[dic objectForKey:currencyPair.toCodeReverseString]);
-        if (rate != nil) {
+        if (rate) {
             double doubleRate = 1 / [rate doubleValue];
             return [[Rate alloc] initWithRateValue:doubleRate currencyPair:currencyPair timestamp:nil];
         } else {

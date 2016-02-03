@@ -76,6 +76,11 @@ static NSString* const FXSCurrencyKey = @"currency";
     }
 }
 
+- (Money *)copyMoney
+{
+    return [[[self class] alloc] initWithAmount:self.amount currency:self.currency];
+}
+
 - (FXSComparisonResult *)compareMoney:(Money *)money
 {
     if (![self.currency isEqualCurrency:money.currency]) {

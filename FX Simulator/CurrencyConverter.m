@@ -18,12 +18,12 @@
 
 + (Money *)convert:(Money *)money to:(Currency *)currency
 {
-    if (money == nil || currency == nil) {
+    if (!money || !currency) {
         return nil;
     }
     
     if ([money.currency isEqualCurrency:currency]) {
-        return money;
+        return [money copyMoney];
     }
     
     CurrencyPair *currencyPair = [[CurrencyPair alloc] initWithBaseCurrency:money.currency QuoteCurrency:currency];
