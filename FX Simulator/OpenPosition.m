@@ -346,7 +346,7 @@ static const int maxRecords = 50;
 {
     NSString *sql = [NSString stringWithFormat:@"select count(*) as count from %@ WHERE 0 < position_size AND save_slot = ?;", FXSOpenPositionsTableName];
     
-    __block NSUInteger count;
+    __block NSUInteger count = 0;
     
     [self execute:^(FMDatabase *db) {
         
