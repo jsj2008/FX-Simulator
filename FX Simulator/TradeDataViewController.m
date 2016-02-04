@@ -125,12 +125,6 @@
     }
 }
 
-- (IBAction)dataLinkButtonTouched:(id)sender {
-    NSString *urlString = @"http://www.forexite.com";
-    NSURL *url = [NSURL URLWithString:urlString];
-    [[UIApplication sharedApplication] openURL:url];
-}
-
 - (void)setTradeDataView
 {
     [_account displayDataUsingBlock:^(NSString *equityStringValue, NSString *profitAndLossStringValue, NSString *positionTypeStringValue, NSString *averageRateStringValue, NSString *totalLotStringValue, UIColor *equityStringColor, UIColor *profitAndLossStringColor) {
