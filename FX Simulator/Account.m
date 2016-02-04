@@ -36,6 +36,7 @@
 @property (nonatomic) Money *balance;
 @property (nonatomic) PositionSize *totalPositionSize;
 @property (nonatomic) PositionType *positionType;
+@property (nonatomic, readonly) Money *convertedRealizedProfitAndLoss;
 @end
 
 @implementation Account {
@@ -139,7 +140,7 @@
 {
     if (!_balance) {
         [self setRealizedProfitAndLoss];
-        _balance = [_startBalance addMoney:_realizedProfitAndLoss];
+        _balance = [_startBalance addMoney:self.convertedRealizedProfitAndLoss];
     }
     
     return _balance;
@@ -207,6 +208,11 @@
     Money *availableMargin = [[Money alloc] initWithAmount:[self equity].amount - margin.amount currency:_accountCurrency];
     
     return availableMargin;
+}
+
+- (Money *)convertedRealizedProfitAndLoss
+{
+    return [_realizedProfitAndLoss convertToCurrency:_accountCurrency];
 }
 
 - (void)didOrder:(Result *)result
