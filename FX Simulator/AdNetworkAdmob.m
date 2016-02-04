@@ -46,6 +46,7 @@
     }
         
     GADRequest *request = [GADRequest request];
+    request.testDevices = [AdNetworkSettingsId admobTestDevices];
     
     [_bannerView loadRequest:request];
 }
