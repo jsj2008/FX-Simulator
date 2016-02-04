@@ -61,6 +61,8 @@
         return;
     }
     
+    _isSimulationStopped = NO;
+    
     _saveData = saveData;
     _account = saveData.account;
     _market = _saveData.market;
