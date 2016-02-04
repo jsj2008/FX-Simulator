@@ -2325,6 +2325,7 @@
                     <tabBarItem key="tabBarItem" title="" id="YbL-8d-O3G"/>
                     <navigationItem key="navigationItem" title="About" id="Bz0-Hj-UCa"/>
                     <connections>
+                        <outlet property="fmdbViewCell" destination="jhd-vt-UaO" id="fPd-gC-qVA"/>
                         <outlet property="tableView" destination="0JV-zM-APm" id="Euu-Oe-x5I"/>
                         <outlet property="versionLabel" destination="6z9-bZ-PsM" id="iEK-Ll-zNg"/>
                     </connections>

@@ -8,8 +8,11 @@
 
 #import "AboutTableViewController.h"
 
+#import "Setting.h"
+
 @interface AboutTableViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *versionLabel;
+@property (weak, nonatomic) IBOutlet UITableViewCell *fmdbViewCell;
 
 @end
 
@@ -25,6 +28,13 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
     self.versionLabel.text = [[NSBundle mainBundle] objectForInfoDictionaryKey: @"CFBundleShortVersionString"];
+}
+
+- (void)viewDidLayoutSubviews
+{
+    [super viewDidLayoutSubviews];
+    
+    self.fmdbViewCell.backgroundColor = [Setting baseColor];
 }
 
 - (void)didReceiveMemoryWarning {
