@@ -12,6 +12,7 @@
 #import "CurrencyPair.h"
 #import "ExecutionOrder.h"
 #import "Market.h"
+#import "Message.h"
 #import "OpenPosition.h"
 #import "Order.h"
 #import "OrderFactory.h"
@@ -37,6 +38,7 @@
     SimulationState *_simulationState;
     SimulationTimeManager *_simulationTimeManager;
     NSDate *_previousAddTimeDate;
+    BOOL _isSimulationStopped;
 }
 
 - (instancetype)init
@@ -123,39 +125,50 @@
 {
     if ([keyPath isEqualToString:@"currentLoadedRowid"] && [object isKindOfClass:[SimulationTimeManager class]]) {
         
-        SimulationStateResult *result = [_simulationState isStop];
-        
-        if (result.isStop) {
+        if (_isSimulationStopped) {
             return;
         }
         
         [_market add];
         
-        [self notifyDelegatesOfUpdate];
+        [self notifyDelegatesOfMarketDidUpdate];
     }
 }
 
-- (void)notifyDelegatesOfUpdate
+- (void)notifyDelegatesOfMarketDidUpdate
 {
     for (id<SimulationManagerDelegate> delegate in _delegates) {
-        if ([delegate respondsToSelector:@selector(update)]) {
-            [delegate update];
+        if ([delegate respondsToSelector:@selector(marketDidUpdate)]) {
+            [delegate marketDidUpdate];
         }
     }
     
-    [self didNotifyDelegatesOfUpdate];
+    [self didNotifyDelegatesOfMarketDidUpdate];
 }
 
-- (void)didNotifyDelegatesOfUpdate
+- (void)didNotifyDelegatesOfMarketDidUpdate
 {
     SimulationStateResult *result = [_simulationState isStop];
     
     if (result.isStop) {
-        [self pauseTime];
-        for (id<SimulationManagerDelegate> delegate in _delegates) {
-            if ([delegate respondsToSelector:@selector(simulationStopped:)]) {
-                [delegate simulationStopped:result];
-            }
+        [self stopSimulationWithResult:result];
+    }
+}
+
+- (void)stopSimulation
+{
+    [self pauseTime];
+    
+    _isSimulationStopped = YES;
+}
+
+- (void)stopSimulationWithResult:(SimulationStateResult *)result
+{
+    [self stopSimulation];
+    
+    for (id<SimulationManagerDelegate> delegate in _delegates) {
+        if ([delegate respondsToSelector:@selector(simulationStopped:)]) {
+            [delegate simulationStopped:[[Message alloc] initWithTitle:result.title message:result.message]];
         }
     }
 }
@@ -163,8 +176,16 @@
 - (void)startTime
 {
     if (!self.isStartTime) {
-        [self notifyDelegatesOfUpdate];
+        
         [_simulationTimeManager start];
+        
+        SimulationStateResult *result = [_simulationState isStop];
+        
+        if (result.isStop) {
+            [self stopSimulationWithResult:result];
+            return;
+        }
+        
     }
 }
 
