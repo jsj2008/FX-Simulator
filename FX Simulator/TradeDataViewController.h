@@ -24,5 +24,4 @@
 - (void)loadMarket:(Market *)market;
 - (void)loadSaveData:(SaveData *)saveData;
 - (void)update;
-- (void)tradeViewTouchesBegan;
 @end

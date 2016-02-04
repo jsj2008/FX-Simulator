@@ -37,7 +37,6 @@
     return self;
 }
 
-#warning positionsize
 - (OrdersCreateMode *)createModeFromOrder:(Order *)order
 {
     PositionType *positionType = [_openPositions positionTypeOfCurrencyPair:order.currencyPair];

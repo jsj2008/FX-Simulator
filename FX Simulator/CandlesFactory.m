@@ -23,7 +23,6 @@
     
     float candleZoneWidth = chartSize.width / count;
     float spaceBetweenCandles = candleZoneWidth * 0.3;
-    NSUInteger numberOfCandle = count;
     float candleWidth = candleZoneWidth - spaceBetweenCandles;
     //float candleWidth = (width-spaceBetweenCandles*numberOfCandle-spaceBetweenCandles)/numberOfCandle;
     double maxRate = [chunk getMaxRateLimit:count].rateValue;
