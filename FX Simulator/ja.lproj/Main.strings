@@ -83,8 +83,8 @@
 /* Class = "UILabel"; text = "Detail"; ObjectID = "OGa-Ha-Wci"; */
 "OGa-Ha-Wci.text" = "Detail";
 
-/* Class = "UIButton"; normalTitle = "www.forexite.com"; ObjectID = "OVl-jc-a9P"; */
-"OVl-jc-a9P.normalTitle" = "www.forexite.com";
+/* Class = "UIButton"; normalTitle = "forexite.com"; ObjectID = "OVl-jc-a9P"; */
+"OVl-jc-a9P.normalTitle" = "forexite.com";
 
 /* Class = "UILabel"; text = "Lot"; ObjectID = "QGw-h7-mEX"; */
 "QGw-h7-mEX.text" = "Lot";
@@ -211,3 +211,60 @@
 
 /* Class = "UILabel"; text = "1 Lot ="; ObjectID = "xgM-GM-gPB"; */
 "xgM-GM-gPB.text" = "1 Lot =";
+
+
+
+/* Rate Panel View Controller */
+
+
+
+/* Class = "UIButton"; text = "Sell"; ObjectID = "UYT-Du-Ssw"; */
+"UYT-Du-Ssw.normalTitle" = "売";
+
+/* Class = "UIButton"; text = "Buy"; ObjectID = "mx5-5I-gzI"; */
+"mx5-5I-gzI.normalTitle" = "買";
+
+
+
+/* Trade Data View Controller */
+
+
+
+/* Class = "UILabel"; text = "Lot"; ObjectID = "BKw-04-Fso"; */
+"BKw-04-Fso.text" = "ロット";
+
+
+
+/* Config View Controller */
+
+
+
+/* Class = "UINavigationItem"; title = "Settings"; ObjectID = "gZa-eB-Si3"; */
+"gZa-eB-Si3.title" = "設定";
+
+/* Class = "UITabBarItem"; title = "Settings"; ObjectID = "rdp-rN-ObA"; */
+"rdp-rN-ObA.title" = "設定";
+
+
+
+/* About View Controller */
+
+
+
+/* Class = "UITableViewSection"; headerTitle = "Developer"; ObjectID = "Jbi-Jz-Fyb"; */
+"Jbi-Jz-Fyb.headerTitle" = "作者";
+
+/* Class = "UITableViewSection"; headerTitle = "Version"; ObjectID = "x6w-VQ-DVL"; */
+"x6w-VQ-DVL.headerTitle" = "バージョン";
+
+/* Class = "UITableViewSection"; headerTitle = "Support"; ObjectID = "tNU-HE-eeS"; */
+"tNU-HE-eeS.headerTitle" = "サポート";
+
+/* Class = "UITableViewSection"; headerTitle = "Credits"; ObjectID = "UV3-hW-vjP"; */
+"UV3-hW-vjP.headerTitle" = "クレジット";
+
+/* Class = "UILabel"; text = "Version"; ObjectID = "2jh-eg-wng"; */
+"2jh-eg-wng.text" = "バージョン";
+
+/* Class = "UIButton"; text = "Support"; ObjectID = "7TH-2M-pcd"; */
+"7TH-2M-pcd.normalTitle" = "サポート";
