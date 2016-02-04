@@ -23,6 +23,11 @@
     SimulationManager *_simulationManager;
 }
 
+- (void)loadSaveData:(SaveData *)saveData
+{
+    
+}
+
 - (void)loadSimulationManager:(SimulationManager *)simulationManager
 {
     _simulationManager = simulationManager;

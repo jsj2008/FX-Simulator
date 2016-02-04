@@ -108,7 +108,6 @@ static const unsigned int displayMaxOpenPositionDataRecords = 100;
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
     // Return the number of rows in the section.
     
     return [_openPositionDataRecords count];
