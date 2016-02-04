@@ -1963,7 +1963,7 @@
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OVl-jc-a9P" userLabel="Link Button">
                                                         <rect key="frame" x="100" y="0.0" width="185" height="20"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                                        <state key="normal" title="www.forexite.com">
+                                                        <state key="normal" title="forexite.com">
                                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                         </state>
                                                         <connections>
