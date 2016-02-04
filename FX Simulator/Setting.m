@@ -92,7 +92,6 @@ static NSDictionary *spreadRateDic;
 
 + (NSDictionary *)currencyPairDictionaryList
 {
-#warning CurrencyPairList(static変数)から生成
     Currency *usd = [[Currency alloc] initWithCurrencyType:USD];
     Currency *jpy = [[Currency alloc] initWithCurrencyType:JPY];
     Currency *eur = [[Currency alloc] initWithCurrencyType:EUR];
