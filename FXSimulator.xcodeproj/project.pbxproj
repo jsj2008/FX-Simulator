@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		7002F4A21B48D77000AF9DA7 /* Candle.m in Sources */ = {isa = PBXBuildFile; fileRef = 7002F4A11B48D77000AF9DA7 /* Candle.m */; };
+		70041F9E1C627B740091628A /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = 70041F9D1C627B740091628A /* Message.m */; };
 		70042C641B47ABBC00C1A22E /* MovingAverage.m in Sources */ = {isa = PBXBuildFile; fileRef = 70042C631B47ABBC00C1A22E /* MovingAverage.m */; };
 		70042C671B47FA1500C1A22E /* IndicatorUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 70042C661B47FA1500C1A22E /* IndicatorUtils.m */; };
 		70042C6D1B480D6800C1A22E /* ForexDataChunk.m in Sources */ = {isa = PBXBuildFile; fileRef = 70042C6C1B480D6800C1A22E /* ForexDataChunk.m */; };
@@ -85,6 +86,7 @@
 		70838AA51C2939630044B1CC /* AdProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 70838AA41C2939630044B1CC /* AdProvider.m */; };
 		70838AA91C293CDE0044B1CC /* AdNetworkIAd.m in Sources */ = {isa = PBXBuildFile; fileRef = 70838AA81C293CDE0044B1CC /* AdNetworkIAd.m */; };
 		70838AAC1C293D060044B1CC /* AdNetworkAdmob.m in Sources */ = {isa = PBXBuildFile; fileRef = 70838AAB1C293D060044B1CC /* AdNetworkAdmob.m */; };
+		7098ADB81C61E1B000C7D319 /* SettingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7098ADB71C61E1B000C7D319 /* SettingTests.m */; };
 		709BC75E1B0700320059C940 /* SetAutoUpdateIntervalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 709BC75D1B0700320059C940 /* SetAutoUpdateIntervalViewController.m */; };
 		70A6BF231C564F6E00BA7407 /* GoogleMobileAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70A6BF221C564F6E00BA7407 /* GoogleMobileAds.framework */; };
 		70A6BF6B1C57B21800BA7407 /* AboutTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70A6BF6A1C57B21800BA7407 /* AboutTableViewController.m */; };
@@ -190,6 +192,8 @@
 		7002F4A01B48D77000AF9DA7 /* Candle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Candle.h; sourceTree = "<group>"; };
 		7002F4A11B48D77000AF9DA7 /* Candle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Candle.m; sourceTree = "<group>"; };
 		7002F4A31B48D7A200AF9DA7 /* Indicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Indicator.h; sourceTree = "<group>"; };
+		70041F9C1C627B740091628A /* Message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Message.h; sourceTree = "<group>"; };
+		70041F9D1C627B740091628A /* Message.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Message.m; sourceTree = "<group>"; };
 		70042C621B47ABBC00C1A22E /* MovingAverage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovingAverage.h; sourceTree = "<group>"; };
 		70042C631B47ABBC00C1A22E /* MovingAverage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovingAverage.m; sourceTree = "<group>"; };
 		70042C651B47FA1500C1A22E /* IndicatorUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IndicatorUtils.h; sourceTree = "<group>"; };
@@ -313,6 +317,7 @@
 		70838AA81C293CDE0044B1CC /* AdNetworkIAd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdNetworkIAd.m; sourceTree = "<group>"; };
 		70838AAA1C293D060044B1CC /* AdNetworkAdmob.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdNetworkAdmob.h; sourceTree = "<group>"; };
 		70838AAB1C293D060044B1CC /* AdNetworkAdmob.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdNetworkAdmob.m; sourceTree = "<group>"; };
+		7098ADB71C61E1B000C7D319 /* SettingTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingTests.m; sourceTree = "<group>"; };
 		709BC75C1B0700320059C940 /* SetAutoUpdateIntervalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetAutoUpdateIntervalViewController.h; sourceTree = "<group>"; };
 		709BC75D1B0700320059C940 /* SetAutoUpdateIntervalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetAutoUpdateIntervalViewController.m; sourceTree = "<group>"; };
 		70A6BF221C564F6E00BA7407 /* GoogleMobileAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleMobileAds.framework; path = vendor/GoogleMobileAds.framework; sourceTree = "<group>"; };
@@ -766,6 +771,8 @@
 				70A6BF6A1C57B21800BA7407 /* AboutTableViewController.m */,
 				70C90FE21C58E9EC001E3777 /* LinkButton.h */,
 				70C90FE31C58E9EC001E3777 /* LinkButton.m */,
+				70041F9C1C627B740091628A /* Message.h */,
+				70041F9D1C627B740091628A /* Message.m */,
 			);
 			path = "FX Simulator";
 			sourceTree = "<group>";
@@ -790,6 +797,7 @@
 				70D2FAA61A9F305800CAB509 /* FX_SimulatorTests.m */,
 				70D2FAA41A9F305800CAB509 /* Supporting Files */,
 				70467D6F1B87030900B75BD3 /* SaveDataTests.m */,
+				7098ADB71C61E1B000C7D319 /* SettingTests.m */,
 			);
 			path = "FX SimulatorTests";
 			sourceTree = "<group>";
@@ -1260,6 +1268,7 @@
 				70D2FBFB1A9F57DC00CAB509 /* OnlyNewOrdersCreateMode.m in Sources */,
 				70D2FC101A9F58F700CAB509 /* CurrencyPair.m in Sources */,
 				70D2FBA11A9F57A000CAB509 /* ForexHistoryDataArrayUtils.m in Sources */,
+				70041F9E1C627B740091628A /* Message.m in Sources */,
 				70D2FB701A9F577200CAB509 /* CandlesFactory.m in Sources */,
 				705FCFA61BFB7BA8006197DA /* ChartSource.m in Sources */,
 				705FCFB51BFB7BA9006197DA /* IndicatorSource.m in Sources */,
@@ -1279,6 +1288,7 @@
 			files = (
 				70FC8ADE1B87895F009B121C /* SaveDataTests.m in Sources */,
 				70D2FAA71A9F305800CAB509 /* FX_SimulatorTests.m in Sources */,
+				7098ADB81C61E1B000C7D319 /* SettingTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1430,7 +1440,7 @@
 				);
 				GCC_PREFIX_HEADER = "FX Simulator/FX_Simulator-Prefix.pch";
 				INFOPLIST_FILE = "FX Simulator/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = net.yuuxeno.FXSimulator;
 				PRODUCT_NAME = FXSimulator;
@@ -1452,7 +1462,7 @@
 				);
 				GCC_PREFIX_HEADER = "FX Simulator/FX_Simulator-Prefix.pch";
 				INFOPLIST_FILE = "FX Simulator/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = net.yuuxeno.FXSimulator;
 				PRODUCT_NAME = FXSimulator;
