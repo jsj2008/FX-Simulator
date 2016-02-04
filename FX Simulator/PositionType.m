@@ -8,9 +8,6 @@
 
 #import "PositionType.h"
 
-static NSString* const displayBuy = @"Buy";
-static NSString* const displaySell = @"Sell";
-
 @implementation PositionType
 
 - (instancetype)init
@@ -65,10 +62,10 @@ static NSString* const displaySell = @"Sell";
 
 - (NSString *)toDisplayString
 {
-    if (self.isShort == YES) {
-        return displaySell;
-    } else if (self.isLong == YES) {
-        return displayBuy;
+    if (self.isShort) {
+        return NSLocalizedString(@"Sell", nil);;
+    } else if (self.isLong) {
+        return NSLocalizedString(@"Buy", nil);
     }
     
     return nil;
