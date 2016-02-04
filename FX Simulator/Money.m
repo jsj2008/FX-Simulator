@@ -65,14 +65,14 @@ static NSString* const FXSCurrencyKey = @"currency";
 {
     if (!money) {
         DLog(@"money is nil");
-        return self;
+        return nil;
     }
     
     if ([self.currency isEqualCurrency:money.currency]) {
         return [[Money alloc] initWithAmount:(self.amount + money.amount) currency:self.currency];
     } else {
         DLog(@"different currency");
-        return self;
+        return nil;
     }
 }
 
