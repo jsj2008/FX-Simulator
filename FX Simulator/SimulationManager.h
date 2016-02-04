@@ -10,6 +10,7 @@
 #import "OrderManager.h"
 
 @class Market;
+@class Message;
 @class OrderFactory;
 @class OrderManager;
 @class SaveData;
@@ -27,12 +28,14 @@
 - (void)loadOrderFactory:(OrderFactory *)orderFactory;
 - (void)loadOrderManager:(OrderManager *)orderManager;
 - (void)saveDataDidLoad;
+
 /**
  アプリ起動後、最初に1回だけ呼ばれる。
 */
 - (void)loadSimulationManager:(SimulationManager *)simulationManager;
-- (void)update;
-- (void)simulationStopped:(SimulationStateResult *)result;
+
+- (void)marketDidUpdate;
+- (void)simulationStopped:(Message *)message;
 - (void)didOrder:(Result *)result;
 @end
 
@@ -45,7 +48,7 @@
 @class TradeViewController;
 
 /**
- シュミレーションの状態をチェックして、それにもとづいてシュミレーションを管理する。
+ シミュレーションの状態をチェックして、それにもとづいてシミュレーションを管理する。
  Marketオブジェクトを持ち、Marketの時間が進むと、それに応じて、オブザーバにMarketの変更を伝える。
 */
 

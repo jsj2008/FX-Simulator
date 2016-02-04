@@ -12,6 +12,7 @@
 #import "SaveData.h"
 #import "ChartViewController.h"
 #import "Market.h"
+#import "Message.h"
 #import "ChartViewController.h"
 #import "OrderManager.h"
 #import "Result.h"
@@ -105,11 +106,20 @@
     [super viewWillAppear:animated];
     
     if (!_simulationManager.isStartTime) {
-        [_simulationManager startTime];
+        [self update];
     } else {
         [_simulationManager resumeTime];
     }
     
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    if (!_simulationManager.isStartTime) {
+        [_simulationManager startTime];
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -117,6 +127,13 @@
     [super viewWillDisappear:animated];
     
     [_simulationManager pauseTime];
+}
+
+- (void)update
+{
+    [_chartViewController update:_market];
+    [_ratePanelViewController update];
+    [_tradeDataViewController update];
 }
 
 - (void)autoUpdateSettingSwitchChanged:(BOOL)isSwitchOn
@@ -129,11 +146,14 @@
     return _simulationManager.isAutoUpdate;
 }
 
-- (void)update
+- (void)marketDidUpdate
 {
-    [_chartViewController update:_market];
-    [_ratePanelViewController update];
-    [_tradeDataViewController update];
+    [self update];
+}
+
+- (void)simulationStopped:(Message *)message
+{
+    [message showAlertToController:self];
 }
 
 - (void)chartViewTouched
