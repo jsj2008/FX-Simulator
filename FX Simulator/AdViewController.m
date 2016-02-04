@@ -36,10 +36,22 @@
     [_adManager loadAd];
 }
 
+- (void)viewDidLayoutSubviews
+{
+    [super viewDidLayoutSubviews];
+    
+    if (_adView) {
+        float adViewY = self.view.frame.size.height - _adView.frame.size.height;
+        _adView.frame = CGRectMake(_adView.frame.origin.x, adViewY, _adView.frame.size.width, _adView.frame.size.height);
+    }
+}
+
 - (void)didLoadAdNetwork:(UIView *)adView
 {
     _adView = adView;
+    
     [self.view addSubview:_adView];
+    
     _adView.hidden = YES;
 }
 
