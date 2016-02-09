@@ -68,6 +68,11 @@ static NSDictionary *spreadRateDic;
     return dateFormatter;
 }
 
++ (BOOL)is3_5inch
+{
+    return CGSizeEqualToSize(CGSizeMake(320, 480), [UIScreen mainScreen].bounds.size);
+}
+
 + (BOOL)isLocaleJapanese
 {
     NSArray *languages = [NSLocale preferredLanguages];
