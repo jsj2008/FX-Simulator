@@ -8,7 +8,6 @@
 
 #import "AdProvider.h"
 
-#import "AdNetworkIAd.h"
 #import "AdNetworkAdmob.h"
 
 @implementation AdProvider {
@@ -18,10 +17,9 @@
 
 + (instancetype)defaultAdProviderWithAdViewController:(UIViewController *)adViewController
 {
-    AdNetworkIAd *iAd = [AdNetworkIAd new];
     AdNetworkAdmob *admob = [[AdNetworkAdmob alloc] initWithAdViewController:adViewController];
     
-    return [[[self class] alloc] initWithAdNetworks:@[iAd, admob]];
+    return [[[self class] alloc] initWithAdNetworks:@[admob]];
 }
 
 - (instancetype)initWithAdNetworks:(NSArray *)adNetworks

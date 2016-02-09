@@ -85,6 +85,11 @@ static NSDictionary *spreadRateDic;
     return NO;
 }
 
++ (BOOL)isTablet
+{
+    return [UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad ? YES : NO;
+}
+
 + (NSArray *)currencyPairList
 {
     Currency *usd = [[Currency alloc] initWithCurrencyType:USD];

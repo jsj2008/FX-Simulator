@@ -45,14 +45,14 @@
 - (void)didLoadAdNetwork:(id<AdNetwork>)adNetwork
 {
     if ([self.delegate respondsToSelector:@selector(didLoadAdNetwork:)]) {
-        [self.delegate didLoadAdNetwork:adNetwork.adView];
+        [self.delegate didLoadAdNetwork:adNetwork];
     }
 }
 
 - (void)didLoadAd:(id<AdNetwork>)adNetwork
 {
     if ([self.delegate respondsToSelector:@selector(didLoadAd:)]) {
-        [self.delegate didLoadAd:adNetwork.adView];
+        [self.delegate didLoadAd:adNetwork];
     }
 }
 
