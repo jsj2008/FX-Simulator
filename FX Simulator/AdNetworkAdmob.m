@@ -9,6 +9,7 @@
 #import "AdNetworkAdmob.h"
 
 #import "AdNetworkSettingsId.h"
+#import "Setting.h"
 
 @import GoogleMobileAds;
 
@@ -35,7 +36,8 @@
 {
     [self reset];
     
-    _bannerView = [[GADBannerView alloc] initWithAdSize:kGADAdSizeSmartBannerPortrait];
+    GADAdSize adSize = [self adSizeForScreenSize:[UIScreen mainScreen].bounds.size];
+    _bannerView = [[GADBannerView alloc] initWithAdSize:adSize];
     _bannerView.adUnitID = [AdNetworkSettingsId admobId];
     _bannerView.delegate = self;
     _bannerView.rootViewController = _adViewController;
@@ -57,6 +59,22 @@
     [_bannerView removeFromSuperview];
     _bannerView.delegate = nil;
     _bannerView = nil;
+}
+
+- (GADAdSize)adSizeForScreenSize:(CGSize)size
+{
+    if (size.width <= size.height) {
+        return kGADAdSizeSmartBannerPortrait;
+    } else {
+        return kGADAdSizeSmartBannerLandscape;
+    }
+}
+
+- (void)normalizeAdViewWithScreenSize:(CGSize)size;
+{
+    if ([Setting isTablet]) {
+        _bannerView.adSize = [self adSizeForScreenSize:size];
+    }
 }
 
 #pragma mark - GADBannerViewDelegate

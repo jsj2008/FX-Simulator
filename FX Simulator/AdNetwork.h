@@ -23,4 +23,5 @@
 @property (nonatomic, readonly) BOOL isAdLoaded;
 @property (nonatomic, readonly) UIView *adView;
 - (void)load;
+- (void)normalizeAdViewWithScreenSize:(CGSize)size;
 @end

@@ -9,8 +9,8 @@
 #import "AdProvider.h"
 
 @protocol AdManagerDelegate <NSObject>
-- (void)didLoadAdNetwork:(UIView *)adView;
-- (void)didLoadAd:(UIView *)adView;
+- (void)didLoadAdNetwork:(id<AdNetwork>)adNetwork;
+- (void)didLoadAd:(id<AdNetwork>)adNetwork;
 @end
 
 @interface AdManager : NSObject <AdProviderDelegate>

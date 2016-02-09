@@ -9,6 +9,7 @@
 #import "AdViewController.h"
 
 #import "AdManager.h"
+#import "AdNetwork.h"
 
 @interface AdViewController () <AdManagerDelegate>
 
@@ -16,7 +17,7 @@
 
 @implementation AdViewController {
     AdManager *_adManager;
-    UIView *_adView;
+    id<AdNetwork> _currentLoadedAdNetwork;
 }
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder
@@ -40,24 +41,34 @@
 {
     [super viewDidLayoutSubviews];
     
-    if (_adView) {
-        float adViewY = self.view.frame.size.height - _adView.frame.size.height;
-        _adView.frame = CGRectMake(_adView.frame.origin.x, adViewY, _adView.frame.size.width, _adView.frame.size.height);
+    if (_currentLoadedAdNetwork) {
+        UIView *adView = _currentLoadedAdNetwork.adView;
+        float adViewY = self.view.frame.size.height - adView.frame.size.height;
+        adView.frame = CGRectMake(adView.frame.origin.x, adViewY, adView.frame.size.width, adView.frame.size.height);
     }
 }
 
-- (void)didLoadAdNetwork:(UIView *)adView
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
 {
-    _adView = adView;
-    
-    [self.view addSubview:_adView];
-    
-    _adView.hidden = YES;
+    [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
+        [_currentLoadedAdNetwork normalizeAdViewWithScreenSize:size];
+    } completion:nil];
 }
 
-- (void)didLoadAd:(UIView *)adView
+- (void)didLoadAdNetwork:(id<AdNetwork>)adNetwork
 {
-    _adView.hidden = NO;
+    _currentLoadedAdNetwork = adNetwork;
+    
+    UIView *adView = _currentLoadedAdNetwork.adView;
+    
+    [self.view addSubview:adView];
+    
+    adView.hidden = YES;
+}
+
+- (void)didLoadAd:(id<AdNetwork>)adNetwork
+{
+    adNetwork.adView.hidden = NO;
 }
 
 - (void)didReceiveMemoryWarning {
