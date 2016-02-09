@@ -17,6 +17,7 @@
 #import "Result.h"
 #import "PositionSize.h"
 #import "SaveData.h"
+#import "Setting.h"
 #import "TimeFrame.h"
 
 @interface TradeDataViewController ()
@@ -76,6 +77,10 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    if ([Setting is3_5inch]) {
+        self.autoUpdateSettingSwitch.transform = CGAffineTransformMakeScale(0.8, 0.8);
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {

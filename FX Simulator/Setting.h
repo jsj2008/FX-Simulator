@@ -34,6 +34,8 @@
 
 + (NSDateFormatter *)dateFormatter;
 
++ (BOOL)is3_5inch;
+
 + (BOOL)isLocaleJapanese;
 
 /**
