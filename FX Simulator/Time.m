@@ -8,6 +8,8 @@
 
 #import "Time.h"
 
+#import "Setting.h"
+
 static NSString* const FXSTimeKey = @"time";
 
 @implementation Time
@@ -40,9 +42,9 @@ static NSString* const FXSTimeKey = @"time";
 
 - (Time *)addDay:(int)day
 {
-    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSCalendar *calendar = [Setting calendar];
     
-    NSDateComponents *comps1 = [[NSDateComponents alloc]init];
+    NSDateComponents *comps1 = [NSDateComponents new];
     comps1.day = day;
     NSDate *result = [calendar dateByAddingComponents:comps1 toDate:self.date options:0];
     
@@ -69,9 +71,8 @@ static NSString* const FXSTimeKey = @"time";
 {
     NSTimeInterval interval = _timestampValue;
     NSDate* date = [NSDate dateWithTimeIntervalSince1970:interval];
-    
-    NSDateFormatter *dateFormatter = [NSDateFormatter new];
-    dateFormatter.dateFormat = @"yyyy/MM/dd hh:mm:ss";
+    NSDateFormatter *dateFormatter = [Setting dateFormatter];
+    dateFormatter.dateFormat = @"yyyy/MM/dd HH:mm:ss";
     
     return [dateFormatter stringFromDate:date];
 }
@@ -81,7 +82,7 @@ static NSString* const FXSTimeKey = @"time";
     NSTimeInterval interval = _timestampValue;
     NSDate* date = [NSDate dateWithTimeIntervalSince1970:interval];
     
-    NSDateFormatter *dateFormatter = [NSDateFormatter new];
+    NSDateFormatter *dateFormatter = [Setting dateFormatter];
     dateFormatter.dateFormat = @"yyyy/MM/dd";
     
     return [dateFormatter stringFromDate:date];
@@ -92,8 +93,8 @@ static NSString* const FXSTimeKey = @"time";
     NSTimeInterval interval = _timestampValue;
     NSDate* date = [NSDate dateWithTimeIntervalSince1970:interval];
     
-    NSDateFormatter *dateFormatter = [NSDateFormatter new];
-    dateFormatter.dateFormat = @"hh:mm:ss";
+    NSDateFormatter *dateFormatter = [Setting dateFormatter];
+    dateFormatter.dateFormat = @"HH:mm:ss";
     
     return [dateFormatter stringFromDate:date];
 }
