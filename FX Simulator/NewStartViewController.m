@@ -27,6 +27,7 @@
     SimulationManager *_simulationManager;
     NSHashTable *_delegates;
     SaveData *_saveData;
+    BOOL _isNewStart;
 }
 
 - (void)loadSimulationManager:(SimulationManager *)simulationManager
@@ -61,6 +62,18 @@
     }
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    if (_isNewStart) {
+        if ([self.delegate respondsToSelector:@selector(didStartSimulationWithNewData)]) {
+            [self.delegate didStartSimulationWithNewData];
+            _isNewStart = NO;
+        }
+    }
+}
+
 - (IBAction)newStartButtonPushed:(id)sender {
     
     
@@ -83,13 +96,13 @@
         
         [_simulationManager startSimulationForSaveData:newSaveData];
         
-        if ([self.delegate respondsToSelector:@selector(didStartSimulationWithNewData)]) {
-            [self.delegate didStartSimulationWithNewData];
-        }
+        _isNewStart = YES;
         
     } error:^{
         
         [newSaveData delete];
+        
+        _isNewStart = NO;
         
     }];
 }
