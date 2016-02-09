@@ -29,6 +29,8 @@
     
     saveData.tradePositionSize = saveData.positionSizeOfLot;
     
+    saveData.lastLoadedTime = saveData.startTime;
+    
     return saveData;
 }
 
