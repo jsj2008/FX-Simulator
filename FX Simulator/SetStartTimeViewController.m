@@ -170,9 +170,8 @@ numberOfRowsInComponent:(NSInteger)component
 {
     NSString* dateString = [NSString stringWithFormat:@"%@-%@-%@", year, month, day];
     
-    NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
+    NSDateFormatter* formatter = [Setting dateFormatter];
     [formatter setDateFormat:@"yyyy-MM-dd"];
-    [formatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
     
     return [formatter dateFromString:dateString];
 }

@@ -30,6 +30,10 @@
 
 + (UIColor *)baseColor;
 
++ (NSCalendar *)calendar;
+
++ (NSDateFormatter *)dateFormatter;
+
 + (BOOL)isLocaleJapanese;
 
 /**

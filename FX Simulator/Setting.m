@@ -53,6 +53,21 @@ static NSDictionary *spreadRateDic;
     return [UIColor blackColor];
 }
 
++ (NSCalendar *)calendar
+{
+    return [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+}
+
++ (NSDateFormatter *)dateFormatter
+{
+    NSDateFormatter *dateFormatter = [NSDateFormatter new];
+    dateFormatter.timeZone = [NSTimeZone timeZoneForSecondsFromGMT:0];
+    dateFormatter.calendar = [self calendar];
+    dateFormatter.locale = [NSLocale systemLocale];
+    
+    return dateFormatter;
+}
+
 + (BOOL)isLocaleJapanese
 {
     NSArray *languages = [NSLocale preferredLanguages];
