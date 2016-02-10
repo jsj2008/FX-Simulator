@@ -24,7 +24,7 @@
     // Do any additional setup after loading the view.
     
     Lot *lot = [[Lot alloc] initWithPositionSize:_defaultTradePositionSize positionSizeOfLot:self.positionSizeOfLot];
-    self.inputTradeLotTextField.text = lot.toDisplayString;
+    self.inputTradeLotTextField.text = lot.stringValue;
     
 }
 
