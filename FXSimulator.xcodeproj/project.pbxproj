@@ -77,7 +77,6 @@
 		70BF3C221BAEF88500779617 /* OpenPositionRelationChunk.m in Sources */ = {isa = PBXBuildFile; fileRef = 70BF3C211BAEF88500779617 /* OpenPositionRelationChunk.m */; };
 		70BF3C251BAEF8D600779617 /* ExecutionOrderRelationChunk.m in Sources */ = {isa = PBXBuildFile; fileRef = 70BF3C241BAEF8D600779617 /* ExecutionOrderRelationChunk.m */; };
 		70C90FE41C58E9EC001E3777 /* LinkButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 70C90FE31C58E9EC001E3777 /* LinkButton.m */; };
-		70CFEB3E1B16EA6800837727 /* TradeTestDb.sqlite3 in Resources */ = {isa = PBXBuildFile; fileRef = 70CFEB3D1B16EA6800837727 /* TradeTestDb.sqlite3 */; };
 		70CFEB411B19F92800837727 /* FXSTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 70CFEB401B19F92800837727 /* FXSTest.m */; };
 		70D2FA8A1A9F305700CAB509 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FA891A9F305700CAB509 /* main.m */; };
 		70D2FA8D1A9F305700CAB509 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FA8C1A9F305700CAB509 /* AppDelegate.m */; };
@@ -299,7 +298,6 @@
 		70C90FE21C58E9EC001E3777 /* LinkButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LinkButton.h; sourceTree = "<group>"; };
 		70C90FE31C58E9EC001E3777 /* LinkButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LinkButton.m; sourceTree = "<group>"; };
 		70CFEB3A1B16CFF600837727 /* FX_Simulator-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FX_Simulator-Prefix.pch"; sourceTree = "<group>"; };
-		70CFEB3D1B16EA6800837727 /* TradeTestDb.sqlite3 */ = {isa = PBXFileReference; lastKnownFileType = file; path = TradeTestDb.sqlite3; sourceTree = "<group>"; };
 		70CFEB3F1B19F92800837727 /* FXSTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FXSTest.h; sourceTree = "<group>"; };
 		70CFEB401B19F92800837727 /* FXSTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FXSTest.m; sourceTree = "<group>"; };
 		70D2FA841A9F305700CAB509 /* FXSimulator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FXSimulator.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -789,7 +787,6 @@
 			isa = PBXGroup;
 			children = (
 				70BF3C151BA9B88200779617 /* trade_db.sqlite3 */,
-				70CFEB3D1B16EA6800837727 /* TradeTestDb.sqlite3 */,
 				70D2FACE1A9F558100CAB509 /* forex_time_scale.sqlite */,
 			);
 			name = Resources;
@@ -1044,7 +1041,6 @@
 				70D2FA981A9F305700CAB509 /* Images.xcassets in Resources */,
 				70BF3C161BA9B88200779617 /* trade_db.sqlite3 in Resources */,
 				70E6796A1C034F02007A31E8 /* Localizable.strings in Resources */,
-				70CFEB3E1B16EA6800837727 /* TradeTestDb.sqlite3 in Resources */,
 				70E679651C034F02007A31E8 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
