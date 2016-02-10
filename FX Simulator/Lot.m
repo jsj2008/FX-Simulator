@@ -48,6 +48,11 @@
     return _positionSize;
 }
 
+- (NSString *)stringValue
+{
+    return self.valueObj.stringValue;
+}
+
 - (NSString *)toDisplayString
 {
     return [self.valueObj fxs_toDisplayString];
