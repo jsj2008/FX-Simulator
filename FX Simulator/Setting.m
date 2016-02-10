@@ -55,7 +55,11 @@ static NSDictionary *spreadRateDic;
 
 + (NSCalendar *)calendar
 {
-    return [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    calendar.timeZone = [NSTimeZone timeZoneForSecondsFromGMT:0];
+    calendar.locale = [NSLocale systemLocale];
+    
+    return calendar;
 }
 
 + (NSDateFormatter *)dateFormatter

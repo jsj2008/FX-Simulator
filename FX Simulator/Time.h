@@ -12,6 +12,7 @@
 @property (nonatomic, readonly) NSDate *date;
 @property (nonatomic, readonly) timestamp_t timestampValue;
 @property (nonatomic, readonly) NSNumber *timestampValueObj;
++ (instancetype)timeWithBlock:(void (^)(NSDateComponents *components))block;
 - (instancetype)initWithDate:(NSDate*)date;
 - (instancetype)initWithTimestamp:(timestamp_t)timestamp;
 - (Time *)addDay:(int)day;

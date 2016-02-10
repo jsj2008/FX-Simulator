@@ -14,6 +14,21 @@ static NSString* const FXSTimeKey = @"time";
 
 @implementation Time
 
++ (instancetype)timeWithBlock:(void (^)(NSDateComponents *components))block
+{
+    if (!block) {
+        return nil;
+    }
+    
+    NSDateComponents *components = [NSDateComponents new];
+    
+    block(components);
+    
+    NSCalendar *calendar = [Setting calendar];
+    
+    return [[[self class] alloc] initWithDate:[calendar dateFromComponents:components]];
+}
+
 - (instancetype)initWithCoder:(NSCoder *)aDecoder
 {
     return [self initWithDate:[aDecoder decodeObjectForKey:FXSTimeKey]];

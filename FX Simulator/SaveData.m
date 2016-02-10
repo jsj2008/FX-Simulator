@@ -102,7 +102,14 @@ static NSUInteger FXSDefaultLeverage = 100;
     
     saveData.currencyPair = [self defaultCurrencyPair];
     saveData.timeFrame = [[TimeFrame alloc] initWithMinute:15];
-    saveData.startTime = [Setting rangeForSimulation].start;
+    saveData.startTime = [Time timeWithBlock:^(NSDateComponents *components) {
+        components.year = 2010;
+        components.month = 1;
+        components.day = 1;
+        components.hour = 0;
+        components.minute = 0;
+        components.second = 0;
+    }];;
     saveData.lastLoadedTime = saveData.startTime;
     saveData.spread = [[Spread alloc] initWithPips:1 currencyPair:saveData.currencyPair];
     saveData.accountCurrency = [self defaultAccountCurrency];
