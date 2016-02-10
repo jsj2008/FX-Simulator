@@ -14,9 +14,6 @@
 #import "Market.h"
 #import "SimulationStateResult.h"
 
-static NSString* const shortageAlertTitle = @"資産が足りません。";
-static NSString* const chartEndAlertTitle = @"チャートが端まで読み込まれました。";
-
 @implementation SimulationState {
     Account *_account;
     Market *_market;
@@ -35,9 +32,9 @@ static NSString* const chartEndAlertTitle = @"チャートが端まで読み込�
 - (SimulationStateResult *)isStop
 {
     if ([_account isShortage]) {
-        return [[SimulationStateResult alloc] initWithIsStop:YES title:shortageAlertTitle message:nil];
+        return [[SimulationStateResult alloc] initWithIsStop:YES title:NSLocalizedString(@"Shortage Of Equity", nil) message:nil];
     } else if ([_market didLoadLastData]) {
-        return [[SimulationStateResult alloc] initWithIsStop:YES title:chartEndAlertTitle message:nil];
+        return [[SimulationStateResult alloc] initWithIsStop:YES title:NSLocalizedString(@"End Of Data", nil) message:nil];
     }
     
     return [[SimulationStateResult alloc] initWithIsStop:NO title:nil message:nil];
