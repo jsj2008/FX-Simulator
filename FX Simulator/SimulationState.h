@@ -21,11 +21,4 @@
 @interface SimulationState : NSObject
 - (instancetype)initWithAccount:(Account*)account Market:(Market*)market;
 - (SimulationStateResult *)isStop;
-/**
- 資産が0以下なのか、チャートが端まで読み込まれたのかなど、その状態に応じて、異なるアラートを出す。
- シュミレーションがストップしていないときは、アラートは表示されない。
-*/
-//- (void)showAlert:(UIViewController*)controller;
-//- (void)updatedMarket;
-//- (void)reset;
 @end
