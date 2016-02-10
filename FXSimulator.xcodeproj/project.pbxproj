@@ -41,7 +41,6 @@
 		705DCE4B1AE7C84300BCF710 /* Rates.m in Sources */ = {isa = PBXBuildFile; fileRef = 70B5AAEE1AC7FF44001F8823 /* Rates.m */; };
 		705DCE4C1AE7CE9800BCF710 /* RatePanelButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 70AD14751AADD0AA0099F0BA /* RatePanelButton.m */; };
 		705E78B11C26D06100A966EF /* AdManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 705E78B01C26D06100A966EF /* AdManager.m */; };
-		705E78B31C26D1EC00A966EF /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 705E78B21C26D1EC00A966EF /* iAd.framework */; };
 		705FCFA61BFB7BA8006197DA /* ChartSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 705FCFA51BFB7BA8006197DA /* ChartSource.m */; };
 		705FCFA91BFB7BA9006197DA /* CandleSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 705FCFA81BFB7BA9006197DA /* CandleSource.m */; };
 		705FCFAC1BFB7BA9006197DA /* CandleBaseSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 705FCFAB1BFB7BA9006197DA /* CandleBaseSource.m */; };
@@ -84,7 +83,6 @@
 		708383541C478B7E002027AF /* OrderFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 708383531C478B7E002027AF /* OrderFactory.m */; };
 		70838AA21C2938DD0044B1CC /* AdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70838AA11C2938DD0044B1CC /* AdViewController.m */; };
 		70838AA51C2939630044B1CC /* AdProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 70838AA41C2939630044B1CC /* AdProvider.m */; };
-		70838AA91C293CDE0044B1CC /* AdNetworkIAd.m in Sources */ = {isa = PBXBuildFile; fileRef = 70838AA81C293CDE0044B1CC /* AdNetworkIAd.m */; };
 		70838AAC1C293D060044B1CC /* AdNetworkAdmob.m in Sources */ = {isa = PBXBuildFile; fileRef = 70838AAB1C293D060044B1CC /* AdNetworkAdmob.m */; };
 		7098ADB81C61E1B000C7D319 /* SettingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7098ADB71C61E1B000C7D319 /* SettingTests.m */; };
 		709BC75E1B0700320059C940 /* SetAutoUpdateIntervalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 709BC75D1B0700320059C940 /* SetAutoUpdateIntervalViewController.m */; };
@@ -248,7 +246,6 @@
 		705C2E0F1ADE4C270089D510 /* Money+ConvertToAccountCurrency.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Money+ConvertToAccountCurrency.m"; sourceTree = "<group>"; };
 		705E78AF1C26D06100A966EF /* AdManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdManager.h; sourceTree = "<group>"; };
 		705E78B01C26D06100A966EF /* AdManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdManager.m; sourceTree = "<group>"; };
-		705E78B21C26D1EC00A966EF /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 		705FCFA41BFB7BA8006197DA /* ChartSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChartSource.h; sourceTree = "<group>"; };
 		705FCFA51BFB7BA8006197DA /* ChartSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChartSource.m; sourceTree = "<group>"; };
 		705FCFA71BFB7BA9006197DA /* CandleSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CandleSource.h; sourceTree = "<group>"; };
@@ -313,8 +310,6 @@
 		70838AA31C2939630044B1CC /* AdProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdProvider.h; sourceTree = "<group>"; };
 		70838AA41C2939630044B1CC /* AdProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdProvider.m; sourceTree = "<group>"; };
 		70838AA61C293A6C0044B1CC /* AdNetwork.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdNetwork.h; sourceTree = "<group>"; };
-		70838AA71C293CDE0044B1CC /* AdNetworkIAd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdNetworkIAd.h; sourceTree = "<group>"; };
-		70838AA81C293CDE0044B1CC /* AdNetworkIAd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdNetworkIAd.m; sourceTree = "<group>"; };
 		70838AAA1C293D060044B1CC /* AdNetworkAdmob.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdNetworkAdmob.h; sourceTree = "<group>"; };
 		70838AAB1C293D060044B1CC /* AdNetworkAdmob.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdNetworkAdmob.m; sourceTree = "<group>"; };
 		7098ADB71C61E1B000C7D319 /* SettingTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingTests.m; sourceTree = "<group>"; };
@@ -513,7 +508,6 @@
 				704AF51F1C3A857F0055C78E /* AVFoundation.framework in Frameworks */,
 				704AF51D1C3A856D0055C78E /* AudioToolbox.framework in Frameworks */,
 				704AF51B1C3A85590055C78E /* AdSupport.framework in Frameworks */,
-				705E78B31C26D1EC00A966EF /* iAd.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -582,7 +576,6 @@
 				704AF51C1C3A856D0055C78E /* AudioToolbox.framework */,
 				70A6BF221C564F6E00BA7407 /* GoogleMobileAds.framework */,
 				704AF51A1C3A85590055C78E /* AdSupport.framework */,
-				705E78B21C26D1EC00A966EF /* iAd.framework */,
 				70D2FA861A9F305700CAB509 /* FX Simulator */,
 				70D2FAA31A9F305800CAB509 /* FX SimulatorTests */,
 				70D2FA851A9F305700CAB509 /* Products */,
@@ -755,8 +748,6 @@
 				70838AA31C2939630044B1CC /* AdProvider.h */,
 				70838AA41C2939630044B1CC /* AdProvider.m */,
 				70838AA61C293A6C0044B1CC /* AdNetwork.h */,
-				70838AA71C293CDE0044B1CC /* AdNetworkIAd.h */,
-				70838AA81C293CDE0044B1CC /* AdNetworkIAd.m */,
 				70838AAA1C293D060044B1CC /* AdNetworkAdmob.h */,
 				70838AAB1C293D060044B1CC /* AdNetworkAdmob.m */,
 				70BB5B7F1C2DAFB800F2DE65 /* AdNetworkSettingsId.h */,
@@ -1163,7 +1154,6 @@
 				70EACE691B2AACBE00A2E532 /* FXSAlert.m in Sources */,
 				705E78B11C26D06100A966EF /* AdManager.m in Sources */,
 				702A84F61BDB5F7B00CA6102 /* Coordinate.m in Sources */,
-				70838AA91C293CDE0044B1CC /* AdNetworkIAd.m in Sources */,
 				70D2FB6B1A9F576500CAB509 /* SimulationTimeManager.m in Sources */,
 				70D2FBF81A9F57DC00CAB509 /* OrdersCreateModeFactory.m in Sources */,
 				70D2FB481A9F574000CAB509 /* TradeViewController.m in Sources */,
