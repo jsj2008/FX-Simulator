@@ -15,7 +15,6 @@
 static FMDatabase *db;
 static BOOL inTransaction;
 static NSString* const dbFileName = @"trade_db.sqlite3";
-static NSString* const testDbFileName = @"TradeTestDb.sqlite3";
 
 @implementation TradeDatabase
 
@@ -90,11 +89,6 @@ static NSString* const testDbFileName = @"TradeTestDb.sqlite3";
 + (FMDatabase *)dbConnect
 {
     return [self connectOfDbFileName:dbFileName];
-}
-
-+ (FMDatabase *)testDbConnect
-{
-    return [self connectOfDbFileName:testDbFileName];
 }
 
 + (FMDatabase *)connectOfDbFileName:(NSString *)fileName
