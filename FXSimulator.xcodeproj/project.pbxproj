@@ -59,24 +59,6 @@
 		7076F5AB1AECCEB3004CC6BA /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FC031A9F58D100CAB509 /* MainViewController.m */; };
 		7079FEE81AF4FF23004D3CEA /* SetStartTimeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7079FEE71AF4FF23004D3CEA /* SetStartTimeViewController.m */; };
 		7079FEEB1AF9E688004D3CEA /* NSDate+FXSDateData.m in Sources */ = {isa = PBXBuildFile; fileRef = 7079FEEA1AF9E688004D3CEA /* NSDate+FXSDateData.m */; };
-		707CA1911B52394300F099E9 /* clock.png in Resources */ = {isa = PBXBuildFile; fileRef = 707CA17F1B52394300F099E9 /* clock.png */; };
-		707CA1921B52394300F099E9 /* clock@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 707CA1801B52394300F099E9 /* clock@2x.png */; };
-		707CA1931B52394300F099E9 /* config.png in Resources */ = {isa = PBXBuildFile; fileRef = 707CA1811B52394300F099E9 /* config.png */; };
-		707CA1941B52394300F099E9 /* config@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 707CA1821B52394300F099E9 /* config@2x.png */; };
-		707CA1951B52394300F099E9 /* display.png in Resources */ = {isa = PBXBuildFile; fileRef = 707CA1831B52394300F099E9 /* display.png */; };
-		707CA1961B52394300F099E9 /* display@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 707CA1841B52394300F099E9 /* display@2x.png */; };
-		707CA1971B52394300F099E9 /* file.png in Resources */ = {isa = PBXBuildFile; fileRef = 707CA1851B52394300F099E9 /* file.png */; };
-		707CA1981B52394300F099E9 /* file@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 707CA1861B52394300F099E9 /* file@2x.png */; };
-		707CA1991B52394300F099E9 /* graph.png in Resources */ = {isa = PBXBuildFile; fileRef = 707CA1871B52394300F099E9 /* graph.png */; };
-		707CA19A1B52394300F099E9 /* graph@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 707CA1881B52394300F099E9 /* graph@2x.png */; };
-		707CA19B1B52394300F099E9 /* info.png in Resources */ = {isa = PBXBuildFile; fileRef = 707CA1891B52394300F099E9 /* info.png */; };
-		707CA19C1B52394300F099E9 /* info@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 707CA18A1B52394300F099E9 /* info@2x.png */; };
-		707CA19D1B52394300F099E9 /* note.png in Resources */ = {isa = PBXBuildFile; fileRef = 707CA18B1B52394300F099E9 /* note.png */; };
-		707CA19E1B52394300F099E9 /* note@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 707CA18C1B52394300F099E9 /* note@2x.png */; };
-		707CA19F1B52394300F099E9 /* plus.png in Resources */ = {isa = PBXBuildFile; fileRef = 707CA18D1B52394300F099E9 /* plus.png */; };
-		707CA1A01B52394300F099E9 /* plus@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 707CA18E1B52394300F099E9 /* plus@2x.png */; };
-		707CA1A11B52394300F099E9 /* portfolio.png in Resources */ = {isa = PBXBuildFile; fileRef = 707CA18F1B52394300F099E9 /* portfolio.png */; };
-		707CA1A21B52394300F099E9 /* portfolio@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 707CA1901B52394300F099E9 /* portfolio@2x.png */; };
 		707CA1A51B5387CF00F099E9 /* IndicatorChunk.m in Sources */ = {isa = PBXBuildFile; fileRef = 707CA1A41B5387CF00F099E9 /* IndicatorChunk.m */; };
 		707CA1B71B53A51700F099E9 /* Indicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 707CA1B61B53A51700F099E9 /* Indicator.m */; };
 		708383481C47740F002027AF /* OrderRelationChunk.m in Sources */ = {isa = PBXBuildFile; fileRef = 708383471C47740F002027AF /* OrderRelationChunk.m */; };
@@ -280,24 +262,6 @@
 		7079FEE71AF4FF23004D3CEA /* SetStartTimeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetStartTimeViewController.m; sourceTree = "<group>"; };
 		7079FEE91AF9E688004D3CEA /* NSDate+FXSDateData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+FXSDateData.h"; sourceTree = "<group>"; };
 		7079FEEA1AF9E688004D3CEA /* NSDate+FXSDateData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+FXSDateData.m"; sourceTree = "<group>"; };
-		707CA17F1B52394300F099E9 /* clock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = clock.png; sourceTree = "<group>"; };
-		707CA1801B52394300F099E9 /* clock@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "clock@2x.png"; sourceTree = "<group>"; };
-		707CA1811B52394300F099E9 /* config.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = config.png; sourceTree = "<group>"; };
-		707CA1821B52394300F099E9 /* config@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "config@2x.png"; sourceTree = "<group>"; };
-		707CA1831B52394300F099E9 /* display.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = display.png; sourceTree = "<group>"; };
-		707CA1841B52394300F099E9 /* display@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "display@2x.png"; sourceTree = "<group>"; };
-		707CA1851B52394300F099E9 /* file.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = file.png; sourceTree = "<group>"; };
-		707CA1861B52394300F099E9 /* file@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "file@2x.png"; sourceTree = "<group>"; };
-		707CA1871B52394300F099E9 /* graph.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = graph.png; sourceTree = "<group>"; };
-		707CA1881B52394300F099E9 /* graph@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "graph@2x.png"; sourceTree = "<group>"; };
-		707CA1891B52394300F099E9 /* info.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = info.png; sourceTree = "<group>"; };
-		707CA18A1B52394300F099E9 /* info@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "info@2x.png"; sourceTree = "<group>"; };
-		707CA18B1B52394300F099E9 /* note.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = note.png; sourceTree = "<group>"; };
-		707CA18C1B52394300F099E9 /* note@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "note@2x.png"; sourceTree = "<group>"; };
-		707CA18D1B52394300F099E9 /* plus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = plus.png; sourceTree = "<group>"; };
-		707CA18E1B52394300F099E9 /* plus@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "plus@2x.png"; sourceTree = "<group>"; };
-		707CA18F1B52394300F099E9 /* portfolio.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = portfolio.png; sourceTree = "<group>"; };
-		707CA1901B52394300F099E9 /* portfolio@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "portfolio@2x.png"; sourceTree = "<group>"; };
 		707CA1A31B5387CF00F099E9 /* IndicatorChunk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IndicatorChunk.h; sourceTree = "<group>"; };
 		707CA1A41B5387CF00F099E9 /* IndicatorChunk.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IndicatorChunk.m; sourceTree = "<group>"; };
 		707CA1B61B53A51700F099E9 /* Indicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Indicator.m; sourceTree = "<group>"; };
@@ -773,7 +737,6 @@
 			children = (
 				70E6796C1C034F02007A31E8 /* Localizable.strings */,
 				70E679671C034F02007A31E8 /* InfoPlist.strings */,
-				70D2FAE51A9F569A00CAB509 /* UITabBarIcon */,
 				70D2FAE41A9F568400CAB509 /* FMDB */,
 				70D2FA881A9F305700CAB509 /* Info.plist */,
 				70D2FA891A9F305700CAB509 /* main.m */,
@@ -983,31 +946,6 @@
 			name = FMDB;
 			sourceTree = "<group>";
 		};
-		70D2FAE51A9F569A00CAB509 /* UITabBarIcon */ = {
-			isa = PBXGroup;
-			children = (
-				707CA17F1B52394300F099E9 /* clock.png */,
-				707CA1801B52394300F099E9 /* clock@2x.png */,
-				707CA1811B52394300F099E9 /* config.png */,
-				707CA1821B52394300F099E9 /* config@2x.png */,
-				707CA1831B52394300F099E9 /* display.png */,
-				707CA1841B52394300F099E9 /* display@2x.png */,
-				707CA1851B52394300F099E9 /* file.png */,
-				707CA1861B52394300F099E9 /* file@2x.png */,
-				707CA1871B52394300F099E9 /* graph.png */,
-				707CA1881B52394300F099E9 /* graph@2x.png */,
-				707CA1891B52394300F099E9 /* info.png */,
-				707CA18A1B52394300F099E9 /* info@2x.png */,
-				707CA18B1B52394300F099E9 /* note.png */,
-				707CA18C1B52394300F099E9 /* note@2x.png */,
-				707CA18D1B52394300F099E9 /* plus.png */,
-				707CA18E1B52394300F099E9 /* plus@2x.png */,
-				707CA18F1B52394300F099E9 /* portfolio.png */,
-				707CA1901B52394300F099E9 /* portfolio@2x.png */,
-			);
-			name = UITabBarIcon;
-			sourceTree = "<group>";
-		};
 		70D2FB1A1A9F56E500CAB509 /* SubChartView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1100,32 +1038,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				707CA1981B52394300F099E9 /* file@2x.png in Resources */,
 				70D2FACF1A9F558100CAB509 /* forex_time_scale.sqlite in Resources */,
-				707CA1961B52394300F099E9 /* display@2x.png in Resources */,
 				70D2FA961A9F305700CAB509 /* Main.storyboard in Resources */,
 				70D2FA9B1A9F305700CAB509 /* LaunchScreen.xib in Resources */,
-				707CA19F1B52394300F099E9 /* plus.png in Resources */,
 				70D2FA981A9F305700CAB509 /* Images.xcassets in Resources */,
-				707CA19E1B52394300F099E9 /* note@2x.png in Resources */,
 				70BF3C161BA9B88200779617 /* trade_db.sqlite3 in Resources */,
 				70E6796A1C034F02007A31E8 /* Localizable.strings in Resources */,
-				707CA19C1B52394300F099E9 /* info@2x.png in Resources */,
-				707CA19B1B52394300F099E9 /* info.png in Resources */,
-				707CA1951B52394300F099E9 /* display.png in Resources */,
-				707CA1921B52394300F099E9 /* clock@2x.png in Resources */,
-				707CA1991B52394300F099E9 /* graph.png in Resources */,
-				707CA19D1B52394300F099E9 /* note.png in Resources */,
-				707CA1911B52394300F099E9 /* clock.png in Resources */,
-				707CA1A11B52394300F099E9 /* portfolio.png in Resources */,
-				707CA19A1B52394300F099E9 /* graph@2x.png in Resources */,
 				70CFEB3E1B16EA6800837727 /* TradeTestDb.sqlite3 in Resources */,
 				70E679651C034F02007A31E8 /* InfoPlist.strings in Resources */,
-				707CA1A21B52394300F099E9 /* portfolio@2x.png in Resources */,
-				707CA1941B52394300F099E9 /* config@2x.png in Resources */,
-				707CA1931B52394300F099E9 /* config.png in Resources */,
-				707CA1A01B52394300F099E9 /* plus@2x.png in Resources */,
-				707CA1971B52394300F099E9 /* file.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
