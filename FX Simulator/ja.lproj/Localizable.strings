@@ -43,3 +43,9 @@
 /* No comment provided by engineer. */
 "Buy" = "買";
 
+/* No comment provided by engineer. */
+"Shortage Of Equity" = "資産が足りません";
+
+/* No comment provided by engineer. */
+"End Of Data" = "データが終わりまで読み込まれました";
+
