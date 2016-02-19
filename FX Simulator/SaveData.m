@@ -112,8 +112,8 @@ static NSUInteger FXSDefaultLeverage = 100;
     }];;
     saveData.lastLoadedTime = saveData.startTime;
     saveData.spread = [[Spread alloc] initWithPips:1 currencyPair:saveData.currencyPair];
-    saveData.accountCurrency = [self defaultAccountCurrency];
-    saveData.startBalance = [[Money alloc] initWithAmount:1000000 currency:saveData.accountCurrency];
+    saveData.startBalance = [self defaultStartBalance];
+    saveData.accountCurrency = saveData.startBalance.currency;
     // SettingのpositionSizeOfLotListにある値
     saveData.positionSizeOfLot = [[PositionSize alloc] initWithSizeValue:10000];;
     
@@ -132,6 +132,19 @@ static NSUInteger FXSDefaultLeverage = 100;
     } else {
         return [[Currency alloc] initWithCurrencyType:USD];
     }
+}
+
++ (Money *)defaultStartBalance
+{
+    Currency *defaultAccountCurrency = [self defaultAccountCurrency];
+    
+    if ([defaultAccountCurrency isEqualCurrency:[[Currency alloc] initWithCurrencyType:JPY]]) {
+        return [[Money alloc] initWithAmount:1000000 currency:defaultAccountCurrency];
+    } else if ([defaultAccountCurrency isEqualCurrency:[[Currency alloc] initWithCurrencyType:USD]]) {
+        return [[Money alloc] initWithAmount:10000 currency:defaultAccountCurrency];
+    }
+    
+    return nil;
 }
 
 + (CurrencyPair *)defaultCurrencyPair
