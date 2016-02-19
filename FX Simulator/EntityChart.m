@@ -58,7 +58,7 @@ static const NSUInteger FXSBackLimitForPrepare = FXSRequireForexDataCount - FXSM
 {
     FXSEntityChartViewSize = CGSizeMake(3000, 1000);
     FXSEntityChartImageSize = FXSEntityChartViewSize;
-    FXSMiniEntityChartImageSize = CGSizeMake(1000, 1000);
+    FXSMiniEntityChartImageSize = CGSizeMake(1000, 500);
 }
 
 + (UIImageView *)entityChartView
