@@ -171,7 +171,7 @@ static NSDictionary *spreadRateDic;
 
 + (float)minAutoUpdateIntervalSeconds
 {
-    return 0.2;
+    return 0.15;
 }
 
 + (PositionSize *)maxTradePositionSize
