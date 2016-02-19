@@ -203,12 +203,7 @@
 
 - (void)addTime
 {
-    NSDate *now = [NSDate date];
-    
-    if (!_previousAddTimeDate || [Setting minAutoUpdateIntervalSeconds] < [now timeIntervalSinceDate:_previousAddTimeDate]) {
-        _previousAddTimeDate = now;
-        [_simulationTimeManager add];
-    }
+    [_simulationTimeManager add];
 }
 
 - (float)autoUpdateIntervalSeconds
