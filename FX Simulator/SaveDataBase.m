@@ -135,7 +135,7 @@
     _startBalance = startBalance;
 }
 
-- (void)setleverage:(Leverage *)leverage
+- (void)setLeverage:(Leverage *)leverage
 {
     if (!leverage) {
         return;
