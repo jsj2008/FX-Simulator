@@ -33,7 +33,7 @@
 #import "TimeFrameChunk.h"
 
 static BOOL FXSDefaultIsAutoUpdate = YES;
-static float FXSDefaultAutoUpdateIntervalSeconds = 1.0;
+static float FXSDefaultAutoUpdateIntervalSeconds = 0.8;
 static NSUInteger FXSDefaultLeverage = 100;
 
 @interface SaveData ()
