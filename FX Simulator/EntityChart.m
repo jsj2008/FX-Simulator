@@ -151,12 +151,13 @@ static const NSUInteger FXSBackLimitForPrepare = FXSRequireForexDataCount - FXSM
             
     _isStartedPreparePreviousEntityChart = YES;
     
+    ForexHistoryData *leftEndForexData = [_candle leftEndForexData];
+    ForexDataChunk *newForexDataChunk = [market chunkForCenterForexData:leftEndForexData frontLimit:FXSFrontLimitForPrepare backLimit:FXSBackLimitForPrepare];
+    
     NSOperationQueue *queue = [NSOperationQueue new];
     
     [queue addOperationWithBlock:^{
         @synchronized (_syncPreviousEntityChart) {
-            ForexHistoryData *leftEndForexData = [_candle leftEndForexData];
-            ForexDataChunk *newForexDataChunk = [market chunkForCenterForexData:leftEndForexData frontLimit:FXSFrontLimitForPrepare backLimit:FXSBackLimitForPrepare];
             
             NSComparisonResult result = [leftEndForexData.oldestTime compareTime:newForexDataChunk.oldestTime];
             
@@ -179,12 +180,18 @@ static const NSUInteger FXSBackLimitForPrepare = FXSRequireForexDataCount - FXSM
     
     _isStartedPrepareNextEntityChart = YES;
     
+    ForexHistoryData *rightEndForexData = [_candle rightEndForexData];
+    
+    if ([rightEndForexData.latestTime isEqualTime:market.currentTime]) {
+        return;
+    }
+    
+    ForexDataChunk *newForexDataChunk = [market chunkForCenterForexData:rightEndForexData frontLimit:FXSFrontLimitForPrepare backLimit:FXSBackLimitForPrepare];
+    
     NSOperationQueue *queue = [NSOperationQueue new];
     
     [queue addOperationWithBlock:^{
         @synchronized (_syncNextEntityChart) {
-            ForexHistoryData *rightEndForexData = [_candle rightEndForexData];
-            ForexDataChunk *newForexDataChunk = [market chunkForCenterForexData:rightEndForexData frontLimit:FXSFrontLimitForPrepare backLimit:FXSBackLimitForPrepare];
             
             NSComparisonResult result = [rightEndForexData.latestTime compareTime:newForexDataChunk.latestTime];
             
