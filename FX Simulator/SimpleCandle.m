@@ -24,7 +24,7 @@
     
     
     
-    CGContextSetLineWidth(context, 2);
+    CGContextSetLineWidth(context, 1.5);
     CGContextSetStrokeColorWithColor(context, lineColor.CGColor);
     
     CGContextMoveToPoint(context, self.highLineBottom.x, self.highLineBottom.y);
