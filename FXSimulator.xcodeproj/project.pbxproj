@@ -61,6 +61,7 @@
 		7079FEEB1AF9E688004D3CEA /* NSDate+FXSDateData.m in Sources */ = {isa = PBXBuildFile; fileRef = 7079FEEA1AF9E688004D3CEA /* NSDate+FXSDateData.m */; };
 		707CA1A51B5387CF00F099E9 /* IndicatorChunk.m in Sources */ = {isa = PBXBuildFile; fileRef = 707CA1A41B5387CF00F099E9 /* IndicatorChunk.m */; };
 		707CA1B71B53A51700F099E9 /* Indicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 707CA1B61B53A51700F099E9 /* Indicator.m */; };
+		7081E47E1CCF21F600902F1F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7081E47D1CCF21F600902F1F /* AppDelegate.swift */; };
 		708383481C47740F002027AF /* OrderRelationChunk.m in Sources */ = {isa = PBXBuildFile; fileRef = 708383471C47740F002027AF /* OrderRelationChunk.m */; };
 		708383541C478B7E002027AF /* OrderFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 708383531C478B7E002027AF /* OrderFactory.m */; };
 		70838AA21C2938DD0044B1CC /* AdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70838AA11C2938DD0044B1CC /* AdViewController.m */; };
@@ -78,8 +79,6 @@
 		70BF3C251BAEF8D600779617 /* ExecutionOrderRelationChunk.m in Sources */ = {isa = PBXBuildFile; fileRef = 70BF3C241BAEF8D600779617 /* ExecutionOrderRelationChunk.m */; };
 		70C90FE41C58E9EC001E3777 /* LinkButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 70C90FE31C58E9EC001E3777 /* LinkButton.m */; };
 		70CFEB411B19F92800837727 /* FXSTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 70CFEB401B19F92800837727 /* FXSTest.m */; };
-		70D2FA8A1A9F305700CAB509 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FA891A9F305700CAB509 /* main.m */; };
-		70D2FA8D1A9F305700CAB509 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FA8C1A9F305700CAB509 /* AppDelegate.m */; };
 		70D2FA961A9F305700CAB509 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 70D2FA941A9F305700CAB509 /* Main.storyboard */; };
 		70D2FA981A9F305700CAB509 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 70D2FA971A9F305700CAB509 /* Images.xcassets */; };
 		70D2FA9B1A9F305700CAB509 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 70D2FA991A9F305700CAB509 /* LaunchScreen.xib */; };
@@ -264,6 +263,8 @@
 		707CA1A31B5387CF00F099E9 /* IndicatorChunk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IndicatorChunk.h; sourceTree = "<group>"; };
 		707CA1A41B5387CF00F099E9 /* IndicatorChunk.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IndicatorChunk.m; sourceTree = "<group>"; };
 		707CA1B61B53A51700F099E9 /* Indicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Indicator.m; sourceTree = "<group>"; };
+		7081E47C1CCF21F500902F1F /* FXSimulator-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FXSimulator-Bridging-Header.h"; sourceTree = "<group>"; };
+		7081E47D1CCF21F600902F1F /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		708383461C47740F002027AF /* OrderRelationChunk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderRelationChunk.h; sourceTree = "<group>"; };
 		708383471C47740F002027AF /* OrderRelationChunk.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderRelationChunk.m; sourceTree = "<group>"; };
 		708383521C478B7E002027AF /* OrderFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderFactory.h; sourceTree = "<group>"; };
@@ -806,6 +807,8 @@
 				70FCD5B51B9EB49400500B40 /* ExecutionOrderComponents.m */,
 				70FCD5B71BA0812500500B40 /* SimulationStateResult.h */,
 				70FCD5B81BA0812500500B40 /* SimulationStateResult.m */,
+				7081E47D1CCF21F600902F1F /* AppDelegate.swift */,
+				7081E47C1CCF21F500902F1F /* FXSimulator-Bridging-Header.h */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -1035,7 +1038,6 @@
 				7062E5BB1B60BB0100BDA666 /* CoreDataManager.m in Sources */,
 				70D2FC3D1A9F591600CAB509 /* PositionType.m in Sources */,
 				70D2FAF11A9F56AE00CAB509 /* FMDatabase.m in Sources */,
-				70D2FA8D1A9F305700CAB509 /* AppDelegate.m in Sources */,
 				700C9E651B75BAF30084320E /* CandleSource+Additions.m in Sources */,
 				70D2FAD71A9F559200CAB509 /* OpenPositionHeaderView.m in Sources */,
 				70CFEB411B19F92800837727 /* FXSTest.m in Sources */,
@@ -1076,12 +1078,12 @@
 				70D2FBFD1A9F57DC00CAB509 /* ExecutionOrder.m in Sources */,
 				70838AA51C2939630044B1CC /* AdProvider.m in Sources */,
 				705FCFBE1BFC609B006197DA /* ChartType.m in Sources */,
-				70D2FA8A1A9F305700CAB509 /* main.m in Sources */,
 				705FCFB21BFB7BA9006197DA /* HeikinAshiSource.m in Sources */,
 				70D2FAF51A9F56AE00CAB509 /* FMResultSet.m in Sources */,
 				70D2FC091A9F58EC00CAB509 /* ConfigViewController.m in Sources */,
 				70D2FBFC1A9F57DC00CAB509 /* CloseAndNewOrdersCreateMode.m in Sources */,
 				70BB8BEA1B60D07C00B0539D /* FXSimulator.xcdatamodeld in Sources */,
+				7081E47E1CCF21F600902F1F /* AppDelegate.swift in Sources */,
 				705FCFAF1BFB7BA9006197DA /* BollingerBandsSource.m in Sources */,
 				7079FEE81AF4FF23004D3CEA /* SetStartTimeViewController.m in Sources */,
 				70D2FC481A9F591600CAB509 /* Lot.m in Sources */,
@@ -1212,6 +1214,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				"OTHER_SWIFT_FLAGS[arch=*]" = "-D DEBUG";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1257,6 +1260,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
@@ -1272,6 +1276,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = net.yuuxeno.FXSimulator;
 				PRODUCT_NAME = FXSimulator;
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "FX Simulator/FXSimulator-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -1279,6 +1285,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
@@ -1294,6 +1301,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = net.yuuxeno.FXSimulator;
 				PRODUCT_NAME = FXSimulator;
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "FX Simulator/FXSimulator-Bridging-Header.h";
 			};
 			name = Release;
 		};
