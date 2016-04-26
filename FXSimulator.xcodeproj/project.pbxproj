@@ -304,8 +304,6 @@
 		70D2FA841A9F305700CAB509 /* FXSimulator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FXSimulator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		70D2FA881A9F305700CAB509 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		70D2FA891A9F305700CAB509 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		70D2FA8B1A9F305700CAB509 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		70D2FA8C1A9F305700CAB509 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		70D2FA951A9F305700CAB509 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		70D2FA971A9F305700CAB509 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		70D2FA9A1A9F305700CAB509 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -676,8 +674,6 @@
 				705FCFBD1BFC609B006197DA /* ChartType.m */,
 				705E78AF1C26D06100A966EF /* AdManager.h */,
 				705E78B01C26D06100A966EF /* AdManager.m */,
-				70D2FA8B1A9F305700CAB509 /* AppDelegate.h */,
-				70D2FA8C1A9F305700CAB509 /* AppDelegate.m */,
 				70D2FC0B1A9F58F700CAB509 /* TradeDatabase.h */,
 				70D2FC0C1A9F58F700CAB509 /* TradeDatabase.m */,
 				70D2FB631A9F576500CAB509 /* Market.h */,
