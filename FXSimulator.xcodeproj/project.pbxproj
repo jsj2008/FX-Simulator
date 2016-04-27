@@ -385,8 +385,6 @@
 		70D2FBEA1A9F57DC00CAB509 /* CloseAndNewOrdersCreateMode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CloseAndNewOrdersCreateMode.m; sourceTree = "<group>"; };
 		70D2FBEB1A9F57DC00CAB509 /* ExecutionOrder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExecutionOrder.h; sourceTree = "<group>"; };
 		70D2FBEC1A9F57DC00CAB509 /* ExecutionOrder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExecutionOrder.m; sourceTree = "<group>"; };
-		70D2FC021A9F58D100CAB509 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
-		70D2FC031A9F58D100CAB509 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		70D2FC051A9F58EC00CAB509 /* ConfigViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigViewController.h; sourceTree = "<group>"; };
 		70D2FC061A9F58EC00CAB509 /* ConfigViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigViewController.m; sourceTree = "<group>"; };
 		70D2FC0B1A9F58F700CAB509 /* TradeDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TradeDatabase.h; sourceTree = "<group>"; };
@@ -832,8 +830,6 @@
 		70EB77A91CAD844700FF1F83 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				70D2FC021A9F58D100CAB509 /* MainViewController.h */,
-				70D2FC031A9F58D100CAB509 /* MainViewController.m */,
 				700B95831B0C3C97003F160B /* InputTradeLotViewController.h */,
 				700B95841B0C3C97003F160B /* InputTradeLotViewController.m */,
 				70D2FC051A9F58EC00CAB509 /* ConfigViewController.h */,
