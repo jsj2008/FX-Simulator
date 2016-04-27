@@ -15,6 +15,7 @@
 		700B95851B0C3C97003F160B /* InputTradeLotViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 700B95841B0C3C97003F160B /* InputTradeLotViewController.m */; };
 		700C9E651B75BAF30084320E /* CandleSource+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 700C9E641B75BAF30084320E /* CandleSource+Additions.m */; };
 		700C9E811B786C800084320E /* TimeFrameChunk.m in Sources */ = {isa = PBXBuildFile; fileRef = 700C9E801B786C800084320E /* TimeFrameChunk.m */; };
+		7015FD391CCFC4720015A474 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7015FD381CCFC4720015A474 /* MainViewController.swift */; };
 		70248B9C1C3E9F2E0073D5B7 /* Leverage.m in Sources */ = {isa = PBXBuildFile; fileRef = 70248B9B1C3E9F2E0073D5B7 /* Leverage.m */; };
 		70248BAA1C3F76420073D5B7 /* SaveDataSource+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 70248BA71C3F76420073D5B7 /* SaveDataSource+CoreDataProperties.m */; };
 		70248BAB1C3F76420073D5B7 /* SaveDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 70248BA91C3F76420073D5B7 /* SaveDataSource.m */; };
@@ -56,7 +57,6 @@
 		706D09CA1BF75BB200B3BBF7 /* FXSComparisonResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 706D09C91BF75BB200B3BBF7 /* FXSComparisonResult.m */; };
 		7076F5A71AECCBBB004CC6BA /* NewStartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7076F5A61AECCBBB004CC6BA /* NewStartViewController.m */; };
 		7076F5AA1AECCDB7004CC6BA /* CheckmarkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7076F5A91AECCDB7004CC6BA /* CheckmarkViewController.m */; };
-		7076F5AB1AECCEB3004CC6BA /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FC031A9F58D100CAB509 /* MainViewController.m */; };
 		7079FEE81AF4FF23004D3CEA /* SetStartTimeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7079FEE71AF4FF23004D3CEA /* SetStartTimeViewController.m */; };
 		7079FEEB1AF9E688004D3CEA /* NSDate+FXSDateData.m in Sources */ = {isa = PBXBuildFile; fileRef = 7079FEEA1AF9E688004D3CEA /* NSDate+FXSDateData.m */; };
 		707CA1A51B5387CF00F099E9 /* IndicatorChunk.m in Sources */ = {isa = PBXBuildFile; fileRef = 707CA1A41B5387CF00F099E9 /* IndicatorChunk.m */; };
@@ -184,6 +184,7 @@
 		700C9E641B75BAF30084320E /* CandleSource+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CandleSource+Additions.m"; sourceTree = "<group>"; };
 		700C9E7F1B786C800084320E /* TimeFrameChunk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeFrameChunk.h; sourceTree = "<group>"; };
 		700C9E801B786C800084320E /* TimeFrameChunk.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeFrameChunk.m; sourceTree = "<group>"; };
+		7015FD381CCFC4720015A474 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		70248B9A1C3E9F2D0073D5B7 /* Leverage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Leverage.h; sourceTree = "<group>"; };
 		70248B9B1C3E9F2E0073D5B7 /* Leverage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Leverage.m; sourceTree = "<group>"; };
 		70248BA61C3F76420073D5B7 /* SaveDataSource+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SaveDataSource+CoreDataProperties.h"; sourceTree = "<group>"; };
@@ -384,8 +385,6 @@
 		70D2FBEA1A9F57DC00CAB509 /* CloseAndNewOrdersCreateMode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CloseAndNewOrdersCreateMode.m; sourceTree = "<group>"; };
 		70D2FBEB1A9F57DC00CAB509 /* ExecutionOrder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExecutionOrder.h; sourceTree = "<group>"; };
 		70D2FBEC1A9F57DC00CAB509 /* ExecutionOrder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExecutionOrder.m; sourceTree = "<group>"; };
-		70D2FC021A9F58D100CAB509 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
-		70D2FC031A9F58D100CAB509 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		70D2FC051A9F58EC00CAB509 /* ConfigViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigViewController.h; sourceTree = "<group>"; };
 		70D2FC061A9F58EC00CAB509 /* ConfigViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigViewController.m; sourceTree = "<group>"; };
 		70D2FC0B1A9F58F700CAB509 /* TradeDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TradeDatabase.h; sourceTree = "<group>"; };
@@ -831,8 +830,6 @@
 		70EB77A91CAD844700FF1F83 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				70D2FC021A9F58D100CAB509 /* MainViewController.h */,
-				70D2FC031A9F58D100CAB509 /* MainViewController.m */,
 				700B95831B0C3C97003F160B /* InputTradeLotViewController.h */,
 				700B95841B0C3C97003F160B /* InputTradeLotViewController.m */,
 				70D2FC051A9F58EC00CAB509 /* ConfigViewController.h */,
@@ -869,6 +866,7 @@
 				70838AA11C2938DD0044B1CC /* AdViewController.m */,
 				70A6BF691C57B21800BA7407 /* AboutTableViewController.h */,
 				70A6BF6A1C57B21800BA7407 /* AboutTableViewController.m */,
+				7015FD381CCFC4720015A474 /* MainViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -1045,7 +1043,6 @@
 				70D2FBD81A9F57CB00CAB509 /* SaveLoader.m in Sources */,
 				70D2FAF21A9F56AE00CAB509 /* FMDatabaseAdditions.m in Sources */,
 				70D2FAD81A9F559200CAB509 /* OpenPositionTableViewCell.m in Sources */,
-				7076F5AB1AECCEB3004CC6BA /* MainViewController.m in Sources */,
 				70D2FC491A9F591600CAB509 /* ProfitAndLossCalculator.m in Sources */,
 				70D2FB4A1A9F574000CAB509 /* RatePanelViewController.m in Sources */,
 				70BF3C251BAEF8D600779617 /* ExecutionOrderRelationChunk.m in Sources */,
@@ -1093,6 +1090,7 @@
 				70D2FC101A9F58F700CAB509 /* CurrencyPair.m in Sources */,
 				70D2FBA11A9F57A000CAB509 /* ForexHistoryDataArrayUtils.m in Sources */,
 				70041F9E1C627B740091628A /* Message.m in Sources */,
+				7015FD391CCFC4720015A474 /* MainViewController.swift in Sources */,
 				70D2FB701A9F577200CAB509 /* CandlesFactory.m in Sources */,
 				705FCFA61BFB7BA8006197DA /* ChartSource.m in Sources */,
 				705FCFB51BFB7BA9006197DA /* IndicatorSource.m in Sources */,
