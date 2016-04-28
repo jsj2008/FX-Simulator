@@ -26,7 +26,6 @@
 #import "SimulationTimeManager.h"
 #import "TimeFrame.h"
 #import "TradeDatabase.h"
-#import "TradeViewController.h"
 
 @implementation SimulationManager {
     Account *_account;

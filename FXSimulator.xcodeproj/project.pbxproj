@@ -332,8 +332,6 @@
 		70D2FAF01A9F56AE00CAB509 /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FMResultSet.m; path = ../vendor/FMDB/FMResultSet.m; sourceTree = "<group>"; };
 		70D2FB1B1A9F572B00CAB509 /* SubChartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubChartViewController.h; sourceTree = "<group>"; };
 		70D2FB1C1A9F572B00CAB509 /* SubChartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubChartViewController.m; sourceTree = "<group>"; };
-		70D2FB2A1A9F574000CAB509 /* TradeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TradeViewController.h; sourceTree = "<group>"; };
-		70D2FB2B1A9F574000CAB509 /* TradeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TradeViewController.m; sourceTree = "<group>"; };
 		70D2FB2C1A9F574000CAB509 /* ChartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChartViewController.h; sourceTree = "<group>"; };
 		70D2FB2D1A9F574000CAB509 /* ChartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChartViewController.m; sourceTree = "<group>"; };
 		70D2FB2E1A9F574000CAB509 /* RatePanelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RatePanelViewController.h; sourceTree = "<group>"; };
@@ -841,8 +839,6 @@
 				70D2FB1C1A9F572B00CAB509 /* SubChartViewController.m */,
 				70B5AAF01ACE5BC0001F8823 /* SubChartDataViewController.h */,
 				70B5AAF11ACE5BC0001F8823 /* SubChartDataViewController.m */,
-				70D2FB2A1A9F574000CAB509 /* TradeViewController.h */,
-				70D2FB2B1A9F574000CAB509 /* TradeViewController.m */,
 				70D2FB2C1A9F574000CAB509 /* ChartViewController.h */,
 				70D2FB2D1A9F574000CAB509 /* ChartViewController.m */,
 				70D2FB2E1A9F574000CAB509 /* RatePanelViewController.h */,
