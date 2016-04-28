@@ -1150,7 +1150,7 @@
         <!--Trade View Controller-->
         <scene sceneID="tdy-gL-0Zy">
             <objects>
-                <viewController storyboardIdentifier="TradeViewController" title="Trade" id="FsJ-ty-zYD" userLabel="Trade View Controller" customClass="TradeViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TradeViewController" title="Trade" id="FsJ-ty-zYD" userLabel="Trade View Controller" customClass="TradeViewController" customModule="FXSimulator" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Jvj-6s-LHl"/>
                         <viewControllerLayoutGuide type="bottom" id="CYR-sO-hTC"/>
