@@ -4,4 +4,12 @@
 
 #import "NewStartViewController.h"
 #import "TradeViewController.h"
+#import "RatePanelViewController.h"
+#import "Market.h"
+#import "OrderFactory.h"
+#import "SaveData.h"
+#import "ChartViewController.h"
+#import "Chart.h"
+#import "Message.h"
+#import "Result.h"
 
