@@ -69,6 +69,7 @@
 		70838AAC1C293D060044B1CC /* AdNetworkAdmob.m in Sources */ = {isa = PBXBuildFile; fileRef = 70838AAB1C293D060044B1CC /* AdNetworkAdmob.m */; };
 		7098ADB81C61E1B000C7D319 /* SettingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7098ADB71C61E1B000C7D319 /* SettingTests.m */; };
 		709BC75E1B0700320059C940 /* SetAutoUpdateIntervalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 709BC75D1B0700320059C940 /* SetAutoUpdateIntervalViewController.m */; };
+		709BFB381CD0A42800BA7A15 /* TradeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 709BFB361CD0A08E00BA7A15 /* TradeViewController.swift */; };
 		70A6BF231C564F6E00BA7407 /* GoogleMobileAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70A6BF221C564F6E00BA7407 /* GoogleMobileAds.framework */; };
 		70A6BF6B1C57B21800BA7407 /* AboutTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70A6BF6A1C57B21800BA7407 /* AboutTableViewController.m */; };
 		70B5AAF21ACE5BC0001F8823 /* SubChartDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70B5AAF11ACE5BC0001F8823 /* SubChartDataViewController.m */; };
@@ -93,7 +94,6 @@
 		70D2FAF41A9F56AE00CAB509 /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FAED1A9F56AE00CAB509 /* FMDatabaseQueue.m */; };
 		70D2FAF51A9F56AE00CAB509 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FAF01A9F56AE00CAB509 /* FMResultSet.m */; };
 		70D2FB251A9F572B00CAB509 /* SubChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FB1C1A9F572B00CAB509 /* SubChartViewController.m */; };
-		70D2FB481A9F574000CAB509 /* TradeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FB2B1A9F574000CAB509 /* TradeViewController.m */; };
 		70D2FB491A9F574000CAB509 /* ChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FB2D1A9F574000CAB509 /* ChartViewController.m */; };
 		70D2FB4A1A9F574000CAB509 /* RatePanelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FB2F1A9F574000CAB509 /* RatePanelViewController.m */; };
 		70D2FB4B1A9F574000CAB509 /* TradeDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FB311A9F574000CAB509 /* TradeDataViewController.m */; };
@@ -280,6 +280,7 @@
 		7098ADB71C61E1B000C7D319 /* SettingTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingTests.m; sourceTree = "<group>"; };
 		709BC75C1B0700320059C940 /* SetAutoUpdateIntervalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetAutoUpdateIntervalViewController.h; sourceTree = "<group>"; };
 		709BC75D1B0700320059C940 /* SetAutoUpdateIntervalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetAutoUpdateIntervalViewController.m; sourceTree = "<group>"; };
+		709BFB361CD0A08E00BA7A15 /* TradeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TradeViewController.swift; sourceTree = "<group>"; };
 		70A6BF221C564F6E00BA7407 /* GoogleMobileAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleMobileAds.framework; path = vendor/GoogleMobileAds.framework; sourceTree = "<group>"; };
 		70A6BF691C57B21800BA7407 /* AboutTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutTableViewController.h; sourceTree = "<group>"; };
 		70A6BF6A1C57B21800BA7407 /* AboutTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutTableViewController.m; sourceTree = "<group>"; };
@@ -331,8 +332,6 @@
 		70D2FAF01A9F56AE00CAB509 /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FMResultSet.m; path = ../vendor/FMDB/FMResultSet.m; sourceTree = "<group>"; };
 		70D2FB1B1A9F572B00CAB509 /* SubChartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubChartViewController.h; sourceTree = "<group>"; };
 		70D2FB1C1A9F572B00CAB509 /* SubChartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubChartViewController.m; sourceTree = "<group>"; };
-		70D2FB2A1A9F574000CAB509 /* TradeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TradeViewController.h; sourceTree = "<group>"; };
-		70D2FB2B1A9F574000CAB509 /* TradeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TradeViewController.m; sourceTree = "<group>"; };
 		70D2FB2C1A9F574000CAB509 /* ChartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChartViewController.h; sourceTree = "<group>"; };
 		70D2FB2D1A9F574000CAB509 /* ChartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChartViewController.m; sourceTree = "<group>"; };
 		70D2FB2E1A9F574000CAB509 /* RatePanelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RatePanelViewController.h; sourceTree = "<group>"; };
@@ -840,8 +839,6 @@
 				70D2FB1C1A9F572B00CAB509 /* SubChartViewController.m */,
 				70B5AAF01ACE5BC0001F8823 /* SubChartDataViewController.h */,
 				70B5AAF11ACE5BC0001F8823 /* SubChartDataViewController.m */,
-				70D2FB2A1A9F574000CAB509 /* TradeViewController.h */,
-				70D2FB2B1A9F574000CAB509 /* TradeViewController.m */,
 				70D2FB2C1A9F574000CAB509 /* ChartViewController.h */,
 				70D2FB2D1A9F574000CAB509 /* ChartViewController.m */,
 				70D2FB2E1A9F574000CAB509 /* RatePanelViewController.h */,
@@ -867,6 +864,7 @@
 				70A6BF691C57B21800BA7407 /* AboutTableViewController.h */,
 				70A6BF6A1C57B21800BA7407 /* AboutTableViewController.m */,
 				7015FD381CCFC4720015A474 /* MainViewController.swift */,
+				709BFB361CD0A08E00BA7A15 /* TradeViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -989,7 +987,6 @@
 				702A84F61BDB5F7B00CA6102 /* Coordinate.m in Sources */,
 				70D2FB6B1A9F576500CAB509 /* SimulationTimeManager.m in Sources */,
 				70D2FBF81A9F57DC00CAB509 /* OrdersCreateModeFactory.m in Sources */,
-				70D2FB481A9F574000CAB509 /* TradeViewController.m in Sources */,
 				70D2FB4B1A9F574000CAB509 /* TradeDataViewController.m in Sources */,
 				700B95851B0C3C97003F160B /* InputTradeLotViewController.m in Sources */,
 				704D3E7A1B5A7B0C00A8B9AB /* ChartChunk.m in Sources */,
@@ -1060,6 +1057,7 @@
 				70D2FC471A9F591600CAB509 /* CurrencyConverter.m in Sources */,
 				70D2FAF41A9F56AE00CAB509 /* FMDatabaseQueue.m in Sources */,
 				70D2FC401A9F591600CAB509 /* Currency.m in Sources */,
+				709BFB381CD0A42800BA7A15 /* TradeViewController.swift in Sources */,
 				70D2FC461A9F591600CAB509 /* Money.m in Sources */,
 				70248BAA1C3F76420073D5B7 /* SaveDataSource+CoreDataProperties.m in Sources */,
 				70042C641B47ABBC00C1A22E /* MovingAverage.m in Sources */,
